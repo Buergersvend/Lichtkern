@@ -697,16 +697,14 @@ function Dashboard({clients,sessions,appointments,onNav,reminders,onDismissRemin
   return(
     <div style={{padding:"0 16px 100px"}}>
       {/* Hero */}
-      <div style={{position:"relative",borderRadius:"24px",overflow:"hidden",padding:"24px 22px 22px",marginBottom:"16px",background:`linear-gradient(145deg,${T.tealL} 0%,#FAFFFE 55%,${T.violetL} 100%)`,boxShadow:`0 4px 24px rgba(13,148,136,0.18)`,border:`1.5px solid ${T.border}`}}>
-        <Flower size={220} opacity={0.09}/>
+      <div style={{position:"relative",borderRadius:"24px",overflow:"hidden",padding:"28px 28px 26px",marginBottom:"16px",background:`linear-gradient(145deg,${T.tealL} 0%,#FAFFFE 55%,${T.violetL} 100%)`,boxShadow:`0 4px 24px rgba(13,148,136,0.18)`,border:`1.5px solid ${T.border}`}}>
+        <Flower size={240} opacity={0.09}/>
         <div style={{position:"relative",zIndex:1,display:"flex",justifyContent:"space-between",alignItems:"flex-start"}}>
           <div>
-            <p style={{fontFamily:"Raleway",fontSize:"11px",color:T.textSoft,letterSpacing:"2px",textTransform:"uppercase",margin:"0 0 4px",fontWeight:700}}>{greeting}{name?`, ${name}`:""} ✦</p>
-            <h1 style={{fontFamily:"Cinzel",fontSize:"26px",color:T.text,margin:"0 0 16px",fontWeight:700,lineHeight:1.2}}>Lichtkern</h1>
-            <button onClick={()=>onNav("session")} style={{fontFamily:"Raleway",fontWeight:700,fontSize:"14px",padding:"12px 24px",borderRadius:"20px",background:`linear-gradient(135deg,${T.teal},${T.tealD})`,color:"white",border:"none",cursor:"pointer",boxShadow:`0 4px 18px rgba(13,148,136,0.4)`,letterSpacing:"0.3px"}}>✦ Neue Sitzung</button>
+            <h1 style={{fontFamily:"Cinzel",fontSize:"28px",color:T.text,margin:"0",fontWeight:700,lineHeight:1.2}}>Lichtkern</h1>
           </div>
           <div style={{textAlign:"center",flexShrink:0}}>
-            <div style={{fontFamily:"Cinzel",fontSize:"32px",color:T.teal,fontWeight:700,lineHeight:1}}>{clients.length}</div>
+            <div style={{fontFamily:"Cinzel",fontSize:"36px",color:T.teal,fontWeight:700,lineHeight:1}}>{clients.length}</div>
             <div style={{fontFamily:"Raleway",fontSize:"9px",color:T.textSoft,fontWeight:700,letterSpacing:"1px",textTransform:"uppercase",marginTop:"2px"}}>Klienten</div>
           </div>
         </div>
@@ -764,9 +762,6 @@ function Dashboard({clients,sessions,appointments,onNav,reminders,onDismissRemin
       {/* Quick actions with Tree of Life background */}
       <SL>Schnellzugriff</SL>
       <div style={{position:"relative",borderRadius:"20px",overflow:"hidden",padding:"4px 0 8px"}}>
-        <div style={{position:"absolute",top:"50%",left:"50%",transform:"translate(-50%,-50%)",zIndex:0,opacity:1}}>
-          <TreeOfLife width={360} height={440} opacity={0.07}/>
-        </div>
         <div style={{position:"relative",zIndex:1,display:"grid",gridTemplateColumns:"1fr 1fr",gap:"10px",marginBottom:"16px"}}>
         {[
           {label:"Klient anlegen",   icon:"◈", s:"clients",   bg:"rgba(255,255,255,0.82)", border:T.borderMid,  c:T.tealD},
@@ -1627,11 +1622,17 @@ function App({ user, onLogout }){
     {/* Desktop sidebar */}
     {isDesktop && (
       <div style={{width:"260px",flexShrink:0,background:"rgba(240,250,250,0.98)",borderRight:`1.5px solid ${T.border}`,display:"flex",flexDirection:"column",position:"fixed",top:0,left:0,bottom:0,zIndex:100,backdropFilter:"blur(20px)"}}>
-        {/* Logo - prominent */}
-        <div style={{padding:"28px 24px 22px",borderBottom:`1.5px solid ${T.border}`}}>
-          <div style={{fontFamily:"Cinzel",fontSize:"26px",color:T.text,fontWeight:700,letterSpacing:"2px",lineHeight:1.1}}>✦ LICHTKERN</div>
-          <div style={{fontFamily:"Raleway",fontSize:"9px",color:T.textSoft,letterSpacing:"2.5px",textTransform:"uppercase",fontWeight:700,marginTop:"5px"}}>Resonanz Akademie</div>
-          {settings.praxisname&&<div style={{fontFamily:"Raleway",fontSize:"12px",color:T.tealD,fontWeight:700,marginTop:"7px",paddingTop:"7px",borderTop:`1px solid ${T.border}`}}>— {settings.praxisname}</div>}
+        {/* Logo - prominent with Flower watermark */}
+        <div style={{position:"relative",padding:"28px 24px 24px",borderBottom:`1.5px solid ${T.border}`,overflow:"hidden",background:`linear-gradient(160deg,${T.tealL} 0%,rgba(255,255,255,0.5) 60%,${T.violetL} 100%)`}}>
+          <div style={{position:"absolute",top:"50%",left:"50%",transform:"translate(-50%,-50%)",pointerEvents:"none",zIndex:0}}>
+            <Flower size={260} opacity={0.22}/>
+          </div>
+          <div style={{position:"relative",zIndex:1}}>
+            {(()=>{const h=new Date().getHours();const g=h<12?"Guten Morgen":h<17?"Guten Tag":"Guten Abend";const n=settings?.therapistName?settings.therapistName.split(" ")[0]:"";return(<div style={{fontFamily:"Raleway",fontSize:"10px",color:T.tealD,letterSpacing:"2px",textTransform:"uppercase",fontWeight:700,marginBottom:"8px",opacity:0.8}}>{g}{n?`, ${n}`:""} ✦</div>);})()}
+            <div style={{fontFamily:"Cinzel",fontSize:"28px",color:T.text,fontWeight:700,letterSpacing:"2px",lineHeight:1.1}}>✦ LICHTKERN</div>
+            <div style={{fontFamily:"Raleway",fontSize:"9px",color:T.textSoft,letterSpacing:"3px",textTransform:"uppercase",fontWeight:700,marginTop:"6px"}}>Resonanz Akademie</div>
+            {settings.praxisname&&<div style={{fontFamily:"Raleway",fontSize:"12px",color:T.tealD,fontWeight:700,marginTop:"10px",paddingTop:"10px",borderTop:`1px solid ${T.border}`}}>— {settings.praxisname}</div>}
+          </div>
         </div>
         {/* Neue Sitzung - prominent button */}
         <div style={{padding:"18px 20px 12px"}}>
@@ -1652,6 +1653,10 @@ function App({ user, onLogout }){
         </div>
         {/* Settings bottom */}
         <div style={{padding:"12px 14px 24px",borderTop:`1.5px solid ${T.border}`}}>
+          {/* Tree of Life decoration */}
+          <div style={{display:"flex",justifyContent:"center",padding:"12px 0 16px",opacity:0.18,pointerEvents:"none"}}>
+            <TreeOfLife width={180} height={200} opacity={1} color={T.teal}/>
+          </div>
           <button onClick={()=>setShowSettings(true)} style={{display:"flex",alignItems:"center",gap:"13px",padding:"12px 14px",borderRadius:"14px",border:"none",background:"transparent",color:T.textMid,cursor:"pointer",fontFamily:"Raleway",fontWeight:700,fontSize:"13px",width:"100%",textAlign:"left",transition:"all 0.15s"}}>
             <span style={{fontSize:"17px",opacity:0.65}}>⚙️</span>
             <span>Einstellungen</span>
@@ -1674,10 +1679,7 @@ function App({ user, onLogout }){
           </div>
           <button onClick={()=>setShowSettings(true)} style={{width:"38px",height:"38px",borderRadius:"50%",background:T.bgSoft,border:`1.5px solid ${T.border}`,fontSize:"17px",cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0}}>⚙️</button>
         </header>}
-        {/* Desktop page title only - no duplicate button */}
-        {isDesktop&&<div style={{padding:"22px 32px 12px",borderBottom:`1.5px solid ${T.border}`,marginBottom:"8px"}}>
-          <div style={{fontFamily:"Cinzel",fontSize:"22px",color:T.text,fontWeight:700,letterSpacing:"1px"}}>{NAV.find(n=>n.id===screen)?.label||"Übersicht"}</div>
-        </div>}
+        {/* Desktop page title removed */}
         <div style={{padding:isDesktop?"0 32px":"0"}}>
       {screen==="dashboard"&&<Dashboard clients={clients} sessions={sessions} appointments={appointments} onNav={nav} reminders={reminders} onDismissReminder={dismissReminder} onAddReminder={addReminder} settings={settings}/>}
       {screen==="clients"  &&<Clients clients={clients} sessions={sessions} onSave={saveClients} onStart={startSession} onDelete={async(id)=>{await saveClients(clients.filter(c=>c.id!==id));await saveSessions(sessions.filter(s=>s.clientId!==id));const nextAppts=appointments.filter(a=>a.clientId!==id);setAppts(nextAppts);try{await fsSet(user.uid,"lk_appts",JSON.stringify(nextAppts));}catch{};const nt={...genTrees};delete nt[id];setGenTrees(nt);try{await fsSet(user.uid,"lk_gentrees",JSON.stringify(nt));}catch{};}} onOnboarding={()=>nav("onboarding")} reminders={reminders} onAddReminder={addReminder} onDismissReminder={dismissReminder} onAnalyse={(id)=>{setAnalyticsClient(id);nav("clientanalysis");}}/>}
