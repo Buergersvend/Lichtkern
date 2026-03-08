@@ -149,97 +149,109 @@ function Flower({size=280,opacity=0.09,color}){
   </svg>);
 }
 
-function TreeOfLife({width=340,height=420,opacity=0.09,color,style={}}){
+function TreeOfLife({width=340,height=460,opacity=0.09,color,style={}}){
   const c=color||T.teal;
   return(
-    <svg width={width} height={height} viewBox="0 0 340 420" style={{pointerEvents:"none",opacity,...style}}>
-      {/* === ROOTS === */}
-      <path d="M170 340 Q155 355 130 365 Q110 372 95 380" fill="none" stroke={c} strokeWidth="3" strokeLinecap="round"/>
-      <path d="M170 340 Q165 360 160 375 Q155 385 148 395" fill="none" stroke={c} strokeWidth="2.5" strokeLinecap="round"/>
-      <path d="M170 340 Q170 362 170 378 Q170 388 168 400" fill="none" stroke={c} strokeWidth="3" strokeLinecap="round"/>
-      <path d="M170 340 Q178 362 182 378 Q186 390 188 402" fill="none" stroke={c} strokeWidth="2.5" strokeLinecap="round"/>
-      <path d="M170 340 Q188 355 210 365 Q228 372 245 380" fill="none" stroke={c} strokeWidth="3" strokeLinecap="round"/>
-      <path d="M150 350 Q130 365 108 370 Q90 374 75 382" fill="none" stroke={c} strokeWidth="1.5" strokeLinecap="round"/>
-      <path d="M190 350 Q210 365 232 370 Q250 374 265 382" fill="none" stroke={c} strokeWidth="1.5" strokeLinecap="round"/>
-      <path d="M140 358 Q118 370 100 378" fill="none" stroke={c} strokeWidth="1" strokeLinecap="round"/>
-      <path d="M200 358 Q222 370 240 378" fill="none" stroke={c} strokeWidth="1" strokeLinecap="round"/>
-      {/* === TRUNK === */}
-      <path d="M155 340 Q148 310 150 280 Q152 255 155 230" fill="none" stroke={c} strokeWidth="12" strokeLinecap="round"/>
-      <path d="M185 340 Q192 310 190 280 Q188 255 185 230" fill="none" stroke={c} strokeWidth="12" strokeLinecap="round"/>
-      <path d="M155 230 Q160 210 165 195 Q168 182 170 170" fill="none" stroke={c} strokeWidth="9" strokeLinecap="round"/>
-      <path d="M185 230 Q180 210 175 195 Q172 182 170 170" fill="none" stroke={c} strokeWidth="9" strokeLinecap="round"/>
-      {/* === MEDITATING FIGURE (merged with trunk) === */}
-      {/* Head */}
-      <circle cx="170" cy="295" r="14" fill="none" stroke={c} strokeWidth="2"/>
-      {/* Body / robe */}
-      <path d="M156 309 Q150 325 145 342 Q155 348 170 348 Q185 348 195 342 Q190 325 184 309 Q178 305 170 304 Q162 305 156 309Z" fill="none" stroke={c} strokeWidth="1.8"/>
-      {/* Arms / hands in lap */}
-      <path d="M148 328 Q155 334 163 336 Q170 337 177 336 Q185 334 192 328" fill="none" stroke={c} strokeWidth="1.5" strokeLinecap="round"/>
-      {/* Legs crossed */}
-      <path d="M145 342 Q148 350 158 353 Q164 355 170 354 Q176 355 182 353 Q192 350 195 342" fill="none" stroke={c} strokeWidth="1.5" strokeLinecap="round"/>
-      {/* === MAIN BRANCHES === */}
-      {/* Left side */}
-      <path d="M158 240 Q135 225 108 215 Q85 207 60 205" fill="none" stroke={c} strokeWidth="5" strokeLinecap="round"/>
-      <path d="M160 220 Q130 200 100 188 Q75 178 48 175" fill="none" stroke={c} strokeWidth="4" strokeLinecap="round"/>
-      <path d="M162 200 Q135 178 110 162 Q88 148 65 140" fill="none" stroke={c} strokeWidth="3.5" strokeLinecap="round"/>
-      <path d="M164 182 Q142 158 118 142 Q98 128 75 118" fill="none" stroke={c} strokeWidth="3" strokeLinecap="round"/>
-      <path d="M165 165 Q145 140 125 120 Q108 103 88 90" fill="none" stroke={c} strokeWidth="2.5" strokeLinecap="round"/>
-      <path d="M166 148 Q148 122 132 100 Q118 80 100 65" fill="none" stroke={c} strokeWidth="2" strokeLinecap="round"/>
-      {/* Right side */}
-      <path d="M182 240 Q205 225 232 215 Q255 207 280 205" fill="none" stroke={c} strokeWidth="5" strokeLinecap="round"/>
-      <path d="M180 220 Q210 200 240 188 Q265 178 292 175" fill="none" stroke={c} strokeWidth="4" strokeLinecap="round"/>
-      <path d="M178 200 Q205 178 230 162 Q252 148 275 140" fill="none" stroke={c} strokeWidth="3.5" strokeLinecap="round"/>
-      <path d="M176 182 Q198 158 222 142 Q242 128 265 118" fill="none" stroke={c} strokeWidth="3" strokeLinecap="round"/>
-      <path d="M175 165 Q195 140 215 120 Q232 103 252 90" fill="none" stroke={c} strokeWidth="2.5" strokeLinecap="round"/>
-      <path d="M174 148 Q192 122 208 100 Q222 80 240 65" fill="none" stroke={c} strokeWidth="2" strokeLinecap="round"/>
-      {/* Center upward */}
-      <path d="M170 170 Q168 145 168 120 Q168 98 170 78" fill="none" stroke={c} strokeWidth="4" strokeLinecap="round"/>
-      <path d="M170 78 Q168 58 166 42 Q164 28 162 15" fill="none" stroke={c} strokeWidth="2.5" strokeLinecap="round"/>
-      <path d="M170 78 Q174 55 176 38 Q178 24 178 12" fill="none" stroke={c} strokeWidth="2" strokeLinecap="round"/>
-      {/* === SECONDARY BRANCHES === */}
-      <path d="M60 205 Q48 195 35 190" fill="none" stroke={c} strokeWidth="2" strokeLinecap="round"/>
-      <path d="M60 205 Q50 198 42 202" fill="none" stroke={c} strokeWidth="1.5" strokeLinecap="round"/>
-      <path d="M48 175 Q36 165 25 160" fill="none" stroke={c} strokeWidth="1.8" strokeLinecap="round"/>
-      <path d="M48 175 Q38 170 30 175" fill="none" stroke={c} strokeWidth="1.3" strokeLinecap="round"/>
-      <path d="M65 140 Q52 130 38 125" fill="none" stroke={c} strokeWidth="1.8" strokeLinecap="round"/>
-      <path d="M65 140 Q55 132 50 138" fill="none" stroke={c} strokeWidth="1.3" strokeLinecap="round"/>
-      <path d="M75 118 Q62 108 50 102" fill="none" stroke={c} strokeWidth="1.5" strokeLinecap="round"/>
-      <path d="M88 90 Q75 78 65 70" fill="none" stroke={c} strokeWidth="1.5" strokeLinecap="round"/>
-      <path d="M88 90 Q80 82 75 88" fill="none" stroke={c} strokeWidth="1.2" strokeLinecap="round"/>
-      <path d="M100 65 Q88 52 78 44" fill="none" stroke={c} strokeWidth="1.3" strokeLinecap="round"/>
-      <path d="M100 65 Q95 55 100 48" fill="none" stroke={c} strokeWidth="1.2" strokeLinecap="round"/>
-      <path d="M280 205 Q292 195 305 190" fill="none" stroke={c} strokeWidth="2" strokeLinecap="round"/>
-      <path d="M280 205 Q290 198 298 202" fill="none" stroke={c} strokeWidth="1.5" strokeLinecap="round"/>
-      <path d="M292 175 Q304 165 315 160" fill="none" stroke={c} strokeWidth="1.8" strokeLinecap="round"/>
-      <path d="M275 140 Q288 130 302 125" fill="none" stroke={c} strokeWidth="1.8" strokeLinecap="round"/>
-      <path d="M265 118 Q278 108 290 102" fill="none" stroke={c} strokeWidth="1.5" strokeLinecap="round"/>
-      <path d="M252 90 Q265 78 275 70" fill="none" stroke={c} strokeWidth="1.5" strokeLinecap="round"/>
-      <path d="M240 65 Q252 52 262 44" fill="none" stroke={c} strokeWidth="1.3" strokeLinecap="round"/>
-      {/* === LEAF CLUSTERS === */}
+    <svg width={width} height={height} viewBox="0 0 340 460" style={{pointerEvents:"none",opacity,...style}}>
+      {/* ROOTS */}
+      <path d="M155 390 Q140 400 120 408 Q100 414 78 418" fill="none" stroke={c} strokeWidth="3.5" strokeLinecap="round"/>
+      <path d="M158 392 Q150 405 142 414 Q134 422 126 430" fill="none" stroke={c} strokeWidth="2.5" strokeLinecap="round"/>
+      <path d="M162 394 Q158 408 156 420 Q154 430 153 440" fill="none" stroke={c} strokeWidth="2.5" strokeLinecap="round"/>
+      <path d="M170 396 Q170 412 170 425 Q170 436 169 446" fill="none" stroke={c} strokeWidth="3" strokeLinecap="round"/>
+      <path d="M178 394 Q182 408 184 420 Q186 430 187 440" fill="none" stroke={c} strokeWidth="2.5" strokeLinecap="round"/>
+      <path d="M182 392 Q190 405 198 414 Q206 422 214 430" fill="none" stroke={c} strokeWidth="2.5" strokeLinecap="round"/>
+      <path d="M185 390 Q200 400 220 408 Q240 414 262 418" fill="none" stroke={c} strokeWidth="3.5" strokeLinecap="round"/>
+      <path d="M78 418 Q60 422 45 428 Q30 432 18 436" fill="none" stroke={c} strokeWidth="2" strokeLinecap="round"/>
+      <path d="M78 418 Q65 424 55 432" fill="none" stroke={c} strokeWidth="1.5" strokeLinecap="round"/>
+      <path d="M126 430 Q115 436 104 442 Q92 446 82 450" fill="none" stroke={c} strokeWidth="1.5" strokeLinecap="round"/>
+      <path d="M214 430 Q225 436 236 442 Q248 446 258 450" fill="none" stroke={c} strokeWidth="1.5" strokeLinecap="round"/>
+      <path d="M262 418 Q275 424 285 432" fill="none" stroke={c} strokeWidth="1.5" strokeLinecap="round"/>
+      <path d="M262 418 Q280 422 295 428 Q310 432 322 436" fill="none" stroke={c} strokeWidth="2" strokeLinecap="round"/>
+      {/* MEDITATING FIGURE */}
+      <ellipse cx="170" cy="395" rx="52" ry="9" fill="none" stroke={c} strokeWidth="1.5" opacity="0.4"/>
+      <path d="M122 390 Q128 380 145 376 Q158 373 170 374 Q182 373 195 376 Q212 380 218 390" fill="none" stroke={c} strokeWidth="3" strokeLinecap="round"/>
+      <path d="M122 390 Q117 392 112 390 Q107 387 110 382" fill="none" stroke={c} strokeWidth="1.5" strokeLinecap="round"/>
+      <path d="M218 390 Q223 392 228 390 Q233 387 230 382" fill="none" stroke={c} strokeWidth="1.5" strokeLinecap="round"/>
+      <path d="M145 376 Q140 362 142 350 Q144 338 148 328" fill="none" stroke={c} strokeWidth="4" strokeLinecap="round"/>
+      <path d="M195 376 Q200 362 198 350 Q196 338 192 328" fill="none" stroke={c} strokeWidth="4" strokeLinecap="round"/>
+      <path d="M148 370 Q155 360 163 356" fill="none" stroke={c} strokeWidth="1.2" strokeLinecap="round"/>
+      <path d="M192 370 Q185 360 177 356" fill="none" stroke={c} strokeWidth="1.2" strokeLinecap="round"/>
+      <path d="M146 354 Q155 346 163 343" fill="none" stroke={c} strokeWidth="1" strokeLinecap="round"/>
+      <path d="M194 354 Q185 346 177 343" fill="none" stroke={c} strokeWidth="1" strokeLinecap="round"/>
+      <path d="M148 348 Q156 354 164 356 Q170 357 176 356 Q184 354 192 348" fill="none" stroke={c} strokeWidth="2" strokeLinecap="round"/>
+      <path d="M148 328 Q140 323 135 316" fill="none" stroke={c} strokeWidth="3" strokeLinecap="round"/>
+      <path d="M192 328 Q200 323 205 316" fill="none" stroke={c} strokeWidth="3" strokeLinecap="round"/>
+      <path d="M158 328 Q160 316 162 306" fill="none" stroke={c} strokeWidth="5" strokeLinecap="round"/>
+      <path d="M182 328 Q180 316 178 306" fill="none" stroke={c} strokeWidth="5" strokeLinecap="round"/>
+      <ellipse cx="170" cy="296" rx="14" ry="16" fill="none" stroke={c} strokeWidth="2"/>
+      <path d="M163 293 Q166 291 169 293" fill="none" stroke={c} strokeWidth="1.2" strokeLinecap="round"/>
+      <path d="M171 293 Q174 291 177 293" fill="none" stroke={c} strokeWidth="1.2" strokeLinecap="round"/>
+      <path d="M165 302 Q170 305 175 302" fill="none" stroke={c} strokeWidth="1" strokeLinecap="round"/>
+      {/* TRUNK from head upward */}
+      <path d="M160 282 Q157 265 158 248 Q159 234 160 220" fill="none" stroke={c} strokeWidth="10" strokeLinecap="round"/>
+      <path d="M180 282 Q183 265 182 248 Q181 234 180 220" fill="none" stroke={c} strokeWidth="10" strokeLinecap="round"/>
+      <path d="M160 220 Q162 200 164 184 Q166 170 168 158" fill="none" stroke={c} strokeWidth="8" strokeLinecap="round"/>
+      <path d="M180 220 Q178 200 176 184 Q174 170 172 158" fill="none" stroke={c} strokeWidth="8" strokeLinecap="round"/>
+      <path d="M168 158 Q169 142 170 128 Q170 115 170 104" fill="none" stroke={c} strokeWidth="6" strokeLinecap="round"/>
+      <path d="M172 158 Q171 142 170 128" fill="none" stroke={c} strokeWidth="5" strokeLinecap="round"/>
+      {/* MAIN BRANCHES */}
+      <path d="M160 236 Q136 223 110 215 Q86 208 60 206" fill="none" stroke={c} strokeWidth="5.5" strokeLinecap="round"/>
+      <path d="M161 214 Q132 198 104 188 Q80 179 52 176" fill="none" stroke={c} strokeWidth="4.5" strokeLinecap="round"/>
+      <path d="M163 192 Q136 172 110 157 Q87 144 60 135" fill="none" stroke={c} strokeWidth="4" strokeLinecap="round"/>
+      <path d="M165 168 Q142 147 118 131 Q97 117 72 107" fill="none" stroke={c} strokeWidth="3.5" strokeLinecap="round"/>
+      <path d="M166 146 Q146 122 126 104 Q108 88 86 74" fill="none" stroke={c} strokeWidth="3" strokeLinecap="round"/>
+      <path d="M167 126 Q150 102 132 82 Q116 63 96 49" fill="none" stroke={c} strokeWidth="2.5" strokeLinecap="round"/>
+      <path d="M168 108 Q153 84 138 64 Q124 45 108 30" fill="none" stroke={c} strokeWidth="2" strokeLinecap="round"/>
+      <path d="M180 236 Q204 223 230 215 Q254 208 280 206" fill="none" stroke={c} strokeWidth="5.5" strokeLinecap="round"/>
+      <path d="M179 214 Q208 198 236 188 Q260 179 288 176" fill="none" stroke={c} strokeWidth="4.5" strokeLinecap="round"/>
+      <path d="M177 192 Q204 172 230 157 Q253 144 280 135" fill="none" stroke={c} strokeWidth="4" strokeLinecap="round"/>
+      <path d="M175 168 Q198 147 222 131 Q243 117 268 107" fill="none" stroke={c} strokeWidth="3.5" strokeLinecap="round"/>
+      <path d="M174 146 Q194 122 214 104 Q232 88 254 74" fill="none" stroke={c} strokeWidth="3" strokeLinecap="round"/>
+      <path d="M173 126 Q190 102 208 82 Q224 63 244 49" fill="none" stroke={c} strokeWidth="2.5" strokeLinecap="round"/>
+      <path d="M172 108 Q187 84 202 64 Q216 45 232 30" fill="none" stroke={c} strokeWidth="2" strokeLinecap="round"/>
+      <path d="M170 104 Q168 82 167 62 Q166 44 165 28" fill="none" stroke={c} strokeWidth="3" strokeLinecap="round"/>
+      <path d="M170 104 Q172 82 173 62 Q174 44 175 28" fill="none" stroke={c} strokeWidth="2.5" strokeLinecap="round"/>
+      <path d="M170 55 Q168 36 166 20 Q164 8 163 2" fill="none" stroke={c} strokeWidth="1.8" strokeLinecap="round"/>
+      <path d="M170 55 Q172 36 174 20 Q176 8 177 2" fill="none" stroke={c} strokeWidth="1.5" strokeLinecap="round"/>
+      {/* SECONDARY BRANCHES */}
+      <path d="M60 206 Q46 198 32 194" fill="none" stroke={c} strokeWidth="2.5" strokeLinecap="round"/>
+      <path d="M60 206 Q48 201 42 208" fill="none" stroke={c} strokeWidth="2" strokeLinecap="round"/>
+      <path d="M52 176 Q38 168 24 164" fill="none" stroke={c} strokeWidth="2.2" strokeLinecap="round"/>
+      <path d="M60 135 Q44 127 30 120" fill="none" stroke={c} strokeWidth="2" strokeLinecap="round"/>
+      <path d="M72 107 Q56 99 42 92" fill="none" stroke={c} strokeWidth="1.8" strokeLinecap="round"/>
+      <path d="M86 74 Q72 64 58 55" fill="none" stroke={c} strokeWidth="1.8" strokeLinecap="round"/>
+      <path d="M96 49 Q82 37 70 28" fill="none" stroke={c} strokeWidth="1.5" strokeLinecap="round"/>
+      <path d="M108 30 Q96 18 86 10" fill="none" stroke={c} strokeWidth="1.3" strokeLinecap="round"/>
+      <path d="M280 206 Q294 198 308 194" fill="none" stroke={c} strokeWidth="2.5" strokeLinecap="round"/>
+      <path d="M288 176 Q302 168 316 164" fill="none" stroke={c} strokeWidth="2.2" strokeLinecap="round"/>
+      <path d="M280 135 Q296 127 310 120" fill="none" stroke={c} strokeWidth="2" strokeLinecap="round"/>
+      <path d="M268 107 Q284 99 298 92" fill="none" stroke={c} strokeWidth="1.8" strokeLinecap="round"/>
+      <path d="M254 74 Q268 64 282 55" fill="none" stroke={c} strokeWidth="1.8" strokeLinecap="round"/>
+      <path d="M244 49 Q258 37 270 28" fill="none" stroke={c} strokeWidth="1.5" strokeLinecap="round"/>
+      <path d="M232 30 Q244 18 254 10" fill="none" stroke={c} strokeWidth="1.3" strokeLinecap="round"/>
+      {/* LEAF CLUSTERS */}
       {[
-        [35,188],[25,158],[38,123],[50,100],[65,68],[78,42],[100,46],[115,30],
-        [135,18],[155,10],[170,8],[185,10],[205,18],[225,30],[240,46],[262,68],
-        [275,100],[290,123],[305,158],[305,188],[162,13],[178,10],
-        [48,198],[42,200],[30,173],[88,86],[75,116]
+        [32,192],[22,162],[28,176],[30,118],[42,90],[56,53],[68,26],[86,8],[108,28],[128,10],
+        [148,4],[163,1],[170,0],[177,1],[192,4],[212,10],[232,28],[254,53],[268,70],
+        [282,90],[298,118],[314,162],[306,192],[244,47],[96,47],[165,26],[175,26],
+        [42,206],[42,135],[58,107],[78,72],[300,176],[296,135],[262,105]
       ].map(([x,y],i)=>(
         <g key={i}>
-          <circle cx={x} cy={y} r="8" fill={c} opacity="0.25"/>
-          <circle cx={x} cy={y} r="5" fill={c} opacity="0.35"/>
-          <circle cx={x} cy={y} r="2.5" fill={c} opacity="0.55"/>
+          <circle cx={x} cy={y} r={9} fill={c} opacity="0.2"/>
+          <circle cx={x} cy={y} r={5.5} fill={c} opacity="0.3"/>
+          <circle cx={x} cy={y} r={2.5} fill={c} opacity="0.5"/>
         </g>
       ))}
-      {/* Small leaf dots scattered */}
       {[
-        [42,192],[28,162],[52,128],[58,105],[72,74],[82,48],[108,38],[128,22],[148,14],
-        [192,14],[212,22],[232,38],[258,74],[268,105],[278,128],[312,162],[298,192],
-        [55,200],[38,178],[70,145],[80,122],[95,78]
+        [50,198],[36,165],[38,128],[48,98],[62,60],[78,32],[100,12],[120,3],
+        [158,6],[182,6],[220,3],[240,12],[262,32],[278,60],[292,98],[302,128],[314,165],[290,198],
+        [68,112],[252,112],[80,86],[260,86]
       ].map(([x,y],i)=>(
-        <circle key={`l${i}`} cx={x} cy={y} r="3.5" fill={c} opacity="0.2"/>
+        <circle key={`s${i}`} cx={x} cy={y} r={4} fill={c} opacity="0.18"/>
       ))}
     </svg>
   );
 }
-
 // ─── ATOMS ────────────────────────────────────
 function Card({children,style={},onClick}){
   return(<div onClick={onClick} style={{background:T.bgCard,borderRadius:"18px",border:`1.5px solid ${T.border}`,padding:"16px",boxShadow:`0 3px 18px ${T.shadow}`,cursor:onClick?"pointer":"default",...style}}>{children}</div>);
@@ -696,19 +708,6 @@ function Dashboard({clients,sessions,appointments,onNav,reminders,onDismissRemin
 
   return(
     <div style={{padding:"0 16px 100px"}}>
-      {/* Hero */}
-      <div style={{position:"relative",borderRadius:"24px",overflow:"hidden",padding:"28px 28px 26px",marginBottom:"16px",background:`linear-gradient(145deg,${T.tealL} 0%,#FAFFFE 55%,${T.violetL} 100%)`,boxShadow:`0 4px 24px rgba(13,148,136,0.18)`,border:`1.5px solid ${T.border}`}}>
-        <Flower size={240} opacity={0.09}/>
-        <div style={{position:"relative",zIndex:1,display:"flex",justifyContent:"space-between",alignItems:"flex-start"}}>
-          <div>
-            <h1 style={{fontFamily:"Cinzel",fontSize:"28px",color:T.text,margin:"0",fontWeight:700,lineHeight:1.2}}>Lichtkern</h1>
-          </div>
-          <div style={{textAlign:"center",flexShrink:0}}>
-            <div style={{fontFamily:"Cinzel",fontSize:"36px",color:T.teal,fontWeight:700,lineHeight:1}}>{clients.length}</div>
-            <div style={{fontFamily:"Raleway",fontSize:"9px",color:T.textSoft,fontWeight:700,letterSpacing:"1px",textTransform:"uppercase",marginTop:"2px"}}>Klienten</div>
-          </div>
-        </div>
-      </div>
 
       {/* Stats row */}
       <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:"10px",marginBottom:"16px"}}>
@@ -1623,15 +1622,15 @@ function App({ user, onLogout }){
     {isDesktop && (
       <div style={{width:"260px",flexShrink:0,background:"rgba(240,250,250,0.98)",borderRight:`1.5px solid ${T.border}`,display:"flex",flexDirection:"column",position:"fixed",top:0,left:0,bottom:0,zIndex:100,backdropFilter:"blur(20px)"}}>
         {/* Logo - prominent with Flower watermark */}
-        <div style={{position:"relative",padding:"28px 24px 24px",borderBottom:`1.5px solid ${T.border}`,overflow:"hidden",background:`linear-gradient(160deg,${T.tealL} 0%,rgba(255,255,255,0.5) 60%,${T.violetL} 100%)`}}>
+        <div style={{position:"relative",padding:"32px 20px 28px",borderBottom:`1.5px solid ${T.border}`,overflow:"hidden",background:`linear-gradient(160deg,${T.tealL} 0%,rgba(255,255,255,0.5) 60%,${T.violetL} 100%)`,textAlign:"center"}}>
           <div style={{position:"absolute",top:"50%",left:"50%",transform:"translate(-50%,-50%)",pointerEvents:"none",zIndex:0}}>
-            <Flower size={260} opacity={0.22}/>
+            <Flower size={280} opacity={0.25}/>
           </div>
           <div style={{position:"relative",zIndex:1}}>
-            {(()=>{const h=new Date().getHours();const g=h<12?"Guten Morgen":h<17?"Guten Tag":"Guten Abend";const n=settings?.therapistName?settings.therapistName.split(" ")[0]:"";return(<div style={{fontFamily:"Raleway",fontSize:"10px",color:T.tealD,letterSpacing:"2px",textTransform:"uppercase",fontWeight:700,marginBottom:"8px",opacity:0.8}}>{g}{n?`, ${n}`:""} ✦</div>);})()}
-            <div style={{fontFamily:"Cinzel",fontSize:"28px",color:T.text,fontWeight:700,letterSpacing:"2px",lineHeight:1.1}}>✦ LICHTKERN</div>
-            <div style={{fontFamily:"Raleway",fontSize:"9px",color:T.textSoft,letterSpacing:"3px",textTransform:"uppercase",fontWeight:700,marginTop:"6px"}}>Resonanz Akademie</div>
-            {settings.praxisname&&<div style={{fontFamily:"Raleway",fontSize:"12px",color:T.tealD,fontWeight:700,marginTop:"10px",paddingTop:"10px",borderTop:`1px solid ${T.border}`}}>— {settings.praxisname}</div>}
+            {(()=>{const h=new Date().getHours();const g=h<12?"Guten Morgen":h<17?"Guten Tag":"Guten Abend";const n=settings?.therapistName?settings.therapistName.split(" ")[0]:"";return n?(<div style={{fontFamily:"Raleway",fontSize:"10px",color:T.tealD,letterSpacing:"2px",textTransform:"uppercase",fontWeight:700,marginBottom:"10px",opacity:0.85}}>{g}, {n} ✦</div>):null;})()}
+            <div style={{fontFamily:"Cinzel",fontSize:"28px",color:T.text,fontWeight:700,letterSpacing:"3px",lineHeight:1.1}}>✦ LICHTKERN</div>
+            <div style={{fontFamily:"Raleway",fontSize:"8px",color:T.textSoft,letterSpacing:"3.5px",textTransform:"uppercase",fontWeight:700,marginTop:"7px"}}>Resonanz Akademie</div>
+            {settings.praxisname&&<div style={{fontFamily:"Raleway",fontSize:"11px",color:T.tealD,fontWeight:700,marginTop:"10px",paddingTop:"10px",borderTop:`1px dashed ${T.border}`,letterSpacing:"1px"}}>— {settings.praxisname}</div>}
           </div>
         </div>
         {/* Neue Sitzung - prominent button */}
