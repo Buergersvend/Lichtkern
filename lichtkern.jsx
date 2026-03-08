@@ -1642,11 +1642,17 @@ function App({ user, onLogout }){
           {NAV.filter(n=>n.id!=="session").map(item=>{
             const isA=screen===item.id;
             return(
-              <button key={item.id} onClick={()=>nav(item.id)} style={{display:"flex",alignItems:"center",gap:"13px",padding:"12px 14px",borderRadius:"14px",border:"none",background:isA?T.tealL:"transparent",color:isA?T.tealD:T.textMid,cursor:"pointer",fontFamily:"Raleway",fontWeight:700,fontSize:"13px",textAlign:"left",boxShadow:isA?`0 2px 10px rgba(13,148,136,0.12)`:"none",transition:"all 0.15s"}}>
+              <React.Fragment key={item.id}>
+              <button onClick={()=>nav(item.id)} style={{display:"flex",alignItems:"center",gap:"13px",padding:"12px 14px",borderRadius:"14px",border:"none",background:isA?T.tealL:"transparent",color:isA?T.tealD:T.textMid,cursor:"pointer",fontFamily:"Raleway",fontWeight:700,fontSize:"13px",textAlign:"left",boxShadow:isA?`0 2px 10px rgba(13,148,136,0.12)`:"none",transition:"all 0.15s"}}>
                 <span style={{fontSize:"17px",width:"22px",textAlign:"center",opacity:isA?1:0.65}}>{item.icon}</span>
                 <span>{item.label}</span>
                 {isA&&<div style={{marginLeft:"auto",width:"6px",height:"6px",borderRadius:"50%",background:T.teal,flexShrink:0}}/>}
               </button>
+              {item.id==="clients"&&<button onClick={()=>startSession()} style={{display:"flex",alignItems:"center",gap:"13px",padding:"12px 14px",borderRadius:"14px",border:"none",background:"transparent",color:T.textMid,cursor:"pointer",fontFamily:"Raleway",fontWeight:700,fontSize:"13px",textAlign:"left",transition:"all 0.15s"}}>
+                <span style={{fontSize:"17px",width:"22px",textAlign:"center",opacity:0.65}}>✦</span>
+                <span>Sitzung</span>
+              </button>}
+              </React.Fragment>
             );
           })}
         </div>
