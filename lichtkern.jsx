@@ -1633,12 +1633,8 @@ function App({ user, onLogout }){
     {/* Desktop sidebar */}
     {isDesktop && (
       <div style={{width:"260px",flexShrink:0,background:"rgba(240,250,250,0.98)",borderRight:`1.5px solid ${T.border}`,display:"flex",flexDirection:"column",position:"fixed",top:0,left:0,bottom:0,zIndex:100,backdropFilter:"blur(20px)"}}>
-        {/* Neue Sitzung button */}
-        <div style={{padding:"52px 20px 16px",borderBottom:`1.5px solid ${T.border}`}}>
-          <button onClick={()=>startSession()} style={{width:"100%",fontFamily:"Raleway",fontWeight:700,fontSize:"14px",padding:"14px 0",borderRadius:"16px",background:`linear-gradient(135deg,${T.teal},${T.tealD})`,color:"white",border:"none",cursor:"pointer",boxShadow:`0 4px 20px rgba(13,148,136,0.35)`,letterSpacing:"0.5px"}}>✦ Neue Sitzung</button>
-        </div>
-        {/* Nav items - no session, no NEU */}
-        <div style={{padding:"4px 14px",flex:1,display:"flex",flexDirection:"column",gap:"3px",overflowY:"auto"}}>
+        {/* Nav items */}
+        <div style={{padding:"24px 14px 4px",flex:1,display:"flex",flexDirection:"column",gap:"3px",overflowY:"auto"}}>
           {NAV.filter(n=>n.id!=="session").map(item=>{
             const isA=screen===item.id;
             return(
