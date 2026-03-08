@@ -2601,14 +2601,14 @@ function SettingsScreen({ settings, onSave, onClose, clients, sessions, appointm
   );
 
   return (
-    <div style={{position:"fixed",inset:0,background:T.bg,zIndex:200,overflowY:"auto",paddingBottom:"40px"}}>
+    <div style={{position:"fixed",top:0,left:0,right:0,bottom:0,background:T.bg,zIndex:200,overflowY:"auto",paddingBottom:"40px",paddingLeft:typeof window!=="undefined"&&window.innerWidth>=900?"260px":"0"}}>
       {/* Header */}
-      <div style={{padding:"16px 16px 12px",display:"flex",justifyContent:"space-between",alignItems:"center",borderBottom:`1.5px solid ${T.border}`,background:T.bg,position:"sticky",top:0,zIndex:10}}>
+      <div style={{padding:"16px 24px 12px",display:"flex",justifyContent:"space-between",alignItems:"center",borderBottom:`1.5px solid ${T.border}`,background:T.bg,position:"sticky",top:0,zIndex:10}}>
         <div style={{fontFamily:"Cinzel",fontSize:"18px",color:T.text,fontWeight:700}}>⚙️ Einstellungen</div>
         <button onClick={onClose} style={{fontFamily:"Raleway",fontSize:"20px",color:T.textSoft,background:"none",border:"none",cursor:"pointer"}}>✕</button>
       </div>
 
-      <div style={{padding:"20px 16px"}}>
+      <div style={{padding:"20px 24px"}}>
 
         {/* Branding lock notice */}
         <div style={{background:`linear-gradient(135deg,${T.tealL},${T.violetL})`,borderRadius:"16px",padding:"14px 16px",marginBottom:"16px",border:`1.5px solid ${T.borderMid}`,display:"flex",gap:"12px",alignItems:"center"}}>
