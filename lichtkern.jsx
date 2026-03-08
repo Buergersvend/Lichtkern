@@ -1,4 +1,36 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
+import { initializeApp } from "firebase/app";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "firebase/auth";
+import { getFirestore, doc, getDoc, setDoc, deleteDoc } from "firebase/firestore";
+
+// ─── FIREBASE CONFIG ──────────────────────────
+const firebaseConfig = {
+  apiKey: "AIzaSyDPxV2D36zoCawfSM4C-x3jlcW-Pu5L1n4",
+  authDomain: "lichtkern-43757.firebaseapp.com",
+  projectId: "lichtkern-43757",
+  storageBucket: "lichtkern-43757.firebasestorage.app",
+  messagingSenderId: "72774063015",
+  appId: "1:72774063015:web:4e9457a91d6ad49f1f5c82",
+  measurementId: "G-8PLHVC81YQ"
+};
+const firebaseApp = initializeApp(firebaseConfig);
+const auth = getAuth(firebaseApp);
+const db   = getFirestore(firebaseApp);
+
+// ─── FIRESTORE STORAGE (ersetzt window.storage) ──
+const fsGet = async (userId, key) => {
+  try {
+    const snap = await getDoc(doc(db, "users", userId, "data", key));
+    if (snap.exists()) return { value: snap.data().value };
+    return null;
+  } catch { return null; }
+};
+const fsSet = async (userId, key, value) => {
+  try { await setDoc(doc(db, "users", userId, "data", key), { value }); } catch {}
+};
+const fsDelete = async (userId, key) => {
+  try { await deleteDoc(doc(db, "users", userId, "data", key)); } catch {}
+};
 
 // ─── KRISTALLWASSER TOKENS ───────────────────
 const T = {
@@ -1273,7 +1305,132 @@ Hinweis: Diese Dokumentation ersetzt keine medizinische oder therapeutische Beha
 }
 
 // ─── ROOT ─────────────────────────────────────
-export default function App(){
+// ─── LOGIN SCREEN ─────────────────────────────
+function LoginScreen({ onLogin }) {
+  const [mode, setMode]         = useState("login"); // "login" | "register"
+  const [email, setEmail]       = useState("");
+  const [password, setPassword] = useState("");
+  const [name, setName]         = useState("");
+  const [praxis, setPraxis]     = useState("");
+  const [dsgvo, setDsgvo]       = useState(false);
+  const [loading, setLoading]   = useState(false);
+  const [error, setError]       = useState("");
+  const [pwVisible, setPwVisible] = useState(false);
+
+  const errMap = {
+    "auth/email-already-in-use": "Diese E-Mail ist bereits registriert.",
+    "auth/invalid-email": "Ungültige E-Mail-Adresse.",
+    "auth/weak-password": "Passwort muss mindestens 6 Zeichen haben.",
+    "auth/user-not-found": "Kein Konto mit dieser E-Mail gefunden.",
+    "auth/wrong-password": "Falsches Passwort.",
+    "auth/invalid-credential": "E-Mail oder Passwort falsch.",
+    "auth/too-many-requests": "Zu viele Versuche. Bitte später nochmal versuchen.",
+  };
+
+  const submit = async () => {
+    setError(""); setLoading(true);
+    try {
+      if (mode === "register") {
+        if (!dsgvo) { setError("Bitte Datenschutzerklärung akzeptieren."); setLoading(false); return; }
+        if (!name.trim()) { setError("Bitte deinen Namen eingeben."); setLoading(false); return; }
+        const cred = await createUserWithEmailAndPassword(auth, email, password);
+        await setDoc(doc(db, "users", cred.user.uid, "data", "lk_settings"), {
+          value: JSON.stringify({ theme:"kristallwasser", currency:"CHF", defaultDuration:"60", autoLock:"5", pinEnabled:false, praxisname:praxis, subtitle:"", therapistName:name, defaultFee:"", disclaimer:"" })
+        });
+        await setDoc(doc(db, "users", cred.user.uid, "profile"), { name, praxis, email, createdAt: new Date().toISOString() });
+        onLogin(cred.user);
+      } else {
+        const cred = await signInWithEmailAndPassword(auth, email, password);
+        onLogin(cred.user);
+      }
+    } catch (e) {
+      setError(errMap[e.code] || "Ein Fehler ist aufgetreten. Bitte versuche es nochmal.");
+    }
+    setLoading(false);
+  };
+
+  const inp = { width:"100%", padding:"13px 16px", borderRadius:"12px", border:`1.5px solid ${T.border}`, fontFamily:"Raleway", fontSize:"15px", color:T.text, background:T.bgSofter, outline:"none", boxSizing:"border-box" };
+  const btn = { width:"100%", padding:"15px", borderRadius:"14px", background:`linear-gradient(135deg,${T.teal},${T.tealD})`, color:"white", border:"none", fontFamily:"Raleway", fontWeight:700, fontSize:"16px", cursor:"pointer", boxShadow:`0 4px 18px ${T.shadowDeep}`, marginTop:"8px" };
+
+  return (
+    <div style={{background:T.bg, minHeight:"100vh", display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", padding:"24px", position:"relative", overflow:"hidden"}}>
+      <div style={{position:"fixed",top:"-80px",right:"-80px",width:"300px",height:"300px",borderRadius:"50%",background:`radial-gradient(circle,${T.tealL} 0%,transparent 70%)`,opacity:0.7,pointerEvents:"none"}}/>
+      <div style={{position:"fixed",bottom:"10%",left:"-60px",width:"240px",height:"240px",borderRadius:"50%",background:`radial-gradient(circle,${T.violetL} 0%,transparent 70%)`,opacity:0.5,pointerEvents:"none"}}/>
+      <div style={{width:"100%", maxWidth:"400px", position:"relative", zIndex:1}}>
+        {/* Logo */}
+        <div style={{textAlign:"center", marginBottom:"32px"}}>
+          <div style={{width:"72px",height:"72px",borderRadius:"50%",background:`linear-gradient(135deg,${T.tealL},${T.violetL})`,display:"flex",alignItems:"center",justifyContent:"center",fontSize:"28px",margin:"0 auto 12px",boxShadow:`0 6px 28px ${T.shadowDeep}`,border:`1.5px solid ${T.border}`}}>✦</div>
+          <div style={{fontFamily:"Cinzel", fontSize:"26px", color:T.text, fontWeight:700, letterSpacing:"2px"}}>LICHTKERN</div>
+          <div style={{fontFamily:"Raleway", fontSize:"11px", color:T.textSoft, letterSpacing:"3px", marginTop:"4px"}}>POWERED BY RESONANZ AKADEMIE</div>
+        </div>
+
+        {/* Card */}
+        <div style={{background:"white", borderRadius:"20px", padding:"28px", boxShadow:`0 8px 40px ${T.shadow}`, border:`1px solid ${T.border}`}}>
+          {/* Tabs */}
+          <div style={{display:"flex", background:T.bgSoft, borderRadius:"10px", padding:"4px", marginBottom:"24px"}}>
+            {["login","register"].map(m => (
+              <button key={m} onClick={()=>{setMode(m);setError("");}} style={{flex:1,padding:"9px",borderRadius:"8px",border:"none",fontFamily:"Raleway",fontWeight:700,fontSize:"13px",cursor:"pointer",background:mode===m?"white":"transparent",color:mode===m?T.teal:T.textMid,boxShadow:mode===m?`0 2px 8px ${T.shadow}`:"none",transition:"all 0.2s"}}>
+                {m === "login" ? "Anmelden" : "Registrieren"}
+              </button>
+            ))}
+          </div>
+
+          <div style={{display:"flex", flexDirection:"column", gap:"12px"}}>
+            {mode === "register" && <>
+              <input style={inp} placeholder="Dein Name" value={name} onChange={e=>setName(e.target.value)} />
+              <input style={inp} placeholder="Praxisname (optional)" value={praxis} onChange={e=>setPraxis(e.target.value)} />
+            </>}
+            <input style={inp} type="email" placeholder="E-Mail" value={email} onChange={e=>setEmail(e.target.value)} onKeyDown={e=>e.key==="Enter"&&submit()} />
+            <div style={{position:"relative"}}>
+              <input style={{...inp, paddingRight:"48px"}} type={pwVisible?"text":"password"} placeholder="Passwort" value={password} onChange={e=>setPassword(e.target.value)} onKeyDown={e=>e.key==="Enter"&&submit()} />
+              <button onClick={()=>setPwVisible(!pwVisible)} style={{position:"absolute",right:"12px",top:"50%",transform:"translateY(-50%)",background:"none",border:"none",cursor:"pointer",fontSize:"16px",opacity:0.5}}>{pwVisible?"🙈":"👁️"}</button>
+            </div>
+
+            {mode === "register" && (
+              <label style={{display:"flex", gap:"10px", alignItems:"flex-start", cursor:"pointer", marginTop:"4px"}}>
+                <input type="checkbox" checked={dsgvo} onChange={e=>setDsgvo(e.target.checked)} style={{marginTop:"3px", accentColor:T.teal}} />
+                <span style={{fontFamily:"Raleway", fontSize:"12px", color:T.textMid, lineHeight:"1.5"}}>
+                  Ich akzeptiere die <span style={{color:T.teal, fontWeight:700}}>Datenschutzerklärung</span> und willige in die Verarbeitung meiner Daten gemäß DSGVO ein.
+                </span>
+              </label>
+            )}
+
+            {error && <div style={{background:"#FFF0F0", border:"1px solid #FFCCCC", borderRadius:"10px", padding:"10px 14px", fontFamily:"Raleway", fontSize:"13px", color:"#CC0000"}}>{error}</div>}
+
+            <button style={{...btn, opacity:loading?0.7:1}} onClick={submit} disabled={loading}>
+              {loading ? "⏳ Bitte warten..." : mode === "login" ? "Anmelden" : "Konto erstellen"}
+            </button>
+          </div>
+        </div>
+
+        <div style={{textAlign:"center", marginTop:"20px", fontFamily:"Raleway", fontSize:"11px", color:T.textSoft}}>
+          ✦ Deine Daten sind sicher in Europa gespeichert
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ─── ROOT WRAPPER ─────────────────────────────
+export default function Root() {
+  const [user, setUser] = useState(undefined); // undefined = loading, null = logged out
+  useEffect(() => {
+    const unsub = onAuthStateChanged(auth, u => setUser(u || null));
+    return unsub;
+  }, []);
+
+  if (user === undefined) return (
+    <div style={{background:T.bg,height:"100vh",display:"flex",alignItems:"center",justifyContent:"center",flexDirection:"column",gap:"16px"}}>
+      <div style={{width:"70px",height:"70px",borderRadius:"50%",background:`linear-gradient(135deg,${T.tealL},${T.violetL})`,display:"flex",alignItems:"center",justifyContent:"center",fontSize:"30px",boxShadow:`0 6px 28px rgba(13,148,136,0.22)`,border:`1.5px solid ${T.border}`}}>✦</div>
+      <div style={{fontFamily:"Raleway",fontSize:"12px",color:T.textMid,letterSpacing:"3px",fontWeight:700}}>LICHTKERN</div>
+    </div>
+  );
+  if (!user) return <LoginScreen onLogin={setUser} />;
+  return <App user={user} onLogout={async()=>{ await signOut(auth); setUser(null); }} />;
+}
+
+// ─── MAIN APP ─────────────────────────────────
+function App({ user, onLogout }){
   const [screen,setScreen]           = useState("dashboard");
   const [clients,setClients]         = useState([]);
   const [sessions,setSessions]       = useState([]);
@@ -1293,26 +1450,27 @@ export default function App(){
   },[]);
 
   useEffect(()=>{(async()=>{
-    try{const d=await window.storage.get("lk_clients"); if(d)setClients(JSON.parse(d.value));}catch{}
-    try{const d=await window.storage.get("lk_sessions");if(d)setSessions(JSON.parse(d.value));}catch{}
-    try{const d=await window.storage.get("lk_appts");   if(d)setAppts(JSON.parse(d.value));}catch{}
-    try{const d=await window.storage.get("lk_gentrees"); if(d)setGenTrees(JSON.parse(d.value));}catch{}
-    try{const d=await window.storage.get("lk_templates");if(d)setTemplates(JSON.parse(d.value));}catch{}
-    try{const d=await window.storage.get("lk_reminders");if(d)setReminders(JSON.parse(d.value));}catch{}
-    try{const d=await window.storage.get("lk_settings"); if(d){const s=JSON.parse(d.value);setSettings(s);if(s.pinEnabled)setLocked(true);}}catch{}
+    const uid = user.uid;
+    try{const d=await fsGet(uid,"lk_clients"); if(d)setClients(JSON.parse(d.value));}catch{}
+    try{const d=await fsGet(uid,"lk_sessions");if(d)setSessions(JSON.parse(d.value));}catch{}
+    try{const d=await fsGet(uid,"lk_appts");   if(d)setAppts(JSON.parse(d.value));}catch{}
+    try{const d=await fsGet(uid,"lk_gentrees"); if(d)setGenTrees(JSON.parse(d.value));}catch{}
+    try{const d=await fsGet(uid,"lk_templates");if(d)setTemplates(JSON.parse(d.value));}catch{}
+    try{const d=await fsGet(uid,"lk_reminders");if(d)setReminders(JSON.parse(d.value));}catch{}
+    try{const d=await fsGet(uid,"lk_settings"); if(d){const s=JSON.parse(d.value);setSettings(s);if(s.pinEnabled)setLocked(true);}}catch{}
     setReady(true);
-  })();},[]);
+  })();},[user.uid]);
 
-  const saveClients = async c=>{setClients(c);  try{await window.storage.set("lk_clients", JSON.stringify(c));}catch{}};
-  const saveSessions= async s=>{setSessions(s); try{await window.storage.set("lk_sessions",JSON.stringify(s));}catch{}};
-  const saveAppt    = async a=>{const next=appointments.find(x=>x.id===a.id)?appointments.map(x=>x.id===a.id?a:x):[...appointments,a];setAppts(next);try{await window.storage.set("lk_appts",JSON.stringify(next));}catch{}};
-  const saveSettings = async s=>{setSettings(s);try{await window.storage.set("lk_settings",JSON.stringify(s));}catch{}};
-  const saveTemplates= async t=>{setTemplates(t);try{await window.storage.set("lk_templates",JSON.stringify(t));}catch{}};
-  const saveReminders= async r=>{setReminders(r);try{await window.storage.set("lk_reminders",JSON.stringify(r));}catch{}};
+  const saveClients = async c=>{setClients(c);  try{await fsSet(user.uid,"lk_clients", JSON.stringify(c));}catch{}};
+  const saveSessions= async s=>{setSessions(s); try{await fsSet(user.uid,"lk_sessions",JSON.stringify(s));}catch{}};
+  const saveAppt    = async a=>{const next=appointments.find(x=>x.id===a.id)?appointments.map(x=>x.id===a.id?a:x):[...appointments,a];setAppts(next);try{await fsSet(user.uid,"lk_appts",JSON.stringify(next));}catch{}};
+  const saveSettings = async s=>{setSettings(s);try{await fsSet(user.uid,"lk_settings",JSON.stringify(s));}catch{}};
+  const saveTemplates= async t=>{setTemplates(t);try{await fsSet(user.uid,"lk_templates",JSON.stringify(t));}catch{}};
+  const saveReminders= async r=>{setReminders(r);try{await fsSet(user.uid,"lk_reminders",JSON.stringify(r));}catch{}};
   const addReminder  = async r=>{const next=[...reminders,{...r,id:uid(),createdAt:new Date().toISOString()}];await saveReminders(next);};
   const dismissReminder=async id=>{const next=reminders.map(r=>r.id===id?{...r,dismissed:true}:r);await saveReminders(next);};
-  const saveGenTree  = async(clientId,tree)=>{const next={...genTrees,[clientId]:tree};setGenTrees(next);try{await window.storage.set("lk_gentrees",JSON.stringify(next));}catch{}};
-  const deleteAppt  = async id=>{const next=appointments.filter(a=>a.id!==id);setAppts(next);try{await window.storage.set("lk_appts",JSON.stringify(next));}catch{}};
+  const saveGenTree  = async(clientId,tree)=>{const next={...genTrees,[clientId]:tree};setGenTrees(next);try{await fsSet(user.uid,"lk_gentrees",JSON.stringify(next));}catch{}};
+  const deleteAppt  = async id=>{const next=appointments.filter(a=>a.id!==id);setAppts(next);try{await fsSet(user.uid,"lk_appts",JSON.stringify(next));}catch{}};
 
   const startSession=(client=null,template=null)=>{
     const tpl=template||{};
@@ -1348,7 +1506,7 @@ export default function App(){
         </div>
       </header>
       {screen==="dashboard"&&<Dashboard clients={clients} sessions={sessions} appointments={appointments} onNav={nav} reminders={reminders} onDismissReminder={dismissReminder} onAddReminder={addReminder}/>}
-      {screen==="clients"  &&<Clients clients={clients} sessions={sessions} onSave={saveClients} onStart={startSession} onDelete={async(id)=>{await saveClients(clients.filter(c=>c.id!==id));await saveSessions(sessions.filter(s=>s.clientId!==id));const nextAppts=appointments.filter(a=>a.clientId!==id);setAppts(nextAppts);try{await window.storage.set("lk_appts",JSON.stringify(nextAppts));}catch{};const nt={...genTrees};delete nt[id];setGenTrees(nt);try{await window.storage.set("lk_gentrees",JSON.stringify(nt));}catch{};}} onOnboarding={()=>nav("onboarding")} reminders={reminders} onAddReminder={addReminder} onDismissReminder={dismissReminder} onAnalyse={(id)=>{setAnalyticsClient(id);nav("clientanalysis");}}/>}
+      {screen==="clients"  &&<Clients clients={clients} sessions={sessions} onSave={saveClients} onStart={startSession} onDelete={async(id)=>{await saveClients(clients.filter(c=>c.id!==id));await saveSessions(sessions.filter(s=>s.clientId!==id));const nextAppts=appointments.filter(a=>a.clientId!==id);setAppts(nextAppts);try{await fsSet(user.uid,"lk_appts",JSON.stringify(nextAppts));}catch{};const nt={...genTrees};delete nt[id];setGenTrees(nt);try{await fsSet(user.uid,"lk_gentrees",JSON.stringify(nt));}catch{};}} onOnboarding={()=>nav("onboarding")} reminders={reminders} onAddReminder={addReminder} onDismissReminder={dismissReminder} onAnalyse={(id)=>{setAnalyticsClient(id);nav("clientanalysis");}}/>}
       {screen==="session"  &&<Session wizard={wizard} setWizard={setWizard} clients={clients} onComplete={completeSession} onCancel={()=>{setWizard(null);setScreen("dashboard");}} templates={templates} onStartWithTemplate={(tpl)=>startSession(null,tpl)}/>}
       {screen==="calendar" &&<CalendarScreen appointments={appointments} clients={clients} onSaveAppt={saveAppt} onDeleteAppt={deleteAppt} onStartSession={startSession}/>}
       {screen==="gentree"   &&<GenTree clients={clients} genTrees={genTrees} onSaveTree={saveGenTree}/>}
@@ -1359,7 +1517,7 @@ export default function App(){
       {screen==="billing"   &&<Billing sessions={sessions} clients={clients} settings={settings} onUpdateSession={async(updated)=>{const next=sessions.map(s=>s.id===updated.id?updated:s);await saveSessions(next);}}/>}
       {screen==="templates" &&<TemplatesScreen templates={templates} onSave={saveTemplates} onStartSession={(tpl)=>startSession(null,tpl)}/>}
       {screen==="onboarding" &&<OnboardingScreen onSave={async(client)=>{await saveClients([...clients,client]);nav("clients");}} onCancel={()=>nav("clients")}/>}
-      {showSettings&&<SettingsScreen settings={settings} onSave={saveSettings} onClose={()=>setShowSettings(false)} clients={clients} sessions={sessions} appointments={appointments} genTrees={genTrees} reminders={reminders} templates={templates} onImport={async(data)=>{if(data.clients)await saveClients(data.clients);if(data.sessions)await saveSessions(data.sessions);if(data.appointments){setAppts(data.appointments);try{await window.storage.set("lk_appts",JSON.stringify(data.appointments));}catch{}}if(data.genTrees){setGenTrees(data.genTrees);try{await window.storage.set("lk_gentrees",JSON.stringify(data.genTrees));}catch{}}if(data.reminders){setReminders(data.reminders);try{await window.storage.set("lk_reminders",JSON.stringify(data.reminders));}catch{}}if(data.templates){setTemplates(data.templates);try{await window.storage.set("lk_templates",JSON.stringify(data.templates));}catch{}}if(data.settings)await saveSettings(data.settings);}}/>}
+      {showSettings&&<SettingsScreen settings={settings} onSave={saveSettings} onClose={()=>setShowSettings(false)} clients={clients} sessions={sessions} appointments={appointments} genTrees={genTrees} reminders={reminders} templates={templates} onImport={async(data)=>{if(data.clients)await saveClients(data.clients);if(data.sessions)await saveSessions(data.sessions);if(data.appointments){setAppts(data.appointments);try{await fsSet(user.uid,"lk_appts",JSON.stringify(data.appointments));}catch{}}if(data.genTrees){setGenTrees(data.genTrees);try{await fsSet(user.uid,"lk_gentrees",JSON.stringify(data.genTrees));}catch{}}if(data.reminders){setReminders(data.reminders);try{await fsSet(user.uid,"lk_reminders",JSON.stringify(data.reminders));}catch{}}if(data.templates){setTemplates(data.templates);try{await fsSet(user.uid,"lk_templates",JSON.stringify(data.templates));}catch{}}if(data.settings)await saveSettings(data.settings);}} onLogout={onLogout}/>}
     </div>
     <BottomNav active={screen} onChange={nav}/>
   </div>);
@@ -2140,7 +2298,7 @@ function PinLock({ mode, onSuccess, onSetup }) {
       setPin(next);
       if(next.length===4){
         try {
-          const stored = await window.storage.get("lk_pin");
+          const stored = await fsGet("pin_user", "lk_pin");
           if(stored && stored.value === next){ onSuccess(); }
           else { setError("Falsche PIN"); setPin(""); setTimeout(()=>setError(""),1500); }
         } catch { setError("Fehler"); setPin(""); }
@@ -2198,7 +2356,7 @@ function PinLock({ mode, onSuccess, onSetup }) {
 }
 
 // ─── SETTINGS SCREEN ──────────────────────────
-function SettingsScreen({ settings, onSave, onClose, clients, sessions, appointments, genTrees, reminders, templates, onImport }) {
+function SettingsScreen({ settings, onSave, onClose, clients, sessions, appointments, genTrees, reminders, templates, onImport, onLogout }) {
   const [form,setForm] = useState({...settings});
   const [pinMode,setPinMode] = useState(null); // null | "setup" | "change"
   const [pinEnabled,setPinEnabled] = useState(!!settings.pinEnabled);
@@ -2213,7 +2371,7 @@ function SettingsScreen({ settings, onSave, onClose, clients, sessions, appointm
   };
 
   const handlePinSetup = async (pin) => {
-    try{ await window.storage.set("lk_pin", pin); }catch{}
+    try{ await fsSet("pin_user","lk_pin", pin); }catch{}
     setPinEnabled(true);
     await onSave({...form, pinEnabled:true});
     setPinMode(null);
@@ -2221,7 +2379,7 @@ function SettingsScreen({ settings, onSave, onClose, clients, sessions, appointm
 
   const disablePin = async () => {
     if(!window.confirm("PIN-Schutz wirklich deaktivieren?")) return;
-    try{ await window.storage.delete("lk_pin"); }catch{}
+    try{ await fsDelete("pin_user","lk_pin"); }catch{}
     setPinEnabled(false);
     await onSave({...form, pinEnabled:false});
   };
@@ -2382,9 +2540,15 @@ function SettingsScreen({ settings, onSave, onClose, clients, sessions, appointm
           </div>
         </div>
 
-        <Btn onClick={save} style={{width:"100%",fontSize:"14px",padding:"14px",marginBottom:"20px"}}>
+        <Btn onClick={save} style={{width:"100%",fontSize:"14px",padding:"14px",marginBottom:"12px"}}>
           {saved ? "✅ Gespeichert!" : "Einstellungen speichern"}
         </Btn>
+
+        {onLogout && (
+          <button onClick={()=>{if(window.confirm("Wirklich abmelden?"))onLogout();}} style={{width:"100%",fontFamily:"Raleway",fontWeight:700,fontSize:"14px",padding:"14px",borderRadius:"14px",border:`1.5px solid #FFCCCC`,background:"#FFF5F5",color:"#CC0000",cursor:"pointer",marginBottom:"20px"}}>
+            🚪 Abmelden
+          </button>
+        )}
 
         {/* Export & Backup */}
         <div style={{background:"#FFFFFF",borderRadius:"18px",padding:"16px",marginBottom:"20px",border:`1.5px solid ${T.border}`}}>
