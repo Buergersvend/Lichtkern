@@ -1140,8 +1140,10 @@ function HDTab({client,onSave}){
     setGateMap(prev=>{
       const cur=prev[g];
       const next={...prev};
+      // Zyklus: leer → Persönlichkeit (teal) → Beide (violett) → Design (rot) → leer
       if(!cur)next[g]='p';
-      else if(cur==='p')next[g]='d';
+      else if(cur==='p')next[g]='b';
+      else if(cur==='b')next[g]='d';
       else delete next[g];
       return next;
     });
@@ -1302,7 +1304,7 @@ Warmherzig, präzise, ohne Heilversprechen.`}]})});
                 </div>
               </div>
               <div style={{fontFamily:'Raleway',fontSize:'11px',color:T.textMid,marginBottom:'10px',lineHeight:'1.5',background:'white',borderRadius:'8px',padding:'8px',border:`1px dashed ${T.border}`}}>
-                👆 <strong>1× tippen</strong> = Persönlichkeit (schwarz) · <strong>2× tippen</strong> = Design (rot) · <strong>3× tippen</strong> = entfernen
+                👆 <strong>1× tippen</strong> = Persönlichkeit · <strong>2× tippen</strong> = Beide · <strong>3× tippen</strong> = nur Design · <strong>4× tippen</strong> = entfernen
               </div>
               {/* Gate Grid 8x8 */}
               <div style={{display:'grid',gridTemplateColumns:'repeat(8,1fr)',gap:'4px',marginBottom:'12px'}}>
