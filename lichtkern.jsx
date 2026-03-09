@@ -1115,18 +1115,52 @@ function HDTab({client,onSave}){
     hdPGates:client.hdPGates||'',  // comma-separated
     hdDGates:client.hdDGates||'',
   });
-  const [editing,setEditing]=useState(false);
+  const [editing,setEditing]=useState(!client.hdType&&!client.hdPGates);
+  const [gateStep,setGateStep]=useState(0); // 0=Typ, 1=Tore
   const [aiLoading,setAiLoading]=useState(false);
   const [aiText,setAiText]=useState('');
-  const pgates=(form.hdPGates||'').split(',').map(s=>s.trim()).filter(Boolean).map(Number).filter(n=>n>=1&&n<=64);
-  const dgates=(form.hdDGates||'').split(',').map(s=>s.trim()).filter(Boolean).map(Number).filter(n=>n>=1&&n<=64);
-  const allGates=[...pgates,...dgates];
+  // gateMap: {gateNum: 'p'|'d'} 
+  const initGateMap=()=>{
+    const m={};
+    (client.hdPGates||'').split(',').map(s=>s.trim()).filter(Boolean).forEach(g=>{if(+g>=1&&+g<=64)m[+g]='p';});
+    (client.hdDGates||'').split(',').map(s=>s.trim()).filter(Boolean).forEach(g=>{if(+g>=1&&+g<=64)m[+g]=m[+g]==='p'?'b':'d';});
+    return m;
+  };
+  const [gateMap,setGateMap]=useState(initGateMap);
+  
+  const pgates=Object.entries(gateMap).filter(([,v])=>v==='p'||v==='b').map(([k])=>+k);
+  const dgates=Object.entries(gateMap).filter(([,v])=>v==='d'||v==='b').map(([k])=>+k);
+  const allGates=[...new Set([...pgates,...dgates])];
   const defined=hdCalcDefinedCenters(allGates);
   const calcType=allGates.length>0?hdDetermineType(defined):'';
   const displayType=form.hdType||calcType||'—';
-  const hasData=form.hdType||pgates.length>0||dgates.length>0;
+  const hasData=form.hdType||allGates.length>0;
 
-  const save=()=>{onSave({...client,...form});setEditing(false);};
+  const tapGate=(g)=>{
+    setGateMap(prev=>{
+      const cur=prev[g];
+      const next={...prev};
+      if(!cur)next[g]='p';
+      else if(cur==='p')next[g]='d';
+      else delete next[g];
+      return next;
+    });
+  };
+
+  const save=()=>{
+    const pg=pgates.join(',');
+    const dg=dgates.join(',');
+    onSave({...client,...form,hdPGates:pg,hdDGates:dg});
+    setEditing(false);
+  };
+  
+  const mybodygraphUrl=()=>{
+    if(!form.hdBirthDate)return'https://www.mybodygraph.com';
+    const [y,m,d]=(form.hdBirthDate||'').split('-');
+    const [h,min]=(form.hdBirthTime||'00:00').split(':');
+    const place=encodeURIComponent(form.hdBirthPlace||'');
+    return`https://www.mybodygraph.com/chart?day=${d||''}&month=${m||''}&year=${y||''}&hour=${h||'0'}&minute=${min||'0'}&city=${place}`;
+  };
 
   const genAI=async()=>{
     if(!hasData)return;
@@ -1221,29 +1255,90 @@ Warmherzig, präzise, ohne Heilversprechen.`}]})});
 
       {/* Edit / Form */}
       {editing?(
-        <Card style={{marginBottom:'16px',border:`1.5px solid ${T.borderMid}`,background:T.bgSoft}}>
-          <SL color={T.tealD}>⚙ HD-Daten bearbeiten</SL>
-          <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:'8px',marginBottom:'10px'}}>
-            <div><div style={{fontFamily:'Raleway',fontSize:'10px',color:T.textMid,fontWeight:700,marginBottom:'4px'}}>Geburtsdatum</div><TI value={form.hdBirthDate} onChange={v=>setForm({...form,hdBirthDate:v})} placeholder="1990-06-15"/></div>
-            <div><div style={{fontFamily:'Raleway',fontSize:'10px',color:T.textMid,fontWeight:700,marginBottom:'4px'}}>Uhrzeit</div><TI value={form.hdBirthTime} onChange={v=>setForm({...form,hdBirthTime:v})} placeholder="14:30"/></div>
+        <div style={{marginBottom:'16px'}}>
+          {/* Step indicator */}
+          <div style={{display:'flex',gap:'6px',marginBottom:'14px'}}>
+            {['① Geburt & Typ','② Tore eingeben'].map((s,i)=>(
+              <button key={i} onClick={()=>setGateStep(i)} style={{flex:1,padding:'9px',borderRadius:'12px',border:`1.5px solid ${gateStep===i?T.teal:T.border}`,background:gateStep===i?T.teal:'white',fontFamily:'Raleway',fontSize:'11px',fontWeight:700,color:gateStep===i?'white':T.textMid,cursor:'pointer'}}>
+                {s}
+              </button>
+            ))}
           </div>
-          <div style={{marginBottom:'10px'}}><div style={{fontFamily:'Raleway',fontSize:'10px',color:T.textMid,fontWeight:700,marginBottom:'4px'}}>Geburtsort</div><TI value={form.hdBirthPlace} onChange={v=>setForm({...form,hdBirthPlace:v})} placeholder="München, Deutschland"/></div>
-          {sel('HD-Typ',['Manifestor','Generator','Manifesting Generator','Projektor','Reflektor'],'hdType')}
-          {sel('Profil',['1/3','1/4','2/4','2/5','3/5','3/6','4/6','4/1','5/1','5/2','6/2','6/3'],'hdProfile')}
-          {sel('Autorität',['Emotional','Sakral','Milz','Ego','Selbst','Mental','Lunar'],'hdAuthority')}
-          <div style={{marginBottom:'10px'}}>
-            <div style={{fontFamily:'Raleway',fontSize:'10px',color:T.tealD,fontWeight:700,letterSpacing:'1px',marginBottom:'4px'}}>PERSÖNLICHKEIT-TORE (schwarze Seite) <span style={{color:T.textSoft,fontWeight:400}}>– kommagetrennt aus deinem offiziellen Chart</span></div>
-            <TI value={form.hdPGates} onChange={v=>setForm({...form,hdPGates:v})} placeholder="z.B. 1, 8, 25, 51, 34, 57..."/>
-          </div>
-          <div style={{marginBottom:'12px'}}>
-            <div style={{fontFamily:'Raleway',fontSize:'10px',color:'#DC2626',fontWeight:700,letterSpacing:'1px',marginBottom:'4px'}}>DESIGN-TORE (rote Seite) <span style={{color:T.textSoft,fontWeight:400}}>– kommagetrennt</span></div>
-            <TI value={form.hdDGates} onChange={v=>setForm({...form,hdDGates:v})} placeholder="z.B. 5, 15, 3, 60..."/>
-          </div>
-          <div style={{background:T.bgSoft,borderRadius:'10px',padding:'10px',marginBottom:'12px',border:`1px dashed ${T.border}`}}>
-            <div style={{fontFamily:'Raleway',fontSize:'11px',color:T.textMid,lineHeight:'1.5'}}>💡 Offizielle HD-Charts erhältst du kostenlos auf <strong>mybodygraph.com</strong> oder <strong>jovianarchive.com</strong></div>
-          </div>
-          <div style={{display:'flex',gap:'8px'}}><Btn onClick={save} style={{flex:1}}>✓ Speichern</Btn><Btn variant="soft" onClick={()=>setEditing(false)} style={{flex:1}}>Abbrechen</Btn></div>
-        </Card>
+
+          {gateStep===0&&(
+            <Card style={{border:`1.5px solid ${T.borderMid}`,background:T.bgSoft}}>
+              <SL color={T.tealD}>Geburtsdaten</SL>
+              <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:'8px',marginBottom:'10px'}}>
+                <div><div style={{fontFamily:'Raleway',fontSize:'10px',color:T.textMid,fontWeight:700,marginBottom:'4px'}}>Datum</div><TI value={form.hdBirthDate} onChange={v=>setForm({...form,hdBirthDate:v})} placeholder="1990-06-15"/></div>
+                <div><div style={{fontFamily:'Raleway',fontSize:'10px',color:T.textMid,fontWeight:700,marginBottom:'4px'}}>Uhrzeit</div><TI value={form.hdBirthTime} onChange={v=>setForm({...form,hdBirthTime:v})} placeholder="14:30"/></div>
+              </div>
+              <div style={{marginBottom:'12px'}}><div style={{fontFamily:'Raleway',fontSize:'10px',color:T.textMid,fontWeight:700,marginBottom:'4px'}}>Geburtsort</div><TI value={form.hdBirthPlace} onChange={v=>setForm({...form,hdBirthPlace:v})} placeholder="München, Deutschland"/></div>
+              
+              {/* mybodygraph link */}
+              <a href={mybodygraphUrl()} target="_blank" rel="noreferrer" style={{display:'block',background:`linear-gradient(135deg,${T.violetL},${T.tealL})`,borderRadius:'12px',padding:'14px',marginBottom:'12px',border:`1.5px solid ${T.borderMid}`,textDecoration:'none'}}>
+                <div style={{fontFamily:'Raleway',fontWeight:800,fontSize:'13px',color:T.violetD,marginBottom:'3px'}}>🔗 Chart auf mybodygraph.com öffnen →</div>
+                <div style={{fontFamily:'Raleway',fontSize:'11px',color:T.textMid}}>Öffnet deinen persönlichen HD-Chart{form.hdBirthDate?' mit den eingetragenen Daten':' (Daten erst oben eingeben)'}</div>
+              </a>
+              
+              {sel('HD-Typ (aus Chart ablesen)',['Manifestor','Generator','Manifesting Generator','Projektor','Reflektor'],'hdType')}
+              {sel('Profil',['1/3','1/4','2/4','2/5','3/5','3/6','4/6','4/1','5/1','5/2','6/2','6/3'],'hdProfile')}
+              {sel('Autorität',['Emotional','Sakral','Milz','Ego','Selbst','Mental','Lunar'],'hdAuthority')}
+              
+              <Btn onClick={()=>setGateStep(1)} style={{width:'100%',marginTop:'4px'}}>Weiter → Tore eingeben</Btn>
+            </Card>
+          )}
+
+          {gateStep===1&&(
+            <Card style={{border:`1.5px solid ${T.borderMid}`,background:T.bgSoft}}>
+              <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:'8px'}}>
+                <SL color={T.tealD}>Tore antippen</SL>
+                <div style={{display:'flex',gap:'8px',alignItems:'center'}}>
+                  {[['p',T.teal,'Persönl.'],['d','#DC2626','Design'],['b',T.violet,'Beide']].map(([v,col,lbl])=>(
+                    <div key={v} style={{display:'flex',alignItems:'center',gap:'4px'}}>
+                      <div style={{width:'10px',height:'10px',borderRadius:'2px',background:col}}/>
+                      <span style={{fontFamily:'Raleway',fontSize:'9px',color:T.textMid,fontWeight:600}}>{lbl}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div style={{fontFamily:'Raleway',fontSize:'11px',color:T.textMid,marginBottom:'10px',lineHeight:'1.5',background:'white',borderRadius:'8px',padding:'8px',border:`1px dashed ${T.border}`}}>
+                👆 <strong>1× tippen</strong> = Persönlichkeit (schwarz) · <strong>2× tippen</strong> = Design (rot) · <strong>3× tippen</strong> = entfernen
+              </div>
+              {/* Gate Grid 8x8 */}
+              <div style={{display:'grid',gridTemplateColumns:'repeat(8,1fr)',gap:'4px',marginBottom:'12px'}}>
+                {Array.from({length:64},(_,i)=>i+1).map(g=>{
+                  const st=gateMap[g];
+                  const bg=st==='p'?T.teal:st==='d'?'#DC2626':st==='b'?T.violet:'#F1F5F9';
+                  const col=st?'white':T.textSoft;
+                  return(
+                    <button key={g} onClick={()=>tapGate(g)} style={{aspectRatio:'1',borderRadius:'6px',border:`1px solid ${st?(st==='p'?T.tealD:st==='d'?'#B91C1C':T.violetD):'#E2E8F0'}`,background:bg,fontFamily:'Raleway',fontSize:'10px',fontWeight:st?800:500,color:col,cursor:'pointer',transition:'all 0.1s',display:'flex',alignItems:'center',justifyContent:'center'}}>
+                      {g}
+                    </button>
+                  );
+                })}
+              </div>
+              <div style={{display:'flex',gap:'6px',background:'white',borderRadius:'10px',padding:'10px',marginBottom:'12px',border:`1px solid ${T.border}`}}>
+                <div style={{flex:1}}>
+                  <div style={{fontFamily:'Raleway',fontSize:'9px',color:T.teal,fontWeight:700,marginBottom:'3px'}}>PERSÖNLICHKEIT ({pgates.length})</div>
+                  <div style={{fontFamily:'Raleway',fontSize:'11px',color:T.text}}>{pgates.sort((a,b)=>a-b).join(', ')||'–'}</div>
+                </div>
+                <div style={{flex:1}}>
+                  <div style={{fontFamily:'Raleway',fontSize:'9px',color:'#DC2626',fontWeight:700,marginBottom:'3px'}}>DESIGN ({dgates.length})</div>
+                  <div style={{fontFamily:'Raleway',fontSize:'11px',color:T.text}}>{dgates.sort((a,b)=>a-b).join(', ')||'–'}</div>
+                </div>
+              </div>
+              {allGates.length>0&&calcType&&(
+                <div style={{background:T.tealL,borderRadius:'10px',padding:'10px',marginBottom:'12px',border:`1px solid ${T.borderMid}`,fontFamily:'Raleway',fontSize:'12px',color:T.tealD,fontWeight:700}}>
+                  ⚙ Berechneter Typ: {calcType}
+                </div>
+              )}
+              <div style={{display:'flex',gap:'8px'}}>
+                <Btn variant="soft" onClick={()=>setGateStep(0)} style={{flex:1}}>← Zurück</Btn>
+                <Btn onClick={save} style={{flex:2}}>✓ Speichern</Btn>
+              </div>
+            </Card>
+          )}
+        </div>
       ):(
         <Btn variant="soft" onClick={()=>setEditing(true)} style={{width:'100%',marginBottom:'16px'}}>✏ HD-Daten bearbeiten</Btn>
       )}
