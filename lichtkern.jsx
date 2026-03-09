@@ -779,6 +779,7 @@ function Dashboard({clients,sessions,appointments,onNav,reminders,onDismissRemin
           {label:"Kalender",         icon:"⊡", s:"calendar",  bg:"rgba(255,255,255,0.82)", border:"#A78BFA",    c:T.violetD},
           {label:"Wissensbasis",     icon:"◆", s:"knowledge", bg:"rgba(255,255,255,0.82)", border:"#6BAEE8",    c:"#0A2A50"},
           {label:"Generationsbaum",  icon:"🧬",s:"gentree",   bg:"rgba(255,255,255,0.82)", border:"#9B7EE0",    c:"#2A1660"},
+          {label:"Synergy Engine",    icon:"⚡",s:"synergy",   bg:"rgba(255,255,255,0.82)", border:"#6D3FCC",    c:"#3D1A8A"},
           {label:"Abrechnung",       icon:"◎", s:"billing",   bg:"rgba(255,255,255,0.82)", border:"#4ADE80",    c:"#0A3B20"},
           {label:"Analyse",          icon:"◇", s:"analytics", bg:"rgba(255,255,255,0.82)", border:T.borderMid,  c:T.tealD},
         ].map((a,i)=>(
@@ -914,10 +915,589 @@ Vielen Dank für deine baldige Begleichung.
   );
 }
 
+// ─── HUMAN DESIGN ENGINE ──────────────────────
+const HD_GATE_CENTER={
+  64:'head',61:'head',63:'head',
+  47:'ajna',24:'ajna',4:'ajna',17:'ajna',43:'ajna',11:'ajna',
+  62:'throat',23:'throat',56:'throat',35:'throat',12:'throat',45:'throat',33:'throat',8:'throat',31:'throat',20:'throat',16:'throat',
+  1:'g',13:'g',25:'g',46:'g',2:'g',15:'g',10:'g',7:'g',
+  21:'heart',40:'heart',26:'heart',51:'heart',
+  30:'sp',22:'sp',36:'sp',49:'sp',55:'sp',37:'sp',6:'sp',
+  5:'sacral',14:'sacral',29:'sacral',59:'sacral',9:'sacral',3:'sacral',42:'sacral',27:'sacral',34:'sacral',
+  48:'spleen',57:'spleen',44:'spleen',50:'spleen',32:'spleen',28:'spleen',18:'spleen',
+  58:'root',38:'root',54:'root',53:'root',60:'root',19:'root',39:'root',41:'root',52:'root'
+};
+const HD_CHANNELS=[[4,63],[24,61],[47,64],[11,56],[17,62],[23,43],[1,8],[7,31],[10,20],[13,33],[21,45],[12,22],[35,36],[16,48],[20,57],[2,14],[5,15],[10,34],[29,46],[25,51],[26,44],[37,40],[27,50],[34,57],[6,59],[3,60],[9,52],[42,53],[18,58],[28,38],[32,54],[19,49],[30,41],[39,55]];
+const HD_CENTER_CFG={
+  head:   {label:'Kopf',       color:'#7C3AED',bg:'#EDE9FE',size:52,shape:'tri-down'},
+  ajna:   {label:'Ajna',       color:'#2563EB',bg:'#DBEAFE',size:48,shape:'tri-up'},
+  throat: {label:'Kehle',      color:'#D97706',bg:'#FEF3C7',size:44,shape:'rect'},
+  g:      {label:'G / Selbst', color:'#F59E0B',bg:'#FEF9C3',size:46,shape:'diamond'},
+  heart:  {label:'Herz',       color:'#DC2626',bg:'#FEE2E2',size:40,shape:'tri-down'},
+  sp:     {label:'Solarplexus',color:'#EA580C',bg:'#FFEDD5',size:48,shape:'tri-up'},
+  sacral: {label:'Sakral',     color:'#B91C1C',bg:'#FEE2E2',size:50,shape:'rect'},
+  spleen: {label:'Milz',       color:'#16A34A',bg:'#DCFCE7',size:44,shape:'tri-up'},
+  root:   {label:'Wurzel',     color:'#92400E',bg:'#FEF3C7',size:42,shape:'rect'}
+};
+const HD_TYPE_DESC={
+  'Manifestor':    {strategy:'Informieren vor dem Handeln',signature:'Frieden',notself:'Wut',desc:'Manifestoren sind Initiatoren – sie haben die Fähigkeit, Dinge zu starten und andere zu bewegen. Ihre Energie ist bündelnd und fokussiert.'},
+  'Generator':     {strategy:'Warten & auf Resonanz antworten',signature:'Befriedigung',notself:'Frustration',desc:'Generatoren sind die Lebenskraft der Welt. Ihre Sakralenergie ist zyklusartig und nachhaltig. Sie gedeihen, wenn sie auf echte Resonanz reagieren.'},
+  'Manifesting Generator':{strategy:'Warten, informieren, dann handeln',signature:'Befriedigung',notself:'Frustration/Wut',desc:'Manifesting Generatoren verbinden Initiationskraft mit Sakralenergie. Sie sind schnell, multitaskingfähig und erschaffen Neues durch direkte Energie.'},
+  'Projektor':     {strategy:'Warten auf Einladung',signature:'Erfolg',notself:'Bitterkeit',desc:'Projektoren haben die Fähigkeit, andere tiefgründig zu führen und zu leiten. Sie brauchen Anerkennung und Einladung, um ihre Weisheit optimal einzusetzen.'},
+  'Reflektor':     {strategy:'Warten einen Mondmonat',signature:'Überraschung',notself:'Enttäuschung',desc:'Reflektoren sind Spiegel der Gemeinschaft. Sie sind selten und kostbar – ihre offenen Zentren reflektieren das Umfeld mit klarer Wahrheit.'}
+};
+const HD_AUTHORITY_DESC={
+  'Emotional':   'Entscheidungen brauchen Zeit – erst wenn die emotionale Welle abklingt, wird Klarheit sichtbar.',
+  'Sakral':      'Die Sakralkraft antwortet spontan mit Ja/Nein. Auf die körperliche Resonanz hören.',
+  'Milz':        'Spontane, intuitive Eingebungen im Moment. Der erste Impuls trägt die Wahrheit.',
+  'Ego':         'Entscheidungen aus dem Herzensimpuls – was will ich wirklich? Was lohnt sich?',
+  'Selbst':      'Der Körper führt in die richtigen Orte und zu den richtigen Menschen.',
+  'Mental':      'Entscheidungen durch Austausch und Reflexion mit vertrauten Menschen.',
+  'Lunar':       'Entscheidungen erst nach einem vollständigen Mondzyklus (28-29 Tage).'
+};
+
+function hdCalcDefinedCenters(allGates){
+  const s=new Set(allGates.map(Number));
+  const def=new Set();
+  HD_CHANNELS.forEach(([a,b])=>{if(s.has(a)&&s.has(b)){def.add(HD_GATE_CENTER[a]);def.add(HD_GATE_CENTER[b]);}});
+  return def;
+}
+function hdDetermineType(def){
+  if(def.size===0)return'Reflektor';
+  const hasSacral=def.has('sacral'),hasThroat=def.has('throat'),hasHeart=def.has('heart'),hasSP=def.has('sp'),hasRoot=def.has('root');
+  if(hasSacral&&hasThroat)return'Manifesting Generator';
+  if(hasSacral)return'Generator';
+  if(hasThroat&&(hasHeart||hasSP||hasRoot))return'Manifestor';
+  return'Projektor';
+}
+
+// ─── BODYGRAPH SVG ────────────────────────────
+function BodygraphSVG({pgates=[],dgates=[],size=260}){
+  const allGates=[...pgates,...dgates].map(Number);
+  const defined=hdCalcDefinedCenters(allGates);
+  const pSet=new Set(pgates.map(Number));
+  const dSet=new Set(dgates.map(Number));
+
+  // Center positions in 200x380 viewBox
+  const CP={
+    head:   {x:100,y:30},
+    ajna:   {x:100,y:95},
+    throat: {x:100,y:158},
+    g:      {x:63,y:220},
+    heart:  {x:152,y:205},
+    sp:     {x:158,y:298},
+    sacral: {x:100,y:285},
+    spleen: {x:48,y:298},
+    root:   {x:100,y:360}
+  };
+
+  const cDef=(c)=>defined.has(c);
+  const cc=(c)=>cDef(c)?HD_CENTER_CFG[c].color:'#CBD5E1';
+  const cb=(c)=>cDef(c)?HD_CENTER_CFG[c].bg:'#F1F5F9';
+
+  // Shape renderers
+  function TriDown({cx,cy,s,c,fill,label}){
+    const h=s*0.8;
+    const pts=`${cx},${cy-h/2} ${cx+s/2},${cy+h/2} ${cx-s/2},${cy+h/2}`;
+    return(<g>
+      <polygon points={pts} fill={fill} stroke={c} strokeWidth="2"/>
+      <text x={cx} y={cy+4} textAnchor="middle" style={{fontFamily:'Raleway',fontSize:'7px',fill:c,fontWeight:700}}>{label}</text>
+    </g>);
+  }
+  function TriUp({cx,cy,s,c,fill,label}){
+    const h=s*0.8;
+    const pts=`${cx},${cy+h/2} ${cx+s/2},${cy-h/2} ${cx-s/2},${cy-h/2}`;
+    return(<g>
+      <polygon points={pts} fill={fill} stroke={c} strokeWidth="2"/>
+      <text x={cx} y={cy+4} textAnchor="middle" style={{fontFamily:'Raleway',fontSize:'7px',fill:c,fontWeight:700}}>{label}</text>
+    </g>);
+  }
+  function Rect({cx,cy,w,h,c,fill,label}){
+    return(<g>
+      <rect x={cx-w/2} y={cy-h/2} width={w} height={h} rx="5" fill={fill} stroke={c} strokeWidth="2"/>
+      <text x={cx} y={cy+4} textAnchor="middle" style={{fontFamily:'Raleway',fontSize:'7px',fill:c,fontWeight:700}}>{label}</text>
+    </g>);
+  }
+  function Diamond({cx,cy,s,c,fill,label}){
+    const pts=`${cx},${cy-s/2} ${cx+s/2},${cy} ${cx},${cy+s/2} ${cx-s/2},${cy}`;
+    return(<g>
+      <polygon points={pts} fill={fill} stroke={c} strokeWidth="2"/>
+      <text x={cx} y={cy+4} textAnchor="middle" style={{fontFamily:'Raleway',fontSize:'7px',fill:c,fontWeight:700}}>{label}</text>
+    </g>);
+  }
+
+  // Channel lines
+  function chanColor(a,b){
+    const hasPboth=pSet.has(a)&&pSet.has(b);
+    const hasDboth=dSet.has(a)&&dSet.has(b);
+    if(hasPboth&&hasDboth)return'#7C3AED';
+    if(hasPboth)return'#0D9488';
+    if(hasDboth)return'#DC2626';
+    if((pSet.has(a)||dSet.has(a))&&(pSet.has(b)||dSet.has(b)))return'#7C3AED';
+    return null;
+  }
+  const CHAN_PATHS=[
+    // Head-Ajna
+    {a:4,b:63,x1:93,y1:52,x2:93,y2:80},{a:24,b:61,x1:100,y1:52,x2:100,y2:80},{a:47,b:64,x1:107,y1:52,x2:107,y2:80},
+    // Ajna-Throat
+    {a:17,b:62,x1:93,y1:112,x2:93,y2:142},{a:43,b:23,x1:100,y1:112,x2:100,y2:142},{a:11,b:56,x1:107,y1:112,x2:107,y2:142},
+    // Throat-G
+    {a:8,b:1,x1:80,y1:170,x2:75,y2:205},{a:31,b:7,x1:85,y1:172,x2:70,y2:207},{a:20,b:10,x1:90,y1:172,x2:65,y2:210},{a:33,b:13,x1:95,y1:172,x2:60,y2:213},
+    // Throat-Heart
+    {a:45,b:21,x1:118,y1:165,x2:138,y2:195},
+    // Throat-SP
+    {a:12,b:22,x1:118,y1:168,x2:148,y2:280},{a:35,b:36,x1:122,y1:168,x2:152,y2:280},
+    // Throat-Spleen
+    {a:16,b:48,x1:80,y1:168,x2:60,y2:282},{a:20,b:57,x1:78,y1:168,x2:56,y2:284},
+    // G-Sacral
+    {a:2,b:14,x1:68,y1:232,x2:82,y2:270},{a:5,b:15,x1:72,y1:234,x2:86,y2:270},{a:10,b:34,x1:76,y1:234,x2:90,y2:270},{a:29,b:46,x1:80,y1:234,x2:94,y2:270},
+    // G-Heart
+    {a:25,b:51,x1:78,y1:218,x2:138,y2:210},
+    // Heart-Spleen
+    {a:26,b:44,x1:143,y1:218,x2:62,y2:286},
+    // Heart-SP
+    {a:37,b:40,x1:155,y1:220,x2:152,y2:280},
+    // Sacral-Spleen
+    {a:27,b:50,x1:78,y1:290,x2:62,y2:290},{a:34,b:57,x1:82,y1:294,x2:64,y2:294},
+    // Sacral-SP
+    {a:6,b:59,x1:120,y1:290,x2:148,y2:290},
+    // Sacral-Root
+    {a:3,b:60,x1:93,y1:303,x2:93,y2:345},{a:9,b:52,x1:100,y1:303,x2:100,y2:345},{a:42,b:53,x1:107,y1:303,x2:107,y2:345},
+    // Spleen-Root
+    {a:18,b:58,x1:52,y1:312,x2:80,y2:348},{a:28,b:38,x1:56,y1:312,x2:84,y2:348},{a:32,b:54,x1:60,y1:312,x2:88,y2:348},
+    // SP-Root
+    {a:19,b:49,x1:152,y1:312,x2:120,y2:348},{a:30,b:41,x1:155,y1:312,x2:115,y2:348},{a:39,b:55,x1:158,y1:312,x2:110,y2:348},
+  ];
+
+  const scale=size/200;
+  return(
+    <svg viewBox="0 0 200 380" width={size} height={size*1.9} style={{display:'block',margin:'0 auto'}}>
+      {/* Channel lines */}
+      {CHAN_PATHS.map((ch,i)=>{
+        const col=chanColor(ch.a,ch.b);
+        if(!col)return null;
+        return<line key={i} x1={ch.x1} y1={ch.y1} x2={ch.x2} y2={ch.y2} stroke={col} strokeWidth="3.5" strokeLinecap="round" opacity="0.85"/>;
+      })}
+      {/* Inactive channel lines (faint) */}
+      {CHAN_PATHS.map((ch,i)=>{
+        const col=chanColor(ch.a,ch.b);
+        if(col)return null;
+        return<line key={'g'+i} x1={ch.x1} y1={ch.y1} x2={ch.x2} y2={ch.y2} stroke="#CBD5E1" strokeWidth="1.5" strokeLinecap="round" opacity="0.4"/>;
+      })}
+      {/* Centers */}
+      <TriDown cx={CP.head.x}   cy={CP.head.y}   s={44} c={cc('head')}   fill={cb('head')}   label="KOPF"/>
+      <TriUp   cx={CP.ajna.x}   cy={CP.ajna.y}   s={40} c={cc('ajna')}   fill={cb('ajna')}   label="AJNA"/>
+      <Rect    cx={CP.throat.x} cy={CP.throat.y} w={70} h={28} c={cc('throat')} fill={cb('throat')} label="KEHLE"/>
+      <Diamond cx={CP.g.x}      cy={CP.g.y}      s={46} c={cc('g')}      fill={cb('g')}      label="G"/>
+      <TriDown cx={CP.heart.x}  cy={CP.heart.y}  s={36} c={cc('heart')}  fill={cb('heart')}  label="HERZ"/>
+      <Rect    cx={CP.sacral.x} cy={CP.sacral.y} w={74} h={32} c={cc('sacral')} fill={cb('sacral')} label="SAKRAL"/>
+      <TriUp   cx={CP.spleen.x} cy={CP.spleen.y} s={38} c={cc('spleen')} fill={cb('spleen')} label="MILZ"/>
+      <TriUp   cx={CP.sp.x}     cy={CP.sp.y}     s={38} c={cc('sp')}     fill={cb('sp')}     label="S.PLEXUS"/>
+      <Rect    cx={CP.root.x}   cy={CP.root.y}   w={68} h={26} c={cc('root')}   fill={cb('root')}   label="WURZEL"/>
+      {/* Gate dots */}
+      {[...pSet].filter(g=>HD_GATE_CENTER[g]).map(g=>{
+        const cp=CP[HD_GATE_CENTER[g]];
+        return<circle key={'p'+g} cx={cp.x+(Math.random()*12-6)} cy={cp.y+(Math.random()*12-6)} r="3" fill={T.teal} opacity="0.7"/>;
+      })}
+    </svg>
+  );
+}
+
+// ─── HD TAB COMPONENT ─────────────────────────
+function HDTab({client,onSave}){
+  const [form,setForm]=useState({
+    hdBirthDate:client.hdBirthDate||'',
+    hdBirthTime:client.hdBirthTime||'',
+    hdBirthPlace:client.hdBirthPlace||'',
+    hdType:client.hdType||'',
+    hdProfile:client.hdProfile||'',
+    hdAuthority:client.hdAuthority||'',
+    hdPGates:client.hdPGates||'',  // comma-separated
+    hdDGates:client.hdDGates||'',
+  });
+  const [editing,setEditing]=useState(false);
+  const [aiLoading,setAiLoading]=useState(false);
+  const [aiText,setAiText]=useState('');
+  const pgates=(form.hdPGates||'').split(',').map(s=>s.trim()).filter(Boolean).map(Number).filter(n=>n>=1&&n<=64);
+  const dgates=(form.hdDGates||'').split(',').map(s=>s.trim()).filter(Boolean).map(Number).filter(n=>n>=1&&n<=64);
+  const allGates=[...pgates,...dgates];
+  const defined=hdCalcDefinedCenters(allGates);
+  const calcType=allGates.length>0?hdDetermineType(defined):'';
+  const displayType=form.hdType||calcType||'—';
+  const hasData=form.hdType||pgates.length>0||dgates.length>0;
+
+  const save=()=>{onSave({...client,...form});setEditing(false);};
+
+  const genAI=async()=>{
+    if(!hasData)return;
+    setAiLoading(true);
+    try{
+      const r=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,messages:[{role:'user',content:`Du bist ein erfahrener Human Design Analytiker in einer ganzheitlichen Heilpraxis. Analysiere diesen Klienten für die therapeutische Begleitung:
+
+Klient: ${client.name}
+HD-Typ: ${displayType}
+Profil: ${form.hdProfile||'—'}
+Autorität: ${form.hdAuthority||'—'}
+Bewusste Tore (Persönlichkeit): ${pgates.join(', ')||'keine'}
+Unbewusste Tore (Design): ${dgates.join(', ')||'keine'}
+Definierte Zentren: ${[...defined].map(c=>HD_CENTER_CFG[c]?.label||c).join(', ')||'keine'}
+
+Bitte gib:
+1. **Kernthema** (2 Sätze): Was prägt diesen Menschen fundamental?
+2. **Heilungsansätze** (3 konkrete Impulse für die Praxisarbeit): Welche Themen/Zentren verdienen besondere Aufmerksamkeit?
+3. **Konditionierungsfelder** (offene Zentren): Was nimmt dieser Mensch von anderen auf – und was ist echt?
+4. **Integrationsauftrag**: Ein kraftvoller Satz für die Arbeit mit diesem Klienten.
+
+Warmherzig, präzise, ohne Heilversprechen.`}]})});
+      const d=await r.json();setAiText(d.content?.[0]?.text||'Fehler.');
+    }catch{setAiText('Netzwerkfehler.');}
+    setAiLoading(false);
+  };
+
+  const sel=(label,opts,key)=>(
+    <div style={{marginBottom:'10px'}}>
+      <div style={{fontFamily:'Raleway',fontSize:'10px',color:T.textMid,fontWeight:700,letterSpacing:'1px',textTransform:'uppercase',marginBottom:'4px'}}>{label}</div>
+      <select value={form[key]} onChange={e=>setForm({...form,[key]:e.target.value})} style={{width:'100%',padding:'10px',borderRadius:'10px',border:`1.5px solid ${T.border}`,fontFamily:'Raleway',fontSize:'13px',color:T.text,background:'#fff',outline:'none'}}>
+        <option value=''>— wählen</option>
+        {opts.map(o=><option key={o} value={o}>{o}</option>)}
+      </select>
+    </div>
+  );
+
+  return(
+    <div style={{paddingBottom:'20px'}}>
+      {/* Header */}
+      <div style={{background:`linear-gradient(135deg,${T.violetL},${T.tealL})`,borderRadius:'16px',padding:'18px',marginBottom:'16px',border:`1.5px solid ${T.border}`,position:'relative',overflow:'hidden'}}>
+        <Flower size={160} opacity={0.12} color={T.violet}/>
+        <div style={{position:'relative',zIndex:1}}>
+          <div style={{fontFamily:'Cinzel',fontSize:'13px',color:T.violetD,letterSpacing:'2px',marginBottom:'4px'}}>⚙ HUMAN DESIGN</div>
+          <div style={{fontFamily:'Raleway',fontWeight:800,fontSize:'20px',color:T.text}}>{displayType}</div>
+          {form.hdProfile&&<div style={{fontFamily:'Raleway',fontSize:'13px',color:T.textMid,fontWeight:600,marginTop:'2px'}}>Profil {form.hdProfile} · {form.hdAuthority||''}</div>}
+          {form.hdBirthDate&&<div style={{fontFamily:'Raleway',fontSize:'11px',color:T.textSoft,marginTop:'6px'}}>📅 {form.hdBirthDate}{form.hdBirthTime?' · '+form.hdBirthTime:''}{form.hdBirthPlace?' · '+form.hdBirthPlace:''}</div>}
+          <div style={{display:'flex',gap:'6px',marginTop:'10px',flexWrap:'wrap'}}>
+            {[...defined].map(c=><span key={c} style={{fontSize:'10px',padding:'3px 10px',borderRadius:'20px',background:'rgba(255,255,255,0.8)',color:HD_CENTER_CFG[c]?.color,fontFamily:'Raleway',fontWeight:700,border:`1px solid ${HD_CENTER_CFG[c]?.color}`}}>{HD_CENTER_CFG[c]?.label}</span>)}
+          </div>
+        </div>
+      </div>
+
+      {/* Bodygraph */}
+      {allGates.length>0&&(
+        <Card style={{marginBottom:'16px',padding:'16px'}}>
+          <div style={{fontFamily:'Raleway',fontSize:'11px',color:T.textMid,fontWeight:700,letterSpacing:'1px',textTransform:'uppercase',marginBottom:'12px'}}>⚙ Bodygraph</div>
+          <div style={{display:'flex',gap:'12px',alignItems:'flex-start'}}>
+            <div style={{flex:'0 0 auto'}}>
+              <BodygraphSVG pgates={pgates} dgates={dgates} size={160}/>
+            </div>
+            <div style={{flex:1,minWidth:0}}>
+              <div style={{fontFamily:'Raleway',fontSize:'10px',color:T.textSoft,fontWeight:600,marginBottom:'8px'}}>Legende</div>
+              {[[T.teal,'Persönlichkeit (bewusst)'],[T.violetD,'Beide Seiten'],['#DC2626','Design (unbewusst)']].map(([col,lbl])=>(
+                <div key={lbl} style={{display:'flex',alignItems:'center',gap:'6px',marginBottom:'5px'}}>
+                  <div style={{width:'20px',height:'3px',borderRadius:'2px',background:col}}/>
+                  <span style={{fontFamily:'Raleway',fontSize:'10px',color:T.textMid,fontWeight:600}}>{lbl}</span>
+                </div>
+              ))}
+              <div style={{marginTop:'12px',fontFamily:'Raleway',fontSize:'11px',color:T.textMid,fontWeight:600}}>Definierte Zentren: <strong>{defined.size}</strong>/9</div>
+              <div style={{fontFamily:'Raleway',fontSize:'11px',color:T.textMid}}>Offene Zentren: <strong>{9-defined.size}</strong>/9</div>
+            </div>
+          </div>
+        </Card>
+      )}
+
+      {/* Type info */}
+      {form.hdType&&HD_TYPE_DESC[form.hdType]&&(
+        <Card style={{marginBottom:'16px',background:T.bgSoft,border:`1.5px solid ${T.borderMid}`}}>
+          <div style={{fontFamily:'Raleway',fontSize:'11px',color:T.tealD,fontWeight:700,letterSpacing:'1px',textTransform:'uppercase',marginBottom:'8px'}}>✦ Strategie & Signatur</div>
+          <div style={{fontFamily:'Raleway',fontSize:'12px',color:T.text,lineHeight:'1.6',marginBottom:'8px'}}>{HD_TYPE_DESC[form.hdType].desc}</div>
+          <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:'8px'}}>
+            {[['Strategie',HD_TYPE_DESC[form.hdType].strategy,T.tealL,T.tealD],['Signatur',HD_TYPE_DESC[form.hdType].signature,T.bgSoft,T.tealD],['Not-Self',HD_TYPE_DESC[form.hdType].notself,'#FEE2E2','#DC2626'],form.hdAuthority?['Autorität',HD_AUTHORITY_DESC[form.hdAuthority]||form.hdAuthority,T.violetL,T.violetD]:null].filter(Boolean).map(([k,v,bg,col])=>(
+              <div key={k} style={{background:bg,borderRadius:'10px',padding:'10px',border:`1px solid ${T.border}`}}>
+                <div style={{fontFamily:'Raleway',fontSize:'9px',fontWeight:800,color:col,letterSpacing:'1px',textTransform:'uppercase',marginBottom:'3px'}}>{k}</div>
+                <div style={{fontFamily:'Raleway',fontSize:'11px',color:T.text,fontWeight:600,lineHeight:'1.4'}}>{v}</div>
+              </div>
+            ))}
+          </div>
+        </Card>
+      )}
+
+      {/* Edit / Form */}
+      {editing?(
+        <Card style={{marginBottom:'16px',border:`1.5px solid ${T.borderMid}`,background:T.bgSoft}}>
+          <SL color={T.tealD}>⚙ HD-Daten bearbeiten</SL>
+          <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:'8px',marginBottom:'10px'}}>
+            <div><div style={{fontFamily:'Raleway',fontSize:'10px',color:T.textMid,fontWeight:700,marginBottom:'4px'}}>Geburtsdatum</div><TI value={form.hdBirthDate} onChange={v=>setForm({...form,hdBirthDate:v})} placeholder="1990-06-15"/></div>
+            <div><div style={{fontFamily:'Raleway',fontSize:'10px',color:T.textMid,fontWeight:700,marginBottom:'4px'}}>Uhrzeit</div><TI value={form.hdBirthTime} onChange={v=>setForm({...form,hdBirthTime:v})} placeholder="14:30"/></div>
+          </div>
+          <div style={{marginBottom:'10px'}}><div style={{fontFamily:'Raleway',fontSize:'10px',color:T.textMid,fontWeight:700,marginBottom:'4px'}}>Geburtsort</div><TI value={form.hdBirthPlace} onChange={v=>setForm({...form,hdBirthPlace:v})} placeholder="München, Deutschland"/></div>
+          {sel('HD-Typ',['Manifestor','Generator','Manifesting Generator','Projektor','Reflektor'],'hdType')}
+          {sel('Profil',['1/3','1/4','2/4','2/5','3/5','3/6','4/6','4/1','5/1','5/2','6/2','6/3'],'hdProfile')}
+          {sel('Autorität',['Emotional','Sakral','Milz','Ego','Selbst','Mental','Lunar'],'hdAuthority')}
+          <div style={{marginBottom:'10px'}}>
+            <div style={{fontFamily:'Raleway',fontSize:'10px',color:T.tealD,fontWeight:700,letterSpacing:'1px',marginBottom:'4px'}}>PERSÖNLICHKEIT-TORE (schwarze Seite) <span style={{color:T.textSoft,fontWeight:400}}>– kommagetrennt aus deinem offiziellen Chart</span></div>
+            <TI value={form.hdPGates} onChange={v=>setForm({...form,hdPGates:v})} placeholder="z.B. 1, 8, 25, 51, 34, 57..."/>
+          </div>
+          <div style={{marginBottom:'12px'}}>
+            <div style={{fontFamily:'Raleway',fontSize:'10px',color:'#DC2626',fontWeight:700,letterSpacing:'1px',marginBottom:'4px'}}>DESIGN-TORE (rote Seite) <span style={{color:T.textSoft,fontWeight:400}}>– kommagetrennt</span></div>
+            <TI value={form.hdDGates} onChange={v=>setForm({...form,hdDGates:v})} placeholder="z.B. 5, 15, 3, 60..."/>
+          </div>
+          <div style={{background:T.bgSoft,borderRadius:'10px',padding:'10px',marginBottom:'12px',border:`1px dashed ${T.border}`}}>
+            <div style={{fontFamily:'Raleway',fontSize:'11px',color:T.textMid,lineHeight:'1.5'}}>💡 Offizielle HD-Charts erhältst du kostenlos auf <strong>mybodygraph.com</strong> oder <strong>jovianarchive.com</strong></div>
+          </div>
+          <div style={{display:'flex',gap:'8px'}}><Btn onClick={save} style={{flex:1}}>✓ Speichern</Btn><Btn variant="soft" onClick={()=>setEditing(false)} style={{flex:1}}>Abbrechen</Btn></div>
+        </Card>
+      ):(
+        <Btn variant="soft" onClick={()=>setEditing(true)} style={{width:'100%',marginBottom:'16px'}}>✏ HD-Daten bearbeiten</Btn>
+      )}
+
+      {/* KI Analysis */}
+      <div>
+        <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:'8px'}}>
+          <SL>✦ KI-Analyse</SL>
+          <Btn onClick={genAI} disabled={!hasData||aiLoading} style={{padding:'8px 16px',fontSize:'11px',opacity:(!hasData||aiLoading)?0.5:1}}>
+            {aiLoading?'…':'⚙ Analysieren'}
+          </Btn>
+        </div>
+        {!hasData&&<div style={{fontFamily:'Raleway',fontSize:'12px',color:T.textSoft,fontStyle:'italic',padding:'12px 0'}}>Bitte zuerst HD-Daten eingeben.</div>}
+        {aiText&&<div style={{background:T.bgSoft,borderRadius:'14px',padding:'16px',border:`1.5px solid ${T.borderMid}`,fontFamily:'Raleway',fontSize:'13px',color:T.text,lineHeight:'1.7',whiteSpace:'pre-wrap'}}>{aiText}</div>}
+      </div>
+    </div>
+  );
+}
+
+// ─── CLIENT DETAIL MODAL ──────────────────────
+function ClientDetailModal({client,sessions,onClose,onSave,onStart,onAnalyse}){
+  const [tab,setTab]=useState('profil');
+  const sc=sessions.filter(s=>s.clientId===client.id);
+  const tabs=[['profil','👤 Profil'],['hd','⚙ Human Design'],['sessions','📋 Sitzungen']];
+  return(
+    <div style={{position:'fixed',inset:0,background:'rgba(0,0,0,0.5)',zIndex:200,display:'flex',alignItems:'flex-end',justifyContent:'center'}} onClick={e=>{if(e.target===e.currentTarget)onClose();}}>
+      <div style={{background:'#FFFFFF',borderRadius:'24px 24px 0 0',width:'100%',maxWidth:'480px',maxHeight:'92vh',overflowY:'auto',padding:'0 0 80px'}}>
+        {/* Handle */}
+        <div style={{display:'flex',justifyContent:'center',padding:'12px 0 4px'}}><div style={{width:'40px',height:'4px',borderRadius:'2px',background:T.border}}/></div>
+        {/* Header */}
+        <div style={{padding:'12px 20px 0',display:'flex',justifyContent:'space-between',alignItems:'center'}}>
+          <div>
+            <div style={{fontFamily:'Cinzel',fontSize:'18px',color:T.text,fontWeight:700}}>{client.name}</div>
+            {client.hdType&&<div style={{fontFamily:'Raleway',fontSize:'12px',color:T.violet,fontWeight:600,marginTop:'2px'}}>⚙ {client.hdType}{client.hdProfile?' · '+client.hdProfile:''}</div>}
+          </div>
+          <button onClick={onClose} style={{width:'32px',height:'32px',borderRadius:'50%',border:`1.5px solid ${T.border}`,background:T.bgSoft,cursor:'pointer',fontSize:'16px',display:'flex',alignItems:'center',justifyContent:'center',color:T.textMid}}>✕</button>
+        </div>
+        {/* Quick actions */}
+        <div style={{display:'flex',gap:'8px',padding:'12px 20px 0'}}>
+          <button onClick={()=>onStart(client)} style={{flex:1,padding:'9px',borderRadius:'12px',background:T.tealL,border:`1.5px solid ${T.borderMid}`,fontFamily:'Raleway',fontWeight:700,fontSize:'12px',color:T.tealD,cursor:'pointer'}}>✦ Sitzung</button>
+          <button onClick={()=>{onAnalyse(client.id);onClose();}} style={{flex:1,padding:'9px',borderRadius:'12px',background:T.violetL,border:`1.5px solid #A78BFA`,fontFamily:'Raleway',fontWeight:700,fontSize:'12px',color:T.violetD,cursor:'pointer'}}>📊 Analyse</button>
+        </div>
+        {/* Tabs */}
+        <div style={{display:'flex',gap:'6px',padding:'12px 20px',borderBottom:`1px solid ${T.border}`}}>
+          {tabs.map(([v,l])=><button key={v} onClick={()=>setTab(v)} style={{flex:1,padding:'9px 4px',borderRadius:'10px',border:`1.5px solid ${tab===v?T.teal:T.border}`,background:tab===v?T.teal:'white',fontFamily:'Raleway',fontSize:'11px',fontWeight:700,color:tab===v?'white':T.textMid,cursor:'pointer'}}>{l}</button>)}
+        </div>
+        <div style={{padding:'16px 20px'}}>
+          {tab==='profil'&&(
+            <div>
+              {[['Email / Tel.',client.contact],['Notizen',client.notes]].filter(([,v])=>v).map(([k,v])=>(
+                <div key={k} style={{marginBottom:'12px'}}><div style={{fontFamily:'Raleway',fontSize:'10px',color:T.textSoft,fontWeight:700,letterSpacing:'1px',textTransform:'uppercase',marginBottom:'3px'}}>{k}</div><div style={{fontFamily:'Raleway',fontSize:'13px',color:T.text,lineHeight:'1.5'}}>{v}</div></div>
+              ))}
+              {client.tags?.length>0&&<div style={{marginBottom:'12px'}}><div style={{fontFamily:'Raleway',fontSize:'10px',color:T.textSoft,fontWeight:700,letterSpacing:'1px',textTransform:'uppercase',marginBottom:'6px'}}>Tags</div><div style={{display:'flex',flexWrap:'wrap',gap:'5px'}}>{client.tags.map(t=><span key={t} style={{fontSize:'11px',padding:'4px 12px',borderRadius:'12px',background:T.tealL,color:T.tealD,fontFamily:'Raleway',fontWeight:700,border:`1px solid ${T.borderMid}`}}>{t}</span>)}</div></div>}
+              <div style={{fontFamily:'Raleway',fontSize:'12px',color:T.textSoft,marginTop:'16px'}}>Seit: {new Date(client.createdAt).toLocaleDateString('de-DE')} · {sc.length} Sitzung{sc.length!==1?'en':''}</div>
+            </div>
+          )}
+          {tab==='hd'&&<HDTab client={client} onSave={updated=>{onSave(updated);}}/>}
+          {tab==='sessions'&&(
+            <div>
+              {sc.length===0&&<div style={{textAlign:'center',padding:'32px 0',color:T.textSoft,fontFamily:'Raleway',fontSize:'13px'}}>Noch keine Sitzungen</div>}
+              {sc.slice().reverse().map(s=>(
+                <div key={s.id} style={{background:T.bgSoft,borderRadius:'12px',padding:'12px',marginBottom:'8px',border:`1px solid ${T.border}`}}>
+                  <div style={{fontFamily:'Raleway',fontWeight:700,fontSize:'12px',color:T.text}}>{new Date(s.createdAt).toLocaleDateString('de-DE')}</div>
+                  {s.goal&&<div style={{fontFamily:'Raleway',fontSize:'12px',color:T.textMid,marginTop:'3px',lineHeight:'1.4'}}>{s.goal}</div>}
+                  {s.aiSummary&&<div style={{fontFamily:'Raleway',fontSize:'11px',color:T.textSoft,marginTop:'6px',lineHeight:'1.5',display:'-webkit-box',WebkitLineClamp:2,WebkitBoxOrient:'vertical',overflow:'hidden'}}>{s.aiSummary}</div>}
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ─── SYNERGY ENGINE ───────────────────────────
+function SynergyEngine({clients,onBack}){
+  const [clientA,setClientA]=useState(null);
+  const [clientB,setClientB]=useState(null);
+  const [aiText,setAiText]=useState('');
+  const [aiLoading,setAiLoading]=useState(false);
+
+  const hdClients=clients.filter(c=>c.hdType||c.hdPGates||c.hdDGates);
+
+  const getGates=c=>{
+    const p=(c?.hdPGates||'').split(',').map(s=>s.trim()).filter(Boolean).map(Number).filter(n=>n>=1&&n<=64);
+    const d=(c?.hdDGates||'').split(',').map(s=>s.trim()).filter(Boolean).map(Number).filter(n=>n>=1&&n<=64);
+    return{p,d,all:[...p,...d]};
+  };
+
+  const calcSynergy=(cA,cB)=>{
+    if(!cA||!cB)return{shared:[],electromagnetic:[],dominance:[]};
+    const gA=getGates(cA);
+    const gB=getGates(cB);
+    const setA=new Set(gA.all);
+    const setB=new Set(gB.all);
+    // Shared gates
+    const shared=[...setA].filter(g=>setB.has(g));
+    // Electromagnetic connections: A has one gate of channel, B has the other
+    const electromagnetic=HD_CHANNELS.filter(([a,b])=>(setA.has(a)&&setB.has(b))||(setA.has(b)&&setB.has(a))).map(([a,b])=>({gate1:setA.has(a)?a:b,gate2:setA.has(a)?b:a,center1:HD_GATE_CENTER[setA.has(a)?a:b],center2:HD_GATE_CENTER[setA.has(a)?b:a]}));
+    return{shared,electromagnetic};
+  };
+
+  const syn=calcSynergy(clientA,clientB);
+
+  const genAI=async()=>{
+    if(!clientA||!clientB)return;
+    setAiLoading(true);
+    const gA=getGates(clientA);
+    const gB=getGates(clientB);
+    const defA=hdCalcDefinedCenters(gA.all);
+    const defB=hdCalcDefinedCenters(gB.all);
+    try{
+      const r=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,messages:[{role:'user',content:`Du bist ein Human Design Beziehungsanalytiker in einer ganzheitlichen Heilpraxis. Analysiere diese zwei Menschen:
+
+PERSON A: ${clientA.name}
+Typ: ${clientA.hdType||'unbekannt'} · Profil: ${clientA.hdProfile||'—'} · Autorität: ${clientA.hdAuthority||'—'}
+Definierte Zentren: ${[...defA].map(c=>HD_CENTER_CFG[c]?.label).join(', ')||'—'}
+
+PERSON B: ${clientB.name}
+Typ: ${clientB.hdType||'unbekannt'} · Profil: ${clientB.hdProfile||'—'} · Autorität: ${clientB.hdAuthority||'—'}
+Definierte Zentren: ${[...defB].map(c=>HD_CENTER_CFG[c]?.label).join(', ')||'—'}
+
+Elektromagnetische Verbindungen: ${syn.electromagnetic.length} Kanäle
+${syn.electromagnetic.slice(0,5).map(e=>`Kanal ${e.gate1}-${e.gate2} (${HD_CENTER_CFG[e.center1]?.label||e.center1}↔${HD_CENTER_CFG[e.center2]?.label||e.center2})`).join(', ')||'keine'}
+
+Bitte analysiere:
+1. **Energiedynamik**: Wie interagieren diese zwei Menschen energetisch?
+2. **Wachstumsfelder**: Was aktiviert/konditioniert A bei B und umgekehrt?
+3. **Stärken der Verbindung**: Was macht diese Begegnung wertvoll?
+4. **Herausforderungen**: Wo können Reibungspunkte entstehen?
+5. **Empfehlung für die Praxisarbeit**: Ein konkreter Ansatz für gemeinsame oder individuelle Begleitung.
+
+Warmherzig, präzise.`}]})});
+      const d=await r.json();setAiText(d.content?.[0]?.text||'Fehler.');
+    }catch{setAiText('Netzwerkfehler.');}
+    setAiLoading(false);
+  };
+
+  const ClientPicker=({label,value,onChange})=>(
+    <div style={{flex:1}}>
+      <div style={{fontFamily:'Raleway',fontSize:'10px',color:T.textMid,fontWeight:700,letterSpacing:'1px',textTransform:'uppercase',marginBottom:'6px'}}>{label}</div>
+      <select value={value?.id||''} onChange={e=>onChange(clients.find(c=>c.id===e.target.value)||null)} style={{width:'100%',padding:'12px',borderRadius:'12px',border:`1.5px solid ${T.border}`,fontFamily:'Raleway',fontSize:'13px',color:T.text,background:'#fff',outline:'none'}}>
+        <option value=''>— Klient wählen</option>
+        {clients.map(c=><option key={c.id} value={c.id}>{c.name}{c.hdType?' ('+c.hdType+')':''}</option>)}
+      </select>
+    </div>
+  );
+
+  const gA=clientA?getGates(clientA):{p:[],d:[],all:[]};
+  const gB=clientB?getGates(clientB):{p:[],d:[],all:[]};
+
+  return(
+    <div style={{padding:'0 16px 96px'}}>
+      <div style={{display:'flex',alignItems:'center',gap:'12px',paddingTop:'8px',marginBottom:'20px'}}>
+        <button onClick={onBack} style={{background:T.bgSoft,border:`1.5px solid ${T.border}`,borderRadius:'12px',padding:'8px 14px',fontFamily:'Raleway',fontWeight:700,fontSize:'13px',color:T.textMid,cursor:'pointer'}}>← Zurück</button>
+        <h2 style={{fontFamily:'Cinzel',fontSize:'20px',color:T.text,margin:0,fontWeight:700}}>Synergy Engine</h2>
+      </div>
+
+      {/* Description */}
+      <div style={{background:`linear-gradient(135deg,${T.violetL},${T.tealL})`,borderRadius:'16px',padding:'16px',marginBottom:'20px',border:`1.5px solid ${T.border}`,position:'relative',overflow:'hidden'}}>
+        <Flower size={150} opacity={0.1} color={T.violet}/>
+        <div style={{position:'relative',zIndex:1,fontFamily:'Raleway',fontSize:'13px',color:T.textMid,lineHeight:'1.6'}}>Lege zwei Charts übereinander und entdecke elektromagnetische Verbindungen, Dominanzfelder und die energetische Dynamik zwischen zwei Menschen.</div>
+      </div>
+
+      {/* Client Pickers */}
+      <div style={{display:'flex',gap:'12px',marginBottom:'20px'}}>
+        <ClientPicker label="Person A" value={clientA} onChange={setClientA}/>
+        <div style={{display:'flex',alignItems:'center',paddingTop:'18px',fontSize:'20px',color:T.textSoft}}>⇄</div>
+        <ClientPicker label="Person B" value={clientB} onChange={setClientB}/>
+      </div>
+
+      {/* Synergy Results */}
+      {clientA&&clientB&&(
+        <>
+          {/* Charts side by side */}
+          {(gA.all.length>0||gB.all.length>0)&&(
+            <Card style={{marginBottom:'16px'}}>
+              <SL>Bodygraphs</SL>
+              <div style={{display:'flex',gap:'8px',justifyContent:'space-around'}}>
+                <div style={{textAlign:'center'}}>
+                  <div style={{fontFamily:'Raleway',fontSize:'11px',fontWeight:700,color:T.tealD,marginBottom:'6px'}}>{clientA.name}</div>
+                  <BodygraphSVG pgates={gA.p} dgates={gA.d} size={120}/>
+                </div>
+                <div style={{textAlign:'center'}}>
+                  <div style={{fontFamily:'Raleway',fontSize:'11px',fontWeight:700,color:T.violetD,marginBottom:'6px'}}>{clientB.name}</div>
+                  <BodygraphSVG pgates={gB.p} dgates={gB.d} size={120}/>
+                </div>
+              </div>
+            </Card>
+          )}
+
+          {/* Electromagnetic connections */}
+          <Card style={{marginBottom:'16px',background:T.bgSoft,border:`1.5px solid ${T.borderMid}`}}>
+            <SL color={T.violetD}>⚡ Elektromagnetische Verbindungen</SL>
+            {syn.electromagnetic.length===0?(
+              <div style={{fontFamily:'Raleway',fontSize:'13px',color:T.textSoft,fontStyle:'italic',padding:'8px 0'}}>Keine direkten elektromagnetischen Verbindungen gefunden.</div>
+            ):(
+              <div style={{display:'flex',flexDirection:'column',gap:'8px'}}>
+                {syn.electromagnetic.map((e,i)=>(
+                  <div key={i} style={{background:'white',borderRadius:'10px',padding:'10px 12px',border:`1px solid ${T.border}`,display:'flex',alignItems:'center',gap:'10px'}}>
+                    <span style={{fontFamily:'Cinzel',fontSize:'13px',color:T.violetD,fontWeight:700}}>Tor {e.gate1}–{e.gate2}</span>
+                    <span style={{fontFamily:'Raleway',fontSize:'11px',color:T.textMid}}>
+                      {HD_CENTER_CFG[e.center1]?.label||e.center1} ↔ {HD_CENTER_CFG[e.center2]?.label||e.center2}
+                    </span>
+                    <span style={{marginLeft:'auto',fontSize:'11px',padding:'3px 8px',borderRadius:'8px',background:T.violetL,color:T.violetD,fontFamily:'Raleway',fontWeight:700}}>{clientA.name.split(' ')[0]} → {clientB.name.split(' ')[0]}</span>
+                  </div>
+                ))}
+              </div>
+            )}
+          </Card>
+
+          {/* Type comparison */}
+          <Card style={{marginBottom:'16px'}}>
+            <SL>Typ-Dynamik</SL>
+            <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:'10px'}}>
+              {[clientA,clientB].map(c=>(
+                <div key={c.id} style={{background:T.bgSoft,borderRadius:'12px',padding:'12px',border:`1px solid ${T.border}`}}>
+                  <div style={{fontFamily:'Raleway',fontWeight:800,fontSize:'13px',color:T.text,marginBottom:'4px'}}>{c.name}</div>
+                  <div style={{fontFamily:'Raleway',fontSize:'12px',color:T.violet,fontWeight:600}}>{c.hdType||'Typ unbekannt'}</div>
+                  {c.hdProfile&&<div style={{fontFamily:'Raleway',fontSize:'11px',color:T.textMid}}>Profil {c.hdProfile}</div>}
+                  {c.hdAuthority&&<div style={{fontFamily:'Raleway',fontSize:'11px',color:T.textMid}}>Auth: {c.hdAuthority}</div>}
+                </div>
+              ))}
+            </div>
+          </Card>
+
+          {/* AI Analysis */}
+          <div>
+            <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:'10px'}}>
+              <SL>✦ KI-Beziehungsanalyse</SL>
+              <Btn onClick={genAI} disabled={aiLoading} style={{padding:'8px 16px',fontSize:'11px',opacity:aiLoading?0.5:1}}>{aiLoading?'…':'⚙ Analysieren'}</Btn>
+            </div>
+            {aiText&&<div style={{background:T.bgSoft,borderRadius:'14px',padding:'16px',border:`1.5px solid ${T.borderMid}`,fontFamily:'Raleway',fontSize:'13px',color:T.text,lineHeight:'1.7',whiteSpace:'pre-wrap'}}>{aiText}</div>}
+          </div>
+        </>
+      )}
+
+      {!clientA&&!clientB&&hdClients.length<2&&(
+        <div style={{textAlign:'center',padding:'40px 0'}}>
+          <div style={{fontSize:'40px',marginBottom:'12px',opacity:0.4}}>⚙</div>
+          <div style={{fontFamily:'Raleway',fontSize:'14px',color:T.textMid,fontWeight:600,marginBottom:'6px'}}>Mindestens 2 Klienten mit HD-Daten</div>
+          <div style={{fontFamily:'Raleway',fontSize:'12px',color:T.textSoft}}>Füge zuerst HD-Tore oder Typen in den Klientenprofilen ein.</div>
+        </div>
+      )}
+    </div>
+  );
+}
+
 // ─── CLIENTS ──────────────────────────────────
 function Clients({clients,sessions,onSave,onStart,onDelete,onOnboarding,reminders,onAddReminder,onDismissReminder,onAnalyse,settings={}}){
   const [showAdd,setShowAdd]=useState(false);
   const [search,setSearch]=useState("");
+  const [selClient,setSelClient]=useState(null);
   const [form,setForm]=useState({name:"",contact:"",notes:"",tags:"",hdType:"",hdProfile:"",hdAuthority:""});
   const filtered=clients.filter(c=>c.name.toLowerCase().includes(search.toLowerCase()));
   const add=()=>{if(!form.name.trim())return;onSave([...clients,{id:uid(),createdAt:new Date().toISOString(),...form,tags:form.tags.split(",").map(t=>t.trim()).filter(Boolean)}]);setForm({name:"",contact:"",notes:"",tags:""});setShowAdd(false);};
@@ -982,30 +1562,33 @@ function Clients({clients,sessions,onSave,onStart,onDelete,onOnboarding,reminder
       <div style={{display:"flex",flexDirection:"column",gap:"10px"}}>
         {filtered.map(c=>{
           const sc=sessions.filter(s=>s.clientId===c.id).length;
+          const hasHD=c.hdType||c.hdPGates;
           return(
-            <Card key={c.id}>
+            <Card key={c.id} style={{cursor:'pointer'}} onClick={()=>setSelClient(c)}>
               <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start"}}>
                 <div style={{flex:1,minWidth:0}}>
                   <div style={{fontFamily:"Raleway",fontWeight:800,fontSize:"15px",color:T.text}}>{c.name}</div>
                   {c.contact&&<div style={{fontFamily:"Raleway",fontSize:"12px",color:T.textMid,marginTop:"3px",fontWeight:500}}>{c.contact}</div>}
+                  {hasHD&&<div style={{fontFamily:"Raleway",fontSize:'11px',color:T.violet,fontWeight:700,marginTop:'4px'}}>⚙ {c.hdType||'HD'}{c.hdProfile?' · Profil '+c.hdProfile:''}</div>}
                   {c.tags?.length>0&&<div style={{display:"flex",flexWrap:"wrap",gap:"5px",marginTop:"8px"}}>{c.tags.map(t=><span key={t} style={{fontSize:"10px",padding:"3px 11px",borderRadius:"12px",background:T.tealL,color:T.tealD,fontFamily:"Raleway",fontWeight:700,border:`1px solid ${T.borderMid}`}}>{t}</span>)}</div>}
                 </div>
                 <div style={{textAlign:"right",flexShrink:0,marginLeft:"12px"}}>
                   <div style={{fontFamily:"Raleway",fontSize:"11px",color:T.textSoft,fontWeight:600}}>{sc} Sitzung{sc!==1?"en":""}</div>
-                  <button onClick={()=>onStart(c)} style={{fontFamily:"Raleway",fontSize:"12px",color:T.teal,fontWeight:700,background:"none",border:"none",cursor:"pointer",marginTop:"6px",display:"block"}}>Sitzung →</button>
-                  <button onClick={()=>onAnalyse&&onAnalyse(c.id)} style={{fontFamily:"Raleway",fontSize:"11px",color:T.violetD,background:"none",border:"none",cursor:"pointer",marginTop:"3px",display:"block",fontWeight:700}}>📊 Analyse →</button>
-                  <button onClick={()=>{const txt=window.prompt(`Erinnerung für ${c.name}:`);if(txt)onAddReminder({type:"manual",icon:"📌",color:T.tealD,bg:T.tealL,border:T.borderMid,title:`${c.name}`,sub:txt,email:c.contact,clientName:c.name,done:false});}} style={{fontFamily:"Raleway",fontSize:"11px",color:T.tealD,background:T.tealL,border:`1px solid ${T.borderMid}`,borderRadius:"8px",padding:"4px 10px",cursor:"pointer",marginTop:"6px",display:"block",fontWeight:700}}>
-                    📌 Erinnerung
-                  </button>
-                  <button onClick={()=>{if(window.confirm(`Klient "${c.name}" und alle zugehörigen Daten (Sitzungen, Termine, Baum) wirklich löschen?`)){onDelete(c.id);}}} style={{fontFamily:"Raleway",fontSize:"11px",color:"#C0392B",background:"#FEE2E2",border:"1px solid #FCA5A5",borderRadius:"8px",padding:"4px 10px",cursor:"pointer",marginTop:"6px",display:"block",fontWeight:700}}>
-                    🗑 Löschen
-                  </button>
+                  <div style={{fontFamily:"Raleway",fontSize:"10px",color:T.textSoft,marginTop:'6px'}}>→ Profil öffnen</div>
                 </div>
               </div>
             </Card>
           );
         })}
       </div>
+      {selClient&&<ClientDetailModal
+        client={selClient}
+        sessions={sessions}
+        onClose={()=>setSelClient(null)}
+        onSave={updated=>{onSave(clients.map(c=>c.id===updated.id?updated:c));setSelClient(updated);}}
+        onStart={c=>{onStart(c);setSelClient(null);}}
+        onAnalyse={id=>{onAnalyse&&onAnalyse(id);}}
+      />}
     </div>
   );
 }
@@ -1802,6 +2385,7 @@ function App({ user, onLogout }){
       {screen==="session"  &&<Session wizard={wizard} setWizard={setWizard} clients={clients} onComplete={completeSession} onCancel={()=>{setWizard(null);setScreen("dashboard");}} templates={templates} onStartWithTemplate={(tpl)=>startSession(null,tpl)}/>}
       {screen==="calendar" &&<CalendarScreen appointments={appointments} clients={clients} onSaveAppt={saveAppt} onDeleteAppt={deleteAppt} onStartSession={startSession}/>}
       {screen==="gentree"   &&<GenTree clients={clients} genTrees={genTrees} onSaveTree={saveGenTree}/>}
+      {screen==="synergy"    &&<SynergyEngine clients={clients} onBack={()=>setScreen("clients")}/>}
       {screen==="history"   &&<History sessions={sessions} onDelete={id=>{saveSessions(sessions.filter(s=>s.id!==id));}}/>}
       {screen==="analytics" &&<Analytics sessions={sessions} clients={clients} onSelectClient={(id)=>{setAnalyticsClient(id);setScreen("clientanalysis");}}/>}
       {screen==="clientanalysis"&&<ClientAnalysis clientId={analyticsClient} clients={clients} sessions={sessions} onBack={()=>setScreen("analytics")}/>}
