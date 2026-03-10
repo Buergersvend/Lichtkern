@@ -17,17 +17,18 @@ const firebaseApp = initializeApp(firebaseConfig);
 const auth = getAuth(firebaseApp);
 const db   = getFirestore(firebaseApp);
 
-// ─── GROQ KI-API (kostenlos) ──────────────────────
-// Key wird sicher aus Vercel-Umgebungsvariable gelesen (nie im Code speichern!):
-const GROQ_API_KEY = import.meta.env.VITE_GROQ_API_KEY;
+// ─── GROQ KI-API (sicher via Serverless Proxy) ────
+// Der API-Key liegt nur auf dem Vercel-Server – nie im Browser sichtbar!
+const _GROQ_PLACEHOLDER = null; // Key nur serverseitig in /api/ki.js
 const groqFetch = async (prompt) => {
-  const r = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+  const r = await fetch("/api/ki", {
     method: "POST",
-    headers: { "Content-Type": "application/json", "Authorization": `Bearer ${GROQ_API_KEY}` },
-    body: JSON.stringify({ model: "llama-3.3-70b-versatile", max_tokens: 1000, messages: [{ role: "user", content: prompt }] })
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ prompt })
   });
   const d = await r.json();
-  return d.choices?.[0]?.message?.content || "Fehler.";
+  if (d.error) throw new Error(d.error);
+  return d.text || "Fehler.";
 };
 
 // ─── FIRESTORE STORAGE (ersetzt window.storage) ──
