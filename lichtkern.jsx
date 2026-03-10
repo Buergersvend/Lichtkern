@@ -17,6 +17,19 @@ const firebaseApp = initializeApp(firebaseConfig);
 const auth = getAuth(firebaseApp);
 const db   = getFirestore(firebaseApp);
 
+// ─── GROQ KI-API (kostenlos) ──────────────────────
+// Key wird sicher aus Vercel-Umgebungsvariable gelesen (nie im Code speichern!):
+const GROQ_API_KEY = import.meta.env.VITE_GROQ_API_KEY;
+const groqFetch = async (prompt) => {
+  const r = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+    method: "POST",
+    headers: { "Content-Type": "application/json", "Authorization": `Bearer ${GROQ_API_KEY}` },
+    body: JSON.stringify({ model: "llama-3.3-70b-versatile", max_tokens: 1000, messages: [{ role: "user", content: prompt }] })
+  });
+  const d = await r.json();
+  return d.choices?.[0]?.message?.content || "Fehler.";
+};
+
 // ─── FIRESTORE STORAGE (ersetzt window.storage) ──
 const fsGet = async (userId, key) => {
   try {
@@ -1168,7 +1181,7 @@ function HDTab({client,onSave}){
     if(!hasData)return;
     setAiLoading(true);
     try{
-      const r=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,messages:[{role:'user',content:`Du bist ein erfahrener Human Design Analytiker in einer ganzheitlichen Heilpraxis. Analysiere diesen Klienten für die therapeutische Begleitung:
+      const _aiPrompt1=`Du bist ein erfahrener Human Design Analytiker in einer ganzheitlichen Heilpraxis. Analysiere diesen Klienten für die therapeutische Begleitung:
 
 Klient: ${client.name}
 HD-Typ: ${displayType}
@@ -1184,8 +1197,8 @@ Bitte gib:
 3. **Konditionierungsfelder** (offene Zentren): Was nimmt dieser Mensch von anderen auf – und was ist echt?
 4. **Integrationsauftrag**: Ein kraftvoller Satz für die Arbeit mit diesem Klienten.
 
-Warmherzig, präzise, ohne Heilversprechen.`}]})});
-      const d=await r.json();setAiText(d.content?.[0]?.text||'Fehler.');
+Warmherzig, präzise, ohne Heilversprechen.`;
+      setAiText(await groqFetch(_aiPrompt1));
     }catch{setAiText('Netzwerkfehler.');}
     setAiLoading(false);
   };
@@ -1454,7 +1467,7 @@ function SynergyEngine({clients,onBack}){
     const defA=hdCalcDefinedCenters(gA.all);
     const defB=hdCalcDefinedCenters(gB.all);
     try{
-      const r=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,messages:[{role:'user',content:`Du bist ein Human Design Beziehungsanalytiker in einer ganzheitlichen Heilpraxis. Analysiere diese zwei Menschen:
+      const _aiPrompt2=`Du bist ein Human Design Beziehungsanalytiker in einer ganzheitlichen Heilpraxis. Analysiere diese zwei Menschen:
 
 PERSON A: ${clientA.name}
 Typ: ${clientA.hdType||'unbekannt'} · Profil: ${clientA.hdProfile||'—'} · Autorität: ${clientA.hdAuthority||'—'}
@@ -1474,8 +1487,8 @@ Bitte analysiere:
 4. **Herausforderungen**: Wo können Reibungspunkte entstehen?
 5. **Empfehlung für die Praxisarbeit**: Ein konkreter Ansatz für gemeinsame oder individuelle Begleitung.
 
-Warmherzig, präzise.`}]})});
-      const d=await r.json();setAiText(d.content?.[0]?.text||'Fehler.');
+Warmherzig, präzise.`;
+      setAiText(await groqFetch(_aiPrompt2));
     }catch{setAiText('Netzwerkfehler.');}
     setAiLoading(false);
   };
@@ -1707,8 +1720,8 @@ function Session({wizard,setWizard,clients,onComplete,onCancel}){
   const upd=u=>setWizard({...wizard,...u});
   const genAI=async()=>{
     setAiLoading(true);
-    try{const r=await fetch("https://api.anthropic.com/v1/messages",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({model:"claude-sonnet-4-20250514",max_tokens:1000,messages:[{role:"user",content:`Du bist ein einfühlsamer Begleiter im Lichtkern-System. Schreibe eine warmherzige Sitzungsdokumentation (kein KI-Ton):\nKlient: ${wizard.clientName||"Anonym"} | Typ: ${wizard.type==="first"?"Erstsitzung":wizard.type==="followup"?"Folgesitzung":"Abschluss"}\nThema: ${wizard.goal||"—"} | Ebenen: ${t2.map(([k,v])=>`${lvl(k)?.name} (${v}%)`).join(", ")||"—"}\nTechniken: ${wizard.techniques?.join(", ")||"—"} | Ergebnis: ${wizard.outcome||"—"} | Integration: ${wizard.homework||"—"}\n1. Warmherzige Zusammenfassung (3-4 Sätze) 2. 2-3 Integrationsimpulse mit Reflexionsfragen. Keine Heilversprechen.`}]})});
-      const d=await r.json();setAiText(d.content?.[0]?.text||"Fehler.");}catch{setAiText("Netzwerkfehler.");}
+    try{const _aiPrompt3=`Du bist ein einfühlsamer Begleiter im Lichtkern-System. Schreibe eine warmherzige Sitzungsdokumentation (kein KI-Ton):\nKlient: ${wizard.clientName||"Anonym"} | Typ: ${wizard.type==="first"?"Erstsitzung":wizard.type==="followup"?"Folgesitzung":"Abschluss"}\nThema: ${wizard.goal||"—"} | Ebenen: ${t2.map(([k,v])=>`${lvl(k)?.name} (${v}%)`).join(", ")||"—"}\nTechniken: ${wizard.techniques?.join(", ")||"—"} | Ergebnis: ${wizard.outcome||"—"} | Integration: ${wizard.homework||"—"}\n1. Warmherzige Zusammenfassung (3-4 Sätze) 2. 2-3 Integrationsimpulse mit Reflexionsfragen. Keine Heilversprechen.`;
+      setAiText(await groqFetch(_aiPrompt3));}catch{setAiText("Netzwerkfehler.");}
     setAiLoading(false);
   };
   return(
