@@ -339,6 +339,7 @@ const NAV=[
   {id:"clients",  label:"Klienten",  icon:"◈"},
   {id:"session",  label:"Sitzung",   icon:"✦"},
   {id:"calendar", label:"Kalender",  icon:"⊡"},
+  {id:"oracle",   label:"Oracle",    icon:"🔮"},
   {id:"billing",  label:"Abrechnung",icon:"◎"},
 ];
 
@@ -895,26 +896,26 @@ herzlichen Glückwunsch zu deinem Geburtstag!
 
 Ich wünsche dir einen wundervollen Tag voller Licht und Freude. 🌿
 
-✦ Lichtkern · powered by Resonanz Akademie`);window.location.href=`mailto:${h.email}?subject=${s}&body=${b}`;}} style={{fontFamily:"Raleway",fontSize:"10px",fontWeight:700,padding:"4px 10px",borderRadius:"8px",border:`1px solid ${h.border}`,background:"rgba(255,255,255,0.7)",color:h.color,cursor:"pointer"}}>✉️ Glückwunsch senden</button>}
+✦ Lichtkern · powered by Human Resonanz`);window.location.href=`mailto:${h.email}?subject=${s}&body=${b}`;}} style={{fontFamily:"Raleway",fontSize:"10px",fontWeight:700,padding:"4px 10px",borderRadius:"8px",border:`1px solid ${h.border}`,background:"rgba(255,255,255,0.7)",color:h.color,cursor:"pointer"}}>✉️ Glückwunsch senden</button>}
                     {h.email&&h.type==="nosession"&&<button onClick={()=>{const s=encodeURIComponent(`Wie geht es dir? · Lichtkern`);const b=encodeURIComponent(`Liebe/r ${h.clientName},
 
 ich denke an dich und frage mich, wie es dir geht. Magst du eine neue Sitzung vereinbaren?
 
 Ich freue mich von dir zu hören. 🌿
 
-✦ Lichtkern · powered by Resonanz Akademie`);window.location.href=`mailto:${h.email}?subject=${s}&body=${b}`;}} style={{fontFamily:"Raleway",fontSize:"10px",fontWeight:700,padding:"4px 10px",borderRadius:"8px",border:`1px solid ${h.border}`,background:"rgba(255,255,255,0.7)",color:h.color,cursor:"pointer"}}>✉️ Kontakt aufnehmen</button>}
+✦ Lichtkern · powered by Human Resonanz`);window.location.href=`mailto:${h.email}?subject=${s}&body=${b}`;}} style={{fontFamily:"Raleway",fontSize:"10px",fontWeight:700,padding:"4px 10px",borderRadius:"8px",border:`1px solid ${h.border}`,background:"rgba(255,255,255,0.7)",color:h.color,cursor:"pointer"}}>✉️ Kontakt aufnehmen</button>}
                     {h.email&&h.type==="followup"&&<button onClick={()=>{const s=encodeURIComponent(`Follow-up · Lichtkern`);const b=encodeURIComponent(`Liebe/r ${h.clientName},
 
 wie integrierst du die Impulse aus unserer letzten Sitzung? Ich würde mich freuen, von dir zu hören und eventuell einen Folgetermin zu vereinbaren.
 
-✦ Lichtkern · powered by Resonanz Akademie`);window.location.href=`mailto:${h.email}?subject=${s}&body=${b}`;}} style={{fontFamily:"Raleway",fontSize:"10px",fontWeight:700,padding:"4px 10px",borderRadius:"8px",border:`1px solid ${h.border}`,background:"rgba(255,255,255,0.7)",color:h.color,cursor:"pointer"}}>✉️ Follow-up Mail</button>}
+✦ Lichtkern · powered by Human Resonanz`);window.location.href=`mailto:${h.email}?subject=${s}&body=${b}`;}} style={{fontFamily:"Raleway",fontSize:"10px",fontWeight:700,padding:"4px 10px",borderRadius:"8px",border:`1px solid ${h.border}`,background:"rgba(255,255,255,0.7)",color:h.color,cursor:"pointer"}}>✉️ Follow-up Mail</button>}
                     {h.email&&h.type==="invoice"&&<button onClick={()=>{const s=encodeURIComponent(`Zahlungserinnerung · Lichtkern`);const b=encodeURIComponent(`Liebe/r ${h.clientName},
 
 dies ist eine freundliche Erinnerung bezüglich der ausstehenden Rechnung von ${h.sub}.
 
 Vielen Dank für deine baldige Begleichung.
 
-✦ Lichtkern · powered by Resonanz Akademie`);window.location.href=`mailto:${h.email}?subject=${s}&body=${b}`;}} style={{fontFamily:"Raleway",fontSize:"10px",fontWeight:700,padding:"4px 10px",borderRadius:"8px",border:`1px solid ${h.border}`,background:"rgba(255,255,255,0.7)",color:h.color,cursor:"pointer"}}>✉️ Rechnung erinnern</button>}
+✦ Lichtkern · powered by Human Resonanz`);window.location.href=`mailto:${h.email}?subject=${s}&body=${b}`;}} style={{fontFamily:"Raleway",fontSize:"10px",fontWeight:700,padding:"4px 10px",borderRadius:"8px",border:`1px solid ${h.border}`,background:"rgba(255,255,255,0.7)",color:h.color,cursor:"pointer"}}>✉️ Rechnung erinnern</button>}
                     {h.isManual&&<button onClick={()=>onDismissReminder(h.id)} style={{fontFamily:"Raleway",fontSize:"10px",fontWeight:700,padding:"4px 10px",borderRadius:"8px",border:`1px solid ${h.border}`,background:"rgba(255,255,255,0.7)",color:h.color,cursor:"pointer"}}>✅ Erledigt</button>}
                     {!h.isManual&&<button onClick={()=>onDismissReminder(h.id)} style={{fontFamily:"Raleway",fontSize:"10px",fontWeight:600,padding:"4px 10px",borderRadius:"8px",border:"1px solid #CBD5E1",background:"rgba(255,255,255,0.5)",color:"#6AABA7",cursor:"pointer"}}>Ausblenden</button>}
                   </div>
@@ -1849,7 +1850,7 @@ function History({sessions, onDelete}){
         🗑 Löschen
       </button>
     </div>
-    <div style={{textAlign:"center",marginTop:"16px",fontFamily:"Raleway",fontSize:"9px",letterSpacing:"2px",color:T.textSoft,lineHeight:"2",fontWeight:700}}>LICHTKERN · powered by Resonanz Akademie<br/>Kein Ersatz für medizinische Behandlung</div>
+    <div style={{textAlign:"center",marginTop:"16px",fontFamily:"Raleway",fontSize:"9px",letterSpacing:"2px",color:T.textSoft,lineHeight:"2",fontWeight:700}}>LICHTKERN · powered by Human Resonanz<br/>Kein Ersatz für medizinische Behandlung</div>
     {pdfSession&&<PDFModal session={pdfSession} onClose={()=>setPdfSession(null)}/>}
   </div>);
   return(<div style={{padding:"0 16px 96px"}}>
@@ -2024,7 +2025,7 @@ function buildPDF(session, opts){
   <!-- Footer -->
   <div style="border-top:1.5px solid #B2E0DC;margin-top:32px;padding-top:16px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;">
     <div>
-      <p style="font-family:Cinzel,serif;font-size:11px;color:#0D9488;font-weight:700;">✦ Lichtkern · powered by Resonanz Akademie</p>
+      <p style="font-family:Cinzel,serif;font-size:11px;color:#0D9488;font-weight:700;">✦ Lichtkern · powered by Human Resonanz</p>
       ${praxisname?`<p style="font-family:Raleway,sans-serif;font-size:10px;color:#6AABA7;margin-top:2px;">${praxisname}</p>`:""}
     </div>
     <p style="font-family:Raleway,sans-serif;font-size:9px;color:#6AABA7;text-align:right;line-height:1.6;">Keine medizinische Diagnose.<br/>Kein Ersatz für ärztliche oder therapeutische Behandlung.</p>
@@ -2088,7 +2089,7 @@ ${session.aiSummary && showAI ? `\nSitzungsresonanz:\n${session.aiSummary}` : ""
 
 Ich wünsche dir eine integrative und lichtvolle Zeit. 🌿
 
-${praxisname ? praxisname + "\n" : ""}✦ Lichtkern · powered by Resonanz Akademie
+${praxisname ? praxisname + "\n" : ""}✦ Lichtkern · powered by Human Resonanz
 
 Hinweis: Diese Dokumentation ersetzt keine medizinische oder therapeutische Behandlung.`
     );
@@ -2222,7 +2223,7 @@ function LoginScreen({ onLogin }) {
         <div style={{textAlign:"center", marginBottom:"36px"}}>
           <div style={{width:"80px",height:"80px",borderRadius:"50%",background:`linear-gradient(135deg,${T.teal},#6D3FCC)`,display:"flex",alignItems:"center",justifyContent:"center",fontSize:"32px",margin:"0 auto 16px",boxShadow:`0 8px 32px rgba(13,148,136,0.35)`,color:"white"}}>✦</div>
           <div style={{fontFamily:"Cinzel", fontSize:"28px", color:T.text, fontWeight:700, letterSpacing:"3px"}}>LICHTKERN</div>
-          <div style={{fontFamily:"Raleway", fontSize:"11px", color:T.textSoft, letterSpacing:"3px", marginTop:"5px", fontWeight:600}}>POWERED BY RESONANZ AKADEMIE</div>
+          <div style={{fontFamily:"Raleway", fontSize:"11px", color:T.textSoft, letterSpacing:"3px", marginTop:"5px", fontWeight:600}}>POWERED BY HUMAN RESONANZ</div>
         </div>
 
         {/* Card */}
@@ -2277,6 +2278,1384 @@ function LoginScreen({ onLogin }) {
 }
 
 // ─── ROOT WRAPPER ─────────────────────────────
+
+// ════════════════════════════════════════════════════════════════
+//  RESONANZ ORACLE · Human Resonanz
+// ════════════════════════════════════════════════════════════════
+
+// ─── DESIGN TOKENS (aus Hauptdatei übernommen) ────────────────
+const OT = {
+  bg:"#F0FAFA", bgCard:"#FFFFFF", bgSoft:"#E6F7F7", bgSofter:"#F5FDFD",
+  border:"#B2E0DC", borderMid:"#7EC8C2",
+  text:"#0F3030", textMid:"#2D6B68", textSoft:"#6AABA7",
+  teal:"#0D9488", tealL:"#CCFBF1", tealD:"#0F6B63",
+  violet:"#6D3FCC", violetL:"#EDE9FE", violetD:"#4C1D95",
+  gold:"#D97706", goldL:"#FEF3C7",
+  rose:"#E11D48", roseL:"#FFE4E6",
+  shadow:"rgba(13,148,136,0.12)", shadowDeep:"rgba(13,148,136,0.22)",
+};
+
+// ════════════════════════════════════════════════════════════════
+//  WISSENSNETZ · Das verbundene Datensystem
+// ════════════════════════════════════════════════════════════════
+
+const CHAKRA_SYSTEM = [
+  { id:"wurzel",       nr:1, name:"Wurzel-Chakra",   de:"Muladhara",   farbe:"#DC2626", hex:"#DC2626",
+    symbol:"▼", mantra:"LAM", hz:396,
+    themen:["Sicherheit","Überleben","Erdung","Vertrauen","Familie","Geld","Körper"],
+    emotion_block:["Angst","Panik","Unsicherheit","Existenzangst","Misstrauen"],
+    organe:["Nebennieren","Nieren","Blase","Dickdarm","Beine","Füße","Steißbein","Knochen"],
+    aura_schicht:"Ätherischer Körper",
+    hd_zentren:["Wurzel","Milz"],
+    heilung:["Rote Erdkristalle","Barfußlaufen","Rhodonit","Hämatit","Affirmation: Ich bin sicher"],
+    lernpfad_soft:"Das Wurzel-Chakra ist unser energetischer Anker. Es verbindet uns mit der Erde und dem physischen Leben.",
+    lernpfad_deep:"Im energetischen Scan zeigt sich das Wurzel-Chakra durch Temperatur (kalt = unteraktiv, heiß = überaktiv) und Pulsation. Blockaden entstehen durch frühe Kindheitstraumata, Mangelerfahrungen oder transgenerationale Armutsmuster."
+  },
+  { id:"sakral",       nr:2, name:"Sakral-Chakra",   de:"Svadhisthana", farbe:"#EA580C", hex:"#EA580C",
+    symbol:"◎", mantra:"VAM", hz:417,
+    themen:["Kreativität","Sexualität","Gefühle","Genuss","Freude","Beziehungen","Fluss"],
+    emotion_block:["Schuld","Scham","Unterdrückung","Rigidität","Frigidität","Sucht"],
+    organe:["Gebärmutter","Eierstöcke","Prostata","Blase","Darm","Hüfte","Lende"],
+    aura_schicht:"Emotionalkörper",
+    hd_zentren:["Sakral","Milz"],
+    heilung:["Mondstein","Orangencalcit","Tantra-Atmung","Hüftkreise","Wasserelement"],
+    lernpfad_soft:"Das Sakral-Chakra trägt unsere Lebensenergie, Kreativität und die Fähigkeit, Freude zu empfangen.",
+    lernpfad_deep:"In der energetischen Arbeit ist das Sakral-Chakra oft durch transgenerationale Sexualwunden belastet. Ahnenlinien-Arbeit und Auflösung von Loyalitätsmustern sind hier zentral."
+  },
+  { id:"solar",        nr:3, name:"Solarplexus",     de:"Manipura",    farbe:"#CA8A04", hex:"#CA8A04",
+    symbol:"▲", mantra:"RAM", hz:528,
+    themen:["Kraft","Wille","Selbstwert","Identität","Kontrolle","Durchsetzung","Verdauung des Lebens"],
+    emotion_block:["Scham","Ohnmacht","Kontrollzwang","Perfektionismus","Aggression","Opferhaltung"],
+    organe:["Magen","Leber","Milz","Bauchspeicheldrüse","Gallenblase","Zwölffingerdarm"],
+    aura_schicht:"Mentalkörper",
+    hd_zentren:["Ego","G-Zentrum","Milz"],
+    heilung:["Citrin","Tigerauge","Atemarbeit","Sonnenbad","Grenzen setzen"],
+    lernpfad_soft:"Der Solarplexus ist unser Kraftzentrum. Er regiert Selbstvertrauen, innere Stärke und die Fähigkeit, das Leben aktiv zu gestalten.",
+    lernpfad_deep:"Im Scan zeigt sich der Solarplexus durch einen Sog-Effekt (Energie wird gezogen = Fremdenergie) oder Enge (Kontrollmuster). Karmische Themen von Macht und Ohnmacht sind häufig."
+  },
+  { id:"herz",         nr:4, name:"Herz-Chakra",     de:"Anahata",     farbe:"#16A34A", hex:"#16A34A",
+    symbol:"✦", mantra:"YAM", hz:639,
+    themen:["Liebe","Mitgefühl","Verbindung","Selbstliebe","Vergebung","Heilung","Brücke"],
+    emotion_block:["Trauer","Einsamkeit","Verlust","Verhärtung","Selbstablehnung","Grenzverlust"],
+    organe:["Herz","Lunge","Thymus","Arme","Hände","Brustkorb","Schultern"],
+    aura_schicht:"Astralkörper",
+    hd_zentren:["G-Zentrum","Milz","Ego"],
+    heilung:["Rosenquarz","Malachit","Ho'oponopono","Herz-Kohärenz-Atmung","Vergebungsrituale"],
+    lernpfad_soft:"Das Herz-Chakra ist die Brücke zwischen dem Unteren (Materie) und dem Oberen (Geist). Es trägt die höchste Heilfrequenz.",
+    lernpfad_deep:"Herzheilungen sind oft mehrstufig: 1. Schutzpanzer auflösen 2. Alten Schmerz entlassen 3. Selbstliebe aktivieren 4. Verbindungsfaden zum höheren Selbst stärken. Besondere Methode: Blutreinigung durch Lichtarbeit im Herzraum."
+  },
+  { id:"kehle",        nr:5, name:"Kehlkopf-Chakra", de:"Vishuddha",   farbe:"#0284C7", hex:"#0284C7",
+    symbol:"◈", mantra:"HAM", hz:741,
+    themen:["Wahrheit","Ausdruck","Kommunikation","Stimme","Kreativität","Integrität","Zuhören"],
+    emotion_block:["Schlucken von Gefühlen","Lügen","Schweigen","Überreden","Stimmverlust"],
+    organe:["Kehle","Schilddrüse","Nebenschilddrüse","Mund","Zähne","Kiefer","Hals","Nacken","Ohren"],
+    aura_schicht:"Äther-Schablone",
+    hd_zentren:["Kehle","G-Zentrum"],
+    heilung:["Lapislazuli","Aquamarin","Tönen","Singen","Wahrheit sprechen","Blauäther-Licht"],
+    lernpfad_soft:"Das Kehlkopf-Chakra trägt unsere Stimme und Wahrheit. Hier manifestieren sich alle unausgesprochenen Worte als Energie.",
+    lernpfad_deep:"Im Human Design ist das Kehle-Zentrum das einzige Manifestationszentrum. Nicht-definierte Kehle = hohe Empfindlichkeit für Fremdenergie. Klassische Muster: 'Ich darf nicht' oder 'niemand hört mir zu'."
+  },
+  { id:"stirn",        nr:6, name:"Stirn-Chakra",    de:"Ajna",        farbe:"#4338CA", hex:"#4338CA",
+    symbol:"◉", mantra:"OM", hz:852,
+    themen:["Intuition","Weisheit","Wahrnehmung","Vision","Hellsicht","Unterscheidung","Gedanken"],
+    emotion_block:["Realitätsverlust","Skepsis","Übeaktion","Kopfschmerzen","Zwang","Delusion"],
+    organe:["Augen","Stirn","Hypophyse","Pinealdrüse","Kleinhirn","Nase","Stirnhöhlen"],
+    aura_schicht:"Kausalkörper",
+    hd_zentren:["Ajna","Krone"],
+    heilung:["Amethyst","Sodalith","Traumarbeit","Meditation","Dritte-Auge-Aktivierung"],
+    lernpfad_soft:"Das Stirnchakra ist das Tor zur inneren Wahrnehmung – Hellsehen, Hellspüren, Hellfühlen und Hellwissen sind hier verwurzelt.",
+    lernpfad_deep:"Für Heiler: Das Stirnchakra benötigt regelmäßige Reinigung nach intensiver Wahrnehmungsarbeit. Schutzvisualisierung vor und Erdung nach Sitzungen ist essenziell."
+  },
+  { id:"krone",        nr:7, name:"Kronen-Chakra",   de:"Sahasrara",   farbe:"#7C3AED", hex:"#7C3AED",
+    symbol:"✧", mantra:"AUM", hz:963,
+    themen:["Einheit","Transzendenz","Göttliche Verbindung","Bewusstsein","Erleuchtung","Stille"],
+    emotion_block:["Geistige Starre","Dogmatismus","Entkörperung","Überstimulation","Depression"],
+    organe:["Großhirn","Schädeldecke","Zentralnervensystem","Haut"],
+    aura_schicht:"Kether-Körper",
+    hd_zentren:["Krone","Ajna"],
+    heilung:["Bergkristall","Selenit","Stilles Gebet","Lichtkanal öffnen","Kosmische Verbindung"],
+    lernpfad_soft:"Das Kronenchakra verbindet uns mit dem Universum. Es ist weniger ein Energiezentrum als ein offenes Tor zum Unendlichen.",
+    lernpfad_deep:"Kronen-Aktivierung ist nicht Ziel, sondern Nebenprodukt tiefer Reinigungsarbeit. Überstimulation führt zu Dissoziation. Erdung und Wurzel-Chakra-Stärkung ist immer parallel notwendig."
+  },
+];
+
+const ORGAN_MAP = {
+  "kopf / gehirn": { emoji:"🧠",
+    symbolik:["Kontrolle","Überdenken","Gedankenlast","Intellekt überdominiert"],
+    emotion:["Überanalyse","mentaler Stress","Überforderung","innerer Lärm"],
+    chakra:"stirn", seiten:{links:"Vergangenheit / Weibliches",rechts:"Zukunft / Männliches"},
+    ahnen:"Väter- oder Mutterlinie: Verbotenes Denken, unterdrückte Meinung",
+    heilung:["Stirnchakra-Balance","Gehirn-Hemisphären-Sync","Mentalkörper-Reinigung","Ahnen: Recht auf eigene Gedanken"],
+    keywords:["kopfschmerzen","migräne","schwindel","gedanken","mental"]
+  },
+  "augen": { emoji:"👁️",
+    symbolik:["Nicht-sehen-wollen","Angst vor Wahrheit","Hellsicht blockiert","blinder Fleck"],
+    emotion:["Verleugnung","Schutz vor Schmerz","Überforderung"],
+    chakra:"stirn", seiten:{links:"Innenschau / was du dir selbst nicht zeigst",rechts:"Außenwelt / was du anderen nicht zeigen willst"},
+    ahnen:"Generationenmuster: 'Sieh nicht hin' / Zeugen von Gewalt oder Schmerz",
+    heilung:["Ajna-Chakra-Öffnung","Augen-Meridian-Arbeit","innere Kind-Arbeit: darf sehen"],
+    keywords:["augen","sehen","blind","wahrnehmung","blick"]
+  },
+  "ohren": { emoji:"👂",
+    symbolik:["Nicht-hören-wollen","Botschaften überhören","innere Stimme ignoriert"],
+    emotion:["Überwältigung durch Geräusche","Konfliktvermeidung","Gehorsam"],
+    chakra:"kehle", seiten:{links:"eigene innere Stimme",rechts:"äußere Botschaften / Autorität"},
+    ahnen:"'Kinder haben zu schweigen' / Verbote zu hören oder zu sprechen",
+    heilung:["Kehlchakra-Balance","Ohr-Meridian","Stille-Meditation","Selbstermächtigung der inneren Stimme"],
+    keywords:["ohren","hören","tinnitus","stille","ohr"]
+  },
+  "mund / zähne / kiefer": { emoji:"🦷",
+    symbolik:["Schlucken von Worten","Verbissenes Festhalten","aufgebissene Zähne","Ausdruck blockiert"],
+    emotion:["Unterdrückte Worte","Wut","Ohnmacht","Perfektionismus","Kontrolle"],
+    chakra:"kehle", seiten:{links:"Weibliches / Empfangen",rechts:"Männliches / Geben"},
+    ahnen:"Muster: 'Sprich nicht darüber' / verbotene Wahrheiten",
+    heilung:["Kiefer-Entspannung","Kehlchakra-Befreiung","Tönen","die eigene Wahrheit sprechen"],
+    keywords:["mund","zähne","kiefer","schlucken","beißen","zähneknirschen"]
+  },
+  "hals / schilddrüse": { emoji:"🌀",
+    symbolik:["Stimme unterdrückt","Lebensfluss gebremst","Nicht authentisch","Metabolismus des Lebens"],
+    emotion:["Angst vor Ablehnung","Schweigen","Isolation","Erschöpfung (Hashimoto=Selbstangriff)"],
+    chakra:"kehle", seiten:{links:"Empfangen von Liebe und Wahrheit",rechts:"Geben / Aussenden"},
+    ahnen:"Generationen: verbotene Sprache, Emigration, Sprachverlust",
+    heilung:["Schilddrüsen-Meridian","Kehle-Licht-Infusion","Singen","Aquamarin","Wahrheitsbotschaft"],
+    keywords:["hals","schilddrüse","stimme","nacken","kehle","hashimoto"]
+  },
+  "schultern": { emoji:"💪",
+    symbolik:["Last tragen","Verantwortung","Bürde","Schulterlast der Familie"],
+    emotion:["Überlastung","Pflichtgefühl","Selbstaufopferung","Hilfsbereitschaft als Flucht"],
+    chakra:"herz", seiten:{links:"emotionale Last / Familienthemen",rechts:"berufliche Last / männliche Linie"},
+    ahnen:"Muster: 'Wir müssen funktionieren' / traumatische Familienbelastungen",
+    heilung:["Herz-Chakra-Öffnung","Schultern freisprechen","Lasten rituell abgeben","Familienaufstellung"],
+    keywords:["schultern","schulter","last","verantwortung","verspannt","nacken"]
+  },
+  "ellenbogen": { emoji:"🦾",
+    symbolik:["anecken","sich behaupten","Raum einnehmen","Reibungspunkte","Grenzen"],
+    emotion:["Frustration","unterdrückte Durchsetzung","Ärger auf Hindernisse","Rigidität"],
+    chakra:"solar", seiten:{links:"innere Blockade / Selbstbeziehung",rechts:"äußere Reibung / Beziehungen"},
+    ahnen:"'Streit nicht an' / 'Pass dich an' / Rebellion unterdrückt",
+    heilung:["Solarplexus-Kraft-Aktivierung","Grenzen-Ritual","Dickdarm-Meridian","das Recht auf Reibung"],
+    keywords:["ellenbogen","anecken","reibung","grenzen","behaupten","ärger"]
+  },
+  "hände / finger": { emoji:"🤲",
+    symbolik:["Greifen und Loslassen","Berühren und Berührt-werden","Kontrolle","Schöpfung"],
+    emotion:["Festhalten","Kontrollzwang","Kreativitätsblockade","Berührungsarmut"],
+    chakra:"herz", seiten:{links:"empfangen",rechts:"geben"},
+    ahnen:"'Nicht anfassen' / körperliche Kälte in der Familie / Gewalt durch Hände",
+    heilung:["Herzchakra-Öffnung","Daumenmassage für Lungenmeridian","Handchakras aktivieren","loslassen üben"],
+    keywords:["hände","finger","greifen","halten","loslassen","hände"]
+  },
+  "herz": { emoji:"❤️",
+    symbolik:["Zentrum des Lebens","Liebe und Verlust","Herzschmerz","emotionale Wunde","Einheit"],
+    emotion:["Trauer","Liebeskummer","Einsamkeit","Selbstablehnung","Sehnsucht","Verhärtung"],
+    chakra:"herz", seiten:{links:"Empfangen von Liebe / Selbstliebe",rechts:"Geben von Liebe"},
+    ahnen:"Verlust, Krieg, früher Tod von Geliebten, Trennungen über Generationen",
+    heilung:["Herzheilung (Lichtinfusion)","Blutreinigung","Ho'oponopono","Rosenquarz","Herz-Kohärenz","Vergebungsarbeit"],
+    keywords:["herz","herzschmerz","liebe","verlust","trauer","einsamkeit","herzrythmus"]
+  },
+  "lunge": { emoji:"🫁",
+    symbolik:["Atem des Lebens","Raum einnehmen","Lebensfreude","Loslassen beim Ausatmen","Trauer"],
+    emotion:["Unterdrückte Trauer","Lebensangst","Nicht atmen dürfen","Lebensraum verloren"],
+    chakra:"herz", seiten:{links:"emotionale Trauer / Loslassen",rechts:"aktive Kraft / Lebenswille"},
+    ahnen:"Verlust, Asthma-Muster, 'kein Raum für mich' / enge Verhältnisse",
+    heilung:["Atemtherapie","Herzchakra-Öffnung","Lungenmeridian","Trauer-Ritual","Lebensraum beanspruchen"],
+    keywords:["lunge","atmen","atem","asthma","husten","trauer"]
+  },
+  "leber / galle": { emoji:"🫀",
+    symbolik:["Verarbeitung","aufgestauter Ärger","Vergiftetes","Entgiftung","Urteile"],
+    emotion:["Wut","Bitterkeit","Neid","aufgestauter Ärger","unkontrollierbare Emotionen"],
+    chakra:"solar", seiten:{links:"innere Bitterkeit",rechts:"äußerer Ärger / Konflikt"},
+    ahnen:"Muster: unterdrückte Wut, Alkohol als Flucht, Bitterkeit über das Leben",
+    heilung:["Leberentgiftung energetisch","Gallenblasen-Meridian","Wut rituell entladen","Solarplexus-Reinigung"],
+    keywords:["leber","galle","wut","ärger","bitterkeit","entgiftung"]
+  },
+  "magen / milz": { emoji:"🫃",
+    symbolik:["Verdauung des Lebens","Assimilation","Sorgen","Grübeln","Unverarbeitetes"],
+    emotion:["Sorgen","Grübeln","Nicht-annehmen-können","Zu viel auf einmal","Überwältigung"],
+    chakra:"solar", seiten:{links:"emotionale Assimilation",rechts:"äußere Themen / Beruf"},
+    ahnen:"'Das Leben ist schwer' / Mangelernährung / Hungermuster",
+    heilung:["Magenmeridian-Arbeit","Sorgen rituell entladen","Solarplexus","Milz-Stärkung","Erd-Frequenz"],
+    keywords:["magen","milz","verdauung","sorgen","grübeln","bauch","übelkeit"]
+  },
+  "nieren / nebennieren": { emoji:"🫘",
+    symbolik:["Urangst","Lebenskraft","Vitalität","Filtern des Lebens","Schockstarre"],
+    emotion:["Tiefe Angst","Erschöpfung","Schock","Trauma","Lebensangst","Überlebensstress"],
+    chakra:"wurzel", seiten:{links:"weibliche Linie / Mutter",rechts:"männliche Linie / Vater"},
+    ahnen:"Kriegstrauma, Überlebensangst, existenzielle Not über Generationen",
+    heilung:["Nierenmeridian-Stärkung","Nebennieren-Reset","Tiefes Trauma-Release","Ahnen-Frieden","Wurzelchakra"],
+    keywords:["nieren","nebennieren","angst","erschöpfung","trauma","schock","burnout"]
+  },
+  "rücken oben": { emoji:"🔼",
+    symbolik:["Liebesbedürfnis unerfüllt","fehlende Unterstützung","emotionale Last"],
+    emotion:["Mangel an Liebe","Unsupportedness","emotionale Bürde","Verlassenheit"],
+    chakra:"herz",  seiten:{links:"Selbstliebe / innere Unterstützung",rechts:"äußere Unterstützung durch andere"},
+    ahnen:"Liebesarmut, emotionale Kälte in der Herkunftsfamilie",
+    heilung:["Herzchakra-Öffnung","Selbstliebe-Ritual","Rückenmeridian-Arbeit","Unterstützung annehmen lernen"],
+    keywords:["rücken oben","oberer rücken","schulterblatt","verspannung"]
+  },
+  "rücken mitte": { emoji:"🟡",
+    symbolik:["Schuldgefühle","Vergangenheit","Festhalten","Steckenbleiben"],
+    emotion:["Schuld","Scham","Ohnmacht","alte Wunden","Verbitterung"],
+    chakra:"solar", seiten:{links:"innere Schuld",rechts:"Schuld durch andere zugewiesen"},
+    ahnen:"Muster: Strafe, Sühne, 'schuldig sein' als Familienprogramm",
+    heilung:["Solarplexus","Vergebungsarbeit","Schuld-Ritual","Gallenmeridian","Zeitlinienarbeit"],
+    keywords:["rücken mitte","mittlerer rücken","solar","schuld","vergangenheit"]
+  },
+  "rücken unten / lendenwirbel": { emoji:"🔽",
+    symbolik:["Existenzangst","Geldsorgen","Mangel","Unterstützung fehlt","Familie"],
+    emotion:["Finanzielle Angst","Überlebensangst","Verlassenheit","Erschöpfung"],
+    chakra:"wurzel", seiten:{links:"weibliche Linie",rechts:"männliche Linie"},
+    ahnen:"Existenzmuster, Armut, Krieg, Heimatverlust",
+    heilung:["Wurzelchakra-Erdung","Ahnenfrieden","Nierenmeridian","Blasenmeridian","Abundanzprogramm aktivieren"],
+    keywords:["rücken unten","lendenwirbel","ischias","hüfte","kreuz","exist"]
+  },
+  "hüfte / becken": { emoji:"🦵",
+    symbolik:["Vorwärtsgehen","Sexualität","Kreativität","Familiensystem","Gleichgewicht"],
+    emotion:["Stagnation","Angst vor Veränderung","sexuelle Blockaden","Familienthemen"],
+    chakra:"sakral", seiten:{links:"Weibliches / Yin / Mutter",rechts:"Männliches / Yang / Vater"},
+    ahnen:"Sexualität als Tabu, Bindung an Herkunftsfamilie, Bewegungsunfreiheit",
+    heilung:["Sakralchakra-Öffnung","Hüftöffner","Ahnen-Sexualitätsmuster","Becken-Entspannung"],
+    keywords:["hüfte","becken","hüftschmerzen","sexualität","kreativität","fortbewegung"]
+  },
+  "knie": { emoji:"🦿",
+    symbolik:["Flexibilität","Demut","Sturheit","Ego","Niederbeugen"],
+    emotion:["Starrsinn","Stolz","Angst vor Niederlage","Unterwerfung","Autoritätskonflikte"],
+    chakra:"wurzel", seiten:{links:"innere Flexibilität",rechts:"äußere Anpassung / Autorität"},
+    ahnen:"Kniefall vor Autoritäten / Unterwerfungsmuster / Stolz als Überlebensstrategie",
+    heilung:["Magenmeridian","Flexibilitäts-Übung mental","Wurzelchakra","Ego-Auflösung","Demut als Kraft"],
+    keywords:["knie","knieschmerzen","starrheit","flexibilität","beugen","autorität"]
+  },
+  "sprunggelenk / füße": { emoji:"🦶",
+    symbolik:["Richtung im Leben","Schritt-für-Schritt","Erdung","Vorwärtskommen","Standpunkt"],
+    emotion:["Orientierungslosigkeit","Angst vor dem nächsten Schritt","Erdungsdefizit"],
+    chakra:"wurzel", seiten:{links:"Vergangenheit / Herkunft",rechts:"Zukunft / Richtung"},
+    ahnen:"Entwurzelung, Flucht, Migration, heimatlose Vorfahren",
+    heilung:["Fußreflexzonen","Barfußlaufen","Erdungsritual","Wurzelchakra","Ahnen-Heimat-Heilung"],
+    keywords:["füße","fuß","sprunggelenk","knöchel","erdung","richtung","schritt"]
+  },
+  "haut": { emoji:"🧑",
+    symbolik:["Grenze","Berührung","Abgrenzung","Kontakt","Schutz","Identität"],
+    emotion:["Grenzverlust","Hypersensitivität","Berührungsangst","Kontaktangst","Identitätsverlust"],
+    chakra:"wurzel", seiten:{ links:"Selbstbezug",rechts:"Außenwelt"},
+    ahnen:"Generationelle Berührungsarmut, Übergriffe, zu viel oder zu wenig Nähe",
+    heilung:["Hautmeridian","Schutz-Visualisierung","Aura-Stärkung","Körpergrenzen-Ritual","Berührungs-Therapie"],
+    keywords:["haut","neurodermitis","ekzem","psoriasis","jucken","kontakt","berührung"]
+  },
+  "blut / kreislauf": { emoji:"🩸",
+    symbolik:["Lebensfluss","Kraft","Familie (Blut ist dicker)","Ahnenverbindung","Vitalität"],
+    emotion:["Lebensunlust","Erschöpfung","Familienthemen","Blutsbande","Kreislauf des Lebens"],
+    chakra:"herz", seiten:{links:"Vergangenheit",rechts:"Zukunft"},
+    ahnen:"Zentrales Ahnenthema – Blut trägt alle Generationenmuster",
+    heilung:["Blutreinigung (Lichtarbeit)","Herzchakra-Pump-Übung","DNA-Aktivierung","Ahnen-Blutlinie-Reinigung","Ferritheilung"],
+    keywords:["blut","kreislauf","blutdruck","anämie","durchblutung","vitalität"]
+  },
+};
+
+const AURA_SCHICHTEN = [
+  { nr:1, name:"Ätherischer Körper",    farbe:"#CBD5E1", thema:"Vitalität · Körperblaupause",
+    abstand:"2–5 cm", wahrnehmung:"Kribbeln, Wärme, Pulsation direkt am Körper",
+    blockaden:["Erschöpfung","Chronische Erkrankungen","Energieverlust","Schmerz"],
+    heilung:["Pranic Healing","Quantenheilung am Ätherfeld","Lebensenergie-Infusion","Akupunktur-Meridiane"],
+    chirurgie:["Ätherische Wunden nähen","Depleted areas auffüllen","Energielecks schließen"]
+  },
+  { nr:2, name:"Emotionalkörper",       farbe:"#FCA5A5", thema:"Gefühle · Wünsche · Reaktionen",
+    abstand:"5–15 cm", wahrnehmung:"Temperaturveränderungen, Farben, emotionale Eindrücke",
+    blockaden:["Unterdrückte Gefühle","Altes Herzweh","Traumata","emotionale Verstrickungen"],
+    heilung:["Emotions-Entleerung","Emotionalkörper-Reinigung","Traumaarbeit","Farbheilung"],
+    chirurgie:["Emotionale Schichten ablösen","alte Gefühlsknoten lösen","Schutzpanzer auflösen"]
+  },
+  { nr:3, name:"Mentalkörper",          farbe:"#FEF08A", thema:"Gedanken · Überzeugungen · Muster",
+    abstand:"15–25 cm", wahrnehmung:"Impulse, Gedanken die kommen, Druckgefühl am Kopf",
+    blockaden:["Glaubenssätze","Negative Gedankenmuster","Mentale Programme","Fremdgedanken"],
+    heilung:["Glaubenssatz-Clearing","Mentalkörper-Reinigung","Lichtsprache","Affirmationsfeld"],
+    chirurgie:["Mentale Implantate entfernen","Fremdgedanken auslösen","Mentales Gitter reparieren"]
+  },
+  { nr:4, name:"Astralkörper",          farbe:"#86EFAC", thema:"Verbindungen · Liebe · Beziehungen",
+    abstand:"25–45 cm", wahrnehmung:"Energiefäden zu Personen, Herzöffnung, Expansionsgefühl",
+    blockaden:["Kord-Verbindungen","Symbiotische Bindungen","Liebeswunden","Beziehungsverstrickungen"],
+    heilung:["Kord-Schneiden","Astralreisen-Reinigung","Liebeswunden-Heilung","Herzverbindungen stärken"],
+    chirurgie:["Energetische Korde durchtrennen","Parasitäre Verbindungen lösen","Liebesfäden heilen"]
+  },
+  { nr:5, name:"Äther-Schablone",       farbe:"#7DD3FC", thema:"Göttlicher Bauplan · Identität",
+    abstand:"45–60 cm", wahrnehmung:"Kristalline Struktur, Blaupausen-Qualität, Ordnung/Chaos",
+    blockaden:["Identitätsverlust","Nicht authentisch leben","Lebensplan blockiert"],
+    heilung:["Blaupausen-Aktivierung","Göttliche Struktur wiederherstellen","Identitätsheilung"],
+    chirurgie:["Verzerrte Blaupausen korrigieren","Göttliches Muster reinstallieren"]
+  },
+  { nr:6, name:"Kausalkörper",          farbe:"#C4B5FD", thema:"Karma · Seelenmuster · Lebensthemen",
+    abstand:"60–80 cm", wahrnehmung:"Leuchten, hohe Frequenz, Sphärenklang intern",
+    blockaden:["Karmische Muster","Seelenwunden","ungelöste Lebensthemen","Seelensplitter"],
+    heilung:["Karma-Auflösung","Seelenheilung","Zeitlinienarbeit","Inkarnationsthemen lösen"],
+    chirurgie:["Karmische Korde trennen","Seelensplitter zurückrufen","Lebensthemen umprogrammieren"]
+  },
+  { nr:7, name:"Kether-Körper",         farbe:"#FFFFFF", thema:"Göttliche Verbindung · Einheit",
+    abstand:"80–100+ cm", wahrnehmung:"Stille, Licht, absolute Präsenz, Grenzenlosigkeit",
+    blockaden:["Spirituelle Trennung","Gottvertrauen verloren","Sinnkrise","Disconnect"],
+    heilung:["Lichtkanal öffnen","Göttliche Verbindung herstellen","Quellenlicht einlassen"],
+    chirurgie:["Lichtkanal reparieren","Verbindung zum Höheren reinstallieren"]
+  },
+];
+
+const AURA_CHIRURGIE_TECHNIKEN = [
+  { name:"Kord-Schneidung",            icon:"✂️", beschreibung:"Energetische Verbindungsfäden zu Personen, Orten oder Situationen durchtrennen. Nicht zu verwechseln mit Liebesbanden.", anwendung:"Symbiotische Abhängigkeiten, toxische Beziehungen, nicht ablösbare Bindungen", schritte:["Feld scannen nach Korden","Ursprung bestimmen","Intention setzen","Arkturanisches Lichtschwert oder Goldenes Licht","Wunde versiegeln","Neue Grenze setzen"] },
+  { name:"Implantat-Entfernung",       icon:"🔮", beschreibung:"Fremdenergetische Strukturen im Aurafeld finden und auflösen. Diese können aus anderen Inkarnationen, Verträgen oder Magie stammen.", anwendung:"Unerklärliche Schwere, fremde Gedanken, blockierte Manifestation", schritte:["Scan mit Hellspürsinn","Lokalisierung (oft Chakren oder Gelenke)","Lichtzange / Goldenes Licht","Entfernen und Entsorgen im Licht","Wunde füllen mit Reines Licht"] },
+  { name:"Energieleck-Versiegelung",   icon:"💧", beschreibung:"Löcher oder Risse in der Aura finden und reparieren. Entstehen durch Schock, Operationen, Drogen oder intensive emotionale Verluste.", anwendung:"Chronische Erschöpfung, das Gefühl 'immer leer zu sein'", schritte:["Aura abtasten auf Temperaturdifferenzen","Leck lokalisieren","Goldenes Licht oder Silberlicht einfüllen","Aura-Gewebe nähen (visualisiert)","Versiegeln und schützen"] },
+  { name:"Fremdenergien-Clearing",     icon:"🌊", beschreibung:"Im Alltag, in Menschenmassen oder bei intensiver Kontaktarbeit sammeln sich Fremdenergien im Feld. Regelmäßige Reinigung ist essenziell.", anwendung:"Nach intensiver Sitzungsarbeit, in Menschenmassen, nach Konflikten", schritte:["Violettes Feuer / Lichtdusche","Feld von außen nach innen bürsten","Ins Licht entlassen","Schutz reaktivieren"] },
+  { name:"Schutzmatrix-Stärkung",      icon:"🛡️", beschreibung:"Aufbau eines bewussten energetischen Schutzschildes für sensible Praktizierende und deren Klienten.", anwendung:"Vor Sitzungen, bei empathischen Überwältigungen, für Schutz im Alltag", schritte:["Erdung aktivieren","Lichtschutzblase aufbauen (Goldlicht oder Kristall)","Spiegel-Außenhülle","Intention: Nur das Höchste und Heilsamste darf ein und aus"] },
+  { name:"Seelensplitter-Rückruf",     icon:"🌟", beschreibung:"Teile der Seele, die durch Trauma abgespalten wurden, werden zurückgerufen und reintegriert. Schamanische Kerntechnik.", anwendung:"Bei Dissoziationstendenzen, Gefühl 'nicht ganz da zu sein', nach Traumata", schritte:["Heiligen Raum öffnen","Seelensplitter lokalisieren (Zeit / Ort)","Liebevoller Ruf","Empfangen und integrieren","Mit Licht versiegeln"] },
+  { name:"DNA-Aktivierung",            icon:"🧬", beschreibung:"Aktivierung von Licht-Codes in den Ahnen-DNS-Schichten. Entfernt generationelle Programme und aktiviert das volle Potenzial.", anwendung:"Bei tiefen Familienmustern, Wiederholung generationeller Themen", schritte:["Verbindung mit dem höheren Selbst","DNS-Doppelhelix visualisieren","Licht-Codes einschleusen","Altes Programm auflösen","Neues Programm verankern"] },
+];
+
+const HELLSINN_TAGS = {
+  wahrnehmung: {
+    label:"💫 Wahrnehmungsart", farbe:"#7C3AED", bgfarbe:"#EDE9FE",
+    items:["Wärme","Kälte","Schwere","Leichtigkeit","Kribbeln","Pulsation","Enge","Druck","Zug","Leere","Fülle","Prickeln","Schmerz gespürt","Starre","Vibration","Weichheit","Härte"]
+  },
+  farben: {
+    label:"🎨 Farben / Licht", farbe:"#EA580C", bgfarbe:"#FFF7ED",
+    items:["Rot","Orange","Gelb","Grün","Hellblau","Dunkelblau","Violett","Weiß","Schwarz","Grau","Braun","Rosa","Gold","Silber","Türkis","Dunkel","Hell","Trüb","Leuchtend"]
+  },
+  koerper: {
+    label:"🫀 Körperzone", farbe:"#0D9488", bgfarbe:"#CCFBF1",
+    items:["Kopf","Herz","Bauch","Brust","Rücken","Schultern","Arme","Beine","Füße","Hände","Kehle","Gesicht","Becken","Hüfte","Knie","Wirbelsäule","Links","Rechts","Oben","Unten"]
+  },
+  energetisch: {
+    label:"⚡ Energetisches Feld", farbe:"#6D3FCC", bgfarbe:"#EDE9FE",
+    items:["Aura groß","Aura klein","Löcher im Feld","Korde","Fremdenergie","Schutzwand","Chakra aktiv","Chakra blockiert","Strudel","Lichtkörper","Dunkelfeld","Implantate","Seelensplitter","Verbindungsfäden"]
+  },
+  bildlich: {
+    label:"🌿 Bilder / Symbole", farbe:"#16A34A", bgfarbe:"#DCFCE7",
+    items:["Mauer","Käfig","Netz","Panzer","Schleier","Schnur","Knoten","Stein","Schwert","Licht","Fluss","Baum","Wurzel","Wasser","Feuer","Erde","Wind","Höhle","Brücke","Spiegel"]
+  },
+  ahnen: {
+    label:"🧬 Ahnen / Karma", farbe:"#B45309", bgfarbe:"#FEF3C7",
+    items:["Mutter-Linie","Vater-Linie","Großeltern","Krieg","Verlust","Emigration","Trauma","Schwur","Loyalität","Karma","Wiederholung","Verstrickung","Schicksal","Ahnen anwesend"]
+  },
+};
+
+const HEILMETHODEN_KATALOG = [
+  { id:"blutreinigung",  name:"Blutreinigung",      icon:"🩸", kategorie:"Energetische Heilung",
+    beschreibung:"Reinigung des energetischen Blutfeldes von niedrigen Frequenzen, Schockmustern und Ahnenbelastungen. Das Blut ist der Träger aller Lebensinformation.",
+    anwendung:"Chronische Erkrankungen, Erschöpfung, Ahnenthemen, Kreislaufprobleme, Bluterkrankungen",
+    ablauf:["Verbindung mit dem Herzfeld","Licht durch das Blut strömen lassen","Dunkle Partikel im Licht auflösen","Neue vitale Frequenz einprogrammieren","Versiegelung"],
+    stufe:3
+  },
+  { id:"herzheilung",    name:"Herzheilung",         icon:"💚", kategorie:"Energetische Heilung",
+    beschreibung:"Tiefe Heilungsarbeit am Herzfeld: Öffnen, Reinigen, Integrieren von Herzwunden, Liebeskummer, Verlust und emotionalen Panzerungen.",
+    anwendung:"Herzschmerz, Trauer, Verlust, Beziehungsprobleme, Selbstablehnung, Angststörungen",
+    ablauf:["Herzraum öffnen","Schmerzschichten ablösen","Rohes Licht einlassen","Selbstliebe ankern","Herz-Kohärenz stabilisieren"],
+    stufe:2
+  },
+  { id:"chakraheilung",  name:"Chakraheilung",        icon:"🌈", kategorie:"Energetische Heilung",
+    beschreibung:"Systematische Reinigung, Balancierung und Aktivierung der sieben Hauptchakren und ihrer Verbindungskanäle (Sushumna, Ida, Pingala).",
+    anwendung:"Energieimbalancen, Körperbeschwerden, emotionale Blockaden, spirituelle Stagnation",
+    ablauf:["Chakren-Scan (Pendeltest/Intuition)","Blockiertes Chakra identifizieren","Reinigung","Aktivierung mit Farb-/Tonfrequenz","Nadis ausbalancieren"],
+    stufe:1
+  },
+  { id:"meridianheilung",name:"Meridian-Ausgleich",  icon:"🌊", kategorie:"Energetische Heilung",
+    beschreibung:"Energetische Aktivierung der 12 Hauptmeridiane und 2 Gefäße (Renmai/Dumai) zur Harmonisierung des gesamten Energiesystems.",
+    anwendung:"Organprobleme, Schmerzbilder, emotionale Muster, TCM-Diagnoseprinzipien",
+    ablauf:["Meridian-Scan","Schwache Meridiane bestimmen","Sedierung / Tonisierung","Energie nachführen","Ausleitung"],
+    stufe:2
+  },
+  { id:"auraoperation",  name:"Aura-Chirurgie",      icon:"✂️", kategorie:"Aura-Arbeit",
+    beschreibung:"Präzise energetische Eingriffe im Aurakörper: Kord-Schnitte, Implantat-Entfernung, Energieleck-Versiegelung, Schutzmatrix-Aufbau.",
+    anwendung:"Energielecks, Fremdeinflüsse, toxische Beziehungen, chronische Energielosigkeit",
+    ablauf:["Aura-Scan","Befund festhalten","Gezielte Intervention","Wunden heilen","Schutz aufbauen"],
+    stufe:4
+  },
+  { id:"ahnenarbeit",    name:"Ahnenlinien-Heilung", icon:"🧬", kategorie:"Systemische Energie",
+    beschreibung:"Heilungsarbeit an transgenerationellen Mustern, Loyalitäten, Schwüren und Traumata in Mutter- und Vaterlinie bis zur 7. Generation.",
+    anwendung:"Wiederholungsmuster, Beziehungsthemen, Erkrankungsmuster die sich wiederholen",
+    ablauf:["Ahnen-Feld öffnen","Thema und Ursprung finden","Anerkennung der Ahnen","Lösung/Vergebung","DNS-Reinigung","Integration"],
+    stufe:3
+  },
+  { id:"dnaheilung",     name:"DNA / Licht-Codes",   icon:"🔮", kategorie:"Quantenheilung",
+    beschreibung:"Aktivierung von Licht-Codes in der DNS über Intention, Klang und höherdimensionale Verbindung. Epigenetische Umprogrammierung.",
+    anwendung:"Tiefe Familienmuster, spirituelles Erwachen, Potential-Entfaltung",
+    ablauf:["Verbindung höheres Selbst","DNS-Visualisierung","Lichtcodes einsenden","Altes Programm auflösen","Neues Muster verankern"],
+    stufe:5
+  },
+  { id:"zeitlinie",      name:"Zeitlinienarbeit",    icon:"⏳", kategorie:"Quantenheilung",
+    beschreibung:"Energetische Heilungsarbeit in der Zeit: Vergangenheitshealing, Inkarnationsthemen, Zukunftsprogrammierung.",
+    anwendung:"Nicht-heilende Wunden, Traumatas die 'tief' sitzen, Karma-Auflösung",
+    ablauf:["Zeitlinie öffnen","Heilungspunkt identifizieren","Intervention im Energiefeld der Zeit","Integration ins Jetzt"],
+    stufe:4
+  },
+  { id:"lichtsprache",   name:"Licht-Sprache",       icon:"✨", kategorie:"Frequenzarbeit",
+    beschreibung:"Übertragung von Heilfrequenzen durch Laut, Geste und Intention jenseits des Verstandes. Direkte Arbeit mit dem Energiefeld.",
+    anwendung:"Tiefe Blockaden, wenn Worte nicht reichen, Frequenzübertragung",
+    ablauf:["Verbindung herstellen","Kanal öffnen","Lichtsprache fließen lassen","Empfangen und integrieren"],
+    stufe:3
+  },
+  { id:"fernheilung",    name:"Fernheilung",         icon:"🌐", kategorie:"Quantenheilung",
+    beschreibung:"Quantenenergetische Heilungsarbeit über Raum und Zeit. Intention als primäres Werkzeug. Gleiche Wirksamkeit wie Präsenz-Sitzung.",
+    anwendung:"Nicht anwesende Klienten, Nachsorge, internationale Arbeit",
+    ablauf:["Heiligen Raum öffnen","Verbindung mit Klientenfeld aufnehmen","Absicht setzen","Arbeit durchführen","Schließen und loslassen"],
+    stufe:4
+  },
+];
+
+const LERNPFAD_STUFEN = [
+  { nr:1, name:"Einführung",    farbe:"#16A34A", icon:"🌱", beschreibung:"Grundverständnis, Terminologie, erste Wahrnehmungen. Für Einsteiger." },
+  { nr:2, name:"Grundlagen",   farbe:"#0D9488", icon:"📚", beschreibung:"Systematisches Wissen, erste Technikanwendung, Klienten-Grundarbeit." },
+  { nr:3, name:"Vertiefung",   farbe:"#0284C7", icon:"🎯", beschreibung:"Komplexe Fälle, Kombination von Methoden, eigene Wahrnehmungsschärfung." },
+  { nr:4, name:"Meisterschaft",farbe:"#7C3AED", icon:"⚡", beschreibung:"Aura-Chirurgie, Quantenarbeit, Fern-Anwendungen, Ausbildungsleitung." },
+  { nr:5, name:"Zertifizierung",farbe:"#D97706",icon:"🏆", beschreibung:"Geprüfte Kompetenz, Resonanz Akademie Zertifikat, Lehrerlizenz." },
+];
+
+// ════════════════════════════════════════════════════════════════
+//  UI HILFSKOMPONENTEN
+// ════════════════════════════════════════════════════════════════
+const OCard = ({children, style={}}) => (
+  <div style={{background:"#FFFFFF",borderRadius:"18px",padding:"18px",border:`1.5px solid ${OT.border}`,boxShadow:`0 2px 14px ${OT.shadow}`,...style}}>{children}</div>
+);
+const OBtn = ({children,onClick,variant="primary",disabled,style={}}) => {
+  const variants = {
+    primary:{background:`linear-gradient(135deg,${OT.teal},${OT.tealD})`,color:"white",border:"none"},
+    soft:{background:OT.bgSoft,color:OT.textMid,border:`1.5px solid ${OT.border}`},
+    violet:{background:`linear-gradient(135deg,${OT.violet},${OT.violetD})`,color:"white",border:"none"},
+    ghost:{background:"transparent",color:OT.teal,border:`1.5px solid ${OT.teal}`},
+  };
+  return <button onClick={onClick} disabled={disabled} style={{fontFamily:"Raleway",fontWeight:700,fontSize:"13px",padding:"10px 18px",borderRadius:"12px",cursor:disabled?"wait":"pointer",opacity:disabled?0.6:1,transition:"all 0.15s",...variants[variant],...style}}>{children}</button>;
+};
+const OTag = ({label, aktiv, onClick, farbe="#0D9488", bgFarbe="#CCFBF1"}) => (
+  <button onClick={onClick} style={{fontFamily:"Raleway",fontSize:"11px",fontWeight:700,padding:"5px 12px",borderRadius:"20px",border:`1.5px solid ${aktiv?farbe:OT.border}`,background:aktiv?bgFarbe:"white",color:aktiv?farbe:OT.textSoft,cursor:"pointer",transition:"all 0.12s"}}>{label}</button>
+);
+const OLabel = ({children, color}) => (
+  <div style={{fontFamily:"Raleway",fontSize:"10px",letterSpacing:"2px",fontWeight:800,color:color||OT.textSoft,textTransform:"uppercase",marginBottom:"10px"}}>{children}</div>
+);
+
+// ════════════════════════════════════════════════════════════════
+//  HELLSINN-SCANNER · Kern-Feature
+// ════════════════════════════════════════════════════════════════
+function HellsinnScanner({ groqFetch }) {
+  const [eingabe, setEingabe]       = useState("");
+  const [tags, setTags]             = useState([]);
+  const [aktivKat, setAktivKat]    = useState("wahrnehmung");
+  const [lokalInfo, setLokalInfo]  = useState([]);
+  const [kiAntwort, setKiAntwort]  = useState("");
+  const [kiLaed, setKiLaed]        = useState(false);
+  const [kiGestellt, setKiGestellt]= useState(false);
+  const debounceRef                 = useRef();
+
+  // Lokale Sofort-Analyse bei Änderung der Tags/Eingabe
+  useEffect(() => {
+    clearTimeout(debounceRef.current);
+    debounceRef.current = setTimeout(() => analysiereLokal(), 300);
+  }, [eingabe, tags]);
+
+  const analysiereLokal = () => {
+    const alleWorte = [...tags, ...eingabe.toLowerCase().split(/[\s,;]+/)].filter(Boolean);
+    const treffer = [];
+
+    // Organ-Treffer
+    Object.entries(ORGAN_MAP).forEach(([organ, daten]) => {
+      const matchScore = daten.keywords.filter(k => alleWorte.some(w => w.includes(k) || k.includes(w))).length;
+      if (matchScore > 0) treffer.push({ typ:"organ", organ, daten, score: matchScore });
+    });
+
+    // Chakra-Treffer
+    CHAKRA_SYSTEM.forEach(chakra => {
+      const matchScore = [...chakra.themen, ...chakra.emotion_block, ...chakra.organe]
+        .filter(t => alleWorte.some(w => t.toLowerCase().includes(w) || w.includes(t.toLowerCase().split(" ")[0]))).length;
+      if (matchScore > 0) treffer.push({ typ:"chakra", chakra, score: matchScore });
+    });
+
+    // Aura-Treffer
+    const auraWorte = ["aura","feld","schicht","korde","leck","schutz","implantat","splitter","fremdenergie"];
+    if (alleWorte.some(w => auraWorte.some(a => a.includes(w) || w.includes(a)))) {
+      treffer.push({ typ:"aura_hinweis", score:1 });
+    }
+
+    treffer.sort((a,b) => b.score - a.score);
+    setLokalInfo(treffer.slice(0, 4));
+  };
+
+  const tagToggle = (tag) => setTags(t => t.includes(tag) ? t.filter(x=>x!==tag) : [...t, tag]);
+
+  const kiAnalyse = async () => {
+    if (!groqFetch) { setKiAntwort("⚠️ Kein API-Zugang. Verbinde die App mit /api/ki."); return; }
+    setKiLaed(true); setKiGestellt(true); setKiAntwort("");
+    const kontext = `Stichworte: ${eingabe}\nWahrnehmungs-Tags: ${tags.join(", ")}`;
+    const organTreffer = lokalInfo.filter(i=>i.typ==="organ").map(i=>`Organ: ${i.organ} (${i.daten.symbolik.join(", ")})`).join("\n");
+    const chakraTreffer = lokalInfo.filter(i=>i.typ==="chakra").map(i=>`Chakra: ${i.chakra.name} - Themen: ${i.chakra.themen.slice(0,3).join(", ")}`).join("\n");
+    
+    const prompt = `Du bist ein erfahrener energetischer Heiler und feinstofflicher Berater im Lichtkern-System. Du erhältst die Wahrnehmungen eines Praktizierers an einem Klienten und gibst sofort strukturierte Handlungsempfehlungen. Antworte auf Deutsch, klar und professionell.
+
+WAHRNEHMUNGEN:
+${kontext}
+
+AUTOMATISCH ERKANNTE BEZÜGE:
+${organTreffer}
+${chakraTreffer}
+
+Gib eine strukturierte Analyse in GENAU diesem Format (nutze diese Überschriften):
+
+🫀 ORGANSPRACHE & KÖRPERSYMBOLIK
+[Was sagen diese Körperregionen/Symptome auf der energetischen Ebene? Welche Themen, Gefühle, Lebensbereiche sind gemeint?]
+
+⚡ CHAKRA & ENERGIEFELD
+[Welche Chakren sind betroffen? Was zeigt das Energiefeld? Offen/geschlossen/überaktiv?]
+
+🧬 MÖGLICHE AHNENMUSTER / GENERATIONENTHEMEN
+[Welche generationellen Themen könnten dahinterstecken?]
+
+💚 HEILUNGSEMPFEHLUNGEN (Priorität: Energetisch)
+1. [Erste Maßnahme, z.B. Chakraheilung / Blutreinigung / Herzheilung]
+2. [Zweite Maßnahme]
+3. [Dritte Maßnahme]
+[Weitere wenn relevant]
+
+🎯 FRAGEN AN DEN KLIENTEN
+[2-3 gezielte Fragen die mehr Klarheit bringen]
+
+Sei präzise, praxisnah und einfühlsam. Keine Heilversprechen, keine Diagnosen.`;
+
+    try {
+      const antwort = await groqFetch(prompt);
+      setKiAntwort(antwort);
+    } catch (e) {
+      setKiAntwort("❌ Fehler bei der KI-Analyse. Bitte Verbindung prüfen.");
+    }
+    setKiLaed(false);
+  };
+
+  const reset = () => { setEingabe(""); setTags([]); setLokalInfo([]); setKiAntwort(""); setKiGestellt(false); };
+
+  const alleTagsKat = HELLSINN_TAGS[aktivKat];
+
+  return (
+    <div style={{display:"flex",flexDirection:"column",gap:"14px"}}>
+      {/* Eingabe */}
+      <OCard>
+        <OLabel>✦ Hellsinn-Eingabe · Was nimmst du wahr?</OLabel>
+        <textarea
+          value={eingabe}
+          onChange={e=>setEingabe(e.target.value)}
+          placeholder="Notiere frei, was du wahrnimmst... z.B. 'Wärme im Herzbereich, Enge links, schwerer Energiepanzer, Bild: graue Mauer, Korde zur Mutter spürbar...'"
+          style={{width:"100%",minHeight:"90px",padding:"12px 14px",borderRadius:"12px",border:`1.5px solid ${OT.border}`,fontFamily:"Raleway",fontSize:"13px",color:OT.text,resize:"vertical",outline:"none",background:OT.bgSofter,lineHeight:"1.7",boxSizing:"border-box",fontWeight:500}}
+        />
+        <div style={{display:"flex",gap:"8px",marginTop:"10px",flexWrap:"wrap"}}>
+          <OBtn onClick={kiAnalyse} disabled={kiLaed||(!eingabe.trim()&&tags.length===0)}>
+            {kiLaed?"⏳ KI analysiert...":"✦ KI-Analyse starten"}
+          </OBtn>
+          {(eingabe||tags.length>0)&&<OBtn variant="ghost" onClick={reset}>← Neu</OBtn>}
+        </div>
+      </OCard>
+
+      {/* Tag-Auswahl nach Kategorie */}
+      <OCard>
+        <OLabel>Wahrnehmungs-Tags schnell hinzufügen</OLabel>
+        <div style={{display:"flex",gap:"6px",flexWrap:"wrap",marginBottom:"10px"}}>
+          {Object.entries(HELLSINN_TAGS).map(([key,kat])=>(
+            <button key={key} onClick={()=>setAktivKat(key)} style={{fontFamily:"Raleway",fontSize:"11px",fontWeight:700,padding:"6px 12px",borderRadius:"20px",border:`1.5px solid ${aktivKat===key?kat.farbe:OT.border}`,background:aktivKat===key?kat.bgfarbe:"white",color:aktivKat===key?kat.farbe:OT.textSoft,cursor:"pointer"}}>
+              {kat.label}
+            </button>
+          ))}
+        </div>
+        <div style={{display:"flex",flexWrap:"wrap",gap:"6px"}}>
+          {alleTagsKat.items.map(item=>(
+            <OTag key={item} label={item} aktiv={tags.includes(item)} onClick={()=>tagToggle(item)} farbe={alleTagsKat.farbe} bgFarbe={alleTagsKat.bgfarbe}/>
+          ))}
+        </div>
+        {tags.length>0&&(
+          <div style={{marginTop:"10px",padding:"10px 14px",background:OT.tealL,borderRadius:"12px",border:`1px solid ${OT.borderMid}`}}>
+            <span style={{fontFamily:"Raleway",fontSize:"11px",color:OT.tealD,fontWeight:700}}>Aktive Tags: </span>
+            <span style={{fontFamily:"Raleway",fontSize:"11px",color:OT.tealD,fontWeight:500}}>{tags.join(" · ")}</span>
+          </div>
+        )}
+      </OCard>
+
+      {/* Lokale Sofort-Bezüge */}
+      {lokalInfo.length > 0 && (
+        <OCard style={{background:`linear-gradient(135deg,${OT.bgSoft},#FAFFFE)`,border:`1.5px solid ${OT.borderMid}`}}>
+          <OLabel color={OT.tealD}>⚡ Sofortige Resonanz-Bezüge</OLabel>
+          {lokalInfo.map((info, idx) => {
+            if (info.typ === "organ") {
+              const { organ, daten } = info;
+              return (
+                <div key={idx} style={{marginBottom:"12px",padding:"12px",background:"white",borderRadius:"12px",border:`1px solid ${OT.border}`}}>
+                  <div style={{display:"flex",alignItems:"center",gap:"8px",marginBottom:"6px"}}>
+                    <span style={{fontSize:"20px"}}>{daten.emoji}</span>
+                    <span style={{fontFamily:"Cinzel",fontSize:"13px",color:OT.text,fontWeight:700,textTransform:"capitalize"}}>{organ}</span>
+                    <span style={{marginLeft:"auto",fontFamily:"Raleway",fontSize:"10px",fontWeight:700,padding:"3px 8px",borderRadius:"8px",background:OT.tealL,color:OT.tealD}}>Organsprache</span>
+                  </div>
+                  <div style={{display:"flex",flexWrap:"wrap",gap:"5px",marginBottom:"6px"}}>
+                    {daten.symbolik.map(s=><span key={s} style={{fontFamily:"Raleway",fontSize:"10px",fontWeight:700,padding:"3px 9px",borderRadius:"10px",background:"#FEF3C7",color:OT.gold}}>{s}</span>)}
+                  </div>
+                  <div style={{fontFamily:"Raleway",fontSize:"11px",color:OT.textMid,fontWeight:500}}>
+                    Chakra-Bezug: <b>{CHAKRA_SYSTEM.find(c=>c.id===daten.chakra)?.name||daten.chakra}</b>
+                    {daten.seiten && <span style={{marginLeft:"8px"}}>· L: {daten.seiten.links} · R: {daten.seiten.rechts}</span>}
+                  </div>
+                </div>
+              );
+            }
+            if (info.typ === "chakra") {
+              const { chakra } = info;
+              return (
+                <div key={idx} style={{marginBottom:"12px",padding:"12px",background:"white",borderRadius:"12px",border:`1px solid ${OT.border}`}}>
+                  <div style={{display:"flex",alignItems:"center",gap:"8px",marginBottom:"6px"}}>
+                    <span style={{fontSize:"20px",color:chakra.hex}}>●</span>
+                    <span style={{fontFamily:"Cinzel",fontSize:"13px",color:OT.text,fontWeight:700}}>{chakra.name}</span>
+                    <span style={{marginLeft:"auto",fontFamily:"Raleway",fontSize:"10px",fontWeight:700,padding:"3px 8px",borderRadius:"8px",background:"#EDE9FE",color:OT.violet}}>Chakra</span>
+                  </div>
+                  <div style={{fontFamily:"Raleway",fontSize:"11px",color:OT.textMid,fontWeight:500,marginBottom:"6px"}}>
+                    Mögliche Blockaden: {chakra.emotion_block.slice(0,3).join(" · ")}
+                  </div>
+                  <div style={{display:"flex",flexWrap:"wrap",gap:"4px"}}>
+                    {chakra.heilung.slice(0,3).map(h=><span key={h} style={{fontFamily:"Raleway",fontSize:"10px",padding:"3px 9px",borderRadius:"10px",background:OT.tealL,color:OT.tealD,fontWeight:700}}>{h}</span>)}
+                  </div>
+                </div>
+              );
+            }
+            if (info.typ === "aura_hinweis") {
+              return (
+                <div key={idx} style={{padding:"12px",background:"white",borderRadius:"12px",border:`1px solid ${OT.border}`}}>
+                  <div style={{fontFamily:"Raleway",fontSize:"12px",color:OT.violet,fontWeight:700}}>🔮 Aura-Feld-Arbeit indiziert</div>
+                  <div style={{fontFamily:"Raleway",fontSize:"11px",color:OT.textMid,fontWeight:500,marginTop:"4px"}}>
+                    Wechsle zur "Aura & Chirurgie" Karte für detaillierte Feinstoffarbeit
+                  </div>
+                </div>
+              );
+            }
+            return null;
+          })}
+        </OCard>
+      )}
+
+      {/* KI-Antwort */}
+      {kiGestellt && (
+        <OCard style={{background:`linear-gradient(135deg,${OT.violetL} 0%,${OT.tealL} 100%)`,border:`1.5px solid ${OT.borderMid}`}}>
+          <OLabel color={OT.violetD}>✦ KI-Analyse · Stiller Berater</OLabel>
+          {kiLaed ? (
+            <div style={{textAlign:"center",padding:"30px 0"}}>
+              <div style={{fontSize:"30px",marginBottom:"12px",animation:"pulse 1.5s infinite"}}>✦</div>
+              <div style={{fontFamily:"Raleway",fontSize:"13px",color:OT.textMid,fontWeight:600}}>Energetische Analyse läuft...</div>
+            </div>
+          ) : (
+            <div style={{fontFamily:"Raleway",fontSize:"13px",color:OT.text,lineHeight:"1.9",whiteSpace:"pre-wrap",fontWeight:500}}>{kiAntwort}</div>
+          )}
+        </OCard>
+      )}
+    </div>
+  );
+}
+
+// ════════════════════════════════════════════════════════════════
+//  ORGANSPRACHE-KARTE
+// ════════════════════════════════════════════════════════════════
+function OrganspracheKarte({ groqFetch }) {
+  const [gewaehltes, setGewaehltes] = useState(null);
+  const [seite, setSeite]           = useState("links");
+  const [kiDetail, setKiDetail]     = useState("");
+  const [kiLaed, setKiLaed]         = useState(false);
+
+  const ladeKiDetail = async (organ, daten) => {
+    if (!groqFetch) return;
+    setKiLaed(true); setKiDetail("");
+    const chkr = CHAKRA_SYSTEM.find(c=>c.id===daten.chakra);
+    const prompt = `Du bist ein energetischer Heiler und erklärst Organsprache präzise und praxisnah.
+
+Organ: ${organ} (Emoji: ${daten.emoji})
+Seite: ${seite} = ${daten.seiten?.[seite]||"universal"}
+Symbolik: ${daten.symbolik.join(", ")}
+Emotionen: ${daten.emotion.join(", ")}
+Chakra-Bezug: ${chkr?.name}
+Ahnen-Thema: ${daten.ahnen}
+
+Gib eine PRAXISNAHE Erklärung in 3 kurzen Abschnitten:
+
+1. 🎯 WAS DIESES ORGAN JETZT SAGEN WILL (3-4 Sätze, direkt zum Punkt)
+2. 💬 TYPISCHE SÄTZE DES KLIENTEN (3 konkrete Sätze die der Klient oft sagt wenn dieses Muster aktiv ist)  
+3. 🌟 NÄCHSTE SCHRITTE IN DER SITZUNG (2-3 konkrete Handlungsimpulse)
+
+Keine langen Einleitungen. Sofort in die Praxis.`;
+
+    try {
+      const antwort = await groqFetch(prompt);
+      setKiDetail(antwort);
+    } catch { setKiDetail("Fehler bei der Analyse."); }
+    setKiLaed(false);
+  };
+
+  const waehleOrgan = (organ) => {
+    setGewaehltes(organ);
+    setKiDetail("");
+    ladeKiDetail(organ, ORGAN_MAP[organ]);
+  };
+
+  if (gewaehltes && ORGAN_MAP[gewaehltes]) {
+    const daten = ORGAN_MAP[gewaehltes];
+    const chkr = CHAKRA_SYSTEM.find(c=>c.id===daten.chakra);
+    return (
+      <div style={{display:"flex",flexDirection:"column",gap:"12px"}}>
+        <button onClick={()=>{setGewaehltes(null);setKiDetail("");}} style={{fontFamily:"Raleway",fontSize:"13px",color:OT.teal,fontWeight:700,background:"none",border:"none",cursor:"pointer",textAlign:"left"}}>← Alle Organe</button>
+        
+        <OCard style={{background:`linear-gradient(135deg,${OT.tealL},${OT.violetL})`,border:`1.5px solid ${OT.borderMid}`}}>
+          <div style={{display:"flex",alignItems:"center",gap:"12px",marginBottom:"14px"}}>
+            <span style={{fontSize:"36px"}}>{daten.emoji}</span>
+            <div>
+              <div style={{fontFamily:"Cinzel",fontSize:"18px",color:OT.text,fontWeight:700,textTransform:"capitalize"}}>{gewaehltes}</div>
+              <div style={{fontFamily:"Raleway",fontSize:"11px",color:OT.textMid,fontWeight:600,marginTop:"2px"}}>Chakra: {chkr?.name||daten.chakra} · {chkr?.symbol}</div>
+            </div>
+          </div>
+
+          {/* Seiten-Toggle */}
+          {daten.seiten && (
+            <div style={{display:"flex",gap:"8px",marginBottom:"14px"}}>
+              {["links","rechts"].map(s=>(
+                <button key={s} onClick={()=>setSeite(s)} style={{flex:1,padding:"9px",borderRadius:"10px",border:`1.5px solid ${seite===s?OT.teal:OT.border}`,background:seite===s?OT.teal:"white",color:seite===s?"white":OT.textMid,fontFamily:"Raleway",fontSize:"11px",fontWeight:700,cursor:"pointer"}}>
+                  {s==="links"?"◀ Links":"Rechts ▶"}<br/>
+                  <span style={{fontSize:"9px",fontWeight:500,opacity:0.85}}>{daten.seiten[s]}</span>
+                </button>
+              ))}
+            </div>
+          )}
+
+          <div style={{display:"flex",flexWrap:"wrap",gap:"6px",marginBottom:"12px"}}>
+            {daten.symbolik.map(s=><span key={s} style={{fontFamily:"Raleway",fontSize:"11px",fontWeight:700,padding:"4px 11px",borderRadius:"12px",background:"rgba(255,255,255,0.9)",color:OT.gold,border:"1px solid #D97706"}}>{s}</span>)}
+          </div>
+          <div style={{fontFamily:"Raleway",fontSize:"12px",color:OT.textMid,fontWeight:500,lineHeight:"1.6",marginBottom:"10px"}}>
+            <b>Ahnen-Thema:</b> {daten.ahnen}
+          </div>
+          <div style={{display:"flex",flexWrap:"wrap",gap:"6px"}}>
+            {daten.heilung.map(h=><span key={h} style={{fontFamily:"Raleway",fontSize:"10px",fontWeight:700,padding:"3px 10px",borderRadius:"10px",background:"rgba(255,255,255,0.8)",color:OT.teal,border:`1px solid ${OT.borderMid}`}}>💚 {h}</span>)}
+          </div>
+        </OCard>
+
+        {/* KI-Detailanalyse */}
+        <OCard>
+          <OLabel color={OT.violetD}>✦ KI-Praxisanalyse</OLabel>
+          {kiLaed ? (
+            <div style={{textAlign:"center",padding:"24px",fontFamily:"Raleway",fontSize:"13px",color:OT.textMid}}>⏳ Analysiere...</div>
+          ) : kiDetail ? (
+            <div style={{fontFamily:"Raleway",fontSize:"13px",color:OT.text,lineHeight:"1.9",whiteSpace:"pre-wrap",fontWeight:500}}>{kiDetail}</div>
+          ) : (
+            <OBtn onClick={()=>ladeKiDetail(gewaehltes,daten)}>✦ KI-Praxisanalyse laden</OBtn>
+          )}
+        </OCard>
+      </div>
+    );
+  }
+
+  // Organ-Raster
+  const kategorien = {
+    "Kopf & Sinne":["kopf / gehirn","augen","ohren","mund / zähne / kiefer"],
+    "Hals & Torso":["hals / schilddrüse","schultern","herz","lunge","leber / galle","magen / milz"],
+    "Bauch & Becken":["nieren / nebennieren","hüfte / becken","blut / kreislauf"],
+    "Extremitäten":["ellenbogen","hände / finger","knie","sprunggelenk / füße"],
+    "Rücken":["rücken oben","rücken mitte","rücken unten / lendenwirbel"],
+    "Systemisch":["haut"],
+  };
+
+  return (
+    <div style={{display:"flex",flexDirection:"column",gap:"14px"}}>
+      <OCard style={{background:`linear-gradient(135deg,${OT.tealL},${OT.violetL})`,padding:"16px"}}>
+        <div style={{fontFamily:"Cinzel",fontSize:"15px",color:OT.text,fontWeight:700,marginBottom:"4px"}}>Organsprache-Navigator</div>
+        <div style={{fontFamily:"Raleway",fontSize:"12px",color:OT.textMid,fontWeight:500}}>Wähle ein Organ → sofortige energetische Deutung + KI-Praxisanalyse</div>
+      </OCard>
+      {Object.entries(kategorien).map(([kat, organe]) => (
+        <OCard key={kat}>
+          <OLabel>{kat}</OLabel>
+          <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:"8px"}}>
+            {organe.filter(o=>ORGAN_MAP[o]).map(organ => (
+              <button key={organ} onClick={()=>waehleOrgan(organ)} style={{padding:"10px 12px",borderRadius:"12px",border:`1.5px solid ${OT.border}`,background:OT.bgSofter,cursor:"pointer",textAlign:"left",display:"flex",alignItems:"center",gap:"8px",transition:"all 0.15s"}}>
+                <span style={{fontSize:"18px"}}>{ORGAN_MAP[organ].emoji}</span>
+                <span style={{fontFamily:"Raleway",fontSize:"11px",fontWeight:700,color:OT.text,textTransform:"capitalize",lineHeight:"1.3"}}>{organ}</span>
+              </button>
+            ))}
+          </div>
+        </OCard>
+      ))}
+    </div>
+  );
+}
+
+// ════════════════════════════════════════════════════════════════
+//  AURA & CHIRURGIE
+// ════════════════════════════════════════════════════════════════
+function AuraChirurgie({ groqFetch }) {
+  const [ansicht, setAnsicht]     = useState("schichten");
+  const [gewaehlt, setGewaehlt]   = useState(null);
+  const [technikSel, setTechnikSel] = useState(null);
+
+  return (
+    <div style={{display:"flex",flexDirection:"column",gap:"14px"}}>
+      {/* Tab-Switcher */}
+      <div style={{display:"flex",gap:"8px"}}>
+        {[["schichten","🌐 Aura-Schichten"],["chirurgie","✂️ Aura-Chirurgie"]].map(([id,label])=>(
+          <button key={id} onClick={()=>{setAnsicht(id);setGewaehlt(null);setTechnikSel(null);}} style={{flex:1,padding:"11px",borderRadius:"12px",border:`1.5px solid ${ansicht===id?OT.violet:OT.border}`,background:ansicht===id?OT.violetL:"white",color:ansicht===id?OT.violetD:OT.textMid,fontFamily:"Raleway",fontSize:"12px",fontWeight:700,cursor:"pointer"}}>
+            {label}
+          </button>
+        ))}
+      </div>
+
+      {ansicht === "schichten" && (
+        <>
+          {gewaehlt !== null ? (
+            <div>
+              <button onClick={()=>setGewaehlt(null)} style={{fontFamily:"Raleway",fontSize:"13px",color:OT.teal,fontWeight:700,background:"none",border:"none",cursor:"pointer",marginBottom:"12px",display:"block"}}>← Alle Schichten</button>
+              {(() => {
+                const s = AURA_SCHICHTEN[gewaehlt];
+                return (
+                  <OCard>
+                    <div style={{display:"flex",alignItems:"center",gap:"10px",marginBottom:"14px"}}>
+                      <div style={{width:"14px",height:"14px",borderRadius:"50%",background:s.farbe,border:"2px solid rgba(0,0,0,0.1)",flexShrink:0}}/>
+                      <div>
+                        <div style={{fontFamily:"Cinzel",fontSize:"16px",color:OT.text,fontWeight:700}}>{s.name}</div>
+                        <div style={{fontFamily:"Raleway",fontSize:"11px",color:OT.textMid,fontWeight:600}}>{s.thema}</div>
+                      </div>
+                    </div>
+                    <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:"10px",marginBottom:"12px"}}>
+                      <div style={{background:OT.bgSoft,padding:"10px",borderRadius:"10px"}}>
+                        <div style={{fontFamily:"Raleway",fontSize:"10px",fontWeight:800,color:OT.textSoft,textTransform:"uppercase",letterSpacing:"1px",marginBottom:"4px"}}>Abstand</div>
+                        <div style={{fontFamily:"Raleway",fontSize:"12px",color:OT.text,fontWeight:700}}>{s.abstand}</div>
+                      </div>
+                      <div style={{background:OT.bgSoft,padding:"10px",borderRadius:"10px"}}>
+                        <div style={{fontFamily:"Raleway",fontSize:"10px",fontWeight:800,color:OT.textSoft,textTransform:"uppercase",letterSpacing:"1px",marginBottom:"4px"}}>Wahrnehmung</div>
+                        <div style={{fontFamily:"Raleway",fontSize:"11px",color:OT.text,fontWeight:500}}>{s.wahrnehmung}</div>
+                      </div>
+                    </div>
+                    <OLabel color="#C0392B">Typische Blockaden</OLabel>
+                    <div style={{display:"flex",flexWrap:"wrap",gap:"6px",marginBottom:"12px"}}>
+                      {s.blockaden.map(b=><span key={b} style={{fontFamily:"Raleway",fontSize:"10px",fontWeight:700,padding:"4px 10px",borderRadius:"10px",background:"#FEE2E2",color:"#9B1C1C"}}>{b}</span>)}
+                    </div>
+                    <OLabel color={OT.tealD}>Heilungsmethoden</OLabel>
+                    <div style={{display:"flex",flexWrap:"wrap",gap:"6px",marginBottom:"12px"}}>
+                      {s.heilung.map(h=><span key={h} style={{fontFamily:"Raleway",fontSize:"10px",fontWeight:700,padding:"4px 10px",borderRadius:"10px",background:OT.tealL,color:OT.tealD}}>💚 {h}</span>)}
+                    </div>
+                    <OLabel color={OT.violetD}>Chirurgische Eingriffe</OLabel>
+                    <div style={{display:"flex",flexWrap:"wrap",gap:"6px"}}>
+                      {s.chirurgie.map(c=><span key={c} style={{fontFamily:"Raleway",fontSize:"10px",fontWeight:700,padding:"4px 10px",borderRadius:"10px",background:OT.violetL,color:OT.violetD}}>✂️ {c}</span>)}
+                    </div>
+                  </OCard>
+                );
+              })()}
+            </div>
+          ) : (
+            <>
+              <OCard style={{background:`linear-gradient(135deg,${OT.violetL},${OT.tealL})`,padding:"16px"}}>
+                <div style={{fontFamily:"Cinzel",fontSize:"15px",color:OT.text,fontWeight:700,marginBottom:"4px"}}>Die 7 Aura-Schichten</div>
+                <div style={{fontFamily:"Raleway",fontSize:"12px",color:OT.textMid,fontWeight:500}}>Jede Schicht trägt ihre eigene Frequenz und Aufgabe. Von physisch-nah (1) bis kosmisch (7).</div>
+              </OCard>
+              {AURA_SCHICHTEN.map((s, idx) => (
+                <button key={idx} onClick={()=>setGewaehlt(idx)} style={{background:"white",borderRadius:"14px",padding:"14px 16px",border:`1.5px solid ${OT.border}`,cursor:"pointer",textAlign:"left",display:"flex",alignItems:"center",gap:"14px",boxShadow:`0 2px 10px ${OT.shadow}`,transition:"all 0.15s"}}>
+                  <div style={{display:"flex",flexDirection:"column",alignItems:"center",gap:"3px",flexShrink:0}}>
+                    <div style={{width:"28px",height:"28px",borderRadius:"50%",background:s.farbe,border:"2px solid rgba(0,0,0,0.08)",boxShadow:`0 2px 8px ${s.farbe}44`}}/>
+                    <span style={{fontFamily:"Cinzel",fontSize:"11px",color:OT.textSoft,fontWeight:700}}>{s.nr}</span>
+                  </div>
+                  <div style={{flex:1}}>
+                    <div style={{fontFamily:"Raleway",fontSize:"13px",color:OT.text,fontWeight:700,marginBottom:"2px"}}>{s.name}</div>
+                    <div style={{fontFamily:"Raleway",fontSize:"11px",color:OT.textMid,fontWeight:500}}>{s.thema}</div>
+                    <div style={{fontFamily:"Raleway",fontSize:"10px",color:OT.textSoft,fontWeight:500,marginTop:"2px"}}>{s.abstand}</div>
+                  </div>
+                  <span style={{color:OT.textSoft,fontSize:"18px"}}>›</span>
+                </button>
+              ))}
+            </>
+          )}
+        </>
+      )}
+
+      {ansicht === "chirurgie" && (
+        <>
+          {technikSel !== null ? (
+            <div>
+              <button onClick={()=>setTechnikSel(null)} style={{fontFamily:"Raleway",fontSize:"13px",color:OT.teal,fontWeight:700,background:"none",border:"none",cursor:"pointer",marginBottom:"12px",display:"block"}}>← Alle Techniken</button>
+              {(() => {
+                const t = AURA_CHIRURGIE_TECHNIKEN[technikSel];
+                return (
+                  <OCard>
+                    <div style={{display:"flex",alignItems:"center",gap:"12px",marginBottom:"14px"}}>
+                      <span style={{fontSize:"32px"}}>{t.icon}</span>
+                      <div>
+                        <div style={{fontFamily:"Cinzel",fontSize:"16px",color:OT.text,fontWeight:700}}>{t.name}</div>
+                        <div style={{fontFamily:"Raleway",fontSize:"11px",color:OT.textMid,fontWeight:600}}>{t.anwendung}</div>
+                      </div>
+                    </div>
+                    <div style={{fontFamily:"Raleway",fontSize:"13px",color:OT.text,lineHeight:"1.75",fontWeight:500,marginBottom:"14px",padding:"12px",background:OT.bgSoft,borderRadius:"10px"}}>{t.beschreibung}</div>
+                    <OLabel color={OT.tealD}>Schritt-für-Schritt</OLabel>
+                    <div style={{display:"flex",flexDirection:"column",gap:"6px"}}>
+                      {t.schritte.map((schritt, i) => (
+                        <div key={i} style={{display:"flex",alignItems:"flex-start",gap:"10px",padding:"8px 12px",background:"white",borderRadius:"10px",border:`1px solid ${OT.border}`}}>
+                          <span style={{fontFamily:"Cinzel",fontSize:"12px",color:OT.teal,fontWeight:700,flexShrink:0,marginTop:"1px"}}>{i+1}.</span>
+                          <span style={{fontFamily:"Raleway",fontSize:"12px",color:OT.text,fontWeight:500,lineHeight:"1.6"}}>{schritt}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </OCard>
+                );
+              })()}
+            </div>
+          ) : (
+            <>
+              <OCard style={{background:`linear-gradient(135deg,#FDE68A,${OT.violetL})`,padding:"16px"}}>
+                <div style={{fontFamily:"Cinzel",fontSize:"15px",color:OT.text,fontWeight:700,marginBottom:"4px"}}>Aura-Chirurgie Techniken</div>
+                <div style={{fontFamily:"Raleway",fontSize:"12px",color:OT.textMid,fontWeight:500}}>Präzise energetische Eingriffe. Nur nach fundierter Ausbildung anwenden. Stufe 3–5.</div>
+              </OCard>
+              {AURA_CHIRURGIE_TECHNIKEN.map((t, idx) => (
+                <button key={idx} onClick={()=>setTechnikSel(idx)} style={{background:"white",borderRadius:"14px",padding:"14px 16px",border:`1.5px solid ${OT.border}`,cursor:"pointer",textAlign:"left",display:"flex",alignItems:"center",gap:"12px",boxShadow:`0 2px 10px ${OT.shadow}`,transition:"all 0.15s"}}>
+                  <span style={{fontSize:"28px",flexShrink:0}}>{t.icon}</span>
+                  <div style={{flex:1}}>
+                    <div style={{fontFamily:"Raleway",fontSize:"13px",color:OT.text,fontWeight:700,marginBottom:"3px"}}>{t.name}</div>
+                    <div style={{fontFamily:"Raleway",fontSize:"11px",color:OT.textMid,fontWeight:500}}>{t.anwendung}</div>
+                  </div>
+                  <span style={{color:OT.textSoft,fontSize:"18px"}}>›</span>
+                </button>
+              ))}
+            </>
+          )}
+        </>
+      )}
+    </div>
+  );
+}
+
+// ════════════════════════════════════════════════════════════════
+//  CHAKREN-MATRIX
+// ════════════════════════════════════════════════════════════════
+function ChakraMatrix({ groqFetch }) {
+  const [gewaehltes, setGewaehltes] = useState(null);
+  const [kiDetail, setKiDetail]     = useState("");
+  const [kiLaed, setKiLaed]         = useState(false);
+  const [status, setStatus]         = useState({}); // chakra.id -> "ok"|"block"|"uber"
+
+  const statusLabels = { ok:"✓ Aktiv", block:"▼ Blockiert", uber:"▲ Überaktiv" };
+  const statusColors = { ok:{bg:"#DCFCE7",color:"#16A34A"}, block:{bg:"#FEE2E2",color:"#9B1C1C"}, uber:{bg:"#FEF3C7",color:"#92400E"} };
+
+  const ladeKiDetail = async (chakra) => {
+    if (!groqFetch) return;
+    setKiLaed(true); setKiDetail("");
+    const st = status[chakra.id] || "unbekannt";
+    const prompt = `Du bist ein Chakra-Spezialist. Analysiere dieses Chakra praxisnah.
+
+Chakra: ${chakra.name} (${chakra.de}) · Nr. ${chakra.nr}
+Status laut Scan: ${statusLabels[st]||st}
+Mantra: ${chakra.mantra} · ${chakra.hz} Hz
+Themen: ${chakra.themen.join(", ")}
+Mögliche Blockaden: ${chakra.emotion_block.join(", ")}
+Verbundene Organe: ${chakra.organe.slice(0,5).join(", ")}
+
+Antworte in diesen Abschnitten (kurz & präzise):
+
+🎯 WAS JETZT ZU TUN IST (je nach Status: ${statusLabels[st]||"unbekannt"})
+[2-3 konkrete Schritte für diese Sitzung]
+
+💬 WAS DER KLIENT MÖGLICHERWEISE ERLEBT
+[3-4 Sätze zu Symptomen/Gefühlen/Mustern]
+
+🌟 HEILUNGSIMPULSE
+[3 spezifische Techniken mit kurzer Erklärung]
+
+⚡ VERBINDUNG ZU ANDEREN CHAKREN
+[Mit welchen anderen Chakren interagiert dieses? Was sind typische Ketten-Reaktionen?]`;
+
+    try { setKiDetail(await groqFetch(prompt)); }
+    catch { setKiDetail("Fehler."); }
+    setKiLaed(false);
+  };
+
+  const toggleStatus = (id) => {
+    const reihe = [undefined, "ok", "block", "uber"];
+    const aktuell = status[id];
+    const next = reihe[(reihe.indexOf(aktuell)+1) % reihe.length];
+    setStatus(s => ({...s, [id]: next}));
+  };
+
+  if (gewaehltes) {
+    return (
+      <div style={{display:"flex",flexDirection:"column",gap:"12px"}}>
+        <button onClick={()=>{setGewaehltes(null);setKiDetail("");}} style={{fontFamily:"Raleway",fontSize:"13px",color:OT.teal,fontWeight:700,background:"none",border:"none",cursor:"pointer",textAlign:"left"}}>← Alle Chakren</button>
+        <OCard style={{background:`linear-gradient(135deg,${gewaehltes.hex}22,${OT.violetL})`,border:`1.5px solid ${gewaehltes.hex}44`}}>
+          <div style={{display:"flex",alignItems:"center",gap:"14px",marginBottom:"14px"}}>
+            <div style={{width:"48px",height:"48px",borderRadius:"50%",background:gewaehltes.hex,display:"flex",alignItems:"center",justifyContent:"center",boxShadow:`0 4px 16px ${gewaehltes.hex}55`,flexShrink:0}}>
+              <span style={{fontFamily:"Cinzel",fontSize:"20px",color:"white",fontWeight:700}}>{gewaehltes.symbol}</span>
+            </div>
+            <div>
+              <div style={{fontFamily:"Cinzel",fontSize:"18px",color:OT.text,fontWeight:700}}>{gewaehltes.name}</div>
+              <div style={{fontFamily:"Raleway",fontSize:"11px",color:OT.textMid,fontWeight:600}}>{gewaehltes.de} · {gewaehltes.mantra} · {gewaehltes.hz} Hz</div>
+            </div>
+          </div>
+          <div style={{display:"flex",flexWrap:"wrap",gap:"6px",marginBottom:"12px"}}>
+            {gewaehltes.themen.map(t=><span key={t} style={{fontFamily:"Raleway",fontSize:"10px",fontWeight:700,padding:"4px 10px",borderRadius:"10px",background:"rgba(255,255,255,0.85)",color:gewaehltes.hex,border:`1px solid ${gewaehltes.hex}44`}}>{t}</span>)}
+          </div>
+          <div style={{marginBottom:"12px"}}>
+            <OLabel color="#C0392B">Blockaden-Muster</OLabel>
+            <div style={{display:"flex",flexWrap:"wrap",gap:"6px"}}>
+              {gewaehltes.emotion_block.map(e=><span key={e} style={{fontFamily:"Raleway",fontSize:"10px",fontWeight:700,padding:"4px 10px",borderRadius:"10px",background:"#FEE2E2",color:"#9B1C1C"}}>{e}</span>)}
+            </div>
+          </div>
+          <div>
+            <OLabel color={OT.tealD}>Organe & Körperzonen</OLabel>
+            <div style={{fontFamily:"Raleway",fontSize:"12px",color:OT.textMid,fontWeight:500}}>{gewaehltes.organe.join(" · ")}</div>
+          </div>
+        </OCard>
+        <OCard>
+          <OLabel color={OT.tealD}>Lernpfad</OLabel>
+          <div style={{fontFamily:"Raleway",fontSize:"13px",color:OT.text,lineHeight:"1.8",fontWeight:500,marginBottom:"10px"}}>{gewaehltes.lernpfad_soft}</div>
+          <div style={{background:OT.violetL,padding:"12px",borderRadius:"12px",border:`1px solid ${OT.violet}33`}}>
+            <div style={{fontFamily:"Raleway",fontSize:"10px",fontWeight:800,color:OT.violetD,letterSpacing:"1.5px",textTransform:"uppercase",marginBottom:"6px"}}>🎓 Vertiefung</div>
+            <div style={{fontFamily:"Raleway",fontSize:"12px",color:OT.text,lineHeight:"1.8",fontWeight:500}}>{gewaehltes.lernpfad_deep}</div>
+          </div>
+        </OCard>
+        <OCard>
+          <OLabel color={OT.violetD}>✦ KI-Sitzungsanalyse</OLabel>
+          {kiLaed ? <div style={{textAlign:"center",padding:"20px",fontFamily:"Raleway",fontSize:"13px",color:OT.textMid}}>⏳ Analysiere...</div>
+          : kiDetail ? <div style={{fontFamily:"Raleway",fontSize:"13px",color:OT.text,lineHeight:"1.9",whiteSpace:"pre-wrap",fontWeight:500}}>{kiDetail}</div>
+          : <OBtn onClick={()=>ladeKiDetail(gewaehltes)}>✦ KI-Analyse für diese Sitzung</OBtn>}
+        </OCard>
+      </div>
+    );
+  }
+
+  return (
+    <div style={{display:"flex",flexDirection:"column",gap:"12px"}}>
+      <OCard style={{background:`linear-gradient(135deg,${OT.violetL},${OT.tealL})`,padding:"16px"}}>
+        <div style={{fontFamily:"Cinzel",fontSize:"15px",color:OT.text,fontWeight:700,marginBottom:"4px"}}>Chakren-Matrix</div>
+        <div style={{fontFamily:"Raleway",fontSize:"12px",color:OT.textMid,fontWeight:500}}>Tippe auf Status um Scan-Ergebnis zu vermerken · Dann KI-Analyse per Klick</div>
+      </OCard>
+      {CHAKRA_SYSTEM.map(chakra => {
+        const st = status[chakra.id];
+        const sc = st ? statusColors[st] : null;
+        return (
+          <div key={chakra.id} style={{background:"white",borderRadius:"14px",padding:"14px 16px",border:`1.5px solid ${st?chakra.hex+"44":OT.border}`,boxShadow:`0 2px 10px ${OT.shadow}`,display:"flex",alignItems:"center",gap:"14px"}}>
+            <button onClick={()=>setGewaehltes(chakra)} style={{display:"flex",alignItems:"center",gap:"12px",flex:1,background:"none",border:"none",cursor:"pointer",textAlign:"left",padding:0}}>
+              <div style={{width:"38px",height:"38px",borderRadius:"50%",background:chakra.hex,display:"flex",alignItems:"center",justifyContent:"center",boxShadow:`0 3px 10px ${chakra.hex}44`,flexShrink:0}}>
+                <span style={{fontFamily:"Cinzel",fontSize:"16px",color:"white",fontWeight:700}}>{chakra.symbol}</span>
+              </div>
+              <div>
+                <div style={{fontFamily:"Raleway",fontSize:"13px",color:OT.text,fontWeight:700}}>{chakra.name}</div>
+                <div style={{fontFamily:"Raleway",fontSize:"10px",color:OT.textSoft,fontWeight:500}}>{chakra.themen.slice(0,3).join(" · ")}</div>
+              </div>
+            </button>
+            <button onClick={()=>toggleStatus(chakra.id)} style={{padding:"6px 12px",borderRadius:"10px",border:`1.5px solid ${sc?sc.color:OT.border}`,background:sc?sc.bg:OT.bgSofter,color:sc?sc.color:OT.textSoft,fontFamily:"Raleway",fontSize:"10px",fontWeight:700,cursor:"pointer",flexShrink:0,minWidth:"72px",textAlign:"center"}}>
+              {sc?statusLabels[st]:"— Scan"}
+            </button>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
+// ════════════════════════════════════════════════════════════════
+//  HEILUNGS-GUIDE
+// ════════════════════════════════════════════════════════════════
+function HeilungsGuide({ groqFetch }) {
+  const [gewaehlt, setGewaehlt] = useState(null);
+  const [kiDetail, setKiDetail] = useState("");
+  const [kiLaed, setKiLaed]     = useState(false);
+
+  const ladeKiDetail = async (methode) => {
+    if (!groqFetch) return;
+    setKiLaed(true); setKiDetail("");
+    const prompt = `Du bist ein erfahrener energetischer Heiler und erklärst diese Heilmethode für den praktischen Einsatz.
+
+Methode: ${methode.name} (${methode.kategorie})
+Beschreibung: ${methode.beschreibung}
+Anwendungsgebiet: ${methode.anwendung}
+
+Gib eine PRAXISANLEITUNG:
+
+🎯 WANN GENAU ANWENDEN
+[Konkrete Indikatoren, wann diese Methode die richtige ist - inkl. Kontraindikationen]
+
+⚡ SCHRITT-FÜR-SCHRITT ANLEITUNG 
+[Detaillierte Anleitung in Schritten]
+
+💬 KOMMUNIKATION MIT DEM KLIENTEN
+[Was sagst du dem Klienten vorher / während / nachher? Wie erklärst du es?]
+
+🌟 INTEGRATION NACH DER SITZUNG
+[Was empfiehlst du dem Klienten mitzunehmen / zu üben?]
+
+⚠️ WICHTIGE HINWEISE
+[Sicherheit, Grenzen, wann zur Begleitung durch andere Fachleute verweisen]`;
+
+    try { setKiDetail(await groqFetch(prompt)); }
+    catch { setKiDetail("Fehler."); }
+    setKiLaed(false);
+  };
+
+  if (gewaehlt) {
+    return (
+      <div style={{display:"flex",flexDirection:"column",gap:"12px"}}>
+        <button onClick={()=>{setGewaehlt(null);setKiDetail("");}} style={{fontFamily:"Raleway",fontSize:"13px",color:OT.teal,fontWeight:700,background:"none",border:"none",cursor:"pointer",textAlign:"left"}}>← Alle Methoden</button>
+        <OCard style={{background:`linear-gradient(135deg,${OT.tealL},${OT.violetL})`,border:`1.5px solid ${OT.borderMid}`}}>
+          <div style={{display:"flex",alignItems:"center",gap:"12px",marginBottom:"14px"}}>
+            <span style={{fontSize:"36px"}}>{gewaehlt.icon}</span>
+            <div>
+              <div style={{fontFamily:"Cinzel",fontSize:"18px",color:OT.text,fontWeight:700}}>{gewaehlt.name}</div>
+              <div style={{fontFamily:"Raleway",fontSize:"11px",color:OT.textMid,fontWeight:600}}>{gewaehlt.kategorie} · Stufe {gewaehlt.stufe}/5</div>
+            </div>
+          </div>
+          <div style={{fontFamily:"Raleway",fontSize:"13px",color:OT.text,lineHeight:"1.75",fontWeight:500,marginBottom:"12px"}}>{gewaehlt.beschreibung}</div>
+          <OLabel>Anwendungsgebiet</OLabel>
+          <div style={{fontFamily:"Raleway",fontSize:"12px",color:OT.textMid,fontWeight:500,marginBottom:"12px"}}>{gewaehlt.anwendung}</div>
+          <OLabel color={OT.tealD}>Basis-Ablauf</OLabel>
+          <div style={{display:"flex",flexDirection:"column",gap:"6px"}}>
+            {gewaehlt.ablauf.map((s,i)=>(
+              <div key={i} style={{display:"flex",gap:"10px",padding:"8px 12px",background:"rgba(255,255,255,0.8)",borderRadius:"10px"}}>
+                <span style={{fontFamily:"Cinzel",fontSize:"12px",color:OT.teal,fontWeight:700,flexShrink:0}}>{i+1}.</span>
+                <span style={{fontFamily:"Raleway",fontSize:"12px",color:OT.text,fontWeight:500}}>{s}</span>
+              </div>
+            ))}
+          </div>
+        </OCard>
+        <OCard>
+          <OLabel color={OT.violetD}>✦ KI-Praxisanleitung (detailliert)</OLabel>
+          {kiLaed ? <div style={{textAlign:"center",padding:"24px",fontFamily:"Raleway",fontSize:"13px",color:OT.textMid}}>⏳ Lade Praxiswissen...</div>
+          : kiDetail ? <div style={{fontFamily:"Raleway",fontSize:"13px",color:OT.text,lineHeight:"1.9",whiteSpace:"pre-wrap",fontWeight:500}}>{kiDetail}</div>
+          : <OBtn onClick={()=>ladeKiDetail(gewaehlt)}>✦ Detaillierte Praxisanleitung laden</OBtn>}
+        </OCard>
+      </div>
+    );
+  }
+
+  const kategorien = [...new Set(HEILMETHODEN_KATALOG.map(m=>m.kategorie))];
+
+  return (
+    <div style={{display:"flex",flexDirection:"column",gap:"14px"}}>
+      <OCard style={{background:`linear-gradient(135deg,${OT.tealL},${OT.violetL})`,padding:"16px"}}>
+        <div style={{fontFamily:"Cinzel",fontSize:"15px",color:OT.text,fontWeight:700,marginBottom:"4px"}}>Heilungs-Guide</div>
+        <div style={{fontFamily:"Raleway",fontSize:"12px",color:OT.textMid,fontWeight:500}}>Priorisiert: Energetische Heilung zuerst. KI gibt detaillierte Praxisanleitungen.</div>
+      </OCard>
+      {kategorien.map(kat => (
+        <div key={kat}>
+          <OLabel>{kat}</OLabel>
+          <div style={{display:"flex",flexDirection:"column",gap:"8px"}}>
+            {HEILMETHODEN_KATALOG.filter(m=>m.kategorie===kat).map(methode => (
+              <button key={methode.id} onClick={()=>{setGewaehlt(methode);ladeKiDetail(methode);}} style={{background:"white",borderRadius:"14px",padding:"14px 16px",border:`1.5px solid ${OT.border}`,cursor:"pointer",textAlign:"left",display:"flex",alignItems:"center",gap:"12px",boxShadow:`0 2px 10px ${OT.shadow}`,transition:"all 0.15s"}}>
+                <span style={{fontSize:"26px",flexShrink:0}}>{methode.icon}</span>
+                <div style={{flex:1}}>
+                  <div style={{fontFamily:"Raleway",fontSize:"13px",color:OT.text,fontWeight:700,marginBottom:"2px"}}>{methode.name}</div>
+                  <div style={{fontFamily:"Raleway",fontSize:"11px",color:OT.textMid,fontWeight:500,marginBottom:"4px"}}>{methode.anwendung.split(",")[0]}...</div>
+                  <div style={{display:"flex",gap:"4px"}}>
+                    {Array.from({length:5},(_,i)=>(
+                      <div key={i} style={{width:"12px",height:"4px",borderRadius:"2px",background:i<methode.stufe?OT.violet:OT.border}}/>
+                    ))}
+                    <span style={{fontFamily:"Raleway",fontSize:"9px",color:OT.textSoft,fontWeight:600,marginLeft:"4px"}}>Stufe {methode.stufe}</span>
+                  </div>
+                </div>
+                <span style={{color:OT.textSoft,fontSize:"18px"}}>›</span>
+              </button>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+// ════════════════════════════════════════════════════════════════
+//  LERNPFAD
+// ════════════════════════════════════════════════════════════════
+function Lernpfad({ groqFetch }) {
+  const [gewStufe, setGewStufe]   = useState(null);
+  const [gewThema, setGewThema]   = useState(null);
+  const [kiInhalt, setKiInhalt]   = useState("");
+  const [kiLaed, setKiLaed]       = useState(false);
+
+  const THEMEN = [
+    {id:"organsprache", name:"Organsprache", icon:"🫀"},
+    {id:"chakren", name:"Chakralehre", icon:"🌈"},
+    {id:"aura", name:"Aura & Feinstoff", icon:"🌐"},
+    {id:"ahnen", name:"Ahnen & DNA", icon:"🧬"},
+    {id:"hellsinne", name:"Hellsinne", icon:"👁️"},
+    {id:"aura_chirurgie", name:"Aura-Chirurgie", icon:"✂️"},
+    {id:"fernheilung", name:"Fernheilung", icon:"🌐"},
+    {id:"lichtsprache", name:"Licht-Sprache", icon:"✨"},
+    {id:"humandesign", name:"Human Design", icon:"⚙️"},
+    {id:"schamanismus", name:"Schamanismus", icon:"🪶"},
+    {id:"meridiane", name:"Meridiane & TCM", icon:"🌊"},
+    {id:"kristalle", name:"Kristallarbeit", icon:"💎"},
+  ];
+
+  const ladeKiInhalt = async (thema, stufe) => {
+    if (!groqFetch) { setKiInhalt("⚠️ API nicht verbunden."); return; }
+    setKiLaed(true); setKiInhalt("");
+    const stufenNamen = {1:"Einführung",2:"Grundlagen",3:"Vertiefung",4:"Meisterschaft",5:"Zertifizierungswissen"};
+    const prompt = `Du bist Leiter der Resonanz Akademie und vermittelst professionelles energetisches Heiler-Wissen.
+
+Thema: ${thema.name}
+Lernstufe: ${stufenNamen[stufe]} (${stufe}/5)
+
+Erstelle einen LEHRINHALT in dieser Struktur:
+
+📚 KERNWISSEN FÜR DIESE STUFE
+[Essentielles Wissen das auf dieser Stufe vermittelt wird - 3-5 Kernpunkte]
+
+🎯 PRAXISÜBUNGEN
+[2-3 konkrete Übungen die der Lernende jetzt durchführen kann]
+
+${stufe >= 3 ? `⚡ FORTGESCHRITTENE TECHNIKEN\n[Auf dieser Stufe spezifische Techniken und Vertiefungen]\n` : ""}
+${stufe >= 4 ? `🔮 MEISTERSCHAFTSWISSEN\n[Was unterscheidet einen Meister von einem Fortgeschrittenen?]\n` : ""}
+
+💬 TYPISCHE FRAGEN AUF DIESER STUFE
+[3 Fragen die Lernende auf dieser Stufe häufig stellen, mit Antworten]
+
+🌟 NÄCHSTE SCHRITTE
+[Was kommt als nächstes? Wie geht die Lernreise weiter?]
+
+Schreibe klar, strukturiert und inspirierend. Auf Deutsch.`;
+
+    try { setKiInhalt(await groqFetch(prompt)); }
+    catch { setKiInhalt("Fehler beim Laden."); }
+    setKiLaed(false);
+  };
+
+  if (gewThema && gewStufe) {
+    return (
+      <div style={{display:"flex",flexDirection:"column",gap:"12px"}}>
+        <button onClick={()=>{setGewThema(null);setGewStufe(null);setKiInhalt("");}} style={{fontFamily:"Raleway",fontSize:"13px",color:OT.teal,fontWeight:700,background:"none",border:"none",cursor:"pointer",textAlign:"left"}}>← Zurück</button>
+        <OCard style={{background:`linear-gradient(135deg,${OT.tealL},${OT.violetL})`,border:`1.5px solid ${OT.borderMid}`}}>
+          <div style={{display:"flex",alignItems:"center",gap:"12px"}}>
+            <span style={{fontSize:"32px"}}>{gewThema.icon}</span>
+            <div>
+              <div style={{fontFamily:"Cinzel",fontSize:"18px",color:OT.text,fontWeight:700}}>{gewThema.name}</div>
+              <div style={{display:"flex",alignItems:"center",gap:"6px",marginTop:"4px"}}>
+                <div style={{width:"12px",height:"12px",borderRadius:"50%",background:LERNPFAD_STUFEN[gewStufe-1].farbe}}/>
+                <span style={{fontFamily:"Raleway",fontSize:"12px",color:OT.textMid,fontWeight:700}}>{LERNPFAD_STUFEN[gewStufe-1].icon} Stufe {gewStufe}: {LERNPFAD_STUFEN[gewStufe-1].name}</span>
+              </div>
+            </div>
+          </div>
+        </OCard>
+        <OCard>
+          {kiLaed ? (
+            <div style={{textAlign:"center",padding:"36px"}}>
+              <div style={{fontSize:"32px",marginBottom:"14px"}}>📚</div>
+              <div style={{fontFamily:"Raleway",fontSize:"13px",color:OT.textMid,fontWeight:600}}>Lerninhalt wird generiert...</div>
+            </div>
+          ) : kiInhalt ? (
+            <div style={{fontFamily:"Raleway",fontSize:"13px",color:OT.text,lineHeight:"1.95",whiteSpace:"pre-wrap",fontWeight:500}}>{kiInhalt}</div>
+          ) : (
+            <OBtn onClick={()=>ladeKiInhalt(gewThema,gewStufe)}>📚 Lerninhalt laden</OBtn>
+          )}
+        </OCard>
+      </div>
+    );
+  }
+
+  if (gewThema) {
+    return (
+      <div style={{display:"flex",flexDirection:"column",gap:"12px"}}>
+        <button onClick={()=>setGewThema(null)} style={{fontFamily:"Raleway",fontSize:"13px",color:OT.teal,fontWeight:700,background:"none",border:"none",cursor:"pointer",textAlign:"left"}}>← Themen</button>
+        <OCard style={{background:`linear-gradient(135deg,${OT.tealL},${OT.violetL})`,padding:"16px"}}>
+          <div style={{display:"flex",alignItems:"center",gap:"10px",marginBottom:"6px"}}>
+            <span style={{fontSize:"28px"}}>{gewThema.icon}</span>
+            <div style={{fontFamily:"Cinzel",fontSize:"16px",color:OT.text,fontWeight:700}}>{gewThema.name}</div>
+          </div>
+          <div style={{fontFamily:"Raleway",fontSize:"12px",color:OT.textMid,fontWeight:500}}>Wähle deine Lernstufe</div>
+        </OCard>
+        {LERNPFAD_STUFEN.map(stufe => (
+          <button key={stufe.nr} onClick={()=>{setGewStufe(stufe.nr);ladeKiInhalt(gewThema,stufe.nr);}} style={{background:"white",borderRadius:"14px",padding:"16px",border:`1.5px solid ${stufe.farbe}44`,cursor:"pointer",textAlign:"left",display:"flex",alignItems:"center",gap:"14px",boxShadow:`0 2px 10px ${OT.shadow}`,transition:"all 0.15s"}}>
+            <div style={{width:"42px",height:"42px",borderRadius:"50%",background:stufe.farbe,display:"flex",alignItems:"center",justifyContent:"center",fontSize:"20px",flexShrink:0,boxShadow:`0 3px 12px ${stufe.farbe}44`}}>
+              {stufe.icon}
+            </div>
+            <div style={{flex:1}}>
+              <div style={{fontFamily:"Raleway",fontSize:"13px",color:OT.text,fontWeight:700,marginBottom:"3px"}}>Stufe {stufe.nr}: {stufe.name}</div>
+              <div style={{fontFamily:"Raleway",fontSize:"11px",color:OT.textMid,fontWeight:500}}>{stufe.beschreibung}</div>
+            </div>
+            <span style={{color:OT.textSoft,fontSize:"18px"}}>›</span>
+          </button>
+        ))}
+      </div>
+    );
+  }
+
+  return (
+    <div style={{display:"flex",flexDirection:"column",gap:"14px"}}>
+      <OCard style={{background:`linear-gradient(135deg,${OT.goldL},${OT.violetL})`,padding:"16px"}}>
+        <div style={{fontFamily:"Cinzel",fontSize:"15px",color:OT.text,fontWeight:700,marginBottom:"4px"}}>🏆 Resonanz Akademie · Lernpfad</div>
+        <div style={{fontFamily:"Raleway",fontSize:"12px",color:OT.textMid,fontWeight:500}}>Von Einführung bis Zertifizierung. KI generiert individuellen Lerninhalt für deine Stufe.</div>
+        <div style={{display:"flex",gap:"6px",marginTop:"10px",flexWrap:"wrap"}}>
+          {LERNPFAD_STUFEN.map(s=>(
+            <div key={s.nr} style={{display:"flex",alignItems:"center",gap:"4px",padding:"4px 10px",borderRadius:"10px",background:"rgba(255,255,255,0.8)",border:`1px solid ${s.farbe}44`}}>
+              <div style={{width:"8px",height:"8px",borderRadius:"50%",background:s.farbe}}/>
+              <span style={{fontFamily:"Raleway",fontSize:"10px",fontWeight:700,color:s.farbe}}>{s.name}</span>
+            </div>
+          ))}
+        </div>
+      </OCard>
+      <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:"10px"}}>
+        {THEMEN.map(thema=>(
+          <button key={thema.id} onClick={()=>setGewThema(thema)} style={{background:"white",borderRadius:"14px",padding:"16px",border:`1.5px solid ${OT.border}`,cursor:"pointer",textAlign:"left",boxShadow:`0 2px 10px ${OT.shadow}`,transition:"all 0.15s",display:"flex",flexDirection:"column",gap:"8px"}}>
+            <span style={{fontSize:"28px"}}>{thema.icon}</span>
+            <div style={{fontFamily:"Raleway",fontSize:"12px",color:OT.text,fontWeight:700,lineHeight:"1.3"}}>{thema.name}</div>
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// ════════════════════════════════════════════════════════════════
+//  RESONANZ ORACLE · HAUPT-KOMPONENTE
+// ════════════════════════════════════════════════════════════════
+function ResonanzOracle({ groqFetch }) {
+  const [aktiv, setAktiv] = useState("scanner");
+
+  const TABS = [
+    { id:"scanner",    icon:"💫", label:"Hellsinn-Scanner" },
+    { id:"organmap",   icon:"🫀", label:"Organsprache"    },
+    { id:"chakra",     icon:"🌈", label:"Chakren"         },
+    { id:"aura",       icon:"🌐", label:"Aura & Chirurgie"},
+    { id:"heilung",    icon:"💚", label:"Heilungs-Guide"  },
+    { id:"lernpfad",   icon:"🏆", label:"Lernpfad"        },
+  ];
+
+  useEffect(() => {
+    if (!document.querySelector("#oracle-fonts")) {
+      const l = document.createElement("link");
+      l.id = "oracle-fonts";
+      l.rel = "stylesheet";
+      l.href = "https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Raleway:wght@400;500;600;700;800&display=swap";
+      document.head.appendChild(l);
+    }
+  }, []);
+
+  return (
+    <div style={{background:OT.bg,minHeight:"100%",paddingBottom:"40px"}}>
+      {/* Hero */}
+      <div style={{position:"relative",margin:"0 0 20px",padding:"26px 20px 22px",background:`linear-gradient(145deg,${OT.tealL} 0%,#FFFFFF 45%,${OT.violetL} 100%)`,borderBottom:`1.5px solid ${OT.border}`,overflow:"hidden"}}>
+        <div style={{position:"absolute",top:-60,right:-60,width:"200px",height:"200px",borderRadius:"50%",background:`radial-gradient(circle,${OT.violetL} 0%,transparent 70%)`,opacity:0.6,pointerEvents:"none"}}/>
+        <div style={{position:"relative",zIndex:1}}>
+          <div style={{fontFamily:"Cinzel",fontSize:"22px",color:OT.text,fontWeight:700,letterSpacing:"2px",marginBottom:"4px"}}>✦ Resonanz Oracle</div>
+          <div style={{fontFamily:"Raleway",fontSize:"10px",color:OT.textSoft,letterSpacing:"3px",fontWeight:700,textTransform:"uppercase"}}>KI als stiller Berater im Hintergrund</div>
+          <div style={{fontFamily:"Raleway",fontSize:"12px",color:OT.textMid,fontWeight:500,marginTop:"8px",lineHeight:"1.6"}}>Organsprache · Chakren · Aura-Chirurgie · Heilungs-Guide · Lernpfad</div>
+        </div>
+      </div>
+
+      {/* Tab-Navigation (horizontal scrollbar) */}
+      <div style={{overflowX:"auto",paddingBottom:"2px"}}>
+        <div style={{display:"flex",gap:"6px",padding:"0 16px",minWidth:"max-content"}}>
+          {TABS.map(tab => (
+            <button key={tab.id} onClick={()=>setAktiv(tab.id)} style={{display:"flex",alignItems:"center",gap:"6px",padding:"9px 14px",borderRadius:"20px",border:`1.5px solid ${aktiv===tab.id?OT.teal:OT.border}`,background:aktiv===tab.id?OT.teal:"white",color:aktiv===tab.id?"white":OT.textMid,fontFamily:"Raleway",fontSize:"11px",fontWeight:700,cursor:"pointer",whiteSpace:"nowrap",boxShadow:aktiv===tab.id?`0 3px 12px rgba(13,148,136,0.3)`:"none",transition:"all 0.15s"}}>
+              <span>{tab.icon}</span><span>{tab.label}</span>
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Inhalt */}
+      <div style={{padding:"16px 16px 0"}}>
+        {aktiv === "scanner"  && <HellsinnScanner groqFetch={groqFetch}/>}
+        {aktiv === "organmap" && <OrganspracheKarte groqFetch={groqFetch}/>}
+        {aktiv === "chakra"   && <ChakraMatrix groqFetch={groqFetch}/>}
+        {aktiv === "aura"     && <AuraChirurgie groqFetch={groqFetch}/>}
+        {aktiv === "heilung"  && <HeilungsGuide groqFetch={groqFetch}/>}
+        {aktiv === "lernpfad" && <Lernpfad groqFetch={groqFetch}/>}
+      </div>
+
+      {/* Disclaimer */}
+      <div style={{textAlign:"center",padding:"32px 20px 0",fontFamily:"Raleway",fontSize:"9px",color:OT.textSoft,letterSpacing:"1px",fontWeight:600,lineHeight:"2"}}>
+        LICHTKERN · RESONANZ ORACLE · powered by Human Resonanz<br/>
+        Kein Ersatz für medizinische oder therapeutische Behandlung
+      </div>
+    </div>
+  );
+}
+
 export default function Root() {
   const [user, setUser] = useState(undefined); // undefined = loading, null = logged out
   useEffect(() => {
@@ -2311,7 +3690,7 @@ function WelcomeSetup({onComplete}){
     <div style={{position:"fixed",inset:0,background:"linear-gradient(145deg,#E8F8F5 0%,#F8FAFF 50%,#F0EBF8 100%)",zIndex:500,display:"flex",alignItems:"center",justifyContent:"center",padding:"20px",overflowY:"auto"}}>
       <div style={{maxWidth:"640px",width:"100%",textAlign:"center",padding:"20px 0"}}>
         <div style={{fontFamily:"Cinzel",fontSize:"32px",color:"#0F4F4A",fontWeight:700,letterSpacing:"4px",marginBottom:"6px"}}>✦ LICHTKERN</div>
-        <div style={{fontFamily:"Raleway",fontSize:"10px",color:"#6AABA7",letterSpacing:"4px",textTransform:"uppercase",fontWeight:700,marginBottom:"32px"}}>Resonanz Akademie</div>
+        <div style={{fontFamily:"Raleway",fontSize:"10px",color:"#6AABA7",letterSpacing:"4px",textTransform:"uppercase",fontWeight:700,marginBottom:"32px"}}>Human Resonanz</div>
         <div style={{background:"rgba(255,255,255,0.85)",borderRadius:"24px",padding:"32px",boxShadow:"0 8px 40px rgba(13,148,136,0.12)",border:"1.5px solid rgba(13,148,136,0.15)",backdropFilter:"blur(20px)"}}>
           <div style={{fontFamily:"Cinzel",fontSize:"20px",color:"#0F4F4A",fontWeight:700,marginBottom:"8px"}}>Willkommen! Wie nutzt du Lichtkern?</div>
           <div style={{fontFamily:"Raleway",fontSize:"13px",color:"#6B7280",marginBottom:"24px",lineHeight:1.6}}>Wähle deine Schwerpunkte — jederzeit in den Einstellungen anpassbar.</div>
@@ -2454,7 +3833,7 @@ function App({ user, onLogout }){
         {!isDesktop&&<header style={{padding:"12px 16px 10px",display:"flex",justifyContent:"space-between",alignItems:"flex-start",borderBottom:`1.5px solid ${T.border}`,marginBottom:"4px"}}>
           <div>
             <div style={{fontFamily:"Cinzel",fontSize:"20px",color:T.text,fontWeight:700,letterSpacing:"1px"}}>✦ Lichtkern</div>
-            <div style={{fontFamily:"Raleway",fontSize:"9px",color:T.textSoft,letterSpacing:"2px",textTransform:"uppercase",fontWeight:600,marginTop:"2px"}}>powered by Resonanz Akademie</div>
+            <div style={{fontFamily:"Raleway",fontSize:"9px",color:T.textSoft,letterSpacing:"2px",textTransform:"uppercase",fontWeight:600,marginTop:"2px"}}>powered by Human Resonanz</div>
             {settings.praxisname&&<div style={{fontFamily:"Raleway",fontSize:"11px",color:T.textMid,fontWeight:700,marginTop:"2px"}}>{settings.praxisname}</div>}
           </div>
           <button onClick={()=>setShowSettings(true)} style={{width:"38px",height:"38px",borderRadius:"50%",background:T.bgSoft,border:`1.5px solid ${T.border}`,fontSize:"17px",cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0}}>⚙️</button>
@@ -2482,7 +3861,7 @@ function App({ user, onLogout }){
                 </div>
                 <div style={{position:"relative",zIndex:1}}>
                   <div style={{fontFamily:"Cinzel",fontSize:"46px",color:T.text,fontWeight:700,letterSpacing:"6px",lineHeight:1,textShadow:"0 2px 20px rgba(13,148,136,0.15)"}}>✦ LICHTKERN</div>
-                  <div style={{fontFamily:"Raleway",fontSize:"9px",color:T.textSoft,letterSpacing:"5px",textTransform:"uppercase",fontWeight:700,marginTop:"8px"}}>powered by Resonanz Akademie</div>
+                  <div style={{fontFamily:"Raleway",fontSize:"9px",color:T.textSoft,letterSpacing:"5px",textTransform:"uppercase",fontWeight:700,marginTop:"8px"}}>powered by Human Resonanz</div>
                 </div>
               </div>
               {/* Right spacer */}
@@ -2501,6 +3880,7 @@ function App({ user, onLogout }){
       {screen==="analytics" &&<Analytics sessions={sessions} clients={clients} onSelectClient={(id)=>{setAnalyticsClient(id);setScreen("clientanalysis");}}/>}
       {screen==="clientanalysis"&&<ClientAnalysis clientId={analyticsClient} clients={clients} sessions={sessions} onBack={()=>setScreen("analytics")}/>}
       {screen==="knowledge"&&<Knowledge/>}
+      {screen==="oracle"    &&<ResonanzOracle groqFetch={groqFetch}/>}
       {screen==="billing"   &&<Billing sessions={sessions} clients={clients} settings={settings} onUpdateSession={async(updated)=>{const next=sessions.map(s=>s.id===updated.id?updated:s);await saveSessions(next);}}/>}
       {screen==="templates" &&<TemplatesScreen templates={templates} onSave={saveTemplates} onStartSession={(tpl)=>startSession(null,tpl)}/>}
       {screen==="onboarding" &&<OnboardingScreen onSave={async(client)=>{await saveClients([...clients,client]);nav("clients");}} onCancel={()=>nav("clients")}/>}
@@ -2952,7 +4332,7 @@ ${p.notes?"<p>Notizen: "+p.notes+"</p>":""}
 ${inheritedThemes.length?"<div class=\"card\"><h3>Vererbte Muster (2+ Generationen)</h3>"+inheritedThemes.map(([t,c])=>"<span class=\"pill\">"+t+" ("+c+"×)</span>").join(" ")+"</div>":""}
 ${(tree?.relations||[]).length?"<div class=\"card\"><h3>Verknüpfte Klienten</h3>"+(tree.relations||[]).map(r=>"<p>"+r.relType+": "+r.targetName+" · Einwilligung: "+new Date(r.date).toLocaleDateString("de-DE")+"</p>").join("")+"</div>":""}
 <div style="border-top:1.5px solid #B2E0DC;margin-top:18px;padding-top:12px;text-align:center;">
-  <p style="font-family:Cinzel,serif;font-size:11px;color:#0D9488;font-weight:700;">✦ Lichtkern · powered by Resonanz Akademie</p>
+  <p style="font-family:Cinzel,serif;font-size:11px;color:#0D9488;font-weight:700;">✦ Lichtkern · powered by Human Resonanz</p>
   <p style="font-size:9px;color:#6AABA7;margin-top:4px;">Vertraulich · Generationsarbeit</p>
 </div></div></body></html>`;
     const w=window.open("","_blank");if(w){w.document.write(html);w.document.close();}
@@ -3393,7 +4773,7 @@ function SettingsScreen({ settings, onSave, onClose, clients, sessions, appointm
         <div style={{background:`linear-gradient(135deg,${T.tealL},${T.violetL})`,borderRadius:"16px",padding:"14px 16px",marginBottom:"16px",border:`1.5px solid ${T.borderMid}`,display:"flex",gap:"12px",alignItems:"center"}}>
           <div style={{fontSize:"24px",flexShrink:0}}>✦</div>
           <div>
-            <div style={{fontFamily:"Cinzel",fontSize:"13px",color:T.text,fontWeight:700}}>Lichtkern · Resonanz Akademie</div>
+            <div style={{fontFamily:"Cinzel",fontSize:"13px",color:T.text,fontWeight:700}}>Lichtkern · Human Resonanz</div>
             <div style={{fontFamily:"Raleway",fontSize:"11px",color:T.textMid,fontWeight:500,marginTop:"3px"}}>Markenname & Branding sind fest verankert und können nicht geändert werden.</div>
           </div>
         </div>
@@ -3645,7 +5025,7 @@ ${cs.map((s,i)=>{
   +"</div>";
 }).join("")}
 <div style="border-top:1.5px solid #B2E0DC;margin-top:20px;padding-top:14px;text-align:center;">
-  <p style="font-family:Cinzel,serif;font-size:11px;color:#0D9488;font-weight:700;">✦ Lichtkern · powered by Resonanz Akademie</p>
+  <p style="font-family:Cinzel,serif;font-size:11px;color:#0D9488;font-weight:700;">✦ Lichtkern · powered by Human Resonanz</p>
 </div></div></body></html>`;
             const w=window.open("","_blank");if(w){w.document.write(html);w.document.close();}
           }} style={{width:"100%",fontFamily:"Raleway",fontWeight:700,fontSize:"11px",padding:"9px",borderRadius:"10px",border:`1.5px solid ${T.border}`,background:"white",color:T.textMid,cursor:"pointer"}}>
@@ -4303,7 +5683,7 @@ Was möchtest du mich fragen?
 
 
 ───────────────────────────────────────────
-✦ Lichtkern · powered by Resonanz Akademie
+✦ Lichtkern · powered by Human Resonanz
 Deine Angaben werden vertraulich behandelt.`);
       window.location.href = `mailto:${mailEmail}?subject=${subject}&body=${body}`;
     };
@@ -4318,7 +5698,7 @@ Deine Angaben werden vertraulich behandelt.`);
 <div style="background:linear-gradient(140deg,#CCFBF1,#FFFFFF,#EDE9FE);border-radius:20px;padding:28px;margin-bottom:20px;border:1.5px solid #B2E0DC;">
   <p style="font-size:9px;letter-spacing:3px;color:#6AABA7;text-transform:uppercase;margin-bottom:6px;font-weight:700;">ERSTANAMNESE</p>
   <h1 style="font-family:Cinzel,serif;font-size:24px;color:#0F3030;font-weight:700;margin-bottom:4px;">Lichtkern</h1>
-  <p style="font-size:11px;color:#2D6B68;">powered by Resonanz Akademie · Vertraulicher Fragebogen</p>
+  <p style="font-size:11px;color:#2D6B68;">powered by Human Resonanz · Vertraulicher Fragebogen</p>
 </div>
 <div class="section"><h3>Persönliche Daten</h3>
   <p>Name:</p><div class="line"></div>
@@ -4358,7 +5738,7 @@ Deine Angaben werden vertraulich behandelt.`);
   <div class="line"></div><div class="line"></div><div class="line"></div>
 </div>
 <div style="border-top:1.5px solid #B2E0DC;margin-top:20px;padding-top:14px;text-align:center;">
-  <p style="font-family:Cinzel,serif;font-size:11px;color:#0D9488;font-weight:700;">✦ Lichtkern · powered by Resonanz Akademie</p>
+  <p style="font-family:Cinzel,serif;font-size:11px;color:#0D9488;font-weight:700;">✦ Lichtkern · powered by Human Resonanz</p>
   <p style="font-size:9px;color:#6AABA7;margin-top:4px;">Vertraulich · Nicht für Dritte bestimmt</p>
 </div>
 </div></body></html>`;
@@ -4446,7 +5826,7 @@ ${[
   <p style="font-size:13px;color:#0F3030;line-height:1.8;white-space:pre-wrap;font-weight:500;">${content}</p>
 </div>`).join("")}
 <div style="border-top:1.5px solid #B2E0DC;margin-top:24px;padding-top:14px;text-align:center;">
-  <p style="font-family:Cinzel,serif;font-size:11px;color:#0D9488;font-weight:700;">✦ Lichtkern · powered by Resonanz Akademie</p>
+  <p style="font-family:Cinzel,serif;font-size:11px;color:#0D9488;font-weight:700;">✦ Lichtkern · powered by Human Resonanz</p>
   <p style="font-size:9px;color:#6AABA7;margin-top:4px;">Vertrauliche Erstanamnese · Nicht für Dritte bestimmt</p>
 </div>
 </div></body></html>`;
