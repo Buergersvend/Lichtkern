@@ -4157,14 +4157,6 @@ const QUIZ_FRAGEN = [
 // ════════════════════════════════════════════════════════════════
 //  UI HILFSKOMPONENTEN
 // ════════════════════════════════════════════════════════════════
-const Card = ({children, style={}}) => (
-  <div style={{background:"#FFF",borderRadius:"18px",padding:"18px 20px",border:`1.5px solid ${OT.border}`,boxShadow:`0 2px 14px ${OT.shadow}`,marginBottom:"12px",...style}}>{children}</div>
-);
-
-const Label = ({children, color, size="10"}) => (
-  <div style={{fontFamily:"Raleway",fontSize:`${size}px`,letterSpacing:"2px",fontWeight:800,color:color||OT.textSoft,textTransform:"uppercase",marginBottom:"10px"}}>{children}</div>
-);
-
 const Highlight = ({text}) => (
   <div style={{margin:"16px 0",padding:"14px 18px",background:`linear-gradient(135deg,${OT.tealL},${OT.violetL})`,borderRadius:"12px",borderLeft:`4px solid ${OT.teal}`}}>
     <div style={{fontFamily:"Raleway",fontSize:"13px",color:OT.tealD,fontWeight:700,lineHeight:"1.7",fontStyle:"italic"}}>„{text}"</div>
