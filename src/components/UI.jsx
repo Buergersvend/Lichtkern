@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback, useRef } from "react";
 import { T } from "../config/theme.js";
 
+function Flower({size=280,opacity=0.09,color}){
   const c=color||T.teal,r=44,cx=size/2,cy=size/2;
   const pts=[[0,0],[r,0],[-r,0],[r/2,r*0.866],[-r/2,r*0.866],[r/2,-r*0.866],[-r/2,-r*0.866]];
   return(<svg width={size} height={size} style={{position:"absolute",top:0,left:0,opacity,pointerEvents:"none"}} viewBox={`0 0 ${size} ${size}`}>
