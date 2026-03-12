@@ -45,9 +45,4 @@ const fsDelete = async (userId, key) => {
   try { await deleteDoc(doc(db, "users", userId, "data", key)); } catch {}
 };
 
-// ─── KRISTALLWASSER TOKENS ───────────────────
-const T = {
-  bg:"#F0FAFA", bgCard:"#FFFFFF", bgSoft:"#E6F7F7", bgSofter:"#F5FDFD",
-  border:"#B2E0DC", borderMid:"#7EC8C2",
-
 export { auth, db, groqFetch, fsGet, fsSet, fsDelete, onAuthStateChanged, signOut, createUserWithEmailAndPassword, signInWithEmailAndPassword };
