@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback, useRef } from "react";
 import { OT } from "./OracleUI.jsx";
 
+function HellsinnScanner({ groqFetch }){
   const [eingabe, setEingabe]       = useState("");
   const [tags, setTags]             = useState([]);
   const [aktivKat, setAktivKat]    = useState("wahrnehmung");
