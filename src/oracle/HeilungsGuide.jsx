@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback, useRef } from "react";
 import { OT } from "./OracleUI.jsx";
 
+function HeilungsGuide({ groqFetch }){
   const [gewaehlt, setGewaehlt] = useState(null);
   const [kiDetail, setKiDetail] = useState("");
   const [kiLaed, setKiLaed]     = useState(false);
