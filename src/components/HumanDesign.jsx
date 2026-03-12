@@ -445,7 +445,4 @@ Warmherzig, präzise, ohne Heilversprechen.`;
   );
 }
 
-// ─── CLIENT DETAIL MODAL ──────────────────────
-function ClientDetailModal({client,sessions,onClose,onSave,onStart,onAnalyse}){
-
 export { HD_GATE_CENTER, HD_CHANNELS, HD_CENTER_CFG, HD_TYPE_DESC, HD_AUTHORITY_DESC, BodygraphSVG, HDTab };
