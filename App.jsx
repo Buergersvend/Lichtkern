@@ -1,25 +1,25 @@
 import React, { useState, useEffect, useCallback, useRef } from "react";
-import { auth, db, groqFetch, fsGet, fsSet, fsDelete, onAuthStateChanged, signOut, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "./config/firebase.js";
-import { T } from "./config/theme.js";
-import { APPT_TYPES, LEVELS, TECHNIQUES, KNOWLEDGE, DE_DAYS, DE_DAYS_F, DE_MONTHS, HOURS } from "./config/constants.js";
-import { NAV, BottomNav, Card, Btn, TI, Select, LBar, Pill } from "./components/UI.jsx";
-import { BodygraphSVG, HDTab } from "./components/HumanDesign.jsx";
-import { LoginScreen } from "./screens/Login.jsx";
-import { Dashboard } from "./screens/Dashboard.jsx";
-import { Clients, ClientDetailModal, SynergyEngine } from "./screens/Clients.jsx";
-import { Session } from "./screens/Session.jsx";
-import { CalendarScreen } from "./screens/Calendar.jsx";
-import { History } from "./screens/History.jsx";
-import { Knowledge } from "./screens/Knowledge.jsx";
-import { Analytics } from "./screens/Analytics.jsx";
-import { ClientAnalysis } from "./screens/ClientAnalysis.jsx";
-import { Billing } from "./screens/Billing.jsx";
-import { TemplatesScreen } from "./screens/Templates.jsx";
-import { OnboardingScreen } from "./screens/Onboarding.jsx";
-import { SettingsScreen } from "./screens/Settings.jsx";
-import { GenTree } from "./screens/GenTree.jsx";
-import { PDFModal } from "./screens/PDFModal.jsx";
-import { ResonanzOracle } from "./oracle/ResonanzOracle.jsx";
+import { auth, db, groqFetch, fsGet, fsSet, fsDelete, onAuthStateChanged, signOut, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "./src/config/firebase.js";
+import { T } from "./src/config/theme.js";
+import { APPT_TYPES, LEVELS, TECHNIQUES, KNOWLEDGE, DE_DAYS, DE_DAYS_F, DE_MONTHS, HOURS } from "./src/config/constants.js";
+import { NAV, BottomNav, Card, Btn, TI, Select, LBar, Pill } from "./src/components/UI.jsx";
+import { BodygraphSVG, HDTab } from "./src/components/HumanDesign.jsx";
+import { LoginScreen } from "./src/screens/Login.jsx";
+import { Dashboard } from "./src/screens/Dashboard.jsx";
+import { Clients, ClientDetailModal, SynergyEngine } from "./src/screens/Clients.jsx";
+import { Session } from "./src/screens/Session.jsx";
+import { CalendarScreen } from "./src/screens/Calendar.jsx";
+import { History } from "./src/screens/History.jsx";
+import { Knowledge } from "./src/screens/Knowledge.jsx";
+import { Analytics } from "./src/screens/Analytics.jsx";
+import { ClientAnalysis } from "./src/screens/ClientAnalysis.jsx";
+import { Billing } from "./src/screens/Billing.jsx";
+import { TemplatesScreen } from "./src/screens/Templates.jsx";
+import { OnboardingScreen } from "./src/screens/Onboarding.jsx";
+import { SettingsScreen } from "./src/screens/Settings.jsx";
+import { GenTree } from "./src/screens/GenTree.jsx";
+import { PDFModal } from "./src/screens/PDFModal.jsx";
+import { ResonanzOracle } from "./src/oracle/ResonanzOracle.jsx";
 
 function Root() {
   const [user, setUser] = useState(undefined); // undefined = loading, null = logged out
