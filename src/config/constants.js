@@ -1,6 +1,4 @@
 // ─── LICHTKERN KONSTANTEN ────────────────────────
-
-// ─── APPOINTMENT TYPES ───────────────────────
 const APPT_TYPES = {
   session:  { label:"Klienten-Sitzung", color:"#0D9488", bg:"#CCFBF1", border:"#7EC8C2", dot:"#0D9488" },
   first:    { label:"Erstgespräch",     color:"#6D3FCC", bg:"#EDE9FE", border:"#A78BFA", dot:"#6D3FCC" },
@@ -97,6 +95,5 @@ const getMonthDays = (dateStr) => {
 const HOURS = Array.from({length:13},(_,i)=>i+8); // 8–20
 
 // ─── FLOWER ───────────────────────────────────
-function Flower({size=280,opacity=0.09,color}){
 
 export { APPT_TYPES, LEVELS, TECHNIQUES, KNOWLEDGE, DE_DAYS, DE_DAYS_F, DE_MONTHS, HOURS };
