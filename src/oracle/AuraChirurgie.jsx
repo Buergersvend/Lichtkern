@@ -140,7 +140,4 @@ function AuraChirurgie({ groqFetch }){
 
 // ════════════════════════════════════════════════════════════════
 //  CHAKREN-MATRIX
-// ════════════════════════════════════════════════════════════════
-function ChakraMatrix({ groqFetch }) {
-
 export { AuraChirurgie };
