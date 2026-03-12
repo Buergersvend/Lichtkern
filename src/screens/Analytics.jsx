@@ -289,7 +289,4 @@ import { Card, Btn, Pill } from "../components/UI.jsx";
   );
 }
 
-// ─── GENERATIONSBAUM ──────────────────────────
-const GEN_ROLES = ["Ich","Mutter","Vater","Mutter-Mutter","Mutter-Vater","Vater-Mutter","Vater-Vater"];
-
 export { Analytics };
