@@ -21,7 +21,7 @@ import { GenTree } from "./screens/GenTree.jsx";
 import { PDFModal } from "./screens/PDFModal.jsx";
 import { ResonanzOracle } from "./oracle/ResonanzOracle.jsx";
 
-export default function Root() {
+function Root() {
   const [user, setUser] = useState(undefined); // undefined = loading, null = logged out
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, u => setUser(u || null));
