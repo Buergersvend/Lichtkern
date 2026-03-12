@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback, useRef } from "react";
 import { T } from "../config/theme.js";
 
+const GATE_CENTER = {
   64:'head',61:'head',63:'head',
   47:'ajna',24:'ajna',4:'ajna',17:'ajna',43:'ajna',11:'ajna',
   62:'throat',23:'throat',56:'throat',35:'throat',12:'throat',45:'throat',33:'throat',8:'throat',31:'throat',20:'throat',16:'throat',
