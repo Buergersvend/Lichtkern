@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback, useRef } from "react";
 import { OT } from "./OracleUI.jsx";
 
+function AuraChirurgie({ groqFetch }){
   const [ansicht, setAnsicht]     = useState("schichten");
   const [gewaehlt, setGewaehlt]   = useState(null);
   const [technikSel, setTechnikSel] = useState(null);
