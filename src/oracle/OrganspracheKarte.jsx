@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback, useRef } from "react";
 import { OT } from "./OracleUI.jsx";
 
+function OrganspracheKarte({ groqFetch }){
   const [gewaehltes, setGewaehltes] = useState(null);
   const [seite, setSeite]           = useState("links");
   const [kiDetail, setKiDetail]     = useState("");
