@@ -21,6 +21,7 @@ import { GenTree } from "./screens/GenTree.jsx";
 import { PDFModal } from "./screens/PDFModal.jsx";
 import { ResonanzOracle } from "./oracle/ResonanzOracle.jsx";
 
+export default function Root() {
   const [user, setUser] = useState(undefined); // undefined = loading, null = logged out
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, u => setUser(u || null));
@@ -255,8 +256,5 @@ function App({ user, onLogout }){
     {!isDesktop&&<BottomNav active={screen} onChange={nav}/>}
   </div>);
 }
-
-// ─── ANALYTICS ────────────────────────────────
-function Analytics({ sessions, clients, onSelectClient }) {
 
 export default Root;
