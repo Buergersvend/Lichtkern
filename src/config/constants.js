@@ -94,6 +94,4 @@ const getMonthDays = (dateStr) => {
 
 const HOURS = Array.from({length:13},(_,i)=>i+8); // 8–20
 
-// ─── FLOWER ───────────────────────────────────
-
 export { APPT_TYPES, LEVELS, TECHNIQUES, KNOWLEDGE, DE_DAYS, DE_DAYS_F, DE_MONTHS, HOURS };
