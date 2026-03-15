@@ -70,6 +70,4 @@ import { Lernpfad } from "./Lernpfad.jsx";
   );
 }
 
-export default function Root() {
-
 export { ResonanzOracle };
