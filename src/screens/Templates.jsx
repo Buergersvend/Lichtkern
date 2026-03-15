@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback, useRef } from "react";
 import { T } from "../config/theme.js";
 import { Card, Btn, TI } from "../components/UI.jsx";
 
+const DEFAULT_TEMPLATES = [
   {
     id:"tpl_first", name:"Erstsitzung Standard", emoji:"🌱", builtin:true,
     type:"first", category:"Körper", resonanceSource:"Intuition",
