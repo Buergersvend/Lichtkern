@@ -263,6 +263,4 @@ function TemplatesScreen({ templates, onSave, onStartSession }) {
 }
 
 // ─── ONBOARDING FRAGEBOGEN ────────────────────
-const LEBENSBEREICH_OPTIONS = ["Körper & Gesundheit","Beziehung & Familie","Beruf & Finanzen","Spiritualität","Persönlichkeit","Sinnfrage & Lebensweg"];
-
 export { TemplatePickerModal, TemplatesScreen };
