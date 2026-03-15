@@ -126,7 +126,4 @@ Hinweis: Diese Dokumentation ersetzt keine medizinische oder therapeutische Beha
 }
 
 // ─── ROOT ─────────────────────────────────────
-// ─── LOGIN SCREEN ─────────────────────────────
-function LoginScreen({ onLogin }) {
-
 export { PDFModal };
