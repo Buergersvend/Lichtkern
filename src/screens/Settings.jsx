@@ -457,6 +457,4 @@ ${cs.map((s,i)=>{
 }
 
 // ─── BILLING ──────────────────────────────────
-const PAY_STATUS = {
-
 export { PinLock, SettingsRow, SettingsScreen };
