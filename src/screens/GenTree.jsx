@@ -423,7 +423,4 @@ ${(tree?.relations||[]).length?"<div class=\"card\"><h3>Verknüpfte Klienten</h3
   );
 }
 
-// ─── COLOR THEMES ─────────────────────────────
-const THEMES = {
-
 export { GenTree };
