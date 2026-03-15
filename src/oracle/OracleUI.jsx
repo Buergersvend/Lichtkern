@@ -443,7 +443,4 @@ const OLabel = ({children, color}) => (
 
 // ════════════════════════════════════════════════════════════════
 //  HELLSINN-SCANNER · Kern-Feature
-// ════════════════════════════════════════════════════════════════
-function HellsinnScanner({ groqFetch }) {
-
 export { OT, CHAKRA_SYSTEM, ORGAN_MAP, AURA_SCHICHTEN, AURA_CHIRURGIE_TECHNIKEN, HELLSINN_TAGS, HEILMETHODEN_KATALOG, LERNPFAD_STUFEN, OCard, OBtn, OTag, OLabel };
