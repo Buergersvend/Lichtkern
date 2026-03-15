@@ -262,5 +262,4 @@ function TemplatesScreen({ templates, onSave, onStartSession }) {
   );
 }
 
-// ─── ONBOARDING FRAGEBOGEN ────────────────────
 export { TemplatePickerModal, TemplatesScreen };
