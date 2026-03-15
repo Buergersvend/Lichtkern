@@ -216,7 +216,4 @@ Sei präzise, praxisnah und einfühlsam. Keine Heilversprechen, keine Diagnosen.
 
 // ════════════════════════════════════════════════════════════════
 //  ORGANSPRACHE-KARTE
-// ════════════════════════════════════════════════════════════════
-function OrganspracheKarte({ groqFetch }) {
-
 export { HellsinnScanner };
