@@ -240,7 +240,4 @@ function Billing({ sessions, clients, settings, onUpdateSession }) {
   );
 }
 
-// ─── DEFAULT TEMPLATES ────────────────────────
-const DEFAULT_TEMPLATES = [
-
 export { Billing };
