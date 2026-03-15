@@ -121,7 +121,4 @@ Gib eine PRAXISANLEITUNG:
 // ════════════════════════════════════════════════════════════════
 
 
-// ─── STUFEN-FARBEN ────────────────────────────────────────────
-const STUFEN_CFG = {
-
 export { HeilungsGuide };
