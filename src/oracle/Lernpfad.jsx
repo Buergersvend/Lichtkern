@@ -153,7 +153,4 @@ Schreibe klar, strukturiert und inspirierend. Auf Deutsch.`;
 
 // ════════════════════════════════════════════════════════════════
 //  RESONANZ ORACLE · HAUPT-KOMPONENTE
-// ════════════════════════════════════════════════════════════════
-function ResonanzOracle({ groqFetch }) {
-
 export { Lernpfad };
