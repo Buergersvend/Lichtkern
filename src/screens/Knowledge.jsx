@@ -163,7 +163,4 @@ function buildPDF(session, opts){
   return html;
 }
 
-// ─── PDF MODAL ────────────────────────────────
-function PDFModal({ session, onClose }) {
-
 export { Knowledge };
