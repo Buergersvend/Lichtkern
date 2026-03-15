@@ -1,7 +1,7 @@
 // src/components/Decorations.jsx
 // Dekorative SVG-Komponenten: Flower, TreeOfLife
 // Importiere T aus deiner constants/theme-Datei (Pfad ggf. anpassen)
-import { T } from "../config/constants";
+import { T } from "../config/theme";
 
 // ─── FLOWER ───────────────────────────────────
 export function Flower({ size = 280, opacity = 0.09, color }) {
