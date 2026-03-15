@@ -456,5 +456,4 @@ ${cs.map((s,i)=>{
   );
 }
 
-// ─── BILLING ──────────────────────────────────
 export { PinLock, SettingsRow, SettingsScreen };
