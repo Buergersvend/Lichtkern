@@ -1173,6 +1173,4 @@ function OrganspracheLernmodul({ stufe = 1, onBack, onZertifikat }) {
 }
 
 
-function Lernpfad({ groqFetch }) {
-
 export { OrganspracheKarte, OrganspracheLernmodul };
