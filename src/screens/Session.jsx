@@ -3,6 +3,8 @@ import { T } from "../config/theme.js";
 import { APPT_TYPES, LEVELS, TECHNIQUES, KNOWLEDGE, DE_DAYS, DE_DAYS_F, DE_MONTHS, HOURS } from "../config/constants.js";
 import { Card, Btn, TI, Select, LBar, Pill } from "../components/UI.jsx";
 
+const STEPS = ["Klient","Ziel","Ebenen","Techniken","Abschluss"];
+
 function Session({wizard,setWizard,clients,onComplete,onCancel}){
   const [aiLoading,setAiLoading]=useState(false);
   const [aiText,setAiText]=useState("");
