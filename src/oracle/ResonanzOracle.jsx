@@ -7,6 +7,7 @@ import { ChakraMatrix } from "./ChakraMatrix.jsx";
 import { HeilungsGuide } from "./HeilungsGuide.jsx";
 import { Lernpfad } from "./Lernpfad.jsx";
 
+function ResonanzOracle({ groqFetch }){
   const [aktiv, setAktiv] = useState("scanner");
 
   const TABS = [
