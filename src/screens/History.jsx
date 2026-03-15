@@ -52,7 +52,4 @@ import { Card, Btn } from "../components/UI.jsx";
   </div>);
 }
 
-// ─── KNOWLEDGE ────────────────────────────────
-function Knowledge(){
-
 export { History };
