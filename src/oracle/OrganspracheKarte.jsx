@@ -130,10 +130,8 @@ Keine langen Einleitungen. Sofort in die Praxis.`;
 
 // ════════════════════════════════════════════════════════════════
 //  AURA & CHIRURGIE
-// ════════════════════════════════════════════════════════════════
-function AuraChirurgie({ groqFetch }) {
-
 // ─── ORGANSPRACHE LERNMODUL ───────────────────
+const LERNMODUL_STUFEN = {
   1: { name:"Einführung",    farbe:"#16A34A", icon:"🌱", bg:"#DCFCE7" },
   2: { name:"Grundlagen",   farbe:"#0D9488", icon:"📚", bg:"#CCFBF1" },
   3: { name:"Vertiefung",   farbe:"#0284C7", icon:"🎯", bg:"#DBEAFE" },
@@ -1171,6 +1169,5 @@ function OrganspracheLernmodul({ stufe = 1, onBack, onZertifikat }) {
     </div>
   );
 }
-
 
 export { OrganspracheKarte, OrganspracheLernmodul };
