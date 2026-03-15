@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback, useRef } from "react";
 import { T } from "../config/theme.js";
 import { Card, Btn, Pill } from "../components/UI.jsx";
 
-
+function Analytics({sessions,clients}){
   // ── compute all stats ──
   const total = sessions.length;
 
