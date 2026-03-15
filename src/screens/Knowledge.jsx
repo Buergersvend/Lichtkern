@@ -3,6 +3,7 @@ import { T } from "../config/theme.js";
 import { APPT_TYPES, LEVELS, TECHNIQUES, KNOWLEDGE, DE_DAYS, DE_DAYS_F, DE_MONTHS, HOURS } from "../config/constants.js";
 import { Card, Btn, Pill } from "../components/UI.jsx";
 
+function Knowledge(){
   const [sel,setSel]=useState(null);const [tab,setTab]=useState("soft");
   if(sel)return(<div style={{padding:"0 16px 96px"}}>
     <button onClick={()=>setSel(null)} style={{fontFamily:"Raleway",fontSize:"13px",color:T.teal,fontWeight:700,background:"none",border:"none",cursor:"pointer",paddingTop:"8px",display:"block",marginBottom:"14px"}}>← Zurück</button>
