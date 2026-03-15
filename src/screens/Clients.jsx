@@ -4,6 +4,7 @@ import { APPT_TYPES, LEVELS, TECHNIQUES, KNOWLEDGE, DE_DAYS, DE_DAYS_F, DE_MONTH
 import { Card, Btn, TI, Select, Pill } from "../components/UI.jsx";
 import { BodygraphSVG, HDTab } from "../components/HumanDesign.jsx";
 
+function ClientDetailModal({client,sessions,onClose,onSave,onStart,onAnalyse}){
   const [tab,setTab]=useState('profil');
   const sc=sessions.filter(s=>s.clientId===client.id);
   const tabs=[['profil','👤 Profil'],['hd','⚙ Human Design'],['sessions','📋 Sitzungen']];
@@ -331,8 +332,5 @@ function Clients({clients,sessions,onSave,onStart,onDelete,onOnboarding,reminder
     </div>
   );
 }
-
-// ─── SESSION WIZARD ───────────────────────────
-const STEPS=["Klient","Ziel","Ebenen","Techniken","Abschluss"];
 
 export { ClientDetailModal, SynergyEngine, Clients };
