@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback, useRef } from "react";
 import { T } from "../config/theme.js";
 import { Card, Btn, Pill } from "../components/UI.jsx";
 
+function ClientAnalysis({ clientId, clients, sessions, onBack }){
   const client = clients.find(c=>c.id===clientId);
   const cs = sessions.filter(s=>s.clientId===clientId).sort((a,b)=>a.createdAt?.localeCompare(b.createdAt));
 
