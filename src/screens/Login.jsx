@@ -122,7 +122,4 @@ import { Flower, TreeOfLife, TI, Btn } from "../components/UI.jsx";
 //  RESONANZ ORACLE · Human Resonanz
 // ════════════════════════════════════════════════════════════════
 
-// ─── DESIGN TOKENS (aus Hauptdatei übernommen) ────────────────
-const OT = {
-
 export { LoginScreen };
