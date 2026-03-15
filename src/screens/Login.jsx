@@ -116,10 +116,4 @@ import { Flower, TreeOfLife, TI, Btn } from "../components/UI.jsx";
   );
 }
 
-// ─── ROOT WRAPPER ─────────────────────────────
-
-// ════════════════════════════════════════════════════════════════
-//  RESONANZ ORACLE · Human Resonanz
-// ════════════════════════════════════════════════════════════════
-
 export { LoginScreen };
