@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback, useRef } from "react";
 import { T } from "../config/theme.js";
 import { Card, Btn, Pill } from "../components/UI.jsx";
 
+const PAY_STATUS = {
   open:    { label:"Offen",       color:"#C0392B", bg:"#FEE2E2", border:"#FCA5A5", icon:"📋" },
   partial: { label:"Teilbezahlt", color:"#7C4A00", bg:"#FEF3C7", border:"#F59E0B", icon:"⚠️" },
   paid:    { label:"Bezahlt",     color:"#0A3B20", bg:"#DCFCE7", border:"#4ADE80", icon:"✅" },
