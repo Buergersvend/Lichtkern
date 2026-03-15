@@ -118,7 +118,4 @@ function SA({wizard,upd,aiText,aiLoading,onGen}){
   {pdfModal&&<PDFModal session={previewSession} onClose={()=>setPdfModal(false)}/>}
 </div>);}
 
-// ─── HISTORY ──────────────────────────────────
-function History({sessions, onDelete}){
-
 export { Session, STEPS };
