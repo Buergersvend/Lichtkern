@@ -451,7 +451,4 @@ ${[
   return null;
 }
 
-// ─── CLIENT ANALYSIS ──────────────────────────
-function ClientAnalysis({ clientId, clients, sessions, onBack }) {
-
 export { OnboardingScreen };
