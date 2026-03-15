@@ -125,5 +125,4 @@ Hinweis: Diese Dokumentation ersetzt keine medizinische oder therapeutische Beha
   );
 }
 
-// ─── ROOT ─────────────────────────────────────
 export { PDFModal };
