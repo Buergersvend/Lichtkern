@@ -210,7 +210,4 @@ Vielen Dank für deine baldige Begleichung.
   );
 }
 
-// ─── HUMAN DESIGN ENGINE ──────────────────────
-const HD_GATE_CENTER={
-
 export { Dashboard };
