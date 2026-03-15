@@ -366,7 +366,4 @@ function CalendarScreen({appointments,clients,onSaveAppt,onDeleteAppt,onStartSes
   );
 }
 
-// ─── DASHBOARD ────────────────────────────────
-function Dashboard({clients,sessions,appointments,onNav,reminders,onDismissReminder,onAddReminder,settings}){
-
 export { ApptModal, CalendarScreen };
