@@ -3,6 +3,7 @@ import { T } from "../config/theme.js";
 import { APPT_TYPES, LEVELS, TECHNIQUES, KNOWLEDGE, DE_DAYS, DE_DAYS_F, DE_MONTHS, HOURS } from "../config/constants.js";
 import { Card, Btn, Pill } from "../components/UI.jsx";
 
+function Dashboard({clients,sessions,appointments,onNav,reminders,onDismissReminder,onAddReminder,settings}){
   const lC={};sessions.forEach(s=>Object.entries(s.levels||{}).forEach(([k,v])=>{if(v>50)lC[k]=(lC[k]||0)+1;}));
   const tL=Object.entries(lC).sort(([,a],[,b])=>b-a)[0];
   const tI=tL?lvl(tL[0]):null;
