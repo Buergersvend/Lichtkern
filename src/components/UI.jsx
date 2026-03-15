@@ -204,6 +204,4 @@ function BottomNav({active,onChange}){
   </nav>);
 }
 
-// ─── APPOINTMENT MODAL ────────────────────────
-
 export { Flower, TreeOfLife, Card, SL, Btn, TI, LBar, Pill, Select, NAV, BottomNav };
