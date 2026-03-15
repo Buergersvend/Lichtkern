@@ -127,7 +127,4 @@ Antworte in diesen Abschnitten (kurz & präzise):
 
 // ════════════════════════════════════════════════════════════════
 //  HEILUNGS-GUIDE
-// ════════════════════════════════════════════════════════════════
-function HeilungsGuide({ groqFetch }) {
-
 export { ChakraMatrix };
