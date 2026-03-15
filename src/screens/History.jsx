@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback, useRef } from "react";
 import { T } from "../config/theme.js";
 import { Card, Btn } from "../components/UI.jsx";
 
+function History({sessions, onDelete}){
   const [detail,setDetail]=useState(null);
   const [pdfSession,setPdfSession]=useState(null);
   if(detail)return(<div style={{padding:"0 16px 96px"}}>
