@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback, useRef } from "react";
 import { OT } from "./OracleUI.jsx";
 import { OrganspracheLernmodul } from "./OrganspracheKarte.jsx";
 
+function Lernpfad({ groqFetch }){
   const [gewStufe, setGewStufe]   = useState(null);
   const [gewThema, setGewThema]   = useState(null);
   const [kiInhalt, setKiInhalt]   = useState("");
@@ -151,6 +152,4 @@ Schreibe klar, strukturiert und inspirierend. Auf Deutsch.`;
   );
 }
 
-// ════════════════════════════════════════════════════════════════
-//  RESONANZ ORACLE · HAUPT-KOMPONENTE
 export { Lernpfad };
