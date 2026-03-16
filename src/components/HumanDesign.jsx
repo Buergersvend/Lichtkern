@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback, useRef } from "react";
 import { Flower } from "./Decorations";
 import { T } from "../config/theme.js";
 
-import { lvl, top2 } from "../config/helpers";
+import { lvl, top2, dynGrad } from "../config/helpers";
 import { Card, Btn, SL, TI, Pill, Select, LBar } from "./UI.jsx";
 const HD_GATE_CENTER = {
   64:'head',61:'head',63:'head',
