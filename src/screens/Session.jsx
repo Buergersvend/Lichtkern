@@ -2,7 +2,8 @@ import React, { useState, useEffect, useCallback, useRef } from "react";
 import { Flower } from "../components/Decorations";
 import { T } from "../config/theme.js";
 import { APPT_TYPES, LEVELS, TECHNIQUES, KNOWLEDGE, DE_DAYS, DE_DAYS_F, DE_MONTHS, HOURS } from "../config/constants.js";
-import { Card, Btn, TI, Select, LBar, Pill } from "../components/UI.jsx";
+import { lvl, top2 } from "../config/helpers";
+import { Card, Btn, TI, Select, LBar, Pill, SL } from "../components/UI.jsx";
 
 const STEPS = ["Klient","Ziel","Ebenen","Techniken","Abschluss"];
 
