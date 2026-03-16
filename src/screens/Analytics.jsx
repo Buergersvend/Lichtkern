@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useCallback, useRef } from "react";
 import { Flower } from "../components/Decorations";
 import { T } from "../config/theme.js";
-import { Card, Btn, Pill } from "../components/UI.jsx";
+import { LEVELS, APPT_TYPES, DE_MONTHS } from "../config/constants.js";
+import { Card, Btn, Pill, SL } from "../components/UI.jsx";
 
 function Analytics({sessions,clients}){
   // ── compute all stats ──
