@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback, useRef } from "react";
 import { Flower } from "./Decorations";
 import { T } from "../config/theme.js";
-
+import { Card, Btn, SL, TI, Pill, Select, LBar } from "./UI.jsx";
 const HD_GATE_CENTER = {
   64:'head',61:'head',63:'head',
   47:'ajna',24:'ajna',4:'ajna',17:'ajna',43:'ajna',11:'ajna',
