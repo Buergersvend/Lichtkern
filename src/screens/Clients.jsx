@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback, useRef } from "react";
 import { T } from "../config/theme.js";
-import { APPT_TYPES, LEVELS, TECHNIQUES, KNOWLEDGE, DE_DAYS, DE_DAYS_F, DE_MONTHS, HOURS } from "../config/constants.js";
+import { Flower } from "../components/Decorations";
+import { Card, Btn, TI, Select, Pill, SL } from "../components/UI.jsx";
 import { Card, Btn, TI, Select, Pill } from "../components/UI.jsx";
 import { BodygraphSVG, HDTab } from "../components/HumanDesign.jsx";
 
