@@ -3,7 +3,7 @@ import { Flower } from "./src/components/Decorations";
 import { auth, db, groqFetch, fsGet, fsSet, fsDelete, onAuthStateChanged, signOut, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "./src/config/firebase.js";
 import { T } from "./src/config/theme.js";
 import { APPT_TYPES, LEVELS, TECHNIQUES, KNOWLEDGE, DE_DAYS, DE_DAYS_F, DE_MONTHS, HOURS } from "./src/config/constants.js";
-import { NAV, BottomNav, Card, Btn, TI, Select, LBar, Pill } from "./src/components/UI.jsx";
+import { NAV, BottomNav, Card, Btn, TI, Select, LBar, Pill, SL } from "./src/components/UI.jsx";
 import { BodygraphSVG, HDTab } from "./src/components/HumanDesign.jsx";
 import { LoginScreen } from "./src/screens/Login.jsx";
 import { Dashboard } from "./src/screens/Dashboard.jsx";
