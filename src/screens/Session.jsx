@@ -4,7 +4,7 @@ import { T } from "../config/theme.js";
 import { APPT_TYPES, LEVELS, TECHNIQUES, KNOWLEDGE, DE_DAYS, DE_DAYS_F, DE_MONTHS, HOURS } from "../config/constants.js";
 import { lvl, top2, dynGrad } from "../config/helpers";
 import { Card, Btn, TI, Select, LBar, Pill, SL } from "../components/UI.jsx";
-
+import { PDFModal } from "./PDFModal.jsx";
 const STEPS = ["Klient","Ziel","Ebenen","Techniken","Abschluss"];
 
 function Session({wizard,setWizard,clients,onComplete,onCancel}){
