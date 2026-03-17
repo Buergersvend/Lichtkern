@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback, useRef } from "react";
 import { Flower } from "../components/Decorations";
 import { T } from "../config/theme.js";
-import { Card, Btn, TI, Select } from "../components/UI.jsx";
+import { Card, Btn, TI, Select, SL, Pill } from "../components/UI.jsx";
 
 const ENERGIE_OPTIONS = ["Operationen","Unfälle","Traumata","Chronische Erkrankungen","Burnout","Schwere Verluste"];
 const THERAPIE_OPTIONS = ["Psychotherapie","Physiotherapie","Homöopathie","Osteopathie","Andere Energetik","Coaching","Keine bisherige Therapie"];
