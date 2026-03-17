@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useCallback, useRef } from "react";
 import { Flower } from "../components/Decorations";
 import { T } from "../config/theme.js";
-import { Card, Btn, Pill } from "../components/UI.jsx";
+import { APPT_TYPES, DE_MONTHS, DE_DAYS } from "../config/constants.js";
+import { Card, Btn, Pill, SL, TI, Select } from "../components/UI.jsx";
 
 const PAY_STATUS = {
   open:    { label:"Offen",       color:"#C0392B", bg:"#FEE2E2", border:"#FCA5A5", icon:"📋" },
