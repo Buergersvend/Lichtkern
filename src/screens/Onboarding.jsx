@@ -28,6 +28,7 @@ function OnboardingScreen({ onSave, onCancel }) {
     tags:"",
   });
   const [showPreview, setShowPreview] = useState(false);
+  const [mailEmail,setMailEmail] = useState("");
   const up = u => setForm(f=>({...f,...u}));
 
   // Mode selection
@@ -61,7 +62,7 @@ function OnboardingScreen({ onSave, onCancel }) {
   );
 
   // Mail modes: send questionnaire via email or PDF
-  const [mailEmail,setMailEmail] = useState("");
+  
   if(clientMode==="mail_text"||clientMode==="mail_pdf"){
     const sendMailText = () => {
       const subject = encodeURIComponent("Erstanamnese · Lichtkern");
