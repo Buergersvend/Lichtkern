@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback, useRef } from "react";
 import { Flower } from "../components/Decorations";
 import { T } from "../config/theme.js";
+import { uid } from "../config/helpers";
 import { Card, Btn, TI, Select, SL, Pill } from "../components/UI.jsx";
 
 const ENERGIE_OPTIONS = ["Operationen","Unfälle","Traumata","Chronische Erkrankungen","Burnout","Schwere Verluste"];
