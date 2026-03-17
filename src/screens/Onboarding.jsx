@@ -5,7 +5,7 @@ import { Card, Btn, TI, Select, SL, Pill } from "../components/UI.jsx";
 
 const ENERGIE_OPTIONS = ["Operationen","Unfälle","Traumata","Chronische Erkrankungen","Burnout","Schwere Verluste"];
 const THERAPIE_OPTIONS = ["Psychotherapie","Physiotherapie","Homöopathie","Osteopathie","Andere Energetik","Coaching","Keine bisherige Therapie"];
-
+const LEBENSBEREICH_OPTIONS = ["Körper & Gesundheit","Beziehung & Familie","Beruf & Finanzen","Spiritualität","Persönlichkeit","Sinnfrage & Lebensweg"];
 function OnboardingScreen({ onSave, onCancel }) {
   const ONBOARDING_STEPS = ["Person","Beschwerden","Vorgeschichte","Lebensbereiche","Ziele","Ahnen","Abschluss"];
   const [step, setStep] = useState(0);
