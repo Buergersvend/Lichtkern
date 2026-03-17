@@ -1,3 +1,4 @@
+import { T } from "./theme";
 // ─── LICHTKERN KONSTANTEN ────────────────────────
 const APPT_TYPES = {
   session:  { label:"Klienten-Sitzung", color:"#0D9488", bg:"#CCFBF1", border:"#7EC8C2", dot:"#0D9488" },
