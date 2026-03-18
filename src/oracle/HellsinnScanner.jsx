@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback, useRef } from "react";
-import { OT } from "./OracleUI.jsx";
+import { OT } from "../TI";  
 
 function HellsinnScanner({ groqFetch }){
   const [eingabe, setEingabe]       = useState("");
