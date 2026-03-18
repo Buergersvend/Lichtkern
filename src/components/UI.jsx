@@ -14,14 +14,6 @@ const LEVELS=[
   {key:"dna",name:"DNA / Ahnen",icon:"🧬",bg:"#EAF4FE",border:"#6BAEE8",bar:"#2C7FD4",text:"#0A2A50"},
 ];
 
-export function Flower({size=280,opacity=0.09,color}){
-  const c=color||T.teal,r=44,cx=size/2,cy=size/2;
-  const pts=[[0,0],[r,0],[-r,0],[r/2,r*0.866],[-r/2,r*0.866],[r/2,-r*0.866],[-r/2,-r*0.866]];
-  return(<svg width={size} height={size} style={{position:"absolute",top:0,left:0,opacity,pointerEvents:"none"}} viewBox={`0 0 ${size} ${size}`}>
-    {pts.map(([dx,dy],i)=><circle key={i} cx={cx+dx} cy={cy+dy} r={r} fill="none" stroke={c} strokeWidth="1.1"/>)}
-    <circle cx={cx} cy={cy} r={r*2} fill="none" stroke={c} strokeWidth="0.5"/>
-  </svg>);
-}
 
 export function Card({children,style={},onClick}){
   return(<div onClick={onClick} style={{background:T.bgCard,borderRadius:"18px",border:`1.5px solid ${T.border}`,padding:"16px",boxShadow:`0 3px 18px ${T.shadow}`,cursor:onClick?"pointer":"default",...style}}>{children}</div>);
