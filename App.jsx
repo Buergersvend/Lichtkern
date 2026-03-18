@@ -20,7 +20,7 @@ import { OnboardingScreen } from "./src/screens/Onboarding.jsx";
 import { SettingsScreen } from "./src/screens/Settings.jsx";
 import { GenTree } from "./src/screens/GenTree.jsx";
 import { PDFModal } from "./src/screens/PDFModal.jsx";
-import { ResonanzOracle } from "./src/oracle/ResonanzOracle.jsx";
+// import { ResonanzOracle } from "./src/oracle/ResonanzOracle.jsx";
 
 function Root() {
   const [user, setUser] = useState(undefined); // undefined = loading, null = logged out
