@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback, useRef } from "react";
 
-const OT = {
+export const OT = {
   bg:"#F0FAFA", bgCard:"#FFFFFF", bgSoft:"#E6F7F7", bgSofter:"#F5FDFD",
   border:"#B2E0DC", borderMid:"#7EC8C2",
   text:"#0F3030", textMid:"#2D6B68", textSoft:"#6AABA7",
