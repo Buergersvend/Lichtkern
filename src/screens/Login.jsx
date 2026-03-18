@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback, useRef } from "react";
 import { T } from "../config/theme.js";
-import { Flower, TI, Btn } from "../components/UI.jsx";
+import { TI, Btn } from "../components/UI.jsx";
+import { Flower } from "../components/Decorations";
 import { auth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "../config/firebase.js";
 import { getFirestore, doc, setDoc } from "firebase/firestore";
 const db = getFirestore();
