@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useCallback, useRef } from "react";
 import { T } from "../config/theme.js";
-import { Card, Btn, TI, Select, Pill } from "../components/UI.jsx";
-
+import { Card, Btn, TI, SL, Select, Pill } from "../components/UI.jsx";
 const THEMES = {
   kristallwasser: {
     name:"Kristallwasser", emoji:"🌊",
