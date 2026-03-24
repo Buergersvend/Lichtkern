@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback, useRef } from "react";
-import { todayStr, addDays, parseDate, toDateStr, getMondayOf, getWeekDays, getMonthDays } from '../config/helpers';
+import { todayStr, addDays, parseDate, toDateStr, getMondayOf, getWeekDays, getMonthDays, uid } from '../config/helpers';
 import { T } from "../config/theme.js";
 import { APPT_TYPES, LEVELS, TECHNIQUES, KNOWLEDGE, DE_DAYS, DE_DAYS_F, DE_MONTHS, HOURS } from "../config/constants.js";
 import { Card, Btn, TI, SL, Select, Pill } from "../components/UI.jsx";
