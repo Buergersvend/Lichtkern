@@ -2,6 +2,23 @@ import React, { useState, useEffect, useCallback, useRef } from "react";
 import { T } from "../config/theme.js";
 import { APPT_TYPES, LEVELS, TECHNIQUES, KNOWLEDGE, DE_DAYS, DE_DAYS_F, DE_MONTHS, HOURS } from "../config/constants.js";
 import { Btn, TI, SL, Card } from "../components/UI.jsx";
+function buildPDF(s, opts) {
+  const { version, praxisname, showGoal, showLevels, showTech, showOutcome, showHW, showAI } = opts;
+  const date = new Date(s.createdAt||Date.now()).toLocaleDateString("de-DE");
+  return `<!DOCTYPE html><html><head><meta charset="utf-8">
+  <style>body{font-family:Raleway,sans-serif;padding:40px;color:#0F3030;max-width:700px;margin:auto}
+  h1{font-family:Cinzel,serif;font-size:24px}h2{font-size:13px;text-transform:uppercase;letter-spacing:2px;color:#0D9488;margin-top:24px}
+  p{font-size:14px;line-height:1.7}hr{border:none;border-top:1px solid #B2E0DC;margin:20px 0}</style></head>
+  <body>
+  <h1>Lichtkern · Sitzungsdokumentation</h1>
+  ${praxisname?`<p style="font-size:12px">${praxisname}</p>`:""}
+  <p style="font-size:12px">Datum: ${date} · Klient: ${s.clientName||"–"}</p><hr>
+  ${showGoal&&s.goal?`<h2>Thema & Anliegen</h2><p>${s.goal}</p>`:""}
+  ${showOutcome&&s.outcome?`<h2>Ergebnis</h2><p>${s.outcome}</p>`:""}
+  ${showHW&&s.homework?`<h2>Integrationsauftrag</h2><p>${s.homework}</p>`:""}
+  ${showAI&&s.aiSummary?`<h2>KI-Resonanz</h2><p>${s.aiSummary}</p>`:""}
+  </body></html>`;
+}
 function PDFModal({ session, onClose }){
   const [version,setVersion] = useState("kurz");
   const [praxisname,setPraxisname]   = useState("");
