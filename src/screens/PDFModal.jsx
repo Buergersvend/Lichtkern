@@ -10,7 +10,7 @@ function buildPDF(s, opts) {
   h1{font-family:Cinzel,serif;font-size:24px}h2{font-size:13px;text-transform:uppercase;letter-spacing:2px;color:#0D9488;margin-top:24px}
   p{font-size:14px;line-height:1.7}hr{border:none;border-top:1px solid #B2E0DC;margin:20px 0}</style></head>
   <body>
-  <h1>Lichtkern · Sitzungsdokumentation</h1>
+  <button onclick="window.print()" style="position:fixed;top:20px;right:20px;background:#0D9488;color:white;border:none;padding:10px 20px;border-radius:8px;font-size:14px;cursor:pointer">⬇ PDF speichern</button><h1>Lichtkern · Sitzungsdokumentation</h1>
   ${praxisname?`<p style="font-size:12px">${praxisname}</p>`:""}
   <p style="font-size:12px">Datum: ${date} · Klient: ${s.clientName||"–"}</p><hr>
   ${showGoal&&s.goal?`<h2>Thema & Anliegen</h2><p>${s.goal}</p>`:""}
