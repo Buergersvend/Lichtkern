@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback, useRef } from "react";
 import { T } from "../config/theme.js";
 import { Flower } from "../components/Decorations";
 import { Card, Btn, TI, Select, Pill, SL } from "../components/UI.jsx";
-
+import { groqFetch, hdCalcDefinedCenters } from "../config/groq.js";
 import { BodygraphSVG, HDTab, HD_CHANNELS, HD_CENTER_CFG, HD_GATE_CENTER } from "../components/HumanDesign.jsx";
 
 function ClientDetailModal({client,sessions,onClose,onSave,onStart,onAnalyse}){
