@@ -5,7 +5,7 @@ import { Card, Btn, TI, Select, Pill, SL } from "../components/UI.jsx";
 
 import { BodygraphSVG, HDTab, HD_CHANNELS, HD_CENTER_CFG, HD_GATE_CENTER } from "../components/HumanDesign.jsx";
 async function groqFetch(prompt) {
-  const res = await fetch("/api/ki.js", {
+ const res = await fetch("/api/ki", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ prompt }),
