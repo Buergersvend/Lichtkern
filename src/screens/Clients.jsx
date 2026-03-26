@@ -2,9 +2,22 @@ import React, { useState, useEffect, useCallback, useRef } from "react";
 import { T } from "../config/theme.js";
 import { Flower } from "../components/Decorations";
 import { Card, Btn, TI, Select, Pill, SL } from "../components/UI.jsx";
-import { groqFetch, hdCalcDefinedCenters } from "../config/groq.js";
-import { BodygraphSVG, HDTab, HD_CHANNELS, HD_CENTER_CFG, HD_GATE_CENTER } from "../components/HumanDesign.jsx";
 
+import { BodygraphSVG, HDTab, HD_CHANNELS, HD_CENTER_CFG, HD_GATE_CENTER } from "../components/HumanDesign.jsx";
+async function groqFetch(prompt) {
+  const res = await fetch("/api/ki.js", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ prompt }),
+  });
+  if (!res.ok) throw new Error("KI Netzwerkfehler");
+  const data = await res.json();
+  return data.text || data.result || "";
+}
+
+function hdCalcDefinedCenters(gates) {
+  return new Set(gates);
+}
 function ClientDetailModal({client,sessions,onClose,onSave,onStart,onAnalyse}){
   const [tab,setTab]=useState('profil');
   const sc=sessions.filter(s=>s.clientId===client.id);
