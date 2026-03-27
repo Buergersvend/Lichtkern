@@ -19,7 +19,7 @@ async function groqFetch(prompt) {
 function hdCalcDefinedCenters(gates) {
   return new Set(gates);
 }
-function ClientDetailModal({client,sessions,onClose,onSave,onStart,onAnalyse}){
+function ClientDetailModal({client,sessions,onClose,onSave,onStart,onAnalyse,onDelete}){
   const [tab,setTab]=useState('profil');
   const sc=sessions.filter(s=>s.clientId===client.id);
   const tabs=[['profil','👤 Profil'],['hd','⚙ Human Design'],['sessions','📋 Sitzungen']];
