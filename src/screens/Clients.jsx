@@ -24,8 +24,8 @@ function ClientDetailModal({client,sessions,onClose,onSave,onStart,onAnalyse,onD
   const sc=sessions.filter(s=>s.clientId===client.id);
   const tabs=[['profil','👤 Profil'],['hd','⚙ Human Design'],['sessions','📋 Sitzungen']];
   return(
-    <div style={{position:'fixed',inset:0,background:'rgba(0,0,0,0.5)',zIndex:200,display:'flex',alignItems:'flex-end',justifyContent:'center'}} onClick={e=>{if(e.target===e.currentTarget)onClose();}}>
-      <div style={{background:'#FFFFFF',borderRadius:'24px 24px 0 0',width:'100%',maxWidth:'480px',maxHeight:'92vh',overflowY:'auto',padding:'0 0 80px'}}>
+   <div style={{position:'fixed',inset:0,background:'rgba(0,0,0,0.5)',zIndex:200,display:'flex',alignItems:'center',justifyContent:'center'}}
+    <div style={{background:'#FFFFFF',borderRadius:'24px',width:'95%',maxWidth:'560px',maxHeight:'92vh',overflowY:'auto',padding:'0 0 40px'}}
         {/* Handle */}
         <div style={{display:'flex',justifyContent:'center',padding:'12px 0 4px'}}><div style={{width:'40px',height:'4px',borderRadius:'2px',background:T.border}}/></div>
         {/* Header */}
