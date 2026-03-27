@@ -437,7 +437,7 @@ Warmherzig, präzise, ohne Heilversprechen.`;
       {/* KI Analysis */}
       <div>
         <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:'8px'}}>
-          <SL>✦ KI-Analyse</SL>
+         <SL>✦ Resonanz-Analyse</SL>
           <Btn onClick={genAI} disabled={!hasData||aiLoading} style={{padding:'8px 16px',fontSize:'11px',opacity:(!hasData||aiLoading)?0.5:1}}>
             {aiLoading?'…':'⚙ Analysieren'}
           </Btn>
