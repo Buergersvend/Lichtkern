@@ -40,7 +40,7 @@ function ClientDetailModal({client,sessions,onClose,onSave,onStart,onAnalyse}){
         <div style={{display:'flex',gap:'8px',padding:'12px 20px 0'}}>
           <button onClick={()=>onStart(client)} style={{flex:1,padding:'9px',borderRadius:'12px',background:T.tealL,border:`1.5px solid ${T.borderMid}`,fontFamily:'Raleway',fontWeight:700,fontSize:'12px',color:T.tealD,cursor:'pointer'}}>✦ Sitzung</button>
           <button onClick={()=>{onAnalyse(client.id);onClose();}} style={{flex:1,padding:'9px',borderRadius:'12px',background:T.violetL,border:`1.5px solid #A78BFA`,fontFamily:'Raleway',fontWeight:700,fontSize:'12px',color:T.violetD,cursor:'pointer'}}>📊 Analyse</button>
-        </div>
+       <button onClick={()=>{if(window.confirm('Klient wirklich löschen?')){onDelete(client.id);onClose();}}} style={{flex:1,padding:'9px',borderRadius:'12px',background:'#FEE2E2',border:'1.5px solid #FCA5A5',fontFamily:'Raleway',fontWeight:700,fontSize:'12px',color:'#DC2626',cursor:'pointer'}}>🗑 Löschen</button> </div>
         {/* Tabs */}
         <div style={{display:'flex',gap:'6px',padding:'12px 20px',borderBottom:`1px solid ${T.border}`}}>
           {tabs.map(([v,l])=><button key={v} onClick={()=>setTab(v)} style={{flex:1,padding:'9px 4px',borderRadius:'10px',border:`1.5px solid ${tab===v?T.teal:T.border}`,background:tab===v?T.teal:'white',fontFamily:'Raleway',fontSize:'11px',fontWeight:700,color:tab===v?'white':T.textMid,cursor:'pointer'}}>{l}</button>)}
