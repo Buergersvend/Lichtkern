@@ -343,6 +343,7 @@ function Clients({clients,sessions,onSave,onStart,onDelete,onOnboarding,reminder
         onSave={updated=>{onSave(clients.map(c=>c.id===updated.id?updated:c));setSelClient(updated);}}
         onStart={c=>{onStart(c);setSelClient(null);}}
         onAnalyse={id=>{onAnalyse&&onAnalyse(id);}}
+           onDelete={id=>{onDelete&&onDelete(id);}}        
       />}
     </div>
   );
