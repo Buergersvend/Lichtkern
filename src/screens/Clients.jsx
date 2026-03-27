@@ -4,6 +4,7 @@ import { Flower } from "../components/Decorations";
 import { Card, Btn, TI, Select, Pill, SL } from "../components/UI.jsx";
 
 import { BodygraphSVG, HDTab, HD_CHANNELS, HD_CENTER_CFG, HD_GATE_CENTER } from "../components/HumanDesign.jsx";
+import { uid } from "../config/helpers.js";
 async function groqFetch(prompt) {
  const res = await fetch("/api/ki", {
     method: "POST",
