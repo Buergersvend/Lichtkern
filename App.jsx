@@ -200,14 +200,7 @@ function App({ user, onLogout }){
       <div style={{position:"fixed",bottom:"12%",left:isDesktop?"200px":"-50px",width:"220px",height:"220px",borderRadius:"50%",background:`radial-gradient(circle,${T.violetL} 0%,transparent 70%)`,pointerEvents:"none",zIndex:0,opacity:0.5}}/>
       <div style={{position:"relative",zIndex:1,paddingTop:"12px",maxWidth:isDesktop?"none":"480px",margin:"0 auto"}}>
         {/* Mobile header */}
-        {!isDesktop&&<header style={{padding:"12px 16px 10px",display:"flex",justifyContent:"space-between",alignItems:"flex-start",borderBottom:`1.5px solid ${T.border}`,marginBottom:"4px"}}>
-          <div>
-            <div style={{fontFamily:"Cinzel",fontSize:"20px",color:T.text,fontWeight:700,letterSpacing:"1px"}}>✦ Lichtkern</div>
-            <div style={{fontFamily:"Raleway",fontSize:"9px",color:T.textSoft,letterSpacing:"2px",textTransform:"uppercase",fontWeight:600,marginTop:"2px"}}>powered by Human Resonanz</div>
-            {settings.praxisname&&<div style={{fontFamily:"Raleway",fontSize:"11px",color:T.textMid,fontWeight:700,marginTop:"2px"}}>{settings.praxisname}</div>}
-          </div>
-          <button onClick={()=>setShowSettings(true)} style={{width:"38px",height:"38px",borderRadius:"50%",background:T.bgSoft,border:`1.5px solid ${T.border}`,fontSize:"17px",cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0}}>⚙️</button>
-        </header>}
+        
         {/* Brand hero banner - left: greeting+praxis, center: LICHTKERN+flower */}
        
       
