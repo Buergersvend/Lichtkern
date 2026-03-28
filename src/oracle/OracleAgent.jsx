@@ -34,7 +34,7 @@ export default function OracleAgent({ onClose }) {
         {/* Header */}
         <div style={{ padding: "20px 24px 12px", borderBottom: `1px solid ${T.border}`, display: "flex", justifyContent: "space-between", alignItems: "center" }}>
           <div>
-            <div style={{ fontFamily: "Cinzel", fontSize: "20px", color: T.text, fontWeight: 700 }}>✦ Oracle</div>
+            <div style={{ fontFamily: "Cinzel", fontSize: "20px", color: T.text, fontWeight: 700 }}>✦ Resonanz</div>
             <div style={{ fontFamily: "Raleway", fontSize: "11px", color: T.textSoft, marginTop: "2px" }}>Dein intelligenter Praxis-Assistent</div>
           </div>
           <button onClick={onClose} style={{ background: T.bgSoft, border: `1.5px solid ${T.border}`, borderRadius: "50%", width: "32px", height: "32px", cursor: "pointer", fontSize: "16px", color: T.textMid }}>✕</button>
@@ -59,13 +59,13 @@ export default function OracleAgent({ onClose }) {
               {m.text}
             </div>
           ))}
-          {loading && <div style={{ alignSelf: "flex-start", fontFamily: "Raleway", fontSize: "13px", color: T.textSoft }}>Oracle denkt…</div>}
+          {loading && <div style={{ alignSelf: "flex-start", fontFamily: "Raleway", fontSize: "13px", color: T.textSoft }}>Resonanz denkt…</div>}
         </div>
 
         {/* Input */}
         <div style={{ padding: "12px 24px 20px", borderTop: `1px solid ${T.border}`, display: "flex", gap: "10px" }}>
           <div style={{ flex: 1 }}>
-            <TI value={input} onChange={setInput} placeholder="Frage an Oracle…" />
+            <TI value={input} onChange={setInput} placeholder="Frage an Resonanz…" />
           </div>
           <Btn onClick={send} disabled={loading} style={{ padding: "10px 20px" }}>Senden</Btn>
         </div>
