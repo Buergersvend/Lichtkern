@@ -181,6 +181,12 @@ function App({ user, onLogout }){
           })}
         </div>
         {/* Settings bottom */}
+        <div style={{padding:"12px 14px 24px",borderTop:`1.5px solid ${T.border}`}}>
+            <button onClick={()=>setShowSettings(true)} style={{display:"flex",alignItems:"center",gap:"13px",padding:"12px 14px",borderRadius:"14px",border:"none",background:"transparent",width:"100%",cursor:"pointer"}}>
+              <span style={{fontSize:"17px",opacity:0.65}}>⚙</span>
+              <span style={{color:"rgba(245,240,232,0.7)"}}>Einstellungen</span>
+            </button>
+          </div>
        </div>
     )}
 
