@@ -89,6 +89,7 @@ function WelcomeSetup({onComplete}){
 
 // ─── MAIN APP ─────────────────────────────────
 function App({ user, onLogout }){
+  const [showOracle, setShowOracle] = useState(false);
   const [screen,setScreen]           = useState("dashboard");
   const [clients,setClients]         = useState([]);
   const [sessions,setSessions]       = useState([]);
@@ -257,8 +258,7 @@ function App({ user, onLogout }){
         </div>
       </div>
     </div>
-    {user?.email==="donath-sven@web.de"&&<button onClick={()=>setShowOracle(true)} style={{position:"fixed",bottom:"80px",right:"16px",width:"52px",height:"52px",borderRadius:"50%",background:"linear-gradient(135deg,#6D28D9,#0D9488)",border:"none",cursor:"pointer",fontSize:"22px",boxShadow:"0 4px 16px rgba(109,40,217,0.4)",zIndex:100}}>✦</button>}
-{showOracle&&<OracleAgent onClose={()=>setShowOracle(false)}/>}
+   
     {!isDesktop&&<BottomNav active={screen} onChange={nav}/>}
   </div>);
 }
