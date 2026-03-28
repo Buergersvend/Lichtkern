@@ -4,6 +4,7 @@ import { auth, db, groqFetch, fsGet, fsSet, fsDelete, onAuthStateChanged, signOu
 import { T } from "./src/config/theme.js";
 import { APPT_TYPES, LEVELS, TECHNIQUES, KNOWLEDGE, DE_DAYS, DE_DAYS_F, DE_MONTHS, HOURS } from "./src/config/constants.js";
 import { uid } from "./src/config/helpers.js";
+
 import { NAV, BottomNav, Card, Btn, TI, Select, LBar, Pill, SL } from "./src/components/UI.jsx";
 import { BodygraphSVG, HDTab } from "./src/components/HumanDesign.jsx";
 import { LoginScreen } from "./src/screens/Login.jsx";
@@ -21,10 +22,11 @@ import { OnboardingScreen } from "./src/screens/Onboarding.jsx";
 import { SettingsScreen } from "./src/screens/Settings.jsx";
 import { GenTree } from "./src/screens/GenTree.jsx";
 import { PDFModal } from "./src/screens/PDFModal.jsx";
-// import { ResonanzOracle } from "./src/oracle/ResonanzOracle.jsx";
+import OracleAgent from "./src/oracle/OracleAgent.jsx";
 
 function Root() {
   const [user, setUser] = useState(undefined); // undefined = loading, null = logged out
+  const [showOracle, setShowOracle] = useState(false);
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, u => setUser(u || null));
     return unsub;
@@ -255,6 +257,8 @@ function App({ user, onLogout }){
         </div>
       </div>
     </div>
+    {user?.email==="donath-sven@web.de"&&<button onClick={()=>setShowOracle(true)} style={{position:"fixed",bottom:"80px",right:"16px",width:"52px",height:"52px",borderRadius:"50%",background:"linear-gradient(135deg,#6D28D9,#0D9488)",border:"none",cursor:"pointer",fontSize:"22px",boxShadow:"0 4px 16px rgba(109,40,217,0.4)",zIndex:100}}>✦</button>}
+{showOracle&&<OracleAgent onClose={()=>setShowOracle(false)}/>}
     {!isDesktop&&<BottomNav active={screen} onChange={nav}/>}
   </div>);
 }
