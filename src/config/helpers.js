@@ -14,7 +14,7 @@ export const dynGrad = (lv = {}) => {
 };
 
 // ─── DATE HELPERS ─────────────────────────────
-export const toDateStr = d => d.toISOString().slice(0, 10);
+export const toDateStr = d => `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
 export const todayStr = () => toDateStr(new Date());
 export const parseDate = s => { const [y, m, d] = s.split("-"); return new Date(+y, +m - 1, +d); };
 export const addDays = (s, n) => { const d = parseDate(s); d.setDate(d.getDate() + n); return toDateStr(d); };
