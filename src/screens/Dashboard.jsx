@@ -91,10 +91,7 @@ function Dashboard({clients,sessions,appointments,onNav,settings}){
         ))}
       </div>
 
-      {/* Einstellungen */}
-      <div style={{textAlign:"center"}}>
-        <button onClick={()=>onNav("settings")} style={{background:"none",border:"none",cursor:"pointer",fontFamily:"Raleway",fontSize:"11px",color:"rgba(201,168,76,0.35)",letterSpacing:"1px"}}>⚙ Einstellungen</button>
-      </div>
+      
 
     </div>
   );
