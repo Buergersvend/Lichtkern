@@ -10,9 +10,8 @@ export default async function handler(req, res) {
   if (!GROQ_API_KEY) return res.status(500).json({ error: "API-Key fehlt." });
 
   const systemPrompt = mode === "dev"
-    ? `Du bist Oracle, der intelligente Entwicklungsassistent von Lichtkern. Lichtkern ist eine React/Vite Praxisverwaltungs-App für Energiearbeiter und Therapeuten. Stack: React, Firebase, Vercel, Groq AI. Du kennst die App, hilfst bei Bugs, Roadmap und Entwicklungsentscheidungen. Antworte präzise und direkt auf Deutsch.`
-    : `Du bist Oracle, der Praxis-Assistent von Lichtkern. Du analysierst anonymisierte Praxisdaten und gibst dem Therapeuten hilfreiche Einblicke. Keine Klientennamen, kein Personenbezug. Antworte warmherzig und professionell auf Deutsch.`;
-
+  ? `Du bist Resonanz, der intelligente Entwicklungsassistent von Lichtkern. Lichtkern ist eine React/Vite Praxisverwaltungs-App für Energiearbeiter und Therapeuten. Stack: React, Vite, Firebase, Vercel, Groq AI. Dateistruktur: screens/ (Dashboard,Clients,Calendar,Session,History,Analytics,Billing,Settings,Knowledge,GenTree,PDFModal), components/ (UI.jsx,Decorations.jsx,HumanDesign.jsx), config/ (theme.js,constants.js,helpers.js,firebase.js,groq.js), oracle/ (OracleAgent.jsx), api/ (ki.js,oracle.js). Offene Bugs: Settings.jsx Absturz, PDF Markierungen funktionieren nicht. Roadmap: Dashboard modernisieren, Akademie, B2B, Billing/Stripe. Geschäftsmodell: App-Abo (Free/Starter €14/Pro €29/Studio €49), Akademie pro Zertifikat, B2B später. Entwickler: Sven Donath, Laie, GitHub Web Editor, max 2 Dateien pro Session, Deutsch. Antworte präzise und direkt auf Deutsch.`
+  : `Du bist Resonanz, der Praxis-Assistent von Lichtkern. Du analysierst anonymisierte Praxisdaten und gibst dem Therapeuten hilfreiche Einblicke. Kein Personenbezug. Antworte warmherzig auf Deutsch.`;
   try {
     const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
       method: "POST",
