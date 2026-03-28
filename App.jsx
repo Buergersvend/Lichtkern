@@ -157,7 +157,7 @@ function App({ user, onLogout }){
 
   if(!settings.setupDone) return(<WelcomeSetup onComplete={async(modules)=>{const newS={...settings,modules,setupDone:true};await saveSettings(newS);}}/>);
 
-  return(<div style={{background:T.bg,minHeight:"100vh",display:"flex",flexDirection:"row"}}>
+  return(<div style={{background:"#111111",minHeight:"100vh",display:"flex",flexDirection:"row"}}>
     {/* Desktop sidebar */}
     {isDesktop && (
       <div style={{width:"260px",flexShrink:0,background:"#111111",borderRight:'1px solid rgba(201,168,76,0.15)',display:"flex",flexDirection:"column",position:"fixed",top:0,left:0,bottom:0,zIndex:100,backdropFilter:"blur(20px)",boxShadow:"2px 0 24px rgba(13,148,136,0.06)"}}>
@@ -167,7 +167,7 @@ function App({ user, onLogout }){
             const isA=screen===item.id;
             return(
               <React.Fragment key={item.id}>
-              <button onClick={()=>nav(item.id)} style={{display:"flex",alignItems:"center",gap:"13px",padding:"12px 14px",borderRadius:"14px",border:"none",background:isA?T.tealL:"transparent",color:isA?T.tealD:T.textMid,cursor:"pointer",fontFamily:"Raleway",fontWeight:700,fontSize:"13px",textAlign:"left",boxShadow:isA?`0 2px 10px rgba(13,148,136,0.12)`:"none",transition:"all 0.15s"}}>
+              <button onClick={()=>nav(item.id)} style={{display:"flex",alignItems:"center",gap:"13px",padding:"12px 14px",borderRadius:"14px",border:"none",background:isA?"rgba(201,168,76,0.15)":"transparent",color:isA?T.tealD:T.textMid,cursor:"pointer",fontFamily:"Raleway",fontWeight:700,fontSize:"13px",textAlign:"left",boxShadow:isA?`0 2px 10px rgba(13,148,136,0.12)`:"none",transition:"all 0.15s"}}>
                 <span style={{fontSize:"17px",width:"22px",textAlign:"center",opacity:isA?1:0.65}}>{item.icon}</span>
                 <span>{item.label}</span>
                 {isA&&<div style={{marginLeft:"auto",width:"6px",height:"6px",borderRadius:"50%",background:T.teal,flexShrink:0}}/>}
