@@ -160,7 +160,7 @@ function App({ user, onLogout }){
   return(<div style={{background:T.bg,minHeight:"100vh",display:"flex",flexDirection:"row"}}>
     {/* Desktop sidebar */}
     {isDesktop && (
-      <div style={{width:"260px",flexShrink:0,background:"rgba(242,251,250,0.99)",borderRight:`1.5px solid rgba(13,148,136,0.12)`,display:"flex",flexDirection:"column",position:"fixed",top:0,left:0,bottom:0,zIndex:100,backdropFilter:"blur(20px)",boxShadow:"2px 0 24px rgba(13,148,136,0.06)"}}>
+      <div style={{width:"260px",flexShrink:0,background:"#111111",borderRight:'1px solid rgba(201,168,76,0.15)',display:"flex",flexDirection:"column",position:"fixed",top:0,left:0,bottom:0,zIndex:100,backdropFilter:"blur(20px)",boxShadow:"2px 0 24px rgba(13,148,136,0.06)"}}>
         {/* Nav items */}
         <div style={{padding:"24px 14px 4px",flex:1,display:"flex",flexDirection:"column",gap:"3px",overflowY:"auto"}}>
           {NAV.filter(n=>n.id!=="session").map(item=>{
