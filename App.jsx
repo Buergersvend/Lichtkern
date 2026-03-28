@@ -209,35 +209,7 @@ function App({ user, onLogout }){
           <button onClick={()=>setShowSettings(true)} style={{width:"38px",height:"38px",borderRadius:"50%",background:T.bgSoft,border:`1.5px solid ${T.border}`,fontSize:"17px",cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0}}>⚙️</button>
         </header>}
         {/* Brand hero banner - left: greeting+praxis, center: LICHTKERN+flower */}
-        {isDesktop&&screen==="dashboard"&&(()=>{
-          const h=new Date().getHours();
-          const g=h<12?"Guten Morgen":h<17?"Guten Tag":"Guten Abend";
-          const n=settings?.therapistName?settings.therapistName.split(" ")[0]:"";
-          return(
-            <div style={{position:"relative",margin:"0 32px 28px",borderRadius:"28px",overflow:"hidden",padding:"36px 48px",background:`linear-gradient(145deg,${T.tealL} 0%,#FAFFFE 45%,${T.violetL} 100%)`,boxShadow:`0 8px 40px rgba(13,148,136,0.18)`,border:`1.5px solid rgba(13,148,136,0.2)`,display:"flex",alignItems:"center",gap:"0"}}>
-              {/* Flower watermark - centered */}
-              <div style={{position:"absolute",top:"50%",left:"50%",transform:"translate(-50%,-50%)",pointerEvents:"none",zIndex:0}}>
-                <Flower size={420} opacity={0.2}/>
-              </div>
-              {/* Left: greeting + praxis */}
-              <div style={{position:"relative",zIndex:1,flex:"0 0 220px",display:"flex",flexDirection:"column",gap:"6px"}}>
-                {n&&<div style={{fontFamily:"Raleway",fontSize:"10px",color:T.tealD,letterSpacing:"2.5px",textTransform:"uppercase",fontWeight:700,opacity:0.85}}>{g}, {n} ✦</div>}
-                {settings.praxisname&&<div style={{fontFamily:"Raleway",fontSize:"13px",color:T.tealD,fontWeight:700,letterSpacing:"1px"}}>— {settings.praxisname} —</div>}
-              </div>
-              {/* Center: LICHTKERN + Flower */}
-              <div style={{position:"relative",zIndex:1,flex:1,textAlign:"center"}}>
-                <div style={{position:"absolute",top:"50%",left:"50%",transform:"translate(-50%,-55%)",pointerEvents:"none",zIndex:0}}>
-                  <Flower size={320} opacity={0.22}/>
-                </div>
-                <div style={{position:"relative",zIndex:1}}>
-                  <div style={{fontFamily:"Cinzel",fontSize:"46px",color:T.text,fontWeight:700,letterSpacing:"6px",lineHeight:1,textShadow:"0 2px 20px rgba(13,148,136,0.15)"}}>✦ LICHTKERN</div>
-                  <div style={{fontFamily:"Raleway",fontSize:"9px",color:T.textSoft,letterSpacing:"5px",textTransform:"uppercase",fontWeight:700,marginTop:"8px"}}>powered by Human Resonanz</div>
-                </div>
-              </div>
-              {/* Right spacer */}
-              <div style={{flex:"0 0 220px"}}/>
-            </div>
-          );
+       
         })()}
         <div style={{padding:isDesktop?"0 32px":"0"}}>
       {screen==="dashboard"&&<Dashboard clients={clients} sessions={sessions} appointments={appointments} onNav={nav} reminders={reminders} onDismissReminder={dismissReminder} onAddReminder={addReminder} settings={settings}/>}
