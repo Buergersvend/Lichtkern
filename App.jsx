@@ -160,7 +160,7 @@ function App({ user, onLogout }){
   return(<div style={{background:"#111111",minHeight:"100vh",display:"flex",flexDirection:"row"}}>
     {/* Desktop sidebar */}
     {isDesktop && (
-      <div style={{width:"260px",flexShrink:0,background:"#111111",borderRight:'1px solid rgba(201,168,76,0.15)',display:"flex",flexDirection:"column",position:"fixed",top:0,left:0,bottom:0,zIndex:100,backdropFilter:"blur(20px)",boxShadow:"2px 0 24px rgba(13,148,136,0.06)"}}>
+      <div style={{width:"260px",flexShrink:0,background:"#111111",borderRight:'1px solid rgba(201,168,76,0.15)',display:"flex",flexDirection:"column",overflowY:"hidden",position:"fixed",top:0,left:0,bottom:0,zIndex:100,backdropFilter:"blur(20px)",boxShadow:"2px 0 24px rgba(13,148,136,0.06)"}}>
         {/* Nav items */}
         <div style={{padding:"24px 14px 4px",flex:1,display:"flex",flexDirection:"column",gap:"3px",overflowY:"hidden"}}>
           {NAV.filter(n=>n.id!=="session").map(item=>{
@@ -174,7 +174,7 @@ function App({ user, onLogout }){
               </button>
               {item.id==="clients"&&<button onClick={()=>startSession()} style={{display:"flex",alignItems:"center",gap:"13px",padding:"12px 14px",borderRadius:"14px",border:"none",background:"transparent",color:T.textMid,cursor:"pointer",fontFamily:"Raleway",fontWeight:700,fontSize:"13px",textAlign:"left",transition:"all 0.15s"}}>
                 <span style={{fontSize:"17px",width:"22px",textAlign:"center",opacity:0.65}}>✦</span>
-                <span>Sitzung</span>
+               <span style={{color:"rgba(245,240,232,0.7)"}}>Sitzung</span>
               </button>}
               </React.Fragment>
             );
