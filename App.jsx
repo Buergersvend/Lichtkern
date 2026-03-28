@@ -8,7 +8,7 @@ import { uid } from "./src/config/helpers.js";
 import { NAV, BottomNav, Card, Btn, TI, Select, LBar, Pill, SL } from "./src/components/UI.jsx";
 import { BodygraphSVG, HDTab } from "./src/components/HumanDesign.jsx";
 import { LoginScreen } from "./src/screens/Login.jsx";
-import { Dashboard } from "./src/screens/Dashboard.jsx";
+import Dashboard from "./src/screens/Dashboard.jsx";
 import { Clients, ClientDetailModal, SynergyEngine } from "./src/screens/Clients.jsx";
 import { Session } from "./src/screens/Session.jsx";
 import { CalendarScreen } from "./src/screens/Calendar.jsx";
