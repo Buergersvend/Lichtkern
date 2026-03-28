@@ -168,9 +168,9 @@ function App({ user, onLogout }){
             return(
               <React.Fragment key={item.id}>
               <button onClick={()=>nav(item.id)} style={{display:"flex",alignItems:"center",gap:"13px",padding:"12px 14px",borderRadius:"14px",border:"none",background:isA?"rgba(201,168,76,0.15)":"transparent",color:isA?T.tealD:T.textMid,cursor:"pointer",fontFamily:"Raleway",fontWeight:700,fontSize:"13px",textAlign:"left",boxShadow:isA?`0 2px 10px rgba(13,148,136,0.12)`:"none",transition:"all 0.15s"}}>
-                <span style={{fontSize:"17px",width:"22px",textAlign:"center",opacity:isA?1:0.65}}>{item.icon}</span>
+                <span style={{fontSize:"17px",width:"22px",textAlign:"center",opacity:isA?1:0.5}}>{item.icon}</span>
                 <span>{item.label}</span>
-                {isA&&<div style={{marginLeft:"auto",width:"6px",height:"6px",borderRadius:"50%",background:T.teal,flexShrink:0}}/>}
+                {isA&&<div style={{marginLeft:"auto",width:"6px",height:"6px",borderRadius:"50%",background:"#C9A84C",flexShrink:0}}/>}
               </button>
               {item.id==="clients"&&<button onClick={()=>startSession()} style={{display:"flex",alignItems:"center",gap:"13px",padding:"12px 14px",borderRadius:"14px",border:"none",background:"transparent",color:T.textMid,cursor:"pointer",fontFamily:"Raleway",fontWeight:700,fontSize:"13px",textAlign:"left",transition:"all 0.15s"}}>
                 <span style={{fontSize:"17px",width:"22px",textAlign:"center",opacity:0.65}}>✦</span>
