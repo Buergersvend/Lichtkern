@@ -80,7 +80,7 @@ export const NAV=[
   {id:"session",  label:"Sitzung",   icon:"✦"},
   {id:"calendar", label:"Kalender",  icon:"◷"},
   {id:"history",  label:"Verlauf",   icon:"◎"},
-  {id:"oracle", label:"Oracle", icon:"✦"},
+ {id:"oracle", label:"Resonanz", icon:"✦"},
 ];
 
 export function BottomNav({active,onChange}){
