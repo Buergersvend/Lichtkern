@@ -181,7 +181,7 @@ function App({ user, onLogout }){
           })}
         </div>
         {/* Settings bottom */}
-       
+       </div>
     )}
 
     {/* Main content */}
