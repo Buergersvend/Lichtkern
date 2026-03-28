@@ -277,7 +277,7 @@ function CalendarScreen({appointments,clients,onSaveAppt,onDeleteAppt,onStartSes
         </div>
         {/* Weekday header */}
         <div style={{display:"grid",gridTemplateColumns:"repeat(7,1fr)",gap:"2px",marginBottom:"4px"}}>
-          {DE_DAYS.map(d=><div key={d} style={{textAlign:"center",fontFamily:"Raleway",fontSize:"11px",fontWeight:700,color:"#C9A84C",letterSpacing:"1px",padding:"4px 0"}}>{d}</div>
+          {DE_DAYS.map(d=><div key={d} style={{textAlign:"center",fontFamily:"Raleway",fontSize:"11px",fontWeight:700,color:"#C9A84C",letterSpacing:"1px",padding:"4px 0"}}>{d}</div>)}
         </div>
         {/* Day grid */}
         <div style={{display:"grid",gridTemplateColumns:"repeat(7,1fr)",gap:"2px"}}>
