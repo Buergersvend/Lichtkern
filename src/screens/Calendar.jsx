@@ -220,9 +220,9 @@ function CalendarScreen({appointments,clients,onSaveAppt,onDeleteAppt,onStartSes
             return(
               <div key={d} onClick={()=>{setCurrent(d);setView("day");}} style={{cursor:"pointer"}}>
                 <div style={{textAlign:"center",marginBottom:"5px"}}>
-                  <div style={{fontFamily:"Raleway",fontSize:"9px",fontWeight:700,color:T.textSoft,letterSpacing:"0.5px"}}>{DE_DAYS[i]}</div>
+                  <div style={{fontFamily:"Raleway",fontSize:"9px",fontWeight:700,color:"#C9A84C",letterSpacing:"0.5px"}}>{DE_DAYS[i]}</div>
                   <div style={{width:"28px",height:"28px",borderRadius:"50%",margin:"3px auto",display:"flex",alignItems:"center",justifyContent:"center",background:isToday?T.teal:isSelected?T.tealL:"transparent",border:isToday?"none":isSelected?`1.5px solid ${T.tealD}`:"none"}}>
-                    <span style={{fontFamily:"Raleway",fontSize:"13px",fontWeight:700,color:isToday?"white":isSelected?T.tealD:T.text}}>{pd.getDate()}</span>
+                    <span style={{fontFamily:"Raleway",fontSize:"13px",fontWeight:700,color:isToday?"white":isSelected?T.tealD:"rgba(245,240,232,0.85)" }}>{pd.getDate()}</span>
                   </div>
                 </div>
                 <div style={{minHeight:"80px",background:isSelected?"rgba(204,251,241,0.3)":"transparent",borderRadius:"10px",padding:"2px"}}>
