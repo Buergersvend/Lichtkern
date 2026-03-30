@@ -71,8 +71,8 @@ function LoginScreen({ onLogin }){
       <div style={{width:"100%", maxWidth:"400px", position:"relative", zIndex:1}}>
         {/* Logo */}
         <div style={{textAlign:"center", marginBottom:"36px"}}>
-          <div style={{width:"80px",height:"80px",borderRadius:"50%",background:`linear-gradient(135deg,${T.teal},#6D3FCC)`,display:"flex",alignItems:"center",justifyContent:"center",fontSize:"32px",margin:"0 auto 16px",boxShadow:`0 8px 32px rgba(13,148,136,0.35)`,color:"white"}}>✦</div>
-          <div style={{fontFamily:"Cinzel", fontSize:"28px", color:T.text, fontWeight:700, letterSpacing:"3px"}}>LICHTKERN</div>
+        <img src="https://human-resonanz-yeze.vercel.app/Firmenlogo_SD_202603-removebg-preview.png" style={{width:"80px",height:"80px",objectFit:"contain"}}/>
+        
           <div style={{fontFamily:"Raleway", fontSize:"11px", color:T.textSoft, letterSpacing:"3px", marginTop:"5px", fontWeight:600}}>POWERED BY HUMAN RESONANZ</div>
         </div>
 
