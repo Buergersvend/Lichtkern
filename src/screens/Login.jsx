@@ -53,6 +53,7 @@ function LoginScreen({ onLogin }){
         onLogin(cred.user);
       } else {
         const cred = await signInWithEmailAndPassword(auth, email, password);
+       if(remember)localStorage.setItem("rememberedEmail",email);else localStorage.removeItem("rememberedEmail");
         onLogin(cred.user);
       }
     } catch (e) {
