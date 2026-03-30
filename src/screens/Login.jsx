@@ -12,11 +12,16 @@ function LoginScreen({ onLogin }){
   const [loading, setLoading]     = useState(false);
   const [error, setError]         = useState("");
   const [pwVisible, setPwVisible] = useState(false);
+  const [remember, setRemember] = useState(!!localStorage.getItem("rememberedEmail"));
   // useRef for inputs — prevents focus loss on every keystroke
   const refEmail    = useRef();
   const refPassword = useRef();
   const refName     = useRef();
-  const refPraxis   = useRef();
+ const refPraxis = useRef();
+    useEffect(()=>{
+      const saved=localStorage.getItem("rememberedEmail");
+      if(saved&&refEmail.current)refEmail.current.value=saved;
+    },[]);
 
   const errMap = {
     "auth/email-already-in-use": "Diese E-Mail ist bereits registriert.",
