@@ -65,7 +65,7 @@ function LoginScreen({ onLogin }){
   const inp = { width:"100%", padding:"14px 16px", borderRadius:"14px", border:`1.5px solid ${T.border}`, fontFamily:"Raleway", fontSize:"16px", color:T.text, background:"#FAFFFE", outline:"none", boxSizing:"border-box", WebkitAppearance:"none" };
 
   return (
-    <div style={{background:`linear-gradient(160deg, #E8FAF8 0%, #F0EFFE 100%)`, minHeight:"100vh", display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", padding:"24px", position:"relative", overflow:"hidden"}}>
+    <div style={{background:"#0F0F0F")`, minHeight:"100vh", display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", padding:"24px", position:"relative", overflow:"hidden"}}>
       <div style={{position:"fixed",top:"-100px",right:"-100px",width:"350px",height:"350px",borderRadius:"50%",background:`radial-gradient(circle,${T.tealL} 0%,transparent 70%)`,opacity:0.8,pointerEvents:"none"}}/>
       <div style={{position:"fixed",bottom:"5%",left:"-80px",width:"280px",height:"280px",borderRadius:"50%",background:`radial-gradient(circle,${T.violetL} 0%,transparent 70%)`,opacity:0.6,pointerEvents:"none"}}/>
       <div style={{width:"100%", maxWidth:"400px", position:"relative", zIndex:1}}>
@@ -77,7 +77,7 @@ function LoginScreen({ onLogin }){
         </div>
 
         {/* Card */}
-        <div style={{background:"rgba(255,255,255,0.92)", backdropFilter:"blur(12px)", borderRadius:"24px", padding:"28px", boxShadow:"0 12px 48px rgba(13,148,136,0.15)", border:`1px solid rgba(178,224,220,0.6)`}}>
+        <div style={{background:"#1A1A1A")", backdropFilter:"blur(12px)", borderRadius:"24px", padding:"28px", boxShadow:"0 12px 48px rgba(13,148,136,0.15)", border:`1px solid rgba(178,224,220,0.6)`}}>
           {/* Tabs */}
           <div style={{display:"flex", background:T.bgSoft, borderRadius:"12px", padding:"4px", marginBottom:"24px"}}>
             {["login","register"].map(m => (
