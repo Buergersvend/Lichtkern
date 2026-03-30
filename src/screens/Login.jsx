@@ -77,7 +77,7 @@ function LoginScreen({ onLogin }){
         </div>
 
         {/* Card */}
-        <div style={{background:"#1A1A1A")", backdropFilter:"blur(12px)", borderRadius:"24px", padding:"28px", boxShadow:"0 12px 48px rgba(13,148,136,0.15)", border:`1px solid rgba(178,224,220,0.6)`}}>
+        <div style={{background:"#1A1A1A", backdropFilter:"blur(12px)", borderRadius:"24px", padding:"28px", boxShadow:"0 12px 48px rgba(13,148,136,0.15)", border:`1px solid rgba(178,224,220,0.6)`}}>
           {/* Tabs */}
           <div style={{display:"flex", background:T.bgSoft, borderRadius:"12px", padding:"4px", marginBottom:"24px"}}>
             {["login","register"].map(m => (
