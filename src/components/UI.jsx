@@ -84,7 +84,7 @@ export const NAV=[
 ];
 
 export function BottomNav({active,onChange}){
-  return(<nav style={{position:"fixed",bottom:0,left:0,right:0,background:T.bgCard,borderTop:`1.5px solid ${T.border}`,display:"flex",zIndex:100,paddingBottom:"env(safe-area-inset-bottom)"}}>
+  return(<nav style={{position:"fixed",bottom:0,left:0,right:0,background:"#0F0F0F",borderTop:`1.5px solid ${T.border}`,display:"flex",zIndex:100,paddingBottom:"env(safe-area-inset-bottom)"}}>
     {NAV.map(n=>(
       <button key={n.id} onClick={()=>onChange(n.id)} style={{flex:1,padding:"10px 4px 8px",border:"none",background:"none",cursor:"pointer",display:"flex",flexDirection:"column",alignItems:"center",gap:"3px"}}>
         <span style={{fontSize:"18px",opacity:active===n.id?1:0.4}}>{n.icon}</span>
