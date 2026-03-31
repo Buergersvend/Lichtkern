@@ -17,11 +17,11 @@ function Dashboard({clients,sessions,appointments,onNav,settings}){
   const praxis=settings?.praxisname||"";
 
   const tiles=[
-    {id:"clients",icon:"◈",label:"Klienten"},
-    {id:"calendar",icon:"⊙",label:"Kalender"},
+   {id:"clients",icon:"◆",label:"Klienten"},
     {id:"session",icon:"✦",label:"Sitzung"},
+    {id:"calendar",icon:"◎",label:"Kalender"},
     {id:"history",icon:"◎",label:"Verlauf"},
-    {id:"knowledge",icon:"◆",label:"Wissensbasis"},
+    {id:"knowledge",icon:"◆",label:"Akademie"},
     {id:"clientanalysis",icon:"⊕",label:"Analyse"},
   ];
 
