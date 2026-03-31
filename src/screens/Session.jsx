@@ -4,6 +4,7 @@ import { Flower } from "../components/Decorations";
 import { T } from "../config/theme.js";
 import { APPT_TYPES, LEVELS, TECHNIQUES, KNOWLEDGE, DE_DAYS, DE_DAYS_F, DE_MONTHS, HOURS } from "../config/constants.js";
 import { lvl, top2, dynGrad, uid } from "../config/helpers";
+import { groqFetch } from "../config/groq.js";
 import { Card, Btn, TI, Select, LBar, Pill, SL } from "../components/UI.jsx";
 import { PDFModal } from "./PDFModal.jsx";
 const STEPS = ["Klient","Ziel","Ebenen","Techniken","Abschluss"];
