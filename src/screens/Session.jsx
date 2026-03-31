@@ -94,7 +94,7 @@ function SA({wizard,upd,aiText,aiLoading,onGen}){
   <div><SL>Private Notizen</SL><TI value={wizard.notes||""} onChange={v=>upd({notes:v})} placeholder="Nur für dich…" multiline rows={2}/></div>
   <div>
     <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:"8px"}}>
-      <SL>✦ KI-Zusammenfassung</SL>
+     <SL>✦ Resonanz-Zusammenfassung</SL>
       <button onClick={onGen} disabled={aiLoading} style={{fontFamily:"Raleway",fontSize:"12px",fontWeight:700,padding:"8px 16px",borderRadius:"10px",border:"none",cursor:aiLoading?"wait":"pointer",background:`linear-gradient(135deg,${T.teal},${T.tealD})`,color:"white",opacity:aiLoading?0.6:1}}>{aiLoading?"⏳ Generiert…":"✦ Generieren"}</button>
     </div>
     {aiText?<Card style={{background:T.bgSoft,border:`1.5px solid ${T.borderMid}`}}><div style={{fontFamily:"Raleway",fontSize:"13px",color:T.text,lineHeight:"1.85",whiteSpace:"pre-wrap",fontWeight:500}}>{aiText}</div></Card>
