@@ -312,14 +312,14 @@ function Clients({clients,sessions,onSave,onStart,onDelete,onOnboarding,reminder
           <div style={{display:"flex",gap:"8px",marginTop:"12px"}}><Btn onClick={add} style={{flex:1}}>Speichern</Btn><Btn variant="soft" onClick={()=>setShowAdd(false)} style={{flex:1}}>Abbrechen</Btn></div>
         </Card>
       )}
-      <div style={{marginBottom:"14px"}}><TI value={search} onChange={setSearch} placeholder="Klient suchen…"/></div>
+     <div style={{marginBottom:"14px"}}><TI value={search} onChange={setSearch} placeholder="Klient suchen…" style={{background:"#1A1A1A",color:"#F5F0E8",border:"1px solid rgba(201,168,76,0.2)"}}/></div>
       {filtered.length===0&&<div style={{textAlign:"center",padding:"52px 0"}}><div style={{fontSize:"40px",marginBottom:"10px",opacity:0.4}}>◈</div><div style={{fontFamily:"Raleway",fontSize:"14px",color:T.textMid,fontWeight:600}}>Noch keine Klienten</div></div>}
       <div style={{display:"flex",flexDirection:"column",gap:"10px"}}>
         {filtered.map(c=>{
           const sc=sessions.filter(s=>s.clientId===c.id).length;
           const hasHD=c.hdType||c.hdPGates;
           return(
-            <Card key={c.id} style={{cursor:'pointer'}} onClick={()=>setSelClient(c)}>
+ <Card key={c.id} style={{cursor:'pointer',background:"#1A1A1A",border:"1px solid rgba(201,168,76,0.2)"}} onClick={()=>setSelClient(c)}>
               <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start"}}>
                 <div style={{flex:1,minWidth:0}}>
                   <div style={{fontFamily:"Raleway",fontWeight:800,fontSize:"15px",color:T.text}}>{c.name}</div>
