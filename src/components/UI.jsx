@@ -70,7 +70,7 @@ export function Pill({label,active,onClick}){
 }
 
 export function Select({value,onChange,options}){
-  return(<select value={value} onChange={e=>onChange(e.target.value)} style={{width:"100%",background:"#FFF",border:`1.5px solid ${T.border}`,borderRadius:"12px",padding:"11px 14px",color:T.text,fontFamily:"Raleway",fontSize:"13px",fontWeight:500,outline:"none",appearance:"none"}}>
+return(<select value={value} onChange={e=>onChange(e.target.value)} style={{width:"100%",background:"#1A1A1A",border:`1.5px solid ${T.border}`,borderRadius:"12px",padding:"11px 14px",color:T.text,fontFamily:"Raleway",fontSize:"13px",fontWeight:500,outline:"none",appearance:"none"}}>
     {options.map(o=><option key={o.value} value={o.value}>{o.label}</option>)}
   </select>);
 }
