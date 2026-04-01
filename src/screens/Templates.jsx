@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback, useRef } from "react";
 import { Flower } from "../components/Decorations";
 import { T } from "../config/theme.js";
 import { Card, Btn, TI, SL } from "../components/UI.jsx";
+import { uid } from "../config/helpers";
 
 const DEFAULT_TEMPLATES = [
   {
