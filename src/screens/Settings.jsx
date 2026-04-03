@@ -223,28 +223,7 @@ function SettingsScreen({ settings, onSave, onClose, clients, sessions, appointm
           </SettingsRow>
         </div>
 
-        {/* Farb-Akzent */}
-        <div style={{background:"#FFFFFF",borderRadius:"18px",padding:"16px",marginBottom:"20px",border:`1.5px solid ${T.border}`}}>
-          <SL color={T.tealD}>Farb-Thema</SL>
-          <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:"10px"}}>
-            {Object.entries(THEMES).map(([key,th])=>(
-              <button key={key} onClick={()=>up({theme:key})}
-                style={{padding:"14px",borderRadius:"14px",
-                  border:`2px solid ${form.theme===key?th.teal:T.border}`,
-                  background:form.theme===key?th.tealL:"white",
-                  cursor:"pointer",textAlign:"left",transition:"all 0.15s"}}>
-                <div style={{fontSize:"22px",marginBottom:"6px"}}>{th.emoji}</div>
-                <div style={{fontFamily:"Raleway",fontSize:"12px",fontWeight:700,
-                  color:form.theme===key?th.tealD:T.text}}>{th.name}</div>
-                <div style={{display:"flex",gap:"4px",marginTop:"6px"}}>
-                  {[th.teal,th.violet,th.tealL].map((c,i)=>(
-                    <div key={i} style={{width:"14px",height:"14px",borderRadius:"50%",background:c}}/>
-                  ))}
-                </div>
-              </button>
-            ))}
-          </div>
-        </div>
+       
 
         {/* Honorar */}
         <div style={{background:"#FFFFFF",borderRadius:"18px",padding:"16px",marginBottom:"20px",border:`1.5px solid ${T.border}`}}>
