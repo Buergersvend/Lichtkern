@@ -51,7 +51,7 @@ function ApptModal({appt, clients, onSave, onDelete, onClose}){
           <SL>Klient</SL>
           <div style={{marginBottom:"14px"}}>
             <Select value={form.clientId} onChange={handleClientChange} options={[{value:"",label:"— Klient wählen —"},...clients.map(c=>({value:c.id,label:c.name}))]}/>
-            {!form.clientId&&<div style={{marginTop:"6px",background:"white",borderRadius:"10px"}}><TI value={form.clientName} onChange={v=>up({clientName:v,clientId:""})} placeholder="Oder freier Name…"/></div>}
+            {!form.clientId&&<div style={{marginTop:"6px",background:T.bgCard,borderRadius:"10px"}}><TI value={form.clientName} onChange={v=>up({clientName:v,clientId:""})} placeholder="Oder freier Name…"/></div>}
           </div>
         </>)}
 
