@@ -357,7 +357,7 @@ function SettingsScreen({ settings, onSave, onClose, clients, sessions, appointm
               const csv=rows.map(r=>r.map(v=>`"${String(v).replace(/"/g,'""')}"`).join(",")).join("\n");
               const blob=new Blob(["﻿"+csv],{type:"text/csv;charset=utf-8"});
               const url=URL.createObjectURL(blob);const a=document.createElement("a");a.href=url;a.download=`lichtkern_klienten_${new Date().toISOString().slice(0,10)}.csv`;a.click();URL.revokeObjectURL(url);
-            }} style={{width:"100%",fontFamily:"Raleway",fontWeight:700,fontSize:"11px",padding:"9px",borderRadius:"10px",border:`1.5px solid ${T.border}`,background:"white",color:T.textMid,cursor:"pointer",textAlign:"left"}}>
+            }} style={{width:"100%",fontFamily:"Raleway",fontWeight:700,fontSize:"11px",padding:"9px",borderRadius:"10px",border:`1.5px solid ${T.border}`,background:T.bgCard,color:T.textMid,cursor:"pointer",textAlign:"left"}}>
               📋 Klienten exportieren
             </button>
             {/* CSV Sessions */}
@@ -367,7 +367,7 @@ function SettingsScreen({ settings, onSave, onClose, clients, sessions, appointm
               const csv=rows.map(r=>r.map(v=>`"${String(v).replace(/"/g,'""')}"`).join(",")).join("\n");
               const blob=new Blob(["﻿"+csv],{type:"text/csv;charset=utf-8"});
               const url=URL.createObjectURL(blob);const a=document.createElement("a");a.href=url;a.download=`lichtkern_sitzungen_${new Date().toISOString().slice(0,10)}.csv`;a.click();URL.revokeObjectURL(url);
-            }} style={{width:"100%",fontFamily:"Raleway",fontWeight:700,fontSize:"11px",padding:"9px",borderRadius:"10px",border:`1.5px solid ${T.border}`,background:"white",color:T.textMid,cursor:"pointer",textAlign:"left"}}>
+            }} style={{width:"100%",fontFamily:"Raleway",fontWeight:700,fontSize:"11px",padding:"9px",borderRadius:"10px",border:`1.5px solid ${T.border}`,background:T.bgCard,color:T.textMid,cursor:"pointer",textAlign:"left"}}>
               ✦ Sitzungen exportieren
             </button>
             {/* CSV Billing */}
@@ -378,14 +378,14 @@ function SettingsScreen({ settings, onSave, onClose, clients, sessions, appointm
               const csv=rows.map(r=>r.map(v=>`"${String(v).replace(/"/g,'""')}"`).join(",")).join("\n");
               const blob=new Blob(["﻿"+csv],{type:"text/csv;charset=utf-8"});
               const url=URL.createObjectURL(blob);const a=document.createElement("a");a.href=url;a.download=`lichtkern_abrechnung_${new Date().toISOString().slice(0,10)}.csv`;a.click();URL.revokeObjectURL(url);
-            }} style={{width:"100%",fontFamily:"Raleway",fontWeight:700,fontSize:"11px",padding:"9px",borderRadius:"10px",border:`1.5px solid ${T.border}`,background:"white",color:T.textMid,cursor:"pointer",textAlign:"left"}}>
+            }} style={{width:"100%",fontFamily:"Raleway",fontWeight:700,fontSize:"11px",padding:"9px",borderRadius:"10px",border:`1.5px solid ${T.border}`,background:T.bgCard,color:T.textMid,cursor:"pointer",textAlign:"left"}}>
               💰 Abrechnung exportieren
             </button>
           </div>
 
           {/* PDF Report per client */}
           <div style={{fontFamily:"Raleway",fontSize:"12px",fontWeight:700,color:T.text,marginBottom:"6px"}}>PDF-Gesamtbericht pro Klient</div>
-          <select id="pdfClientSelect" style={{width:"100%",background:"white",border:`1.5px solid ${T.border}`,borderRadius:"10px",padding:"10px 12px",color:T.text,fontFamily:"Raleway",fontSize:"12px",fontWeight:500,outline:"none",appearance:"none",marginBottom:"8px"}}>
+          <select id="pdfClientSelect" style={{width:"100%",background:T.bgCard,border:`1.5px solid ${T.border}`,borderRadius:"10px",padding:"10px 12px",color:T.text,fontFamily:"Raleway",fontSize:"12px",fontWeight:500,outline:"none",appearance:"none",marginBottom:"8px"}}>
             <option value="">— Klient wählen —</option>
             {(clients||[]).map(cl=><option key={cl.id} value={cl.id}>{cl.name}</option>)}
           </select>
@@ -424,7 +424,7 @@ ${cs.map((s,i)=>{
   <p style="font-family:Cinzel,serif;font-size:11px;color:#0D9488;font-weight:700;">✦ Lichtkern · powered by Human Resonanz</p>
 </div></div></body></html>`;
             const w=window.open("","_blank");if(w){w.document.write(html);w.document.close();}
-          }} style={{width:"100%",fontFamily:"Raleway",fontWeight:700,fontSize:"11px",padding:"9px",borderRadius:"10px",border:`1.5px solid ${T.border}`,background:"white",color:T.textMid,cursor:"pointer"}}>
+          }} style={{width:"100%",fontFamily:"Raleway",fontWeight:700,fontSize:"11px",padding:"9px",borderRadius:"10px",border:`1.5px solid ${T.border}`,background:T.bgCard,color:T.textMid,cursor:"pointer"}}>
             📄 Gesamtbericht erstellen
           </button>
 
