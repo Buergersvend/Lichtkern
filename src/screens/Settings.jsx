@@ -206,7 +206,7 @@ function SettingsScreen({ settings, onSave, onClose, clients, sessions, appointm
         </div>
 
         {/* Session defaults */}
-        <div style={{background:"#FFFFFF",borderRadius:"18px",padding:"16px",marginBottom:"20px",border:`1.5px solid ${T.border}`}}>
+        <div style={{background:T.bgCard,borderRadius:"18px",padding:"16px",marginBottom:"20px",border:`1.5px solid ${T.border}`}}>
           <SL color={T.tealD}>Sitzungs-Standards</SL>
           <SettingsRow label="Standard-Sitzungsdauer">
             <div style={{display:"flex",flexWrap:"wrap",gap:"8px"}}>
@@ -226,7 +226,7 @@ function SettingsScreen({ settings, onSave, onClose, clients, sessions, appointm
        
 
         {/* Honorar */}
-        <div style={{background:"#FFFFFF",borderRadius:"18px",padding:"16px",marginBottom:"20px",border:`1.5px solid ${T.border}`}}>
+        <div style={{background:T.bgCard,borderRadius:"18px",padding:"16px",marginBottom:"20px",border:`1.5px solid ${T.border}`}}>
           <SL color={T.tealD}>Honorar & Währung</SL>
           <SettingsRow label="Währung">
             <div style={{display:"flex",gap:"8px",flexWrap:"wrap"}}>
@@ -247,7 +247,7 @@ function SettingsScreen({ settings, onSave, onClose, clients, sessions, appointm
         </div>
 
         {/* Disclaimer */}
-        <div style={{background:"#FFFFFF",borderRadius:"18px",padding:"16px",marginBottom:"20px",border:`1.5px solid ${T.border}`}}>
+        <div style={{background:T.bgCard,borderRadius:"18px",padding:"16px",marginBottom:"20px",border:`1.5px solid ${T.border}`}}>
           <SL color={T.tealD}>Disclaimer (PDF-Footer)</SL>
           <TI value={form.disclaimer||""} onChange={v=>up({disclaimer:v})}
             placeholder="Keine medizinische Diagnose. Kein Ersatz für ärztliche Behandlung."
@@ -255,7 +255,7 @@ function SettingsScreen({ settings, onSave, onClose, clients, sessions, appointm
         </div>
 
         {/* Sicherheit */}
-        <div style={{background:"#FFFFFF",borderRadius:"18px",padding:"16px",marginBottom:"24px",border:`1.5px solid ${T.border}`}}>
+        <div style={{background:T.bgCard,borderRadius:"18px",padding:"16px",marginBottom:"24px",border:`1.5px solid ${T.border}`}}>
           <SL color={T.tealD}>🔒 Sicherheit</SL>
 
           <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",padding:"10px 0",borderBottom:`1px solid ${T.border}`}}>
@@ -309,7 +309,7 @@ function SettingsScreen({ settings, onSave, onClose, clients, sessions, appointm
         )}
 
         {/* Export & Backup */}
-        <div style={{background:"#FFFFFF",borderRadius:"18px",padding:"16px",marginBottom:"20px",border:`1.5px solid ${T.border}`}}>
+        <div style={{background:T.bgCard,borderRadius:"18px",padding:"16px",marginBottom:"20px",border:`1.5px solid ${T.border}`}}>
           <SL color={T.tealD}>🗄 Export & Backup</SL>
 
           {/* JSON Full Backup */}
