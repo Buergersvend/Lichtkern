@@ -101,8 +101,8 @@ function SA({wizard,upd,aiText,aiLoading,onGen}){
     :<div style={{background:T.bgSofter,borderRadius:"14px",padding:"22px",textAlign:"center",border:`1.5px solid ${T.border}`}}><div style={{fontFamily:"Raleway",fontSize:"13px",color:T.textSoft,fontWeight:500}}>Einfühlsame Zusammenfassung generieren</div></div>}
   </div>
   {/* Honorar */}
-  <div style={{background:"#EDFAF2",borderRadius:"16px",padding:"14px",border:"1.5px solid #4DC98A"}}>
-    <SL color="#0A3B20">💰 Honorar</SL>
+  <div style={{background:T.bgCard,borderRadius:"16px",padding:"14px",border:`1.5px solid ${T.borderMid}`}}>
+    <<SL color={T.tealD}>>💰 Honorar</SL>
     <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:"8px",marginBottom:"10px"}}>
       <div><TI value={wizard.fee||""} onChange={v=>upd({fee:v})} placeholder="Betrag (z.B. 120)"/></div>
       <div>
