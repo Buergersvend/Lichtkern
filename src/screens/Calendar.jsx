@@ -343,9 +343,9 @@ function CalendarScreen({appointments,clients,onSaveAppt,onDeleteAppt,onStartSes
         </div>
         {/* Month/week navigator */}
         <div style={{display:"flex",alignItems:"center",justifyContent:"space-between"}}>
-          <button onClick={()=>navigate(-1)} style={{width:"36px",height:"36px",borderRadius:"50%",border:`1.5px solid ${T.border}`,background:"white",cursor:"pointer",fontSize:"16px",color:T.textMid,display:"flex",alignItems:"center",justifyContent:"center"}}>‹</button>
+          <button onClick={()=>navigate(-1)} style={{width:"36px",height:"36px",borderRadius:"50%",border:`1.5px solid ${T.border}`,,background:T.bgCard,cursor:"pointer",fontSize:"16px",color:T.textMid,display:"flex",alignItems:"center",justifyContent:"center"}}>‹</button>
           <div style={{fontFamily:"Cinzel",fontSize:"14px",color:T.text,fontWeight:700,textAlign:"center"}}>{headerLabel()}</div>
-          <button onClick={()=>navigate(1)} style={{width:"36px",height:"36px",borderRadius:"50%",border:`1.5px solid ${T.border}`,background:"white",cursor:"pointer",fontSize:"16px",color:T.textMid,display:"flex",alignItems:"center",justifyContent:"center"}}>›</button>
+          <button onClick={()=>navigate(1)} style={{width:"36px",height:"36px",borderRadius:"50%",border:`1.5px solid ${T.border}`,,background:T.bgCard,cursor:"pointer",fontSize:"16px",color:T.textMid,display:"flex",alignItems:"center",justifyContent:"center"}}>›</button>
         </div>
       </div>
 
