@@ -205,6 +205,26 @@ function SettingsScreen({ settings, onSave, onClose, clients, sessions, appointm
           </SettingsRow>
         </div>
 
+        {/* Rechnungsangaben */}
+        <div style={{background:`T.bgCard`,borderRadius:"18px",padding:"16px",marginBottom:"20px",border:`1.5px solid ${T.border}`}}>
+          <SL color={T.tealD}>Rechnungsangaben</SL>
+          <SettingsRow label="Adresse">
+            <TI value={form.invoiceAddress||""} onChange={v=>up({invoiceAddress:v})} placeholder="Straße, Nr."/>
+          </SettingsRow>
+          <SettingsRow label="PLZ & Ort">
+            <TI value={form.invoiceCity||""} onChange={v=>up({invoiceCity:v})} placeholder="8000 Zürich"/>
+          </SettingsRow>
+          <SettingsRow label="Steuernummer (optional)">
+            <TI value={form.invoiceTax||""} onChange={v=>up({invoiceTax:v})} placeholder="DE 123 456 789"/>
+          </SettingsRow>
+          <SettingsRow label="IBAN (optional)">
+            <TI value={form.invoiceIban||""} onChange={v=>up({invoiceIban:v})} placeholder="CH56 0483 5012 3456 7800 9"/>
+          </SettingsRow>
+          <SettingsRow label="Fusszeile (optional)">
+            <TI value={form.invoiceFooter||""} onChange={v=>up({invoiceFooter:v})} placeholder="Kein Arztersatz. Zahlung innert 30 Tagen."/>
+          </SettingsRow>
+        </div>
+
         {/* Session defaults */}
         <div style={{background:T.bgCard,borderRadius:"18px",padding:"16px",marginBottom:"20px",border:`1.5px solid ${T.border}`}}>
           <SL color={T.tealD}>Sitzungs-Standards</SL>
