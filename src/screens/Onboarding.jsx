@@ -50,7 +50,7 @@ function OnboardingScreen({ onSave, onCancel }) {
           {mode:"mail_text",icon:"✉️",title:"Per Mail versenden — Textformat",sub:"Öffnet dein Mailprogramm mit allen Fragen als lesbaren Text — Klient antwortet per Mail"},
           {mode:"mail_pdf",icon:"📄",title:"Per Mail versenden — PDF",sub:"Generiert einen druckbaren Leer-Fragebogen als PDF zum Herunterladen & Versenden"},
         ].map(opt=>(
-          <div key={opt.mode} onClick={()=>setClientMode(opt.mode)} style={{background:"white",borderRadius:"18px",padding:"18px 20px",cursor:"pointer",border:`1.5px solid ${T.border}`,boxShadow:`0 3px 14px ${T.shadow}`,display:"flex",gap:"16px",alignItems:"center"}}>
+          <div key={opt.mode} onClick={()=>setClientMode(opt.mode)} style={{background:T.bgCard,borderRadius:"18px",padding:"18px 20px",cursor:"pointer",border:`1.5px solid ${T.border}`,boxShadow:`0 3px 14px ${T.shadow}`,display:"flex",gap:"16px",alignItems:"center"}}>
             <span style={{fontSize:"32px",flexShrink:0}}>{opt.icon}</span>
             <div>
               <div style={{fontFamily:"Raleway",fontSize:"14px",fontWeight:700,color:T.text}}>{opt.title}</div>
