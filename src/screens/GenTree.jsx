@@ -298,7 +298,7 @@ ${(tree?.relations||[]).length?"<div class=\"card\"><h3>Verknüpfte Klienten</h3
               ))}
             </div>
             <button onClick={()=>setLinkModal(true)} style={{fontFamily:"Raleway",fontSize:"11px",fontWeight:700,padding:"7px 12px",borderRadius:"10px",border:`1.5px solid ${T.border}`,background:"white",color:T.textMid,cursor:"pointer"}}>🔗</button>
-            <button onClick={exportPDF} style={{fontFamily:"Raleway",fontSize:"11px",fontWeight:700,padding:"7px 12px",borderRadius:"10px",border:`1.5px solid ${T.border}`,background:"white",color:T.textMid,cursor:"pointer"}}>📄</button>
+            <button onClick={exportPDF} style={{fontFamily:"Raleway",fontSize:"11px",fontWeight:700,padding:"7px 12px",borderRadius:"10px",border:`1.5px solid ${T.border}`,background:T.bgCard,color:T.textMid,cursor:"pointer"}}>📄</button>
           </div>
         </div>
       </div>
@@ -362,7 +362,7 @@ ${(tree?.relations||[]).length?"<div class=\"card\"><h3>Verknüpfte Klienten</h3
           </div>
           <div style={{display:"flex",flexWrap:"wrap",gap:"6px"}}>
             {inheritedThemes.map(([theme,count])=>(
-              <div key={theme} style={{background:"white",borderRadius:"20px",padding:"5px 12px",border:`1.5px solid ${T.violet}66`,display:"flex",alignItems:"center",gap:"6px"}}>
+              <div key={theme} style={{background:T.bgCard,borderRadius:"20px",padding:"5px 12px",border:`1.5px solid ${T.violet}66`,display:"flex",alignItems:"center",gap:"6px"}}>
                 <span style={{fontFamily:"Raleway",fontSize:"12px",color:T.violetD,fontWeight:700}}>{theme}</span>
                 <span style={{fontFamily:"Raleway",fontSize:"10px",color:T.violet,fontWeight:800,background:T.violetL,padding:"1px 7px",borderRadius:"10px"}}>{count}×</span>
               </div>
