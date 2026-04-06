@@ -295,7 +295,7 @@ function Clients({clients,sessions,onSave,onStart,onDelete,onOnboarding,reminder
                 </div>
                 <div>
                   <div style={{fontFamily:"Raleway",fontSize:"10px",color:T.textMid,marginBottom:"4px",fontWeight:600}}>Autorität</div>
-                  <select value={form.hdAuthority} onChange={e=>setForm({...form,hdAuthority:e.target.value})} style={{width:"100%",padding:"9px 10px",borderRadius:"10px",border:`1.5px solid ${T.border}`,fontFamily:"Raleway",fontSize:"12px",color:T.text,background:T.bgCard
+                  <select value={form.hdAuthority} onChange={e=>setForm({...form,hdAuthority:e.target.value})} style={{width:"100%",padding:"9px 10px",borderRadius:"10px",border:`1.5px solid ${T.border}`,fontFamily:"Raleway",fontSize:"12px",color:T.text,background:T.bgCard,outline:"none"}}>
                     <option value="Emotional">Emotional</option>
                     <option value="Sakral">Sakral</option>
                     <option value="Milz">Milz</option>
