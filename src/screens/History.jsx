@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useCallback, useRef } from "react";
 import { Flower } from "../components/Decorations";
 import { T } from "../config/theme.js";
-import { Card, Btn, SL, TI } from "../components/UI.jsx";
+import { Card, Btn, SL, TI, LBar } from "../components/UI.jsx";
 import { top2, lvl, dynGrad } from "../config/helpers";
+import { LEVELS } from "../config/constants";
 function History({sessions, onDelete}){
   const [detail,setDetail]=useState(null);
   const [pdfSession,setPdfSession]=useState(null);
