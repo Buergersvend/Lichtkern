@@ -119,7 +119,7 @@ function Billing({ sessions, clients, settings, onUpdateSession }) {
             </div>
             <div>
               <div style={{fontFamily:"Raleway",fontSize:"11px",color:T.textSoft,fontWeight:600,marginBottom:"4px"}}>Status</div>
-              <select value={editStatus} onChange={e=>setEditStatus(e.target.value)} style={{width:"100%",background:"#FFF",border:`1.5px solid ${T.border}`,borderRadius:"12px",padding:"11px 14px",color:T.text,fontFamily:"Raleway",fontSize:"13px",fontWeight:500,outline:"none",appearance:"none"}}>
+              <select value={editStatus} onChange={e=>setEditStatus(e.target.value)} style={{width:"100%",background:T.bgCard,border:`1.5px solid ${T.border}`,borderRadius:"12px",padding:"11px 14px",color:T.text,fontFamily:"Raleway",fontSize:"13px",fontWeight:500,outline:"none",appearance:"none"}}>
                 {Object.entries(PAY_STATUS).map(([k,v])=><option key={k} value={k}>{v.icon} {v.label}</option>)}
               </select>
             </div>
@@ -192,11 +192,11 @@ function Billing({ sessions, clients, settings, onUpdateSession }) {
 
       {/* Filters */}
       <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:"8px",marginBottom:"14px"}}>
-        <select value={filterMonth} onChange={e=>setFilterMonth(e.target.value)} style={{background:"#FFF",border:`1.5px solid ${T.border}`,borderRadius:"12px",padding:"10px 12px",color:T.text,fontFamily:"Raleway",fontSize:"12px",fontWeight:600,outline:"none",appearance:"none"}}>
+        <select value={filterMonth} onChange={e=>setFilterMonth(e.target.value)} style={{background:T.bgCard,border:`1.5px solid ${T.border}`,borderRadius:"12px",padding:"10px 12px",color:T.text,fontFamily:"Raleway",fontSize:"12px",fontWeight:600,outline:"none",appearance:"none"}}>
           <option value="all">Alle Monate</option>
           {months.map(m=><option key={m} value={m}>{m}</option>)}
         </select>
-        <select value={filterStatus} onChange={e=>setFilterStatus(e.target.value)} style={{background:"#FFF",border:`1.5px solid ${T.border}`,borderRadius:"12px",padding:"10px 12px",color:T.text,fontFamily:"Raleway",fontSize:"12px",fontWeight:600,outline:"none",appearance:"none"}}>
+        <select value={filterStatus} onChange={e=>setFilterStatus(e.target.value)} style={{background:T.bgCard,border:`1.5px solid ${T.border}`,borderRadius:"12px",padding:"10px 12px",color:T.text,fontFamily:"Raleway",fontSize:"12px",fontWeight:600,outline:"none",appearance:"none"}}>
           <option value="all">Alle Status</option>
           {Object.entries(PAY_STATUS).map(([k,v])=><option key={k} value={k}>{v.icon} {v.label}</option>)}
         </select>
