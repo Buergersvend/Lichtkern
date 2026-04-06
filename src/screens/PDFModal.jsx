@@ -2,6 +2,9 @@ import React, { useState, useEffect, useCallback, useRef } from "react";
 import { T } from "../config/theme.js";
 import { APPT_TYPES, LEVELS, TECHNIQUES, KNOWLEDGE, DE_DAYS, DE_DAYS_F, DE_MONTHS, HOURS } from "../config/constants.js";
 import { Btn, TI, SL, Card } from "../components/UI.jsx";
+import { db } from "../config/firebase.js";
+import { doc, getDoc } from "firebase/firestore";
+import { getAuth } from "firebase/auth";
 function buildPDF(s, opts) {
   const { version, praxisname, showGoal, showLevels, showTech, showOutcome, showHW, showAI } = opts;
   const date = new Date(s.createdAt||Date.now()).toLocaleDateString("de-DE");
@@ -19,6 +22,37 @@ function buildPDF(s, opts) {
   ${showAI&&s.aiSummary?`<h2>KI-Resonanz</h2><p>${s.aiSummary}</p>`:""}
   </body></html>`;
 }
+function buildInvoice(s, inv) {
+  const date = new Date(s.createdAt||Date.now()).toLocaleDateString("de-DE");
+  const nr = "RE-" + new Date(s.createdAt||Date.now()).getTime().toString().slice(-6);
+  return `<!DOCTYPE html><html><head><meta charset="utf-8">
+<style>body{font-family:Raleway,sans-serif;padding:40px;color:#0F3030;max-width:700px;margin:auto}
+h1{font-family:Cinzel,serif;font-size:22px}
+h2{font-size:12px;text-transform:uppercase;letter-spacing:2px;color:#0D9488;margin-top:24px}
+p{font-size:14px;line-height:1.7}
+hr{border:none;border-top:1px solid #B2E0DC;margin:20px 0}
+.row{display:flex;justify-content:space-between}
+</style></head><body>
+<button onclick="window.print()" style="position:fixed;top:20px;right:20px;background:#0D9488;color:white;border:none;padding:10px 20px;border-radius:8px;font-size:14px;cursor:pointer">🖨 Drucken / PDF</button>
+<h1>${inv.praxisname||"Lichtkern"}</h1>
+<p style="font-size:12px">${inv.address||""}<br>${inv.city||""}</p>
+<hr/>
+<h2>Privatrechnung</h2>
+<p>Rechnungsnummer: ${nr}<br>Datum: ${date}</p>
+<p>Klient: ${s.clientName||"-"}</p>
+<hr/>
+<h2>Leistung</h2>
+<p>${s.type==="first"?"Erstsitzung":s.type==="followup"?"Folgesitzung":"Abschlusssitzung"} · ${date}</p>
+<div class="row"><span>Energetische Behandlung</span><strong>${s.fee||inv.defaultFee||"–"} ${inv.currency||"CHF"}</strong></div>
+<hr/>
+<div class="row"><strong>Total</strong><strong>${s.fee||inv.defaultFee||"–"} ${inv.currency||"CHF"}</strong></div>
+${inv.iban?`<hr/><p style="font-size:12px">IBAN: ${inv.iban}</p>`:""}
+${inv.tax?`<p style="font-size:12px">Steuernummer: ${inv.tax}</p>`:""}
+<hr/>
+<p style="font-size:11px;color:#666">${inv.footer||"Kein Arztersatz."}</p>
+</body></html>`;
+}
+
 function PDFModal({ session, onClose }){
   const [version,setVersion] = useState("kurz");
   const [praxisname,setPraxisname]   = useState("");
@@ -46,7 +80,18 @@ function PDFModal({ session, onClose }){
     if(w){ w.document.write(html); w.document.close(); }
     onClose();
   };
-
+const openInvoice = async () => {
+    const auth = getAuth();
+    const uid = auth.currentUser?.uid;
+    if(!uid) return;
+    const snap = await getDoc(doc(db,"users",uid,"settings","main"));
+    const sv = snap.exists() ? snap.data() : {};
+    const inv = {praxisname:sv.praxisname||"",address:sv.invoiceAddress||"",city:sv.invoiceCity||"",iban:sv.invoiceIban||"",tax:sv.invoiceTax||"",footer:sv.invoiceFooter||"",currency:sv.currency||"CHF",defaultFee:sv.defaultFee||""};
+    const html = buildInvoice(session, inv);
+    const w = window.open("","_blank");
+    if(w){ w.document.write(html); w.document.close(); }
+    onClose();
+  };
   const sendEmail = () => {
     if(!email.trim()) return;
     const typeLabel = session.type==="first"?"Erstsitzung":session.type==="followup"?"Folgesitzung":"Abschlusssitzung";
@@ -127,6 +172,7 @@ Hinweis: Diese Dokumentation ersetzt keine medizinische oder therapeutische Beha
           <Btn onClick={openPDF} style={{width:"100%",fontSize:"14px",padding:"13px"}}>
             📄 PDF öffnen & speichern
           </Btn>
+          <Btn onClick={openInvoice} style={{width:"100%",fontSize:"14px",padding:"13px",background:"transparent",border:`1.5px solid ${T.teal}`,color:T.teal}}>🧾 Privatrechnung erstellen</Btn>
           {email.trim() && (
             <button onClick={sendEmail} style={{width:"100%",fontFamily:"Raleway",fontWeight:700,fontSize:"13px",padding:"13px",borderRadius:"12px",border:`1.5px solid ${T.teal}`,background:T.tealL,color:T.tealD,cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center",gap:"8px"}}>
               ✉️ E-Mail öffnen · {email}
