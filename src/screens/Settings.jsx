@@ -182,7 +182,7 @@ function SettingsScreen({ settings, onSave, onClose, clients, sessions, appointm
               const active=(form.modules||[]).includes(m.id);
               return(
                 <button key={m.id} onClick={()=>{const cur=form.modules||[];up({modules:active?cur.filter(x=>x!==m.id):[...cur,m.id]});}}
-                  style={{padding:"8px 14px",borderRadius:"20px",border:`1.5px solid ${active?T.teal:T.border}`,background:active?T.tealL:"white",fontFamily:"Raleway",fontSize:"12px",fontWeight:700,color:active?T.tealD:T.textMid,cursor:"pointer"}}>
+                  style={{padding:"8px 14px",borderRadius:"20px",border:`1.5px solid ${active?T.teal:T.border}`,background:active?T.T.tealL:T.bgCard,fontFamily:"Raleway",fontSize:"12px",fontWeight:700,color:active?T.tealD:T.textMid,cursor:"pointer"}}>
                   {m.icon} {m.label}
                 </button>
               );
@@ -213,7 +213,7 @@ function SettingsScreen({ settings, onSave, onClose, clients, sessions, appointm
               {["30","45","60","75","90","120"].map(d=>(
                 <button key={d} onClick={()=>up({defaultDuration:d})}
                   style={{padding:"8px 16px",borderRadius:"20px",border:`1.5px solid ${form.defaultDuration===d?T.teal:T.border}`,
-                    background:form.defaultDuration===d?T.tealL:"white",
+                    background:form.defaultDuration===d?T.T.tealL:T.bgCard,
                     fontFamily:"Raleway",fontSize:"12px",fontWeight:700,
                     color:form.defaultDuration===d?T.tealD:T.textMid,cursor:"pointer"}}>
                   {d} Min
