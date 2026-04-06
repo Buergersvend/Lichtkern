@@ -30,7 +30,7 @@ export default function OracleAgent({ onClose }) {
 
   return (
     <div style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.6)", zIndex: 300, display: "flex", alignItems: "center", justifyContent: "center" }}>
-      <div style={{ background: "#fff", borderRadius: "24px", width: "95%", maxWidth: "600px", maxHeight: "85vh", display: "flex", flexDirection: "column", overflow: "hidden" }}>
+      <div style={{ background: T.bgCard, borderRadius: "24px", width: "95%", maxWidth: "600px", maxHeight: "85vh", display: "flex", flexDirection: "column", overflow: "hidden" }}>
         {/* Header */}
         <div style={{ padding: "20px 24px 12px", borderBottom: `1px solid ${T.border}`, display: "flex", justifyContent: "space-between", alignItems: "center" }}>
           <div>
