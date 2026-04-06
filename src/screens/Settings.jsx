@@ -411,7 +411,7 @@ ${cs.map((s,i)=>{
           <div style={{marginTop:"16px",paddingTop:"14px",borderTop:`1px solid ${T.border}`}}>
             <div style={{fontFamily:"Raleway",fontSize:"12px",fontWeight:700,color:T.text,marginBottom:"4px"}}>🔁 Backup wiederherstellen</div>
             <div style={{fontFamily:"Raleway",fontSize:"11px",color:T.textSoft,fontWeight:500,marginBottom:"8px"}}>JSON-Backup importieren — überschreibt alle aktuellen Daten</div>
-            <label style={{display:"block",width:"100%",fontFamily:"Raleway",fontWeight:700,fontSize:"11px",padding:"9px",borderRadius:"10px",border:"1.5px dashed #FCA5A5",background:"#FEE2E2",color:"#9B1C1C",cursor:"pointer",textAlign:"center"}}>
+            <label style={{display:"block",width:"100%",fontFamily:"Raleway",fontWeight:700,fontSize:"11px",padding:"9px",borderRadius:"10px",border:`1.5px dashed ${T.border}`,background:T.bgCard,color:T.text,cursor:"pointer",textAlign:"center"}}>
               📂 JSON-Datei auswählen
               <input type="file" accept=".json" style={{display:"none"}} onChange={async e=>{
                 const file=e.target.files?.[0];if(!file)return;
