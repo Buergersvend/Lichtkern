@@ -277,7 +277,7 @@ function Clients({clients,sessions,onSave,onStart,onDelete,onOnboarding,reminder
               <div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:"8px"}}>
                 <div>
                   <div style={{fontFamily:"Raleway",fontSize:"10px",color:T.textMid,marginBottom:"4px",fontWeight:600}}>Typ</div>
-                  <select value={form.hdType} onChange={e=>setForm({...form,hdType:e.target.value})} style={{width:"100%",padding:"9px 10px",borderRadius:"10px",border:`1.5px solid ${T.border}`,fontFamily:"Raleway",fontSize:"12px",color:T.text,background:"#FFF",outline:"none"}}>
+                  <select value={form.hdType} onChange={e=>setForm({...form,hdType:e.target.value})} style={{width:"100%",padding:"9px 10px",borderRadius:"10px",border:`1.5px solid ${T.border}`,fontFamily:"Raleway",fontSize:"12px",color:T.text,background:T.bgCard,outline:"none"}}>
                     <option value="">—</option>
                     <option value="Manifestor">Manifestor</option>
                     <option value="Generator">Generator</option>
@@ -288,15 +288,14 @@ function Clients({clients,sessions,onSave,onStart,onDelete,onOnboarding,reminder
                 </div>
                 <div>
                   <div style={{fontFamily:"Raleway",fontSize:"10px",color:T.textMid,marginBottom:"4px",fontWeight:600}}>Profil</div>
-                  <select value={form.hdProfile} onChange={e=>setForm({...form,hdProfile:e.target.value})} style={{width:"100%",padding:"9px 10px",borderRadius:"10px",border:`1.5px solid ${T.border}`,fontFamily:"Raleway",fontSize:"12px",color:T.text,background:"#FFF",outline:"none"}}>
+                  <select value={form.hdProfile} onChange={e=>setForm({...form,hdProfile:e.target.value})} style={{width:"100%",padding:"9px 10px",borderRadius:"10px",border:`1.5px solid ${T.border}`,fontFamily:"Raleway",fontSize:"12px",color:T.text,background:T.bgCard,outline:"none"}}>
                     <option value="">—</option>
                     {["1/3","1/4","2/4","2/5","3/5","3/6","4/6","4/1","5/1","5/2","6/2","6/3"].map(p=><option key={p} value={p}>{p}</option>)}
                   </select>
                 </div>
                 <div>
                   <div style={{fontFamily:"Raleway",fontSize:"10px",color:T.textMid,marginBottom:"4px",fontWeight:600}}>Autorität</div>
-                  <select value={form.hdAuthority} onChange={e=>setForm({...form,hdAuthority:e.target.value})} style={{width:"100%",padding:"9px 10px",borderRadius:"10px",border:`1.5px solid ${T.border}`,fontFamily:"Raleway",fontSize:"12px",color:T.text,background:"#FFF",outline:"none"}}>
-                    <option value="">—</option>
+                  <select value={form.hdAuthority} onChange={e=>setForm({...form,hdAuthority:e.target.value})} style={{width:"100%",padding:"9px 10px",borderRadius:"10px",border:`1.5px solid ${T.border}`,fontFamily:"Raleway",fontSize:"12px",color:T.text,background:T.bgCard
                     <option value="Emotional">Emotional</option>
                     <option value="Sakral">Sakral</option>
                     <option value="Milz">Milz</option>
