@@ -48,7 +48,7 @@ export function LBar({levelKey,value=0,onChange,compact=false}){
     <div style={{flex:1}}>
       <div style={{display:"flex",justifyContent:"space-between",marginBottom:"5px"}}>
         <span style={{fontSize:"12px",color:T.text,fontFamily:"Raleway",fontWeight:700}}>{info.name}</span>
-        <span style={{fontSize:"11px",color:T.text,fontFamily:"Raleway",fontWeight:800,background:info.bg,padding:"1px 8px",borderRadius:"8px",border:`1px solid ${info.border}`}}>{value}%</span>
+        <span style={{fontSize:"11px",color:T.text,fontFamily:"Raleway",fontWeight:800,background:T.bgCard,padding:"1px 8px",borderRadius:"8px",border:`1px solid ${info.border}`}}>{value}%</span>
       </div>
       {onChange?(
         <div style={{position:"relative",height:"9px"}}>
