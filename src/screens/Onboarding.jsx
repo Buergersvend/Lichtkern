@@ -36,7 +36,7 @@ function OnboardingScreen({ onSave, onCancel }) {
   if(!clientMode) return (
     <div style={{padding:"0 16px 96px"}}>
       <button onClick={onCancel} style={{fontFamily:"Raleway",fontSize:"13px",color:T.teal,fontWeight:700,background:"none",border:"none",cursor:"pointer",paddingTop:"8px",display:"block",marginBottom:"16px"}}>← Zurück</button>
-      <div style={{position:"relative",borderRadius:"22px",overflow:"hidden",padding:"26px 24px",marginBottom:"24px",background:`linear-gradient(140deg,${T.tealL} 0%,#FFFFFF 50%,${T.violetL} 100%)`,boxShadow:`0 6px 28px ${T.shadowDeep}`,border:`1.5px solid ${T.border}`}}>
+      <div style={{position:"relative",borderRadius:"22px",overflow:"hidden",padding:"26px 24px",marginBottom:"24px",background:T.bgSoft,boxShadow:`0 6px 28px ${T.shadowDeep}`,border:`1.5px solid ${T.border}`}}>
         <Flower size={200} opacity={0.09}/>
         <div style={{position:"relative",zIndex:1}}>
           <h2 style={{fontFamily:"Cinzel",fontSize:"22px",color:T.text,margin:"0 0 6px",fontWeight:700}}>Erstanamnese</h2>
