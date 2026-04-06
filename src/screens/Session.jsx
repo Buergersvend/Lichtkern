@@ -37,7 +37,7 @@ function Session({wizard,setWizard,clients,onComplete,onCancel}){
           {wizard.clientName&&<span style={{fontFamily:"Raleway",fontSize:"11px",color:T.teal,fontWeight:700}}>{wizard.clientName}</span>}
         </div>
       </div>
-      <div style={{position:"relative",margin:"12px 16px",borderRadius:"18px",overflow:"hidden",padding:"20px 22px",background:Object.values(wizard.levels||{}).some(v=>v>0)?dynGrad(wizard.levels||{}):T.bgSoft,boxShadow:`0 3px 18px ${T.shadow}`,border:`1.5px solid ${T.border}`}}>
+      <div style={{position:"relative",margin:"12px 16px",borderRadius:"18px",overflow:"hidden",padding:"20px 22px",background:T.bgSoft,boxShadow:`0 3px 18px ${T.shadow}`,border:`1.5px solid ${T.border}`}}>
         <Flower size={180} opacity={0.1}/>
         <div style={{position:"relative",zIndex:1}}>
           <h2 style={{fontFamily:"Cinzel",fontSize:"20px",color:T.text,margin:"0 0 10px",fontWeight:700}}>{STEPS[wizard.step]}</h2>
