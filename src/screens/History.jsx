@@ -9,7 +9,7 @@ function History({sessions, onDelete}){
   const [pdfSession,setPdfSession]=useState(null);
   if(detail)return(<div style={{padding:"0 16px 96px"}}>
     <button onClick={()=>setDetail(null)} style={{fontFamily:"Raleway",fontSize:"13px",color:T.teal,fontWeight:700,background:"none",border:"none",cursor:"pointer",paddingTop:"8px",display:"block",marginBottom:"14px"}}>← Zurück</button>
-    <div style={{position:"relative",borderRadius:"20px",overflow:"hidden",padding:"24px",marginBottom:"14px",background:dynGrad(detail.levels||{}),boxShadow:`0 4px 22px ${T.shadowDeep}`,border:`1.5px solid ${T.border}`}}>
+    <div style={{position:"relative",borderRadius:"20px",overflow:"hidden",padding:"24px",marginBottom:"14px",background:T.bgSoft,boxShadow:`0 4px 22px ${T.shadowDeep}`,border:`1.5px solid ${T.border}`}}>
       <Flower size={200} opacity={0.1}/>
       <div style={{position:"relative",zIndex:1}}>
         <div style={{fontFamily:"Cinzel",fontSize:"22px",color:T.text,fontWeight:700}}>{detail.clientName||"—"}</div>
