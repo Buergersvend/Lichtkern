@@ -175,7 +175,7 @@ function SettingsScreen({ settings, onSave, onClose, clients, sessions, appointm
         </div>
 
         {/* Module */}
-        <div style={{background:`linear-gradient(140deg,${T.violetL},#FFFFFF)`,borderRadius:"18px",padding:"16px",marginBottom:"20px",border:`1.5px solid ${T.border}`}}>
+        <div style={{background:`T.bgCard`,borderRadius:"18px",padding:"16px",marginBottom:"20px",border:`1.5px solid ${T.border}`}}>
           <SL color={T.tealD}>Aktive Module</SL>
           <div style={{display:"flex",flexWrap:"wrap",gap:"8px",marginBottom:"4px"}}>
             {[{id:"heilarbeit",icon:"🌿",label:"Heilarbeit"},{id:"massage",icon:"💆",label:"Massage"},{id:"coaching",icon:"🧠",label:"Coaching"},{id:"paedagogik",icon:"👨‍👩‍👧",label:"Pädagogik"},{id:"b2b",icon:"👥",label:"B2B"},{id:"allgemein",icon:"📋",label:"Allgemein"}].map(m=>{
@@ -192,7 +192,7 @@ function SettingsScreen({ settings, onSave, onClose, clients, sessions, appointm
         </div>
 
         {/* Praxis */}
-        <div style={{background:`linear-gradient(140deg,${T.tealL},#FFFFFF)`,borderRadius:"18px",padding:"16px",marginBottom:"20px",border:`1.5px solid ${T.border}`}}>
+        <div style={{background:`T.bgCard`,borderRadius:"18px",padding:"16px",marginBottom:"20px",border:`1.5px solid ${T.border}`}}>
           <SL color={T.tealD}>Praxis & Person</SL>
           <SettingsRow label="Praxisname">
             <TI value={form.praxisname||""} onChange={v=>up({praxisname:v})} placeholder="z.B. Praxis Sonnenlicht"/>
