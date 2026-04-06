@@ -83,7 +83,7 @@ function PinLock({ mode, onSuccess, onSetup }) {
 
   return (
     <div style={{minHeight:"100vh",background:T.bg,display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",padding:"32px 24px"}}>
-      <div style={{width:"72px",height:"72px",borderRadius:"50%",background:`linear-gradient(135deg,${T.tealL},${T.violetL})`,display:"flex",alignItems:"center",justifyContent:"center",fontSize:"30px",boxShadow:`0 6px 28px ${T.shadowDeep}`,border:`1.5px solid ${T.border}`,marginBottom:"20px"}}>
+      <div style={{width:"72px",height:"72px",borderRadius:"50%",background:`linear-gradient(135deg,${T.teal},${T.violetL})`,display:"flex",alignItems:"center",justifyContent:"center",fontSize:"30px",boxShadow:`0 6px 28px ${T.shadowDeep}`,border:`1.5px solid ${T.border}`,marginBottom:"20px"}}>
         🔒
       </div>
       <div style={{fontFamily:"Cinzel",fontSize:"20px",color:T.text,fontWeight:700,marginBottom:"6px"}}>Lichtkern</div>
@@ -166,7 +166,7 @@ function SettingsScreen({ settings, onSave, onClose, clients, sessions, appointm
       <div style={{padding:"20px 24px"}}>
 
         {/* Branding lock notice */}
-        <div style={{background:`linear-gradient(135deg,${T.tealL},${T.violetL})`,borderRadius:"16px",padding:"14px 16px",marginBottom:"16px",border:`1.5px solid ${T.borderMid}`,display:"flex",gap:"12px",alignItems:"center"}}>
+        <div style={{background:`linear-gradient(135deg,,${T.teal},${T.violetL})`,borderRadius:"16px",padding:"14px 16px",marginBottom:"16px",border:`1.5px solid ${T.borderMid}`,display:"flex",gap:"12px",alignItems:"center"}}>
           <div style={{fontSize:"24px",flexShrink:0}}>✦</div>
           <div>
             <div style={{fontFamily:"Cinzel",fontSize:"13px",color:T.text,fontWeight:700}}>Lichtkern · Human Resonanz</div>
@@ -182,7 +182,7 @@ function SettingsScreen({ settings, onSave, onClose, clients, sessions, appointm
               const active=(form.modules||[]).includes(m.id);
               return(
                 <button key={m.id} onClick={()=>{const cur=form.modules||[];up({modules:active?cur.filter(x=>x!==m.id):[...cur,m.id]});}}
-                  style={{padding:"8px 14px",borderRadius:"20px",border:`1.5px solid ${active?T.teal:T.border}`,background:active?T.T.tealL:T.bgCard,fontFamily:"Raleway",fontSize:"12px",fontWeight:700,color:active?T.tealD:T.textMid,cursor:"pointer"}}>
+                  style={{padding:"8px 14px",borderRadius:"20px",border:`1.5px solid ${active?T.teal:T.border}`,background:active?T.teal:T.bgCard,fontFamily:"Raleway",fontSize:"12px",fontWeight:700,color:active?T.tealD:T.textMid,cursor:"pointer"}}>
                   {m.icon} {m.label}
                 </button>
               );
@@ -213,7 +213,7 @@ function SettingsScreen({ settings, onSave, onClose, clients, sessions, appointm
               {["30","45","60","75","90","120"].map(d=>(
                 <button key={d} onClick={()=>up({defaultDuration:d})}
                   style={{padding:"8px 16px",borderRadius:"20px",border:`1.5px solid ${form.defaultDuration===d?T.teal:T.border}`,
-                    background:form.defaultDuration===d?T.T.tealL:T.bgCard,
+                    background:form.defaultDuration===d?T.teal:T.bgCard,
                     fontFamily:"Raleway",fontSize:"12px",fontWeight:700,
                     color:form.defaultDuration===d?T.tealD:T.textMid,cursor:"pointer"}}>
                   {d} Min
@@ -233,7 +233,7 @@ function SettingsScreen({ settings, onSave, onClose, clients, sessions, appointm
               {["CHF","EUR","USD","GBP"].map(c=>(
                 <button key={c} onClick={()=>up({currency:c})}
                   style={{padding:"8px 18px",borderRadius:"20px",border:`1.5px solid ${form.currency===c?T.teal:T.border}`,
-                    background:form.currency===c?T.tealL:"white",
+                    background:form.currency===c?T.teal:T.bgCard,
                     fontFamily:"Raleway",fontSize:"12px",fontWeight:700,
                     color:form.currency===c?T.tealD:T.textMid,cursor:"pointer"}}>
                   {c}
@@ -275,7 +275,7 @@ function SettingsScreen({ settings, onSave, onClose, clients, sessions, appointm
             <div style={{paddingTop:"12px"}}>
               <button onClick={()=>setPinMode("change")}
                 style={{fontFamily:"Raleway",fontSize:"12px",fontWeight:700,color:T.teal,
-                  background:T.tealL,border:`1.5px solid ${T.borderMid}`,
+                  background:T.teal,border:`1.5px solid ${T.borderMid}`,
                   borderRadius:"10px",padding:"8px 18px",cursor:"pointer"}}>
                 🔑 PIN ändern
               </button>
@@ -288,7 +288,7 @@ function SettingsScreen({ settings, onSave, onClose, clients, sessions, appointm
               {[["1","1 Min"],["5","5 Min"],["15","15 Min"],["30","30 Min"],["0","Nie"]].map(([v,l])=>(
                 <button key={v} onClick={()=>up({autoLock:v})}
                   style={{padding:"7px 14px",borderRadius:"20px",border:`1.5px solid ${form.autoLock===v?T.teal:T.border}`,
-                    background:form.autoLock===v?T.tealL:"white",
+                    background:form.autoLock===v?T.teal:T.bgCard,
                     fontFamily:"Raleway",fontSize:"11px",fontWeight:700,
                     color:form.autoLock===v?T.tealD:T.textMid,cursor:"pointer"}}>
                   {l}
@@ -303,7 +303,7 @@ function SettingsScreen({ settings, onSave, onClose, clients, sessions, appointm
         </Btn>
 
         {onLogout && (
-          <button onClick={()=>{if(window.confirm("Wirklich abmelden?"))onLogout();}} style={{width:"100%",fontFamily:"Raleway",fontWeight:700,fontSize:"14px",padding:"14px",borderRadius:"14px",border:`1.5px solid #FFCCCC`,background:"#FFF5F5",color:"#CC0000",cursor:"pointer",marginBottom:"20px"}}>
+          <button onClick={()=>{if(window.confirm("Wirklich abmelden?"))onLogout();}} style={{width:"100%",fontFamily:"Raleway",fontWeight:700,fontSize:"14px",padding:"14px",borderRadius:"14px",border:`1.5px solid #CC0000`,background:"transparent",color:"#CC0000",cursor:"pointer",marginBottom:"20px"}}>
             🚪 Abmelden
           </button>
         )}
