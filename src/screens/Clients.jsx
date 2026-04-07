@@ -159,7 +159,7 @@ Warmherzig, präzise.`;
       </div>
 
       {/* Description */}
-      <div style={{background:`linear-gradient(135deg,${T.violetL},${T.tealL})`,borderRadius:'16px',padding:'16px',marginBottom:'20px',border:`1.5px solid ${T.border}`,position:'relative',overflow:'hidden'}}>
+      <div style={{background:T.bgSoft,borderRadius:'16px',padding:'16px',marginBottom:'20px',border:`1.5px solid ${T.border}`,position:'relative',overflow:'hidden'}}>
         <Flower size={150} opacity={0.1} color={T.violet}/>
         <div style={{position:'relative',zIndex:1,fontFamily:'Raleway',fontSize:'13px',color:T.textMid,lineHeight:'1.6'}}>Lege zwei Charts übereinander und entdecke elektromagnetische Verbindungen, Dominanzfelder und die energetische Dynamik zwischen zwei Menschen.</div>
       </div>
