@@ -139,7 +139,7 @@ function Analytics({sessions,clients}){
   return (
     <div style={{padding:"0 16px 96px"}}>
       {/* Hero */}
-      <div style={{position:"relative",borderRadius:"22px",overflow:"hidden",padding:"24px",marginBottom:"20px",background:`linear-gradient(140deg,${T.tealL} 0%,#FFFFFF 50%,${T.violetL} 100%)`,boxShadow:`0 6px 28px ${T.shadowDeep}`,border:`1.5px solid ${T.border}`}}>
+      <div style={{position:"relative",borderRadius:"22px",overflow:"hidden",padding:"24px",marginBottom:"20px",background:T.bgSoft,boxShadow:`0 6px 28px ${T.shadowDeep}`,border:`1.5px solid ${T.border}`}}>
         <Flower size={220} opacity={0.1}/>
         <div style={{position:"relative",zIndex:1}}>
           <h2 style={{fontFamily:"Cinzel",fontSize:"22px",color:T.text,margin:"0 0 4px",fontWeight:700}}>Analyse</h2>
@@ -151,7 +151,7 @@ function Analytics({sessions,clients}){
       <div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:"10px",marginBottom:"16px"}}>
         {[
           {label:"Sitzungen",  value:total,                        bg:T.tealL,   border:T.borderMid, color:T.tealD},
-          {label:"Klienten",   value:clients.length,               bg:T.violetL, border:"#A78BFA",   color:T.violetD},
+          {label:"Klienten",   value:clients.length,               bg:T.bgCard, border:"#A78BFA",   color:T.violetD},
           {label:"Ø pro Klient",value:clients.length?(total/clients.length).toFixed(1):"—", bg:T.goldL, border:"#F59E0B", color:"#7C4A00"},
         ].map((s,i)=>(
           <div key={i} style={{background:s.bg,borderRadius:"16px",border:`1.5px solid ${s.border}`,padding:"14px 8px",textAlign:"center",boxShadow:`0 2px 10px ${T.shadow}`}}>
