@@ -136,7 +136,7 @@ Hinweis: Diese Dokumentation ersetzt keine medizinische oder therapeutische Beha
         <SL>Version</SL>
         <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:"8px",marginBottom:"18px"}}>
           {[["kurz","📋 Kurzversion","Ziel, Ebenen, Methoden, Auftrag"],["detail","📖 Detailversion","+ KI-Resonanz, Reflexionsraum"]].map(([v,l,sub])=>(
-            <button key={v} onClick={()=>setVersion(v)} style={{padding:"12px",borderRadius:"14px",border:`1.5px solid ${version===v?T.teal:T.border}`,background:version===v?T.tealL:"white",cursor:"pointer",textAlign:"left"}}>
+            <button key={v} onClick={()=>setVersion(v)} style={{padding:"12px",borderRadius:"14px",border:`1.5px solid ${version===v?T.teal:T.border}`,background:version==v?T.teal:T.bgCard,cursor:"pointer",textAlign:"left"}}>
               <div style={{fontFamily:"Raleway",fontSize:"12px",fontWeight:700,color:version===v?T.tealD:T.text}}>{l}</div>
               <div style={{fontFamily:"Raleway",fontSize:"10px",color:T.textSoft,marginTop:"3px",fontWeight:500}}>{sub}</div>
             </button>
