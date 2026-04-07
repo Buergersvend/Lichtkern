@@ -25,7 +25,7 @@ function ClientDetailModal({client,sessions,onClose,onSave,onStart,onAnalyse,onD
   const tabs=[['profil','👤 Profil'],['hd','⚙ Human Design'],['sessions','📋 Sitzungen']];
   return(
   <div style={{position:'fixed',inset:0,background:'rgba(0,0,0,0.5)',zIndex:200,display:'flex',alignItems:'center',justifyContent:'center'}}>
-   <div style={{background:'#FFFFFF',borderRadius:'24px',width:'95%',maxWidth:'560px',maxHeight:'92vh',overflowY:'auto',padding:'0 0 40px'}}>
+   <div style={{background:T.bgCard,borderRadius:'24px',width:'95%',maxWidth:'560px',maxHeight:'92vh',overflowY:'auto',padding:'0 0 40px'}}>
         {/* Handle */}
         <div style={{display:'flex',justifyContent:'center',padding:'12px 0 4px'}}><div style={{width:'40px',height:'4px',borderRadius:'2px',background:T.border}}/></div>
         {/* Header */}
@@ -38,9 +38,9 @@ function ClientDetailModal({client,sessions,onClose,onSave,onStart,onAnalyse,onD
         </div>
         {/* Quick actions */}
         <div style={{display:'flex',gap:'8px',padding:'12px 20px 0'}}>
-          <button onClick={()=>onStart(client)} style={{flex:1,padding:'9px',borderRadius:'12px',background:T.tealL,border:`1.5px solid ${T.borderMid}`,fontFamily:'Raleway',fontWeight:700,fontSize:'12px',color:T.tealD,cursor:'pointer'}}>✦ Sitzung</button>
+          <button onClick={()=>onStart(client)} style={{flex:1,padding:'9px',borderRadius:'12px',background:T.teal,border:`1.5px solid ${T.borderMid}`,fontFamily:'Raleway',fontWeight:700,fontSize:'12px',color:T.tealD,cursor:'pointer'}}>✦ Sitzung</button>
           <button onClick={()=>{onAnalyse(client.id);onClose();}} style={{flex:1,padding:'9px',borderRadius:'12px',background:T.violetL,border:`1.5px solid #A78BFA`,fontFamily:'Raleway',fontWeight:700,fontSize:'12px',color:T.violetD,cursor:'pointer'}}>📊 Analyse</button>
-       <button onClick={()=>{if(window.confirm('Klient wirklich löschen?')){onDelete(client.id);onClose();}}} style={{flex:1,padding:'9px',borderRadius:'12px',background:'#FEE2E2',border:'1.5px solid #FCA5A5',fontFamily:'Raleway',fontWeight:700,fontSize:'12px',color:'#DC2626',cursor:'pointer'}}>🗑 Löschen</button> </div>
+       <button onClick={()=>{if(window.confirm('Klient wirklich löschen?')){onDelete(client.id);onClose();}}} style={{flex:1,padding:'9px',borderRadius:'12px',background:'transparent',border:'1.5px solid #FCA5A5',fontFamily:'Raleway',fontWeight:700,fontSize:'12px',color:'#DC2626',cursor:'pointer'}}>🗑 Löschen</button> </div>
         {/* Tabs */}
         <div style={{display:'flex',gap:'6px',padding:'12px 20px',borderBottom:`1px solid ${T.border}`}}>
           {tabs.map(([v,l])=><button key={v} onClick={()=>setTab(v)} style={{flex:1,padding:'9px 4px',borderRadius:'10px',border:`1.5px solid ${tab===v?T.teal:T.border}`,background:tab===v?T.teal:'white',fontFamily:'Raleway',fontSize:'11px',fontWeight:700,color:tab===v?'white':T.textMid,cursor:'pointer'}}>{l}</button>)}
