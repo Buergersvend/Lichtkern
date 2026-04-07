@@ -338,7 +338,7 @@ function CalendarScreen({appointments,clients,onSaveAppt,onDeleteAppt,onStartSes
         {/* View switcher */}
         <div style={{display:"flex",background:T.bgSoft,borderRadius:"14px",padding:"3px",marginBottom:"12px",border:`1.5px solid ${T.border}`}}>
           {[["day","Tag"],["week","Woche"],["month","Monat"]].map(([v,l])=>(
-            <button key={v} onClick={()=>setView(v)} style={{flex:1,padding:"7px",borderRadius:"11px",border:"none",cursor:"pointer",fontFamily:"Raleway",fontSize:"11px",fontWeight:700,transition:"all 0.2s",background:view===v?"white":"transparent",color:view===v?T.tealD:T.textSoft,boxShadow:view===v?`0 2px 8px ${T.shadow}`:"none"}}>{l}</button>
+            <button key={v} onClick={()=>setView(v)} style={{flex:1,padding:"7px",borderRadius:"11px",border:"none",cursor:"pointer",fontFamily:"Raleway",fontSize:"11px",fontWeight:700,transition:"all 0.2s",background:view===v?T.teal:"transparent",color:view===v?T.tealD:T.textSoft,boxShadow:view===v?`0 2px 8px ${T.shadow}`:"none"}}>{l}</button>
           ))}
         </div>
         {/* Month/week navigator */}
