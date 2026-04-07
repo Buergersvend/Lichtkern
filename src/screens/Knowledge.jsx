@@ -8,7 +8,7 @@ function Knowledge(){
   const [sel,setSel]=useState(null);const [tab,setTab]=useState("soft");
   if(sel)return(<div style={{padding:"0 16px 96px"}}>
     <button onClick={()=>setSel(null)} style={{fontFamily:"Raleway",fontSize:"13px",color:T.teal,fontWeight:700,background:"none",border:"none",cursor:"pointer",paddingTop:"8px",display:"block",marginBottom:"14px"}}>← Zurück</button>
-    <div style={{position:"relative",borderRadius:"22px",overflow:"hidden",padding:"28px 24px",marginBottom:"16px",background:`linear-gradient(140deg,${T.tealL} 0%,#FFFFFF 50%,${T.violetL} 100%)`,boxShadow:`0 6px 28px ${T.shadowDeep}`,border:`1.5px solid ${T.border}`}}>
+    <div style={{position:"relative",borderRadius:"22px",overflow:"hidden",padding:"28px 24px",marginBottom:"16px",background:T.bgSoft,border:`1.5px solid ${T.border}`}}>
       <Flower size={200} opacity={0.11}/>
       <div style={{position:"relative",zIndex:1}}><div style={{fontSize:"50px",marginBottom:"12px"}}>{sel.icon}</div><h2 style={{fontFamily:"Cinzel",fontSize:"24px",color:T.text,margin:0,fontWeight:700}}>{sel.title}</h2></div>
     </div>
@@ -17,12 +17,12 @@ function Knowledge(){
     {sel.tags?.length>0&&<div style={{display:"flex",flexWrap:"wrap",gap:"6px",marginTop:"12px"}}>{sel.tags.map(t=><span key={t} style={{fontSize:"10px",padding:"4px 13px",borderRadius:"12px",background:T.tealL,color:T.tealD,fontFamily:"Raleway",fontWeight:700,border:`1px solid ${T.borderMid}`}}>{t}</span>)}</div>}
   </div>);
   return(<div style={{padding:"0 16px 96px"}}>
-    <div style={{position:"relative",borderRadius:"22px",overflow:"hidden",padding:"26px 24px",marginBottom:"20px",background:`linear-gradient(140deg,${T.tealL} 0%,#FFFFFF 50%,${T.violetL} 100%)`,boxShadow:`0 6px 28px ${T.shadowDeep}`,border:`1.5px solid ${T.border}`}}>
+    <div style={{position:"relative",borderRadius:"22px",overflow:"hidden",padding:"26px 24px",marginBottom:"20px",background:T.bgSoft,border:`1.5px solid ${T.border}`}}>
       <Flower size={220} opacity={0.1}/>
       <div style={{position:"relative",zIndex:1}}><h2 style={{fontFamily:"Cinzel",fontSize:"22px",color:T.text,margin:"0 0 4px",fontWeight:700}}>Wissensbasis</h2><p style={{fontFamily:"Raleway",fontSize:"11px",color:T.textMid,margin:0,fontWeight:600}}>10 Kernthemen · Soft & Deep</p></div>
     </div>
     <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:"12px"}}>
-      {KNOWLEDGE.map(item=><div key={item.id} onClick={()=>{setSel(item);setTab("soft");}} style={{background:"#FFFFFF",borderRadius:"18px",padding:"18px",cursor:"pointer",border:`1.5px solid ${T.border}`,boxShadow:`0 3px 14px ${T.shadow}`}}>
+      {KNOWLEDGE.map(item=><div key={item.id} onClick={()=>{setSel(item);setTab("soft");}} style={{background:T.bgCard,borderRadius:"18px",padding:"18px",cursor:"pointer",border:`1.5px solid ${T.border}`,boxShadow:`0 3px 14px ${T.shadow}`}}>
         <span style={{fontSize:"32px",display:"block",marginBottom:"10px"}}>{item.icon}</span>
         <div style={{fontFamily:"Raleway",fontWeight:800,fontSize:"13px",color:T.text,marginBottom:"7px"}}>{item.title}</div>
         <div style={{fontFamily:"Raleway",fontSize:"11px",color:T.textMid,lineHeight:"1.65",fontWeight:500,overflow:"hidden",display:"-webkit-box",WebkitLineClamp:2,WebkitBoxOrient:"vertical"}}>{item.soft}</div>
