@@ -147,7 +147,7 @@ function Billing({ sessions, clients, settings, onUpdateSession }) {
           <div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:"8px"}}>
             {[
               {label:"Einnahmen",  value:`${totalRevenue.toFixed(0)} ${currency}`, bg:"#DCFCE7", border:"#4ADE80", color:"#0A3B20"},
-              {label:"Offen",      value:`${totalOpen.toFixed(0)} ${currency}`,    bg:"#FEE2E2", border:"#FCA5A5", color:"#9B1C1C"},
+              {label:"Offen",      value:`${totalOpen.toFixed(0)} ${currency}`,    bg:"#3a1a1a", border:"#FCA5A5", color:"#ff6b6b"},
               {label:"Sitzungen",  value:totalSessions,                             bg:T.tealL,   border:T.borderMid, color:T.tealD},
             ].map((s,i)=>(
               <div key={i} style={{background:s.bg,borderRadius:"14px",border:`1.5px solid ${s.border}`,padding:"10px 8px",textAlign:"center"}}>
