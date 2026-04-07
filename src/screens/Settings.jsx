@@ -285,7 +285,7 @@ function SettingsScreen({ settings, onSave, onClose, clients, sessions, appointm
             </div>
             <button onClick={pinEnabled?disablePin:()=>setPinMode("setup")}
               style={{width:"44px",height:"24px",borderRadius:"12px",border:"none",cursor:"pointer",
-                background:pinEnabled?T.teal:"#CBD5E1",position:"relative",transition:"background 0.2s"}}>
+                background:pinEnabled?T.teal:T.bgSoft,position:"relative",transition:"background 0.2s"}}>
               <div style={{position:"absolute",top:"3px",left:pinEnabled?"23px":"3px",width:"18px",height:"18px",
                 borderRadius:"50%",background:"white",transition:"left 0.2s",boxShadow:"0 1px 4px rgba(0,0,0,0.2)"}}/>
             </button>
