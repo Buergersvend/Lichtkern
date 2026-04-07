@@ -190,7 +190,7 @@ Deine Angaben werden vertraulich behandelt.`);
     return (
       <div style={{padding:"0 16px 96px"}}>
         <button onClick={()=>setClientMode(null)} style={{fontFamily:"Raleway",fontSize:"13px",color:T.teal,fontWeight:700,background:"none",border:"none",cursor:"pointer",paddingTop:"8px",display:"block",marginBottom:"16px"}}>← Zurück</button>
-        <div style={{position:"relative",borderRadius:"22px",overflow:"hidden",padding:"22px 24px",marginBottom:"20px",background:`linear-gradient(140deg,${T.tealL} 0%,#FFFFFF 50%,${T.violetL} 100%)`,boxShadow:`0 6px 28px ${T.shadowDeep}`,border:`1.5px solid ${T.border}`}}>
+        <div style={{position:"relative",borderRadius:"22px",overflow:"hidden",padding:"22px 24px",marginBottom:"20px",background:T.bgSoft,boxShadow:`0 6px 28px ${T.shadowDeep}`,border:`1.5px solid ${T.border}`}}>
           <Flower size={180} opacity={0.09}/>
           <div style={{position:"relative",zIndex:1}}>
             <div style={{fontFamily:"Cinzel",fontSize:"18px",color:T.text,fontWeight:700}}>{clientMode==="mail_text"?"✉️ Fragebogen per Mail":"📄 Fragebogen als PDF"}</div>
@@ -278,7 +278,7 @@ ${[
     return (
       <div style={{padding:"0 16px 96px"}}>
         <button onClick={()=>setShowPreview(false)} style={{fontFamily:"Raleway",fontSize:"13px",color:T.teal,fontWeight:700,background:"none",border:"none",cursor:"pointer",paddingTop:"8px",display:"block",marginBottom:"14px"}}>← Bearbeiten</button>
-        <div style={{background:`linear-gradient(140deg,${T.tealL},#FFFFFF,${T.violetL})`,borderRadius:"20px",padding:"20px",marginBottom:"14px",border:`1.5px solid ${T.border}`}}>
+        <div style={{background:T.bgSoft,borderRadius:"20px",padding:"20px",marginBottom:"14px",border:`1.5px solid ${T.border}`}}>
           <div style={{fontFamily:"Cinzel",fontSize:"20px",color:T.text,fontWeight:700}}>{form.name||"—"}</div>
           <div style={{fontFamily:"Raleway",fontSize:"12px",color:T.textMid,marginTop:"4px",fontWeight:500}}>
             {form.birthDate&&`*${form.birthDate} · `}{form.contact||""}
@@ -338,7 +338,7 @@ ${[
           {isSelf&&<span style={{fontFamily:"Raleway",fontSize:"10px",color:T.textSoft,fontWeight:600}}>📱 Klient-Modus</span>}
         </div>
       </div>
-      <div style={{background:`linear-gradient(140deg,${T.tealL},#FFFFFF,${T.violetL})`,borderRadius:"18px",padding:"18px 20px",marginBottom:"16px",border:`1.5px solid ${T.border}`}}>
+      <div style={{background:T.bgSoft,borderRadius:"18px",padding:"18px 20px",marginBottom:"16px",border:`1.5px solid ${T.border}`}}>
         <div style={{fontFamily:"Cinzel",fontSize:"18px",color:T.text,fontWeight:700}}>{ONBOARDING_STEPS[step]}</div>
         <div style={{fontFamily:"Raleway",fontSize:"11px",color:T.textMid,marginTop:"3px",fontWeight:500}}>
           {["Persönliche Angaben","Aktuelle Beschwerden","Medizinische Vorgeschichte","Lebensbereiche & Belastungen","Ziele & Erwartungen","Ahnen & Familienmuster","Eigene Fragen & Abschluss"][step]}
