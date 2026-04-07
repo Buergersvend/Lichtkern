@@ -244,7 +244,7 @@ ${(tree?.relations||[]).length?"<div class=\"card\"><h3>Verknüpfte Klienten</h3
   // ── Client selector screen ──
   if(!selectedClientId) return (
     <div style={{padding:"0 16px 96px"}}>
-      <div style={{position:"relative",borderRadius:"22px",overflow:"hidden",padding:"24px",marginBottom:"20px",background:`linear-gradient(140deg,${T.tealL} 0%,#FFFFFF 50%,${T.violetL} 100%)`,boxShadow:`0 6px 28px ${T.shadowDeep}`,border:`1.5px solid ${T.border}`}}>
+      <div style={{position:"relative",borderRadius:"22px",overflow:"hidden",padding:"24px",marginBottom:"20px",background:T.bgSoft,border:`1.5px solid ${T.border}`}}>
         <Flower size={220} opacity={0.1}/>
         <div style={{position:"relative",zIndex:1}}>
           <h2 style={{fontFamily:"Cinzel",fontSize:"22px",color:T.text,margin:"0 0 4px",fontWeight:700}}>Generationsbaum</h2>
@@ -283,7 +283,7 @@ ${(tree?.relations||[]).length?"<div class=\"card\"><h3>Verknüpfte Klienten</h3
       <button onClick={()=>setSelectedClientId(null)} style={{fontFamily:"Raleway",fontSize:"13px",color:T.teal,fontWeight:700,background:"none",border:"none",cursor:"pointer",paddingTop:"8px",display:"block",marginBottom:"10px"}}>← Klienten</button>
 
       {/* Header */}
-      <div style={{position:"relative",borderRadius:"18px",overflow:"hidden",padding:"16px 18px",marginBottom:"12px",background:`linear-gradient(140deg,${T.tealL} 0%,#FFFFFF 50%,${T.violetL} 100%)`,boxShadow:`0 3px 18px ${T.shadow}`,border:`1.5px solid ${T.border}`}}>
+      <div style={{position:"relative",borderRadius:"18px",overflow:"hidden",padding:"16px 18px",marginBottom:"12px",background:T.bgSoft,border:`1.5px solid ${T.border}`}}>
         <Flower size={160} opacity={0.08}/>
         <div style={{position:"relative",zIndex:1,display:"flex",justifyContent:"space-between",alignItems:"center",flexWrap:"wrap",gap:"8px"}}>
           <div>
