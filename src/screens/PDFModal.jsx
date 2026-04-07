@@ -84,8 +84,8 @@ const openInvoice = async () => {
     const auth = getAuth();
     const uid = auth.currentUser?.uid;
     if(!uid) return;
-    const snap = await getDoc(doc(db,"users",uid,"settings","main"));
-    const sv = snap.exists() ? snap.data() : {};
+    const snap = await getDoc(doc(db,"users",uid,"data","lk_settings"));
+    const sv = snap.exists() ? JSON.parse(snap.data().value||"{}") : {};
     const inv = {praxisname:sv.praxisname||"",address:sv.invoiceAddress||"",city:sv.invoiceCity||"",iban:sv.invoiceIban||"",tax:sv.invoiceTax||"",footer:sv.invoiceFooter||"",currency:sv.currency||"CHF",defaultFee:sv.defaultFee||""};
     const html = buildInvoice(session, inv);
     const w = window.open("","_blank");
