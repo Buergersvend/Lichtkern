@@ -141,7 +141,7 @@ Warmherzig, präzise.`;
   const ClientPicker=({label,value,onChange})=>(
     <div style={{flex:1}}>
       <div style={{fontFamily:'Raleway',fontSize:'10px',color:T.textMid,fontWeight:700,letterSpacing:'1px',textTransform:'uppercase',marginBottom:'6px'}}>{label}</div>
-      <select value={value?.id||''} onChange={e=>onChange(clients.find(c=>c.id===e.target.value)||null)} style={{width:'100%',padding:'12px',borderRadius:'12px',border:`1.5px solid ${T.border}`,fontFamily:'Raleway',fontSize:'13px',color:T.text,background:'#fff',outline:'none'}}>
+      <select value={value?.id||''} onChange={e=>onChange(clients.find(c=>c.id===e.target.value)||null)} style={{width:'100%',padding:'12px',borderRadius:'12px',border:`1.5px solid ${T.border}`,fontFamily:'Raleway',fontSize:'13px',color:T.text,background:T.bgCard,outline:'none'}}>
         <option value=''>— Klient wählen</option>
         {clients.map(c=><option key={c.id} value={c.id}>{c.name}{c.hdType?' ('+c.hdType+')':''}</option>)}
       </select>
