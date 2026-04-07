@@ -39,7 +39,7 @@ function ApptModal({appt, clients, onSave, onDelete, onClose}){
         <SL>Terminart</SL>
         <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:"7px",marginBottom:"16px"}}>
           {Object.entries(APPT_TYPES).map(([key,t])=>(
-            <button key={key} onClick={()=>up({type:key})} style={{padding:"9px 10px",borderRadius:"12px",border:`1.5px solid ${form.type===key?t.color:T.border}`,background:form.type===key?t.bg:"white",cursor:"pointer",fontFamily:"Raleway",fontSize:"11px",fontWeight:700,color:form.type===key?t.color:T.textMid,textAlign:"left",transition:"all 0.15s"}}>
+            <button key={key} onClick={()=>up({type:key})} style={{padding:"9px 10px",borderRadius:"12px",border:`1.5px solid ${form.type===key?t.color:T.border}`,background:form.type===key?t.bg:T.bgCard,cursor:"pointer",fontFamily:"Raleway",fontSize:"11px",fontWeight:700,color:form.type===key?t.color:T.textMid,textAlign:"left",transition:"all 0.15s"}}>
               <span style={{display:"block",fontSize:"7px",letterSpacing:"1px",textTransform:"uppercase",marginBottom:"2px",opacity:0.7}}>{key==="session"?"●":"○"}</span>
               {t.label}
             </button>
