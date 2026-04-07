@@ -172,7 +172,7 @@ function Billing({ sessions, clients, settings, onUpdateSession }) {
             <div key={i} style={{flex:1,display:"flex",flexDirection:"column",alignItems:"center",gap:"2px",height:"100%",justifyContent:"flex-end"}}>
               <div style={{fontFamily:"Raleway",fontSize:"9px",color:T.teal,fontWeight:700}}>{m.paid>0?m.paid.toFixed(0):""}</div>
               <div style={{width:"100%",display:"flex",flexDirection:"column",justifyContent:"flex-end",height:`${Math.max(((m.paid+m.open)/maxBar)*100,4)}%`}}>
-                {m.open>0&&<div style={{width:"100%",background:"#FEE2E2",flex:m.open/(m.paid+m.open||1)}}/>}
+                {m.open>0&&<div style={{width:"100%",background:"#3a1a1a",flex:m.open/(m.paid+m.open||1)}}/>}
                 {m.paid>0&&<div style={{width:"100%",background:T.teal,borderRadius:"4px 4px 0 0",flex:m.paid/(m.paid+m.open||1)}}/>}
               </div>
               <div style={{fontFamily:"Raleway",fontSize:"8px",color:T.textSoft,fontWeight:700}}>{m.label}</div>
@@ -180,7 +180,7 @@ function Billing({ sessions, clients, settings, onUpdateSession }) {
           ))}
         </div>
         <div style={{display:"flex",gap:"12px",justifyContent:"center"}}>
-          {[{c:T.teal,l:"Bezahlt"},{c:"#FCA5A5",l:"Offen"}].map((x,i)=>(
+          {[{c:T.teal,l:"Bezahlt"},{c:"#cc4444",l:"Offen"}].map((x,i)=>(
             <div key={i} style={{display:"flex",alignItems:"center",gap:"5px"}}>
               <div style={{width:"10px",height:"10px",borderRadius:"2px",background:x.c}}/>
               <span style={{fontFamily:"Raleway",fontSize:"10px",color:T.textSoft,fontWeight:600}}>{x.l}</span>
