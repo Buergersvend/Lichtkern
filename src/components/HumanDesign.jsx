@@ -81,8 +81,8 @@ function BodygraphSVG({pgates=[],dgates=[],size=260}){
   };
 
   const cDef=(c)=>defined.has(c);
-  const cc=(c)=>cDef(c)?HD_CENTER_CFG[c].color:'#CBD5E1';
-  const cb=(c)=>cDef(c)?HD_CENTER_CFG[c].bg:'#F1F5F9';
+ const cc=(c)=>cDef(c)?HD_CENTER_CFG[c].color:'#4B5563';
+ const cb=(c)=>cDef(c)?HD_CENTER_CFG[c].bg:'#1F2937';
 
   // Shape renderers
   function TriDown({cx,cy,s,c,fill,label}){
