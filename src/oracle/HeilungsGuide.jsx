@@ -41,7 +41,7 @@ Gib eine PRAXISANLEITUNG:
     return (
       <div style={{display:"flex",flexDirection:"column",gap:"12px"}}>
         <button onClick={()=>{setGewaehlt(null);setKiDetail("");}} style={{fontFamily:"Raleway",fontSize:"13px",color:OT.teal,fontWeight:700,background:"none",border:"none",cursor:"pointer",textAlign:"left"}}>← Alle Methoden</button>
-        <OCard style={{background:`linear-gradient(135deg,${OT.tealL},${OT.violetL})`,border:`1.5px solid ${OT.borderMid}`}}>
+        <OCard style={{background:OT.bgSoft,border:`1.5px solid ${OT.borderMid}`}}>
           <div style={{display:"flex",alignItems:"center",gap:"12px",marginBottom:"14px"}}>
             <span style={{fontSize:"36px"}}>{gewaehlt.icon}</span>
             <div>
@@ -76,7 +76,7 @@ Gib eine PRAXISANLEITUNG:
 
   return (
     <div style={{display:"flex",flexDirection:"column",gap:"14px"}}>
-      <OCard style={{background:`linear-gradient(135deg,${OT.tealL},${OT.violetL})`,padding:"16px"}}>
+      <OCard style={{background:OT.bgSoft,padding:"16px"}}>
         <div style={{fontFamily:"Cinzel",fontSize:"15px",color:OT.text,fontWeight:700,marginBottom:"4px"}}>Heilungs-Guide</div>
         <div style={{fontFamily:"Raleway",fontSize:"12px",color:OT.textMid,fontWeight:500}}>Priorisiert: Energetische Heilung zuerst. KI gibt detaillierte Praxisanleitungen.</div>
       </OCard>
@@ -85,7 +85,7 @@ Gib eine PRAXISANLEITUNG:
           <OLabel>{kat}</OLabel>
           <div style={{display:"flex",flexDirection:"column",gap:"8px"}}>
             {HEILMETHODEN_KATALOG.filter(m=>m.kategorie===kat).map(methode => (
-              <button key={methode.id} onClick={()=>{setGewaehlt(methode);ladeKiDetail(methode);}} style={{background:"white",borderRadius:"14px",padding:"14px 16px",border:`1.5px solid ${OT.border}`,cursor:"pointer",textAlign:"left",display:"flex",alignItems:"center",gap:"12px",boxShadow:`0 2px 10px ${OT.shadow}`,transition:"all 0.15s"}}>
+              <button key={methode.id} onClick={()=>{setGewaehlt(methode);ladeKiDetail(methode);}} style={{background:OT.bgCard,borderRadius:"14px",padding:"14px 16px",border:`1.5px solid ${OT.border}`,cursor:"pointer",textAlign:"left",display:"flex",alignItems:"center",gap:"12px",boxShadow:`0 2px 10px ${OT.shadow}`,transition:"all 0.15s"}}>
                 <span style={{fontSize:"26px",flexShrink:0}}>{methode.icon}</span>
                 <div style={{flex:1}}>
                   <div style={{fontFamily:"Raleway",fontSize:"13px",color:OT.text,fontWeight:700,marginBottom:"2px"}}>{methode.name}</div>
