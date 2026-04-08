@@ -15,6 +15,11 @@ function Billing({ sessions, clients, settings, onUpdateSession }) {
   const [detail,setDetail] = useState(null);
   const [filterMonth,setFilterMonth] = useState("all");
   const [filterStatus,setFilterStatus] = useState("all");
+  const [editFee,setEditFee]         = useState("");
+const [editStatus,setEditStatus]   = useState("open");
+const [editInvNr,setEditInvNr]     = useState("");
+const [editInvDate,setEditInvDate] = useState("");
+const [saving,setSaving]           = useState(false);
   const currency = settings?.currency || "CHF";
 
   // Enrich sessions with client info
@@ -85,15 +90,7 @@ function Billing({ sessions, clients, settings, onUpdateSession }) {
     await onUpdateSession({...session, payStatus:status});
   };
 
-  // ── Detail view ──
-  if(detail) {
-    const s = enriched.find(x=>x.id===detail);
-    if(!s) { setDetail(null); return null; }
-    const [editFee,setEditFee]       = useState(s.fee||"");
-    const [editStatus,setEditStatus] = useState(s.payStatus||"open");
-    const [editInvNr,setEditInvNr]   = useState(s.invoiceNr||"");
-    const [editInvDate,setEditInvDate] = useState(s.invoiceDate||"");
-    const [saving,setSaving]         = useState(false);
+   
     const save = async () => { setSaving(true); await onUpdateSession({...s,fee:editFee,payStatus:editStatus,invoiceNr:editInvNr,invoiceDate:editInvDate}); setSaving(false); setDetail(null); };
     const ps = PAY_STATUS[editStatus]||PAY_STATUS.open;
 
