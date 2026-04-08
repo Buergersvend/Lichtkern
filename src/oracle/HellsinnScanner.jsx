@@ -183,7 +183,7 @@ Sei präzise, praxisnah und einfühlsam. Keine Heilversprechen, keine Diagnosen.
             }
             if (info.typ === "aura_hinweis") {
               return (
-                <div key={idx} style={{padding:"12px",background:"white",borderRadius:"12px",border:`1px solid ${OT.border}`}}>
+                <div key={idx} style={{padding:"12px",background:OT.bgCard,borderRadius:"12px",border:`1px solid ${OT.border}`}}>
                   <div style={{fontFamily:"Raleway",fontSize:"12px",color:OT.violet,fontWeight:700}}>🔮 Aura-Feld-Arbeit indiziert</div>
                   <div style={{fontFamily:"Raleway",fontSize:"11px",color:OT.textMid,fontWeight:500,marginTop:"4px"}}>
                     Wechsle zur "Aura & Chirurgie" Karte für detaillierte Feinstoffarbeit
@@ -198,7 +198,7 @@ Sei präzise, praxisnah und einfühlsam. Keine Heilversprechen, keine Diagnosen.
 
       {/* KI-Antwort */}
       {kiGestellt && (
-        <OCard style={{background:`linear-gradient(135deg,${OT.violetL} 0%,${OT.tealL} 100%)`,border:`1.5px solid ${OT.borderMid}`}}>
+        <OCard style={{background:OT.bgSoft,border:`1.5px solid ${OT.borderMid}`}}>
           <OLabel color={OT.violetD}>✦ KI-Analyse · Stiller Berater</OLabel>
           {kiLaed ? (
             <div style={{textAlign:"center",padding:"30px 0"}}>
