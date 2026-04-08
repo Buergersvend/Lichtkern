@@ -292,7 +292,7 @@ Warmherzig, präzise, ohne Heilversprechen.`;
   return(
     <div style={{paddingBottom:'20px'}}>
       {/* Header */}
-      <div style={{background:`linear-gradient(135deg,${T.violetL},${T.tealL})`,borderRadius:'16px',padding:'18px',marginBottom:'16px',border:`1.5px solid ${T.border}`,position:'relative',overflow:'hidden'}}>
+      <div style={{background:T.bgSoft,borderRadius:'16px',padding:'18px',marginBottom:'16px',border:`1.5px solid ${T.border}`,position:'relative',overflow:'hidden'}}>
         <Flower size={160} opacity={0.12} color={T.violet}/>
         <div style={{position:'relative',zIndex:1}}>
           <div style={{fontFamily:'Cinzel',fontSize:'13px',color:T.violetD,letterSpacing:'2px',marginBottom:'4px'}}>⚙ HUMAN DESIGN</div>
