@@ -53,7 +53,7 @@ function AuraChirurgie({ groqFetch }){
                     </div>
                     <OLabel color={OT.violetD}>Chirurgische Eingriffe</OLabel>
                     <div style={{display:"flex",flexWrap:"wrap",gap:"6px"}}>
-                      {s.chirurgie.map(c=><span key={c} style={{fontFamily:"Raleway",fontSize:"10px",fontWeight:700,padding:"4px 10px",borderRadius:"10px",background:OT.violetL,color:OT.violetD}}>✂️ {c}</span>)}
+                      {s.chirurgie.map(c=><span key={c} style={{fontFamily:"Raleway",fontSize:"10px",fontWeight:700,padding:"4px 10px",borderRadius:"10px",background:OT.bgCard,color:OT.violet}}>✂️ {c}</span>)}
                     </div>
                   </OCard>
                 );
@@ -61,12 +61,12 @@ function AuraChirurgie({ groqFetch }){
             </div>
           ) : (
             <>
-              <OCard style={{background:`linear-gradient(135deg,${OT.violetL},${OT.tealL})`,padding:"16px"}}>
+              <OCard style={{background:OT.bgSoft,padding:"16px"}}>
                 <div style={{fontFamily:"Cinzel",fontSize:"15px",color:OT.text,fontWeight:700,marginBottom:"4px"}}>Die 7 Aura-Schichten</div>
                 <div style={{fontFamily:"Raleway",fontSize:"12px",color:OT.textMid,fontWeight:500}}>Jede Schicht trägt ihre eigene Frequenz und Aufgabe. Von physisch-nah (1) bis kosmisch (7).</div>
               </OCard>
               {AURA_SCHICHTEN.map((s, idx) => (
-                <button key={idx} onClick={()=>setGewaehlt(idx)} style={{background:"white",borderRadius:"14px",padding:"14px 16px",border:`1.5px solid ${OT.border}`,cursor:"pointer",textAlign:"left",display:"flex",alignItems:"center",gap:"14px",boxShadow:`0 2px 10px ${OT.shadow}`,transition:"all 0.15s"}}>
+                <button key={idx} onClick={()=>setGewaehlt(idx)} style={{background:OT.bgCard,borderRadius:"14px",padding:"14px 16px",border:`1.5px solid ${OT.border}`,cursor:"pointer",textAlign:"left",display:"flex",alignItems:"center",gap:"14px",boxShadow:`0 2px 10px ${OT.shadow}`,transition:"all 0.15s"}}>
                   <div style={{display:"flex",flexDirection:"column",alignItems:"center",gap:"3px",flexShrink:0}}>
                     <div style={{width:"28px",height:"28px",borderRadius:"50%",background:s.farbe,border:"2px solid rgba(0,0,0,0.08)",boxShadow:`0 2px 8px ${s.farbe}44`}}/>
                     <span style={{fontFamily:"Cinzel",fontSize:"11px",color:OT.textSoft,fontWeight:700}}>{s.nr}</span>
@@ -116,12 +116,12 @@ function AuraChirurgie({ groqFetch }){
             </div>
           ) : (
             <>
-              <OCard style={{background:`linear-gradient(135deg,#FDE68A,${OT.violetL})`,padding:"16px"}}>
+              <OCard style={{background:OT.bgSoft,padding:"16px"}}>
                 <div style={{fontFamily:"Cinzel",fontSize:"15px",color:OT.text,fontWeight:700,marginBottom:"4px"}}>Aura-Chirurgie Techniken</div>
                 <div style={{fontFamily:"Raleway",fontSize:"12px",color:OT.textMid,fontWeight:500}}>Präzise energetische Eingriffe. Nur nach fundierter Ausbildung anwenden. Stufe 3–5.</div>
               </OCard>
               {AURA_CHIRURGIE_TECHNIKEN.map((t, idx) => (
-                <button key={idx} onClick={()=>setTechnikSel(idx)} style={{background:"white",borderRadius:"14px",padding:"14px 16px",border:`1.5px solid ${OT.border}`,cursor:"pointer",textAlign:"left",display:"flex",alignItems:"center",gap:"12px",boxShadow:`0 2px 10px ${OT.shadow}`,transition:"all 0.15s"}}>
+                <button key={idx} onClick={()=>setTechnikSel(idx)} style={{background:OT.bgCard,borderRadius:"14px",padding:"14px 16px",border:`1.5px solid ${OT.border}`,cursor:"pointer",textAlign:"left",display:"flex",alignItems:"center",gap:"12px",boxShadow:`0 2px 10px ${OT.shadow}`,transition:"all 0.15s"}}>
                   <span style={{fontSize:"28px",flexShrink:0}}>{t.icon}</span>
                   <div style={{flex:1}}>
                     <div style={{fontFamily:"Raleway",fontSize:"13px",color:OT.text,fontWeight:700,marginBottom:"3px"}}>{t.name}</div>
