@@ -53,7 +53,7 @@ Antworte in diesen Abschnitten (kurz & präzise):
     return (
       <div style={{display:"flex",flexDirection:"column",gap:"12px"}}>
         <button onClick={()=>{setGewaehltes(null);setKiDetail("");}} style={{fontFamily:"Raleway",fontSize:"13px",color:OT.teal,fontWeight:700,background:"none",border:"none",cursor:"pointer",textAlign:"left"}}>← Alle Chakren</button>
-        <OCard style={{background:`linear-gradient(135deg,${gewaehltes.hex}22,${OT.violetL})`,border:`1.5px solid ${gewaehltes.hex}44`}}>
+        <OCard style={{background:OT.bgSoft,border:`1.5px solid ${gewaehltes.hex}44`}}>
           <div style={{display:"flex",alignItems:"center",gap:"14px",marginBottom:"14px"}}>
             <div style={{width:"48px",height:"48px",borderRadius:"50%",background:gewaehltes.hex,display:"flex",alignItems:"center",justifyContent:"center",boxShadow:`0 4px 16px ${gewaehltes.hex}55`,flexShrink:0}}>
               <span style={{fontFamily:"Cinzel",fontSize:"20px",color:"white",fontWeight:700}}>{gewaehltes.symbol}</span>
@@ -80,7 +80,7 @@ Antworte in diesen Abschnitten (kurz & präzise):
         <OCard>
           <OLabel color={OT.tealD}>Lernpfad</OLabel>
           <div style={{fontFamily:"Raleway",fontSize:"13px",color:OT.text,lineHeight:"1.8",fontWeight:500,marginBottom:"10px"}}>{gewaehltes.lernpfad_soft}</div>
-          <div style={{background:OT.violetL,padding:"12px",borderRadius:"12px",border:`1px solid ${OT.violet}33`}}>
+          <div style={{background:OT.bgCard,padding:"12px",borderRadius:"12px",border:`1px solid ${OT.violet}33`}}>
             <div style={{fontFamily:"Raleway",fontSize:"10px",fontWeight:800,color:OT.violetD,letterSpacing:"1.5px",textTransform:"uppercase",marginBottom:"6px"}}>🎓 Vertiefung</div>
             <div style={{fontFamily:"Raleway",fontSize:"12px",color:OT.text,lineHeight:"1.8",fontWeight:500}}>{gewaehltes.lernpfad_deep}</div>
           </div>
@@ -97,7 +97,7 @@ Antworte in diesen Abschnitten (kurz & präzise):
 
   return (
     <div style={{display:"flex",flexDirection:"column",gap:"12px"}}>
-      <OCard style={{background:`linear-gradient(135deg,${OT.violetL},${OT.tealL})`,padding:"16px"}}>
+      <OCard style={{background:OT.bgSoft,padding:"16px"}}>
         <div style={{fontFamily:"Cinzel",fontSize:"15px",color:OT.text,fontWeight:700,marginBottom:"4px"}}>Chakren-Matrix</div>
         <div style={{fontFamily:"Raleway",fontSize:"12px",color:OT.textMid,fontWeight:500}}>Tippe auf Status um Scan-Ergebnis zu vermerken · Dann KI-Analyse per Klick</div>
       </OCard>
@@ -105,7 +105,7 @@ Antworte in diesen Abschnitten (kurz & präzise):
         const st = status[chakra.id];
         const sc = st ? statusColors[st] : null;
         return (
-          <div key={chakra.id} style={{background:"white",borderRadius:"14px",padding:"14px 16px",border:`1.5px solid ${st?chakra.hex+"44":OT.border}`,boxShadow:`0 2px 10px ${OT.shadow}`,display:"flex",alignItems:"center",gap:"14px"}}>
+          <div key={chakra.id} style={{background:OT.bgCard,borderRadius:"14px",padding:"14px 16px",border:`1.5px solid ${st?chakra.hex+"44":OT.border}`,boxShadow:`0 2px 10px ${OT.shadow}`,display:"flex",alignItems:"center",gap:"14px"}}>
             <button onClick={()=>setGewaehltes(chakra)} style={{display:"flex",alignItems:"center",gap:"12px",flex:1,background:"none",border:"none",cursor:"pointer",textAlign:"left",padding:0}}>
               <div style={{width:"38px",height:"38px",borderRadius:"50%",background:chakra.hex,display:"flex",alignItems:"center",justifyContent:"center",boxShadow:`0 3px 10px ${chakra.hex}44`,flexShrink:0}}>
                 <span style={{fontFamily:"Cinzel",fontSize:"16px",color:"white",fontWeight:700}}>{chakra.symbol}</span>
