@@ -48,7 +48,7 @@ Keine langen Einleitungen. Sofort in die Praxis.`;
       <div style={{display:"flex",flexDirection:"column",gap:"12px"}}>
         <button onClick={()=>{setGewaehltes(null);setKiDetail("");}} style={{fontFamily:"Raleway",fontSize:"13px",color:OT.teal,fontWeight:700,background:"none",border:"none",cursor:"pointer",textAlign:"left"}}>← Alle Organe</button>
         
-        <OCard style={{background:`linear-gradient(135deg,${OT.tealL},${OT.violetL})`,border:`1.5px solid ${OT.borderMid}`}}>
+        <OCard style={{background:OT.bgSoft,border:`1.5px solid ${OT.borderMid}`}}>
           <div style={{display:"flex",alignItems:"center",gap:"12px",marginBottom:"14px"}}>
             <span style={{fontSize:"36px"}}>{daten.emoji}</span>
             <div>
@@ -107,7 +107,7 @@ Keine langen Einleitungen. Sofort in die Praxis.`;
 
   return (
     <div style={{display:"flex",flexDirection:"column",gap:"14px"}}>
-      <OCard style={{background:`linear-gradient(135deg,${OT.tealL},${OT.violetL})`,padding:"16px"}}>
+      <OCard style={{background:OT.bgSoft,padding:"16px"}}>
         <div style={{fontFamily:"Cinzel",fontSize:"15px",color:OT.text,fontWeight:700,marginBottom:"4px"}}>Organsprache-Navigator</div>
         <div style={{fontFamily:"Raleway",fontSize:"12px",color:OT.textMid,fontWeight:500}}>Wähle ein Organ → sofortige energetische Deutung + KI-Praxisanalyse</div>
       </OCard>
@@ -831,7 +831,7 @@ const Label = ({children, color, size="10"}) => (
 );
 
 const Highlight = ({text}) => (
-  <div style={{margin:"16px 0",padding:"14px 18px",background:`linear-gradient(135deg,${OT.tealL},${OT.violetL})`,borderRadius:"12px",borderLeft:`4px solid ${OT.teal}`}}>
+  <div style={{margin:"16px 0",padding:"14px 18px",background:OT.bgSoft,borderRadius:"12px",borderLeft:`4px solid ${OT.teal}`}}>
     <div style={{fontFamily:"Raleway",fontSize:"13px",color:OT.tealD,fontWeight:700,lineHeight:"1.7",fontStyle:"italic"}}>„{text}"</div>
   </div>
 );
@@ -899,7 +899,7 @@ function Quiz({ onAbschluss }) {
   if (abgeschlossen) {
     return (
       <div style={{display:"flex",flexDirection:"column",gap:"14px"}}>
-        <Card style={{background:`linear-gradient(135deg,${bestanden?OT.tealL:OT.roseL},${OT.violetL})`,border:`1.5px solid ${bestanden?OT.borderMid:"#FCA5A5"}`}}>
+        <Card style={{background:OT.bgSoft,border:`1.5px solid ${bestanden?OT.borderMid:"#FCA5A5"}`}}>
           <div style={{textAlign:"center",padding:"16px 0"}}>
             <div style={{fontSize:"52px",marginBottom:"14px"}}>{bestanden?"🏆":"📚"}</div>
             <div style={{fontFamily:"Cinzel",fontSize:"22px",color:OT.text,fontWeight:700,marginBottom:"6px"}}>
@@ -967,7 +967,7 @@ function Quiz({ onAbschluss }) {
       </div>
 
       {/* Frage */}
-      <Card style={{background:`linear-gradient(135deg,${OT.violetL},${OT.bgSoft})`,border:`1.5px solid ${OT.borderMid}`}}>
+      <Card style={{background:OT.bgSoft,border:`1.5px solid ${OT.borderMid}`}}>
         <div style={{fontFamily:"Raleway",fontSize:"14px",color:OT.text,fontWeight:700,lineHeight:"1.7"}}>{frage.frage}</div>
       </Card>
 
@@ -1137,7 +1137,7 @@ function OrganspracheLernmodul({ stufe = 1, onBack, onZertifikat }) {
           <Label>Schlüsselbegriffe dieser Stufe</Label>
           <div style={{display:"flex",flexWrap:"wrap",gap:"6px"}}>
             {inhalt.schluesselwoerter.map(w => (
-              <span key={w} style={{fontFamily:"Raleway",fontSize:"11px",fontWeight:700,padding:"5px 12px",borderRadius:"12px",background:OT.tealL,color:OT.tealD,border:`1px solid ${OT.borderMid}`}}>{w}</span>
+              <span key={w} style={{fontFamily:"Raleway",fontSize:"11px",fontWeight:700,padding:"5px 12px",borderRadius:"12px",background:OT.bgCard,color:OT.tealD,border:`1px solid ${OT.borderMid}`}}>{w}</span>
             ))}
           </div>
         </Card>
@@ -1146,7 +1146,7 @@ function OrganspracheLernmodul({ stufe = 1, onBack, onZertifikat }) {
       {/* CTA: Weiter / Quiz */}
       <div style={{padding:"8px 0 40px"}}>
         {stufe < 5 ? (
-          <div style={{background:`linear-gradient(135deg,${stufeCfg.bg},${OT.violetL})`,borderRadius:"16px",padding:"18px",border:`1.5px solid ${stufeCfg.farbe}33`,textAlign:"center"}}>
+          <div style={{background:OT.bgSoft,borderRadius:"16px",padding:"18px",border:`1.5px solid ${stufeCfg.farbe}33`,textAlign:"center"}}>
             <div style={{fontFamily:"Cinzel",fontSize:"14px",color:OT.text,fontWeight:700,marginBottom:"6px"}}>Bereit für die nächste Stufe?</div>
             <div style={{fontFamily:"Raleway",fontSize:"12px",color:OT.textMid,fontWeight:500,marginBottom:"14px"}}>Stufe {stufe+1}: {STUFEN_CFG[stufe+1].name} – {STUFEN_CFG[stufe+1].icon}</div>
             <button onClick={onBack} style={{fontFamily:"Raleway",fontWeight:700,fontSize:"13px",padding:"12px 24px",borderRadius:"12px",border:"none",cursor:"pointer",background:`linear-gradient(135deg,${stufeCfg.farbe},${OT.tealD})`,color:"white",boxShadow:`0 4px 16px ${stufeCfg.farbe}44`}}>
@@ -1154,7 +1154,7 @@ function OrganspracheLernmodul({ stufe = 1, onBack, onZertifikat }) {
             </button>
           </div>
         ) : (
-          <div style={{background:`linear-gradient(135deg,${OT.goldL},${OT.violetL})`,borderRadius:"16px",padding:"22px",border:`1.5px solid #D97706`,textAlign:"center"}}>
+          <div style={{background:OT.bgSoft,borderRadius:"16px",padding:"22px",border:`1.5px solid #D97706`,textAlign:"center"}}>
             <div style={{fontSize:"40px",marginBottom:"12px"}}>🏆</div>
             <div style={{fontFamily:"Cinzel",fontSize:"16px",color:OT.text,fontWeight:700,marginBottom:"6px"}}>Zertifizierungsprüfung</div>
             <div style={{fontFamily:"Raleway",fontSize:"12px",color:OT.textMid,fontWeight:500,marginBottom:"16px",lineHeight:"1.7"}}>
