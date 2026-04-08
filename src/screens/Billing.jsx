@@ -146,9 +146,9 @@ if(!s) { setDetail(null); return null; }
           <h2 style={{fontFamily:"Cinzel",fontSize:"20px",color:T.text,margin:"0 0 12px",fontWeight:700}}>Abrechnung</h2>
           <div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:"8px"}}>
             {[
-              {label:"Einnahmen",  value:`${totalRevenue.toFixed(0)} ${currency}`, bg:"#DCFCE7", border:"#4ADE80", color:"#0A3B20"},
+              {label:"Einnahmen",  value:`${totalRevenue.toFixed(0)} ${currency}`, bg:"#0a2a1a", border:"#4ADE80", color:"#4ADE80"},
               {label:"Offen",      value:`${totalOpen.toFixed(0)} ${currency}`,    bg:"#3a1a1a", border:"#cc4444", color:"#ff6b6b"},
-              {label:"Sitzungen",  value:totalSessions,                             bg:T.tealL,   border:T.borderMid, color:T.tealD},
+              {label:"Sitzungen",  value:totalSessions,                             bg:T.bgCard,  border:T.borderMid, color:T.teal},
             ].map((s,i)=>(
               <div key={i} style={{background:s.bg,borderRadius:"14px",border:`1.5px solid ${s.border}`,padding:"10px 8px",textAlign:"center"}}>
                 <div style={{fontFamily:"Cinzel",fontSize:"16px",color:s.color,fontWeight:700}}>{s.value}</div>
