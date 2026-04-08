@@ -32,8 +32,8 @@ function ResonanzOracle({ groqFetch }){
   return (
     <div style={{background:OT.bg,minHeight:"100%",paddingBottom:"40px"}}>
       {/* Hero */}
-      <div style={{position:"relative",margin:"0 0 20px",padding:"26px 20px 22px",background:`linear-gradient(145deg,${OT.tealL} 0%,#FFFFFF 45%,${OT.violetL} 100%)`,borderBottom:`1.5px solid ${OT.border}`,overflow:"hidden"}}>
-        <div style={{position:"absolute",top:-60,right:-60,width:"200px",height:"200px",borderRadius:"50%",background:`radial-gradient(circle,${OT.violetL} 0%,transparent 70%)`,opacity:0.6,pointerEvents:"none"}}/>
+      <div style={{position:"relative",margin:"0 0 20px",padding:"26px 20px 22px",background:OT.bgSoft,borderBottom:`1.5px solid ${OT.border}`,overflow:"hidden"}}>
+        <div style={{position:"absolute",top:-60,right:-60,width:"200px",height:"200px",borderRadius:"50%",background:OT.bgSoft,opacity:0,pointerEvents:"none"}}/>
         <div style={{position:"relative",zIndex:1}}>
           <div style={{fontFamily:"Cinzel",fontSize:"22px",color:OT.text,fontWeight:700,letterSpacing:"2px",marginBottom:"4px"}}>✦ Resonanz Oracle</div>
           <div style={{fontFamily:"Raleway",fontSize:"10px",color:OT.textSoft,letterSpacing:"3px",fontWeight:700,textTransform:"uppercase"}}>KI als stiller Berater im Hintergrund</div>
