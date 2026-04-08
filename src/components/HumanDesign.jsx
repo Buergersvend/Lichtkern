@@ -334,7 +334,7 @@ Warmherzig, präzise, ohne Heilversprechen.`;
           <div style={{fontFamily:'Raleway',fontSize:'11px',color:T.tealD,fontWeight:700,letterSpacing:'1px',textTransform:'uppercase',marginBottom:'8px'}}>✦ Strategie & Signatur</div>
           <div style={{fontFamily:'Raleway',fontSize:'12px',color:T.text,lineHeight:'1.6',marginBottom:'8px'}}>{HD_TYPE_DESC[form.hdType].desc}</div>
           <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:'8px'}}>
-            {[['Strategie',HD_TYPE_DESC[form.hdType].strategy,T.tealL,T.tealD],['Signatur',HD_TYPE_DESC[form.hdType].signature,T.bgSoft,T.tealD],['Not-Self',HD_TYPE_DESC[form.hdType].notself,'#FEE2E2','#DC2626'],form.hdAuthority?['Autorität',HD_AUTHORITY_DESC[form.hdAuthority]||form.hdAuthority,T.violetL,T.violetD]:null].filter(Boolean).map(([k,v,bg,col])=>(
+            {[['Strategie',HD_TYPE_DESC[form.hdType].strategy,T.bgCard,T.teal],['Signatur',HD_TYPE_DESC[form.hdType].signature,T.bgSoft,T.tealD],['Not-Self',HD_TYPE_DESC[form.hdType].notself,T.bgCard,'#ff6b6b'],form.hdAuthority?['Autorität',HD_AUTHORITY_DESC[form.hdAuthority]||form.hdAuthority,T.bgCard,T.violet]:null].filter(Boolean).map(([k,v,bg,col])=>(
               <div key={k} style={{background:bg,borderRadius:'10px',padding:'10px',border:`1px solid ${T.border}`}}>
                 <div style={{fontFamily:'Raleway',fontSize:'9px',fontWeight:800,color:col,letterSpacing:'1px',textTransform:'uppercase',marginBottom:'3px'}}>{k}</div>
                 <div style={{fontFamily:'Raleway',fontSize:'11px',color:T.text,fontWeight:600,lineHeight:'1.4'}}>{v}</div>
