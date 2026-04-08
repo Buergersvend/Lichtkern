@@ -392,7 +392,7 @@ Warmherzig, präzise, ohne Heilversprechen.`;
                   ))}
                 </div>
               </div>
-              <div style={{fontFamily:'Raleway',fontSize:'11px',color:T.textMid,marginBottom:'10px',lineHeight:'1.5',background:'white',borderRadius:'8px',padding:'8px',border:`1px dashed ${T.border}`}}>
+              <div style={{fontFamily:'Raleway',fontSize:'11px',color:T.textMid,marginBottom:'10px',lineHeight:'1.5',background:T.bgCard,borderRadius:'8px',padding:'8px',border:`1px dashed ${T.border}`}}>
                 👆 <strong>1× tippen</strong> = Persönlichkeit · <strong>2× tippen</strong> = Beide · <strong>3× tippen</strong> = nur Design · <strong>4× tippen</strong> = entfernen
               </div>
               {/* Gate Grid 8x8 */}
