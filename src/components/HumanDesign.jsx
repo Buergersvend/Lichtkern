@@ -350,7 +350,7 @@ Warmherzig, präzise, ohne Heilversprechen.`;
           {/* Step indicator */}
           <div style={{display:'flex',gap:'6px',marginBottom:'14px'}}>
             {['① Geburt & Typ','② Tore eingeben'].map((s,i)=>(
-              <button key={i} onClick={()=>setGateStep(i)} style={{flex:1,padding:'9px',borderRadius:'12px',border:`1.5px solid ${gateStep===i?T.teal:T.border}`,background:gateStep===i?T.teal:'white',fontFamily:'Raleway',fontSize:'11px',fontWeight:700,color:gateStep===i?'white':T.textMid,cursor:'pointer'}}>
+              <button key={i} onClick={()=>setGateStep(i)} style={{flex:1,padding:'9px',borderRadius:'12px',border:`1.5px solid ${gateStep===i?T.teal:T.border}`,background:gateStep===i?T.teal:T.bgCard,fontFamily:'Raleway',fontSize:'11px',fontWeight:700,color:gateStep===i?'white':T.textMid,cursor:'pointer'}}>
                 {s}
               </button>
             ))}
@@ -366,7 +366,7 @@ Warmherzig, präzise, ohne Heilversprechen.`;
               <div style={{marginBottom:'12px'}}><div style={{fontFamily:'Raleway',fontSize:'10px',color:T.textMid,fontWeight:700,marginBottom:'4px'}}>Geburtsort</div><TI value={form.hdBirthPlace} onChange={v=>setForm({...form,hdBirthPlace:v})} placeholder="München, Deutschland"/></div>
               
               {/* mybodygraph link */}
-              <a href={mybodygraphUrl()} target="_blank" rel="noreferrer" style={{display:'block',background:`linear-gradient(135deg,${T.violetL},${T.tealL})`,borderRadius:'12px',padding:'14px',marginBottom:'12px',border:`1.5px solid ${T.borderMid}`,textDecoration:'none'}}>
+              <a href={mybodygraphUrl()} target="_blank" rel="noreferrer" style={{display:'block',background:T.bgSoft,borderRadius:'12px',padding:'14px',marginBottom:'12px',border:`1.5px solid ${T.borderMid}`,textDecoration:'none'}}>
                 <div style={{fontFamily:'Raleway',fontWeight:800,fontSize:'13px',color:T.violetD,marginBottom:'3px'}}>🔗 Chart auf mybodygraph.com öffnen →</div>
                 <div style={{fontFamily:'Raleway',fontSize:'11px',color:T.textMid}}>Öffnet deinen persönlichen HD-Chart{form.hdBirthDate?' mit den eingetragenen Daten':' (Daten erst oben eingeben)'}</div>
               </a>
