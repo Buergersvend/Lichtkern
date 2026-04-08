@@ -282,7 +282,7 @@ Warmherzig, präzise, ohne Heilversprechen.`;
   const sel=(label,opts,key)=>(
     <div style={{marginBottom:'10px'}}>
       <div style={{fontFamily:'Raleway',fontSize:'10px',color:T.textMid,fontWeight:700,letterSpacing:'1px',textTransform:'uppercase',marginBottom:'4px'}}>{label}</div>
-      <select value={form[key]} onChange={e=>setForm({...form,[key]:e.target.value})} style={{width:'100%',padding:'10px',borderRadius:'10px',border:`1.5px solid ${T.border}`,fontFamily:'Raleway',fontSize:'13px',color:T.text,background:'#fff',outline:'none'}}>
+      <select value={form[key]} onChange={e=>setForm({...form,[key]:e.target.value})} style={{width:'100%',padding:'10px',borderRadius:'10px',border:`1.5px solid ${T.border}`,fontFamily:'Raleway',fontSize:'13px',color:T.text,background:T.bgCard,outline:'none'}}>
         <option value=''>— wählen</option>
         {opts.map(o=><option key={o} value={o}>{o}</option>)}
       </select>
