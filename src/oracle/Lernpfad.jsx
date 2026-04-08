@@ -71,7 +71,7 @@ Schreibe klar, strukturiert und inspirierend. Auf Deutsch.`;
     return (
       <div style={{display:"flex",flexDirection:"column",gap:"12px"}}>
         <button onClick={()=>{setGewThema(null);setGewStufe(null);setKiInhalt("");}} style={{fontFamily:"Raleway",fontSize:"13px",color:OT.teal,fontWeight:700,background:"none",border:"none",cursor:"pointer",textAlign:"left"}}>← Zurück</button>
-        <OCard style={{background:`linear-gradient(135deg,${OT.tealL},${OT.violetL})`,border:`1.5px solid ${OT.borderMid}`}}>
+        <OCard style={{background:OT.bgSoft,border:`1.5px solid ${OT.borderMid}`}}>
           <div style={{display:"flex",alignItems:"center",gap:"12px"}}>
             <span style={{fontSize:"32px"}}>{gewThema.icon}</span>
             <div>
@@ -103,7 +103,7 @@ Schreibe klar, strukturiert und inspirierend. Auf Deutsch.`;
     return (
       <div style={{display:"flex",flexDirection:"column",gap:"12px"}}>
         <button onClick={()=>setGewThema(null)} style={{fontFamily:"Raleway",fontSize:"13px",color:OT.teal,fontWeight:700,background:"none",border:"none",cursor:"pointer",textAlign:"left"}}>← Themen</button>
-        <OCard style={{background:`linear-gradient(135deg,${OT.tealL},${OT.violetL})`,padding:"16px"}}>
+        <OCard style={{background:OT.bgSoft,padding:"16px"}}>
           <div style={{display:"flex",alignItems:"center",gap:"10px",marginBottom:"6px"}}>
             <span style={{fontSize:"28px"}}>{gewThema.icon}</span>
             <div style={{fontFamily:"Cinzel",fontSize:"16px",color:OT.text,fontWeight:700}}>{gewThema.name}</div>
@@ -111,7 +111,7 @@ Schreibe klar, strukturiert und inspirierend. Auf Deutsch.`;
           <div style={{fontFamily:"Raleway",fontSize:"12px",color:OT.textMid,fontWeight:500}}>Wähle deine Lernstufe</div>
         </OCard>
         {LERNPFAD_STUFEN.map(stufe => (
-          <button key={stufe.nr} onClick={()=>{setGewStufe(stufe.nr);ladeKiInhalt(gewThema,stufe.nr);}} style={{background:"white",borderRadius:"14px",padding:"16px",border:`1.5px solid ${stufe.farbe}44`,cursor:"pointer",textAlign:"left",display:"flex",alignItems:"center",gap:"14px",boxShadow:`0 2px 10px ${OT.shadow}`,transition:"all 0.15s"}}>
+          <button key={stufe.nr} onClick={()=>{setGewStufe(stufe.nr);ladeKiInhalt(gewThema,stufe.nr);}} style={{background:OT.bgCard,borderRadius:"14px",padding:"16px",border:`1.5px solid ${stufe.farbe}44`,cursor:"pointer",textAlign:"left",display:"flex",alignItems:"center",gap:"14px",boxShadow:`0 2px 10px ${OT.shadow}`,transition:"all 0.15s"}}>
             <div style={{width:"42px",height:"42px",borderRadius:"50%",background:stufe.farbe,display:"flex",alignItems:"center",justifyContent:"center",fontSize:"20px",flexShrink:0,boxShadow:`0 3px 12px ${stufe.farbe}44`}}>
               {stufe.icon}
             </div>
@@ -128,7 +128,7 @@ Schreibe klar, strukturiert und inspirierend. Auf Deutsch.`;
 
   return (
     <div style={{display:"flex",flexDirection:"column",gap:"14px"}}>
-      <OCard style={{background:`linear-gradient(135deg,${OT.goldL},${OT.violetL})`,padding:"16px"}}>
+      <OCard style={{background:OT.bgSoft,padding:"16px"}}>
         <div style={{fontFamily:"Cinzel",fontSize:"15px",color:OT.text,fontWeight:700,marginBottom:"4px"}}>🏆 Resonanz Akademie · Lernpfad</div>
         <div style={{fontFamily:"Raleway",fontSize:"12px",color:OT.textMid,fontWeight:500}}>Von Einführung bis Zertifizierung. KI generiert individuellen Lerninhalt für deine Stufe.</div>
         <div style={{display:"flex",gap:"6px",marginTop:"10px",flexWrap:"wrap"}}>
