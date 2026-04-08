@@ -141,13 +141,13 @@ function Billing({ sessions, clients, settings, onUpdateSession }) {
   return (
     <div style={{padding:"0 16px 96px"}}>
       {/* Hero */}
-      <div style={{position:"relative",borderRadius:"22px",overflow:"hidden",padding:"22px 24px",marginBottom:"16px",background:`linear-gradient(140deg,${T.teal} 0%,${T.bgCard} 100%)`,boxShadow:`0 6px 28px ${T.shadowDeep}`,border:`1.5px solid ${T.border}`}}>  <Flower size={200} opacity={0.09}/>
+      <div style={{position:"relative",borderRadius:"22px",overflow:"hidden",padding:"22px 24px",marginBottom:"16px",background:T.bgSoft,boxShadow:`0 6px 28px ${T.shadowDeep}`,border:`1.5px solid ${T.border}`}}>  <Flower size={200} opacity={0.09}/>
         <div style={{position:"relative",zIndex:1}}>
           <h2 style={{fontFamily:"Cinzel",fontSize:"20px",color:T.text,margin:"0 0 12px",fontWeight:700}}>Abrechnung</h2>
           <div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:"8px"}}>
             {[
               {label:"Einnahmen",  value:`${totalRevenue.toFixed(0)} ${currency}`, bg:"#DCFCE7", border:"#4ADE80", color:"#0A3B20"},
-              {label:"Offen",      value:`${totalOpen.toFixed(0)} ${currency}`,    bg:"#3a1a1a", border:"#FCA5A5", color:"#ff6b6b"},
+              {label:"Offen",      value:`${totalOpen.toFixed(0)} ${currency}`,    bg:"#3a1a1a", border:"#cc4444", color:"#ff6b6b"},
               {label:"Sitzungen",  value:totalSessions,                             bg:T.tealL,   border:T.borderMid, color:T.tealD},
             ].map((s,i)=>(
               <div key={i} style={{background:s.bg,borderRadius:"14px",border:`1.5px solid ${s.border}`,padding:"10px 8px",textAlign:"center"}}>
