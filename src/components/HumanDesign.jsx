@@ -399,7 +399,7 @@ Warmherzig, präzise, ohne Heilversprechen.`;
               <div style={{display:'grid',gridTemplateColumns:'repeat(8,1fr)',gap:'4px',marginBottom:'12px'}}>
                 {Array.from({length:64},(_,i)=>i+1).map(g=>{
                   const st=gateMap[g];
-                  const bg=st==='p'?T.teal:st==='d'?'#DC2626':st==='b'?T.violet:'#F1F5F9';
+                  const bg=st==='p'?T.teal:st==='d'?'#DC2626':st==='b'?T.violet:T.bgCard;
                   const col=st?'white':T.textSoft;
                   return(
                     <button key={g} onClick={()=>tapGate(g)} style={{aspectRatio:'1',borderRadius:'6px',border:`1px solid ${st?(st==='p'?T.tealD:st==='d'?'#B91C1C':T.violetD):'#E2E8F0'}`,background:bg,fontFamily:'Raleway',fontSize:'10px',fontWeight:st?800:500,color:col,cursor:'pointer',transition:'all 0.1s',display:'flex',alignItems:'center',justifyContent:'center'}}>
@@ -408,7 +408,7 @@ Warmherzig, präzise, ohne Heilversprechen.`;
                   );
                 })}
               </div>
-              <div style={{display:'flex',gap:'6px',background:'white',borderRadius:'10px',padding:'10px',marginBottom:'12px',border:`1px solid ${T.border}`}}>
+              <div style={{display:'flex',gap:'6px',background:T.bgCard,borderRadius:'10px',padding:'10px',marginBottom:'12px',border:`1px solid ${T.border}`}}>
                 <div style={{flex:1}}>
                   <div style={{fontFamily:'Raleway',fontSize:'9px',color:T.teal,fontWeight:700,marginBottom:'3px'}}>PERSÖNLICHKEIT ({pgates.length})</div>
                   <div style={{fontFamily:'Raleway',fontSize:'11px',color:T.text}}>{pgates.sort((a,b)=>a-b).join(', ')||'–'}</div>
@@ -419,7 +419,7 @@ Warmherzig, präzise, ohne Heilversprechen.`;
                 </div>
               </div>
               {allGates.length>0&&calcType&&(
-                <div style={{background:T.tealL,borderRadius:'10px',padding:'10px',marginBottom:'12px',border:`1px solid ${T.borderMid}`,fontFamily:'Raleway',fontSize:'12px',color:T.tealD,fontWeight:700}}>
+                <div style={{background:T.bgSoft,borderRadius:'10px',padding:'10px',marginBottom:'12px',border:`1px solid ${T.borderMid}`,fontFamily:'Raleway',fontSize:'12px',color:T.tealD,fontWeight:700}}>
                   ⚙ Berechneter Typ: {calcType}
                 </div>
               )}
