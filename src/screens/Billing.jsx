@@ -90,7 +90,9 @@ const [saving,setSaving]           = useState(false);
     await onUpdateSession({...session, payStatus:status});
   };
 
-   
+   if(detail) {
+const s = enriched.find(x=>x.id===detail);
+if(!s) { setDetail(null); return null; }
     const save = async () => { setSaving(true); await onUpdateSession({...s,fee:editFee,payStatus:editStatus,invoiceNr:editInvNr,invoiceDate:editInvDate}); setSaving(false); setDetail(null); };
     const ps = PAY_STATUS[editStatus]||PAY_STATUS.open;
 
