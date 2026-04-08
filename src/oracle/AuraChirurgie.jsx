@@ -11,7 +11,7 @@ function AuraChirurgie({ groqFetch }){
       {/* Tab-Switcher */}
       <div style={{display:"flex",gap:"8px"}}>
         {[["schichten","🌐 Aura-Schichten"],["chirurgie","✂️ Aura-Chirurgie"]].map(([id,label])=>(
-          <button key={id} onClick={()=>{setAnsicht(id);setGewaehlt(null);setTechnikSel(null);}} style={{flex:1,padding:"11px",borderRadius:"12px",border:`1.5px solid ${ansicht===id?OT.violet:OT.border}`,background:ansicht===id?OT.violetL:"white",color:ansicht===id?OT.violetD:OT.textMid,fontFamily:"Raleway",fontSize:"12px",fontWeight:700,cursor:"pointer"}}>
+          <button key={id} onClick={()=>{setAnsicht(id);setGewaehlt(null);setTechnikSel(null);}} style={{flex:1,padding:"11px",borderRadius:"12px",border:`1.5px solid ${ansicht===id?OT.violet:OT.border}`,background:ansicht===id?OT.violet:OT.bgCard,color:ansicht===id?"white":OT.textMid,fontFamily:"Raleway",fontSize:"12px",fontWeight:700,cursor:"pointer"}}>
             {label}
           </button>
         ))}
