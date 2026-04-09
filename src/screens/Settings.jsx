@@ -450,11 +450,11 @@ ${cs.map((s,i)=>{
     <span style={{fontFamily:"Raleway",fontSize:"11px",color:T.textSoft}}>Im Human Resonanz Netzwerk sichtbar</span>
   </div>
   {netzwerk.sichtbar && <>
-    <TI label="Anzeigename" value={netzwerk.name} onChange={e=>setNetzwerk(n=>({...n,name:e.target.value}))}/>
-    <TI label="Stadt" value={netzwerk.stadt} onChange={e=>setNetzwerk(n=>({...n,stadt:e.target.value}))}/>
-    <TI label="PLZ" value={netzwerk.plz} onChange={e=>setNetzwerk(n=>({...n,plz:e.target.value}))}/>
-    <TI label="Kurztext (max. 200 Zeichen)" value={netzwerk.kurztext} onChange={e=>setNetzwerk(n=>({...n,kurztext:e.target.value.slice(0,200)}))}/>
-    <TI label="Website (optional)" value={netzwerk.website} onChange={e=>setNetzwerk(n=>({...n,website:e.target.value}))}/>
+    <TI label="Anzeigename" placeholder="z.B. Maria Muster" value={netzwerk.name} onChange={v=>setNetzwerk(n=>({...n,name:v}))}/>
+<TI label="Stadt" placeholder="z.B. München" value={netzwerk.stadt} onChange={v=>setNetzwerk(n=>({...n,stadt:v}))}/>
+<TI label="PLZ" placeholder="z.B. 80331" value={netzwerk.plz} onChange={v=>setNetzwerk(n=>({...n,plz:v}))}/>
+<TI label="Kurztext (max. 200 Zeichen)" placeholder="Ich begleite Menschen auf ihrem Weg..." value={netzwerk.kurztext} onChange={v=>setNetzwerk(n=>({...n,kurztext:v.slice(0,200)}))}/>
+<TI label="Website (optional)" placeholder="https://..." value={netzwerk.website} onChange={v=>setNetzwerk(n=>({...n,website:v}))}/>
   </>}
   <button onClick={saveNetzwerk} style={{marginTop:"8px",width:"100%",fontFamily:"Raleway",fontSize:"11px",padding:"9px",borderRadius:"10px",border:`1.5px solid ${T.border}`,background:"transparent",color:T.text,cursor:"pointer"}}>
     {netzwerkSaved?"✅ Gespeichert":"🌐 Netzwerk-Profil speichern"}
