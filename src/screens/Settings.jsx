@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useCallback, useRef } from "react";
 import { T } from "../config/theme.js";
 import { Card, Btn, TI, SL, Select, Pill } from "../components/UI.jsx";
+import { db, auth } from "../config/firebase.js";
+import { doc, setDoc, getDoc } from "firebase/firestore";
 const THEMES = {
   kristallwasser: {
     name:"Kristallwasser", emoji:"🌊",
@@ -131,6 +133,8 @@ function SettingsScreen({ settings, onSave, onClose, clients, sessions, appointm
   const [pinEnabled,setPinEnabled] = useState(!!settings.pinEnabled);
   const [saved,setSaved]   = useState(false);
   const [importMsg,setImportMsg] = useState("");
+  const [netzwerk, setNetzwerk] = useState({ sichtbar:false, name:"", methoden:[], stadt:"", plz:"", kurztext:"", website:"" });
+const [netzwerkSaved, setNetzwerkSaved] = useState(false);
   const up = u => setForm(f=>({...f,...u}));
 
   const save = async () => {
@@ -138,7 +142,17 @@ function SettingsScreen({ settings, onSave, onClose, clients, sessions, appointm
     setSaved(true);
     setTimeout(()=>setSaved(false),1800);
   };
+useEffect(() => {
+  if(!auth.currentUser) return;
+  getDoc(doc(db,"netzwerk_profile",auth.currentUser.uid)).then(d=>{ if(d.exists()) setNetzwerk(d.data()); });
+},[]);
 
+const saveNetzwerk = async () => {
+  if(!auth.currentUser) return;
+  await setDoc(doc(db,"netzwerk_profile",auth.currentUser.uid),{...netzwerk, uid:auth.currentUser.uid, aktualisiert:new Date()},{merge:true});
+  setNetzwerkSaved(true);
+  setTimeout(()=>setNetzwerkSaved(false),2000);
+};
   const handlePinSetup = async (pin) => {
     try{ await fsSet("pin_user","lk_pin", pin); }catch{}
     setPinEnabled(true);
@@ -426,7 +440,26 @@ ${cs.map((s,i)=>{
           }} style={{width:"100%",fontFamily:"Raleway",fontWeight:700,fontSize:"11px",padding:"9px",borderRadius:"10px",border:`1.5px solid ${T.border}`,background:T.bgCard,color:T.textMid,cursor:"pointer"}}>
             📄 Gesamtbericht erstellen
           </button>
-
+{/* HR Netzwerk */}
+<div style={{marginTop:"16px",paddingTop:"14px",borderTop:`1px solid ${T.border}`}}>
+  <div style={{fontFamily:"Raleway",fontSize:"12px",fontWeight:700,color:T.text,marginBottom:"8px"}}>🌐 HR Netzwerk</div>
+  <div style={{display:"flex",alignItems:"center",gap:"10px",marginBottom:"10px"}}>
+    <button onClick={()=>setNetzwerk(n=>({...n,sichtbar:!n.sichtbar}))} style={{width:"42px",height:"24px",borderRadius:"12px",border:"none",cursor:"pointer",background:netzwerk.sichtbar?T.teal:"#4B5563",position:"relative"}}>
+      <span style={{position:"absolute",top:"3px",left:netzwerk.sichtbar?"20px":"3px",width:"18px",height:"18px",borderRadius:"50%",background:"white",transition:"left 0.2s"}}/>
+    </button>
+    <span style={{fontFamily:"Raleway",fontSize:"11px",color:T.textSoft}}>Im Human Resonanz Netzwerk sichtbar</span>
+  </div>
+  {netzwerk.sichtbar && <>
+    <TI label="Anzeigename" value={netzwerk.name} onChange={e=>setNetzwerk(n=>({...n,name:e.target.value}))}/>
+    <TI label="Stadt" value={netzwerk.stadt} onChange={e=>setNetzwerk(n=>({...n,stadt:e.target.value}))}/>
+    <TI label="PLZ" value={netzwerk.plz} onChange={e=>setNetzwerk(n=>({...n,plz:e.target.value}))}/>
+    <TI label="Kurztext (max. 200 Zeichen)" value={netzwerk.kurztext} onChange={e=>setNetzwerk(n=>({...n,kurztext:e.target.value.slice(0,200)}))}/>
+    <TI label="Website (optional)" value={netzwerk.website} onChange={e=>setNetzwerk(n=>({...n,website:e.target.value}))}/>
+  </>}
+  <button onClick={saveNetzwerk} style={{marginTop:"8px",width:"100%",fontFamily:"Raleway",fontSize:"11px",padding:"9px",borderRadius:"10px",border:`1.5px solid ${T.border}`,background:"transparent",color:T.text,cursor:"pointer"}}>
+    {netzwerkSaved?"✅ Gespeichert":"🌐 Netzwerk-Profil speichern"}
+  </button>
+</div>
           {/* Import */}
           <div style={{marginTop:"16px",paddingTop:"14px",borderTop:`1px solid ${T.border}`}}>
             <div style={{fontFamily:"Raleway",fontSize:"12px",fontWeight:700,color:T.text,marginBottom:"4px"}}>🔁 Backup wiederherstellen</div>
