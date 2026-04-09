@@ -442,7 +442,7 @@ ${cs.map((s,i)=>{
           </button>
 {/* HR Netzwerk */}
 <div style={{marginTop:"16px",paddingTop:"14px",borderTop:`1px solid ${T.border}`}}>
-  <div style={{fontFamily:"Raleway",fontSize:"12px",fontWeight:700,color:T.text,marginBottom:"8px"}}>🌐 HR Netzwerk</div>
+<div style={{display:"flex",alignItems:"center",gap:"6px"}}>🌐 HR Netzwerk<span title="Werde auf der öffentlichen Praktiker-Karte auf human-resonanz.de sichtbar. Interessierte Klienten finden dich direkt — mehr Sichtbarkeit, mehr Buchungen." style={{cursor:"help",width:"16px",height:"16px",borderRadius:"50%",background:T.teal,color:"white",fontSize:"10px",fontWeight:700,display:"inline-flex",alignItems:"center",justifyContent:"center",flexShrink:0}}>i</span></div>
   <div style={{display:"flex",alignItems:"center",gap:"10px",marginBottom:"10px"}}>
     <button onClick={()=>setNetzwerk(n=>({...n,sichtbar:!n.sichtbar}))} style={{width:"42px",height:"24px",borderRadius:"12px",border:"none",cursor:"pointer",background:netzwerk.sichtbar?T.teal:"#4B5563",position:"relative"}}>
       <span style={{position:"absolute",top:"3px",left:netzwerk.sichtbar?"20px":"3px",width:"18px",height:"18px",borderRadius:"50%",background:"white",transition:"left 0.2s"}}/>
