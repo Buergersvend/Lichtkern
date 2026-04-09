@@ -441,7 +441,7 @@ ${cs.map((s,i)=>{
             📄 Gesamtbericht erstellen
           </button>
 {/* HR Netzwerk */}
-<div style={{marginTop:"16px",paddingTop:"14px",borderTop:`1px solid ${T.border}`}}>
+<div style={{marginTop:"16px",paddingTop:"14px",borderTop:`1px solid ${T.border}`,paddingRight:"2px",overflow:"hidden"}}>
 <div style={{display:"flex",alignItems:"center",gap:"6px",position:"relative"}}><span style={{fontFamily:"Raleway",fontSize:"12px",fontWeight:700,color:T.text}}>🌐 HR Netzwerk</span><span onMouseEnter={()=>setNetzwerk(n=>({...n,_tip:true}))} onMouseLeave={()=>setNetzwerk(n=>({...n,_tip:false}))} style={{cursor:"help",width:"16px",height:"16px",borderRadius:"50%",background:T.teal,color:"#000",fontSize:"10px",fontWeight:700,display:"inline-flex",alignItems:"center",justifyContent:"center"  }}>i</span>{netzwerk._tip&&<div style={{position:"absolute",top:"22px",left:"0",zIndex:99,background:T.bgCard,border:`1px solid ${T.border}`,borderRadius:"10px",padding:"10px 12px",width:"260px",fontFamily:"Raleway",fontSize:"11px",color:T.textSoft,lineHeight:"1.6",boxShadow:"0 4px 16px rgba(0,0,0,0.4)"}}>Werde auf der öffentlichen Praktiker-Karte auf <span style={{color:T.teal}}>human-resonanz.de</span> sichtbar. Interessierte Klienten finden dich direkt — mehr Reichweite, mehr Buchungen.</div>}</div>
   <div style={{display:"flex",alignItems:"center",gap:"10px",marginBottom:"10px"}}>
     <button onClick={()=>setNetzwerk(n=>({...n,sichtbar:!n.sichtbar}))} style={{width:"42px",height:"24px",borderRadius:"12px",border:"none",cursor:"pointer",background:netzwerk.sichtbar?T.teal:"#4B5563",position:"relative"}}>
