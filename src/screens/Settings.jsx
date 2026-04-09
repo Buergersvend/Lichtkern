@@ -455,7 +455,7 @@ ${cs.map((s,i)=>{
 <TI label="PLZ" placeholder="z.B. 80331" value={netzwerk.plz} onChange={v=>setNetzwerk(n=>({...n,plz:v}))}/>
 <TI label="Kurztext (max. 200 Zeichen)" placeholder="Ich begleite Menschen auf ihrem Weg..." value={netzwerk.kurztext} onChange={v=>setNetzwerk(n=>({...n,kurztext:v.slice(0,200)}))}/>
 <TI label="Website (optional)" placeholder="https://..." value={netzwerk.website} onChange={v=>setNetzwerk(n=>({...n,website:v}))}/>
- <>}
+ </>}
   <button onClick={saveNetzwerk} style={{marginTop:"8px",width:"100%",fontFamily:"Raleway",fontSize:"11px",padding:"9px",borderRadius:"10px",border:`1.5px solid ${T.border}`,background:"transparent",color:T.text,cursor:"pointer"}}>
     {netzwerkSaved?"✅ Gespeichert":"🌐 Netzwerk-Profil speichern"}
   </button>
