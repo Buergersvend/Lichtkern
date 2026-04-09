@@ -454,7 +454,15 @@ ${cs.map((s,i)=>{
 <TI label="Stadt" placeholder="z.B. München" value={netzwerk.stadt} onChange={v=>setNetzwerk(n=>({...n,stadt:v}))}/>
 <TI label="PLZ" placeholder="z.B. 80331" value={netzwerk.plz} onChange={v=>setNetzwerk(n=>({...n,plz:v}))}/>
 <TI label="Kurztext (max. 200 Zeichen)" placeholder="Ich begleite Menschen auf ihrem Weg..." value={netzwerk.kurztext} onChange={v=>setNetzwerk(n=>({...n,kurztext:v.slice(0,200)}))}/>
-<TI label="Website (optional)" placeholder="https://..." value={netzwerk.website} onChange={v=>setNetzwerk(n=>({...n,website:v}))}/>
+<div style={{marginBottom:"8px"}}>
+  <div style={{fontFamily:"Raleway",fontSize:"11px",color:T.textSoft,marginBottom:"6px"}}>Methoden (mehrere wählbar)</div>
+  <div style={{display:"flex",flexWrap:"wrap",gap:"6px"}}>
+    {["Humanenergetik","Coaching","Energetik","Human Design","Therapie","Heilpraktiker","Astrologie","Sonstiges"].map(m=>(
+      <span key={m} onClick={()=>setNetzwerk(n=>({...n,methoden:n.methoden.includes(m)?n.methoden.filter(x=>x!==m):[...n.methoden,m]}))} style={{cursor:"pointer",padding:"4px 10px",borderRadius:"20px",fontSize:"11px",fontFamily:"Raleway",border:`1px solid ${T.border}`,background:netzwerk.methoden.includes(m)?T.teal:"transparent",color:netzwerk.methoden.includes(m)?"#000":T.textSoft}}>{m}</span>
+    ))}
+  </div>
+</div>
+    <TI label="Website (optional)" placeholder="https://..." value={netzwerk.website} onChange={v=>setNetzwerk(n=>({...n,website:v}))}/>
  </>}
   <button onClick={saveNetzwerk} style={{marginTop:"8px",width:"100%",fontFamily:"Raleway",fontSize:"11px",padding:"9px",borderRadius:"10px",border:`1.5px solid ${T.border}`,background:"transparent",color:T.text,cursor:"pointer"}}>
     {netzwerkSaved?"✅ Gespeichert":"🌐 Netzwerk-Profil speichern"}
