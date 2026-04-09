@@ -461,7 +461,7 @@ ${cs.map((s,i)=>{
   </button>
 </div>
           {/* Import */}
-          <div style={{marginTop:"16px",paddingTop:"14px",borderTop:`1px solid ${T.border}`}}>
+          <div style={{marginTop:"16px",paddingTop:"14px",borderTop:`1px solid ${T.border}`,overflow:"hidden"}}>
             <div style={{fontFamily:"Raleway",fontSize:"12px",fontWeight:700,color:T.text,marginBottom:"4px"}}>🔁 Backup wiederherstellen</div>
             <div style={{fontFamily:"Raleway",fontSize:"11px",color:T.textSoft,fontWeight:500,marginBottom:"8px"}}>JSON-Backup importieren — überschreibt alle aktuellen Daten</div>
             <label style={{display:"block",width:"100%",fontFamily:"Raleway",fontWeight:700,fontSize:"11px",padding:"9px",borderRadius:"10px",border:`1.5px dashed ${T.border}`,background:T.bgCard,color:T.text,cursor:"pointer",textAlign:"center"}}>
