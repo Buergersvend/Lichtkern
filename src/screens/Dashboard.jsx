@@ -5,7 +5,7 @@ const GOLD = "#C9A84C";
 const DARK = "#0F0F0F";
 const DARK2 = "#1A1A1A";
 const DARK3 = "#242424";
-const LOGO = "https://human-resonanz-yeze.vercel.app/Firmenlogo_SD_202603-removebg-preview.png";
+const LOGO = "/Firmenlogo_ohne_Hintergrund_Herz_20260414-removebg-preview.png";
 
 function Dashboard({clients,sessions,appointments,onNav,settings}){
   const [showMore,setShowMore]=useState(false);
