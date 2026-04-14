@@ -71,7 +71,7 @@ function LoginScreen({ onLogin }){
       <div style={{width:"100%", maxWidth:"400px", position:"relative", zIndex:1}}>
         {/* Logo */}
         <div style={{textAlign:"center", marginBottom:"36px"}}>
-        <img src="https://human-resonanz-yeze.vercel.app/Firmenlogo_SD_202603-removebg-preview.png" style={{width:"80px",height:"80px",objectFit:"contain"}}/>
+        <img src="/Firmenlogo_ohne_Hintergrund_Herz_20260414-removebg-preview.png" style={{width:"80px",height:"80px",objectFit:"contain"}}/>
         
           <div style={{fontFamily:"Raleway", fontSize:"11px", color:T.textSoft, letterSpacing:"3px", marginTop:"5px", fontWeight:600}}>POWERED BY HUMAN RESONANZ</div>
         </div>
