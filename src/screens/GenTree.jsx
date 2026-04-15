@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback, useRef } from "react";
 import { Flower } from "../components/Decorations";
 import { T } from "../config/theme.js";
 import { Card, Btn, TI, Select, SL, Pill } from "../components/UI.jsx";
+const uid = () => Math.random().toString(36).slice(2,10);
 const GEN_ROLES = ["Ich","Mutter","Vater","Mutter-Mutter","Mutter-Vater","Vater-Mutter","Vater-Vater"];
 const GEN_THEMES = ["Trauma","Verlust","Sucht","Krankheit","Armut","Gewalt","Trennung","Einsamkeit","Schuld","Scham","Loyalität","Opferrolle","Kontrolle","Angst","Depression","Perfektionismus"];
 const RELATION_TYPES = ["Mutter","Vater","Kind","Geschwister","Partner/in","Großelternteil","Sonstiges"];
