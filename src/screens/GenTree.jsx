@@ -86,7 +86,7 @@ function LinkModal_v2({onSave,onClose,clients,selectedClientId}){
         <div style={{display:"flex",flexWrap:"wrap",gap:"6px",marginBottom:"14px"}}>
           {RELATION_TYPES.map(r=>{
             const col=REL_COLORS[r]||T.textSoft;
-            return<button key={r} onClick={()=>setRelType(r)} style={{fontFamily:"Raleway",fontSize:"11px",fontWeight:700,padding:"6px 13px",borderRadius:"16px",border:`1.5px solid ${relType===r?col:T.border}`,background:relType===r?`${col}22`:"white",color:relType===r?col:T.textMid,cursor:"pointer"}}>{r}</button>;
+          return<button key={r} onClick={()=>setRelType(r)} style={{fontFamily:"Raleway",fontSize:"11px",fontWeight:700,padding:"6px 13px",borderRadius:"16px",border:`1.5px solid ${relType===r?col:T.border}`,background:relType===r?`${col}22`:T.bgCard,color:relType===r?col:T.textSoft,cursor:"pointer"}}>{r}</button>;
           })}
         </div>
         <SL>Klient auswählen</SL>
