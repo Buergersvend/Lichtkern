@@ -106,11 +106,12 @@ function SA({wizard,upd,aiText,aiLoading,onGen}){
     <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:"8px",marginBottom:"10px"}}>
       <div><TI value={wizard.fee||""} onChange={v=>upd({fee:v})} placeholder="Betrag (z.B. 120)"/></div>
       <div>
-        <select value={wizard.payStatus||"open"} onChange={e=>upd({payStatus:e.target.value})} style={{width:"100%",background:T.bgCard,border:`1.5px solid ${T.border}`,borderRadius:"12px",padding:"11px 14px",color:T.text,fontFamily:"Raleway",fontSize:"13px",fontWeight:500,outline:"none",appearance:"none"}}>
-          <option value="open">📋 Offen</option>
-          <option value="partial">⚠️ Teilbezahlt</option>
-          <option value="paid">✅ Bezahlt</option>
-        </select>
+        <select value={wizard.payStatus||"open"} onChange={e=>upd({payStatus:e.target.value})} style={{width:"100%",background:T.bgCard,border:`1.5px solid ${T.borderMid}`,borderRadius:"8px",padding:"8px",color:T.textSoft,fontFamily:"Raleway"}}>
+  <option value="open">🧾 Offen</option>
+  <option value="partial">⚠️ Teilbezahlt</option>
+  <option value="energieausgleich">🌀 Energieausgleich</option>
+  <option value="paid">✅ Bezahlt</option>
+</select>
       </div>
     </div>
     <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:"8px"}}>
