@@ -387,7 +387,7 @@ ${(tree?.relations||[]).length?"<div class=\"card\"><h3>Verknüpfte Klienten</h3
                     {activeRelation?.id===r.id&&<div style={{fontFamily:"Raleway",fontSize:"10px",color:T.textSoft,fontWeight:500,marginTop:"3px"}}>🔒 Einwilligung: {new Date(r.date).toLocaleDateString("de-DE")}</div>}
                   </div>
                 </div>
-                <button onClick={e=>{e.stopPropagation();deleteRelation(r.id);}} style={{fontFamily:"Raleway",fontSize:"11px",color:"#C0392B",background:"#FEE2E2",border:"none",borderRadius:"8px",padding:"4px 9px",cursor:"pointer",fontWeight:700}}>🗑</button>
+               <button onClick={e=>{e.stopPropagation();deleteRelation(r.id);}} style={{fontFamily:"Raleway",fontSize:"11px",color:"#C0392B",background:T.bgCard,border:"1px solid #C0392B",borderRadius:"8px",padding:"4px 9px",cursor:"pointer",fontWeight:700}}>🗑</button>
               </div>
             );
           })}
