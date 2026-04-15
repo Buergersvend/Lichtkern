@@ -6,9 +6,10 @@ import { APPT_TYPES, DE_MONTHS, DE_DAYS } from "../config/constants.js";
 import { Card, Btn, Pill, SL, TI, Select } from "../components/UI.jsx";
 
 const PAY_STATUS = {
-open: { label:"Offen", color:"#C0392B", bg:"#3a1a1a", border:"#cc4444", icon:"🧾" },
-  partial: { label:"Teilbezahlt", color:"#7C4A00", bg:"#FEF3C7", border:"#F59E0B", icon:"⚠️" },
-  paid:    { label:"Bezahlt",     color:"#0A3B20", bg:"#DCFCE7", border:"#4ADE80", icon:"✅" },
+  open:            { label:"Offen",            color:"#C0392B", bg:"#3a1a1a", border:"#cc4444", icon:"🧾" },
+  partial:         { label:"Teilbezahlt",      color:"#7C4A00", bg:"#FEF3C7", border:"#F59E0B", icon:"⚠️" },
+  energieausgleich:{ label:"Energieausgleich", color:"#7B5C00", bg:"#2a1f00", border:"#C9A84C", icon:"🌀" },
+  paid:            { label:"Bezahlt",          color:"#0A3B20", bg:"#DCFCE7", border:"#4ADE80", icon:"✅" },
 };
 
 function Billing({ sessions, clients, settings, onUpdateSession }) {
