@@ -207,7 +207,7 @@ ${(tree?.relations||[]).length?"<div class=\"card\"><h3>Verknüpfte Klienten</h3
       <g onClick={()=>setEditPerson({...p,role})} style={{cursor:"pointer"}}>
         {hasInherited&&<rect x={x-2} y={y-2} width={w+4} height={h+4} rx="14" fill="none" stroke={T.violet} strokeWidth="2" strokeDasharray="5,3" opacity={0.5}/>}
         <rect x={x} y={y} width={w} height={h} rx="12"
-          fill={p.name?(isDead?"#F0EDFC":isMe?T.tealL:"white"):"#F8FFFE"}
+         fill={p.name?(isDead?"#2a1f3d":isMe?T.tealL:T.bgSoft):"#1a1a2e"}
           stroke={brd} strokeWidth={isMe?2:1.5} strokeDasharray={isDead?"5,3":"none"}/>
         <text x={x+w/2} y={y+18} textAnchor="middle" style={{fontSize:"11px",fill:p.name?T.text:T.textSoft,fontWeight:"700",fontFamily:"Raleway"}}>
           {p.name||(role==="Ich"?"Klient":role.replace("-"," "))}
