@@ -416,7 +416,7 @@ const LERNPFAD_STUFEN = [
   { nr:2, name:"Grundlagen",   farbe:"#0D9488", icon:"📚", beschreibung:"Systematisches Wissen, erste Technikanwendung, Klienten-Grundarbeit." },
   { nr:3, name:"Vertiefung",   farbe:"#0284C7", icon:"🎯", beschreibung:"Komplexe Fälle, Kombination von Methoden, eigene Wahrnehmungsschärfung." },
   { nr:4, name:"Meisterschaft",farbe:"#7C3AED", icon:"⚡", beschreibung:"Aura-Chirurgie, Quantenarbeit, Fern-Anwendungen, Ausbildungsleitung." },
-  { nr:5, name:"Zertifizierung",farbe:"#D97706",icon:"🏆", beschreibung:"Geprüfte Kompetenz, Resonanz Akademie Zertifikat, Lehrerlizenz." },
+  { nr:5, name:"Zertifizierung",farbe:"#D97706",icon:"🏆", beschreibung:"Geprüfte Kompetenz, Human Resonanz Akademie Zertifikat, Lehrerlizenz." },
 ];
 
 // ════════════════════════════════════════════════════════════════
