@@ -38,7 +38,7 @@ function Lernpfad({ groqFetch }){
     if (!groqFetch) { setKiInhalt("⚠️ API nicht verbunden."); return; }
     setKiLaed(true); setKiInhalt("");
     const stufenNamen = {1:"Einführung",2:"Grundlagen",3:"Vertiefung",4:"Meisterschaft",5:"Zertifizierungswissen"};
-    const prompt = `Du bist Leiter der Resonanz Akademie und vermittelst professionelles energetisches Heiler-Wissen.
+    const prompt = `Du bist Leiter der Human Resonanz Akademie und vermittelst professionelles energetisches Heiler-Wissen.
 
 Thema: ${thema.name}
 Lernstufe: ${stufenNamen[stufe]} (${stufe}/5)
