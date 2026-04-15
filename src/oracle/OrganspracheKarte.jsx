@@ -917,7 +917,7 @@ function Quiz({ onAbschluss }) {
             {bestanden ? (
               <div style={{background:"rgba(255,255,255,0.85)",borderRadius:"14px",padding:"16px",marginBottom:"10px"}}>
                 <div style={{fontFamily:"Raleway",fontSize:"13px",color:OT.tealD,fontWeight:600,lineHeight:"1.7"}}>
-                  Herzlichen Glückwunsch! Du hast die Prüfung bestanden und das Resonanz Akademie Zertifikat für <strong>Organsprache</strong> verdient. Das Zertifikat wird in deinem Profil hinterlegt.
+                  Herzlichen Glückwunsch! Du hast die Prüfung bestanden und das Human Resonanz Akademie Zertifikat für <strong>Organsprache</strong> verdient. Das Zertifikat wird in deinem Profil hinterlegt.
                 </div>
               </div>
             ) : (
