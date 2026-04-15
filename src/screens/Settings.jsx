@@ -475,7 +475,7 @@ ${cs.map((s,i)=>{
     <button onClick={()=>{const inp=document.getElementById("methodeInput");const v=inp.value.trim();if(v&&!netzwerk.methoden.includes(v)){setNetzwerk(n=>({...n,methoden:[...n.methoden,v]}));inp.value="";}}} style={{background:T.bgSoft,border:`1px solid ${T.borderMid}`,borderRadius:"8px",padding:"7px 14px",color:T.textSoft,fontFamily:"Raleway",fontSize:"11px",cursor:"pointer"}}>+ Hinzufügen</button>
   </div>
 </div>
-</div>
+
     <TI label="Website (optional)" placeholder="https://..." value={netzwerk.website} onChange={v=>setNetzwerk(n=>({...n,website:v}))}/>
  </>}
   <button onClick={saveNetzwerk} style={{marginTop:"8px",width:"100%",fontFamily:"Raleway",fontSize:"11px",padding:"9px",borderRadius:"10px",border:`1.5px solid ${T.border}`,background:"transparent",color:T.text,cursor:"pointer"}}>
