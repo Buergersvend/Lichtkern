@@ -456,11 +456,25 @@ ${cs.map((s,i)=>{
 <TI label="Kurztext (max. 200 Zeichen)" placeholder="Ich begleite Menschen auf ihrem Weg..." value={netzwerk.kurztext} onChange={v=>setNetzwerk(n=>({...n,kurztext:v.slice(0,200)}))}/>
 <div style={{marginBottom:"8px"}}>
   <div style={{fontFamily:"Raleway",fontSize:"11px",color:T.textSoft,marginBottom:"6px"}}>Methoden (mehrere wählbar)</div>
-  <div style={{display:"flex",flexWrap:"wrap",gap:"6px"}}>
-    {["Humanenergetik","Coaching","Energetik","Human Design","Therapie","Heilpraktiker","Astrologie","Sonstiges"].map(m=>(
-      <span key={m} onClick={()=>setNetzwerk(n=>({...n,methoden:n.methoden.includes(m)?n.methoden.filter(x=>x!==m):[...n.methoden,m]}))} style={{cursor:"pointer",padding:"4px 10px",borderRadius:"20px",fontSize:"11px",fontFamily:"Raleway",border:`1px solid ${T.border}`,background:netzwerk.methoden.includes(m)?T.teal:"transparent",color:netzwerk.methoden.includes(m)?"#000":T.textSoft}}>{m}</span>
+  <div style={{position:"relative"}}>
+    <select onChange={e=>{const v=e.target.value;if(v&&!netzwerk.methoden.includes(v))setNetzwerk(n=>({...n,methoden:[...n.methoden,v]}));e.target.value="";}} style={{width:"100%",background:T.bgCard,border:`1.5px solid ${T.borderMid}`,borderRadius:"8px",padding:"8px",color:T.textSoft,fontFamily:"Raleway",fontSize:"11px"}}>
+      <option value="">+ Methode hinzufügen...</option>
+      {["Humanenergetik","Coaching","Energetik","Human Design","Therapie","Heilpraktiker","Astrologie","Numerologie","Reiki","Atemarbeit","Familienaufstellung","Quantenheilung","Sonstiges"].filter(m=>!netzwerk.methoden.includes(m)).map(m=>(<option key={m} value={m}>{m}</option>))}
+    </select>
+  </div>
+  <div style={{display:"flex",flexWrap:"wrap",gap:"6px",marginTop:"8px"}}>
+    {netzwerk.methoden.map(m=>(
+      <span key={m} style={{display:"flex",alignItems:"center",gap:"4px",background:T.bgSoft,border:`1px solid ${T.borderMid}`,borderRadius:"20px",padding:"4px 10px",fontFamily:"Raleway",fontSize:"11px",color:T.textSoft}}>
+        {m}
+        <span onClick={()=>setNetzwerk(n=>({...n,methoden:n.methoden.filter(x=>x!==m)}))} style={{cursor:"pointer",color:T.textMid,fontWeight:"700",marginLeft:"2px"}}>×</span>
+      </span>
     ))}
   </div>
+  <div style={{display:"flex",gap:"6px",marginTop:"8px"}}>
+    <input id="methodeInput" placeholder="Eigene Methode..." style={{flex:1,background:T.bgCard,border:`1.5px solid ${T.borderMid}`,borderRadius:"8px",padding:"7px 10px",color:T.textSoft,fontFamily:"Raleway",fontSize:"11px"}}/>
+    <button onClick={()=>{const inp=document.getElementById("methodeInput");const v=inp.value.trim();if(v&&!netzwerk.methoden.includes(v)){setNetzwerk(n=>({...n,methoden:[...n.methoden,v]}));inp.value="";}}} style={{background:T.bgSoft,border:`1px solid ${T.borderMid}`,borderRadius:"8px",padding:"7px 14px",color:T.textSoft,fontFamily:"Raleway",fontSize:"11px",cursor:"pointer"}}>+ Hinzufügen</button>
+  </div>
+</div>
 </div>
     <TI label="Website (optional)" placeholder="https://..." value={netzwerk.website} onChange={v=>setNetzwerk(n=>({...n,website:v}))}/>
  </>}
