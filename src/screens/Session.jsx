@@ -31,7 +31,7 @@ function Session({wizard,setWizard,clients,onComplete,onCancel}){
   return(
     <div style={{display:"flex",flexDirection:"column",minHeight:"100%"}}>
       <div style={{padding:"12px 16px 0"}}>
-        <div style={{display:"flex",gap:"5px",marginBottom:"10px"}}>{STEPS.map((s,i)=><div key={s} style={{flex:1,height:"5px",borderRadius:"3px",transition:"all 0.3s",background:i<linear-gradient(to right,${T.gold}`linear-gradient(to right,${T.teal},${T.violet})`:T.border}}/>)}</div>
+        <div style={{display:"flex",gap:"5px",marginBottom:"10px"}}>{STEPS.map((s,i)=><div key={s} style={{flex:1,height:"5px",borderRadius:"3px",transition:"all 0.3s",background:i<wizard.step?T.gold:i===wizard.step?`linear-gradient(to right,${T.gold},${T.violet})`:T.border}}/>)}</div>
         <div style={{display:"flex",justifyContent:"space-between",alignItems:"center"}}>
           <span style={{fontFamily:"Raleway",fontSize:"10px",color:T.textMid,fontWeight:700,letterSpacing:"1px"}}>{STEPS[wizard.step].toUpperCase()} · {wizard.step+1}/{STEPS.length}</span>
           {wizard.clientName&&<span style={{fontFamily:"Raleway",fontSize:"11px",color:T.color:T.gold,fontWeight:700}}>{wizard.clientName}</span>}
