@@ -14,7 +14,7 @@ function Session({wizard,setWizard,clients,onComplete,onCancel}){
   const [aiText,setAiText]=useState("");
   if(!wizard)return(
     <div style={{display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",height:"65vh",gap:"20px",padding:"0 32px",textAlign:"center"}}>
-      <div style={{width:"88px",height:"88px",borderRadius:"50%",background:`linear-gradient(135deg,${T.tealL},${T.violetL})`,display:"flex",alignItems:"center",justifyContent:"center",fontSize:"36px",boxShadow:`0 6px 28px ${T.shadowDeep}`,border:`1.5px solid ${T.border}`}}>✦</div>
+      <div style={{width:"88px",height:"88px",borderRadius:"50%",background:`linear-gradient(135deg,${T.goldL},${T.violetL})`,display:"flex",alignItems:"center",justifyContent:"center",fontSize:"36px",boxShadow:`0 6px 28px ${T.shadowDeep}`,border:`1.5px solid ${T.border}`}}>✦</div>
       <div style={{fontFamily:"Cinzel",fontSize:"20px",color:T.text,fontWeight:700}}>Neue Sitzung</div>
       <div style={{fontFamily:"Raleway",fontSize:"13px",color:T.textMid,lineHeight:"1.7",fontWeight:500}}>Begleite deine Klienten strukturiert<br/>und mit voller Präsenz</div>
       <Btn onClick={()=>setWizard({step:0,type:"first",levels:{},techniques:[],goal:"",outcome:"",homework:"",notes:"",resonanceSource:"Intuition",clientName:"",clientId:null,category:""})}>✦ Sitzung starten</Btn>
@@ -31,10 +31,10 @@ function Session({wizard,setWizard,clients,onComplete,onCancel}){
   return(
     <div style={{display:"flex",flexDirection:"column",minHeight:"100%"}}>
       <div style={{padding:"12px 16px 0"}}>
-        <div style={{display:"flex",gap:"5px",marginBottom:"10px"}}>{STEPS.map((s,i)=><div key={s} style={{flex:1,height:"5px",borderRadius:"3px",transition:"all 0.3s",background:i<wizard.step?T.teal:i===wizard.step?`linear-gradient(to right,${T.teal},${T.violet})`:T.border}}/>)}</div>
+        <div style={{display:"flex",gap:"5px",marginBottom:"10px"}}>{STEPS.map((s,i)=><div key={s} style={{flex:1,height:"5px",borderRadius:"3px",transition:"all 0.3s",background:i<linear-gradient(to right,${T.gold}`linear-gradient(to right,${T.teal},${T.violet})`:T.border}}/>)}</div>
         <div style={{display:"flex",justifyContent:"space-between",alignItems:"center"}}>
           <span style={{fontFamily:"Raleway",fontSize:"10px",color:T.textMid,fontWeight:700,letterSpacing:"1px"}}>{STEPS[wizard.step].toUpperCase()} · {wizard.step+1}/{STEPS.length}</span>
-          {wizard.clientName&&<span style={{fontFamily:"Raleway",fontSize:"11px",color:T.teal,fontWeight:700}}>{wizard.clientName}</span>}
+          {wizard.clientName&&<span style={{fontFamily:"Raleway",fontSize:"11px",color:T.color:T.gold,fontWeight:700}}>{wizard.clientName}</span>}
         </div>
       </div>
       <div style={{position:"relative",margin:"12px 16px",borderRadius:"18px",overflow:"hidden",padding:"20px 22px",background:T.bgSoft,boxShadow:`0 3px 18px ${T.shadow}`,border:`1.5px solid ${T.border}`}}>
@@ -59,9 +59,9 @@ function Session({wizard,setWizard,clients,onComplete,onCancel}){
   );
 }
 function SC({wizard,clients,upd}){return(<div style={{display:"flex",flexDirection:"column",gap:"14px"}}>
-  <div><SL>Klient</SL><div style={{display:"flex",flexDirection:"column",gap:"6px",maxHeight:"200px",overflowY:"auto"}}>{clients.length===0&&<div style={{fontFamily:"Raleway",fontSize:"13px",color:T.textMid,fontWeight:500}}>Noch keine Klienten angelegt</div>}{clients.map(c=><button key={c.id} onClick={()=>upd({clientId:c.id,clientName:c.name})} style={{textAlign:"left",padding:"12px 14px",borderRadius:"12px",border:`1.5px solid ${wizard.clientId===c.id?T.teal:T.border}`,background:wizard.clientId===c.id?T.tealL:T.bgCard,cursor:"pointer"}}><div style={{fontFamily:"Raleway",fontWeight:700,fontSize:"13px",color:T.text}}>{c.name}</div></button>)}</div></div>
+  <div><SL>Klient</SL><div style={{display:"flex",flexDirection:"column",gap:"6px",maxHeight:"200px",overflowY:"auto"}}>{clients.length===0&&<div style={{fontFamily:"Raleway",fontSize:"13px",color:T.textMid,fontWeight:500}}>Noch keine Klienten angelegt</div>}{clients.map(c=><button key={c.id} onClick={()=>upd({clientId:c.id,clientName:c.name})} style={{textAlign:"left",padding:"12px 14px",borderRadius:"12px",border:`1.5px solid ${,background:wizard.clientId===c.id?T.goldL`,background:wizard.clientId===c.id?T.tealL:T.bgCard,cursor:"pointer"}}><div style={{fontFamily:"Raleway",fontWeight:700,fontSize:"13px",color:T.text}}>{c.name}</div></button>)}</div></div>
   <div><SL>Oder freier Name</SL><TI value={wizard.clientName||""} onChange={v=>upd({clientName:v,clientId:null})} placeholder="Name oder Kürzel…"/></div>
-  <div><SL>Sitzungstyp</SL><div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:"8px"}}>{[["first","🌱 Erst"],["followup","🔄 Folge"],["closing","✨ Abschluss"]].map(([v,l])=><button key={v} onClick={()=>upd({type:v})} style={{padding:"11px 6px",borderRadius:"12px",border:`1.5px solid ${wizard.type===v?T.teal:T.border}`,background:wizard.type===v?T.teal:T.bgCard,cursor:"pointer",fontFamily:"Raleway",fontSize:"11px",fontWeight:700,color:wizard.type===v?"white":T.textMid}}>{l}</button>)}</div></div>
+  <div><SL>Sitzungstyp</SL><div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:"8px"}}>{[["first","🌱 Erst"],["followup","🔄 Folge"],["closing","✨ Abschluss"]].map(([v,l])=><button key={v} onClick={()=>upd({type:v})} style={{padding:"11px 6px",borderRadius:"12px",border:`1.5px solid ${,background:wizard.type===v?T.gold`,background:wizard.type===v?T.teal:T.bgCard,cursor:"pointer",fontFamily:"Raleway",fontSize:"11px",fontWeight:700,color:wizard.type===v?"white":T.textMid}}>{l}</button>)}</div></div>
 </div>);}
 function SG({wizard,upd}){return(<div style={{display:"flex",flexDirection:"column",gap:"14px"}}>
   <div><SL>Thema / Anliegen</SL><TI value={wizard.goal||""} onChange={v=>upd({goal:v})} placeholder="Was ist heute das zentrale Anliegen?" multiline rows={4}/></div>
@@ -71,7 +71,7 @@ function SG({wizard,upd}){return(<div style={{display:"flex",flexDirection:"colu
 function SLvl({wizard,upd}){
   const ls=wizard.levels||{},set=(k,v)=>upd({levels:{...ls,[k]:v}}),t2=top2(ls);
   return(<div><SL>Ebenen-Scan</SL><Card style={{padding:"14px"}}>{LEVELS.map(l=><LBar key={l.key} levelKey={l.key} value={ls[l.key]||0} onChange={set}/>)}</Card>
-    {t2.length>=2&&<div style={{marginTop:"10px",background:T.bgSoft,borderRadius:"14px",padding:"14px",border:`1.5px solid ${T.borderMid}`}}><SL color={T.tealD}>✦ System-Analyse</SL>{t2.map(([k,v])=>{const i=lvl(k);return<div key={k} style={{fontFamily:"Raleway",fontSize:"13px",color:T.text,marginBottom:"6px",fontWeight:600}}><span style={{fontWeight:800}}>{i?.icon} {i?.name}</span><span style={{color:T.textMid,fontWeight:500}}> · {v}% aktiv</span></div>;})}</div>}
+    {t2.length>=2&&<div style={{marginTop:"10px",background:T.bgSoft,borderRadius:"14px",padding:"14px",border:`1.5px solid ${T.borderMid}`}}><SL color={T.goldD}>✦ System-Analyse</SL>{t2.map(([k,v])=>{const i=lvl(k);return<div key={k} style={{fontFamily:"Raleway",fontSize:"13px",color:T.text,marginBottom:"6px",fontWeight:600}}><span style={{fontWeight:800}}>{i?.icon} {i?.name}</span><span style={{color:T.textMid,fontWeight:500}}> · {v}% aktiv</span></div>;})}</div>}
   </div>);
 }
 function ST({wizard,upd,t2}){
@@ -80,9 +80,9 @@ function ST({wizard,upd,t2}){
   const keys=t2.map(([k])=>k);
   const sugg=[...new Set([...(keys.some(k=>["emotional","mental"].includes(k))?["Emotionale Transformation","Mentale Muster"]:[]),...(keys.includes("dna")?["DNA & Ahnen","Zeitlinie & Karma"]:[]),...(keys.includes("energetisch")?["Meridian & Chakren"]:[]),...(keys.includes("spirituell")?["Schamanismus","Fernheilung"]:[]),...(keys.some(k=>["struktur","stoffwechsel"].includes(k))?["Analyse & Anamnese"]:[])])];
   return(<div style={{display:"flex",flexDirection:"column",gap:"14px"}}>
-    {sugg.length>0&&<div style={{background:T.bgSoft,borderRadius:"14px",padding:"14px",border:`1.5px solid ${T.borderMid}`}}><SL color={T.tealD}>✦ Empfehlungen</SL><div style={{display:"flex",flexWrap:"wrap",gap:"6px"}}>{sugg.map(s=><span key={s} style={{fontSize:"11px",padding:"5px 13px",borderRadius:"20px",background:T.teal,color:"white",fontFamily:"Raleway",fontWeight:700}}>{s}</span>)}</div></div>}
-    {Object.entries(TECHNIQUES).map(([cat,items])=><div key={cat}><div style={{fontFamily:"Raleway",fontSize:"10px",letterSpacing:"2px",fontWeight:800,color:sugg.includes(cat)?T.tealD:T.textSoft,textTransform:"uppercase",marginBottom:"8px"}}>{sugg.includes(cat)?"✦ ":""}{cat}</div><div style={{display:"flex",flexWrap:"wrap",gap:"6px"}}>{items.map(item=><button key={item} onClick={()=>tog(item)} style={{fontFamily:"Raleway",fontSize:"12px",fontWeight:600,padding:"7px 15px",borderRadius:"20px",border:`1.5px solid ${sel.includes(item)?T.teal:T.border}`,background:sel.includes(item)?T.teal:T.bgCard,color:sel.includes(item)?T.bg:T.textMid,cursor:"pointer",transition:"all 0.15s"}}>{item}</button>)}</div></div>)}
-    {sel.length>0&&<div style={{background:T.tealL,borderRadius:"14px",padding:"14px",border:`1.5px solid ${T.borderMid}`}}><SL color={T.tealD}>Ausgewählt ({sel.length})</SL><div style={{display:"flex",flexWrap:"wrap",gap:"6px"}}>{sel.map(t=><span key={t} style={{fontSize:"11px",padding:"5px 13px",borderRadius:"20px",background:T.teal,color:"white",fontFamily:"Raleway",fontWeight:700}}>{t}</span>)}</div></div>}
+    {sugg.length>0&&<div style={{background:T.bgSoft,borderRadius:"14px",padding:"14px",border:`1.5px solid ${T.borderMid}`}}><SL color={T.goldD}>✦ Empfehlungen</SL><div style={{display:"flex",flexWrap:"wrap",gap:"6px"}}>{sugg.map(s=><span key={s} style={{fontSize:"11px",padding:"5px 13px",borderRadius:"20px",background:T.gold,color:"white",fontFamily:"Raleway",fontWeight:700}}>{s}</span>)}</div></div>}
+    {Object.entries(TECHNIQUES).map(([cat,items])=><div key={cat}><div style={{fontFamily:"Raleway",fontSize:"10px",letterSpacing:"2px",fontWeight:800,color:sugg.includes(cat)?T.tealD:T.textSoft,textTransform:"uppercase",marginBottom:"8px"}}>{sugg.includes(cat)?"✦ ":""}{cat}</div><div style={{display:"flex",flexWrap:"wrap",gap:"6px"}}>{items.map(item=><button key={item} onClick={()=>tog(item)} style={{fontFamily:"Raleway",fontSize:"12px",fontWeight:600,padding:"7px 15px",borderRadius:"20px",border:`1.5px solid ${,background:sel.includes(item)?T.gold`,background:sel.includes(item)?T.teal:T.bgCard,color:sel.includes(item)?T.bg:T.textMid,cursor:"pointer",transition:"all 0.15s"}}>{item}</button>)}</div></div>)}
+    {sel.length>0&&<div style={{background:T.goldL,borderRadius:"14px",padding:"14px",border:`1.5px solid ${T.borderMid}`}}><SL color={T.tealD}>Ausgewählt ({sel.length})</SL><div style={{display:"flex",flexWrap:"wrap",gap:"6px"}}>{sel.map(t=><span key={t} style={{fontSize:"11px",padding:"5px 13px",borderRadius:"20px",background:T.gold,color:"white",fontFamily:"Raleway",fontWeight:700}}>{t}</span>)}</div></div>}
   </div>);
 }
 function SA({wizard,upd,aiText,aiLoading,onGen}){
@@ -95,14 +95,14 @@ function SA({wizard,upd,aiText,aiLoading,onGen}){
   <div>
     <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:"8px"}}>
      <SL>✦ Resonanz-Zusammenfassung</SL>
-      <button onClick={onGen} disabled={aiLoading} style={{fontFamily:"Raleway",fontSize:"12px",fontWeight:700,padding:"8px 16px",borderRadius:"10px",border:"none",cursor:aiLoading?"wait":"pointer",background:`linear-gradient(135deg,${T.teal},${T.tealD})`,color:"white",opacity:aiLoading?0.6:1}}>{aiLoading?"⏳ Generiert…":"✦ Generieren"}</button>
+      <button onClick={onGen} disabled={aiLoading} style={{fontFamily:"Raleway",fontSize:"12px",fontWeight:700,padding:"8px 16px",borderRadius:"10px",border:"none",cursor:aiLoading?"wait":"pointer",background:`,color:"white",opacity`,color:"white",opacity:aiLoading?0.6:1}}>{aiLoading?"⏳ Generiert…":"✦ Generieren"}</button>
     </div>
     {aiText?<Card style={{background:T.bgSoft,border:`1.5px solid ${T.borderMid}`}}><div style={{fontFamily:"Raleway",fontSize:"13px",color:T.text,lineHeight:"1.85",whiteSpace:"pre-wrap",fontWeight:500}}>{aiText}</div></Card>
     :<div style={{background:T.bgSofter,borderRadius:"14px",padding:"22px",textAlign:"center",border:`1.5px solid ${T.border}`}}><div style={{fontFamily:"Raleway",fontSize:"13px",color:T.textSoft,fontWeight:500}}>Einfühlsame Zusammenfassung generieren</div></div>}
   </div>
   {/* Honorar */}
   <div style={{background:T.bgCard,borderRadius:"16px",padding:"14px",border:`1.5px solid ${T.borderMid}`}}>
-    <SL color={T.tealD}>>💰 Honorar</SL>
+    <SL color={T.goldD}>>💰 Honorar</SL>
     <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:"8px",marginBottom:"10px"}}>
       <div><TI value={wizard.fee||""} onChange={v=>upd({fee:v})} placeholder="Betrag (z.B. 120)"/></div>
       <div>
