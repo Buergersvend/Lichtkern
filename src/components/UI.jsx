@@ -26,10 +26,10 @@ export function SL({children,color}){
 export function Btn({children,variant="primary",onClick,disabled,style={}}){
   const base={fontFamily:"Raleway",fontWeight:700,fontSize:"13px",border:"none",borderRadius:"12px",padding:"12px 22px",cursor:disabled?"not-allowed":"pointer",transition:"all 0.2s",opacity:disabled?0.45:1,...style};
   const v={
-    primary:{background:`linear-gradient(135deg,${T.teal},${T.tealD})`,color:"#FFF",boxShadow:`0 4px 16px ${T.shadowDeep}`},
-    ghost:{background:T.tealL,color:T.tealD,border:`1.5px solid ${T.borderMid}`},
+    primary:{background:`linear-gradient(135deg,${T.gold},${T.goldD})`,color:"#FFF",boxShadow:`0 4px 16px ${T.shadowDeep}`},
+    ghost:{background:T.goldL,color:T.goldD,border:`1.5px solid ${T.borderMid}`},
     soft:{background:T.bgSoft,color:T.textMid,border:`1.5px solid ${T.border}`},
-    success:{background:`linear-gradient(135deg,${T.teal},${T.tealD})`,color:"#FFF",boxShadow:`0 4px 14px ${T.shadowDeep}`},
+    success:{background:`linear-gradient(135deg,${T.gold},${T.goldD})`,color:"#FFF",boxShadow:`0 4px 14px ${T.shadowDeep}`},
     violet:{background:`linear-gradient(135deg,${T.violet},${T.violetD})`,color:"#FFF"},
     danger:{background:"#FEE2E2",color:"#9B1C1C",border:"1.5px solid #FCA5A5"},
   };
@@ -66,7 +66,7 @@ export function LBar({levelKey,value=0,onChange,compact=false}){
 }
 
 export function Pill({label,active,onClick}){
-  return <button onClick={onClick} style={{fontFamily:"Raleway",fontSize:"12px",fontWeight:600,padding:"7px 16px",borderRadius:"20px",border:`1.5px solid ${active?T.teal:T.border}`,background:active?T.teal:T.bgCard,color:active?"#FFF":T.textMid,cursor:"pointer",transition:"all 0.15s"}}>{label}</button>;
+  return <button onClick={onClick} style={{fontFamily:"Raleway",fontSize:"12px",fontWeight:600,padding:"7px 16px",borderRadius:"20px",border:`1.5px solid ${active?T.gold:T.border}`,background:active?T.gold:T.bgCard,color:active?"#FFF":T.textMid,cursor:"pointer",transition:"all 0.15s"}}>{label}</button>;
 }
 
 export function Select({value,onChange,options}){
