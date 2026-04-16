@@ -34,7 +34,7 @@ function Session({wizard,setWizard,clients,onComplete,onCancel}){
         <div style={{display:"flex",gap:"5px",marginBottom:"10px"}}>{STEPS.map((s,i)=><div key={s} style={{flex:1,height:"5px",borderRadius:"3px",transition:"all 0.3s",background:i<wizard.step?T.gold:i===wizard.step?`linear-gradient(to right,${T.gold},${T.violet})`:T.border}}/>)}</div>
         <div style={{display:"flex",justifyContent:"space-between",alignItems:"center"}}>
           <span style={{fontFamily:"Raleway",fontSize:"10px",color:T.textMid,fontWeight:700,letterSpacing:"1px"}}>{STEPS[wizard.step].toUpperCase()} · {wizard.step+1}/{STEPS.length}</span>
-          {wizard.clientName&&<span style={{fontFamily:"Raleway",fontSize:"11px",ccolor:T.gold,fontWeight:700}}>{wizard.clientName}</span>}
+          {wizard.clientName&&<span style={{fontFamily:"Raleway",fontSize:"11px",color:T.gold,fontWeight:700}}>{wizard.clientName}</span>}
         </div>
       </div>
       <div style={{position:"relative",margin:"12px 16px",borderRadius:"18px",overflow:"hidden",padding:"20px 22px",background:T.bgSoft,boxShadow:`0 3px 18px ${T.shadow}`,border:`1.5px solid ${T.border}`}}>
@@ -82,7 +82,7 @@ function ST({wizard,upd,t2}){
   return(<div style={{display:"flex",flexDirection:"column",gap:"14px"}}>
     {sugg.length>0&&<div style={{background:T.bgSoft,borderRadius:"14px",padding:"14px",border:`1.5px solid ${T.borderMid}`}}><SL color={T.goldD}>✦ Empfehlungen</SL><div style={{display:"flex",flexWrap:"wrap",gap:"6px"}}>{sugg.map(s=><span key={s} style={{fontSize:"11px",padding:"5px 13px",borderRadius:"20px",background:T.gold,color:"white",fontFamily:"Raleway",fontWeight:700}}>{s}</span>)}</div></div>}
     {Object.entries(TECHNIQUES).map(([cat,items])=><div key={cat}><div style={{fontFamily:"Raleway",fontSize:"10px",letterSpacing:"2px",fontWeight:800,color:sugg.includes(cat)?T.goldD:T.textSoft,textTransform:"uppercase",marginBottom:"8px"}}>{sugg.includes(cat)?"✦ ":""}{cat}</div><div style={{display:"flex",flexWrap:"wrap",gap:"6px"}}>{items.map(item=><button key={item} onClick={()=>tog(item)} style={{fontFamily:"Raleway",fontSize:"12px",fontWeight:600,padding:"7px 15px",borderRadius:"20px",border:`1.5px solid ${sel.includes(item)?T.gold:T.border}`,background:sel.includes(item)?T.gold:T.bgCard,color:sel.includes(item)?T.bg:T.textMid,cursor:"pointer",transition:"all 0.15s"}}>{item}</button>)}</div></div>)}
-    {sel.length>0&&<div style={{background:T.goldL,borderRadius:"14px",padding:"14px",border:`1.5px solid ${T.borderMid}`}}><SL color={T.tealD}>Ausgewählt ({sel.length})</SL><div style={{display:"flex",flexWrap:"wrap",gap:"6px"}}>{sel.map(t=><span key={t} style={{fontSize:"11px",padding:"5px 13px",borderRadius:"20px",background:T.gold,color:"white",fontFamily:"Raleway",fontWeight:700}}>{t}</span>)}</div></div>}
+    {sel.length>0&&<div style={{background:T.goldL,borderRadius:"14px",padding:"14px",border:`1.5px solid ${T.borderMid}`}}><SL color={T.goldD}>Ausgewählt ({sel.length})</SL><div style={{display:"flex",flexWrap:"wrap",gap:"6px"}}>{sel.map(t=><span key={t} style={{fontSize:"11px",padding:"5px 13px",borderRadius:"20px",background:T.gold,color:"white",fontFamily:"Raleway",fontWeight:700}}>{t}</span>)}</div></div>}
   </div>);
 }
 function SA({wizard,upd,aiText,aiLoading,onGen}){
