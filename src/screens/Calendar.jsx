@@ -206,7 +206,7 @@ function CalendarScreen({appointments,clients,onSaveAppt,onDeleteAppt,onStartSes
                     <span style={{fontFamily:"Raleway",fontSize:"13px",fontWeight:700,color:isToday?"white":isSelected?T.goldD:"rgba(245,240,232,0.85)"}}>{pd.getDate()}</span>
                   </div>
                 </div>
-                <div style={{minHeight:"80px",background:"transparent"rgba(168,125,58,0.15)":"transparent",borderRadius:"10px",padding:"2px"}}>
+               <div style={{minHeight:"80px",background:"transparent",borderRadius:"10px",padding:"2px"}}>
                   {dayAppts.map(a=><ApptChip key={a.id} a={a} onClick={openEdit}/>)}background:isSelected&&currentDate!==today?"rgba(168,125,58,0.15)":"transparent"
                   {dayAppts.length===0&&<div style={{height:"4px",borderRadius:"2px",background:"transparent"}}/>}
                 </div>
