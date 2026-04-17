@@ -4,7 +4,7 @@ import { T } from "../config/theme.js";
 import { LEVELS, APPT_TYPES, DE_MONTHS } from "../config/constants.js";
 import { Card, Btn, Pill, SL } from "../components/UI.jsx";
 
-function Analytics({sessions,clients}){
+function Analytics({sessions,clients,onSelectClient}){
   // ── compute all stats ──
   const total = sessions.length;
 
@@ -131,9 +131,9 @@ function Analytics({sessions,clients}){
   // Donut data for session types
   let offset=0;
   const donutData=[
-    {label:"Erstsitzung",  value:typeCount.first,   color:T.teal,   pct:Math.round(typeCount.first/typeTotal*100)},
+    {label:"Erstsitzung",  value:typeCount.first,   color:T.gold,   pct:Math.round(typeCount.first/typeTotal*100)},
     {label:"Folgesitzung", value:typeCount.followup, color:T.violet, pct:Math.round(typeCount.followup/typeTotal*100)},
-    {label:"Abschluss",    value:typeCount.closing,  color:T.gold,   pct:Math.round(typeCount.closing/typeTotal*100)},
+    {label:"Abschluss",    value:typeCount.closing,  color:T.goldD,  pct:Math.round(typeCount.closing/typeTotal*100)},
   ].filter(d=>d.value>0);
 
   return (
@@ -150,7 +150,7 @@ function Analytics({sessions,clients}){
       {/* KPI Row */}
       <div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:"10px",marginBottom:"16px"}}>
         {[
-          {label:"Sitzungen",  value:total,                        bg:T.tealL,   border:T.borderMid, color:T.tealD},
+          {label:"Sitzungen",  value:total,                        bg:'rgba(201,168,76,0.15)',   border:T.borderMid, color:T.goldD},
           {label:"Klienten",   value:clients.length,               bg:T.bgCard, border:"#A78BFA",   color:T.violetD},
           {label:"Ø pro Klient",value:clients.length?(total/clients.length).toFixed(1):"—", bg:T.goldL, border:"#F59E0B", color:"#7C4A00"},
         ].map((s,i)=>(
@@ -174,8 +174,8 @@ function Analytics({sessions,clients}){
         <div style={{display:"flex",alignItems:"flex-end",gap:"8px",height:"80px",marginBottom:"8px"}}>
           {monthData.map((m,i)=>(
             <div key={i} style={{flex:1,display:"flex",flexDirection:"column",alignItems:"center",gap:"4px",height:"100%",justifyContent:"flex-end"}}>
-              <div style={{fontFamily:"Raleway",fontSize:"10px",color:T.teal,fontWeight:800}}>{m.count||""}</div>
-              <div style={{width:"100%",borderRadius:"6px 6px 0 0",background:m.count>0?T.teal:T.bgSoft,height:`${Math.max((m.count/maxMonth)*100,4)}%`,border:`1px solid ${m.count>0?T.borderMid:T.border}`,transition:"height 0.4s"}}/>
+              <div style={{fontFamily:"Raleway",fontSize:"10px",color:T.gold,fontWeight:800}}>{m.count||""}</div>
+              <div style={{width:"100%",borderRadius:"6px 6px 0 0",background:m.count>0?T.gold:T.bgSoft,height:`${Math.max((m.count/maxMonth)*100,4)}%`,border:`1px solid ${m.count>0?T.borderMid:T.border}`,transition:"height 0.4s"}}/>
               <div style={{fontFamily:"Raleway",fontSize:"9px",color:T.textSoft,fontWeight:700}}>{m.label}</div>
             </div>
           ))}
@@ -210,7 +210,7 @@ function Analytics({sessions,clients}){
       {techSorted.length>0 && (
         <SectionCard title="Top Techniken" icon="🏆">
           {techSorted.map(([name,count])=>(
-            <HBar key={name} label={name} value={count} max={maxTech} color={T.teal} bg={T.tealL} suffix={` ×`}/>
+            <HBar key={name} label={name} value={count} max={maxTech} color={T.gold} bg={'rgba(201,168,76,0.15)'} suffix={` ×`}/>
           ))}
         </SectionCard>
       )}
@@ -245,13 +245,13 @@ function Analytics({sessions,clients}){
             <div key={c.id} style={{marginBottom:"12px"}}>
               <div style={{display:"flex",justifyContent:"space-between",marginBottom:"4px"}}>
                 <span style={{fontFamily:"Raleway",fontSize:"12px",color:T.text,fontWeight:700}}>{c.name}</span>
-                <span style={{fontFamily:"Raleway",fontSize:"11px",color:T.teal,fontWeight:800}}>{c.sessionCount} Sitzung{c.sessionCount!==1?"en":""}</span>
+                <span style={{fontFamily:"Raleway",fontSize:"11px",color:T.gold,fontWeight:800}}>{c.sessionCount} Sitzung{c.sessionCount!==1?"en":""}</span>
               </div>
               {c.lastSession && <div style={{fontFamily:"Raleway",fontSize:"10px",color:T.textSoft,fontWeight:500,marginBottom:"4px"}}>Letzte: {new Date(c.lastSession.createdAt).toLocaleDateString("de-DE")}</div>}
-              <div style={{height:"6px",borderRadius:"3px",background:T.tealL,border:`1px solid ${T.border}`}}>
-                <div style={{height:"100%",width:`${Math.round((c.sessionCount/maxClientSessions)*100)}%`,borderRadius:"3px",background:T.teal}}/>
+              <div style={{height:"6px",borderRadius:"3px",background:'rgba(201,168,76,0.15)',border:`1px solid ${T.border}`}}>
+                <div style={{height:"100%",width:`${Math.round((c.sessionCount/maxClientSessions)*100)}%`,borderRadius:"3px",background:T.gold}}/>
               </div>
-              <button onClick={()=>onSelectClient&&onSelectClient(c.id)} style={{fontFamily:"Raleway",fontSize:"10px",fontWeight:700,marginTop:"5px",color:T.teal,background:"none",border:"none",cursor:"pointer",padding:0}}>📊 Detail-Analyse →</button>
+              <button onClick={()=>onSelectClient&&onSelectClient(c.id)} style={{fontFamily:"Raleway",fontSize:"10px",fontWeight:700,marginTop:"5px",color:T.gold,background:"none",border:"none",cursor:"pointer",padding:0}}>📊 Detail-Analyse →</button>
             </div>
           ))}
         </SectionCard>
@@ -264,7 +264,7 @@ function Analytics({sessions,clients}){
             {tagSorted.map(([tag,count])=>(
               <div key={tag} style={{background:T.bgSoft,borderRadius:"20px",padding:"6px 14px",border:`1.5px solid ${T.border}`,display:"flex",alignItems:"center",gap:"6px"}}>
                 <span style={{fontFamily:"Raleway",fontSize:"12px",color:T.text,fontWeight:700}}>{tag}</span>
-                <span style={{fontFamily:"Raleway",fontSize:"10px",color:T.teal,fontWeight:800,background:T.tealL,padding:"1px 7px",borderRadius:"10px"}}>{count}</span>
+                <span style={{fontFamily:"Raleway",fontSize:"10px",color:T.gold,fontWeight:800,background:'rgba(201,168,76,0.15)',padding:"1px 7px",borderRadius:"10px"}}>{count}</span>
               </div>
             ))}
           </div>
@@ -278,7 +278,7 @@ function Analytics({sessions,clients}){
             {topWords.map(([word,count],i)=>{
               const size = 11 + Math.round((count / (topWords[0][1]||1)) * 6);
               return(
-                <span key={word} style={{fontFamily:"Raleway",fontSize:`${size}px`,fontWeight:700,color:i<3?T.tealD:T.textMid,background:i<3?T.tealL:T.bgSoft,padding:"5px 12px",borderRadius:"16px",border:`1px solid ${i<3?T.borderMid:T.border}`}}>
+                <span key={word} style={{fontFamily:"Raleway",fontSize:`${size}px`,fontWeight:700,color:i<3?T.goldD:T.textMid,background:i<3?'rgba(201,168,76,0.15)':T.bgSoft,padding:"5px 12px",borderRadius:"16px",border:`1px solid ${i<3?T.borderMid:T.border}`}}>
                   {word} <span style={{fontSize:"10px",opacity:0.7}}>×{count}</span>
                 </span>
               );
