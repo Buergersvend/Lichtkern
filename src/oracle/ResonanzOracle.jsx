@@ -45,7 +45,7 @@ function ResonanzOracle({ groqFetch }){
       <div style={{overflowX:"auto",paddingBottom:"2px"}}>
         <div style={{display:"flex",gap:"6px",padding:"0 16px",minWidth:"max-content"}}>
           {TABS.map(tab => (
-            <button key={tab.id} onClick={()=>setAktiv(tab.id)} style={{display:"flex",alignItems:"center",gap:"6px",padding:"9px 14px",borderRadius:"20px",border:`1.5px solid ${aktiv===tab.id?OT.teal:OT.border}`,background:aktiv===tab.id?OT.teal:"white",color:aktiv===tab.id?"white":OT.textMid,fontFamily:"Raleway",fontSize:"11px",fontWeight:700,cursor:"pointer",whiteSpace:"nowrap",boxShadow:aktiv===tab.id?`0 3px 12px rgba(13,148,136,0.3)`:"none",transition:"all 0.15s"}}>
+            <button key={tab.id} onClick={()=>setAktiv(tab.id)} style={{display:"flex",alignItems:"center",gap:"6px",padding:"9px 14px",borderRadius:"20px",border:`1.5px solid ${aktiv===tab.id?"#C9A84C":OT.border}`,background:aktiv===tab.id?"#C9A84C":OT.bgCard,color:aktiv===tab.id?"white":OT.textMid,fontFamily:"Raleway",fontSize:"11px",fontWeight:700,cursor:"pointer",whiteSpace:"nowrap",boxShadow:aktiv===tab.id?`0 3px 12px rgba(201,168,76,0.3)`:"none",transition:"all 0.15s"}}>
               <span>{tab.icon}</span><span>{tab.label}</span>
             </button>
           ))}
