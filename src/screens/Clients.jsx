@@ -38,12 +38,12 @@ function ClientDetailModal({client,sessions,onClose,onSave,onStart,onAnalyse,onD
         </div>
         {/* Quick actions */}
         <div style={{display:'flex',gap:'8px',padding:'12px 20px 0'}}>
-          <button onClick={()=>onStart(client)} style={{flex:1,padding:'9px',borderRadius:'12px',background:T.teal,border:`1.5px solid ${T.borderMid}`,fontFamily:'Raleway',fontWeight:700,fontSize:'12px',color:T.tealD,cursor:'pointer'}}>✦ Sitzung</button>
+          <button onClick={()=>onStart(client)} style={{flex:1,padding:'9px',borderRadius:'12px',background:T.gold,border:`1.5px solid ${T.borderMid}`,fontFamily:'Raleway',fontWeight:700,fontSize:'12px',color:'#1A1200',cursor:'pointer'}}>✦ Sitzung</button>
           <button onClick={()=>{onAnalyse(client.id);onClose();}} style={{flex:1,padding:'9px',borderRadius:'12px',background:T.bgCard,border:`1.5px solid ${T.border}`,fontFamily:'Raleway',fontWeight:700,fontSize:'12px',color:T.violet,cursor:'pointer'}}>📊 Analyse</button>
        <button onClick={()=>{if(window.confirm('Klient wirklich löschen?')){onDelete(client.id);onClose();}}} style={{flex:1,padding:'9px',borderRadius:'12px',background:'transparent',border:'1.5px solid #FCA5A5',fontFamily:'Raleway',fontWeight:700,fontSize:'12px',color:'#DC2626',cursor:'pointer'}}>🗑 Löschen</button> </div>
         {/* Tabs */}
         <div style={{display:'flex',gap:'6px',padding:'12px 20px',borderBottom:`1px solid ${T.border}`}}>
-          {tabs.map(([v,l])=><button key={v} onClick={()=>setTab(v)} style={{flex:1,padding:'9px 4px',borderRadius:'10px',border:`1.5px solid ${tab===v?T.teal:T.border}`,background:tab===v?T.teal:T.bgCard,fontFamily:'Raleway',fontSize:'11px',fontWeight:700,color:tab===v?'white':T.textMid,cursor:'pointer'}}>{l}</button>)}
+          {tabs.map(([v,l])=><button key={v} onClick={()=>setTab(v)} style={{flex:1,padding:'9px 4px',borderRadius:'10px',border:`1.5px solid ${tab===v?T.gold:T.border}`,background:tab===v?T.gold:T.bgCard,fontFamily:'Raleway',fontSize:'11px',fontWeight:700,color:tab===v?'#1A1200':T.textMid,cursor:'pointer'}}>{l}</button>)}
         </div>
         <div style={{padding:'16px 20px'}}>
           {tab==='profil'&&(
@@ -51,7 +51,7 @@ function ClientDetailModal({client,sessions,onClose,onSave,onStart,onAnalyse,onD
               {[['Email / Tel.',client.contact],['Notizen',client.notes]].filter(([,v])=>v).map(([k,v])=>(
                 <div key={k} style={{marginBottom:'12px'}}><div style={{fontFamily:'Raleway',fontSize:'10px',color:T.textSoft,fontWeight:700,letterSpacing:'1px',textTransform:'uppercase',marginBottom:'3px'}}>{k}</div><div style={{fontFamily:'Raleway',fontSize:'13px',color:T.text,lineHeight:'1.5'}}>{v}</div></div>
               ))}
-              {client.tags?.length>0&&<div style={{marginBottom:'12px'}}><div style={{fontFamily:'Raleway',fontSize:'10px',color:T.textSoft,fontWeight:700,letterSpacing:'1px',textTransform:'uppercase',marginBottom:'6px'}}>Tags</div><div style={{display:'flex',flexWrap:'wrap',gap:'5px'}}>{client.tags.map(t=><span key={t} style={{fontSize:'11px',padding:'4px 12px',borderRadius:'12px',background:T.tealL,color:T.tealD,fontFamily:'Raleway',fontWeight:700,border:`1px solid ${T.borderMid}`}}>{t}</span>)}</div></div>}
+              {client.tags?.length>0&&<div style={{marginBottom:'12px'}}><div style={{fontFamily:'Raleway',fontSize:'10px',color:T.textSoft,fontWeight:700,letterSpacing:'1px',textTransform:'uppercase',marginBottom:'6px'}}>Tags</div><div style={{display:'flex',flexWrap:'wrap',gap:'5px'}}>{client.tags.map(t=><span key={t} style={{fontSize:'11px',padding:'4px 12px',borderRadius:'12px',background:'rgba(201,168,76,0.15)',color:T.goldD,fontFamily:'Raleway',fontWeight:700,border:`1px solid ${T.borderMid}`}}>{t}</span>)}</div></div>}
               <div style={{fontFamily:'Raleway',fontSize:'12px',color:T.textSoft,marginTop:'16px'}}>Seit: {new Date(client.createdAt).toLocaleDateString('de-DE')} · {sc.length} Sitzung{sc.length!==1?'en':''}</div>
             </div>
           )}
@@ -127,7 +127,7 @@ ${syn.electromagnetic.slice(0,5).map(e=>`Kanal ${e.gate1}-${e.gate2} (${HD_CENTE
 
 Bitte analysiere:
 1. **Energiedynamik**: Wie interagieren diese zwei Menschen energetisch?
-2. **Wachstumsfelder**: Was aktiviert/konditioniert A bei B und umgekehrt?
+2. **Wachstumsfelder**: Was aktiviert/konditioniert A bei B und umgekehert?
 3. **Stärken der Verbindung**: Was macht diese Begegnung wertvoll?
 4. **Herausforderungen**: Wo können Reibungspunkte entstehen?
 5. **Empfehlung für die Praxisarbeit**: Ein konkreter Ansatz für gemeinsame oder individuelle Begleitung.
@@ -180,7 +180,7 @@ Warmherzig, präzise.`;
               <SL>Bodygraphs</SL>
               <div style={{display:'flex',gap:'8px',justifyContent:'space-around'}}>
                 <div style={{textAlign:'center'}}>
-                  <div style={{fontFamily:'Raleway',fontSize:'11px',fontWeight:700,color:T.tealD,marginBottom:'6px'}}>{clientA.name}</div>
+                  <div style={{fontFamily:'Raleway',fontSize:'11px',fontWeight:700,color:T.goldD,marginBottom:'6px'}}>{clientA.name}</div>
                   <BodygraphSVG pgates={gA.p} dgates={gA.d} size={120}/>
                 </div>
                 <div style={{textAlign:'center'}}>
@@ -193,13 +193,13 @@ Warmherzig, präzise.`;
 
           {/* Electromagnetic connections */}
           <Card style={{marginBottom:'16px',background:T.bgSoft,border:`1.5px solid ${T.borderMid}`}}>
-            <SL color={T.violetD}>⚡ Elektromagnetische Verbindungen</SL>
+            <SL color={T.goldD}>⚡ Elektromagnetische Verbindungen</SL>
             {syn.electromagnetic.length===0?(
               <div style={{fontFamily:'Raleway',fontSize:'13px',color:T.textSoft,fontStyle:'italic',padding:'8px 0'}}>Keine direkten elektromagnetischen Verbindungen gefunden.</div>
             ):(
               <div style={{display:'flex',flexDirection:'column',gap:'8px'}}>
                 {syn.electromagnetic.map((e,i)=>(
-                  <div key={i} style={{background:'white',borderRadius:'10px',padding:'10px 12px',border:`1px solid ${T.border}`,display:'flex',alignItems:'center',gap:'10px'}}>
+                  <div key={i} style={{background:T.bgCard,borderRadius:'10px',padding:'10px 12px',border:`1px solid ${T.border}`,display:'flex',alignItems:'center',gap:'10px'}}>
                     <span style={{fontFamily:'Cinzel',fontSize:'13px',color:T.violetD,fontWeight:700}}>Tor {e.gate1}–{e.gate2}</span>
                     <span style={{fontFamily:'Raleway',fontSize:'11px',color:T.textMid}}>
                       {HD_CENTER_CFG[e.center1]?.label||e.center1} ↔ {HD_CENTER_CFG[e.center2]?.label||e.center2}
@@ -267,13 +267,13 @@ function Clients({clients,sessions,onSave,onStart,onDelete,onOnboarding,reminder
       </div>
       {showAdd&&(
         <Card style={{marginBottom:"16px",background:T.bgSoft,border:`1.5px solid ${T.borderMid}`}}>
-          <SL color={T.tealD}>Neuer Klient</SL>
+          <SL color={T.goldD}>Neuer Klient</SL>
           {[{k:"name",p:"Name *"},{k:"contact",p:"Email / Telefon"},{k:"notes",p:"Notizen"},{k:"tags",p:"Tags: Angst, Rücken, Ahnen…"}].map(f=>(
             <div key={f.k} style={{marginBottom:"8px"}}><TI value={form[f.k]} onChange={v=>setForm({...form,[f.k]:v})} placeholder={f.p}/></div>
           ))}
           {settings?.modules?.includes("heilarbeit")&&(
             <div style={{marginTop:"12px",paddingTop:"12px",borderTop:`1px dashed ${T.border}`}}>
-              <div style={{fontFamily:"Raleway",fontSize:"10px",color:T.tealD,letterSpacing:"2px",fontWeight:700,textTransform:"uppercase",marginBottom:"8px"}}>✦ Human Design (optional)</div>
+              <div style={{fontFamily:"Raleway",fontSize:"10px",color:T.goldD,letterSpacing:"2px",fontWeight:700,textTransform:"uppercase",marginBottom:"8px"}}>✦ Human Design (optional)</div>
               <div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:"8px"}}>
                 <div>
                   <div style={{fontFamily:"Raleway",fontSize:"10px",color:T.textMid,marginBottom:"4px",fontWeight:600}}>Typ</div>
@@ -324,7 +324,7 @@ function Clients({clients,sessions,onSave,onStart,onDelete,onOnboarding,reminder
                   <div style={{fontFamily:"Raleway",fontWeight:800,fontSize:"15px",color:T.text}}>{c.name}</div>
                   {c.contact&&<div style={{fontFamily:"Raleway",fontSize:"12px",color:T.textMid,marginTop:"3px",fontWeight:500}}>{c.contact}</div>}
                   {hasHD&&<div style={{fontFamily:"Raleway",fontSize:'11px',color:T.violet,fontWeight:700,marginTop:'4px'}}>⚙ {c.hdType||'HD'}{c.hdProfile?' · Profil '+c.hdProfile:''}</div>}
-                  {c.tags?.length>0&&<div style={{display:"flex",flexWrap:"wrap",gap:"5px",marginTop:"8px"}}>{c.tags.map(t=><span key={t} style={{fontSize:"10px",padding:"3px 11px",borderRadius:"12px",background:T.tealL,color:T.tealD,fontFamily:"Raleway",fontWeight:700,border:`1px solid ${T.borderMid}`}}>{t}</span>)}</div>}
+                  {c.tags?.length>0&&<div style={{display:"flex",flexWrap:"wrap",gap:"5px",marginTop:"8px"}}>{c.tags.map(t=><span key={t} style={{fontSize:"10px",padding:"3px 11px",borderRadius:"12px",background:'rgba(201,168,76,0.15)',color:T.goldD,fontFamily:"Raleway",fontWeight:700,border:`1px solid ${T.borderMid}`}}>{t}</span>)}</div>}
                 </div>
                 <div style={{textAlign:"right",flexShrink:0,marginLeft:"12px"}}>
                   <div style={{fontFamily:"Raleway",fontSize:"11px",color:T.textSoft,fontWeight:600}}>{sc} Sitzung{sc!==1?"en":""}</div>
