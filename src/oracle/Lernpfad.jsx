@@ -1,14 +1,13 @@
-import React, { useState, useEffect, useCallback, useRef } from "react";
-import { OT } from "./OracleUI.jsx";
+import React, { useState } from "react";
+import { OT, LERNPFAD_STUFEN, OCard, OBtn, OLabel } from "./OracleUI.jsx";
 import { OrganspracheLernmodul } from "./OrganspracheKarte.jsx";
 
 function Lernpfad({ groqFetch }){
-  const [gewStufe, setGewStufe]   = useState(null);
-  const [gewThema, setGewThema]   = useState(null);
-  const [kiInhalt, setKiInhalt]   = useState("");
-  const [kiLaed, setKiLaed]       = useState(false);
+  const [gewStufe, setGewStufe] = useState(null);
+  const [gewThema, setGewThema] = useState(null);
+  const [kiInhalt, setKiInhalt] = useState("");
+  const [kiLaed, setKiLaed]     = useState(false);
 
-  // ── Pilot-Modul: Organsprache vollständig ausgearbeitet ──
   if (gewThema?.id === "organsprache" && gewStufe) {
     return (
       <OrganspracheLernmodul
@@ -70,7 +69,7 @@ Schreibe klar, strukturiert und inspirierend. Auf Deutsch.`;
   if (gewThema && gewStufe) {
     return (
       <div style={{display:"flex",flexDirection:"column",gap:"12px"}}>
-        <button onClick={()=>{setGewThema(null);setGewStufe(null);setKiInhalt("");}} style={{fontFamily:"Raleway",fontSize:"13px",color:OT.teal,fontWeight:700,background:"none",border:"none",cursor:"pointer",textAlign:"left"}}>← Zurück</button>
+        <button onClick={()=>{setGewThema(null);setGewStufe(null);setKiInhalt("");}} style={{fontFamily:"Raleway",fontSize:"13px",color:"#C9A84C",fontWeight:700,background:"none",border:"none",cursor:"pointer",textAlign:"left"}}>← Zurück</button>
         <OCard style={{background:OT.bgSoft,border:`1.5px solid ${OT.borderMid}`}}>
           <div style={{display:"flex",alignItems:"center",gap:"12px"}}>
             <span style={{fontSize:"32px"}}>{gewThema.icon}</span>
@@ -102,7 +101,7 @@ Schreibe klar, strukturiert und inspirierend. Auf Deutsch.`;
   if (gewThema) {
     return (
       <div style={{display:"flex",flexDirection:"column",gap:"12px"}}>
-        <button onClick={()=>setGewThema(null)} style={{fontFamily:"Raleway",fontSize:"13px",color:OT.teal,fontWeight:700,background:"none",border:"none",cursor:"pointer",textAlign:"left"}}>← Themen</button>
+        <button onClick={()=>setGewThema(null)} style={{fontFamily:"Raleway",fontSize:"13px",color:"#C9A84C",fontWeight:700,background:"none",border:"none",cursor:"pointer",textAlign:"left"}}>← Themen</button>
         <OCard style={{background:OT.bgSoft,padding:"16px"}}>
           <div style={{display:"flex",alignItems:"center",gap:"10px",marginBottom:"6px"}}>
             <span style={{fontSize:"28px"}}>{gewThema.icon}</span>
@@ -112,7 +111,7 @@ Schreibe klar, strukturiert und inspirierend. Auf Deutsch.`;
         </OCard>
         {LERNPFAD_STUFEN.map(stufe => (
           <button key={stufe.nr} onClick={()=>{setGewStufe(stufe.nr);ladeKiInhalt(gewThema,stufe.nr);}} style={{background:OT.bgCard,borderRadius:"14px",padding:"16px",border:`1.5px solid ${stufe.farbe}44`,cursor:"pointer",textAlign:"left",display:"flex",alignItems:"center",gap:"14px",boxShadow:`0 2px 10px ${OT.shadow}`,transition:"all 0.15s"}}>
-            <div style={{width:"42px",height:"42px",borderRadius:"50%",background:stufe.farbe,display:"flex",alignItems:"center",justifyContent:"center",fontSize:"20px",flexShrink:0,boxShadow:`0 3px 12px ${stufe.farbe}44`}}>
+            <div style={{width:"42px",height:"42px",borderRadius:"50%",background:stufe.farbe,display:"flex",alignItems:"center",justifyContent:"center",fontSize:"20px",flexShrink:0}}>
               {stufe.icon}
             </div>
             <div style={{flex:1}}>
@@ -133,7 +132,7 @@ Schreibe klar, strukturiert und inspirierend. Auf Deutsch.`;
         <div style={{fontFamily:"Raleway",fontSize:"12px",color:OT.textMid,fontWeight:500}}>Von Einführung bis Zertifizierung. KI generiert individuellen Lerninhalt für deine Stufe.</div>
         <div style={{display:"flex",gap:"6px",marginTop:"10px",flexWrap:"wrap"}}>
           {LERNPFAD_STUFEN.map(s=>(
-            <div key={s.nr} style={{display:"flex",alignItems:"center",gap:"4px",padding:"4px 10px",borderRadius:"10px",background:"rgba(255,255,255,0.8)",border:`1px solid ${s.farbe}44`}}>
+            <div key={s.nr} style={{display:"flex",alignItems:"center",gap:"4px",padding:"4px 10px",borderRadius:"10px",background:OT.bgCard,border:`1px solid ${s.farbe}44`}}>
               <div style={{width:"8px",height:"8px",borderRadius:"50%",background:s.farbe}}/>
               <span style={{fontFamily:"Raleway",fontSize:"10px",fontWeight:700,color:s.farbe}}>{s.name}</span>
             </div>
@@ -142,7 +141,7 @@ Schreibe klar, strukturiert und inspirierend. Auf Deutsch.`;
       </OCard>
       <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:"10px"}}>
         {THEMEN.map(thema=>(
-          <button key={thema.id} onClick={()=>setGewThema(thema)} style={{background:"white",borderRadius:"14px",padding:"16px",border:`1.5px solid ${OT.border}`,cursor:"pointer",textAlign:"left",boxShadow:`0 2px 10px ${OT.shadow}`,transition:"all 0.15s",display:"flex",flexDirection:"column",gap:"8px"}}>
+          <button key={thema.id} onClick={()=>setGewThema(thema)} style={{background:OT.bgCard,borderRadius:"14px",padding:"16px",border:`1.5px solid ${OT.border}`,cursor:"pointer",textAlign:"left",boxShadow:`0 2px 10px ${OT.shadow}`,transition:"all 0.15s",display:"flex",flexDirection:"column",gap:"8px"}}>
             <span style={{fontSize:"28px"}}>{thema.icon}</span>
             <div style={{fontFamily:"Raleway",fontSize:"12px",color:OT.text,fontWeight:700,lineHeight:"1.3"}}>{thema.name}</div>
           </button>
