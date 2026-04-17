@@ -56,7 +56,7 @@ function App({ user, onLogout }){
   const [templates,setTemplates]     = useState([]);
   const [reminders,setReminders]     = useState([]);
   const [analyticsClient,setAnalyticsClient] = useState(null);
-  const [settings,setSettings]       = useState({theme:'kristallwasser',currency:'CHF',defaultDuration:'60',autoLock:'5',pinEnabled:false,praxisname:'',subtitle:'',therapistName:'',defaultFee:'',disclaimer:'',modules:[],setupDone:false});
+  const [settings,setSettings]       = useState({theme:'kristallwasser',currency:'CHF',defaultDuration:'60',autoLock:'5',pinEnabled:false,praxisname:'',subtitle:'',therapistName:'',defaultFee:'',disclaimer:'',});
   const [showSettings,setShowSettings] = useState(false);
   const [locked,setLocked]           = useState(false);
   const [ready,setReady]             = useState(false);
