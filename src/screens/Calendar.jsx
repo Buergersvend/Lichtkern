@@ -85,9 +85,9 @@ function ApptModal({appt, clients, onSave, onDelete, onClose}){
 }
 
 function CalendarScreen({appointments,clients,onSaveAppt,onDeleteAppt,onStartSession}){
-  const [view,setView]         = useState("week");
- const [currentDate,setCurrent] = useState(todayStr());
-  const [modal,setModal]       = useState(null);
+  const [view,setView]           = useState("week");
+  const [currentDate,setCurrent] = useState(todayStr());
+  const [modal,setModal]         = useState(null);
 
   const today = todayStr();
 
@@ -202,11 +202,11 @@ function CalendarScreen({appointments,clients,onSaveAppt,onDeleteAppt,onStartSes
               <div key={d} onClick={()=>{setCurrent(d);setView("day");}} style={{cursor:"pointer"}}>
                 <div style={{textAlign:"center",marginBottom:"5px"}}>
                   <div style={{fontFamily:"Raleway",fontSize:"9px",fontWeight:700,color:"#C9A84C",letterSpacing:"0.5px"}}>{DE_DAYS[i]}</div>
-                  <div style={{width:isSelected&&!isToday?"32px":"28px",height:isSelected&&!isToday?"32px":"28px",borderRadius:"50%",margin:"3px auto",display:"flex",alignItems:"center",justifyContent:"center",background:isToday?T.gold:isSelected?T.goldL:"transparent",border:isToday?"none":isSelected?`1.5px solid ${T.goldD}`:"none"}}>
-                    <span style={{fontFamily:"Raleway",fontSize:"13px",fontWeight:700,color:isToday?"white":isSelected?T.goldD:"rgba(245,240,232,0.85)"}}>{pd.getDate()}</span>
+                  <div style={{width:"28px",height:"28px",borderRadius:"50%",margin:"3px auto",display:"flex",alignItems:"center",justifyContent:"center",background:isToday?T.gold:isSelected?"rgba(201,168,76,0.25)":"transparent",border:isToday?"none":isSelected?`1.5px solid ${T.gold}`:"none"}}>
+                    <span style={{fontFamily:"Raleway",fontSize:"13px",fontWeight:700,color:isToday?"white":isSelected?T.gold:"rgba(245,240,232,0.85)"}}>{pd.getDate()}</span>
                   </div>
                 </div>
-               <div style={{minHeight:"80px",background:"transparent",borderRadius:"10px",padding:"2px"}}>
+                <div style={{minHeight:"80px",background:"transparent",borderRadius:"10px",padding:"2px"}}>
                   {dayAppts.map(a=><ApptChip key={a.id} a={a} onClick={openEdit}/>)}
                   {dayAppts.length===0&&<div style={{height:"4px",borderRadius:"2px",background:"transparent"}}/>}
                 </div>
