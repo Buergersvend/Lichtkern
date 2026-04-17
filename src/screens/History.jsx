@@ -9,7 +9,7 @@ function History({sessions, onDelete}){
   const [detail,setDetail]=useState(null);
   const [pdfSession,setPdfSession]=useState(null);
   if(detail)return(<div style={{padding:"0 16px 96px"}}>
-    <button onClick={()=>setDetail(null)} style={{fontFamily:"Raleway",fontSize:"13px",color:T.teal,fontWeight:700,background:"none",border:"none",cursor:"pointer",paddingTop:"8px",display:"block",marginBottom:"14px"}}>← Zurück</button>
+    <button onClick={()=>setDetail(null)} style={{fontFamily:"Raleway",fontSize:"13px",color:T.gold,fontWeight:700,background:"none",border:"none",cursor:"pointer",paddingTop:"8px",display:"block",marginBottom:"14px"}}>← Zurück</button>
     <div style={{position:"relative",borderRadius:"20px",overflow:"hidden",padding:"24px",marginBottom:"14px",background:T.bgSoft,boxShadow:`0 4px 22px ${T.shadowDeep}`,border:`1.5px solid ${T.border}`}}>
       <Flower size={200} opacity={0.1}/>
       <div style={{position:"relative",zIndex:1}}>
@@ -20,10 +20,10 @@ function History({sessions, onDelete}){
     </div>
     {detail.goal&&<Card style={{marginBottom:"10px"}}><SL>Thema</SL><div style={{fontFamily:"Raleway",fontSize:"14px",color:T.text,lineHeight:"1.75",fontWeight:500}}>{detail.goal}</div></Card>}
     {Object.values(detail.levels||{}).some(v=>v>0)&&<Card style={{marginBottom:"10px"}}><SL>Ebenen</SL>{LEVELS.map(l=><LBar key={l.key} levelKey={l.key} value={detail.levels?.[l.key]||0} compact/>)}</Card>}
-    {detail.techniques?.length>0&&<Card style={{marginBottom:"10px"}}><SL>Techniken</SL><div style={{display:"flex",flexWrap:"wrap",gap:"6px"}}>{detail.techniques.map(t=><span key={t} style={{fontSize:"11px",padding:"5px 13px",borderRadius:"20px",background:T.tealL,color:T.tealD,fontFamily:"Raleway",fontWeight:700,border:`1px solid ${T.borderMid}`}}>{t}</span>)}</div></Card>}
+    {detail.techniques?.length>0&&<Card style={{marginBottom:"10px"}}><SL>Techniken</SL><div style={{display:"flex",flexWrap:"wrap",gap:"6px"}}>{detail.techniques.map(t=><span key={t} style={{fontSize:"11px",padding:"5px 13px",borderRadius:"20px",background:'rgba(201,168,76,0.15)',color:T.goldD,fontFamily:"Raleway",fontWeight:700,border:`1px solid ${T.borderMid}`}}>{t}</span>)}</div></Card>}
     {detail.outcome&&<Card style={{marginBottom:"10px"}}><SL>Ergebnis</SL><div style={{fontFamily:"Raleway",fontSize:"14px",color:T.text,lineHeight:"1.75",fontWeight:500}}>{detail.outcome}</div></Card>}
     {detail.homework&&<div style={{marginBottom:"10px",background:"#EDFAF2",borderRadius:"16px",padding:"16px",border:"1.5px solid #4DC98A"}}><SL color="#0A3B20">🌱 Integrationsauftrag</SL><div style={{fontFamily:"Raleway",fontSize:"14px",color:"#0A3B20",lineHeight:"1.75",fontWeight:500}}>{detail.homework}</div></div>}
-    {detail.aiSummary&&<div style={{marginBottom:"10px",background:T.bgSoft,borderRadius:"16px",padding:"16px",border:`1.5px solid ${T.borderMid}`}}><SL color={T.tealD}>✦ Zusammenfassung</SL><div style={{fontFamily:"Raleway",fontSize:"13px",color:T.text,lineHeight:"1.85",whiteSpace:"pre-wrap",fontWeight:500}}>{detail.aiSummary}</div></div>}
+    {detail.aiSummary&&<div style={{marginBottom:"10px",background:T.bgSoft,borderRadius:"16px",padding:"16px",border:`1.5px solid ${T.borderMid}`}}><SL color={T.goldD}>✦ Zusammenfassung</SL><div style={{fontFamily:"Raleway",fontSize:"13px",color:T.text,lineHeight:"1.85",whiteSpace:"pre-wrap",fontWeight:500}}>{detail.aiSummary}</div></div>}
     <div style={{display:"flex",gap:"8px",marginTop:"16px"}}>
       <button onClick={()=>setPdfSession(detail)} style={{flex:2,fontFamily:"Raleway",fontWeight:700,fontSize:"13px",padding:"12px",borderRadius:"12px",border:`1.5px solid ${T.border}`,background:T.bgSoft,color:T.textMid,cursor:"pointer"}}>
         📄 PDF erstellen
