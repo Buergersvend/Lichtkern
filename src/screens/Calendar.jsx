@@ -312,7 +312,7 @@ function CalendarScreen({appointments,clients,onSaveAppt,onDeleteAppt,onStartSes
       <div style={{padding:"8px 16px 12px"}}>
         <div style={{display:"flex",background:T.bgSoft,borderRadius:"14px",padding:"3px",marginBottom:"12px",border:`1.5px solid ${T.border}`}}>
           {[["day","Tag"],["week","Woche"],["month","Monat"]].map(([v,l])=>(
-            <button key={v} onClick={()=>setView(v)} style={{flex:1,padding:"7px",borderRadius:"11px",border:"none",cursor:"pointer",fontFamily:"Raleway",fontSize:"11px",fontWeight:700,transition:"all 0.2s",background:view===v?T.gold:"transparent",color:view===v?T.goldD:T.textSoft,boxShadow:view===v?`0 2px 8px ${T.shadow}`:"none"}}>{l}</button>
+            <button key={v} onClick={()=>setView(v)} style={{flex:1,padding:"7px",borderRadius:"11px",border:"none",cursor:"pointer",fontFamily:"Raleway",fontSize:"11px",fontWeight:700,transition:"all 0.2s",background:view===v?T.gold:"transparent",color:view===v?"#1A1200":T.textSoft,boxShadow:view===v?`0 2px 8px ${T.shadow}`:"none"}}>{l}</button>
           ))}
         </div>
         <div style={{display:"flex",alignItems:"center",justifyContent:"space-between"}}>
