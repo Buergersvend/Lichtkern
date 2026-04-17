@@ -43,7 +43,7 @@ export default function OracleAgent({ onClose }) {
         {/* Modus */}
         <div style={{ display: "flex", gap: "8px", padding: "12px 24px" }}>
           {[["dev", "⚙ DEV"], ["analyse", "📊 Analyse"]].map(([v, l]) => (
-            <button key={v} onClick={() => setMode(v)} style={{ padding: "7px 16px", borderRadius: "10px", border: `1.5px solid ${mode === v ? T.teal : T.border}`, background: mode === v ? T.teal : T.bgCard, fontFamily: "Raleway", fontSize: "12px", fontWeight: 700, color: mode === v ? "white" : T.textMid, cursor: "pointer" }}>{l}</button>
+            <button key={v} onClick={() => setMode(v)} style={{ padding: "7px 16px", borderRadius: "10px", border: `1.5px solid ${mode === v ? T.gold : T.border}`, background: mode === v ? T.gold : T.bgCard, fontFamily: "Raleway", fontSize: "12px", fontWeight: 700, color: mode === v ? "white" : T.textMid, cursor: "pointer" }}>{l}</button>
           ))}
         </div>
 
@@ -55,7 +55,7 @@ export default function OracleAgent({ onClose }) {
             </div>
           )}
           {messages.map((m, i) => (
-            <div key={i} style={{ alignSelf: m.role === "user" ? "flex-end" : "flex-start", maxWidth: "80%", background: m.role === "user" ? T.teal : T.bgSoft, color: m.role === "user" ? "white" : T.text, borderRadius: m.role === "user" ? "16px 16px 4px 16px" : "16px 16px 16px 4px", padding: "10px 14px", fontFamily: "Raleway", fontSize: "13px", lineHeight: "1.6" }}>
+            <div key={i} style={{ alignSelf: m.role === "user" ? "flex-end" : "flex-start", maxWidth: "80%", background: m.role === "user" ? T.gold : T.bgSoft, color: m.role === "user" ? "white" : T.text, borderRadius: m.role === "user" ? "16px 16px 4px 16px" : "16px 16px 16px 4px", padding: "10px 14px", fontFamily: "Raleway", fontSize: "13px", lineHeight: "1.6" }}>
               {m.text}
             </div>
           ))}
