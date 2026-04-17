@@ -150,21 +150,7 @@ function SettingsScreen({ settings, onSave, onClose, clients, sessions, appointm
           </div>
         </div>
 
-        <div style={{background:T.bgCard,borderRadius:"18px",padding:"16px",marginBottom:"20px",border:`1.5px solid ${T.border}`}}>
-          <SL color={T.goldD}>Aktive Module</SL>
-          <div style={{display:"flex",flexWrap:"wrap",gap:"8px",marginBottom:"4px"}}>
-            {[{id:"heilarbeit",icon:"🌿",label:"Heilarbeit"},{id:"massage",icon:"💆",label:"Massage"},{id:"coaching",icon:"🧠",label:"Coaching"},{id:"paedagogik",icon:"👨‍👩‍👧",label:"Pädagogik"},{id:"b2b",icon:"👥",label:"B2B"},{id:"allgemein",icon:"📋",label:"Allgemein"}].map(m=>{
-              const active=(form.modules||[]).includes(m.id);
-              return(
-                <button key={m.id} onClick={()=>{const cur=form.modules||[];up({modules:active?cur.filter(x=>x!==m.id):[...cur,m.id]});}}
-                  style={{padding:"8px 14px",borderRadius:"20px",border:`1.5px solid ${active?T.gold:T.border}`,background:active?T.gold:T.bgCard,fontFamily:"Raleway",fontSize:"12px",fontWeight:700,color:active?"white":T.textMid,cursor:"pointer"}}>
-                  {m.icon} {m.label}
-                </button>
-              );
-            })}
-          </div>
-          <div style={{fontFamily:"Raleway",fontSize:"11px",color:T.textMid,marginTop:"8px"}}>Aktivierte Module schalten zusätzliche Felder frei (z.B. Human Design bei Heilarbeit).</div>
-        </div>
+       
 
         <div style={{background:T.bgCard,borderRadius:"18px",padding:"16px",marginBottom:"20px",border:`1.5px solid ${T.border}`}}>
           <SL color={T.goldD}>Praxis & Person</SL>
