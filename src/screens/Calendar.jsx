@@ -265,8 +265,8 @@ function CalendarScreen({appointments,clients,onSaveAppt,onDeleteAppt,onStartSes
             const isSelected=d===currentDate;
             const dayAppts=apptsByDate[d]||[];
             return(
-              <div key={d} onClick={()=>{setCurrent(d);}} style={{minHeight:"52px",borderRadius:"10px",padding:"3px",cursor:"pointer",background:isSelected?"rgba(168,125,58,0.2)":isToday?"rgba(168,125,58,0.1)":"transparent",border:isSelected?`1.5px solid ${T.borderMid}`:"1.5px solid transparent",opacity:isThisMonth?1:0.35}}>
-                <div style={{fontFamily:"Raleway",fontSize:"11px",fontWeight:isToday?800:600,color:isToday?"white":"rgba(245,240,232,0.85)",marginBottom:"3px",textAlign:"center",width:"22px",height:"22px",borderRadius:"50%",display:"flex",alignItems:"center",justifyContent:"center",margin:"0 auto 3px",background:isToday?T.gold:"transparent"}}>{pd.getDate()}</div>
+              <div key={d} onClick={()=>{setCurrent(d);}} style={{minHeight:"52px",borderRadius:"10px",padding:"3px",cursor:"pointer",background:"transparent",border:"1.5px solid transparent",opacity:isThisMonth?1:0.35}}>
+                <div style={{fontFamily:"Raleway",fontSize:"11px",fontWeight:isToday?800:600,color:isToday?"white":"rgba(245,240,232,0.85)",marginBottom:"3px",textAlign:"center",width:"22px",height:"22px",borderRadius:"50%",display:"flex",alignItems:"center",justifyContent:"center",margin:"0 auto 3px",background:isToday?T.gold:isSelected?"rgba(201,168,76,0.25)":"transparent",border:isToday?"none":isSelected?`1.5px solid ${T.gold}`:"none"}}>{pd.getDate()}</div>
                 <div style={{display:"flex",flexWrap:"wrap",gap:"2px",justifyContent:"center"}}>
                   {dayAppts.slice(0,3).map(a=>{
                     const at=APPT_TYPES[a.type]||APPT_TYPES.other;
