@@ -271,7 +271,7 @@ function Clients({clients,sessions,onSave,onStart,onDelete,onOnboarding,reminder
           {[{k:"name",p:"Name *"},{k:"contact",p:"Email / Telefon"},{k:"notes",p:"Notizen"},{k:"tags",p:"Tags: Angst, Rücken, Ahnen…"}].map(f=>(
             <div key={f.k} style={{marginBottom:"8px"}}><TI value={form[f.k]} onChange={v=>setForm({...form,[f.k]:v})} placeholder={f.p}/></div>
           ))}
-          {settings?.modules?.includes("heilarbeit")&&(
+          {(
             <div style={{marginTop:"12px",paddingTop:"12px",borderTop:`1px dashed ${T.border}`}}>
               <div style={{fontFamily:"Raleway",fontSize:"10px",color:T.goldD,letterSpacing:"2px",fontWeight:700,textTransform:"uppercase",marginBottom:"8px"}}>✦ Human Design (optional)</div>
               <div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:"8px"}}>
