@@ -112,8 +112,7 @@ function App({ user, onLogout }){
     <div style={{fontFamily:"Raleway",fontSize:"12px",color:T.textMid,letterSpacing:"3px",fontWeight:700}}>LICHTKERN</div>
   </div>);
 
-  if(!settings.setupDone) return(<WelcomeSetup onComplete={async(modules)=>{const newS={...settings,modules,setupDone:true};await saveSettings(newS);}}/>);
-
+ 
   return(<div style={{background:"#111111",minHeight:"100vh",display:"flex",flexDirection:"row"}}>
     {/* Desktop sidebar */}
     {isDesktop && (
