@@ -86,7 +86,7 @@ function ApptModal({appt, clients, onSave, onDelete, onClose}){
 
 function CalendarScreen({appointments,clients,onSaveAppt,onDeleteAppt,onStartSession}){
   const [view,setView]         = useState("week");
- const [currentDate,setCurrent] = useState("");
+ const [currentDate,setCurrent] = useState(todayStr());
   const [modal,setModal]       = useState(null);
 
   const today = todayStr();
