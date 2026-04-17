@@ -331,7 +331,7 @@ const HELLSINN_TAGS = {
     items:["Rot","Orange","Gelb","Grün","Hellblau","Dunkelblau","Violett","Weiß","Schwarz","Grau","Braun","Rosa","Gold","Silber","Türkis","Dunkel","Hell","Trüb","Leuchtend"]
   },
   koerper: {
-    label:"🫀 Körperzone", farbe:"#0D9488", bgfarbe:"#CCFBF1",
+    label:"🫀 Körperzone", farbe:"#C9A84C", bgfarbe:"rgba(201,168,76,0.15)",
     items:["Kopf","Herz","Bauch","Brust","Rücken","Schultern","Arme","Beine","Füße","Hände","Kehle","Gesicht","Becken","Hüfte","Knie","Wirbelsäule","Links","Rechts","Oben","Unten"]
   },
   energetisch: {
@@ -413,7 +413,7 @@ const HEILMETHODEN_KATALOG = [
 
 const LERNPFAD_STUFEN = [
   { nr:1, name:"Einführung",    farbe:"#16A34A", icon:"🌱", beschreibung:"Grundverständnis, Terminologie, erste Wahrnehmungen. Für Einsteiger." },
-  { nr:2, name:"Grundlagen",   farbe:"#0D9488", icon:"📚", beschreibung:"Systematisches Wissen, erste Technikanwendung, Klienten-Grundarbeit." },
+  { nr:2, name:"Grundlagen",   farbe:"#C9A84C", icon:"📚", beschreibung:"Systematisches Wissen, erste Technikanwendung, Klienten-Grundarbeit." },
   { nr:3, name:"Vertiefung",   farbe:"#0284C7", icon:"🎯", beschreibung:"Komplexe Fälle, Kombination von Methoden, eigene Wahrnehmungsschärfung." },
   { nr:4, name:"Meisterschaft",farbe:"#7C3AED", icon:"⚡", beschreibung:"Aura-Chirurgie, Quantenarbeit, Fern-Anwendungen, Ausbildungsleitung." },
   { nr:5, name:"Zertifizierung",farbe:"#D97706",icon:"🏆", beschreibung:"Geprüfte Kompetenz, Human Resonanz Akademie Zertifikat, Lehrerlizenz." },
@@ -423,24 +423,22 @@ const LERNPFAD_STUFEN = [
 //  UI HILFSKOMPONENTEN
 // ════════════════════════════════════════════════════════════════
 const OCard = ({children, style={}}) => (
-  <div style={{background:"#FFFFFF",borderRadius:"18px",padding:"18px",border:`1.5px solid ${OT.border}`,boxShadow:`0 2px 14px ${OT.shadow}`,...style}}>{children}</div>
+  <div style={{background:OT.bgCard,borderRadius:"18px",padding:"18px",border:`1.5px solid ${OT.border}`,boxShadow:`0 2px 14px ${OT.shadow}`,...style}}>{children}</div>
 );
 const OBtn = ({children,onClick,variant="primary",disabled,style={}}) => {
   const variants = {
-    primary:{background:`linear-gradient(135deg,${OT.teal},${OT.tealD})`,color:"white",border:"none"},
+    primary:{background:`linear-gradient(135deg,#C9A84C,#A87D3A)`,color:"white",border:"none"},
     soft:{background:OT.bgSoft,color:OT.textMid,border:`1.5px solid ${OT.border}`},
     violet:{background:`linear-gradient(135deg,${OT.violet},${OT.violetD})`,color:"white",border:"none"},
-    ghost:{background:"transparent",color:OT.teal,border:`1.5px solid ${OT.teal}`},
+    ghost:{background:"transparent",color:"#C9A84C",border:`1.5px solid #C9A84C`},
   };
   return <button onClick={onClick} disabled={disabled} style={{fontFamily:"Raleway",fontWeight:700,fontSize:"13px",padding:"10px 18px",borderRadius:"12px",cursor:disabled?"wait":"pointer",opacity:disabled?0.6:1,transition:"all 0.15s",...variants[variant],...style}}>{children}</button>;
 };
-const OTag = ({label, aktiv, onClick, farbe="#0D9488", bgFarbe="#CCFBF1"}) => (
-  <button onClick={onClick} style={{fontFamily:"Raleway",fontSize:"11px",fontWeight:700,padding:"5px 12px",borderRadius:"20px",border:`1.5px solid ${aktiv?farbe:OT.border}`,background:aktiv?bgFarbe:"white",color:aktiv?farbe:OT.textSoft,cursor:"pointer",transition:"all 0.12s"}}>{label}</button>
+const OTag = ({label, aktiv, onClick, farbe="#C9A84C", bgFarbe="rgba(201,168,76,0.15)"}) => (
+  <button onClick={onClick} style={{fontFamily:"Raleway",fontSize:"11px",fontWeight:700,padding:"5px 12px",borderRadius:"20px",border:`1.5px solid ${aktiv?farbe:OT.border}`,background:aktiv?bgFarbe:OT.bgCard,color:aktiv?farbe:OT.textSoft,cursor:"pointer",transition:"all 0.12s"}}>{label}</button>
 );
 const OLabel = ({children, color}) => (
   <div style={{fontFamily:"Raleway",fontSize:"10px",letterSpacing:"2px",fontWeight:800,color:color||OT.textSoft,textTransform:"uppercase",marginBottom:"10px"}}>{children}</div>
 );
 
-// ════════════════════════════════════════════════════════════════
-//  HELLSINN-SCANNER · Kern-Feature
 export { OT, CHAKRA_SYSTEM, ORGAN_MAP, AURA_SCHICHTEN, AURA_CHIRURGIE_TECHNIKEN, HELLSINN_TAGS, HEILMETHODEN_KATALOG, LERNPFAD_STUFEN, OCard, OBtn, OTag, OLabel };
