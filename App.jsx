@@ -43,49 +43,6 @@ function Root() {
 }
 
 
-// ─── WELCOME SETUP ────────────────────────────
-function WelcomeSetup({onComplete}){
-  const [selected,setSelected]=useState([]);
-  const MODULES=[
-    {id:"heilarbeit", icon:"🌿", title:"Heilarbeit & Energie",     desc:"Energetische Arbeit, Human Design, Generationsthemen"},
-    {id:"massage",    icon:"💆", title:"Massage & Körperarbeit",   desc:"Behandlungsprotokolle, Körpertherapie"},
-    {id:"coaching",   icon:"🧠", title:"Coaching & Beratung",      desc:"Zielarbeit, Ressourcen, Persönlichkeitsentwicklung"},
-    {id:"paedagogik", icon:"👨‍👩‍👧", title:"Pädagogik & Familie",     desc:"Eltern-Coaching, Lernbegleitung"},
-    {id:"b2b",        icon:"👥", title:"B2B / Teams",              desc:"Teamanalyse, Unternehmensberatung, HR"},
-    {id:"allgemein",  icon:"📋", title:"Allgemeine Praxis",        desc:"Klassische Praxisverwaltung"},
-  ];
-  const toggle=id=>setSelected(s=>s.includes(id)?s.filter(x=>x!==id):[...s,id]);
-  return(
-    <div style={{position:"fixed",inset:0,background:"linear-gradient(145deg,#E8F8F5 0%,#F8FAFF 50%,#F0EBF8 100%)",zIndex:500,display:"flex",alignItems:"center",justifyContent:"center",padding:"20px",overflowY:"auto"}}>
-      <div style={{maxWidth:"640px",width:"100%",textAlign:"center",padding:"20px 0"}}>
-        <div style={{fontFamily:"Cinzel",fontSize:"32px",color:"#0F4F4A",fontWeight:700,letterSpacing:"4px",marginBottom:"6px"}}>✦ LICHTKERN</div>
-        <div style={{fontFamily:"Raleway",fontSize:"10px",color:"#6AABA7",letterSpacing:"4px",textTransform:"uppercase",fontWeight:700,marginBottom:"32px"}}>Human Resonanz</div>
-        <div style={{background:"rgba(255,255,255,0.85)",borderRadius:"24px",padding:"32px",boxShadow:"0 8px 40px rgba(13,148,136,0.12)",border:"1.5px solid rgba(13,148,136,0.15)",backdropFilter:"blur(20px)"}}>
-          <div style={{fontFamily:"Cinzel",fontSize:"20px",color:"#0F4F4A",fontWeight:700,marginBottom:"8px"}}>Willkommen! Wie nutzt du Lichtkern?</div>
-          <div style={{fontFamily:"Raleway",fontSize:"13px",color:"#6B7280",marginBottom:"24px",lineHeight:1.6}}>Wähle deine Schwerpunkte — jederzeit in den Einstellungen anpassbar.</div>
-          <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:"10px",marginBottom:"24px",textAlign:"left"}}>
-            {MODULES.map(m=>{
-              const sel=selected.includes(m.id);
-              return(
-                <button key={m.id} onClick={()=>toggle(m.id)} style={{padding:"16px",borderRadius:"16px",border:`2px solid ${sel?"#0D9488":"rgba(13,148,136,0.18)"}`,background:sel?"rgba(13,148,136,0.07)":"rgba(255,255,255,0.7)",cursor:"pointer",textAlign:"left",transition:"all 0.2s",boxShadow:sel?"0 4px 16px rgba(13,148,136,0.18)":"none"}}>
-                  <div style={{fontSize:"22px",marginBottom:"5px"}}>{m.icon}</div>
-                  <div style={{fontFamily:"Raleway",fontSize:"13px",fontWeight:700,color:sel?"#0F4F4A":"#374151",marginBottom:"3px"}}>{m.title}</div>
-                  <div style={{fontFamily:"Raleway",fontSize:"11px",color:"#9CA3AF",lineHeight:1.4}}>{m.desc}</div>
-                  {sel&&<div style={{marginTop:"6px",fontFamily:"Raleway",fontSize:"10px",color:"#0D9488",fontWeight:700,letterSpacing:"1px"}}>✓ AKTIV</div>}
-                </button>
-              );
-            })}
-          </div>
-          <button onClick={()=>onComplete(selected.length>0?selected:["allgemein"])}
-            style={{width:"100%",padding:"15px",borderRadius:"14px",background:selected.length>0?"linear-gradient(135deg,#0D9488,#0B6E63)":"#E5E7EB",color:selected.length>0?"white":"#9CA3AF",fontFamily:"Raleway",fontWeight:700,fontSize:"15px",border:"none",cursor:selected.length>0?"pointer":"default",letterSpacing:"0.5px",transition:"all 0.2s"}}>
-            {selected.length>0?`Loslegen →`:"Bitte mindestens ein Modul wählen"}
-          </button>
-          <div style={{marginTop:"10px",fontFamily:"Raleway",fontSize:"11px",color:"#9CA3AF"}}>Module lassen sich jederzeit in den Einstellungen ändern.</div>
-        </div>
-      </div>
-    </div>
-  );
-}
 
 // ─── MAIN APP ─────────────────────────────────
 function App({ user, onLogout }){
