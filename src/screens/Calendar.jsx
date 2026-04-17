@@ -207,7 +207,7 @@ function CalendarScreen({appointments,clients,onSaveAppt,onDeleteAppt,onStartSes
                   </div>
                 </div>
                <div style={{minHeight:"80px",background:"transparent",borderRadius:"10px",padding:"2px"}}>
-                  {dayAppts.map(a=><ApptChip key={a.id} a={a} onClick={openEdit}/>)}background:isSelected&&currentDate!==today?"rgba(168,125,58,0.15)":"transparent"
+                  {dayAppts.map(a=><ApptChip key={a.id} a={a} onClick={openEdit}/>)}
                   {dayAppts.length===0&&<div style={{height:"4px",borderRadius:"2px",background:"transparent"}}/>}
                 </div>
               </div>
