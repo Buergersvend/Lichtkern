@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useCallback, useRef } from "react";
-import { OT } from "./OracleUI.jsx";
+import React, { useState } from "react";
+import { OT, AURA_SCHICHTEN, AURA_CHIRURGIE_TECHNIKEN, OCard, OLabel } from "./OracleUI.jsx";
 
 function AuraChirurgie({ groqFetch }){
-  const [ansicht, setAnsicht]     = useState("schichten");
-  const [gewaehlt, setGewaehlt]   = useState(null);
+  const [ansicht, setAnsicht]       = useState("schichten");
+  const [gewaehlt, setGewaehlt]     = useState(null);
   const [technikSel, setTechnikSel] = useState(null);
 
   return (
@@ -21,7 +21,7 @@ function AuraChirurgie({ groqFetch }){
         <>
           {gewaehlt !== null ? (
             <div>
-              <button onClick={()=>setGewaehlt(null)} style={{fontFamily:"Raleway",fontSize:"13px",color:OT.teal,fontWeight:700,background:"none",border:"none",cursor:"pointer",marginBottom:"12px",display:"block"}}>← Alle Schichten</button>
+              <button onClick={()=>setGewaehlt(null)} style={{fontFamily:"Raleway",fontSize:"13px",color:"#C9A84C",fontWeight:700,background:"none",border:"none",cursor:"pointer",marginBottom:"12px",display:"block"}}>← Alle Schichten</button>
               {(() => {
                 const s = AURA_SCHICHTEN[gewaehlt];
                 return (
@@ -47,9 +47,9 @@ function AuraChirurgie({ groqFetch }){
                     <div style={{display:"flex",flexWrap:"wrap",gap:"6px",marginBottom:"12px"}}>
                       {s.blockaden.map(b=><span key={b} style={{fontFamily:"Raleway",fontSize:"10px",fontWeight:700,padding:"4px 10px",borderRadius:"10px",background:"#FEE2E2",color:"#9B1C1C"}}>{b}</span>)}
                     </div>
-                    <OLabel color={OT.tealD}>Heilungsmethoden</OLabel>
+                    <OLabel color="#A87D3A">Heilungsmethoden</OLabel>
                     <div style={{display:"flex",flexWrap:"wrap",gap:"6px",marginBottom:"12px"}}>
-                      {s.heilung.map(h=><span key={h} style={{fontFamily:"Raleway",fontSize:"10px",fontWeight:700,padding:"4px 10px",borderRadius:"10px",background:OT.tealL,color:OT.tealD}}>💚 {h}</span>)}
+                      {s.heilung.map(h=><span key={h} style={{fontFamily:"Raleway",fontSize:"10px",fontWeight:700,padding:"4px 10px",borderRadius:"10px",background:"rgba(201,168,76,0.15)",color:"#A87D3A"}}>💚 {h}</span>)}
                     </div>
                     <OLabel color={OT.violetD}>Chirurgische Eingriffe</OLabel>
                     <div style={{display:"flex",flexWrap:"wrap",gap:"6px"}}>
@@ -68,7 +68,7 @@ function AuraChirurgie({ groqFetch }){
               {AURA_SCHICHTEN.map((s, idx) => (
                 <button key={idx} onClick={()=>setGewaehlt(idx)} style={{background:OT.bgCard,borderRadius:"14px",padding:"14px 16px",border:`1.5px solid ${OT.border}`,cursor:"pointer",textAlign:"left",display:"flex",alignItems:"center",gap:"14px",boxShadow:`0 2px 10px ${OT.shadow}`,transition:"all 0.15s"}}>
                   <div style={{display:"flex",flexDirection:"column",alignItems:"center",gap:"3px",flexShrink:0}}>
-                    <div style={{width:"28px",height:"28px",borderRadius:"50%",background:s.farbe,border:"2px solid rgba(0,0,0,0.08)",boxShadow:`0 2px 8px ${s.farbe}44`}}/>
+                    <div style={{width:"28px",height:"28px",borderRadius:"50%",background:s.farbe,border:"2px solid rgba(0,0,0,0.08)"}}/>
                     <span style={{fontFamily:"Cinzel",fontSize:"11px",color:OT.textSoft,fontWeight:700}}>{s.nr}</span>
                   </div>
                   <div style={{flex:1}}>
@@ -88,7 +88,7 @@ function AuraChirurgie({ groqFetch }){
         <>
           {technikSel !== null ? (
             <div>
-              <button onClick={()=>setTechnikSel(null)} style={{fontFamily:"Raleway",fontSize:"13px",color:OT.teal,fontWeight:700,background:"none",border:"none",cursor:"pointer",marginBottom:"12px",display:"block"}}>← Alle Techniken</button>
+              <button onClick={()=>setTechnikSel(null)} style={{fontFamily:"Raleway",fontSize:"13px",color:"#C9A84C",fontWeight:700,background:"none",border:"none",cursor:"pointer",marginBottom:"12px",display:"block"}}>← Alle Techniken</button>
               {(() => {
                 const t = AURA_CHIRURGIE_TECHNIKEN[technikSel];
                 return (
@@ -101,11 +101,11 @@ function AuraChirurgie({ groqFetch }){
                       </div>
                     </div>
                     <div style={{fontFamily:"Raleway",fontSize:"13px",color:OT.text,lineHeight:"1.75",fontWeight:500,marginBottom:"14px",padding:"12px",background:OT.bgSoft,borderRadius:"10px"}}>{t.beschreibung}</div>
-                    <OLabel color={OT.tealD}>Schritt-für-Schritt</OLabel>
+                    <OLabel color="#A87D3A">Schritt-für-Schritt</OLabel>
                     <div style={{display:"flex",flexDirection:"column",gap:"6px"}}>
                       {t.schritte.map((schritt, i) => (
-                        <div key={i} style={{display:"flex",alignItems:"flex-start",gap:"10px",padding:"8px 12px",background:"white",borderRadius:"10px",border:`1px solid ${OT.border}`}}>
-                          <span style={{fontFamily:"Cinzel",fontSize:"12px",color:OT.teal,fontWeight:700,flexShrink:0,marginTop:"1px"}}>{i+1}.</span>
+                        <div key={i} style={{display:"flex",alignItems:"flex-start",gap:"10px",padding:"8px 12px",background:OT.bgCard,borderRadius:"10px",border:`1px solid ${OT.border}`}}>
+                          <span style={{fontFamily:"Cinzel",fontSize:"12px",color:"#C9A84C",fontWeight:700,flexShrink:0,marginTop:"1px"}}>{i+1}.</span>
                           <span style={{fontFamily:"Raleway",fontSize:"12px",color:OT.text,fontWeight:500,lineHeight:"1.6"}}>{schritt}</span>
                         </div>
                       ))}
@@ -138,6 +138,4 @@ function AuraChirurgie({ groqFetch }){
   );
 }
 
-// ════════════════════════════════════════════════════════════════
-//  CHAKREN-MATRIX
 export { AuraChirurgie };
