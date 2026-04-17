@@ -1,11 +1,11 @@
-import React, { useState, useEffect, useCallback, useRef } from "react";
-import { OT } from "./OracleUI.jsx";
+import React, { useState } from "react";
+import { OT, CHAKRA_SYSTEM, OCard, OBtn, OLabel } from "./OracleUI.jsx";
 
 function ChakraMatrix({ groqFetch }){
   const [gewaehltes, setGewaehltes] = useState(null);
   const [kiDetail, setKiDetail]     = useState("");
   const [kiLaed, setKiLaed]         = useState(false);
-  const [status, setStatus]         = useState({}); // chakra.id -> "ok"|"block"|"uber"
+  const [status, setStatus]         = useState({});
 
   const statusLabels = { ok:"✓ Aktiv", block:"▼ Blockiert", uber:"▲ Überaktiv" };
   const statusColors = { ok:{bg:"#DCFCE7",color:"#16A34A"}, block:{bg:"#FEE2E2",color:"#9B1C1C"}, uber:{bg:"#FEF3C7",color:"#92400E"} };
@@ -35,7 +35,7 @@ Antworte in diesen Abschnitten (kurz & präzise):
 [3 spezifische Techniken mit kurzer Erklärung]
 
 ⚡ VERBINDUNG ZU ANDEREN CHAKREN
-[Mit welchen anderen Chakren interagiert dieses? Was sind typische Ketten-Reaktionen?]`;
+[Mit welchen anderen Chakren interagiert dieses?]`;
 
     try { setKiDetail(await groqFetch(prompt)); }
     catch { setKiDetail("Fehler."); }
@@ -52,7 +52,7 @@ Antworte in diesen Abschnitten (kurz & präzise):
   if (gewaehltes) {
     return (
       <div style={{display:"flex",flexDirection:"column",gap:"12px"}}>
-        <button onClick={()=>{setGewaehltes(null);setKiDetail("");}} style={{fontFamily:"Raleway",fontSize:"13px",color:OT.teal,fontWeight:700,background:"none",border:"none",cursor:"pointer",textAlign:"left"}}>← Alle Chakren</button>
+        <button onClick={()=>{setGewaehltes(null);setKiDetail("");}} style={{fontFamily:"Raleway",fontSize:"13px",color:"#C9A84C",fontWeight:700,background:"none",border:"none",cursor:"pointer",textAlign:"left"}}>← Alle Chakren</button>
         <OCard style={{background:OT.bgSoft,border:`1.5px solid ${gewaehltes.hex}44`}}>
           <div style={{display:"flex",alignItems:"center",gap:"14px",marginBottom:"14px"}}>
             <div style={{width:"48px",height:"48px",borderRadius:"50%",background:gewaehltes.hex,display:"flex",alignItems:"center",justifyContent:"center",boxShadow:`0 4px 16px ${gewaehltes.hex}55`,flexShrink:0}}>
@@ -73,12 +73,12 @@ Antworte in diesen Abschnitten (kurz & präzise):
             </div>
           </div>
           <div>
-            <OLabel color={OT.tealD}>Organe & Körperzonen</OLabel>
+            <OLabel color="#A87D3A">Organe & Körperzonen</OLabel>
             <div style={{fontFamily:"Raleway",fontSize:"12px",color:OT.textMid,fontWeight:500}}>{gewaehltes.organe.join(" · ")}</div>
           </div>
         </OCard>
         <OCard>
-          <OLabel color={OT.tealD}>Lernpfad</OLabel>
+          <OLabel color="#A87D3A">Lernpfad</OLabel>
           <div style={{fontFamily:"Raleway",fontSize:"13px",color:OT.text,lineHeight:"1.8",fontWeight:500,marginBottom:"10px"}}>{gewaehltes.lernpfad_soft}</div>
           <div style={{background:OT.bgCard,padding:"12px",borderRadius:"12px",border:`1px solid ${OT.violet}33`}}>
             <div style={{fontFamily:"Raleway",fontSize:"10px",fontWeight:800,color:OT.violetD,letterSpacing:"1.5px",textTransform:"uppercase",marginBottom:"6px"}}>🎓 Vertiefung</div>
@@ -125,6 +125,4 @@ Antworte in diesen Abschnitten (kurz & präzise):
   );
 }
 
-// ════════════════════════════════════════════════════════════════
-//  HEILUNGS-GUIDE
 export { ChakraMatrix };
