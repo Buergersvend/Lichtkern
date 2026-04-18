@@ -129,7 +129,7 @@ function LoginScreen({ onLogin }){
               <label style={{display:"flex", gap:"10px", alignItems:"flex-start", cursor:"pointer", padding:"4px 0"}}>
                 <input type="checkbox" checked={dsgvo} onChange={e=>setDsgvo(e.target.checked)} style={{marginTop:"3px", accentColor:T.gold, width:"16px", height:"16px", flexShrink:0}} />
                 <span style={{fontFamily:"Raleway", fontSize:"12px", color:T.textMid, lineHeight:"1.6"}}>
-                  Ich akzeptiere die <a href="https://human-resonanz.de/datenschutz" target="_blank" rel="noopener noreferrer" style={{color:T.goldD, fontWeight:700, textDecoration:"none"}}>Datenschutzerklärung</a> und willige in die Verarbeitung meiner Daten gemäß DSGVO ein.
+                  Ich akzeptiere die <a href="https://human-resonanz.de/datenschutz.html" target="_blank" rel="noopener noreferrer" style={{color:T.goldD, fontWeight:700, textDecoration:"none"}}>Datenschutzerklärung</a> und willige in die Verarbeitung meiner Daten gemäß DSGVO ein.
                 </span>
               </label>
             )}
