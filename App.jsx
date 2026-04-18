@@ -19,7 +19,7 @@ import { ClientAnalysis } from "./src/screens/ClientAnalysis.jsx";
 import { Billing } from "./src/screens/Billing.jsx";
 import { TemplatesScreen } from "./src/screens/Templates.jsx";
 import { OnboardingScreen } from "./src/screens/Onboarding.jsx";
-import { SettingsScreen } from "./src/screens/Settings.jsx";
+import { PinLock, SettingsScreen } from "./src/screens/Settings.jsx";
 import { GenTree } from "./src/screens/GenTree.jsx";
 import { PDFModal } from "./src/screens/PDFModal.jsx";
 import OracleAgent from "./src/oracle/OracleAgent.jsx";
@@ -80,7 +80,7 @@ function App({ user, onLogout }){
     try{const d=await fsGet(uid,"lk_gentrees"); if(d)setGenTrees(JSON.parse(d.value));}catch{}
     try{const d=await fsGet(uid,"lk_templates");if(d)setTemplates(JSON.parse(d.value));}catch{}
     try{const d=await fsGet(uid,"lk_reminders");if(d)setReminders(JSON.parse(d.value));}catch{}
-  try{const d=await fsGet(uid,"lk_settings"); if(d){const s=JSON.parse(d.value);setSettings(s);}}catch{}
+  try{const d=await fsGet(uid,"lk_settings"); if(d){const s=JSON.parse(d.value);setSettings(s);if(s.pinEnabled)setLocked(true);}}catch{}
     setReady(true);
   })();},[user.uid]);
 
