@@ -81,6 +81,12 @@ function PinLock({ mode, onSuccess, onSetup, onLogout }) {
           </button>
         ))}
       </div>
+      {!isSetup && onLogout && (
+        <button onClick={()=>{if(window.confirm("PIN vergessen? Du wirst abgemeldet."))onLogout();}}
+          style={{marginTop:"24px",fontFamily:"Raleway",fontSize:"11px",fontWeight:600,color:T.textSoft,background:"none",border:"none",cursor:"pointer",letterSpacing:"0.5px"}}>
+          PIN vergessen? → Abmelden
+        </button>
+      )}
     </div>
   );
 }
