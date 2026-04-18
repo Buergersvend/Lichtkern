@@ -4,7 +4,7 @@ import { Card, Btn, TI, SL, Select, Pill } from "../components/UI.jsx";
 
 import { db, auth, fsGet, fsSet, fsDelete } from "../config/firebase.js";
 
-function PinLock({ mode, onSuccess, onSetup }) {
+function PinLock({ mode, onSuccess, onSetup, onLogout }) {
   const [pin,setPin]       = useState("");
   const [confirm,setConfirm] = useState("");
   const [step,setStep]     = useState("enter");
