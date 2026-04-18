@@ -106,7 +106,7 @@ function App({ user, onLogout }){
   };
   const nav=id=>{if(id==="session"){startSession();return;}setScreen(id);};
 
-  if(locked)return<PinLock mode="enter" onSuccess={()=>setLocked(false)} onSetup={()=>{}} onLogout={onLogout} userId={user.uid}/>;
+ if(locked)return<PinLock mode="enter" onSuccess={()=>setLocked(false)} onSetup={()=>{}} onLogout={async()=>{await saveSettings({...settings,pinEnabled:false});onLogout();}} userId={user.uid}/>;
   if(!ready)return(<div style={{background:T.bg,height:"100vh",display:"flex",alignItems:"center",justifyContent:"center",flexDirection:"column",gap:"16px"}}>
     <div style={{width:"70px",height:"70px",borderRadius:"50%",background:`linear-gradient(135deg,${T.gold},${T.goldD})`,display:"flex",alignItems:"center",justifyContent:"center",fontSize:"30px",boxShadow:`0 6px 28px ${T.shadowDeep}`,border:`1.5px solid ${T.border}`}}>✦</div>
     <div style={{fontFamily:"Raleway",fontSize:"12px",color:T.textMid,letterSpacing:"3px",fontWeight:700}}>LICHTKERN</div>
