@@ -70,7 +70,7 @@ function LoginScreen({ onLogin }){
     setError(""); setLoading(true);
     try {
       await sendPasswordResetEmail(auth, email);
-      setSuccess("✦ E-Mail zum Zurücksetzen wurde gesendet. Bitte prüfe dein Postfach.");
+    setSuccess("✦ E-Mail zum Zurücksetzen wurde gesendet. Bitte prüfe dein Postfach — auch den Spam-Ordner.");
     } catch(e) {
       setError(errMap[e.code] || "Fehler beim Senden der E-Mail.");
     }
