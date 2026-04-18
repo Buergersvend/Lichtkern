@@ -97,7 +97,7 @@ function LoginScreen({ onLogin }){
           {/* Tabs */}
           <div style={{display:"flex", background:T.bgSoft, borderRadius:"12px", padding:"4px", marginBottom:"24px"}}>
             {["login","register"].map(m => (
-              <button key={m} onClick={()=>{setMode(m);setError("");setSuccess("");}} style={{flex:1,padding:"10px",borderRadius:"10px",border:"none",fontFamily:"Raleway",fontWeight:700,fontSize:"14px",cursor:"pointer",background:mode===m?"white":"transparent",color:mode===m?T.goldD:T.textMid,boxShadow:mode===m?`0 2px 10px rgba(168,125,58,0.15)`:"none",transition:"all 0.2s"}}>
+              <button key={m} onClick={()=>{setMode(m);setError("");setSuccess("");}} style={{flex:1,padding:"10px",borderRadius:"10px",border:"none",fontFamily:"Raleway",fontWeight:700,fontSize:"14px",cursor:"pointer",background:mode===m?T.bgCard:"transparent",color:mode===m?T.goldD:T.textMid,boxShadow:mode===m?`0 2px 10px rgba(168,125,58,0.15)`:"none",transition:"all 0.2s"}}>
                 {m === "login" ? "Anmelden" : "Registrieren"}
               </button>
             ))}
