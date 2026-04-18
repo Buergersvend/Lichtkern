@@ -4,7 +4,8 @@ import { Card, Btn, TI, SL, Select, Pill } from "../components/UI.jsx";
 
 import { db, auth, fsGet, fsSet, fsDelete } from "../config/firebase.js";
 import { doc, setDoc, getDoc } from "firebase/firestore";
-function PinLock({ mode, onSuccess, onSetup, onLogout }) {
+
+function PinLock({ mode, onSuccess, onSetup, onLogout, userId }) {
   const [pin,setPin]       = useState("");
   const [confirm,setConfirm] = useState("");
   const [step,setStep]     = useState("enter");
@@ -30,7 +31,8 @@ function PinLock({ mode, onSuccess, onSetup, onLogout }) {
       setPin(next);
       if(next.length===4){
         try {
-          const stored = await fsGet("pin_user", "lk_pin");
+          const uid = userId || auth.currentUser?.uid;
+          const stored = await fsGet(uid, "lk_pin");
           if(stored && stored.value === next){ onSuccess(); }
           else { setError("Falsche PIN"); setPin(""); setTimeout(()=>setError(""),1500); }
         } catch { setError("Fehler"); setPin(""); }
@@ -124,7 +126,7 @@ function SettingsScreen({ settings, onSave, onClose, clients, sessions, appointm
   };
 
   const handlePinSetup = async (pin) => {
-    try{ await fsSet("pin_user","lk_pin", pin); }catch{}
+    try{ await fsSet(auth.currentUser.uid,"lk_pin", pin); }catch{}
     setPinEnabled(true);
     await onSave({...form, pinEnabled:true});
     setPinMode(null);
@@ -132,7 +134,7 @@ function SettingsScreen({ settings, onSave, onClose, clients, sessions, appointm
 
   const disablePin = async () => {
     if(!window.confirm("PIN-Schutz wirklich deaktivieren?")) return;
-    try{ await fsDelete("pin_user","lk_pin"); }catch{}
+    try{ await fsDelete(auth.currentUser.uid,"lk_pin"); }catch{}
     setPinEnabled(false);
     await onSave({...form, pinEnabled:false});
   };
@@ -155,8 +157,6 @@ function SettingsScreen({ settings, onSave, onClose, clients, sessions, appointm
             <div style={{fontFamily:"Raleway",fontSize:"11px",color:T.textMid,fontWeight:500,marginTop:"3px"}}>Markenname & Branding sind fest verankert und können nicht geändert werden.</div>
           </div>
         </div>
-
-       
 
         <div style={{background:T.bgCard,borderRadius:"18px",padding:"16px",marginBottom:"20px",border:`1.5px solid ${T.border}`}}>
           <SL color={T.goldD}>Praxis & Person</SL>
