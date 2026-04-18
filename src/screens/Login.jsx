@@ -77,7 +77,7 @@ function LoginScreen({ onLogin }){
     setLoading(false);
   };
 
- const inp = { width:"100%", padding:"14px 16px", borderRadius:"14px", border:`1.5px solid ${T.border}`, fontFamily:"Raleway", fontSize:"16px", color:"#1A1A1A", background:"#F5F0E8", outline:"none", boxSizing:"border-box", WebkitAppearance:"none" };
+ const inp = { width:"100%", padding:"14px 16px", borderRadius:"14px", border:`1.5px solid ${T.border}`, fontFamily:"Raleway", fontSize:"16px", color:"#1A1A1A", background:T.bgCard, outline:"none", boxSizing:"border-box", WebkitAppearance:"none" };
 
   return (
     <div style={{background:"#0F0F0F", minHeight:"100vh", display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", padding:"24px", position:"relative", overflow:"hidden"}}>
