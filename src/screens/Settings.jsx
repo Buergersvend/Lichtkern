@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback, useRef } from "react";
 import { T } from "../config/theme.js";
 import { Card, Btn, TI, SL, Select, Pill } from "../components/UI.jsx";
-import { db, auth } from "../config/firebase.js";
+
 import { db, auth, fsGet, fsSet, fsDelete } from "../config/firebase.js";
 
 function PinLock({ mode, onSuccess, onSetup }) {
