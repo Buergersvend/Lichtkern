@@ -67,7 +67,6 @@ function BodygraphSVG({pgates=[],dgates=[],size=260}){
   const pSet=new Set(pgates.map(Number));
   const dSet=new Set(dgates.map(Number));
 
-  // Center positions in 200x380 viewBox
   const CP={
     head:   {x:100,y:30},
     ajna:   {x:100,y:95},
@@ -81,10 +80,9 @@ function BodygraphSVG({pgates=[],dgates=[],size=260}){
   };
 
   const cDef=(c)=>defined.has(c);
- const cc=(c)=>cDef(c)?HD_CENTER_CFG[c].color:'#4B5563';
- const cb=(c)=>cDef(c)?HD_CENTER_CFG[c].bg:'#1F2937';
+  const cc=(c)=>cDef(c)?HD_CENTER_CFG[c].color:'#4B5563';
+  const cb=(c)=>cDef(c)?HD_CENTER_CFG[c].bg:'#1F2937';
 
-  // Shape renderers
   function TriDown({cx,cy,s,c,fill,label}){
     const h=s*0.8;
     const pts=`${cx},${cy-h/2} ${cx+s/2},${cy+h/2} ${cx-s/2},${cy+h/2}`;
@@ -115,65 +113,45 @@ function BodygraphSVG({pgates=[],dgates=[],size=260}){
     </g>);
   }
 
-  // Channel lines
   function chanColor(a,b){
     const hasPboth=pSet.has(a)&&pSet.has(b);
     const hasDboth=dSet.has(a)&&dSet.has(b);
     if(hasPboth&&hasDboth)return'#7C3AED';
-    if(hasPboth)return'#0D9488';
+    if(hasPboth)return'#A87D3A';
     if(hasDboth)return'#DC2626';
     if((pSet.has(a)||dSet.has(a))&&(pSet.has(b)||dSet.has(b)))return'#7C3AED';
     return null;
   }
   const CHAN_PATHS=[
-    // Head-Ajna
     {a:4,b:63,x1:93,y1:52,x2:93,y2:80},{a:24,b:61,x1:100,y1:52,x2:100,y2:80},{a:47,b:64,x1:107,y1:52,x2:107,y2:80},
-    // Ajna-Throat
     {a:17,b:62,x1:93,y1:112,x2:93,y2:142},{a:43,b:23,x1:100,y1:112,x2:100,y2:142},{a:11,b:56,x1:107,y1:112,x2:107,y2:142},
-    // Throat-G
     {a:8,b:1,x1:80,y1:170,x2:75,y2:205},{a:31,b:7,x1:85,y1:172,x2:70,y2:207},{a:20,b:10,x1:90,y1:172,x2:65,y2:210},{a:33,b:13,x1:95,y1:172,x2:60,y2:213},
-    // Throat-Heart
     {a:45,b:21,x1:118,y1:165,x2:138,y2:195},
-    // Throat-SP
     {a:12,b:22,x1:118,y1:168,x2:148,y2:280},{a:35,b:36,x1:122,y1:168,x2:152,y2:280},
-    // Throat-Spleen
     {a:16,b:48,x1:80,y1:168,x2:60,y2:282},{a:20,b:57,x1:78,y1:168,x2:56,y2:284},
-    // G-Sacral
     {a:2,b:14,x1:68,y1:232,x2:82,y2:270},{a:5,b:15,x1:72,y1:234,x2:86,y2:270},{a:10,b:34,x1:76,y1:234,x2:90,y2:270},{a:29,b:46,x1:80,y1:234,x2:94,y2:270},
-    // G-Heart
     {a:25,b:51,x1:78,y1:218,x2:138,y2:210},
-    // Heart-Spleen
     {a:26,b:44,x1:143,y1:218,x2:62,y2:286},
-    // Heart-SP
     {a:37,b:40,x1:155,y1:220,x2:152,y2:280},
-    // Sacral-Spleen
     {a:27,b:50,x1:78,y1:290,x2:62,y2:290},{a:34,b:57,x1:82,y1:294,x2:64,y2:294},
-    // Sacral-SP
     {a:6,b:59,x1:120,y1:290,x2:148,y2:290},
-    // Sacral-Root
     {a:3,b:60,x1:93,y1:303,x2:93,y2:345},{a:9,b:52,x1:100,y1:303,x2:100,y2:345},{a:42,b:53,x1:107,y1:303,x2:107,y2:345},
-    // Spleen-Root
     {a:18,b:58,x1:52,y1:312,x2:80,y2:348},{a:28,b:38,x1:56,y1:312,x2:84,y2:348},{a:32,b:54,x1:60,y1:312,x2:88,y2:348},
-    // SP-Root
     {a:19,b:49,x1:152,y1:312,x2:120,y2:348},{a:30,b:41,x1:155,y1:312,x2:115,y2:348},{a:39,b:55,x1:158,y1:312,x2:110,y2:348},
   ];
 
-  const scale=size/200;
   return(
     <svg viewBox="0 0 200 380" width={size} height={size*1.9} style={{display:'block',margin:'0 auto'}}>
-      {/* Channel lines */}
       {CHAN_PATHS.map((ch,i)=>{
         const col=chanColor(ch.a,ch.b);
         if(!col)return null;
         return<line key={i} x1={ch.x1} y1={ch.y1} x2={ch.x2} y2={ch.y2} stroke={col} strokeWidth="3.5" strokeLinecap="round" opacity="0.85"/>;
       })}
-      {/* Inactive channel lines (faint) */}
       {CHAN_PATHS.map((ch,i)=>{
         const col=chanColor(ch.a,ch.b);
         if(col)return null;
         return<line key={'g'+i} x1={ch.x1} y1={ch.y1} x2={ch.x2} y2={ch.y2} stroke="#CBD5E1" strokeWidth="1.5" strokeLinecap="round" opacity="0.4"/>;
       })}
-      {/* Centers */}
       <TriDown cx={CP.head.x}   cy={CP.head.y}   s={44} c={cc('head')}   fill={cb('head')}   label="KOPF"/>
       <TriUp   cx={CP.ajna.x}   cy={CP.ajna.y}   s={40} c={cc('ajna')}   fill={cb('ajna')}   label="AJNA"/>
       <Rect    cx={CP.throat.x} cy={CP.throat.y} w={70} h={28} c={cc('throat')} fill={cb('throat')} label="KEHLE"/>
@@ -183,10 +161,9 @@ function BodygraphSVG({pgates=[],dgates=[],size=260}){
       <TriUp   cx={CP.spleen.x} cy={CP.spleen.y} s={38} c={cc('spleen')} fill={cb('spleen')} label="MILZ"/>
       <TriUp   cx={CP.sp.x}     cy={CP.sp.y}     s={38} c={cc('sp')}     fill={cb('sp')}     label="S.PLEXUS"/>
       <Rect    cx={CP.root.x}   cy={CP.root.y}   w={68} h={26} c={cc('root')}   fill={cb('root')}   label="WURZEL"/>
-      {/* Gate dots */}
       {[...pSet].filter(g=>HD_GATE_CENTER[g]).map(g=>{
         const cp=CP[HD_GATE_CENTER[g]];
-        return<circle key={'p'+g} cx={cp.x+(Math.random()*12-6)} cy={cp.y+(Math.random()*12-6)} r="3" fill={T.teal} opacity="0.7"/>;
+        return<circle key={'p'+g} cx={cp.x+(Math.random()*12-6)} cy={cp.y+(Math.random()*12-6)} r="3" fill={T.gold} opacity="0.7"/>;
       })}
     </svg>
   );
@@ -201,14 +178,14 @@ function HDTab({client,onSave}){
     hdType:client.hdType||'',
     hdProfile:client.hdProfile||'',
     hdAuthority:client.hdAuthority||'',
-    hdPGates:client.hdPGates||'',  // comma-separated
+    hdPGates:client.hdPGates||'',
     hdDGates:client.hdDGates||'',
   });
   const [editing,setEditing]=useState(!client.hdType&&!client.hdPGates);
-  const [gateStep,setGateStep]=useState(0); // 0=Typ, 1=Tore
+  const [gateStep,setGateStep]=useState(0);
   const [aiLoading,setAiLoading]=useState(false);
   const [aiText,setAiText]=useState('');
-  // gateMap: {gateNum: 'p'|'d'} 
+
   const initGateMap=()=>{
     const m={};
     (client.hdPGates||'').split(',').map(s=>s.trim()).filter(Boolean).forEach(g=>{if(+g>=1&&+g<=64)m[+g]='p';});
@@ -216,7 +193,7 @@ function HDTab({client,onSave}){
     return m;
   };
   const [gateMap,setGateMap]=useState(initGateMap);
-  
+
   const pgates=Object.entries(gateMap).filter(([,v])=>v==='p'||v==='b').map(([k])=>+k);
   const dgates=Object.entries(gateMap).filter(([,v])=>v==='d'||v==='b').map(([k])=>+k);
   const allGates=[...new Set([...pgates,...dgates])];
@@ -229,7 +206,6 @@ function HDTab({client,onSave}){
     setGateMap(prev=>{
       const cur=prev[g];
       const next={...prev};
-      // Zyklus: leer → Persönlichkeit (teal) → Beide (violett) → Design (rot) → leer
       if(!cur)next[g]='p';
       else if(cur==='p')next[g]='b';
       else if(cur==='b')next[g]='d';
@@ -244,7 +220,7 @@ function HDTab({client,onSave}){
     onSave({...client,...form,hdPGates:pg,hdDGates:dg});
     setEditing(false);
   };
-  
+
   const mybodygraphUrl=()=>{
     if(!form.hdBirthDate)return'https://www.mybodygraph.com';
     const [y,m,d]=(form.hdBirthDate||'').split('-');
@@ -295,12 +271,12 @@ Warmherzig, präzise, ohne Heilversprechen.`;
       <div style={{background:T.bgSoft,borderRadius:'16px',padding:'18px',marginBottom:'16px',border:`1.5px solid ${T.border}`,position:'relative',overflow:'hidden'}}>
         <Flower size={160} opacity={0.12} color={T.violet}/>
         <div style={{position:'relative',zIndex:1}}>
-          <div style={{fontFamily:'Cinzel',fontSize:'13px',color:T.violetD,letterSpacing:'2px',marginBottom:'4px'}}>⚙ HUMAN DESIGN</div>
+          <div style={{fontFamily:'Cinzel',fontSize:'13px',color:T.goldD,letterSpacing:'2px',marginBottom:'4px'}}>✦ HUMAN DESIGN</div>
           <div style={{fontFamily:'Raleway',fontWeight:800,fontSize:'20px',color:T.text}}>{displayType}</div>
           {form.hdProfile&&<div style={{fontFamily:'Raleway',fontSize:'13px',color:T.textMid,fontWeight:600,marginTop:'2px'}}>Profil {form.hdProfile} · {form.hdAuthority||''}</div>}
           {form.hdBirthDate&&<div style={{fontFamily:'Raleway',fontSize:'11px',color:T.textSoft,marginTop:'6px'}}>📅 {form.hdBirthDate}{form.hdBirthTime?' · '+form.hdBirthTime:''}{form.hdBirthPlace?' · '+form.hdBirthPlace:''}</div>}
           <div style={{display:'flex',gap:'6px',marginTop:'10px',flexWrap:'wrap'}}>
-            {[...defined].map(c=><span key={c} style={{fontSize:'10px',padding:'3px 10px',borderRadius:'20px',background:'rgba(255,255,255,0.8)',color:HD_CENTER_CFG[c]?.color,fontFamily:'Raleway',fontWeight:700,border:`1px solid ${HD_CENTER_CFG[c]?.color}`}}>{HD_CENTER_CFG[c]?.label}</span>)}
+            {[...defined].map(c=><span key={c} style={{fontSize:'10px',padding:'3px 10px',borderRadius:'20px',background:'rgba(255,255,255,0.08)',color:HD_CENTER_CFG[c]?.color,fontFamily:'Raleway',fontWeight:700,border:`1px solid ${HD_CENTER_CFG[c]?.color}`}}>{HD_CENTER_CFG[c]?.label}</span>)}
           </div>
         </div>
       </div>
@@ -308,14 +284,14 @@ Warmherzig, präzise, ohne Heilversprechen.`;
       {/* Bodygraph */}
       {allGates.length>0&&(
         <Card style={{marginBottom:'16px',padding:'16px'}}>
-          <div style={{fontFamily:'Raleway',fontSize:'11px',color:T.textMid,fontWeight:700,letterSpacing:'1px',textTransform:'uppercase',marginBottom:'12px'}}>⚙ Bodygraph</div>
+          <div style={{fontFamily:'Raleway',fontSize:'11px',color:T.goldD,fontWeight:700,letterSpacing:'1px',textTransform:'uppercase',marginBottom:'12px'}}>✦ Bodygraph</div>
           <div style={{display:'flex',gap:'12px',alignItems:'flex-start'}}>
             <div style={{flex:'0 0 auto'}}>
               <BodygraphSVG pgates={pgates} dgates={dgates} size={160}/>
             </div>
             <div style={{flex:1,minWidth:0}}>
               <div style={{fontFamily:'Raleway',fontSize:'10px',color:T.textSoft,fontWeight:600,marginBottom:'8px'}}>Legende</div>
-              {[[T.teal,'Persönlichkeit (bewusst)'],[T.violetD,'Beide Seiten'],['#DC2626','Design (unbewusst)']].map(([col,lbl])=>(
+              {[[T.gold,'Persönlichkeit (bewusst)'],[T.violetD,'Beide Seiten'],['#DC2626','Design (unbewusst)']].map(([col,lbl])=>(
                 <div key={lbl} style={{display:'flex',alignItems:'center',gap:'6px',marginBottom:'5px'}}>
                   <div style={{width:'20px',height:'3px',borderRadius:'2px',background:col}}/>
                   <span style={{fontFamily:'Raleway',fontSize:'10px',color:T.textMid,fontWeight:600}}>{lbl}</span>
@@ -331,10 +307,10 @@ Warmherzig, präzise, ohne Heilversprechen.`;
       {/* Type info */}
       {form.hdType&&HD_TYPE_DESC[form.hdType]&&(
         <Card style={{marginBottom:'16px',background:T.bgSoft,border:`1.5px solid ${T.borderMid}`}}>
-          <div style={{fontFamily:'Raleway',fontSize:'11px',color:T.tealD,fontWeight:700,letterSpacing:'1px',textTransform:'uppercase',marginBottom:'8px'}}>✦ Strategie & Signatur</div>
+          <div style={{fontFamily:'Raleway',fontSize:'11px',color:T.goldD,fontWeight:700,letterSpacing:'1px',textTransform:'uppercase',marginBottom:'8px'}}>✦ Strategie & Signatur</div>
           <div style={{fontFamily:'Raleway',fontSize:'12px',color:T.text,lineHeight:'1.6',marginBottom:'8px'}}>{HD_TYPE_DESC[form.hdType].desc}</div>
           <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:'8px'}}>
-            {[['Strategie',HD_TYPE_DESC[form.hdType].strategy,T.bgCard,T.teal],['Signatur',HD_TYPE_DESC[form.hdType].signature,T.bgSoft,T.tealD],['Not-Self',HD_TYPE_DESC[form.hdType].notself,T.bgCard,'#ff6b6b'],form.hdAuthority?['Autorität',HD_AUTHORITY_DESC[form.hdAuthority]||form.hdAuthority,T.bgCard,T.violet]:null].filter(Boolean).map(([k,v,bg,col])=>(
+            {[['Strategie',HD_TYPE_DESC[form.hdType].strategy,T.bgCard,T.goldD],['Signatur',HD_TYPE_DESC[form.hdType].signature,T.bgSoft,T.goldD],['Not-Self',HD_TYPE_DESC[form.hdType].notself,T.bgCard,'#ff6b6b'],form.hdAuthority?['Autorität',HD_AUTHORITY_DESC[form.hdAuthority]||form.hdAuthority,T.bgCard,T.violet]:null].filter(Boolean).map(([k,v,bg,col])=>(
               <div key={k} style={{background:bg,borderRadius:'10px',padding:'10px',border:`1px solid ${T.border}`}}>
                 <div style={{fontFamily:'Raleway',fontSize:'9px',fontWeight:800,color:col,letterSpacing:'1px',textTransform:'uppercase',marginBottom:'3px'}}>{k}</div>
                 <div style={{fontFamily:'Raleway',fontSize:'11px',color:T.text,fontWeight:600,lineHeight:'1.4'}}>{v}</div>
@@ -347,10 +323,9 @@ Warmherzig, präzise, ohne Heilversprechen.`;
       {/* Edit / Form */}
       {editing?(
         <div style={{marginBottom:'16px'}}>
-          {/* Step indicator */}
           <div style={{display:'flex',gap:'6px',marginBottom:'14px'}}>
             {['① Geburt & Typ','② Tore eingeben'].map((s,i)=>(
-              <button key={i} onClick={()=>setGateStep(i)} style={{flex:1,padding:'9px',borderRadius:'12px',border:`1.5px solid ${gateStep===i?T.teal:T.border}`,background:gateStep===i?T.teal:T.bgCard,fontFamily:'Raleway',fontSize:'11px',fontWeight:700,color:gateStep===i?'white':T.textMid,cursor:'pointer'}}>
+              <button key={i} onClick={()=>setGateStep(i)} style={{flex:1,padding:'9px',borderRadius:'12px',border:`1.5px solid ${gateStep===i?T.gold:T.border}`,background:gateStep===i?T.gold:T.bgCard,fontFamily:'Raleway',fontSize:'11px',fontWeight:700,color:gateStep===i?'white':T.textMid,cursor:'pointer'}}>
                 {s}
               </button>
             ))}
@@ -358,23 +333,22 @@ Warmherzig, präzise, ohne Heilversprechen.`;
 
           {gateStep===0&&(
             <Card style={{border:`1.5px solid ${T.borderMid}`,background:T.bgSoft}}>
-              <SL color={T.tealD}>Geburtsdaten</SL>
+              <SL color={T.goldD}>Geburtsdaten</SL>
               <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:'8px',marginBottom:'10px'}}>
                 <div><div style={{fontFamily:'Raleway',fontSize:'10px',color:T.textMid,fontWeight:700,marginBottom:'4px'}}>Datum</div><TI value={form.hdBirthDate} onChange={v=>setForm({...form,hdBirthDate:v})} placeholder="1990-06-15"/></div>
                 <div><div style={{fontFamily:'Raleway',fontSize:'10px',color:T.textMid,fontWeight:700,marginBottom:'4px'}}>Uhrzeit</div><TI value={form.hdBirthTime} onChange={v=>setForm({...form,hdBirthTime:v})} placeholder="14:30"/></div>
               </div>
               <div style={{marginBottom:'12px'}}><div style={{fontFamily:'Raleway',fontSize:'10px',color:T.textMid,fontWeight:700,marginBottom:'4px'}}>Geburtsort</div><TI value={form.hdBirthPlace} onChange={v=>setForm({...form,hdBirthPlace:v})} placeholder="München, Deutschland"/></div>
-              
-              {/* mybodygraph link */}
-              <a href={mybodygraphUrl()} target="_blank" rel="noreferrer" style={{display:'block',background:T.bgSoft,borderRadius:'12px',padding:'14px',marginBottom:'12px',border:`1.5px solid ${T.borderMid}`,textDecoration:'none'}}>
-                <div style={{fontFamily:'Raleway',fontWeight:800,fontSize:'13px',color:T.violetD,marginBottom:'3px'}}>🔗 Chart auf mybodygraph.com öffnen →</div>
+
+              <a href={mybodygraphUrl()} target="_blank" rel="noreferrer" style={{display:'block',background:T.bgCard,borderRadius:'12px',padding:'14px',marginBottom:'12px',border:`1.5px solid ${T.borderMid}`,textDecoration:'none'}}>
+                <div style={{fontFamily:'Raleway',fontWeight:800,fontSize:'13px',color:T.goldD,marginBottom:'3px'}}>🔗 Chart auf mybodygraph.com öffnen →</div>
                 <div style={{fontFamily:'Raleway',fontSize:'11px',color:T.textMid}}>Öffnet deinen persönlichen HD-Chart{form.hdBirthDate?' mit den eingetragenen Daten':' (Daten erst oben eingeben)'}</div>
               </a>
-              
+
               {sel('HD-Typ (aus Chart ablesen)',['Manifestor','Generator','Manifesting Generator','Projektor','Reflektor'],'hdType')}
               {sel('Profil',['1/3','1/4','2/4','2/5','3/5','3/6','4/6','4/1','5/1','5/2','6/2','6/3'],'hdProfile')}
               {sel('Autorität',['Emotional','Sakral','Milz','Ego','Selbst','Mental','Lunar'],'hdAuthority')}
-              
+
               <Btn onClick={()=>setGateStep(1)} style={{width:'100%',marginTop:'4px'}}>Weiter → Tore eingeben</Btn>
             </Card>
           )}
@@ -382,10 +356,10 @@ Warmherzig, präzise, ohne Heilversprechen.`;
           {gateStep===1&&(
             <Card style={{border:`1.5px solid ${T.borderMid}`,background:T.bgSoft}}>
               <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:'8px'}}>
-                <SL color={T.tealD}>Tore antippen</SL>
+                <SL color={T.goldD}>Tore antippen</SL>
                 <div style={{display:'flex',gap:'8px',alignItems:'center'}}>
-                  {[['p',T.teal,'Persönl.'],['d','#DC2626','Design'],['b',T.violet,'Beide']].map(([v,col,lbl])=>(
-                    <div key={v} style={{display:'flex',alignItems:'center',gap:'4px'}}>
+                  {[[T.gold,'Persönl.'],['#DC2626','Design'],[T.violet,'Beide']].map(([col,lbl])=>(
+                    <div key={lbl} style={{display:'flex',alignItems:'center',gap:'4px'}}>
                       <div style={{width:'10px',height:'10px',borderRadius:'2px',background:col}}/>
                       <span style={{fontFamily:'Raleway',fontSize:'9px',color:T.textMid,fontWeight:600}}>{lbl}</span>
                     </div>
@@ -395,14 +369,13 @@ Warmherzig, präzise, ohne Heilversprechen.`;
               <div style={{fontFamily:'Raleway',fontSize:'11px',color:T.textMid,marginBottom:'10px',lineHeight:'1.5',background:T.bgCard,borderRadius:'8px',padding:'8px',border:`1px dashed ${T.border}`}}>
                 👆 <strong>1× tippen</strong> = Persönlichkeit · <strong>2× tippen</strong> = Beide · <strong>3× tippen</strong> = nur Design · <strong>4× tippen</strong> = entfernen
               </div>
-              {/* Gate Grid 8x8 */}
               <div style={{display:'grid',gridTemplateColumns:'repeat(8,1fr)',gap:'4px',marginBottom:'12px'}}>
                 {Array.from({length:64},(_,i)=>i+1).map(g=>{
                   const st=gateMap[g];
-                  const bg=st==='p'?T.teal:st==='d'?'#DC2626':st==='b'?T.violet:T.bgCard;
+                  const bg=st==='p'?T.gold:st==='d'?'#DC2626':st==='b'?T.violet:T.bgCard;
                   const col=st?'white':T.textSoft;
                   return(
-                    <button key={g} onClick={()=>tapGate(g)} style={{aspectRatio:'1',borderRadius:'6px',border:`1px solid ${st?(st==='p'?T.tealD:st==='d'?'#B91C1C':T.violetD):'#E2E8F0'}`,background:bg,fontFamily:'Raleway',fontSize:'10px',fontWeight:st?800:500,color:col,cursor:'pointer',transition:'all 0.1s',display:'flex',alignItems:'center',justifyContent:'center'}}>
+                    <button key={g} onClick={()=>tapGate(g)} style={{aspectRatio:'1',borderRadius:'6px',border:`1px solid ${st?(st==='p'?T.goldD:st==='d'?'#B91C1C':T.violetD):'#E2E8F0'}`,background:bg,fontFamily:'Raleway',fontSize:'10px',fontWeight:st?800:500,color:col,cursor:'pointer',transition:'all 0.1s',display:'flex',alignItems:'center',justifyContent:'center'}}>
                       {g}
                     </button>
                   );
@@ -410,7 +383,7 @@ Warmherzig, präzise, ohne Heilversprechen.`;
               </div>
               <div style={{display:'flex',gap:'6px',background:T.bgCard,borderRadius:'10px',padding:'10px',marginBottom:'12px',border:`1px solid ${T.border}`}}>
                 <div style={{flex:1}}>
-                  <div style={{fontFamily:'Raleway',fontSize:'9px',color:T.teal,fontWeight:700,marginBottom:'3px'}}>PERSÖNLICHKEIT ({pgates.length})</div>
+                  <div style={{fontFamily:'Raleway',fontSize:'9px',color:T.gold,fontWeight:700,marginBottom:'3px'}}>PERSÖNLICHKEIT ({pgates.length})</div>
                   <div style={{fontFamily:'Raleway',fontSize:'11px',color:T.text}}>{pgates.sort((a,b)=>a-b).join(', ')||'–'}</div>
                 </div>
                 <div style={{flex:1}}>
@@ -419,8 +392,8 @@ Warmherzig, präzise, ohne Heilversprechen.`;
                 </div>
               </div>
               {allGates.length>0&&calcType&&(
-                <div style={{background:T.bgSoft,borderRadius:'10px',padding:'10px',marginBottom:'12px',border:`1px solid ${T.borderMid}`,fontFamily:'Raleway',fontSize:'12px',color:T.tealD,fontWeight:700}}>
-                  ⚙ Berechneter Typ: {calcType}
+                <div style={{background:T.bgSoft,borderRadius:'10px',padding:'10px',marginBottom:'12px',border:`1px solid ${T.borderMid}`,fontFamily:'Raleway',fontSize:'12px',color:T.goldD,fontWeight:700}}>
+                  ✦ Berechneter Typ: {calcType}
                 </div>
               )}
               <div style={{display:'flex',gap:'8px'}}>
@@ -434,12 +407,12 @@ Warmherzig, präzise, ohne Heilversprechen.`;
         <Btn variant="soft" onClick={()=>setEditing(true)} style={{width:'100%',marginBottom:'16px'}}>✏ HD-Daten bearbeiten</Btn>
       )}
 
-      {/* KI Analysis */}
+      {/* Resonanz-Analyse */}
       <div>
         <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:'8px'}}>
-         <SL>✦ Resonanz-Analyse</SL>
+          <SL>✦ Resonanz-Analyse</SL>
           <Btn onClick={genAI} disabled={!hasData||aiLoading} style={{padding:'8px 16px',fontSize:'11px',opacity:(!hasData||aiLoading)?0.5:1}}>
-            {aiLoading?'…':'⚙ Analysieren'}
+            {aiLoading?'…':'✦ Analysieren'}
           </Btn>
         </div>
         {!hasData&&<div style={{fontFamily:'Raleway',fontSize:'12px',color:T.textSoft,fontStyle:'italic',padding:'12px 0'}}>Bitte zuerst HD-Daten eingeben.</div>}
