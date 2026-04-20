@@ -222,12 +222,10 @@ function HDTab({client,onSave}){
   };
 
   const mybodygraphUrl=()=>{
-    if(!form.hdBirthDate)return'https://www.mybodygraph.com';
-    const [y,m,d]=(form.hdBirthDate||'').split('-');
-    const [h,min]=(form.hdBirthTime||'00:00').split(':');
-    const place=encodeURIComponent(form.hdBirthPlace||'');
-    return`https://www.mybodygraph.com/chart?day=${d||''}&month=${m||''}&year=${y||''}&hour=${h||'0'}&minute=${min||'0'}&city=${place}`;
-  };
+  const name=encodeURIComponent(client.name||'');
+  const clientId=client.id||'';
+  return`https://hd-kalkulator.vercel.app?clientId=${clientId}&name=${name}`;
+};
 
   const genAI=async()=>{
     if(!hasData)return;
