@@ -5,6 +5,8 @@ import { T } from "../config/theme.js";
 import { lvl, top2, dynGrad } from "../config/helpers";
 import { Card, Btn, SL, TI, Pill, Select, LBar } from "./UI.jsx";
 import { groqFetch } from "../config/groq.js";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "../config/firebase.js";
 const HD_GATE_CENTER = {
   64:'head',61:'head',63:'head',
   47:'ajna',24:'ajna',4:'ajna',17:'ajna',43:'ajna',11:'ajna',
