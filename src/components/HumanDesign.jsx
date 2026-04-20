@@ -339,8 +339,8 @@ Warmherzig, präzise, ohne Heilversprechen.`;
               <div style={{marginBottom:'12px'}}><div style={{fontFamily:'Raleway',fontSize:'10px',color:T.textMid,fontWeight:700,marginBottom:'4px'}}>Geburtsort</div><TI value={form.hdBirthPlace} onChange={v=>setForm({...form,hdBirthPlace:v})} placeholder="München, Deutschland"/></div>
 
               <a href={mybodygraphUrl()} target="_blank" rel="noreferrer" style={{display:'block',background:T.bgCard,borderRadius:'12px',padding:'14px',marginBottom:'12px',border:`1.5px solid ${T.borderMid}`,textDecoration:'none'}}>
-                <div style={{fontFamily:'Raleway',fontWeight:800,fontSize:'13px',color:T.goldD,marginBottom:'3px'}}>🔗 Chart auf mybodygraph.com öffnen →</div>
-                <div style={{fontFamily:'Raleway',fontSize:'11px',color:T.textMid}}>Öffnet deinen persönlichen HD-Chart{form.hdBirthDate?' mit den eingetragenen Daten':' (Daten erst oben eingeben)'}</div>
+                <div style={{fontFamily:'Raleway',fontWeight:800,fontSize:'13px',color:T.goldD,marginBottom:'3px'}}>🔮 Human Design berechnen →</div>
+                <div style={{fontFamily:'Raleway',fontSize:'11px',color:T.textMid}}>Öffnet den HD Kalkulator — Ergebnisse werden automatisch gespeichert</div>
               </a>
 
               {sel('HD-Typ (aus Chart ablesen)',['Manifestor','Generator','Manifesting Generator','Projektor','Reflektor'],'hdType')}
