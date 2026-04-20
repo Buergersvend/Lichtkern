@@ -187,7 +187,24 @@ function HDTab({client,onSave}){
   const [gateStep,setGateStep]=useState(0);
   const [aiLoading,setAiLoading]=useState(false);
   const [aiText,setAiText]=useState('');
-
+useEffect(()=>{
+  if(!client.id)return;
+  (async()=>{
+    try{
+      const snap=await getDoc(doc(db,"clients",client.id,"humanDesign","latest"));
+      if(!snap.exists())return;
+      const d=snap.data();
+      onSave({
+        ...client,
+        hdType:      d.typ||'',
+        hdProfile:   d.profil||'',
+        hdAuthority: d.autoritaet||'',
+        hdPGates:    (d.tore_bewusst||[]).join(','),
+        hdDGates:    (d.tore_unbewusst||[]).join(','),
+      });
+    }catch(e){console.log('HD Firebase read:',e);}
+  })();
+},[client.id]);
   const initGateMap=()=>{
     const m={};
     (client.hdPGates||'').split(',').map(s=>s.trim()).filter(Boolean).forEach(g=>{if(+g>=1&&+g<=64)m[+g]='p';});
