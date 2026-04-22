@@ -194,14 +194,14 @@ useEffect(()=>{
       const snap=await getDoc(doc(db,"clients",client.id,"humanDesign","latest"));
       if(!snap.exists())return;
       const d=snap.data();
-      onSave({
-        ...client,
-        hdType:      d.typ||'',
-        hdProfile:   d.profil||'',
-        hdAuthority: d.autoritaet||'',
-        hdPGates:    (d.tore_bewusst||[]).join(','),
-        hdDGates:    (d.tore_unbewusst||[]).join(','),
-      });
+      const hdType=d.typ||'';
+      const hdProfile=d.profil||'';
+      const hdAuthority=d.autoritaet||'';
+      const hdPGates=(d.tore_bewusst||[]).join(',');
+      const hdDGates=(d.tore_unbewusst||[]).join(',');
+      setForm(f=>({...f,hdType,hdProfile,hdAuthority,hdPGates,hdDGates}));
+      setEditing(false);
+      onSave({...client,hdType,hdProfile,hdAuthority,hdPGates,hdDGates});
     }catch(e){console.log('HD Firebase read:',e);}
   })();
 },[client.id]);
