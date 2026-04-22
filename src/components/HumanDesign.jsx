@@ -244,10 +244,7 @@ useEffect(()=>{
   const name=encodeURIComponent(client.name||'');
   const clientId=client.id||'';
   const returnUrl=encodeURIComponent(window.location.href);
-  const birthDate=encodeURIComponent(form.hdBirthDate||'');
-  const birthTime=encodeURIComponent(form.hdBirthTime||'');
-  const birthCity=encodeURIComponent(form.hdBirthPlace||'');
-  return`https://hd-kalkulator.vercel.app?clientId=${clientId}&name=${name}&returnUrl=${returnUrl}&birthDate=${birthDate}&birthTime=${birthTime}&birthCity=${birthCity}`;
+  return`https://hd-kalkulator.vercel.app?clientId=${clientId}&name=${name}&returnUrl=${returnUrl}`;
 };
 
   const genAI=async()=>{
