@@ -282,7 +282,7 @@ function SettingsScreen({ settings, onSave, onClose, clients, sessions, appointm
         </Btn>
 
         {onLogout && (
-         <button onClick={()=>{if(window.confirm("Wirklich abmelden?"))onLogout();}} style={{width:"100%",fontFamily:"Raleway",fontWeight:600,fontSize:"12px",padding:"10px",borderRadius:"12px",border:`1px solid ${T.border}`,background:"transparent",style={{width:"100%",fontFamily:"Raleway",fontWeight:600,fontSize:"12px",padding:"10px",borderRadius:"12px",border:`1px solid ${T.border}`,background:"transparent",color:"rgba(220,80,80,0.7)",cursor:"pointer",marginBottom:"12px",letterSpacing:"0.5px"}},letterSpacing:"0.5px"}}>
+        <button onClick={()=>{if(window.confirm("Wirklich abmelden?"))onLogout();}} style={{width:"100%",fontFamily:"Raleway",fontWeight:600,fontSize:"12px",padding:"10px",borderRadius:"12px",border:`1px solid ${T.border}`,background:"transparent",color:"rgba(220,80,80,0.7)",cursor:"pointer",marginBottom:"12px",letterSpacing:"0.5px"}}>
             🚪 Abmelden
           </button>
         )}
