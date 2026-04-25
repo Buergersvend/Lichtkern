@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useCallback, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { T } from "../config/theme.js";
-import { Card, Btn, TI, SL, Select, Pill } from "../components/UI.jsx";
+import { Btn, TI, SL } from "../components/UI.jsx";
 
 import { db, auth, fsGet, fsSet, fsDelete } from "../config/firebase.js";
 import { doc, setDoc, getDoc } from "firebase/firestore";
@@ -57,7 +57,6 @@ function PinLock({ mode, onSuccess, onSetup, onLogout, userId }) {
       </div>
       <div style={{fontFamily:"Cinzel",fontSize:"20px",color:T.text,fontWeight:700,marginBottom:"6px"}}>Lichtkern</div>
       <div style={{fontFamily:"Raleway",fontSize:"13px",color:T.textMid,fontWeight:600,marginBottom:"32px"}}>{label}</div>
-
       <div style={{display:"flex",gap:"16px",marginBottom:"12px"}}>
         {[0,1,2,3].map(i=>(
           <div key={i} style={{width:"18px",height:"18px",borderRadius:"50%",
@@ -66,10 +65,8 @@ function PinLock({ mode, onSuccess, onSetup, onLogout, userId }) {
             transition:"all 0.15s"}}/>
         ))}
       </div>
-
       {error && <div style={{fontFamily:"Raleway",fontSize:"12px",color:"#C0392B",fontWeight:700,marginBottom:"12px"}}>{error}</div>}
       {!error && <div style={{height:"20px",marginBottom:"12px"}}/>}
-
       <div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:"12px",width:"220px"}}>
         {[1,2,3,4,5,6,7,8,9,"",0,"⌫"].map((d,i)=>(
           <button key={i} onClick={()=>d===""?null:d==="⌫"?handleDel():handleDigit(String(d))}
@@ -97,12 +94,22 @@ function SettingsRow({label,children}){
   return(<div style={{marginBottom:"16px"}}><SL>{label}</SL>{children}</div>);
 }
 
+function Section({title, children}){
+  return(
+    <div style={{background:T.bgCard,borderRadius:"18px",padding:"16px",marginBottom:"20px",border:`1.5px solid ${T.border}`}}>
+      <SL color={T.goldD}>{title}</SL>
+      {children}
+    </div>
+  );
+}
+
 function SettingsScreen({ settings, onSave, onClose, clients, sessions, appointments, genTrees, reminders, templates, onImport, onLogout }) {
-  const [form,setForm] = useState({...settings});
-  const [pinMode,setPinMode] = useState(null);
+  const [form,setForm]         = useState({...settings});
+  const [pinMode,setPinMode]   = useState(null);
   const [pinEnabled,setPinEnabled] = useState(!!settings.pinEnabled);
-  const [saved,setSaved]   = useState(false);
+  const [saved,setSaved]       = useState(false);
   const [importMsg,setImportMsg] = useState("");
+  const [steuerJahr,setSteuerJahr] = useState(String(new Date().getFullYear()));
   const [netzwerk, setNetzwerk] = useState({ sichtbar:false, name:"", methoden:[], stadt:"", plz:"", kurztext:"", website:"" });
   const [netzwerkSaved, setNetzwerkSaved] = useState(false);
   const up = u => setForm(f=>({...f,...u}));
@@ -139,10 +146,89 @@ function SettingsScreen({ settings, onSave, onClose, clients, sessions, appointm
     await onSave({...form, pinEnabled:false});
   };
 
+  // Jahresauswertung Export
+  const exportJahresauswertung = () => {
+    const jahr = parseInt(steuerJahr);
+    const cur = settings?.currency || "EUR";
+    const gefiltert = (sessions||[]).filter(s => {
+      const d = new Date(s.createdAt);
+      return d.getFullYear() === jahr && s.fee;
+    });
+
+    // Nach Monat gruppieren
+    const monate = {};
+    gefiltert.forEach(s => {
+      const monat = new Date(s.createdAt).getMonth();
+      if(!monate[monat]) monate[monat] = [];
+      monate[monat].push(s);
+    });
+
+    const de_monate = ["Januar","Februar","März","April","Mai","Juni","Juli","August","September","Oktober","November","Dezember"];
+
+    const rows = [
+      ["Datum","Klient","Rechnungs-Nr.","Betrag ("+cur+")","Status","Thema","Monat"],
+    ];
+
+    gefiltert
+      .sort((a,b) => a.createdAt?.localeCompare(b.createdAt))
+      .forEach(s => {
+        const d = new Date(s.createdAt);
+        rows.push([
+          d.toLocaleDateString("de-DE"),
+          s.clientName || "",
+          s.invoiceNr || "",
+          s.fee || "",
+          s.payStatus === "paid" ? "Bezahlt" : s.payStatus === "partial" ? "Teilbezahlt" : "Offen",
+          s.goal || "",
+          de_monate[d.getMonth()]
+        ]);
+      });
+
+    // Monatssummen
+    rows.push(["","","","","","",""]);
+    rows.push(["MONATSSUMMEN","","","","","",""]);
+    rows.push(["Monat","Anzahl Sitzungen","Einnahmen ("+cur+")","Davon bezahlt","Davon offen","",""]);
+
+    de_monate.forEach((name, i) => {
+      const ms = (monate[i]||[]);
+      if(ms.length === 0) return;
+      const gesamt = ms.reduce((s,x) => s + parseFloat(x.fee||0), 0);
+      const bezahlt = ms.filter(x=>x.payStatus==="paid").reduce((s,x) => s + parseFloat(x.fee||0), 0);
+      const offen = gesamt - bezahlt;
+      rows.push([name, ms.length, gesamt.toFixed(2), bezahlt.toFixed(2), offen.toFixed(2), "", ""]);
+    });
+
+    // Gesamtsumme
+    const gesamtJahr = gefiltert.reduce((s,x) => s + parseFloat(x.fee||0), 0);
+    const bezahltJahr = gefiltert.filter(x=>x.payStatus==="paid").reduce((s,x) => s + parseFloat(x.fee||0), 0);
+    rows.push(["","","","","","",""]);
+    rows.push(["JAHRESGESAMT "+jahr, gefiltert.length+" Sitzungen", gesamtJahr.toFixed(2)+" "+cur, bezahltJahr.toFixed(2)+" "+cur, (gesamtJahr-bezahltJahr).toFixed(2)+" "+cur+" (offen)", "", ""]);
+
+    const csv = rows.map(r => r.map(v => `"${String(v).replace(/"/g,'""')}"`).join(",")).join("\n");
+    const blob = new Blob(["\uFEFF"+csv], {type:"text/csv;charset=utf-8"});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `lichtkern_jahresauswertung_${jahr}.csv`;
+    a.click();
+    URL.revokeObjectURL(url);
+  };
+
   if(pinMode) return <PinLock mode="setup" onSuccess={()=>setPinMode(null)} onSetup={handlePinSetup}/>;
+
+  const verfuegbareJahre = () => {
+    const jahre = new Set();
+    (sessions||[]).forEach(s => {
+      if(s.fee) jahre.add(String(new Date(s.createdAt).getFullYear()));
+    });
+    if(jahre.size === 0) jahre.add(String(new Date().getFullYear()));
+    return [...jahre].sort((a,b) => b-a);
+  };
 
   return (
     <div style={{position:"fixed",top:0,left:0,right:0,bottom:0,background:T.bg,zIndex:200,overflowY:"auto",paddingBottom:"40px",paddingLeft:typeof window!=="undefined"&&window.innerWidth>=900?"260px":"0"}}>
+
+      {/* Header */}
       <div style={{padding:"16px 24px 12px",display:"flex",justifyContent:"space-between",alignItems:"center",borderBottom:`1.5px solid ${T.border}`,background:T.bg,position:"sticky",top:0,zIndex:10}}>
         <div style={{fontFamily:"Cinzel",fontSize:"18px",color:T.text,fontWeight:700}}>⚙️ Einstellungen</div>
         <button onClick={onClose} style={{fontFamily:"Raleway",fontSize:"20px",color:T.textSoft,background:"none",border:"none",cursor:"pointer"}}>✕</button>
@@ -150,16 +236,17 @@ function SettingsScreen({ settings, onSave, onClose, clients, sessions, appointm
 
       <div style={{padding:"20px 24px"}}>
 
-        <div style={{background:`linear-gradient(135deg,${T.gold},${T.violetL})`,borderRadius:"16px",padding:"14px 16px",marginBottom:"16px",border:`1.5px solid ${T.borderMid}`,display:"flex",gap:"12px",alignItems:"center"}}>
+        {/* Brand Banner — dark */}
+        <div style={{background:`linear-gradient(135deg,rgba(201,168,76,0.12),rgba(139,105,20,0.08))`,borderRadius:"16px",padding:"14px 16px",marginBottom:"20px",border:`1.5px solid ${T.borderMid}`,display:"flex",gap:"12px",alignItems:"center"}}>
           <div style={{fontSize:"24px",flexShrink:0}}>✦</div>
           <div>
-            <div style={{fontFamily:"Cinzel",fontSize:"13px",color:T.text,fontWeight:700}}>Lichtkern · Human Resonanz</div>
+            <div style={{fontFamily:"Cinzel",fontSize:"13px",color:T.gold,fontWeight:700}}>Lichtkern · Human Resonanz</div>
             <div style={{fontFamily:"Raleway",fontSize:"11px",color:T.textMid,fontWeight:500,marginTop:"3px"}}>Markenname & Branding sind fest verankert und können nicht geändert werden.</div>
           </div>
         </div>
 
-        <div style={{background:T.bgCard,borderRadius:"18px",padding:"16px",marginBottom:"20px",border:`1.5px solid ${T.border}`}}>
-          <SL color={T.goldD}>Praxis & Person</SL>
+        {/* 1. Praxis & Person */}
+        <Section title="Praxis & Person">
           <SettingsRow label="Praxisname">
             <TI value={form.praxisname||""} onChange={v=>up({praxisname:v})} placeholder="z.B. Praxis Sonnenlicht"/>
           </SettingsRow>
@@ -169,29 +256,34 @@ function SettingsScreen({ settings, onSave, onClose, clients, sessions, appointm
           <SettingsRow label="Therapeuten-Name">
             <TI value={form.therapistName||""} onChange={v=>up({therapistName:v})} placeholder="Dein vollständiger Name"/>
           </SettingsRow>
-        </div>
+        </Section>
 
-        <div style={{background:T.bgCard,borderRadius:"18px",padding:"16px",marginBottom:"20px",border:`1.5px solid ${T.border}`}}>
-          <SL color={T.goldD}>Rechnungsangaben</SL>
+        {/* 2. Rechnungsangaben + Disclaimer */}
+        <Section title="Rechnungsangaben">
           <SettingsRow label="Adresse">
             <TI value={form.invoiceAddress||""} onChange={v=>up({invoiceAddress:v})} placeholder="Straße, Nr."/>
           </SettingsRow>
           <SettingsRow label="PLZ & Ort">
-            <TI value={form.invoiceCity||""} onChange={v=>up({invoiceCity:v})} placeholder="8000 Zürich"/>
+            <TI value={form.invoiceCity||""} onChange={v=>up({invoiceCity:v})} placeholder="89284 Pfaffenhofen"/>
           </SettingsRow>
           <SettingsRow label="Steuernummer (optional)">
             <TI value={form.invoiceTax||""} onChange={v=>up({invoiceTax:v})} placeholder="DE 123 456 789"/>
           </SettingsRow>
           <SettingsRow label="IBAN (optional)">
-            <TI value={form.invoiceIban||""} onChange={v=>up({invoiceIban:v})} placeholder="CH56 0483 5012 3456 7800 9"/>
+            <TI value={form.invoiceIban||""} onChange={v=>up({invoiceIban:v})} placeholder="DE56 0483 5012 3456 7800 9"/>
           </SettingsRow>
           <SettingsRow label="Fusszeile (optional)">
             <TI value={form.invoiceFooter||""} onChange={v=>up({invoiceFooter:v})} placeholder="Kein Arztersatz. Zahlung innert 30 Tagen."/>
           </SettingsRow>
-        </div>
+          <SettingsRow label="Disclaimer (PDF-Footer)">
+            <TI value={form.disclaimer||""} onChange={v=>up({disclaimer:v})}
+              placeholder="Keine medizinische Diagnose. Kein Ersatz für ärztliche Behandlung."
+              multiline rows={2}/>
+          </SettingsRow>
+        </Section>
 
-        <div style={{background:T.bgCard,borderRadius:"18px",padding:"16px",marginBottom:"20px",border:`1.5px solid ${T.border}`}}>
-          <SL color={T.goldD}>Sitzungs-Standards</SL>
+        {/* 3. Sitzungs-Standards + Honorar */}
+        <Section title="Sitzung & Honorar">
           <SettingsRow label="Standard-Sitzungsdauer">
             <div style={{display:"flex",flexWrap:"wrap",gap:"8px"}}>
               {["30","45","60","75","90","120"].map(d=>(
@@ -205,10 +297,6 @@ function SettingsScreen({ settings, onSave, onClose, clients, sessions, appointm
               ))}
             </div>
           </SettingsRow>
-        </div>
-
-        <div style={{background:T.bgCard,borderRadius:"18px",padding:"16px",marginBottom:"20px",border:`1.5px solid ${T.border}`}}>
-          <SL color={T.goldD}>Honorar & Währung</SL>
           <SettingsRow label="Währung">
             <div style={{display:"flex",gap:"8px",flexWrap:"wrap"}}>
               {["CHF","EUR","USD","GBP"].map(c=>(
@@ -223,20 +311,64 @@ function SettingsScreen({ settings, onSave, onClose, clients, sessions, appointm
             </div>
           </SettingsRow>
           <SettingsRow label="Standard-Honorar pro Sitzung">
-            <TI value={form.defaultFee||""} onChange={v=>up({defaultFee:v})} placeholder={`z.B. 120 ${form.currency||"CHF"}`}/>
+            <TI value={form.defaultFee||""} onChange={v=>up({defaultFee:v})} placeholder={`z.B. 120 ${form.currency||"EUR"}`}/>
           </SettingsRow>
-        </div>
+        </Section>
 
-        <div style={{background:T.bgCard,borderRadius:"18px",padding:"16px",marginBottom:"20px",border:`1.5px solid ${T.border}`}}>
-          <SL color={T.goldD}>Disclaimer (PDF-Footer)</SL>
-          <TI value={form.disclaimer||""} onChange={v=>up({disclaimer:v})}
-            placeholder="Keine medizinische Diagnose. Kein Ersatz für ärztliche Behandlung."
-            multiline rows={3}/>
-        </div>
+        {/* 4. HR Netzwerk */}
+        <Section title="🌐 HR Netzwerk">
+          <div style={{fontFamily:"Raleway",fontSize:"11px",color:T.textSoft,marginBottom:"12px",lineHeight:"1.6"}}>
+            Werde auf der öffentlichen Praktiker-Karte auf <span style={{color:T.gold}}>human-resonanz.de/netzwerk</span> sichtbar. Interessierte Klienten finden dich direkt.
+          </div>
+          <div style={{display:"flex",alignItems:"center",gap:"10px",marginBottom:"14px"}}>
+            <button onClick={()=>setNetzwerk(n=>({...n,sichtbar:!n.sichtbar}))} style={{width:"42px",height:"24px",borderRadius:"12px",border:"none",cursor:"pointer",background:netzwerk.sichtbar?T.gold:"#4B5563",position:"relative",flexShrink:0}}>
+              <span style={{position:"absolute",top:"3px",left:netzwerk.sichtbar?"20px":"3px",width:"18px",height:"18px",borderRadius:"50%",background:"white",transition:"left 0.2s"}}/>
+            </button>
+            <span style={{fontFamily:"Raleway",fontSize:"12px",color:T.textMid,fontWeight:600}}>Im Human Resonanz Netzwerk sichtbar</span>
+          </div>
+          {netzwerk.sichtbar && <>
+            <SettingsRow label="Anzeigename">
+              <TI placeholder="z.B. Maria Muster" value={netzwerk.name} onChange={v=>setNetzwerk(n=>({...n,name:v}))}/>
+            </SettingsRow>
+            <SettingsRow label="Stadt">
+              <TI placeholder="z.B. München" value={netzwerk.stadt} onChange={v=>setNetzwerk(n=>({...n,stadt:v}))}/>
+            </SettingsRow>
+            <SettingsRow label="PLZ">
+              <TI placeholder="z.B. 80331" value={netzwerk.plz} onChange={v=>setNetzwerk(n=>({...n,plz:v}))}/>
+            </SettingsRow>
+            <SettingsRow label="Kurztext (max. 200 Zeichen)">
+              <TI placeholder="Ich begleite Menschen auf ihrem Weg..." value={netzwerk.kurztext} onChange={v=>setNetzwerk(n=>({...n,kurztext:v.slice(0,200)}))}/>
+            </SettingsRow>
+            <div style={{marginBottom:"14px"}}>
+              <SL>Methoden (mehrere wählbar)</SL>
+              <select onChange={e=>{const v=e.target.value;if(v&&!netzwerk.methoden.includes(v))setNetzwerk(n=>({...n,methoden:[...n.methoden,v]}));e.target.value="";}} style={{width:"100%",background:T.bgCard,border:`1.5px solid ${T.borderMid}`,borderRadius:"8px",padding:"8px",color:T.textSoft,fontFamily:"Raleway",fontSize:"11px"}}>
+                <option value="">+ Methode hinzufügen...</option>
+                {["Humanenergetik","Coaching","Energetik","Human Design","Therapie","Heilpraktiker","Astrologie","Numerologie","Reiki","Atemarbeit","Familienaufstellung","Quantenheilung","Sonstiges"].filter(m=>!netzwerk.methoden.includes(m)).map(m=>(<option key={m} value={m}>{m}</option>))}
+              </select>
+              <div style={{display:"flex",flexWrap:"wrap",gap:"6px",marginTop:"8px"}}>
+                {netzwerk.methoden.map(m=>(
+                  <span key={m} style={{display:"flex",alignItems:"center",gap:"4px",background:T.bgSoft,border:`1px solid ${T.borderMid}`,borderRadius:"20px",padding:"4px 10px",fontFamily:"Raleway",fontSize:"11px",color:T.textSoft}}>
+                    {m}
+                    <span onClick={()=>setNetzwerk(n=>({...n,methoden:n.methoden.filter(x=>x!==m)}))} style={{cursor:"pointer",color:T.textMid,fontWeight:"700",marginLeft:"2px"}}>×</span>
+                  </span>
+                ))}
+              </div>
+              <div style={{display:"flex",gap:"6px",marginTop:"8px"}}>
+                <input id="methodeInput" placeholder="Eigene Methode..." style={{flex:1,background:T.bgCard,border:`1.5px solid ${T.borderMid}`,borderRadius:"8px",padding:"7px 10px",color:T.textSoft,fontFamily:"Raleway",fontSize:"11px"}}/>
+                <button onClick={()=>{const inp=document.getElementById("methodeInput");const v=inp.value.trim();if(v&&!netzwerk.methoden.includes(v)){setNetzwerk(n=>({...n,methoden:[...n.methoden,v]}));inp.value="";}}} style={{background:T.bgSoft,border:`1px solid ${T.borderMid}`,borderRadius:"8px",padding:"7px 14px",color:T.textSoft,fontFamily:"Raleway",fontSize:"11px",cursor:"pointer"}}>+ Hinzufügen</button>
+              </div>
+            </div>
+            <SettingsRow label="Website (optional)">
+              <TI placeholder="https://..." value={netzwerk.website} onChange={v=>setNetzwerk(n=>({...n,website:v}))}/>
+            </SettingsRow>
+          </>}
+          <button onClick={saveNetzwerk} style={{marginTop:"4px",width:"100%",fontFamily:"Raleway",fontSize:"12px",fontWeight:700,padding:"10px",borderRadius:"10px",border:`1.5px solid ${T.borderMid}`,background:"transparent",color:T.gold,cursor:"pointer"}}>
+            {netzwerkSaved ? "✅ Gespeichert" : "🌐 Netzwerk-Profil speichern"}
+          </button>
+        </Section>
 
-        <div style={{background:T.bgCard,borderRadius:"18px",padding:"16px",marginBottom:"24px",border:`1.5px solid ${T.border}`}}>
-          <SL color={T.goldD}>🔒 Sicherheit</SL>
-
+        {/* 5. Sicherheit */}
+        <Section title="🔒 Sicherheit">
           <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",padding:"10px 0",borderBottom:`1px solid ${T.border}`}}>
             <div>
               <div style={{fontFamily:"Raleway",fontSize:"13px",color:T.text,fontWeight:700}}>PIN-Schutz</div>
@@ -249,7 +381,6 @@ function SettingsScreen({ settings, onSave, onClose, clients, sessions, appointm
                 borderRadius:"50%",background:"white",transition:"left 0.2s",boxShadow:"0 1px 4px rgba(0,0,0,0.2)"}}/>
             </button>
           </div>
-
           {pinEnabled && (
             <div style={{paddingTop:"12px"}}>
               <button onClick={()=>setPinMode("change")}
@@ -260,7 +391,6 @@ function SettingsScreen({ settings, onSave, onClose, clients, sessions, appointm
               </button>
             </div>
           )}
-
           <div style={{marginTop:"14px"}}>
             <SL>Auto-Lock nach</SL>
             <div style={{display:"flex",gap:"8px",flexWrap:"wrap"}}>
@@ -275,24 +405,38 @@ function SettingsScreen({ settings, onSave, onClose, clients, sessions, appointm
               ))}
             </div>
           </div>
-        </div>
+        </Section>
 
-        <Btn onClick={save} style={{width:"100%",fontSize:"14px",padding:"14px",marginBottom:"12px"}}>
-          {saved ? "✅ Gespeichert!" : "Einstellungen speichern"}
-        </Btn>
+        {/* 6. Export & Backup */}
+        <Section title="🗄 Export & Backup">
 
-        {onLogout && (
-        <button onClick={()=>{if(window.confirm("Wirklich abmelden?"))onLogout();}} style={{width:"100%",fontFamily:"Raleway",fontWeight:600,fontSize:"12px",padding:"10px",borderRadius:"12px",border:`1px solid ${T.border}`,background:"transparent",color:"rgba(220,80,80,0.7)",cursor:"pointer",marginBottom:"12px",letterSpacing:"0.5px"}}>
-            🚪 Abmelden
-          </button>
-        )}
+          {/* Jahresauswertung */}
+          <div style={{marginBottom:"20px",padding:"14px",background:T.bgSoft,borderRadius:"12px",border:`1.5px solid ${T.borderMid}`}}>
+            <div style={{fontFamily:"Cinzel",fontSize:"12px",color:T.gold,fontWeight:700,marginBottom:"4px"}}>📊 Jahresauswertung für Steuerberater</div>
+            <div style={{fontFamily:"Raleway",fontSize:"11px",color:T.textSoft,marginBottom:"12px",lineHeight:"1.6"}}>
+              Alle Einnahmen nach Jahr — mit Monatssummen, Zahlungsstatus und Klientenangaben. Bereit für Excel und Steuerberater.
+            </div>
+            <div style={{display:"flex",gap:"8px",flexWrap:"wrap",marginBottom:"10px"}}>
+              {verfuegbareJahre().map(j=>(
+                <button key={j} onClick={()=>setSteuerJahr(j)}
+                  style={{padding:"7px 16px",borderRadius:"20px",border:`1.5px solid ${steuerJahr===j?T.gold:T.border}`,
+                    background:steuerJahr===j?T.gold:T.bgCard,
+                    fontFamily:"Raleway",fontSize:"12px",fontWeight:700,
+                    color:steuerJahr===j?"white":T.textMid,cursor:"pointer"}}>
+                  {j}
+                </button>
+              ))}
+            </div>
+            <button onClick={exportJahresauswertung}
+              style={{width:"100%",fontFamily:"Raleway",fontWeight:700,fontSize:"12px",padding:"10px",borderRadius:"10px",border:`1.5px solid ${T.gold}`,background:"transparent",color:T.gold,cursor:"pointer"}}>
+              📥 Jahresauswertung {steuerJahr} herunterladen
+            </button>
+          </div>
 
-        <div style={{background:T.bgCard,borderRadius:"18px",padding:"16px",marginBottom:"20px",border:`1.5px solid ${T.border}`}}>
-          <SL color={T.goldD}>🗄 Export & Backup</SL>
-
+          {/* JSON Backup */}
           <div style={{marginBottom:"14px"}}>
             <div style={{fontFamily:"Raleway",fontSize:"12px",fontWeight:700,color:T.text,marginBottom:"4px"}}>Vollständiges Backup (JSON)</div>
-            <div style={{fontFamily:"Raleway",fontSize:"11px",color:T.textSoft,fontWeight:500,marginBottom:"8px"}}>Alle Daten — Klienten, Sitzungen, Abrechnung, Bäume, Einstellungen</div>
+            <div style={{fontFamily:"Raleway",fontSize:"11px",color:T.textSoft,marginBottom:"8px"}}>Alle Daten — Klienten, Sitzungen, Abrechnung, Bäume, Einstellungen</div>
             <button onClick={()=>{
               const data={version:"1.0",exportedAt:new Date().toISOString(),clients,sessions,appointments,genTrees,reminders,templates,settings};
               const blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"});
@@ -303,13 +447,14 @@ function SettingsScreen({ settings, onSave, onClose, clients, sessions, appointm
             </button>
           </div>
 
+          {/* CSV Exporte */}
           <div style={{fontFamily:"Raleway",fontSize:"12px",fontWeight:700,color:T.text,marginBottom:"8px"}}>CSV-Exporte</div>
           <div style={{display:"flex",flexDirection:"column",gap:"7px",marginBottom:"14px"}}>
             <button onClick={()=>{
               const rows=[["ID","Name","Geburtsdatum","Kontakt","Adresse","Tags","Erstellt"],
                 ...(clients||[]).map(c=>[c.id,c.name||"",c.birthDate||"",c.contact||"",c.address||"",(c.tags||[]).join("; "),c.createdAt?.slice(0,10)||""])];
               const csv=rows.map(r=>r.map(v=>`"${String(v).replace(/"/g,'""')}"`).join(",")).join("\n");
-              const blob=new Blob(["﻿"+csv],{type:"text/csv;charset=utf-8"});
+              const blob=new Blob(["\uFEFF"+csv],{type:"text/csv;charset=utf-8"});
               const url=URL.createObjectURL(blob);const a=document.createElement("a");a.href=url;a.download=`lichtkern_klienten_${new Date().toISOString().slice(0,10)}.csv`;a.click();URL.revokeObjectURL(url);
             }} style={{width:"100%",fontFamily:"Raleway",fontWeight:700,fontSize:"11px",padding:"9px",borderRadius:"10px",border:`1.5px solid ${T.border}`,background:T.bgCard,color:T.textMid,cursor:"pointer",textAlign:"left"}}>
               📋 Klienten exportieren
@@ -318,23 +463,24 @@ function SettingsScreen({ settings, onSave, onClose, clients, sessions, appointm
               const rows=[["Datum","Klient","Typ","Thema","Ebenen","Techniken","Ergebnis","Integrationsauftrag"],
                 ...(sessions||[]).map(s=>[s.createdAt?.slice(0,10)||"",s.clientName||"",s.type||"",s.goal||"",Object.entries(s.levels||{}).filter(([,v])=>v>0).map(([k,v])=>`${k}:${v}%`).join("; "),(s.techniques||[]).join("; "),s.outcome||"",s.homework||""])];
               const csv=rows.map(r=>r.map(v=>`"${String(v).replace(/"/g,'""')}"`).join(",")).join("\n");
-              const blob=new Blob(["﻿"+csv],{type:"text/csv;charset=utf-8"});
+              const blob=new Blob(["\uFEFF"+csv],{type:"text/csv;charset=utf-8"});
               const url=URL.createObjectURL(blob);const a=document.createElement("a");a.href=url;a.download=`lichtkern_sitzungen_${new Date().toISOString().slice(0,10)}.csv`;a.click();URL.revokeObjectURL(url);
             }} style={{width:"100%",fontFamily:"Raleway",fontWeight:700,fontSize:"11px",padding:"9px",borderRadius:"10px",border:`1.5px solid ${T.border}`,background:T.bgCard,color:T.textMid,cursor:"pointer",textAlign:"left"}}>
               ✦ Sitzungen exportieren
             </button>
             <button onClick={()=>{
-              const cur=settings?.currency||"CHF";
+              const cur=settings?.currency||"EUR";
               const rows=[["Datum","Klient","Rechnungs-Nr.","Betrag","Währung","Status","Thema"],
                 ...(sessions||[]).filter(s=>s.fee).map(s=>[s.createdAt?.slice(0,10)||"",s.clientName||"",s.invoiceNr||"",s.fee||"",cur,s.payStatus==="paid"?"Bezahlt":s.payStatus==="partial"?"Teilbezahlt":"Offen",s.goal||""])];
               const csv=rows.map(r=>r.map(v=>`"${String(v).replace(/"/g,'""')}"`).join(",")).join("\n");
-              const blob=new Blob(["﻿"+csv],{type:"text/csv;charset=utf-8"});
+              const blob=new Blob(["\uFEFF"+csv],{type:"text/csv;charset=utf-8"});
               const url=URL.createObjectURL(blob);const a=document.createElement("a");a.href=url;a.download=`lichtkern_abrechnung_${new Date().toISOString().slice(0,10)}.csv`;a.click();URL.revokeObjectURL(url);
             }} style={{width:"100%",fontFamily:"Raleway",fontWeight:700,fontSize:"11px",padding:"9px",borderRadius:"10px",border:`1.5px solid ${T.border}`,background:T.bgCard,color:T.textMid,cursor:"pointer",textAlign:"left"}}>
               💰 Abrechnung exportieren
             </button>
           </div>
 
+          {/* PDF Gesamtbericht */}
           <div style={{fontFamily:"Raleway",fontSize:"12px",fontWeight:700,color:T.text,marginBottom:"6px"}}>PDF-Gesamtbericht pro Klient</div>
           <select id="pdfClientSelect" style={{width:"100%",background:T.bgCard,border:`1.5px solid ${T.border}`,borderRadius:"10px",padding:"10px 12px",color:T.text,fontFamily:"Raleway",fontSize:"12px",fontWeight:500,outline:"none",appearance:"none",marginBottom:"8px"}}>
             <option value="">— Klient wählen —</option>
@@ -360,7 +506,7 @@ function SettingsScreen({ settings, onSave, onClose, clients, sessions, appointm
 ${cs.map((s,i)=>{
   const lvlStr=Object.entries(s.levels||{}).filter(([,v])=>v>0).map(([k,v])=>k+" "+v+"%").join(", ");
   const techStr=(s.techniques||[]).join(", ");
-  const feeStr=s.fee?(s.fee+" "+(settings?.currency||"CHF")+" · "+(s.payStatus==="paid"?"Bezahlt":s.payStatus==="partial"?"Teilbezahlt":"Offen")):"";
+  const feeStr=s.fee?(s.fee+" "+(settings?.currency||"EUR")+" · "+(s.payStatus==="paid"?"Bezahlt":s.payStatus==="partial"?"Teilbezahlt":"Offen")):"";
   return "<div class=\"card\">"
   +"<h3>"+(i+1)+". "+(s.type==="first"?"Erstsitzung":s.type==="followup"?"Folgesitzung":"Abschluss")+" · "+new Date(s.createdAt).toLocaleDateString("de-DE")+"</h3>"
   +(s.goal?"<p><strong>Thema:</strong> "+s.goal+"</p>":"")
@@ -379,52 +525,10 @@ ${cs.map((s,i)=>{
             📄 Gesamtbericht erstellen
           </button>
 
-          <div style={{marginTop:"16px",paddingTop:"14px",borderTop:`1px solid ${T.border}`}}>
-            <div style={{display:"flex",alignItems:"center",gap:"6px",position:"relative"}}>
-              <span style={{fontFamily:"Raleway",fontSize:"12px",fontWeight:700,color:T.text}}>🌐 HR Netzwerk</span>
-              <span onMouseEnter={()=>setNetzwerk(n=>({...n,_tip:true}))} onMouseLeave={()=>setNetzwerk(n=>({...n,_tip:false}))} style={{cursor:"help",width:"16px",height:"16px",borderRadius:"50%",background:T.gold,color:"#000",fontSize:"10px",fontWeight:700,display:"inline-flex",alignItems:"center",justifyContent:"center"}}>i</span>
-              {netzwerk._tip&&<div style={{position:"absolute",top:"22px",left:"0",zIndex:99,background:T.bgCard,border:`1px solid ${T.border}`,borderRadius:"10px",padding:"10px 12px",width:"260px",fontFamily:"Raleway",fontSize:"11px",color:T.textSoft,lineHeight:"1.6",boxShadow:"0 4px 16px rgba(0,0,0,0.4)"}}>Werde auf der öffentlichen Praktiker-Karte auf <span style={{color:T.gold}}>human-resonanz.de</span> sichtbar. Interessierte Klienten finden dich direkt — mehr Reichweite, mehr Buchungen.</div>}
-            </div>
-            <div style={{display:"flex",alignItems:"center",gap:"10px",marginBottom:"10px"}}>
-              <button onClick={()=>setNetzwerk(n=>({...n,sichtbar:!n.sichtbar}))} style={{width:"42px",height:"24px",borderRadius:"12px",border:"none",cursor:"pointer",background:netzwerk.sichtbar?T.gold:"#4B5563",position:"relative"}}>
-                <span style={{position:"absolute",top:"3px",left:netzwerk.sichtbar?"20px":"3px",width:"18px",height:"18px",borderRadius:"50%",background:"white",transition:"left 0.2s"}}/>
-              </button>
-              <span style={{fontFamily:"Raleway",fontSize:"11px",color:T.textSoft}}>Im Human Resonanz Netzwerk sichtbar</span>
-            </div>
-            {netzwerk.sichtbar && <>
-              <TI label="Anzeigename" placeholder="z.B. Maria Muster" value={netzwerk.name} onChange={v=>setNetzwerk(n=>({...n,name:v}))}/>
-              <TI label="Stadt" placeholder="z.B. München" value={netzwerk.stadt} onChange={v=>setNetzwerk(n=>({...n,stadt:v}))}/>
-              <TI label="PLZ" placeholder="z.B. 80331" value={netzwerk.plz} onChange={v=>setNetzwerk(n=>({...n,plz:v}))}/>
-              <TI label="Kurztext (max. 200 Zeichen)" placeholder="Ich begleite Menschen auf ihrem Weg..." value={netzwerk.kurztext} onChange={v=>setNetzwerk(n=>({...n,kurztext:v.slice(0,200)}))}/>
-              <div style={{marginBottom:"8px"}}>
-                <div style={{fontFamily:"Raleway",fontSize:"11px",color:T.textSoft,marginBottom:"6px"}}>Methoden (mehrere wählbar)</div>
-                <select onChange={e=>{const v=e.target.value;if(v&&!netzwerk.methoden.includes(v))setNetzwerk(n=>({...n,methoden:[...n.methoden,v]}));e.target.value="";}} style={{width:"100%",background:T.bgCard,border:`1.5px solid ${T.borderMid}`,borderRadius:"8px",padding:"8px",color:T.textSoft,fontFamily:"Raleway",fontSize:"11px"}}>
-                  <option value="">+ Methode hinzufügen...</option>
-                  {["Humanenergetik","Coaching","Energetik","Human Design","Therapie","Heilpraktiker","Astrologie","Numerologie","Reiki","Atemarbeit","Familienaufstellung","Quantenheilung","Sonstiges"].filter(m=>!netzwerk.methoden.includes(m)).map(m=>(<option key={m} value={m}>{m}</option>))}
-                </select>
-                <div style={{display:"flex",flexWrap:"wrap",gap:"6px",marginTop:"8px"}}>
-                  {netzwerk.methoden.map(m=>(
-                    <span key={m} style={{display:"flex",alignItems:"center",gap:"4px",background:T.bgSoft,border:`1px solid ${T.borderMid}`,borderRadius:"20px",padding:"4px 10px",fontFamily:"Raleway",fontSize:"11px",color:T.textSoft}}>
-                      {m}
-                      <span onClick={()=>setNetzwerk(n=>({...n,methoden:n.methoden.filter(x=>x!==m)}))} style={{cursor:"pointer",color:T.textMid,fontWeight:"700",marginLeft:"2px"}}>×</span>
-                    </span>
-                  ))}
-                </div>
-                <div style={{display:"flex",gap:"6px",marginTop:"8px"}}>
-                  <input id="methodeInput" placeholder="Eigene Methode..." style={{flex:1,background:T.bgCard,border:`1.5px solid ${T.borderMid}`,borderRadius:"8px",padding:"7px 10px",color:T.textSoft,fontFamily:"Raleway",fontSize:"11px"}}/>
-                  <button onClick={()=>{const inp=document.getElementById("methodeInput");const v=inp.value.trim();if(v&&!netzwerk.methoden.includes(v)){setNetzwerk(n=>({...n,methoden:[...n.methoden,v]}));inp.value="";}}} style={{background:T.bgSoft,border:`1px solid ${T.borderMid}`,borderRadius:"8px",padding:"7px 14px",color:T.textSoft,fontFamily:"Raleway",fontSize:"11px",cursor:"pointer"}}>+ Hinzufügen</button>
-                </div>
-              </div>
-              <TI label="Website (optional)" placeholder="https://..." value={netzwerk.website} onChange={v=>setNetzwerk(n=>({...n,website:v}))}/>
-            </>}
-            <button onClick={saveNetzwerk} style={{marginTop:"8px",width:"100%",fontFamily:"Raleway",fontSize:"11px",padding:"9px",borderRadius:"10px",border:`1.5px solid ${T.border}`,background:"transparent",color:T.text,cursor:"pointer"}}>
-              {netzwerkSaved?"✅ Gespeichert":"🌐 Netzwerk-Profil speichern"}
-            </button>
-          </div>
-
+          {/* Backup wiederherstellen */}
           <div style={{marginTop:"16px",paddingTop:"14px",borderTop:`1px solid ${T.border}`}}>
             <div style={{fontFamily:"Raleway",fontSize:"12px",fontWeight:700,color:T.text,marginBottom:"4px"}}>🔁 Backup wiederherstellen</div>
-            <div style={{fontFamily:"Raleway",fontSize:"11px",color:T.textSoft,fontWeight:500,marginBottom:"8px"}}>JSON-Backup importieren — überschreibt alle aktuellen Daten</div>
+            <div style={{fontFamily:"Raleway",fontSize:"11px",color:T.textSoft,marginBottom:"8px"}}>JSON-Backup importieren — überschreibt alle aktuellen Daten</div>
             <label style={{display:"block",width:"100%",fontFamily:"Raleway",fontWeight:700,fontSize:"11px",padding:"9px",borderRadius:"10px",border:`1.5px dashed ${T.border}`,background:T.bgCard,color:T.text,cursor:"pointer",textAlign:"center"}}>
               📂 JSON-Datei auswählen
               <input type="file" accept=".json" style={{display:"none"}} onChange={async e=>{
@@ -443,7 +547,21 @@ ${cs.map((s,i)=>{
             </label>
             {importMsg&&<div style={{fontFamily:"Raleway",fontSize:"12px",fontWeight:700,color:importMsg.startsWith("✅")?T.goldD:"#9B1C1C",marginTop:"8px",textAlign:"center"}}>{importMsg}</div>}
           </div>
-        </div>
+        </Section>
+
+        {/* 7. Einstellungen speichern */}
+        <Btn onClick={save} style={{width:"100%",fontSize:"14px",padding:"14px",marginBottom:"12px"}}>
+          {saved ? "✅ Gespeichert!" : "Einstellungen speichern"}
+        </Btn>
+
+        {/* 8. Abmelden — ganz unten */}
+        {onLogout && (
+          <button onClick={()=>{if(window.confirm("Wirklich abmelden?"))onLogout();}}
+            style={{width:"100%",fontFamily:"Raleway",fontWeight:600,fontSize:"12px",padding:"10px",borderRadius:"12px",border:`1px solid rgba(220,80,80,0.2)`,background:"transparent",color:"rgba(220,80,80,0.7)",cursor:"pointer",letterSpacing:"0.5px"}}>
+            🚪 Abmelden
+          </button>
+        )}
+
       </div>
     </div>
   );
