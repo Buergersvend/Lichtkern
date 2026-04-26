@@ -343,7 +343,7 @@ function SettingsScreen({ settings, onSave, onClose, clients, sessions, appointm
               <SL>Methoden (mehrere wählbar)</SL>
               <select onChange={e=>{const v=e.target.value;if(v&&!netzwerk.methoden.includes(v))setNetzwerk(n=>({...n,methoden:[...n.methoden,v]}));e.target.value="";}} style={{width:"100%",background:T.bgCard,border:`1.5px solid ${T.borderMid}`,borderRadius:"8px",padding:"8px",color:T.textSoft,fontFamily:"Raleway",fontSize:"11px"}}>
                 <option value="">+ Methode hinzufügen...</option>
-                {["Humanenergetik","Coaching","Energetik","Human Design","Therapie","Heilpraktiker","Astrologie","Numerologie","Reiki","Atemarbeit","Familienaufstellung","Quantenheilung","Sonstiges"].filter(m=>!netzwerk.methoden.includes(m)).map(m=>(<option key={m} value={m}>{m}</option>))}
+                {["Humanenergetik","Coaching","Human Design","Energiearbeit","Körperarbeit","Systemische Arbeit","Quantenarbeit","Naturheilkunde","Psychotherapie & Beratung","Spirituelle Begleitung","Sonstiges"].filter(m=>!netzwerk.methoden.includes(m)).map(m=>(<option key={m} value={m}>{m}</option>))}
               </select>
               <div style={{display:"flex",flexWrap:"wrap",gap:"6px",marginTop:"8px"}}>
                 {netzwerk.methoden.map(m=>(
