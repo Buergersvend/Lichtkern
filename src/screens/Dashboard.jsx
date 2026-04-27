@@ -17,7 +17,7 @@ function Dashboard({clients,sessions,appointments,onNav,settings}){
   const praxis=settings?.praxisname||"";
 
   const tiles=[
-   {id:"clients",icon:"◆",label:"Klienten"},
+    {id:"clients",icon:"◆",label:"Klienten"},
     {id:"session",icon:"✦",label:"Sitzung"},
     {id:"calendar",icon:"◎",label:"Kalender"},
     {id:"history",icon:"◎",label:"Verlauf"},
@@ -26,7 +26,7 @@ function Dashboard({clients,sessions,appointments,onNav,settings}){
   ];
 
   const more=[
-   {id:"synergy",icon:"✦",label:"Synergy Engine"},
+    {id:"synergy",icon:"✦",label:"Synergy Engine"},
     {id:"gentree",icon:"⊛",label:"Generationsbaum"},
     {id:"billing",icon:"◈",label:"Abrechnung"},
     {id:"templates",icon:"◉",label:"Templates"},
@@ -76,7 +76,7 @@ function Dashboard({clients,sessions,appointments,onNav,settings}){
       </div>
 
       {/* Weitere Funktionen Dropdown */}
-      <div style={{background:DARK2,border:`1px solid rgba(201,168,76,0.15)`,borderRadius:"12px",overflow:"hidden",marginBottom:"20px"}}>
+      <div style={{background:DARK2,border:`1px solid rgba(201,168,76,0.15)`,borderRadius:"12px",overflow:"hidden",marginBottom:"16px"}}>
         <button onClick={()=>setShowMore(!showMore)} style={{width:"100%",padding:"12px 16px",display:"flex",justifyContent:"space-between",alignItems:"center",background:"none",border:"none",cursor:"pointer",borderBottom:showMore?`1px solid rgba(201,168,76,0.1)`:"none"}}>
           <span style={{fontFamily:"Raleway",fontSize:"10px",letterSpacing:"2px",color:"rgba(201,168,76,0.7)",fontWeight:700}}>WEITERE FUNKTIONEN</span>
           <span style={{color:GOLD,fontSize:"11px",transition:"transform 0.2s",transform:showMore?"rotate(180deg)":"rotate(0deg)"}}>▼</span>
@@ -85,16 +85,32 @@ function Dashboard({clients,sessions,appointments,onNav,settings}){
           <button key={m.id} onClick={()=>onNav(m.id)} style={{width:"100%",padding:"11px 16px",display:"flex",justifyContent:"space-between",alignItems:"center",background:"none",border:"none",borderTop:`1px solid rgba(201,168,76,0.08)`,cursor:"pointer"}}
             onMouseEnter={e=>e.currentTarget.style.background=DARK3}
             onMouseLeave={e=>e.currentTarget.style.background="none"}>
-           <span style={{display:"flex",gap:"8px",alignItems:"center"}}>
-  <span style={{color:GOLD,fontSize:"14px"}}>{m.icon}</span>
-  <span style={{fontFamily:"Raleway",fontSize:"13px",color:"rgba(245,240,232,0.7)"}}>{m.label}</span>
-</span>
+            <span style={{display:"flex",gap:"8px",alignItems:"center"}}>
+              <span style={{color:GOLD,fontSize:"14px"}}>{m.icon}</span>
+              <span style={{fontFamily:"Raleway",fontSize:"13px",color:"rgba(245,240,232,0.7)"}}>{m.label}</span>
+            </span>
             <span style={{color:"rgba(201,168,76,0.5)"}}>→</span>
           </button>
         ))}
       </div>
 
-      
+      {/* Stats */}
+      <div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:"10px",marginTop:"4px"}}>
+        <div style={{background:DARK2,border:`1px solid rgba(201,168,76,0.15)`,borderRadius:"12px",padding:"14px 12px",textAlign:"center"}}>
+          <div style={{fontFamily:"Cinzel",fontSize:"22px",color:GOLD,fontWeight:700}}>{(clients||[]).length}</div>
+          <div style={{fontFamily:"Raleway",fontSize:"9px",color:"rgba(245,240,232,0.45)",letterSpacing:"2px",marginTop:"4px"}}>KLIENTEN</div>
+        </div>
+        <div style={{background:DARK2,border:`1px solid rgba(201,168,76,0.15)`,borderRadius:"12px",padding:"14px 12px",textAlign:"center"}}>
+          <div style={{fontFamily:"Cinzel",fontSize:"22px",color:GOLD,fontWeight:700}}>{(sessions||[]).length}</div>
+          <div style={{fontFamily:"Raleway",fontSize:"9px",color:"rgba(245,240,232,0.45)",letterSpacing:"2px",marginTop:"4px"}}>SITZUNGEN</div>
+        </div>
+        <div style={{background:DARK2,border:`1px solid rgba(201,168,76,0.15)`,borderRadius:"12px",padding:"14px 12px",textAlign:"center"}}>
+          <div style={{fontFamily:"Cinzel",fontSize:"22px",color:GOLD,fontWeight:700}}>
+            {(()=>{const next=(appointments||[]).filter(a=>a.date>=today).sort((a,b)=>a.date.localeCompare(b.date)||a.startTime.localeCompare(b.startTime))[0];return next?next.startTime:"—";})()}
+          </div>
+          <div style={{fontFamily:"Raleway",fontSize:"9px",color:"rgba(245,240,232,0.45)",letterSpacing:"2px",marginTop:"4px"}}>NÄCHSTER TERMIN</div>
+        </div>
+      </div>
 
     </div>
   );
