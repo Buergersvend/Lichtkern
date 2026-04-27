@@ -44,13 +44,13 @@ function Dashboard({clients,sessions,appointments,onNav,settings}){
       </div>
 
       {/* Begrüßung */}
-      <div style={{textAlign:"center",marginBottom:"20px"}}>
+      <div style={{textAlign:"center",marginBottom:"32px"}}>
         <div style={{fontFamily:"Cinzel",fontSize:"14px",color:GOLD,letterSpacing:"2px",marginBottom:"6px"}}>{greeting}{name?`, ${name}`:""} ✦</div>
         {praxis&&<div style={{fontFamily:"Raleway",fontSize:"11px",color:"rgba(245,240,232,0.45)",letterSpacing:"2px"}}>— {praxis} —</div>}
       </div>
 
       {/* Stats */}
-      <div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:"10px",marginBottom:"20px"}}>
+      <div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:"10px",marginBottom:"28px"}}>
         <div style={{background:DARK2,border:`1px solid rgba(201,168,76,0.15)`,borderRadius:"12px",padding:"14px 12px",textAlign:"center"}}>
           <div style={{fontFamily:"Cinzel",fontSize:"22px",color:GOLD,fontWeight:700}}>{(clients||[]).length}</div>
           <div style={{fontFamily:"Raleway",fontSize:"9px",color:"rgba(245,240,232,0.45)",letterSpacing:"2px",marginTop:"4px"}}>KLIENTEN</div>
