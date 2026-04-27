@@ -26,7 +26,7 @@ function Dashboard({clients,sessions,appointments,onNav,settings}){
   ];
 
   const more=[
-    {id:"synergy",icon:"⚡",label:"Synergy Engine"},
+   {id:"synergy",icon:"✦",label:"Synergy Engine"},
     {id:"gentree",icon:"⊛",label:"Generationsbaum"},
     {id:"billing",icon:"◈",label:"Abrechnung"},
     {id:"templates",icon:"◉",label:"Templates"},
