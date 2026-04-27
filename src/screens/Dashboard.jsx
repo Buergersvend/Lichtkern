@@ -85,7 +85,10 @@ function Dashboard({clients,sessions,appointments,onNav,settings}){
           <button key={m.id} onClick={()=>onNav(m.id)} style={{width:"100%",padding:"11px 16px",display:"flex",justifyContent:"space-between",alignItems:"center",background:"none",border:"none",borderTop:`1px solid rgba(201,168,76,0.08)`,cursor:"pointer"}}
             onMouseEnter={e=>e.currentTarget.style.background=DARK3}
             onMouseLeave={e=>e.currentTarget.style.background="none"}>
-            <span style={{fontFamily:"Raleway",fontSize:"13px",color:"rgba(245,240,232,0.7)"}}>{m.icon} {m.label}</span>
+           <span style={{display:"flex",gap:"8px",alignItems:"center"}}>
+  <span style={{color:GOLD,fontSize:"14px"}}>{m.icon}</span>
+  <span style={{fontFamily:"Raleway",fontSize:"13px",color:"rgba(245,240,232,0.7)"}}>{m.label}</span>
+</span>
             <span style={{color:"rgba(201,168,76,0.5)"}}>→</span>
           </button>
         ))}
