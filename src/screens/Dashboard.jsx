@@ -9,6 +9,7 @@ const DARK = "#0F0F0F";
 const DARK2 = "#1A1A1A";
 const DARK3 = "#242424";
 const LOGO = "/Firmenlogo_ohne_Hintergrund_Herz_20260414-removebg-preview.png";
+const FALLBACK = "Vertraue dem Fluss deiner Energie — sie führt dich dorthin, wo Heilung möglich ist.";
 
 function Dashboard({clients,sessions,appointments,onNav,settings}){
   const [showMore,setShowMore]=useState(false);
@@ -41,13 +42,13 @@ function Dashboard({clients,sessions,appointments,onNav,settings}){
     async function ladeImpuls(){
       try {
         const uid = auth.currentUser?.uid;
-        if(!uid) return;
+        if(!uid){ setImpuls(FALLBACK); setImpulsLoading(false); return; }
         const ref = doc(db,"users",uid,"data","resonanz_impuls");
         const snap = await getDoc(ref);
         if(snap.exists()){
           const data = snap.data();
           if(data.datum === today){
-            setImpuls(data.text);
+            setImpuls(data.text||FALLBACK);
             setImpulsLoading(false);
             return;
           }
@@ -57,10 +58,15 @@ function Dashboard({clients,sessions,appointments,onNav,settings}){
           role:"user",
           content:"Generiere einen einzigen kurzen Resonanz-Impuls für Energetiker und Heiler. Maximal 2 Sätze. Tiefgründig, poetisch, inspirierend. Keine Anführungszeichen, keine Erklärung, nur den Impuls selbst."
         }]);
+        if(!text || text.startsWith("Fehler") || text.length < 10){
+          setImpuls(FALLBACK);
+          setImpulsLoading(false);
+          return;
+        }
         await setDoc(ref,{datum:today,text});
         setImpuls(text);
       } catch(e){
-        setImpuls("Vertraue dem Fluss deiner Energie — sie führt dich dorthin, wo Heilung möglich ist.");
+        setImpuls(FALLBACK);
       } finally {
         setImpulsLoading(false);
       }
