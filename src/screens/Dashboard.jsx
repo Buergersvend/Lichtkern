@@ -1,5 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { todayStr } from '../config/helpers';
+import { db, auth } from "../config/firebase.js";
+import { doc, getDoc, setDoc } from "firebase/firestore";
+import { groqFetch } from "../config/groq.js";
 
 const GOLD = "#C9A84C";
 const DARK = "#0F0F0F";
@@ -9,6 +12,8 @@ const LOGO = "/Firmenlogo_ohne_Hintergrund_Herz_20260414-removebg-preview.png";
 
 function Dashboard({clients,sessions,appointments,onNav,settings}){
   const [showMore,setShowMore]=useState(false);
+  const [impuls,setImpuls]=useState("");
+  const [impulsLoading,setImpulsLoading]=useState(true);
   const today=todayStr();
   const todayAppts=(appointments||[]).filter(a=>a.date===today).sort((a,b)=>a.startTime.localeCompare(b.startTime));
   const hour=new Date().getHours();
@@ -31,6 +36,37 @@ function Dashboard({clients,sessions,appointments,onNav,settings}){
     {id:"billing",icon:"◈",label:"Abrechnung"},
     {id:"templates",icon:"◉",label:"Templates"},
   ];
+
+  useEffect(()=>{
+    async function ladeImpuls(){
+      try {
+        const uid = auth.currentUser?.uid;
+        if(!uid) return;
+        const ref = doc(db,"users",uid,"data","resonanz_impuls");
+        const snap = await getDoc(ref);
+        if(snap.exists()){
+          const data = snap.data();
+          if(data.datum === today){
+            setImpuls(data.text);
+            setImpulsLoading(false);
+            return;
+          }
+        }
+        // Neu generieren via Groq
+        const text = await groqFetch([{
+          role:"user",
+          content:"Generiere einen einzigen kurzen Resonanz-Impuls für Energetiker und Heiler. Maximal 2 Sätze. Tiefgründig, poetisch, inspirierend. Keine Anführungszeichen, keine Erklärung, nur den Impuls selbst."
+        }]);
+        await setDoc(ref,{datum:today,text});
+        setImpuls(text);
+      } catch(e){
+        setImpuls("Vertraue dem Fluss deiner Energie — sie führt dich dorthin, wo Heilung möglich ist.");
+      } finally {
+        setImpulsLoading(false);
+      }
+    }
+    ladeImpuls();
+  },[today]);
 
   return(
     <div style={{minHeight:"100vh",background:DARK,padding:"0 20px 120px"}}>
@@ -94,7 +130,7 @@ function Dashboard({clients,sessions,appointments,onNav,settings}){
       </div>
 
       {/* Weitere Funktionen Dropdown */}
-      <div style={{background:DARK2,border:`1px solid rgba(201,168,76,0.15)`,borderRadius:"12px",overflow:"hidden"}}>
+      <div style={{background:DARK2,border:`1px solid rgba(201,168,76,0.15)`,borderRadius:"12px",overflow:"hidden",marginBottom:"24px"}}>
         <button onClick={()=>setShowMore(!showMore)} style={{width:"100%",padding:"12px 16px",display:"flex",justifyContent:"space-between",alignItems:"center",background:"none",border:"none",cursor:"pointer",borderBottom:showMore?`1px solid rgba(201,168,76,0.1)`:"none"}}>
           <span style={{fontFamily:"Raleway",fontSize:"10px",letterSpacing:"2px",color:"rgba(201,168,76,0.7)",fontWeight:700}}>WEITERE FUNKTIONEN</span>
           <span style={{color:GOLD,fontSize:"11px",transition:"transform 0.2s",transform:showMore?"rotate(180deg)":"rotate(0deg)"}}>▼</span>
@@ -110,6 +146,17 @@ function Dashboard({clients,sessions,appointments,onNav,settings}){
             <span style={{color:"rgba(201,168,76,0.5)"}}>→</span>
           </button>
         ))}
+      </div>
+
+      {/* Resonanz-Impuls */}
+      <div style={{borderTop:`1px solid rgba(201,168,76,0.15)`,paddingTop:"20px"}}>
+        <div style={{fontFamily:"Raleway",fontSize:"9px",letterSpacing:"3px",color:"rgba(201,168,76,0.5)",marginBottom:"12px",textAlign:"center"}}>✦ RESONANZ-IMPULS</div>
+        {impulsLoading?(
+          <div style={{textAlign:"center",fontFamily:"Raleway",fontSize:"11px",color:"rgba(245,240,232,0.2)",letterSpacing:"1px"}}>wird empfangen ...</div>
+        ):(
+          <div style={{fontFamily:"Cinzel",fontSize:"13px",color:"rgba(245,240,232,0.7)",lineHeight:"1.8",textAlign:"center",fontStyle:"italic",padding:"0 12px"}}>{impuls}</div>
+        )}
+        <div style={{textAlign:"center",marginTop:"12px",fontFamily:"Raleway",fontSize:"9px",color:"rgba(201,168,76,0.3)",letterSpacing:"2px"}}>— täglich neu —</div>
       </div>
 
     </div>
