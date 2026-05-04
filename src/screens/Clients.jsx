@@ -32,14 +32,14 @@ function ClientDetailModal({client,sessions,onClose,onSave,onStart,onAnalyse,onD
         <div style={{padding:'12px 20px 0',display:'flex',justifyContent:'space-between',alignItems:'center'}}>
           <div>
             <div style={{fontFamily:'Cinzel',fontSize:'18px',color:T.text,fontWeight:700}}>{client.name}</div>
-            {client.hdType&&<div style={{fontFamily:'Raleway',fontSize:'12px',color:T.violet,fontWeight:600,marginTop:'2px'}}>⚙ {client.hdType}{client.hdProfile?' · '+client.hdProfile:''}</div>}
+            {client.hdType&&<div style={{fontFamily:'Raleway',fontSize:'12px',color:T.gold,fontWeight:600,marginTop:'2px'}}>⚙ {client.hdType}{client.hdProfile?' · '+client.hdProfile:''}</div>}
           </div>
           <button onClick={onClose} style={{width:'32px',height:'32px',borderRadius:'50%',border:`1.5px solid ${T.border}`,background:T.bgSoft,cursor:'pointer',fontSize:'16px',display:'flex',alignItems:'center',justifyContent:'center',color:T.textMid}}>✕</button>
         </div>
         {/* Quick actions */}
         <div style={{display:'flex',gap:'8px',padding:'12px 20px 0'}}>
           <button onClick={()=>onStart(client)} style={{flex:1,padding:'9px',borderRadius:'12px',background:T.gold,border:`1.5px solid ${T.borderMid}`,fontFamily:'Raleway',fontWeight:700,fontSize:'12px',color:'#1A1200',cursor:'pointer'}}>✦ Sitzung</button>
-          <button onClick={()=>{onAnalyse(client.id);onClose();}} style={{flex:1,padding:'9px',borderRadius:'12px',background:T.bgCard,border:`1.5px solid ${T.border}`,fontFamily:'Raleway',fontWeight:700,fontSize:'12px',color:T.violet,cursor:'pointer'}}>📊 Analyse</button>
+          <button onClick={()=>{onAnalyse(client.id);onClose();}} style={{flex:1,padding:'9px',borderRadius:'12px',background:T.bgCard,border:`1.5px solid ${T.border}`,fontFamily:'Raleway',fontWeight:700,fontSize:'12px',color:T.goldD,cursor:'pointer'}}>📊 Analyse</button>
        <button onClick={()=>{if(window.confirm('Klient wirklich löschen?')){onDelete(client.id);onClose();}}} style={{flex:1,padding:'9px',borderRadius:'12px',background:'transparent',border:'1.5px solid #FCA5A5',fontFamily:'Raleway',fontWeight:700,fontSize:'12px',color:'#DC2626',cursor:'pointer'}}>🗑 Löschen</button> </div>
         {/* Tabs */}
         <div style={{display:'flex',gap:'6px',padding:'12px 20px',borderBottom:`1px solid ${T.border}`}}>
@@ -160,7 +160,7 @@ Warmherzig, präzise.`;
 
       {/* Description */}
       <div style={{background:T.bgSoft,borderRadius:'16px',padding:'16px',marginBottom:'20px',border:`1.5px solid ${T.border}`,position:'relative',overflow:'hidden'}}>
-        <Flower size={150} opacity={0.1} color={T.violet}/>
+        <Flower size={150} opacity={0.1} color={T.gold}/>
         <div style={{position:'relative',zIndex:1,fontFamily:'Raleway',fontSize:'13px',color:T.textMid,lineHeight:'1.6'}}>Lege zwei Charts übereinander und entdecke elektromagnetische Verbindungen, Dominanzfelder und die energetische Dynamik zwischen zwei Menschen.</div>
       </div>
 
@@ -184,7 +184,7 @@ Warmherzig, präzise.`;
                   <BodygraphSVG pgates={gA.p} dgates={gA.d} size={120}/>
                 </div>
                 <div style={{textAlign:'center'}}>
-                  <div style={{fontFamily:'Raleway',fontSize:'11px',fontWeight:700,color:T.violetD,marginBottom:'6px'}}>{clientB.name}</div>
+                  <div style={{fontFamily:'Raleway',fontSize:'11px',fontWeight:700,color:T.text,marginBottom:'6px'}}>{clientB.name}</div>
                   <BodygraphSVG pgates={gB.p} dgates={gB.d} size={120}/>
                 </div>
               </div>
@@ -200,11 +200,11 @@ Warmherzig, präzise.`;
               <div style={{display:'flex',flexDirection:'column',gap:'8px'}}>
                 {syn.electromagnetic.map((e,i)=>(
                   <div key={i} style={{background:T.bgCard,borderRadius:'10px',padding:'10px 12px',border:`1px solid ${T.border}`,display:'flex',alignItems:'center',gap:'10px'}}>
-                    <span style={{fontFamily:'Cinzel',fontSize:'13px',color:T.violetD,fontWeight:700}}>Tor {e.gate1}–{e.gate2}</span>
+                    <span style={{fontFamily:'Cinzel',fontSize:'13px',color:T.goldD,fontWeight:700}}>Tor {e.gate1}–{e.gate2}</span>
                     <span style={{fontFamily:'Raleway',fontSize:'11px',color:T.textMid}}>
                       {HD_CENTER_CFG[e.center1]?.label||e.center1} ↔ {HD_CENTER_CFG[e.center2]?.label||e.center2}
                     </span>
-                    <span style={{marginLeft:'auto',fontSize:'11px',padding:'3px 8px',borderRadius:'8px',background:T.violetL,color:T.violetD,fontFamily:'Raleway',fontWeight:700}}>{clientA.name.split(' ')[0]} → {clientB.name.split(' ')[0]}</span>
+                    <span style={{marginLeft:'auto',fontSize:'11px',padding:'3px 8px',borderRadius:'8px',background:'rgba(201,168,76,0.15)',color:T.goldD,fontFamily:'Raleway',fontWeight:700}}>{clientA.name.split(' ')[0]} → {clientB.name.split(' ')[0]}</span>
                   </div>
                 ))}
               </div>
@@ -218,7 +218,7 @@ Warmherzig, präzise.`;
               {[clientA,clientB].map(c=>(
                 <div key={c.id} style={{background:T.bgSoft,borderRadius:'12px',padding:'12px',border:`1px solid ${T.border}`}}>
                   <div style={{fontFamily:'Raleway',fontWeight:800,fontSize:'13px',color:T.text,marginBottom:'4px'}}>{c.name}</div>
-                  <div style={{fontFamily:'Raleway',fontSize:'12px',color:T.violet,fontWeight:600}}>{c.hdType||'Typ unbekannt'}</div>
+                  <div style={{fontFamily:'Raleway',fontSize:'12px',color:T.gold,fontWeight:600}}>{c.hdType||'Typ unbekannt'}</div>
                   {c.hdProfile&&<div style={{fontFamily:'Raleway',fontSize:'11px',color:T.textMid}}>Profil {c.hdProfile}</div>}
                   {c.hdAuthority&&<div style={{fontFamily:'Raleway',fontSize:'11px',color:T.textMid}}>Auth: {c.hdAuthority}</div>}
                 </div>
@@ -323,7 +323,7 @@ function Clients({clients,sessions,onSave,onStart,onDelete,onOnboarding,reminder
                 <div style={{flex:1,minWidth:0}}>
                   <div style={{fontFamily:"Raleway",fontWeight:800,fontSize:"15px",color:T.text}}>{c.name}</div>
                   {c.contact&&<div style={{fontFamily:"Raleway",fontSize:"12px",color:T.textMid,marginTop:"3px",fontWeight:500}}>{c.contact}</div>}
-                  {hasHD&&<div style={{fontFamily:"Raleway",fontSize:'11px',color:T.violet,fontWeight:700,marginTop:'4px'}}>⚙ {c.hdType||'HD'}{c.hdProfile?' · Profil '+c.hdProfile:''}</div>}
+                  {hasHD&&<div style={{fontFamily:"Raleway",fontSize:'11px',color:T.gold,fontWeight:700,marginTop:'4px'}}>⚙ {c.hdType||'HD'}{c.hdProfile?' · Profil '+c.hdProfile:''}</div>}
                   {c.tags?.length>0&&<div style={{display:"flex",flexWrap:"wrap",gap:"5px",marginTop:"8px"}}>{c.tags.map(t=><span key={t} style={{fontSize:"10px",padding:"3px 11px",borderRadius:"12px",background:'rgba(201,168,76,0.15)',color:T.goldD,fontFamily:"Raleway",fontWeight:700,border:`1px solid ${T.borderMid}`}}>{t}</span>)}</div>}
                 </div>
                 <div style={{textAlign:"right",flexShrink:0,marginLeft:"12px"}}>
