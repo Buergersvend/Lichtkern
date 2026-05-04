@@ -34,7 +34,7 @@ function Root() {
 
   if (user === undefined) return (
     <div style={{background:T.bg,height:"100vh",display:"flex",alignItems:"center",justifyContent:"center",flexDirection:"column",gap:"16px"}}>
-      <div style={{width:"70px",height:"70px",borderRadius:"50%",background:`linear-gradient(135deg,${T.tealL},${T.violetL})`,display:"flex",alignItems:"center",justifyContent:"center",fontSize:"30px",boxShadow:`0 6px 28px rgba(13,148,136,0.22)`,border:`1.5px solid ${T.border}`}}>✦</div>
+      <div style={{width:"70px",height:"70px",borderRadius:"50%",background:`linear-gradient(135deg,${T.gold},${T.goldD})`,display:"flex",alignItems:"center",justifyContent:"center",fontSize:"30px",boxShadow:`0 6px 28px ${T.shadowDeep}`,border:`1.5px solid ${T.border}`}}>✦</div>
       <div style={{fontFamily:"Raleway",fontSize:"12px",color:T.textMid,letterSpacing:"3px",fontWeight:700}}>LICHTKERN</div>
     </div>
   );
@@ -116,14 +116,14 @@ function App({ user, onLogout }){
   return(<div style={{background:"#111111",minHeight:"100vh",display:"flex",flexDirection:"row"}}>
     {/* Desktop sidebar */}
     {isDesktop && (
-      <div style={{width:"260px",flexShrink:0,background:"#111111",borderRight:'1px solid rgba(201,168,76,0.15)',display:"flex",flexDirection:"column",overflowY:"hidden",position:"fixed",top:0,left:0,bottom:0,zIndex:100,backdropFilter:"blur(20px)",boxShadow:"2px 0 24px rgba(13,148,136,0.06)"}}>
+      <div style={{width:"260px",flexShrink:0,background:"#111111",borderRight:'1px solid rgba(201,168,76,0.15)',display:"flex",flexDirection:"column",overflowY:"hidden",position:"fixed",top:0,left:0,bottom:0,zIndex:100,backdropFilter:"blur(20px)",boxShadow:"2px 0 24px rgba(201,168,76,0.06)"}}>
         {/* Nav items */}
         <div style={{padding:"24px 14px 4px",flex:1,display:"flex",flexDirection:"column",gap:"3px",overflowY:"hidden"}}>
           {NAV.filter(n=>n.id!=="session").map(item=>{
             const isA=screen===item.id;
             return(
               <React.Fragment key={item.id}>
-              <button onClick={()=>nav(item.id)} style={{display:"flex",alignItems:"center",gap:"13px",padding:"12px 14px",borderRadius:"14px",border:"none",background:isA?"rgba(201,168,76,0.15)":"transparent",color:isA?T.tealD:T.textMid,cursor:"pointer",fontFamily:"Raleway",fontWeight:700,fontSize:"13px",textAlign:"left",boxShadow:isA?`0 2px 10px rgba(13,148,136,0.12)`:"none",transition:"all 0.15s"}}>
+              <button onClick={()=>nav(item.id)} style={{display:"flex",alignItems:"center",gap:"13px",padding:"12px 14px",borderRadius:"14px",border:"none",background:isA?"rgba(201,168,76,0.15)":"transparent",color:isA?T.gold:T.textMid,cursor:"pointer",fontFamily:"Raleway",fontWeight:700,fontSize:"13px",textAlign:"left",boxShadow:isA?`0 2px 10px rgba(201,168,76,0.12)`:"none",transition:"all 0.15s"}}>
                <span style={{fontSize:"17px",width:"22px",textAlign:"center",opacity:1,filter:isA?"none":"grayscale(1) brightness(1.8)"}}>{item.icon}</span>
                 <span style={{color:isA?"#C9A84C":"rgba(245,240,232,0.7)"}}>{item.label}</span>
                 {isA&&<div style={{marginLeft:"auto",width:"6px",height:"6px",borderRadius:"50%",background:"#C9A84C",flexShrink:0}}/>}
@@ -148,8 +148,8 @@ function App({ user, onLogout }){
 
     {/* Main content */}
     <div style={{flex:1,marginLeft:isDesktop?"260px":"0",minWidth:0}}>
-      <div style={{position:"fixed",top:"-60px",right:"-60px",width:"280px",height:"280px",borderRadius:"50%",background:`radial-gradient(circle,${T.tealL} 0%,transparent 70%)`,pointerEvents:"none",zIndex:0,opacity:0.6}}/>
-      <div style={{position:"fixed",bottom:"12%",left:isDesktop?"200px":"-50px",width:"220px",height:"220px",borderRadius:"50%",background:`radial-gradient(circle,${T.violetL} 0%,transparent 70%)`,pointerEvents:"none",zIndex:0,opacity:0.5}}/>
+      <div style={{position:"fixed",top:"-60px",right:"-60px",width:"280px",height:"280px",borderRadius:"50%",background:`radial-gradient(circle,${T.goldL} 0%,transparent 70%)`,pointerEvents:"none",zIndex:0,opacity:0.35}}/>
+      <div style={{position:"fixed",bottom:"12%",left:isDesktop?"200px":"-50px",width:"220px",height:"220px",borderRadius:"50%",background:`radial-gradient(circle,${T.goldL} 0%,transparent 70%)`,pointerEvents:"none",zIndex:0,opacity:0.25}}/>
       <div style={{position:"relative",zIndex:1,paddingTop:"12px",maxWidth:isDesktop?"none":"480px",margin:"0 auto"}}>
         {/* Mobile header */}
         
