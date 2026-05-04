@@ -131,9 +131,9 @@ function Analytics({sessions,clients,onSelectClient}){
   // Donut data for session types
   let offset=0;
   const donutData=[
-    {label:"Erstsitzung",  value:typeCount.first,   color:T.gold,   pct:Math.round(typeCount.first/typeTotal*100)},
-    {label:"Folgesitzung", value:typeCount.followup, color:T.violet, pct:Math.round(typeCount.followup/typeTotal*100)},
-    {label:"Abschluss",    value:typeCount.closing,  color:T.goldD,  pct:Math.round(typeCount.closing/typeTotal*100)},
+    {label:"Erstsitzung",  value:typeCount.first,   color:T.gold,                      pct:Math.round(typeCount.first/typeTotal*100)},
+    {label:"Folgesitzung", value:typeCount.followup, color:"rgba(201,168,76,0.55)",     pct:Math.round(typeCount.followup/typeTotal*100)},
+    {label:"Abschluss",    value:typeCount.closing,  color:T.goldD,                     pct:Math.round(typeCount.closing/typeTotal*100)},
   ].filter(d=>d.value>0);
 
   return (
@@ -151,8 +151,8 @@ function Analytics({sessions,clients,onSelectClient}){
       <div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:"10px",marginBottom:"16px"}}>
         {[
           {label:"Sitzungen",  value:total,                        bg:'rgba(201,168,76,0.15)',   border:T.borderMid, color:T.goldD},
-          {label:"Klienten",   value:clients.length,               bg:T.bgCard, border:"#A78BFA",   color:T.violetD},
-          {label:"Ø pro Klient",value:clients.length?(total/clients.length).toFixed(1):"—", bg:T.goldL, border:"#F59E0B", color:"#7C4A00"},
+          {label:"Klienten",   value:clients.length,               bg:T.bgCard, border:T.borderMid,   color:T.goldD},
+          {label:"Ø pro Klient",value:clients.length?(total/clients.length).toFixed(1):"—", bg:T.goldL, border:T.borderMid, color:"#7C4A00"},
         ].map((s,i)=>(
           <div key={i} style={{background:s.bg,borderRadius:"16px",border:`1.5px solid ${s.border}`,padding:"14px 8px",textAlign:"center",boxShadow:`0 2px 10px ${T.shadow}`}}>
             <div style={{fontFamily:"Cinzel",fontSize:"22px",color:s.color,fontWeight:700}}>{s.value}</div>
@@ -219,7 +219,7 @@ function Analytics({sessions,clients,onSelectClient}){
       {catSorted.length>0 && (
         <SectionCard title="Themengebiete" icon="🎯">
           {catSorted.map(([cat,count])=>(
-            <HBar key={cat} label={cat} value={count} max={maxCat} color={T.violet} bg={T.violetL} suffix=" Sitzungen"/>
+            <HBar key={cat} label={cat} value={count} max={maxCat} color={T.gold} bg={'rgba(201,168,76,0.15)'} suffix=" Sitzungen"/>
           ))}
         </SectionCard>
       )}
