@@ -1,14 +1,14 @@
 import React, { useState, useEffect, useCallback, useRef } from "react";
 
 const OT = {
-  bg:"#F0FAFA", bgCard:"#FFFFFF", bgSoft:"#E6F7F7", bgSofter:"#F5FDFD",
-  border:"#B2E0DC", borderMid:"#7EC8C2",
-  text:"#0F3030", textMid:"#2D6B68", textSoft:"#6AABA7",
-  teal:"#0D9488", tealL:"#CCFBF1", tealD:"#0F6B63",
-  violet:"#6D3FCC", violetL:"#EDE9FE", violetD:"#4C1D95",
-  gold:"#D97706", goldL:"#FEF3C7",
+  bg:"#FFFDF5", bgCard:"#FFFFFF", bgSoft:"#FFF8E7", bgSofter:"#FFFCF0",
+  border:"rgba(201,168,76,0.3)", borderMid:"rgba(201,168,76,0.5)",
+  text:"#1A1200", textMid:"#6B5B3A", textSoft:"#A89668",
+  teal:"#C9A84C", tealL:"rgba(201,168,76,0.15)", tealD:"#A87D3A",
+  violet:"#C9A84C", violetL:"rgba(201,168,76,0.15)", violetD:"#A87D3A",
+  gold:"#C9A84C", goldL:"rgba(201,168,76,0.15)",
   rose:"#E11D48", roseL:"#FFE4E6",
-  shadow:"rgba(13,148,136,0.12)", shadowDeep:"rgba(13,148,136,0.22)",
+  shadow:"rgba(201,168,76,0.12)", shadowDeep:"rgba(201,168,76,0.22)",
 };
 
 // ════════════════════════════════════════════════════════════════
@@ -323,7 +323,7 @@ const AURA_CHIRURGIE_TECHNIKEN = [
 
 const HELLSINN_TAGS = {
   wahrnehmung: {
-    label:"💫 Wahrnehmungsart", farbe:"#7C3AED", bgfarbe:"#EDE9FE",
+    label:"💫 Wahrnehmungsart", farbe:"#C9A84C", bgfarbe:"rgba(201,168,76,0.15)",
     items:["Wärme","Kälte","Schwere","Leichtigkeit","Kribbeln","Pulsation","Enge","Druck","Zug","Leere","Fülle","Prickeln","Schmerz gespürt","Starre","Vibration","Weichheit","Härte"]
   },
   farben: {
@@ -335,7 +335,7 @@ const HELLSINN_TAGS = {
     items:["Kopf","Herz","Bauch","Brust","Rücken","Schultern","Arme","Beine","Füße","Hände","Kehle","Gesicht","Becken","Hüfte","Knie","Wirbelsäule","Links","Rechts","Oben","Unten"]
   },
   energetisch: {
-    label:"⚡ Energetisches Feld", farbe:"#6D3FCC", bgfarbe:"#EDE9FE",
+    label:"⚡ Energetisches Feld", farbe:"#A87D3A", bgfarbe:"rgba(201,168,76,0.15)",
     items:["Aura groß","Aura klein","Löcher im Feld","Korde","Fremdenergie","Schutzwand","Chakra aktiv","Chakra blockiert","Strudel","Lichtkörper","Dunkelfeld","Implantate","Seelensplitter","Verbindungsfäden"]
   },
   bildlich: {
@@ -415,7 +415,7 @@ const LERNPFAD_STUFEN = [
   { nr:1, name:"Einführung",    farbe:"#16A34A", icon:"🌱", beschreibung:"Grundverständnis, Terminologie, erste Wahrnehmungen. Für Einsteiger." },
   { nr:2, name:"Grundlagen",   farbe:"#C9A84C", icon:"📚", beschreibung:"Systematisches Wissen, erste Technikanwendung, Klienten-Grundarbeit." },
   { nr:3, name:"Vertiefung",   farbe:"#0284C7", icon:"🎯", beschreibung:"Komplexe Fälle, Kombination von Methoden, eigene Wahrnehmungsschärfung." },
-  { nr:4, name:"Meisterschaft",farbe:"#7C3AED", icon:"⚡", beschreibung:"Aura-Chirurgie, Quantenarbeit, Fern-Anwendungen, Ausbildungsleitung." },
+  { nr:4, name:"Meisterschaft",farbe:"#A87D3A", icon:"⚡", beschreibung:"Aura-Chirurgie, Quantenarbeit, Fern-Anwendungen, Ausbildungsleitung." },
   { nr:5, name:"Zertifizierung",farbe:"#D97706",icon:"🏆", beschreibung:"Geprüfte Kompetenz, Human Resonanz Akademie Zertifikat, Lehrerlizenz." },
 ];
 
@@ -429,7 +429,7 @@ const OBtn = ({children,onClick,variant="primary",disabled,style={}}) => {
   const variants = {
     primary:{background:`linear-gradient(135deg,#C9A84C,#A87D3A)`,color:"white",border:"none"},
     soft:{background:OT.bgSoft,color:OT.textMid,border:`1.5px solid ${OT.border}`},
-    violet:{background:`linear-gradient(135deg,${OT.violet},${OT.violetD})`,color:"white",border:"none"},
+    accent:{background:`linear-gradient(135deg,#C9A84C,#A87D3A)`,color:"white",border:"none"},
     ghost:{background:"transparent",color:"#C9A84C",border:`1.5px solid #C9A84C`},
   };
   return <button onClick={onClick} disabled={disabled} style={{fontFamily:"Raleway",fontWeight:700,fontSize:"13px",padding:"10px 18px",borderRadius:"12px",cursor:disabled?"wait":"pointer",opacity:disabled?0.6:1,transition:"all 0.15s",...variants[variant],...style}}>{children}</button>;
