@@ -50,7 +50,7 @@ function ClientDetailModal({client,sessions,onClose,onSave,onStart,onAnalyse,onD
   return(
   <div style={{position:'fixed',inset:0,background:'rgba(0,0,0,0.5)',zIndex:200,display:'flex',alignItems:'center',justifyContent:'center'}}>
    <style>{scrollbarCSS}</style>
-   <div className="lk-modal-scroll" style={{background:T.bgCard,borderRadius:'24px',width:'95%',maxWidth:'560px',maxHeight:'92vh',overflowY:'auto',padding:'0 0 40px'}}>
+   <div className="lk-modal-scroll" style={{background:T.bgCard,borderRadius:'24px',width:'95%',maxWidth:'640px',maxHeight:'92vh',overflowY:'auto',padding:'0 0 40px'}}>
         {/* Handle */}
         <div style={{display:'flex',justifyContent:'center',padding:'12px 0 4px'}}><div style={{width:'40px',height:'4px',borderRadius:'2px',background:T.border}}/></div>
         {/* Header */}
