@@ -117,10 +117,10 @@ function BodygraphSVG({pgates=[],dgates=[],size=260}){
   const chanColor=(a,b)=>{
     const pp=pSet.has(a)&&pSet.has(b);
     const dd=dSet.has(a)&&dSet.has(b);
-    if(pp&&dd)return'#7C3AED';
+    if(pp&&dd)return'#C9A84C';
     if(pp)return'#A87D3A';
     if(dd)return'#DC2626';
-    if((pSet.has(a)||dSet.has(a))&&(pSet.has(b)||dSet.has(b)))return'#7C3AED';
+    if((pSet.has(a)||dSet.has(a))&&(pSet.has(b)||dSet.has(b)))return'#C9A84C';
     return null;
   };
 
@@ -244,7 +244,7 @@ Warmherzig, präzise, ohne Heilversprechen.`;
 
       {/* Header */}
       <div style={{background:T.bgSoft,borderRadius:'16px',padding:'18px',marginBottom:'16px',border:`1.5px solid ${T.border}`,position:'relative',overflow:'hidden'}}>
-        <Flower size={160} opacity={0.12} color={T.violet}/>
+        <Flower size={160} opacity={0.12} color={T.gold}/>
         <div style={{position:'relative',zIndex:1}}>
           <div style={{fontFamily:'Cinzel',fontSize:'13px',color:T.goldD,letterSpacing:'2px',marginBottom:'4px'}}>✦ HUMAN DESIGN</div>
           <div style={{fontFamily:'Raleway',fontWeight:800,fontSize:'20px',color:T.text}}>{displayType}</div>
@@ -269,7 +269,7 @@ Warmherzig, präzise, ohne Heilversprechen.`;
             </div>
             <div style={{flex:1,minWidth:0}}>
               <div style={{fontFamily:'Raleway',fontSize:'10px',color:T.textSoft,fontWeight:600,marginBottom:'8px'}}>Legende</div>
-              {[[T.gold,'Persönlichkeit (bewusst)'],[T.violetD,'Beide Seiten'],['#DC2626','Design (unbewusst)']].map(([col,lbl])=>(
+              {[[T.gold,'Persönlichkeit (bewusst)'],[T.goldD,'Beide Seiten'],['#DC2626','Design (unbewusst)']].map(([col,lbl])=>(
                 <div key={lbl} style={{display:'flex',alignItems:'center',gap:'6px',marginBottom:'5px'}}>
                   <div style={{width:'20px',height:'3px',borderRadius:'2px',background:col}}/>
                   <span style={{fontFamily:'Raleway',fontSize:'10px',color:T.textMid,fontWeight:600}}>{lbl}</span>
@@ -292,7 +292,7 @@ Warmherzig, präzise, ohne Heilversprechen.`;
               ['Strategie', HD_TYPE_DESC[hdData.type].strategy,  T.bgCard, T.goldD],
               ['Signatur',  HD_TYPE_DESC[hdData.type].signature,  T.bgSoft, T.goldD],
               ['Not-Self',  HD_TYPE_DESC[hdData.type].notself,    T.bgCard, '#ff6b6b'],
-              hdData.authority?['Autorität', HD_AUTHORITY_DESC[hdData.authority]||hdData.authority, T.bgCard, T.violet]:null
+              hdData.authority?['Autorität', HD_AUTHORITY_DESC[hdData.authority]||hdData.authority, T.bgCard, T.goldD]:null
             ].filter(Boolean).map(([k,v,bg,col])=>(
               <div key={k} style={{background:bg,borderRadius:'10px',padding:'10px',border:`1px solid ${T.border}`}}>
                 <div style={{fontFamily:'Raleway',fontSize:'9px',fontWeight:800,color:col,letterSpacing:'1px',textTransform:'uppercase',marginBottom:'3px'}}>{k}</div>
