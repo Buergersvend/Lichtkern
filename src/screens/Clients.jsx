@@ -4,6 +4,7 @@ import { Flower } from "../components/Decorations";
 import { Card, Btn, TI, Select, Pill, SL } from "../components/UI.jsx";
 
 import { BodygraphSVG, HDTab, HD_CHANNELS, HD_CENTER_CFG, HD_GATE_CENTER } from "../components/HumanDesign.jsx";
+import { NumerologyTab } from "../components/Numerology.jsx";
 import { uid } from "../config/helpers.js";
 async function groqFetch(prompt) {
  const res = await fetch("/api/ki", {
@@ -46,7 +47,7 @@ const scrollbarCSS = `
 function ClientDetailModal({client,sessions,onClose,onSave,onStart,onAnalyse,onDelete}){
   const [tab,setTab]=useState('profil');
   const sc=sessions.filter(s=>s.clientId===client.id);
-  const tabs=[['profil','👤 Profil'],['hd','⚙ Human Design'],['sessions','📋 Sitzungen']];
+  const tabs=[['profil','👤 Profil'],['hd','⚙ Human Design'],['numerologie','🔢 Numerologie'],['sessions','📋 Sitzungen']];
   return(
   <div style={{position:'fixed',inset:0,background:'rgba(0,0,0,0.5)',zIndex:200,display:'flex',alignItems:'center',justifyContent:'center'}}>
    <style>{scrollbarCSS}</style>
@@ -58,6 +59,7 @@ function ClientDetailModal({client,sessions,onClose,onSave,onStart,onAnalyse,onD
           <div>
             <div style={{fontFamily:'Cinzel',fontSize:'18px',color:T.text,fontWeight:700}}>{client.name}</div>
             {client.hdType&&<div style={{fontFamily:'Raleway',fontSize:'12px',color:T.gold,fontWeight:600,marginTop:'2px'}}>⚙ {client.hdType}{client.hdProfile?' · '+client.hdProfile:''}</div>}
+            {client.birthDate&&!client.hdType&&<div style={{fontFamily:'Raleway',fontSize:'12px',color:T.gold,fontWeight:600,marginTop:'2px'}}>🔢 Numerologie aktiv</div>}
           </div>
           <button onClick={onClose} style={{width:'32px',height:'32px',borderRadius:'50%',border:`1.5px solid ${T.border}`,background:T.bgSoft,cursor:'pointer',fontSize:'16px',display:'flex',alignItems:'center',justifyContent:'center',color:T.textMid}}>✕</button>
         </div>
@@ -81,6 +83,7 @@ function ClientDetailModal({client,sessions,onClose,onSave,onStart,onAnalyse,onD
             </div>
           )}
           {tab==='hd'&&<HDTab client={client} onSave={updated=>{onSave(updated);}}/>}
+          {tab==='numerologie'&&<NumerologyTab client={client} onSave={updated=>{onSave(updated);}}/>}
           {tab==='sessions'&&(
             <div>
               {sc.length===0&&<div style={{textAlign:'center',padding:'32px 0',color:T.textSoft,fontFamily:'Raleway',fontSize:'13px'}}>Noch keine Sitzungen</div>}
@@ -349,6 +352,7 @@ function Clients({clients,sessions,onSave,onStart,onDelete,onOnboarding,reminder
                   <div style={{fontFamily:"Raleway",fontWeight:800,fontSize:"15px",color:T.text}}>{c.name}</div>
                   {c.contact&&<div style={{fontFamily:"Raleway",fontSize:"12px",color:T.textMid,marginTop:"3px",fontWeight:500}}>{c.contact}</div>}
                   {hasHD&&<div style={{fontFamily:"Raleway",fontSize:'11px',color:T.gold,fontWeight:700,marginTop:'4px'}}>⚙ {c.hdType||'HD'}{c.hdProfile?' · Profil '+c.hdProfile:''}</div>}
+                  {c.birthDate&&<div style={{fontFamily:"Raleway",fontSize:'11px',color:T.gold,fontWeight:700,marginTop:hasHD?'2px':'4px'}}>🔢 Numerologie</div>}
                   {c.tags?.length>0&&<div style={{display:"flex",flexWrap:"wrap",gap:"5px",marginTop:"8px"}}>{c.tags.map(t=><span key={t} style={{fontSize:"10px",padding:"3px 11px",borderRadius:"12px",background:'rgba(201,168,76,0.15)',color:T.goldD,fontFamily:"Raleway",fontWeight:700,border:`1px solid ${T.borderMid}`}}>{t}</span>)}</div>}
                 </div>
                 <div style={{textAlign:"right",flexShrink:0,marginLeft:"12px"}}>
