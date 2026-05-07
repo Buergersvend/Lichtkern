@@ -172,15 +172,14 @@ Schreibe OHNE Markdown-Formatierung (keine **, keine #, keine Aufzählungszeiche
           <div ref={printRef}>
 
             {/* PAGE 1 */}
-            <div className="rk-page" style={{ width: '100%', margin: '0 auto', padding: '32px 28px 24px', background: '#0D0D0A', color: '#F5F0E8', position: 'relative', overflow: 'hidden', wordWrap: 'break-word' }}>
-              <div style={{ position: 'absolute', top: '45%', left: '50%', transform: 'translate(-50%, -50%)', width: '360px', height: '360px', borderRadius: '50%', border: '1px solid rgba(201,168,76,0.04)' }} />
+            <div className="rk-page" style={{ width: '100%', margin: '0 auto', padding: '32px 32px 24px', background: '#0D0D0A', color: '#F5F0E8', boxSizing: 'border-box' }}>
 
-              <div style={{ textAlign: 'center', marginBottom: '14px', position: 'relative', zIndex: 1 }}>
+              <div style={{ textAlign: 'center', marginBottom: '14px' }}>
                 <div style={{ fontFamily: 'Raleway', fontSize: '8px', fontWeight: 700, letterSpacing: '4px', color: 'rgba(201,168,76,0.5)', textTransform: 'uppercase', marginBottom: '6px' }}>Human Resonanz</div>
                 <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '28px', fontWeight: 600, color: '#C9A84C', letterSpacing: '2px' }}>Resonanzkarte</div>
               </div>
               <Ornament />
-              <div style={{ textAlign: 'center', marginBottom: '20px', position: 'relative', zIndex: 1 }}>
+              <div style={{ textAlign: 'center', marginBottom: '20px' }}>
                 <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '24px', fontWeight: 700, color: '#F5F0E8', marginBottom: '4px' }}>{client.name}</div>
                 <div style={{ fontFamily: 'Raleway', fontSize: '9px', color: 'rgba(245,240,232,0.4)', letterSpacing: '1px' }}>
                   {[
@@ -192,14 +191,12 @@ Schreibe OHNE Markdown-Formatierung (keine **, keine #, keine Aufzählungszeiche
               </div>
               <Ornament />
 
-              <div style={{ position: 'relative', zIndex: 1 }}>
-                {sections.slice(0, 3).map((sec, i) => (
-                  <div key={i} style={{ marginBottom: '18px' }}>
-                    <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '13px', fontWeight: 700, color: '#C9A84C', letterSpacing: '2px', textTransform: 'uppercase', marginBottom: '6px' }}>{sec.title}</div>
-                    <Prose>{sec.body}</Prose>
-                  </div>
-                ))}
-              </div>
+              {sections.slice(0, 3).map((sec, i) => (
+                <div key={i} style={{ marginBottom: '18px' }}>
+                  <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '13px', fontWeight: 700, color: '#C9A84C', letterSpacing: '2px', textTransform: 'uppercase', marginBottom: '6px' }}>{sec.title}</div>
+                  <Prose>{sec.body}</Prose>
+                </div>
+              ))}
 
               <div style={{ marginTop: '24px', padding: '16px 0', textAlign: 'center' }}>
                 <div style={{ fontFamily: 'Raleway', fontSize: '6.5px', color: 'rgba(245,240,232,0.2)', letterSpacing: '2px', textTransform: 'uppercase' }}>Lichtkern · Human Resonanz · {today}</div>
@@ -207,7 +204,7 @@ Schreibe OHNE Markdown-Formatierung (keine **, keine #, keine Aufzählungszeiche
             </div>
 
             {/* PAGE 2 */}
-            <div className="rk-page" style={{ width: '100%', margin: '0 auto', padding: '24px 28px 24px', background: '#0D0D0A', color: '#F5F0E8', position: 'relative', overflow: 'hidden', wordWrap: 'break-word' }}>
+            <div className="rk-page" style={{ width: '100%', margin: '0 auto', padding: '24px 32px 24px', background: '#0D0D0A', color: '#F5F0E8', boxSizing: 'border-box' }}>
 
               {sections.slice(3).map((sec, i) => (
                 <div key={i} style={{ marginBottom: '18px' }}>
