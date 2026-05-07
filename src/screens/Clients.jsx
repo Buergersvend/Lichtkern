@@ -4,7 +4,7 @@ import { Flower } from "../components/Decorations";
 import { Card, Btn, TI, Select, Pill, SL } from "../components/UI.jsx";
 
 import { BodygraphSVG, HDTab, HD_CHANNELS, HD_CENTER_CFG, HD_GATE_CENTER } from "../components/HumanDesign.jsx";
-import { NumerologyTab } from "../components/Numerology.jsx";
+import { NumerologyTab, calcNumerology, LIFE_PATH_DESC } from "../components/Numerology.jsx";
 import { uid } from "../config/helpers.js";
 async function groqFetch(prompt) {
  const res = await fetch("/api/ki", {
@@ -58,8 +58,12 @@ function ClientDetailModal({client,sessions,onClose,onSave,onStart,onAnalyse,onD
         <div style={{padding:'12px 20px 0',display:'flex',justifyContent:'space-between',alignItems:'center'}}>
           <div>
             <div style={{fontFamily:'Cinzel',fontSize:'18px',color:T.text,fontWeight:700}}>{client.name}</div>
-            {client.hdType&&<div style={{fontFamily:'Raleway',fontSize:'12px',color:T.gold,fontWeight:600,marginTop:'2px'}}>⚙ {client.hdType}{client.hdProfile?' · '+client.hdProfile:''}</div>}
-            {client.birthDate&&!client.hdType&&<div style={{fontFamily:'Raleway',fontSize:'12px',color:T.gold,fontWeight:600,marginTop:'2px'}}>🔢 Numerologie aktiv</div>}
+            {(client.hdType||client.birthDate)&&(()=>{
+              const parts=[];
+              if(client.hdType) parts.push(`⚙ ${client.hdType}${client.hdProfile?' · '+client.hdProfile:''}`);
+              if(client.birthDate){const n=calcNumerology(client.birthDate,client.birthName);if(n){const lp=LIFE_PATH_DESC[n.lifePath];parts.push(`🔢 ${n.lifePath}${n.isMaster?'':''} ${lp?.title||''}`);}}
+              return<div style={{fontFamily:'Raleway',fontSize:'12px',color:T.gold,fontWeight:600,marginTop:'2px'}}>{parts.join(' · ')}</div>;
+            })()}
           </div>
           <button onClick={onClose} style={{width:'32px',height:'32px',borderRadius:'50%',border:`1.5px solid ${T.border}`,background:T.bgSoft,cursor:'pointer',fontSize:'16px',display:'flex',alignItems:'center',justifyContent:'center',color:T.textMid}}>✕</button>
         </div>
@@ -352,7 +356,7 @@ function Clients({clients,sessions,onSave,onStart,onDelete,onOnboarding,reminder
                   <div style={{fontFamily:"Raleway",fontWeight:800,fontSize:"15px",color:T.text}}>{c.name}</div>
                   {c.contact&&<div style={{fontFamily:"Raleway",fontSize:"12px",color:T.textMid,marginTop:"3px",fontWeight:500}}>{c.contact}</div>}
                   {hasHD&&<div style={{fontFamily:"Raleway",fontSize:'11px',color:T.gold,fontWeight:700,marginTop:'4px'}}>⚙ {c.hdType||'HD'}{c.hdProfile?' · Profil '+c.hdProfile:''}</div>}
-                  {c.birthDate&&<div style={{fontFamily:"Raleway",fontSize:'11px',color:T.gold,fontWeight:700,marginTop:hasHD?'2px':'4px'}}>🔢 Numerologie</div>}
+                  {c.birthDate&&(()=>{const n=calcNumerology(c.birthDate,c.birthName);if(!n)return null;const lp=LIFE_PATH_DESC[n.lifePath];return<div style={{fontFamily:"Raleway",fontSize:'11px',color:T.gold,fontWeight:700,marginTop:hasHD?'2px':'4px'}}>🔢 Lebenszahl {n.lifePath} · {lp?.title||''}</div>;})()}
                   {c.tags?.length>0&&<div style={{display:"flex",flexWrap:"wrap",gap:"5px",marginTop:"8px"}}>{c.tags.map(t=><span key={t} style={{fontSize:"10px",padding:"3px 11px",borderRadius:"12px",background:'rgba(201,168,76,0.15)',color:T.goldD,fontFamily:"Raleway",fontWeight:700,border:`1px solid ${T.borderMid}`}}>{t}</span>)}</div>}
                 </div>
                 <div style={{textAlign:"right",flexShrink:0,marginLeft:"12px"}}>
