@@ -6,10 +6,12 @@ import { groqFetch } from "../config/groq.js";
 
 const printCSS = `
 @media print {
-  body { margin: 0; padding: 0; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body { margin: 0; padding: 0; -webkit-print-color-adjust: exact; print-color-adjust: exact; background: #FFFDF8 !important; color: #1A1200 !important; }
   .rk-no-print { display: none !important; }
-  .rk-page { page-break-after: always; break-after: page; width: 210mm !important; min-height: 297mm !important; padding: 24mm 28mm 18mm !important; }
+  .rk-page { page-break-after: always; break-after: page; width: 210mm !important; min-height: 297mm !important; padding: 20mm 24mm 16mm !important; background: #FFFDF8 !important; color: #1A1200 !important; }
   .rk-page:last-child { page-break-after: avoid; break-after: avoid; }
+  .rk-page * { color: #1A1200 !important; }
+  .rk-page [data-gold] { color: #8B7332 !important; }
 }
 @page { size: A4; margin: 0; }
 `;
@@ -84,7 +86,16 @@ Schreibe OHNE Markdown-Formatierung (keine **, keine #, keine Aufzählungszeiche
       <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700&family=Raleway:wght@400;500;600;700;800&display=swap" rel="stylesheet">
       <style>${printCSS}
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Cormorant Garamond', serif; background: #0D0D0A; color: #F5F0E8; }
+        body { font-family: 'Cormorant Garamond', serif; background: #FFFDF8; color: #1A1200; }
+        .rk-page { background: #FFFDF8 !important; color: #1A1200 !important; }
+        .rk-page * { color: #1A1200 !important; }
+        .rk-gold { color: #8B7332 !important; }
+        .rk-soft { color: #6B6355 !important; }
+        .rk-border { border-color: rgba(139,115,50,0.2) !important; }
+        .rk-bg-soft { background: rgba(139,115,50,0.04) !important; }
+        .rk-circle { border-color: rgba(139,115,50,0.3) !important; }
+        .rk-circle-master { border-color: #8B7332 !important; background: rgba(139,115,50,0.08) !important; }
+        .rk-ornament { color: #8B7332 !important; }
       </style></head><body>${content.innerHTML}</body></html>`);
     win.document.close();
     setTimeout(() => { win.print(); }, 600);
@@ -115,7 +126,7 @@ Schreibe OHNE Markdown-Formatierung (keine **, keine #, keine Aufzählungszeiche
 
   return (
     <div style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.7)', zIndex: 400, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '16px' }}>
-      <div style={{ background: T.bgCard, borderRadius: '20px', width: '100%', maxWidth: '680px', maxHeight: '90vh', overflowY: 'auto', display: 'flex', flexDirection: 'column' }}>
+      <div style={{ background: T.bgCard, borderRadius: '20px', width: '100%', maxWidth: '900px', maxHeight: '90vh', overflowY: 'auto', display: 'flex', flexDirection: 'column' }}>
 
         {/* Toolbar */}
         <div className="rk-no-print" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '16px 20px', borderBottom: `1px solid ${T.border}`, flexShrink: 0 }}>
@@ -127,10 +138,7 @@ Schreibe OHNE Markdown-Formatierung (keine **, keine #, keine Aufzählungszeiche
               </button>
             )}
             {karteText && (
-              <>
-                <button onClick={generateKarteText} disabled={loading} style={{ fontFamily: 'Raleway', fontWeight: 700, fontSize: '11px', padding: '8px 14px', borderRadius: '10px', border: `1.5px solid ${T.border}`, background: T.bgSoft, color: T.textMid, cursor: 'pointer' }}>↻ Neu</button>
-                <button onClick={handlePrint} style={{ fontFamily: 'Raleway', fontWeight: 700, fontSize: '12px', padding: '8px 18px', borderRadius: '10px', border: 'none', background: T.gold, color: '#1A1200', cursor: 'pointer' }}>🖨 Drucken</button>
-              </>
+              <button onClick={handlePrint} style={{ fontFamily: 'Raleway', fontWeight: 700, fontSize: '12px', padding: '8px 18px', borderRadius: '10px', border: 'none', background: T.gold, color: '#1A1200', cursor: 'pointer' }}>🖨 Drucken</button>
             )}
             <button onClick={onClose} style={{ fontFamily: 'Raleway', fontWeight: 700, fontSize: '14px', padding: '8px 14px', borderRadius: '10px', border: `1.5px solid ${T.border}`, background: T.bgSoft, color: T.textMid, cursor: 'pointer' }}>✕</button>
           </div>
