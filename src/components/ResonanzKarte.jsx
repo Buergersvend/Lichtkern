@@ -21,7 +21,7 @@ const Ornament = () => (
 );
 
 const Prose = ({ children }) => (
-  <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '12.5px', color: 'rgba(245,240,232,0.8)', lineHeight: '1.85', fontWeight: 400 }}>{children}</div>
+  <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '12.5px', color: 'rgba(245,240,232,0.8)', lineHeight: '1.85', fontWeight: 400, wordWrap: 'break-word', overflowWrap: 'break-word' }}>{children}</div>
 );
 
 function ResonanzKarte({ client, aiText: existingAiText, onClose }) {
@@ -126,7 +126,7 @@ Schreibe OHNE Markdown-Formatierung (keine **, keine #, keine Aufzählungszeiche
 
   return (
     <div style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.7)', zIndex: 400, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '16px' }}>
-      <div style={{ background: T.bgCard, borderRadius: '20px', width: '100%', maxWidth: '900px', maxHeight: '90vh', overflowY: 'auto', display: 'flex', flexDirection: 'column' }}>
+      <div style={{ background: T.bgCard, borderRadius: '20px', width: '100%', maxWidth: '900px', maxHeight: '90vh', overflowY: 'auto', overflowX: 'hidden', display: 'flex', flexDirection: 'column' }}>
 
         {/* Toolbar */}
         <div className="rk-no-print" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '16px 20px', borderBottom: `1px solid ${T.border}`, flexShrink: 0 }}>
@@ -172,7 +172,7 @@ Schreibe OHNE Markdown-Formatierung (keine **, keine #, keine Aufzählungszeiche
           <div ref={printRef}>
 
             {/* PAGE 1 */}
-            <div className="rk-page" style={{ width: '100%', margin: '0 auto', padding: '32px 28px 24px', background: '#0D0D0A', color: '#F5F0E8', position: 'relative', overflow: 'hidden' }}>
+            <div className="rk-page" style={{ width: '100%', margin: '0 auto', padding: '32px 28px 24px', background: '#0D0D0A', color: '#F5F0E8', position: 'relative', overflow: 'hidden', wordWrap: 'break-word' }}>
               <div style={{ position: 'absolute', top: '45%', left: '50%', transform: 'translate(-50%, -50%)', width: '360px', height: '360px', borderRadius: '50%', border: '1px solid rgba(201,168,76,0.04)' }} />
 
               <div style={{ textAlign: 'center', marginBottom: '14px', position: 'relative', zIndex: 1 }}>
@@ -207,7 +207,7 @@ Schreibe OHNE Markdown-Formatierung (keine **, keine #, keine Aufzählungszeiche
             </div>
 
             {/* PAGE 2 */}
-            <div className="rk-page" style={{ width: '100%', margin: '0 auto', padding: '24px 28px 24px', background: '#0D0D0A', color: '#F5F0E8', position: 'relative' }}>
+            <div className="rk-page" style={{ width: '100%', margin: '0 auto', padding: '24px 28px 24px', background: '#0D0D0A', color: '#F5F0E8', position: 'relative', overflow: 'hidden', wordWrap: 'break-word' }}>
 
               {sections.slice(3).map((sec, i) => (
                 <div key={i} style={{ marginBottom: '18px' }}>
