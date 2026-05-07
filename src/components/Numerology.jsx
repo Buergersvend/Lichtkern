@@ -419,6 +419,251 @@ function NumChart({ nums }) {
   );
 }
 
+// ═══════════════════════════════════════════════════════════════════════════
+// RESONANZ-SYNTHESE: HD × Numerologie — Das Herzstück von Lichtkern
+// ═══════════════════════════════════════════════════════════════════════════
+
+const HD_TYPE_NUMEROLOGY = {
+  'Manifestor': {
+    1: { resonanz: 'Doppelte Initiationskraft', insight: 'Manifestor + Lebenszahl 1: Du bist reiner Anfang. Deine Aufgabe ist es, Neues in die Welt zu bringen — ohne auf Erlaubnis zu warten. Informiere, dann handle.' },
+    2: { resonanz: 'Der diplomatische Initiator', insight: 'Manifestor + Lebenszahl 2: Ungewöhnliche Kombination — deine Initiationskraft wird durch tiefe Sensibilität geleitet. Du startest Dinge, die Brücken bauen.' },
+    3: { resonanz: 'Der kreative Katalysator', insight: 'Manifestor + Lebenszahl 3: Deine Worte und Ideen haben Durchschlagskraft. Was du kreierst, bewegt andere sofort.' },
+    4: { resonanz: 'Der Meisterbaumeister', insight: 'Manifestor + Lebenszahl 4: Du initiierst nicht nur — du baust Fundamente die Generationen überdauern. Struktur ist dein Werkzeug der Manifestation.' },
+    5: { resonanz: 'Der freiheitliche Initiator', insight: 'Manifestor + Lebenszahl 5: Unruhe trifft Durchsetzungskraft. Du brichst Strukturen auf und schaffst Raum für Neues — aber achte auf Beständigkeit.' },
+    6: { resonanz: 'Der heilende Initiator', insight: 'Manifestor + Lebenszahl 6: Deine Initiationskraft dient dem Heilen. Du startest Prozesse die andere in ihre Ganzheit führen.' },
+    7: { resonanz: 'Der mystische Initiator', insight: 'Manifestor + Lebenszahl 7: Du bringst tiefe Wahrheiten in Bewegung. Deine Impulse kommen aus der Stille und treffen ins Mark.' },
+    8: { resonanz: 'Die manifestierte Fülle', insight: 'Manifestor + Lebenszahl 8: Maximale Manifestationskraft. Du bist hier um Überfluss zu erschaffen — materiell und spirituell.' },
+    9: { resonanz: 'Der transformative Initiator', insight: 'Manifestor + Lebenszahl 9: Du startest Zyklen des Loslassens. Deine Impulse beenden das Alte und öffnen Raum für Evolution.' },
+    11: { resonanz: 'Der erleuchtete Initiator', insight: 'Manifestor + Meisterzahl 11: Deine Impulse kommen aus höheren Ebenen. Du initiierst spirituelle Durchbrüche — bei dir und bei anderen.' },
+    22: { resonanz: 'Der Meister-Manifestor', insight: 'Manifestor + Meisterzahl 22: Die mächtigste Kombination. Du manifestierst Visionen die die Welt verändern. Dein Informieren ist nicht höflich — es ist prophetisch.' },
+    33: { resonanz: 'Der erleuchtete Heiler-Initiator', insight: 'Manifestor + Meisterzahl 33: Deine bloße Präsenz initiiert Heilung. Du musst nicht handeln — dein Sein bewegt.' },
+  },
+  'Generator': {
+    1: { resonanz: 'Der antwortende Pionier', insight: 'Generator + Lebenszahl 1: Deine Sakralkraft will Neues erschaffen — aber nur wenn echte Resonanz da ist. Warte auf den Impuls, dann gib alles.' },
+    2: { resonanz: 'Der harmonische Generator', insight: 'Generator + Lebenszahl 2: Deine Lebenskraft fließt am stärksten in Partnerschaften. Allein arbeitest du unter deinem Potenzial.' },
+    3: { resonanz: 'Der kreative Motor', insight: 'Generator + Lebenszahl 3: Unerschöpfliche kreative Energie — wenn du auf Resonanz reagierst, wird dein Ausdruck magnetisch.' },
+    4: { resonanz: 'Der ausdauernde Erbauer', insight: 'Generator + Lebenszahl 4: Die beständigste Kombination. Deine Sakralkraft plus Baumeister-Energie erschafft Werke für die Ewigkeit.' },
+    5: { resonanz: 'Der vielseitige Generator', insight: 'Generator + Lebenszahl 5: Deine Energie will Vielfalt — aber deine Strategie verlangt Resonanz. Der Schlüssel: Reagiere auf das, was dich wirklich begeistert.' },
+    6: { resonanz: 'Der heilende Generator', insight: 'Generator + Lebenszahl 6: Deine Lebenskraft heilt. Wenn du auf Resonanz antwortest, wird deine Fürsorge zur Transformation.' },
+    7: { resonanz: 'Der forschende Generator', insight: 'Generator + Lebenszahl 7: Tiefe Sakralenergie für innere Forschung. Deine Befriedigung kommt durch Erkenntnis.' },
+    8: { resonanz: 'Der produktive Fülle-Generator', insight: 'Generator + Lebenszahl 8: Maximale Arbeitskraft trifft Manifestation. Du bist gebaut um Wohlstand durch Hingabe zu erschaffen.' },
+    9: { resonanz: 'Der dienende Generator', insight: 'Generator + Lebenszahl 9: Deine Energie dient dem Größeren. Befriedigung kommt durch Loslassen und Transformation.' },
+    11: { resonanz: 'Der inspirierte Generator', insight: 'Generator + Meisterzahl 11: Deine Sakralkraft ist ein Kanal für höhere Inspiration. Wenn du reagierst, fließt Weisheit durch dich.' },
+    22: { resonanz: 'Der Meisterbauer-Generator', insight: 'Generator + Meisterzahl 22: Du hast die Ausdauer UND die Vision für Großprojekte. Deine Sakralkraft baut Tempel.' },
+    33: { resonanz: 'Der liebende Generator', insight: 'Generator + Meisterzahl 33: Deine Arbeit ist Liebe. Deine Energie heilt durch pure Hingabe an das, was Resonanz erzeugt.' },
+  },
+  'Manifesting Generator': {
+    1: { resonanz: 'Der schnelle Pionier', insight: 'MG + Lebenszahl 1: Blitzschnelle Initiation mit Sakralkraft. Du reagierst, informierst und handelst in einem Atemzug.' },
+    4: { resonanz: 'Der Multi-Baumeister', insight: 'MG + Lebenszahl 4: Du baust auf vielen Ebenen gleichzeitig — und trotzdem steht alles auf solidem Fundament.' },
+    5: { resonanz: 'Der Freiheits-Generator', insight: 'MG + Lebenszahl 5: Maximale Vielseitigkeit. Du brauchst Abwechslung wie Luft — folge deiner sakralen Resonanz durch alle Abenteuer.' },
+    7: { resonanz: 'Der tiefgründige Multitasker', insight: 'MG + Lebenszahl 7: Schnelligkeit und Tiefe in einer Person. Du springst zwischen Projekten — aber jedes berührt die Essenz.' },
+    22: { resonanz: 'Der beschleunigte Meisterbaumeister', insight: 'MG + Meisterzahl 22: Die Kombination aus Geschwindigkeit und Meistervision. Du baust schneller als alle anderen — und größer.' },
+  },
+  'Projektor': {
+    1: { resonanz: 'Der einladende Pionier', insight: 'Projektor + Lebenszahl 1: Du siehst neue Wege bevor andere sie ahnen — aber warte auf die Einladung, bevor du vorangehst.' },
+    2: { resonanz: 'Der natürliche Berater', insight: 'Projektor + Lebenszahl 2: Doppelte Führungsqualität durch Einfühlung. Deine Einladungen kommen durch deine diplomatische Weisheit.' },
+    4: { resonanz: 'Der systemische Führer', insight: 'Projektor + Lebenszahl 4: Du siehst die Strukturen die andere brauchen. Dein Erfolg kommt durch geduldiges Warten und meisterhaftes Organisieren.' },
+    6: { resonanz: 'Der heilende Führer', insight: 'Projektor + Lebenszahl 6: Du führst durch Fürsorge. Deine Einladungen kommen weil andere spüren, dass du sie wirklich siehst.' },
+    7: { resonanz: 'Der weise Beobachter', insight: 'Projektor + Lebenszahl 7: Die tiefgründigste Kombination. Du durchschaust Systeme und Menschen — deine Weisheit ist dein Schlüssel zur Einladung.' },
+    9: { resonanz: 'Der universelle Führer', insight: 'Projektor + Lebenszahl 9: Du führst durch Loslassen. Je weniger du festhältst, desto mehr Einladungen kommen.' },
+    11: { resonanz: 'Der intuitive Führer', insight: 'Projektor + Meisterzahl 11: Deine Führung kommt aus purer Intuition. Du siehst was andere brauchen bevor sie es selbst wissen.' },
+    33: { resonanz: 'Der Meisterlehrer-Projektor', insight: 'Projektor + Meisterzahl 33: Du lehrst durch dein Sein. Deine bloße Anwesenheit ordnet die Energie im Raum.' },
+  },
+  'Reflektor': {
+    7: { resonanz: 'Der Spiegel der Wahrheit', insight: 'Reflektor + Lebenszahl 7: Maximale Durchlässigkeit trifft tiefste Analyse. Du spiegelst nicht nur — du enthüllst verborgene Wahrheiten.' },
+    9: { resonanz: 'Der universelle Spiegel', insight: 'Reflektor + Lebenszahl 9: Du spiegelst die Vollständigkeit. Dein Mondzyklus ist dein Kompass durch die Transformation.' },
+    11: { resonanz: 'Der mystische Spiegel', insight: 'Reflektor + Meisterzahl 11: Du empfängst höhere Frequenzen und spiegelst sie in die Welt. Ein seltenes und kostbares Geschenk.' },
+  },
+};
+
+const AUTHORITY_NUMEROLOGY = {
+  'Emotional': {
+    deep: 'Deine emotionale Welle und deine Zahlen erzählen die gleiche Geschichte: Klarheit braucht Zeit.',
+    tip: 'Nutze die Zeitqualität deines Persönlichen Monats als Rahmen für wichtige Entscheidungen — nicht gegen die Welle, sondern mit ihr.',
+  },
+  'Sakral': {
+    deep: 'Dein Sakral antwortet im Jetzt — deine Zahlen zeigen den größeren Bogen. Beides zusammen ergibt Weisheit.',
+    tip: 'Achte darauf ob dein sakrales Ja/Nein in Einklang mit deiner aktuellen Zeitqualität steht.',
+  },
+  'Milz': {
+    deep: 'Dein erster Impuls trägt die Wahrheit — und deine Zahlen bestätigen den tieferen Sinn dahinter.',
+    tip: 'Vertraue deiner spontanen Intuition, aber reflektiere anschließend anhand deiner Zahlenmuster.',
+  },
+  'Ego': {
+    deep: 'Dein Herzensimpuls trifft auf die Kraft deiner Zahlen — was sich lohnt, zeigt sich auf beiden Ebenen.',
+    tip: 'Frage dich: Will mein Herz UND bestätigt meine Zeitqualität diesen Schritt?',
+  },
+  'Selbst': {
+    deep: 'Dein Körper führt dich an die richtigen Orte — deine Zahlen zeigen warum diese Orte wichtig sind.',
+    tip: 'Folge deinem Körper und nutze die Numerologie als Landkarte für das Warum.',
+  },
+};
+
+function ResonanzSynthese({ client, nums, lifePath }) {
+  const [expanded, setExpanded] = useState(false);
+  
+  const hdType = client.hdType || '';
+  const authority = client.hdAuthority || '';
+  const profile = client.hdProfile || '';
+  
+  // Find HD × Numerologie synthesis
+  const typeMatch = HD_TYPE_NUMEROLOGY[hdType]?.[lifePath];
+  const authMatch = AUTHORITY_NUMEROLOGY[authority];
+  
+  // Profile × Lebenszahl insight
+  const profileLine1 = profile ? parseInt(profile.split('/')[0]) : null;
+  const profileInsight = profileLine1 ? getProfileInsight(profileLine1, lifePath) : null;
+  
+  if (!typeMatch && !authMatch) return null;
+  
+  return (
+    <div style={{
+      marginBottom: '16px',
+      background: 'linear-gradient(135deg, rgba(201,168,76,0.08), rgba(201,168,76,0.03))',
+      borderRadius: '18px',
+      border: `2px solid rgba(201,168,76,0.3)`,
+      overflow: 'hidden',
+      position: 'relative',
+    }}>
+      <Flower size={180} opacity={0.06} color={T.gold} />
+      
+      {/* Header */}
+      <div style={{ padding: '18px 16px 0', position: 'relative', zIndex: 1 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '4px' }}>
+          <span style={{ fontSize: '16px' }}>⚙</span>
+          <span style={{ fontSize: '12px', color: T.textSoft }}>×</span>
+          <span style={{ fontSize: '16px' }}>🔢</span>
+          <div style={{ fontFamily: 'Raleway', fontSize: '10px', fontWeight: 800, color: T.gold, letterSpacing: '2px', textTransform: 'uppercase' }}>Resonanz-Synthese</div>
+        </div>
+        
+        {typeMatch && (
+          <div style={{ marginTop: '8px' }}>
+            <div style={{ fontFamily: 'Cinzel', fontSize: '16px', fontWeight: 700, color: T.gold }}>{typeMatch.resonanz}</div>
+            <div style={{ fontFamily: 'Raleway', fontSize: '10px', color: T.textMid, marginTop: '2px' }}>{hdType} × Lebenszahl {lifePath}</div>
+          </div>
+        )}
+      </div>
+      
+      {/* Main Insight */}
+      <div style={{ padding: '12px 16px', position: 'relative', zIndex: 1 }}>
+        {typeMatch && (
+          <div style={{
+            fontFamily: 'Raleway', fontSize: '13px', color: T.text, lineHeight: '1.7',
+            fontWeight: 500, fontStyle: 'italic',
+          }}>{typeMatch.insight}</div>
+        )}
+        
+        <button onClick={() => setExpanded(!expanded)} style={{
+          marginTop: '12px', fontFamily: 'Raleway', fontSize: '11px', fontWeight: 700,
+          color: T.goldD, background: 'rgba(201,168,76,0.1)', border: `1px solid rgba(201,168,76,0.25)`,
+          borderRadius: '10px', padding: '8px 16px', cursor: 'pointer', width: '100%',
+        }}>
+          {expanded ? '▾ Synthese einklappen' : '▸ Tiefere Verknüpfungen anzeigen'}
+        </button>
+      </div>
+      
+      {/* Expanded Details */}
+      {expanded && (
+        <div style={{ padding: '0 16px 16px', position: 'relative', zIndex: 1 }}>
+          
+          {/* Authority × Numerologie */}
+          {authMatch && (
+            <div style={{
+              background: T.bgCard, borderRadius: '12px', padding: '14px',
+              border: `1px solid ${T.border}`, marginBottom: '10px',
+            }}>
+              <div style={{ fontFamily: 'Raleway', fontSize: '9px', fontWeight: 800, color: T.goldD, letterSpacing: '1.5px', textTransform: 'uppercase', marginBottom: '6px' }}>
+                ✦ {authority} Autorität × Zahlen
+              </div>
+              <div style={{ fontFamily: 'Raleway', fontSize: '12px', color: T.text, lineHeight: '1.6', fontWeight: 500, marginBottom: '8px' }}>
+                {authMatch.deep}
+              </div>
+              <div style={{
+                background: 'rgba(201,168,76,0.08)', borderRadius: '8px', padding: '10px',
+                border: `1px solid rgba(201,168,76,0.15)`,
+              }}>
+                <div style={{ fontFamily: 'Raleway', fontSize: '9px', fontWeight: 800, color: T.goldD, letterSpacing: '1px', marginBottom: '3px' }}>💡 PRAXIS-IMPULS</div>
+                <div style={{ fontFamily: 'Raleway', fontSize: '11px', color: T.textMid, lineHeight: '1.5' }}>{authMatch.tip}</div>
+              </div>
+            </div>
+          )}
+          
+          {/* Profile × Numerologie */}
+          {profileInsight && (
+            <div style={{
+              background: T.bgCard, borderRadius: '12px', padding: '14px',
+              border: `1px solid ${T.border}`, marginBottom: '10px',
+            }}>
+              <div style={{ fontFamily: 'Raleway', fontSize: '9px', fontWeight: 800, color: T.goldD, letterSpacing: '1.5px', textTransform: 'uppercase', marginBottom: '6px' }}>
+                ✦ Profil {profile} × Lebenszahl {lifePath}
+              </div>
+              <div style={{ fontFamily: 'Raleway', fontSize: '12px', color: T.text, lineHeight: '1.6', fontWeight: 500 }}>
+                {profileInsight}
+              </div>
+            </div>
+          )}
+          
+          {/* Zeitqualität × Strategie */}
+          {nums.personalYear && (
+            <div style={{
+              background: T.bgCard, borderRadius: '12px', padding: '14px',
+              border: `1px solid ${T.border}`,
+            }}>
+              <div style={{ fontFamily: 'Raleway', fontSize: '9px', fontWeight: 800, color: T.goldD, letterSpacing: '1.5px', textTransform: 'uppercase', marginBottom: '6px' }}>
+                ✦ Zeitqualität × HD-Strategie
+              </div>
+              <div style={{ fontFamily: 'Raleway', fontSize: '12px', color: T.text, lineHeight: '1.6', fontWeight: 500 }}>
+                {getTimeStrategyInsight(hdType, nums.personalYear)}
+              </div>
+            </div>
+          )}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function getProfileInsight(line1, lifePath) {
+  const insights = {
+    1: `Linie 1 (der Forscher) mit Lebenszahl ${lifePath}: Dein Fundament braucht Tiefe bevor du deine ${lifePath}er-Energie leben kannst. Erst verstehen, dann handeln.`,
+    2: `Linie 2 (der Eremit) mit Lebenszahl ${lifePath}: Deine ${lifePath}er-Gabe will von innen reifen. Andere sehen dein Talent bevor du es selbst erkennst.`,
+    3: `Linie 3 (der Experimentierer) mit Lebenszahl ${lifePath}: Deine ${lifePath}er-Lektion lernst du durch Erfahrung — jeder "Fehler" ist ein Meisterschritt.`,
+    4: `Linie 4 (der Netzwerker) mit Lebenszahl ${lifePath}: Deine ${lifePath}er-Kraft entfaltet sich durch Beziehungen. Dein Netzwerk ist dein Resonanzfeld.`,
+    5: `Linie 5 (der Universalist) mit Lebenszahl ${lifePath}: Andere projizieren ihre Erwartungen auf deine ${lifePath}er-Energie. Bleib bei deiner Wahrheit.`,
+    6: `Linie 6 (das Vorbild) mit Lebenszahl ${lifePath}: Deine ${lifePath}er-Weisheit reift in drei Phasen — Experiment, Rückzug, Vorbild. Geduld ist dein Schlüssel.`,
+  };
+  return insights[line1] || null;
+}
+
+function getTimeStrategyInsight(hdType, personalYear) {
+  const strategies = {
+    'Manifestor': {
+      1: 'Persönliches Jahr 1 + Manifestor: JETZT initiieren. Die Energie unterstützt neue Anfänge — informiere und starte.',
+      4: 'Persönliches Jahr 4 + Manifestor: Zeit für strukturiertes Manifestieren. Baue Systeme statt spontane Impulse.',
+      5: 'Persönliches Jahr 5 + Manifestor: Veränderungsenergie trifft Initiationskraft — ideale Zeit für mutige neue Richtungen.',
+      7: 'Persönliches Jahr 7 + Manifestor: Ungewöhnliche Phase — dein Impuls ist Rückzug statt Aktion. Höre auf die innere Stimme.',
+      9: 'Persönliches Jahr 9 + Manifestor: Loslassen statt initiieren. Beende bewusst, was nicht mehr dient.',
+    },
+    'Generator': {
+      1: 'Persönliches Jahr 1 + Generator: Neue Resonanzen tauchen auf — reagiere auf das was dein Sakral zum Leuchten bringt.',
+      3: 'Persönliches Jahr 3 + Generator: Kreative Hochphase — deine Sakralenergie will sich ausdrücken.',
+      6: 'Persönliches Jahr 6 + Generator: Deine Energie fließt in Fürsorge und Heilung — höre auf dein Sakral bei Beziehungsfragen.',
+      8: 'Persönliches Jahr 8 + Generator: Erntejahr — deine bisherige Arbeit zahlt sich aus. Sakral sagt Ja zu Fülle.',
+    },
+    'Projektor': {
+      2: 'Persönliches Jahr 2 + Projektor: Geduldsphase — die richtigen Einladungen kommen durch stille Präsenz.',
+      7: 'Persönliches Jahr 7 + Projektor: Deine natürliche Energie — Rückzug und tiefe Erkenntnis. Die beste Zeit für Selbststudium.',
+      8: 'Persönliches Jahr 8 + Projektor: Anerkennungsjahr — deine Führungsqualität wird sichtbar und eingeladen.',
+    },
+  };
+  
+  const typeStrategies = strategies[hdType];
+  if (typeStrategies?.[personalYear]) return typeStrategies[personalYear];
+  
+  // Fallback
+  return `Im Persönlichen Jahr ${personalYear} als ${hdType}: Achte besonders darauf, wie die Jahresenergie ${personalYear} deine ${hdType}-Strategie beeinflusst. ${personalYear <= 3 ? 'Aufbauphase' : personalYear <= 6 ? 'Wachstumsphase' : 'Ernteund Reflexionsphase'} — handle entsprechend deiner Strategie.`;
+}
+
 // ─── MAIN NUMEROLOGY TAB ───────────────────────────────────────────────────
 function NumerologyTab({ client, onSave }) {
   const [birthDate, setBirthDate] = useState(client.birthDate || '');
@@ -584,6 +829,11 @@ Warmherzig, tiefgründig, poetisch aber präzise. Ohne Heilversprechen.`;
                 </div>
               ))}
             </Card>
+          )}
+
+          {/* ═══ RESONANZ-SYNTHESE: HD × Numerologie ═══ */}
+          {client.hdType && nums && (
+            <ResonanzSynthese client={client} nums={nums} lifePath={nums.lifePath} />
           )}
 
           {/* KI Resonanz-Analyse */}
