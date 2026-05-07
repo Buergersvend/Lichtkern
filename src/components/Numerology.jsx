@@ -199,10 +199,77 @@ const KARMIC_DESC = {
   19: { title:'Karmische Schuld 19', desc:'Lektion der Eigenständigkeit — Machtmissbrauch in früheren Leben. Heilung durch dienende Führung und Mitgefühl.' },
 };
 
-// ─── NUMBER DISPLAY COMPONENT ──────────────────────────────────────────────
-function NumCard({ number, label, sublabel, description, accent = false, master = false }) {
+// ─── INFO TEXTS: Was ist diese Zahl? ───────────────────────────────────────
+const NUM_INFO = {
+  lifePath: {
+    what: 'Die Lebenszahl ist die wichtigste Zahl in deinem Numerologie-Profil.',
+    how: 'Berechnung: Alle Ziffern des Geburtsdatums werden einzeln addiert und auf eine Kernzahl reduziert (Meisterzahlen 11, 22, 33 bleiben erhalten).',
+    why: 'Sie zeigt deinen Lebensweg, deine zentrale Aufgabe und die Energie, die dein gesamtes Leben durchzieht. Sie ist der rote Faden deiner Existenz.',
+  },
+  birthDay: {
+    what: 'Die Geburtszahl zeigt deine natürliche Begabung — das Talent, das du von Geburt an mitbringst.',
+    how: 'Berechnung: Der Geburtstag wird auf eine einzelne Ziffer reduziert (z.B. 23 → 2+3 = 5).',
+    why: 'Diese Zahl beschreibt, was dir leicht fällt und was andere an dir sofort wahrnehmen. Sie ist dein angeborenes Werkzeug.',
+  },
+  attitude: {
+    what: 'Die Einstellungszahl beschreibt deinen ersten Impuls — wie du instinktiv an Situationen herangehst.',
+    how: 'Berechnung: Geburtstag + Geburtsmonat, dann auf eine Kernzahl reduziert.',
+    why: 'Sie zeigt deine grundsätzliche Haltung zum Leben, bevor du nachdenkst. Dein automatischer Modus — besonders sichtbar in neuen Situationen.',
+  },
+  expression: {
+    what: 'Die Ausdruckszahl (auch Schicksalszahl) zeigt deine natürlichen Talente und wie du in der Welt wirkst.',
+    how: 'Berechnung: Alle Buchstaben des vollständigen Geburtsnamens werden in Zahlen umgewandelt (A=1, B=2… nach dem pythagoreischen System) und addiert.',
+    why: 'Sie beschreibt dein volles Potenzial — die Fähigkeiten, die du in diesem Leben entfalten kannst. Dein Geburtsname trägt die Schwingung deiner Bestimmung.',
+  },
+  heartDesire: {
+    what: 'Die Herzzahl (Seelenzahl) offenbart deine tiefsten inneren Wünsche — was deine Seele wirklich will.',
+    how: 'Berechnung: Nur die Vokale (A, E, I, O, U) des Geburtsnamens werden addiert.',
+    why: 'Was du wirklich brauchst, um dich erfüllt zu fühlen. Diese Zahl spricht von dem, was oft verborgen bleibt — dein innerster Antrieb, jenseits von äußeren Erwartungen.',
+  },
+  personality: {
+    what: 'Die Persönlichkeitszahl zeigt, wie andere dich wahrnehmen — dein äußeres Erscheinungsbild.',
+    how: 'Berechnung: Nur die Konsonanten des Geburtsnamens werden addiert.',
+    why: 'Der erste Eindruck, den du hinterlässt. Diese Zahl beschreibt die Maske, die du trägst — nicht im negativen Sinne, sondern als natürlicher Filter zwischen deiner inneren und äußeren Welt.',
+  },
+  maturity: {
+    what: 'Die Reifezahl entfaltet sich erst ab der Lebensmitte (ca. 35-45 Jahre) und zeigt dein langfristiges Wachstumsziel.',
+    how: 'Berechnung: Lebenszahl + Ausdruckszahl, dann reduziert.',
+    why: 'Sie beschreibt die Synthese deines Lebenswegs und deiner Talente — die Person, zu der du wirst, wenn du dein volles Potenzial lebst. Besonders relevant für die zweite Lebenshälfte.',
+  },
+  spiritual: {
+    what: 'Die Spirituelle Zahl (Kraftzahl) zeigt deine verborgenen Fähigkeiten und das, was zwischen den Zeilen deines Wesens steht.',
+    how: 'Berechnung: Herzzahl + Persönlichkeitszahl, dann reduziert.',
+    why: 'Deine stille Kraftquelle — besonders aktiv zwischen 25 und 55 Jahren. Diese Zahl zeigt Talente, die dir vielleicht selbst nicht bewusst sind, aber die andere an dir spüren.',
+  },
+  generation: {
+    what: 'Die Generationszahl beschreibt die kollektive Energie deines Geburtsjahrgangs.',
+    how: 'Berechnung: Quersumme des Geburtsjahres.',
+    why: 'Sie zeigt, welche kollektive Aufgabe deine Generation teilt. Menschen mit gleicher Generationszahl teilen bestimmte Werte und Herausforderungen ihrer Epoche.',
+  },
+  personalYear: {
+    what: 'Das Persönliche Jahr zeigt die übergeordnete Energie und das Thema des aktuellen Jahres.',
+    how: 'Berechnung: Geburtstag + Geburtsmonat + aktuelles Jahr, dann reduziert.',
+    why: 'Ein 9-Jahres-Zyklus, in dem jedes Jahr eine eigene Qualität hat. Die Zeitqualität zu kennen hilft, im Einklang mit dem natürlichen Rhythmus zu leben und Entscheidungen bewusster zu treffen.',
+  },
+  personalMonth: {
+    what: 'Der Persönliche Monat verfeinert die Jahresenergie und zeigt das Thema des aktuellen Monats.',
+    how: 'Berechnung: Persönliches Jahr + aktueller Monat, dann reduziert.',
+    why: 'Hilft bei der kurzfristigen Planung und zeigt, welche Aktivitäten gerade unterstützt werden.',
+  },
+  personalDay: {
+    what: 'Der Persönliche Tag gibt einen Impuls für die Tagesenergie.',
+    how: 'Berechnung: Persönlicher Monat + aktueller Tag, dann reduziert.',
+    why: 'Nützlich für bewusste Tagesplanung — welche Qualität trägt dieser Tag für dich?',
+  },
+};
+
+// ─── NUMBER DISPLAY COMPONENT (with expandable info) ───────────────────────
+function NumCard({ number, label, sublabel, description, infoKey }) {
+  const [open, setOpen] = useState(false);
   if (number === null || number === undefined) return null;
   const isMaster = [11, 22, 33].includes(number);
+  const info = infoKey ? NUM_INFO[infoKey] : null;
+
   return (
     <div style={{
       background: isMaster ? 'rgba(201,168,76,0.12)' : T.bgSoft,
@@ -231,28 +298,81 @@ function NumCard({ number, label, sublabel, description, accent = false, master 
           {description && <div style={{ fontFamily: 'Raleway', fontSize: '11px', color: T.textMid, lineHeight: '1.5', fontWeight: 500 }}>{description}</div>}
         </div>
       </div>
+
+      {/* Expandable Info Section */}
+      {info && (
+        <>
+          <button onClick={() => setOpen(!open)} style={{
+            marginTop: '10px', width: '100%', textAlign: 'left',
+            fontFamily: 'Raleway', fontSize: '10px', fontWeight: 700,
+            color: T.goldD, background: 'none', border: 'none',
+            cursor: 'pointer', padding: '4px 0', letterSpacing: '0.5px',
+            display: 'flex', alignItems: 'center', gap: '6px',
+          }}>
+            <span style={{ fontSize: '12px', transition: 'transform 0.2s', transform: open ? 'rotate(90deg)' : 'rotate(0deg)', display: 'inline-block' }}>▸</span>
+            {open ? 'Erklärung ausblenden' : 'Was bedeutet diese Zahl?'}
+          </button>
+          {open && (
+            <div style={{
+              marginTop: '8px', background: T.bgCard, borderRadius: '10px',
+              padding: '12px', border: `1px solid ${T.border}`,
+            }}>
+              {[
+                { icon: '◈', title: 'Was ist das?', text: info.what },
+                { icon: '⚙', title: 'Wie wird sie berechnet?', text: info.how },
+                { icon: '✦', title: 'Warum ist sie wichtig?', text: info.why },
+              ].map(({ icon, title, text }) => (
+                <div key={title} style={{ marginBottom: '10px' }}>
+                  <div style={{ fontFamily: 'Raleway', fontSize: '9px', fontWeight: 800, color: T.goldD, letterSpacing: '1px', textTransform: 'uppercase', marginBottom: '3px' }}>{icon} {title}</div>
+                  <div style={{ fontFamily: 'Raleway', fontSize: '11px', color: T.textMid, lineHeight: '1.6', fontWeight: 500 }}>{text}</div>
+                </div>
+              ))}
+            </div>
+          )}
+        </>
+      )}
     </div>
   );
 }
 
 // ─── FORECAST ROW ──────────────────────────────────────────────────────────
 function ForecastRow({ yearNum, monthNum, dayNum }) {
+  const [openInfo, setOpenInfo] = useState(null);
+  const items = [
+    { n: yearNum, label: 'Pers. Jahr', icon: '🌅', key: 'personalYear' },
+    { n: monthNum, label: 'Pers. Monat', icon: '🌙', key: 'personalMonth' },
+    { n: dayNum, label: 'Pers. Tag', icon: '✦', key: 'personalDay' },
+  ];
   return (
-    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '8px' }}>
-      {[
-        { n: yearNum, label: 'Pers. Jahr', icon: '🌅' },
-        { n: monthNum, label: 'Pers. Monat', icon: '🌙' },
-        { n: dayNum, label: 'Pers. Tag', icon: '✦' },
-      ].map(({ n, label, icon }) => (
-        <div key={label} style={{
-          background: T.bgSoft, borderRadius: '12px', padding: '12px', textAlign: 'center',
-          border: `1px solid ${T.border}`,
-        }}>
-          <div style={{ fontSize: '16px', marginBottom: '4px' }}>{icon}</div>
-          <div style={{ fontFamily: 'Cinzel', fontSize: '22px', fontWeight: 700, color: T.gold }}>{n}</div>
-          <div style={{ fontFamily: 'Raleway', fontSize: '9px', fontWeight: 700, color: T.textSoft, letterSpacing: '1px', textTransform: 'uppercase', marginTop: '2px' }}>{label}</div>
+    <div>
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '8px' }}>
+        {items.map(({ n, label, icon, key }) => (
+          <div key={key} onClick={() => setOpenInfo(openInfo === key ? null : key)} style={{
+            background: T.bgSoft, borderRadius: '12px', padding: '12px', textAlign: 'center',
+            border: `1px solid ${openInfo === key ? T.gold : T.border}`, cursor: 'pointer',
+            transition: 'border-color 0.2s',
+          }}>
+            <div style={{ fontSize: '16px', marginBottom: '4px' }}>{icon}</div>
+            <div style={{ fontFamily: 'Cinzel', fontSize: '22px', fontWeight: 700, color: T.gold }}>{n}</div>
+            <div style={{ fontFamily: 'Raleway', fontSize: '9px', fontWeight: 700, color: T.textSoft, letterSpacing: '1px', textTransform: 'uppercase', marginTop: '2px' }}>{label}</div>
+            <div style={{ fontFamily: 'Raleway', fontSize: '8px', color: T.goldD, marginTop: '4px' }}>ⓘ Info</div>
+          </div>
+        ))}
+      </div>
+      {openInfo && NUM_INFO[openInfo] && (
+        <div style={{ marginTop: '8px', background: T.bgCard, borderRadius: '10px', padding: '12px', border: `1px solid ${T.border}` }}>
+          {[
+            { icon: '◈', title: 'Was ist das?', text: NUM_INFO[openInfo].what },
+            { icon: '⚙', title: 'Berechnung', text: NUM_INFO[openInfo].how },
+            { icon: '✦', title: 'Warum wichtig?', text: NUM_INFO[openInfo].why },
+          ].map(({ icon, title, text }) => (
+            <div key={title} style={{ marginBottom: '8px' }}>
+              <div style={{ fontFamily: 'Raleway', fontSize: '9px', fontWeight: 800, color: T.goldD, letterSpacing: '1px', textTransform: 'uppercase', marginBottom: '2px' }}>{icon} {title}</div>
+              <div style={{ fontFamily: 'Raleway', fontSize: '11px', color: T.textMid, lineHeight: '1.6', fontWeight: 500 }}>{text}</div>
+            </div>
+          ))}
         </div>
-      ))}
+      )}
     </div>
   );
 }
@@ -439,15 +559,15 @@ Warmherzig, tiefgründig, poetisch aber präzise. Ohne Heilversprechen.`;
 
           {/* Kernzahlen Detail */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', marginBottom: '16px' }}>
-            <NumCard number={nums.lifePath} label="Lebenszahl" sublabel={lp?.title} description={lp?.essence} />
-            <NumCard number={nums.birthDay} label="Geburtszahl" description={`Tag der Geburt reduziert — deine natürliche Gabe.`} />
-            <NumCard number={nums.attitude} label="Einstellungszahl" description="Wie du das Leben grundsätzlich angehst — dein erster Impuls." />
-            {nums.expression !== null && <NumCard number={nums.expression} label="Ausdruckszahl / Schicksalszahl" sublabel={EXPRESSION_DESC[nums.expression]?.split(':')[0]} description={EXPRESSION_DESC[nums.expression]} />}
-            {nums.heartDesire !== null && <NumCard number={nums.heartDesire} label="Herzzahl / Seelenzahl" description={HEART_DESIRE_DESC[nums.heartDesire]} />}
-            {nums.personality !== null && <NumCard number={nums.personality} label="Persönlichkeitszahl" description={PERSONALITY_DESC[nums.personality]} />}
-            {nums.maturity !== null && <NumCard number={nums.maturity} label="Reifezahl" description="Entfaltet sich ab der Lebensmitte — die Synthese deiner Lebenszahl und Ausdruckszahl." />}
-            {nums.spiritual !== null && <NumCard number={nums.spiritual} label="Spirituelle Zahl" description="Deine verborgenen Talente und Fähigkeiten — besonders stark zwischen 25 und 55 Jahren." />}
-            <NumCard number={nums.generation} label="Generationszahl" description="Die kollektive Energie deines Geburtsjahrgangs." />
+            <NumCard number={nums.lifePath} label="Lebenszahl" sublabel={lp?.title} description={lp?.essence} infoKey="lifePath" />
+            <NumCard number={nums.birthDay} label="Geburtszahl" description={`Tag der Geburt reduziert — deine natürliche Gabe.`} infoKey="birthDay" />
+            <NumCard number={nums.attitude} label="Einstellungszahl" description="Wie du das Leben grundsätzlich angehst — dein erster Impuls." infoKey="attitude" />
+            {nums.expression !== null && <NumCard number={nums.expression} label="Ausdruckszahl / Schicksalszahl" sublabel={EXPRESSION_DESC[nums.expression]?.split(':')[0]} description={EXPRESSION_DESC[nums.expression]} infoKey="expression" />}
+            {nums.heartDesire !== null && <NumCard number={nums.heartDesire} label="Herzzahl / Seelenzahl" description={HEART_DESIRE_DESC[nums.heartDesire]} infoKey="heartDesire" />}
+            {nums.personality !== null && <NumCard number={nums.personality} label="Persönlichkeitszahl" description={PERSONALITY_DESC[nums.personality]} infoKey="personality" />}
+            {nums.maturity !== null && <NumCard number={nums.maturity} label="Reifezahl" description="Entfaltet sich ab der Lebensmitte — die Synthese deiner Lebenszahl und Ausdruckszahl." infoKey="maturity" />}
+            {nums.spiritual !== null && <NumCard number={nums.spiritual} label="Spirituelle Zahl" description="Deine verborgenen Talente und Fähigkeiten — besonders stark zwischen 25 und 55 Jahren." infoKey="spiritual" />}
+            <NumCard number={nums.generation} label="Generationszahl" description="Die kollektive Energie deines Geburtsjahrgangs." infoKey="generation" />
           </div>
 
           {/* Karmische Schuldzahlen */}
