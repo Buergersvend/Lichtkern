@@ -285,9 +285,9 @@ function Clients({clients,sessions,onSave,onStart,onDelete,onOnboarding,reminder
   const [showAdd,setShowAdd]=useState(false);
   const [search,setSearch]=useState("");
   const [selClient,setSelClient]=useState(null);
-  const [form,setForm]=useState({name:"",contact:"",notes:"",tags:"",hdType:"",hdProfile:"",hdAuthority:""});
+  const [form,setForm]=useState({name:"",contact:"",notes:"",tags:"",hdType:"",hdProfile:"",hdAuthority:"",birthDate:"",birthName:""});
   const filtered=clients.filter(c=>c.name.toLowerCase().includes(search.toLowerCase()));
-  const add=()=>{if(!form.name.trim())return;onSave([...clients,{id:uid(),createdAt:new Date().toISOString(),...form,tags:form.tags.split(",").map(t=>t.trim()).filter(Boolean)}]);setForm({name:"",contact:"",notes:"",tags:""});setShowAdd(false);};
+  const add=()=>{if(!form.name.trim())return;onSave([...clients,{id:uid(),createdAt:new Date().toISOString(),...form,tags:form.tags.split(",").map(t=>t.trim()).filter(Boolean)}]);setForm({name:"",contact:"",notes:"",tags:"",birthDate:"",birthName:""});setShowAdd(false);};
   return(
     <div style={{padding:"0 16px 96px"}}>
       <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",paddingTop:"8px",marginBottom:"16px"}}>
@@ -303,6 +303,20 @@ function Clients({clients,sessions,onSave,onStart,onDelete,onOnboarding,reminder
           {[{k:"name",p:"Name *"},{k:"contact",p:"Email / Telefon"},{k:"notes",p:"Notizen"},{k:"tags",p:"Tags: Angst, Rücken, Ahnen…"}].map(f=>(
             <div key={f.k} style={{marginBottom:"8px"}}><TI value={form[f.k]} onChange={v=>setForm({...form,[f.k]:v})} placeholder={f.p}/></div>
           ))}
+          {/* Geburtsdaten für Numerologie */}
+          <div style={{marginTop:"12px",paddingTop:"12px",borderTop:`1px dashed ${T.border}`}}>
+            <div style={{fontFamily:"Raleway",fontSize:"10px",color:T.goldD,letterSpacing:"2px",fontWeight:700,textTransform:"uppercase",marginBottom:"8px"}}>🔢 Numerologie (optional)</div>
+            <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:"8px"}}>
+              <div>
+                <div style={{fontFamily:"Raleway",fontSize:"10px",color:T.textMid,marginBottom:"4px",fontWeight:600}}>Geburtsdatum</div>
+                <input type="date" value={form.birthDate} onChange={e=>setForm({...form,birthDate:e.target.value})} style={{width:"100%",padding:"9px 10px",borderRadius:"10px",border:`1.5px solid ${T.border}`,fontFamily:"Raleway",fontSize:"12px",color:T.text,background:T.bgCard,outline:"none",boxSizing:"border-box"}}/>
+              </div>
+              <div>
+                <div style={{fontFamily:"Raleway",fontSize:"10px",color:T.textMid,marginBottom:"4px",fontWeight:600}}>Geburtsname</div>
+                <input type="text" value={form.birthName} onChange={e=>setForm({...form,birthName:e.target.value})} placeholder="Vollständiger Name" style={{width:"100%",padding:"9px 10px",borderRadius:"10px",border:`1.5px solid ${T.border}`,fontFamily:"Raleway",fontSize:"12px",color:T.text,background:T.bgCard,outline:"none",boxSizing:"border-box"}}/>
+              </div>
+            </div>
+          </div>
           {(
             <div style={{marginTop:"12px",paddingTop:"12px",borderTop:`1px dashed ${T.border}`}}>
               <div style={{fontFamily:"Raleway",fontSize:"10px",color:T.goldD,letterSpacing:"2px",fontWeight:700,textTransform:"uppercase",marginBottom:"8px"}}>✦ Human Design (optional)</div>
