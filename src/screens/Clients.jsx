@@ -4,6 +4,7 @@ import { Flower } from "../components/Decorations";
 import { Card, Btn, TI, Select, Pill, SL } from "../components/UI.jsx";
 
 import { BodygraphSVG, HDTab, HD_CHANNELS, HD_CENTER_CFG, HD_GATE_CENTER } from "../components/HumanDesign.jsx";
+import { NumerologyTab, calcNumerology, LIFE_PATH_DESC } from "../components/Numerology.jsx";
 import { uid } from "../config/helpers.js";
 async function groqFetch(prompt) {
  const res = await fetch("/api/ki", {
@@ -46,18 +47,23 @@ const scrollbarCSS = `
 function ClientDetailModal({client,sessions,onClose,onSave,onStart,onAnalyse,onDelete}){
   const [tab,setTab]=useState('profil');
   const sc=sessions.filter(s=>s.clientId===client.id);
-  const tabs=[['profil','👤 Profil'],['hd','⚙ Human Design'],['sessions','📋 Sitzungen']];
+  const tabs=[['profil','👤 Profil'],['hd','⚙ Human Design'],['numerologie','🔢 Numerologie'],['sessions','📋 Sitzungen']];
   return(
   <div style={{position:'fixed',inset:0,background:'rgba(0,0,0,0.5)',zIndex:200,display:'flex',alignItems:'center',justifyContent:'center'}}>
    <style>{scrollbarCSS}</style>
-   <div className="lk-modal-scroll" style={{background:T.bgCard,borderRadius:'24px',width:'95%',maxWidth:'560px',maxHeight:'92vh',overflowY:'auto',padding:'0 0 40px'}}>
+   <div className="lk-modal-scroll" style={{background:T.bgCard,borderRadius:'24px',width:'95%',maxWidth:'640px',maxHeight:'92vh',overflowY:'auto',padding:'0 0 40px'}}>
         {/* Handle */}
         <div style={{display:'flex',justifyContent:'center',padding:'12px 0 4px'}}><div style={{width:'40px',height:'4px',borderRadius:'2px',background:T.border}}/></div>
         {/* Header */}
         <div style={{padding:'12px 20px 0',display:'flex',justifyContent:'space-between',alignItems:'center'}}>
           <div>
             <div style={{fontFamily:'Cinzel',fontSize:'18px',color:T.text,fontWeight:700}}>{client.name}</div>
-            {client.hdType&&<div style={{fontFamily:'Raleway',fontSize:'12px',color:T.gold,fontWeight:600,marginTop:'2px'}}>⚙ {client.hdType}{client.hdProfile?' · '+client.hdProfile:''}</div>}
+            {(client.hdType||client.birthDate)&&(()=>{
+              const parts=[];
+              if(client.hdType) parts.push(`⚙ ${client.hdType}${client.hdProfile?' · '+client.hdProfile:''}`);
+              if(client.birthDate){const n=calcNumerology(client.birthDate,client.birthName);if(n){const lp=LIFE_PATH_DESC[n.lifePath];parts.push(`🔢 ${n.lifePath}${n.isMaster?'':''} ${lp?.title||''}`);}}
+              return<div style={{fontFamily:'Raleway',fontSize:'12px',color:T.gold,fontWeight:600,marginTop:'2px'}}>{parts.join(' · ')}</div>;
+            })()}
           </div>
           <button onClick={onClose} style={{width:'32px',height:'32px',borderRadius:'50%',border:`1.5px solid ${T.border}`,background:T.bgSoft,cursor:'pointer',fontSize:'16px',display:'flex',alignItems:'center',justifyContent:'center',color:T.textMid}}>✕</button>
         </div>
@@ -81,6 +87,7 @@ function ClientDetailModal({client,sessions,onClose,onSave,onStart,onAnalyse,onD
             </div>
           )}
           {tab==='hd'&&<HDTab client={client} onSave={updated=>{onSave(updated);}}/>}
+          {tab==='numerologie'&&<NumerologyTab client={client} onSave={updated=>{onSave(updated);}}/>}
           {tab==='sessions'&&(
             <div>
               {sc.length===0&&<div style={{textAlign:'center',padding:'32px 0',color:T.textSoft,fontFamily:'Raleway',fontSize:'13px'}}>Noch keine Sitzungen</div>}
@@ -278,9 +285,9 @@ function Clients({clients,sessions,onSave,onStart,onDelete,onOnboarding,reminder
   const [showAdd,setShowAdd]=useState(false);
   const [search,setSearch]=useState("");
   const [selClient,setSelClient]=useState(null);
-  const [form,setForm]=useState({name:"",contact:"",notes:"",tags:"",hdType:"",hdProfile:"",hdAuthority:""});
+  const [form,setForm]=useState({name:"",contact:"",notes:"",tags:"",hdType:"",hdProfile:"",hdAuthority:"",birthDate:"",birthName:""});
   const filtered=clients.filter(c=>c.name.toLowerCase().includes(search.toLowerCase()));
-  const add=()=>{if(!form.name.trim())return;onSave([...clients,{id:uid(),createdAt:new Date().toISOString(),...form,tags:form.tags.split(",").map(t=>t.trim()).filter(Boolean)}]);setForm({name:"",contact:"",notes:"",tags:""});setShowAdd(false);};
+  const add=()=>{if(!form.name.trim())return;onSave([...clients,{id:uid(),createdAt:new Date().toISOString(),...form,tags:form.tags.split(",").map(t=>t.trim()).filter(Boolean)}]);setForm({name:"",contact:"",notes:"",tags:"",birthDate:"",birthName:""});setShowAdd(false);};
   return(
     <div style={{padding:"0 16px 96px"}}>
       <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",paddingTop:"8px",marginBottom:"16px"}}>
@@ -296,6 +303,20 @@ function Clients({clients,sessions,onSave,onStart,onDelete,onOnboarding,reminder
           {[{k:"name",p:"Name *"},{k:"contact",p:"Email / Telefon"},{k:"notes",p:"Notizen"},{k:"tags",p:"Tags: Angst, Rücken, Ahnen…"}].map(f=>(
             <div key={f.k} style={{marginBottom:"8px"}}><TI value={form[f.k]} onChange={v=>setForm({...form,[f.k]:v})} placeholder={f.p}/></div>
           ))}
+          {/* Geburtsdaten für Numerologie */}
+          <div style={{marginTop:"12px",paddingTop:"12px",borderTop:`1px dashed ${T.border}`}}>
+            <div style={{fontFamily:"Raleway",fontSize:"10px",color:T.goldD,letterSpacing:"2px",fontWeight:700,textTransform:"uppercase",marginBottom:"8px"}}>🔢 Numerologie (optional)</div>
+            <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:"8px"}}>
+              <div>
+                <div style={{fontFamily:"Raleway",fontSize:"10px",color:T.textMid,marginBottom:"4px",fontWeight:600}}>Geburtsdatum</div>
+                <input type="date" value={form.birthDate} onChange={e=>setForm({...form,birthDate:e.target.value})} style={{width:"100%",padding:"9px 10px",borderRadius:"10px",border:`1.5px solid ${T.border}`,fontFamily:"Raleway",fontSize:"12px",color:T.text,background:T.bgCard,outline:"none",boxSizing:"border-box"}}/>
+              </div>
+              <div>
+                <div style={{fontFamily:"Raleway",fontSize:"10px",color:T.textMid,marginBottom:"4px",fontWeight:600}}>Geburtsname (Vor- + Nachname)</div>
+                <input type="text" value={form.birthName} onChange={e=>setForm({...form,birthName:e.target.value})} placeholder="z.B. Sven Donath" style={{width:"100%",padding:"9px 10px",borderRadius:"10px",border:`1.5px solid ${T.border}`,fontFamily:"Raleway",fontSize:"12px",color:T.text,background:T.bgCard,outline:"none",boxSizing:"border-box"}}/>
+              </div>
+            </div>
+          </div>
           {(
             <div style={{marginTop:"12px",paddingTop:"12px",borderTop:`1px dashed ${T.border}`}}>
               <div style={{fontFamily:"Raleway",fontSize:"10px",color:T.goldD,letterSpacing:"2px",fontWeight:700,textTransform:"uppercase",marginBottom:"8px"}}>✦ Human Design (optional)</div>
@@ -349,6 +370,7 @@ function Clients({clients,sessions,onSave,onStart,onDelete,onOnboarding,reminder
                   <div style={{fontFamily:"Raleway",fontWeight:800,fontSize:"15px",color:T.text}}>{c.name}</div>
                   {c.contact&&<div style={{fontFamily:"Raleway",fontSize:"12px",color:T.textMid,marginTop:"3px",fontWeight:500}}>{c.contact}</div>}
                   {hasHD&&<div style={{fontFamily:"Raleway",fontSize:'11px',color:T.gold,fontWeight:700,marginTop:'4px'}}>⚙ {c.hdType||'HD'}{c.hdProfile?' · Profil '+c.hdProfile:''}</div>}
+                  {c.birthDate&&(()=>{const n=calcNumerology(c.birthDate,c.birthName);if(!n)return null;const lp=LIFE_PATH_DESC[n.lifePath];return<div style={{fontFamily:"Raleway",fontSize:'11px',color:T.gold,fontWeight:700,marginTop:hasHD?'2px':'4px'}}>🔢 Lebenszahl {n.lifePath} · {lp?.title||''}</div>;})()}
                   {c.tags?.length>0&&<div style={{display:"flex",flexWrap:"wrap",gap:"5px",marginTop:"8px"}}>{c.tags.map(t=><span key={t} style={{fontSize:"10px",padding:"3px 11px",borderRadius:"12px",background:'rgba(201,168,76,0.15)',color:T.goldD,fontFamily:"Raleway",fontWeight:700,border:`1px solid ${T.borderMid}`}}>{t}</span>)}</div>}
                 </div>
                 <div style={{textAlign:"right",flexShrink:0,marginLeft:"12px"}}>
