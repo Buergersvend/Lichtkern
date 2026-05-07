@@ -3,6 +3,7 @@ import { T } from "../config/theme.js";
 import { Card, Btn, SL } from "./UI.jsx";
 import { Flower } from "./Decorations";
 import { groqFetch } from "../config/groq.js";
+import { ResonanzKarte } from "./ResonanzKarte.jsx";
 
 // ─── PYTHAGOREAN LETTER MAP ────────────────────────────────────────────────
 const PYTH = {
@@ -671,6 +672,7 @@ function NumerologyTab({ client, onSave }) {
   const [saved, setSaved] = useState(!!(client.birthDate));
   const [aiLoading, setAiLoading] = useState(false);
   const [aiText, setAiText] = useState('');
+  const [showKarte, setShowKarte] = useState(false);
 
   const nums = useMemo(() => calcNumerology(birthDate, birthName), [birthDate, birthName]);
 
@@ -830,6 +832,18 @@ Warmherzig, tiefgründig, poetisch aber präzise. Ohne Heilversprechen.`;
               ))}
             </Card>
           )}
+
+          {/* Resonanzkarte Button */}
+          <button onClick={() => setShowKarte(true)} style={{
+            width: '100%', marginBottom: '16px', padding: '14px',
+            borderRadius: '14px', border: '1.5px solid rgba(201,168,76,0.35)',
+            background: 'linear-gradient(135deg, rgba(201,168,76,0.1), rgba(201,168,76,0.04))',
+            cursor: 'pointer', textAlign: 'center',
+          }}>
+            <div style={{ fontFamily: 'Raleway', fontWeight: 800, fontSize: '13px', color: T.goldD }}>🖨 Resonanzkarte erstellen</div>
+            <div style={{ fontFamily: 'Raleway', fontSize: '10px', color: T.textMid, marginTop: '3px' }}>Druckbare Seelenlandkarte für deinen Klienten</div>
+          </button>
+          {showKarte && <ResonanzKarte client={{...client, birthDate, birthName}} onClose={() => setShowKarte(false)} />}
 
           {/* ═══ RESONANZ-SYNTHESE: HD × Numerologie ═══ */}
           {client.hdType && nums && (
