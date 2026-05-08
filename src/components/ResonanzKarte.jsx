@@ -17,11 +17,11 @@ const printCSS = `
 `;
 
 const Ornament = () => (
-  <div style={{ textAlign: 'center', margin: '14px 0', color: '#C9A84C', fontSize: '12px', letterSpacing: '8px', opacity: 0.4 }}>✦ ✦ ✦</div>
+  <div style={{ textAlign: 'center', margin: '16px 0', color: '#C9A84C', fontSize: '14px', letterSpacing: '8px', opacity: 0.4 }}>✦ ✦ ✦</div>
 );
 
 const Prose = ({ children }) => (
-  <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '12.5px', color: 'rgba(245,240,232,0.8)', lineHeight: '1.85', fontWeight: 400, wordWrap: 'break-word', overflowWrap: 'break-word' }}>{children}</div>
+  <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '15.5px', color: 'rgba(245,240,232,0.8)', lineHeight: '1.85', fontWeight: 400, wordWrap: 'break-word', overflowWrap: 'break-word' }}>{children}</div>
 );
 
 function ResonanzKarte({ client, aiText: existingAiText, onClose }) {
@@ -226,13 +226,13 @@ Schreibe OHNE Markdown-Formatierung (keine **, keine #, keine Aufzählungszeiche
               }}>
 
                 <div style={{ textAlign: 'center', marginBottom: '14px' }}>
-                  <div style={{ fontFamily: 'Raleway', fontSize: '8px', fontWeight: 700, letterSpacing: '4px', color: 'rgba(201,168,76,0.5)', textTransform: 'uppercase', marginBottom: '6px' }}>Human Resonanz</div>
-                  <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '28px', fontWeight: 600, color: '#C9A84C', letterSpacing: '2px' }}>Resonanzkarte</div>
+                  <div style={{ fontFamily: 'Raleway', fontSize: '10px', fontWeight: 700, letterSpacing: '4px', color: 'rgba(201,168,76,0.5)', textTransform: 'uppercase', marginBottom: '6px' }}>Human Resonanz</div>
+                  <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '32px', fontWeight: 600, color: '#C9A84C', letterSpacing: '2px' }}>Resonanzkarte</div>
                 </div>
                 <Ornament />
                 <div style={{ textAlign: 'center', marginBottom: '20px' }}>
-                  <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '24px', fontWeight: 700, color: '#F5F0E8', marginBottom: '4px' }}>{client.name}</div>
-                  <div style={{ fontFamily: 'Raleway', fontSize: '9px', color: 'rgba(245,240,232,0.4)', letterSpacing: '1px' }}>
+                  <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '28px', fontWeight: 700, color: '#F5F0E8', marginBottom: '4px' }}>{client.name}</div>
+                  <div style={{ fontFamily: 'Raleway', fontSize: '11px', color: 'rgba(245,240,232,0.4)', letterSpacing: '1px' }}>
                     {[
                       client.birthDate && new Date(client.birthDate).toLocaleDateString('de-DE', { day: 'numeric', month: 'long', year: 'numeric' }),
                       hasHD && `${client.hdType} · ${client.hdProfile || ''}`,
@@ -243,14 +243,14 @@ Schreibe OHNE Markdown-Formatierung (keine **, keine #, keine Aufzählungszeiche
                 <Ornament />
 
                 {sections.slice(0, 3).map((sec, i) => (
-                  <div key={i} style={{ marginBottom: '18px' }}>
-                    <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '13px', fontWeight: 700, color: '#C9A84C', letterSpacing: '2px', textTransform: 'uppercase', marginBottom: '6px' }}>{sec.title}</div>
+                  <div key={i} style={{ marginBottom: '22px' }}>
+                    <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '15px', fontWeight: 700, color: '#C9A84C', letterSpacing: '2.5px', textTransform: 'uppercase', marginBottom: '8px' }}>{sec.title}</div>
                     <Prose>{sec.body}</Prose>
                   </div>
                 ))}
 
                 <div style={{ marginTop: '24px', padding: '16px 0', textAlign: 'center' }}>
-                  <div style={{ fontFamily: 'Raleway', fontSize: '6.5px', color: 'rgba(245,240,232,0.2)', letterSpacing: '2px', textTransform: 'uppercase' }}>Lichtkern · Human Resonanz · {today}</div>
+                  <div style={{ fontFamily: 'Raleway', fontSize: '8px', color: 'rgba(245,240,232,0.2)', letterSpacing: '2px', textTransform: 'uppercase' }}>Lichtkern · Human Resonanz · {today}</div>
                 </div>
               </div>
 
@@ -264,8 +264,8 @@ Schreibe OHNE Markdown-Formatierung (keine **, keine #, keine Aufzählungszeiche
               }}>
 
                 {sections.slice(3).map((sec, i) => (
-                  <div key={i} style={{ marginBottom: '18px' }}>
-                    <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '13px', fontWeight: 700, color: '#C9A84C', letterSpacing: '2px', textTransform: 'uppercase', marginBottom: '6px' }}>{sec.title}</div>
+                  <div key={i} style={{ marginBottom: '22px' }}>
+                    <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '15px', fontWeight: 700, color: '#C9A84C', letterSpacing: '2.5px', textTransform: 'uppercase', marginBottom: '8px' }}>{sec.title}</div>
                     <Prose>{sec.body}</Prose>
                   </div>
                 ))}
@@ -275,25 +275,25 @@ Schreibe OHNE Markdown-Formatierung (keine **, keine #, keine Aufzählungszeiche
                 {/* Compact reference block */}
                 <div style={{ display: 'flex', gap: '14px', marginBottom: '16px' }}>
                   {hasHD && (
-                    <div style={{ flex: 1, padding: '12px', border: '1px solid rgba(201,168,76,0.1)', borderRadius: '10px' }}>
-                      <div style={{ fontFamily: 'Raleway', fontSize: '7px', fontWeight: 800, color: '#C9A84C', letterSpacing: '2px', textTransform: 'uppercase', marginBottom: '6px' }}>Human Design</div>
-                      <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '15px', fontWeight: 700, color: '#F5F0E8' }}>{client.hdType}</div>
-                      <div style={{ fontFamily: 'Raleway', fontSize: '9px', color: 'rgba(245,240,232,0.4)', marginTop: '2px' }}>{client.hdProfile && `Profil ${client.hdProfile}`}{client.hdAuthority && ` · ${client.hdAuthority}`}</div>
-                      <div style={{ fontFamily: 'Raleway', fontSize: '9px', color: 'rgba(245,240,232,0.35)', marginTop: '4px' }}>Strategie: {hdInfo?.strategy} · Signatur: {hdInfo?.signature}</div>
+                    <div style={{ flex: 1, padding: '14px', border: '1px solid rgba(201,168,76,0.1)', borderRadius: '10px' }}>
+                      <div style={{ fontFamily: 'Raleway', fontSize: '9px', fontWeight: 800, color: '#C9A84C', letterSpacing: '2px', textTransform: 'uppercase', marginBottom: '6px' }}>Human Design</div>
+                      <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '18px', fontWeight: 700, color: '#F5F0E8' }}>{client.hdType}</div>
+                      <div style={{ fontFamily: 'Raleway', fontSize: '11px', color: 'rgba(245,240,232,0.4)', marginTop: '2px' }}>{client.hdProfile && `Profil ${client.hdProfile}`}{client.hdAuthority && ` · ${client.hdAuthority}`}</div>
+                      <div style={{ fontFamily: 'Raleway', fontSize: '11px', color: 'rgba(245,240,232,0.35)', marginTop: '4px' }}>Strategie: {hdInfo?.strategy} · Signatur: {hdInfo?.signature}</div>
                     </div>
                   )}
                   {hasNums && (
-                    <div style={{ flex: 1, padding: '12px', border: '1px solid rgba(201,168,76,0.1)', borderRadius: '10px' }}>
-                      <div style={{ fontFamily: 'Raleway', fontSize: '7px', fontWeight: 800, color: '#C9A84C', letterSpacing: '2px', textTransform: 'uppercase', marginBottom: '6px' }}>Numerologie</div>
-                      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
+                    <div style={{ flex: 1, padding: '14px', border: '1px solid rgba(201,168,76,0.1)', borderRadius: '10px' }}>
+                      <div style={{ fontFamily: 'Raleway', fontSize: '9px', fontWeight: 800, color: '#C9A84C', letterSpacing: '2px', textTransform: 'uppercase', marginBottom: '6px' }}>Numerologie</div>
+                      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
                         {[
                           { n: nums.lifePath, l: 'Leben' }, { n: nums.expression, l: 'Ausdruck' }, { n: nums.heartDesire, l: 'Herz' },
                           { n: nums.personality, l: 'Person.' }, { n: nums.birthDay, l: 'Geburt' }, { n: nums.attitude, l: 'Einstell.' },
                           { n: nums.maturity, l: 'Reife' }, { n: nums.generation, l: 'Gener.' },
                         ].filter(x => x.n !== null && x.n !== undefined).map(({ n, l }) => (
-                          <div key={l} style={{ textAlign: 'center', width: '38px' }}>
-                            <div style={{ width: '28px', height: '28px', borderRadius: '50%', margin: '0 auto 1px', border: `1.5px solid ${[11,22,33].includes(n)?'#C9A84C':'rgba(201,168,76,0.2)'}`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: "'Cormorant Garamond', serif", fontSize: '12px', fontWeight: 700, color: [11,22,33].includes(n)?'#C9A84C':'#F5F0E8' }}>{n}</div>
-                            <div style={{ fontFamily: 'Raleway', fontSize: '5.5px', fontWeight: 700, color: 'rgba(245,240,232,0.3)', textTransform: 'uppercase' }}>{l}</div>
+                          <div key={l} style={{ textAlign: 'center', width: '44px' }}>
+                            <div style={{ width: '32px', height: '32px', borderRadius: '50%', margin: '0 auto 2px', border: `1.5px solid ${[11,22,33].includes(n)?'#C9A84C':'rgba(201,168,76,0.2)'}`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: "'Cormorant Garamond', serif", fontSize: '14px', fontWeight: 700, color: [11,22,33].includes(n)?'#C9A84C':'#F5F0E8' }}>{n}</div>
+                            <div style={{ fontFamily: 'Raleway', fontSize: '7px', fontWeight: 700, color: 'rgba(245,240,232,0.3)', textTransform: 'uppercase' }}>{l}</div>
                           </div>
                         ))}
                       </div>
@@ -302,13 +302,13 @@ Schreibe OHNE Markdown-Formatierung (keine **, keine #, keine Aufzählungszeiche
                 </div>
 
                 {hasNums && (
-                  <div style={{ display: 'flex', gap: '8px', marginBottom: '16px' }}>
+                  <div style={{ display: 'flex', gap: '10px', marginBottom: '16px' }}>
                     {[{ n: nums.personalYear, l: 'Pers. Jahr', d: PERSONAL_YEAR_DESC[nums.personalYear] }, { n: nums.personalMonth, l: 'Pers. Monat' }, { n: nums.personalDay, l: 'Pers. Tag' }].map(({ n, l, d }) => (
-                      <div key={l} style={{ flex: d ? 2 : 1, padding: '8px', border: '1px solid rgba(201,168,76,0.08)', borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                        <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '20px', fontWeight: 700, color: '#C9A84C' }}>{n}</div>
+                      <div key={l} style={{ flex: d ? 2 : 1, padding: '10px', border: '1px solid rgba(201,168,76,0.08)', borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '10px' }}>
+                        <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '24px', fontWeight: 700, color: '#C9A84C' }}>{n}</div>
                         <div>
-                          <div style={{ fontFamily: 'Raleway', fontSize: '6px', fontWeight: 700, color: 'rgba(245,240,232,0.35)', letterSpacing: '1px', textTransform: 'uppercase' }}>{l}</div>
-                          {d && <div style={{ fontFamily: 'Raleway', fontSize: '8px', color: 'rgba(245,240,232,0.4)', lineHeight: '1.3', marginTop: '1px' }}>{d}</div>}
+                          <div style={{ fontFamily: 'Raleway', fontSize: '8px', fontWeight: 700, color: 'rgba(245,240,232,0.35)', letterSpacing: '1px', textTransform: 'uppercase' }}>{l}</div>
+                          {d && <div style={{ fontFamily: 'Raleway', fontSize: '10px', color: 'rgba(245,240,232,0.4)', lineHeight: '1.3', marginTop: '1px' }}>{d}</div>}
                         </div>
                       </div>
                     ))}
@@ -321,8 +321,8 @@ Schreibe OHNE Markdown-Formatierung (keine **, keine #, keine Aufzählungszeiche
 
                 <div style={{ marginTop: '24px', padding: '16px 0', textAlign: 'center' }}>
                   <Ornament />
-                  <div style={{ fontFamily: 'Raleway', fontSize: '6.5px', color: 'rgba(245,240,232,0.2)', letterSpacing: '2px', textTransform: 'uppercase' }}>Lichtkern · Human Resonanz · www.human-resonanz.de</div>
-                  <div style={{ fontFamily: 'Raleway', fontSize: '6px', color: 'rgba(245,240,232,0.12)', marginTop: '2px' }}>Dient der Selbsterkenntnis · Kein Ersatz für medizinische oder therapeutische Behandlung</div>
+                  <div style={{ fontFamily: 'Raleway', fontSize: '8px', color: 'rgba(245,240,232,0.2)', letterSpacing: '2px', textTransform: 'uppercase' }}>Lichtkern · Human Resonanz · www.human-resonanz.de</div>
+                  <div style={{ fontFamily: 'Raleway', fontSize: '7px', color: 'rgba(245,240,232,0.12)', marginTop: '2px' }}>Dient der Selbsterkenntnis · Kein Ersatz für medizinische oder therapeutische Behandlung</div>
                 </div>
               </div>
             </div>
