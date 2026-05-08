@@ -125,11 +125,43 @@ Schreibe OHNE Markdown-Formatierung (keine **, keine #, keine Aufzählungszeiche
   const sections = parseSections(karteText);
 
   return (
-    <div style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.7)', zIndex: 400, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '16px' }}>
-      <div style={{ background: T.bgCard, borderRadius: '20px', width: '100%', maxWidth: '900px', maxHeight: '90vh', overflowY: 'auto', overflowX: 'hidden', display: 'flex', flexDirection: 'column' }}>
+    <div style={{
+      position: 'fixed',
+      top: 0,
+      right: 0,
+      bottom: 0,
+      left: 0,
+      background: 'rgba(0,0,0,0.75)',
+      backdropFilter: 'blur(4px)',
+      zIndex: 9999,
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      padding: '16px'
+    }}>
+      <div style={{
+        position: 'relative',
+        background: T.bgCard,
+        borderRadius: '20px',
+        border: `1px solid ${T.border}`,
+        width: '100%',
+        maxWidth: '780px',
+        maxHeight: '90vh',
+        display: 'flex',
+        flexDirection: 'column',
+        overflow: 'hidden'
+      }}>
 
-        {/* Toolbar */}
-        <div className="rk-no-print" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '16px 20px', borderBottom: `1px solid ${T.border}`, flexShrink: 0 }}>
+        {/* Toolbar — fixed at top */}
+        <div className="rk-no-print" style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          padding: '14px 24px',
+          borderBottom: `1px solid ${T.border}`,
+          flexShrink: 0,
+          background: T.bgCard
+        }}>
           <div style={{ fontFamily: 'Cinzel', fontSize: '16px', color: T.text, fontWeight: 700 }}>✦ Resonanzkarte</div>
           <div style={{ display: 'flex', gap: '8px' }}>
             {!karteText && (
@@ -138,138 +170,164 @@ Schreibe OHNE Markdown-Formatierung (keine **, keine #, keine Aufzählungszeiche
               </button>
             )}
             {karteText && (
-              <button onClick={handlePrint} style={{ fontFamily: 'Raleway', fontWeight: 700, fontSize: '12px', padding: '8px 18px', borderRadius: '10px', border: 'none', background: T.gold, color: '#1A1200', cursor: 'pointer' }}>🖨 Drucken</button>
+              <>
+                <button onClick={generateKarteText} disabled={loading} style={{ fontFamily: 'Raleway', fontWeight: 600, fontSize: '11px', padding: '8px 14px', borderRadius: '10px', border: `1px solid ${T.border}`, background: T.bgSoft, color: T.textMid, cursor: loading ? 'wait' : 'pointer', opacity: loading ? 0.6 : 1 }}>
+                  {loading ? '⏳…' : '↻ Neu'}
+                </button>
+                <button onClick={handlePrint} style={{ fontFamily: 'Raleway', fontWeight: 700, fontSize: '12px', padding: '8px 18px', borderRadius: '10px', border: 'none', background: T.gold, color: '#1A1200', cursor: 'pointer' }}>🖨 Drucken</button>
+              </>
             )}
             <button onClick={onClose} style={{ fontFamily: 'Raleway', fontWeight: 700, fontSize: '14px', padding: '8px 14px', borderRadius: '10px', border: `1.5px solid ${T.border}`, background: T.bgSoft, color: T.textMid, cursor: 'pointer' }}>✕</button>
           </div>
         </div>
 
-        {/* Empty State */}
-        {!karteText && !loading && (
-          <div style={{ padding: '60px 32px', textAlign: 'center' }}>
-            <div style={{ fontSize: '48px', marginBottom: '16px', opacity: 0.3 }}>✦</div>
-            <div style={{ fontFamily: 'Cinzel', fontSize: '18px', color: T.text, fontWeight: 700, marginBottom: '8px' }}>Seelenlandkarte</div>
-            <div style={{ fontFamily: 'Raleway', fontSize: '13px', color: T.textMid, lineHeight: '1.7', maxWidth: '420px', margin: '0 auto 24px' }}>
-              Eine persönliche Seelenlandkarte für {client.name} — eine warmherzige Synthese aus Human Design und Numerologie, die du ausdrucken und deinem Klienten mitgeben kannst.
+        {/* Scrollable content area */}
+        <div style={{
+          flex: 1,
+          overflowY: 'auto',
+          overflowX: 'hidden'
+        }}>
+
+          {/* Empty State */}
+          {!karteText && !loading && (
+            <div style={{ padding: '60px 32px', textAlign: 'center' }}>
+              <div style={{ fontSize: '48px', marginBottom: '16px', opacity: 0.3 }}>✦</div>
+              <div style={{ fontFamily: 'Cinzel', fontSize: '18px', color: T.text, fontWeight: 700, marginBottom: '8px' }}>Seelenlandkarte</div>
+              <div style={{ fontFamily: 'Raleway', fontSize: '13px', color: T.textMid, lineHeight: '1.7', maxWidth: '420px', margin: '0 auto 24px' }}>
+                Eine persönliche Seelenlandkarte für {client.name} — eine warmherzige Synthese aus Human Design und Numerologie, die du ausdrucken und deinem Klienten mitgeben kannst.
+              </div>
+              <button onClick={generateKarteText} style={{ fontFamily: 'Raleway', fontWeight: 700, fontSize: '14px', padding: '14px 32px', borderRadius: '14px', border: 'none', background: `linear-gradient(135deg, ${T.gold}, ${T.goldD})`, color: '#1A1200', cursor: 'pointer', boxShadow: '0 4px 16px rgba(201,168,76,0.2)' }}>
+                ✦ Karte generieren
+              </button>
             </div>
-            <button onClick={generateKarteText} style={{ fontFamily: 'Raleway', fontWeight: 700, fontSize: '14px', padding: '14px 32px', borderRadius: '14px', border: 'none', background: `linear-gradient(135deg, ${T.gold}, ${T.goldD})`, color: '#1A1200', cursor: 'pointer', boxShadow: '0 4px 16px rgba(201,168,76,0.2)' }}>
-              ✦ Karte generieren
-            </button>
-          </div>
-        )}
+          )}
 
-        {/* Loading */}
-        {loading && (
-          <div style={{ padding: '80px 32px', textAlign: 'center' }}>
-            <div style={{ fontSize: '36px', marginBottom: '16px' }}>✦</div>
-            <div style={{ fontFamily: 'Raleway', fontSize: '14px', color: T.goldD, fontWeight: 600 }}>Seelenlandkarte wird geschrieben…</div>
-            <div style={{ fontFamily: 'Raleway', fontSize: '12px', color: T.textSoft, marginTop: '6px' }}>Human Design und Numerologie werden zu einem persönlichen Brief verwoben.</div>
-          </div>
-        )}
-
-        {/* ═══ PRINTABLE CONTENT ═══ */}
-        {karteText && !loading && (
-          <div ref={printRef}>
-
-            {/* PAGE 1 */}
-            <div className="rk-page" style={{ width: '100%', margin: '0 auto', padding: '32px 32px 24px', background: '#0D0D0A', color: '#F5F0E8', boxSizing: 'border-box' }}>
-
-              <div style={{ textAlign: 'center', marginBottom: '14px' }}>
-                <div style={{ fontFamily: 'Raleway', fontSize: '8px', fontWeight: 700, letterSpacing: '4px', color: 'rgba(201,168,76,0.5)', textTransform: 'uppercase', marginBottom: '6px' }}>Human Resonanz</div>
-                <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '28px', fontWeight: 600, color: '#C9A84C', letterSpacing: '2px' }}>Resonanzkarte</div>
-              </div>
-              <Ornament />
-              <div style={{ textAlign: 'center', marginBottom: '20px' }}>
-                <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '24px', fontWeight: 700, color: '#F5F0E8', marginBottom: '4px' }}>{client.name}</div>
-                <div style={{ fontFamily: 'Raleway', fontSize: '9px', color: 'rgba(245,240,232,0.4)', letterSpacing: '1px' }}>
-                  {[
-                    client.birthDate && new Date(client.birthDate).toLocaleDateString('de-DE', { day: 'numeric', month: 'long', year: 'numeric' }),
-                    hasHD && `${client.hdType} · ${client.hdProfile || ''}`,
-                    hasNums && `Lebenszahl ${nums.lifePath}`,
-                  ].filter(Boolean).join('  ·  ')}
-                </div>
-              </div>
-              <Ornament />
-
-              {sections.slice(0, 3).map((sec, i) => (
-                <div key={i} style={{ marginBottom: '18px' }}>
-                  <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '13px', fontWeight: 700, color: '#C9A84C', letterSpacing: '2px', textTransform: 'uppercase', marginBottom: '6px' }}>{sec.title}</div>
-                  <Prose>{sec.body}</Prose>
-                </div>
-              ))}
-
-              <div style={{ marginTop: '24px', padding: '16px 0', textAlign: 'center' }}>
-                <div style={{ fontFamily: 'Raleway', fontSize: '6.5px', color: 'rgba(245,240,232,0.2)', letterSpacing: '2px', textTransform: 'uppercase' }}>Lichtkern · Human Resonanz · {today}</div>
-              </div>
+          {/* Loading */}
+          {loading && (
+            <div style={{ padding: '80px 32px', textAlign: 'center' }}>
+              <div style={{ fontSize: '36px', marginBottom: '16px', animation: 'pulse 2s ease-in-out infinite' }}>✦</div>
+              <div style={{ fontFamily: 'Raleway', fontSize: '14px', color: T.goldD, fontWeight: 600 }}>Seelenlandkarte wird geschrieben…</div>
+              <div style={{ fontFamily: 'Raleway', fontSize: '12px', color: T.textSoft, marginTop: '6px' }}>Human Design und Numerologie werden zu einem persönlichen Brief verwoben.</div>
+              <style>{`@keyframes pulse { 0%,100% { opacity: 0.4; } 50% { opacity: 1; } }`}</style>
             </div>
+          )}
 
-            {/* PAGE 2 */}
-            <div className="rk-page" style={{ width: '100%', margin: '0 auto', padding: '24px 32px 24px', background: '#0D0D0A', color: '#F5F0E8', boxSizing: 'border-box' }}>
+          {/* ═══ PRINTABLE CONTENT ═══ */}
+          {karteText && !loading && (
+            <div ref={printRef}>
 
-              {sections.slice(3).map((sec, i) => (
-                <div key={i} style={{ marginBottom: '18px' }}>
-                  <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '13px', fontWeight: 700, color: '#C9A84C', letterSpacing: '2px', textTransform: 'uppercase', marginBottom: '6px' }}>{sec.title}</div>
-                  <Prose>{sec.body}</Prose>
+              {/* PAGE 1 */}
+              <div className="rk-page" style={{
+                width: '100%',
+                padding: '40px 48px 32px',
+                background: '#0D0D0A',
+                color: '#F5F0E8',
+                boxSizing: 'border-box'
+              }}>
+
+                <div style={{ textAlign: 'center', marginBottom: '14px' }}>
+                  <div style={{ fontFamily: 'Raleway', fontSize: '8px', fontWeight: 700, letterSpacing: '4px', color: 'rgba(201,168,76,0.5)', textTransform: 'uppercase', marginBottom: '6px' }}>Human Resonanz</div>
+                  <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '28px', fontWeight: 600, color: '#C9A84C', letterSpacing: '2px' }}>Resonanzkarte</div>
                 </div>
-              ))}
-
-              <Ornament />
-
-              {/* Compact reference block */}
-              <div style={{ display: 'flex', gap: '14px', marginBottom: '16px' }}>
-                {hasHD && (
-                  <div style={{ flex: 1, padding: '12px', border: '1px solid rgba(201,168,76,0.1)', borderRadius: '10px' }}>
-                    <div style={{ fontFamily: 'Raleway', fontSize: '7px', fontWeight: 800, color: '#C9A84C', letterSpacing: '2px', textTransform: 'uppercase', marginBottom: '6px' }}>Human Design</div>
-                    <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '15px', fontWeight: 700, color: '#F5F0E8' }}>{client.hdType}</div>
-                    <div style={{ fontFamily: 'Raleway', fontSize: '9px', color: 'rgba(245,240,232,0.4)', marginTop: '2px' }}>{client.hdProfile && `Profil ${client.hdProfile}`}{client.hdAuthority && ` · ${client.hdAuthority}`}</div>
-                    <div style={{ fontFamily: 'Raleway', fontSize: '9px', color: 'rgba(245,240,232,0.35)', marginTop: '4px' }}>Strategie: {hdInfo?.strategy} · Signatur: {hdInfo?.signature}</div>
+                <Ornament />
+                <div style={{ textAlign: 'center', marginBottom: '20px' }}>
+                  <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '24px', fontWeight: 700, color: '#F5F0E8', marginBottom: '4px' }}>{client.name}</div>
+                  <div style={{ fontFamily: 'Raleway', fontSize: '9px', color: 'rgba(245,240,232,0.4)', letterSpacing: '1px' }}>
+                    {[
+                      client.birthDate && new Date(client.birthDate).toLocaleDateString('de-DE', { day: 'numeric', month: 'long', year: 'numeric' }),
+                      hasHD && `${client.hdType} · ${client.hdProfile || ''}`,
+                      hasNums && `Lebenszahl ${nums.lifePath}`,
+                    ].filter(Boolean).join('  ·  ')}
                   </div>
-                )}
-                {hasNums && (
-                  <div style={{ flex: 1, padding: '12px', border: '1px solid rgba(201,168,76,0.1)', borderRadius: '10px' }}>
-                    <div style={{ fontFamily: 'Raleway', fontSize: '7px', fontWeight: 800, color: '#C9A84C', letterSpacing: '2px', textTransform: 'uppercase', marginBottom: '6px' }}>Numerologie</div>
-                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
-                      {[
-                        { n: nums.lifePath, l: 'Leben' }, { n: nums.expression, l: 'Ausdruck' }, { n: nums.heartDesire, l: 'Herz' },
-                        { n: nums.personality, l: 'Person.' }, { n: nums.birthDay, l: 'Geburt' }, { n: nums.attitude, l: 'Einstell.' },
-                        { n: nums.maturity, l: 'Reife' }, { n: nums.generation, l: 'Gener.' },
-                      ].filter(x => x.n !== null && x.n !== undefined).map(({ n, l }) => (
-                        <div key={l} style={{ textAlign: 'center', width: '38px' }}>
-                          <div style={{ width: '28px', height: '28px', borderRadius: '50%', margin: '0 auto 1px', border: `1.5px solid ${[11,22,33].includes(n)?'#C9A84C':'rgba(201,168,76,0.2)'}`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: "'Cormorant Garamond', serif", fontSize: '12px', fontWeight: 700, color: [11,22,33].includes(n)?'#C9A84C':'#F5F0E8' }}>{n}</div>
-                          <div style={{ fontFamily: 'Raleway', fontSize: '5.5px', fontWeight: 700, color: 'rgba(245,240,232,0.3)', textTransform: 'uppercase' }}>{l}</div>
-                        </div>
-                      ))}
+                </div>
+                <Ornament />
+
+                {sections.slice(0, 3).map((sec, i) => (
+                  <div key={i} style={{ marginBottom: '18px' }}>
+                    <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '13px', fontWeight: 700, color: '#C9A84C', letterSpacing: '2px', textTransform: 'uppercase', marginBottom: '6px' }}>{sec.title}</div>
+                    <Prose>{sec.body}</Prose>
+                  </div>
+                ))}
+
+                <div style={{ marginTop: '24px', padding: '16px 0', textAlign: 'center' }}>
+                  <div style={{ fontFamily: 'Raleway', fontSize: '6.5px', color: 'rgba(245,240,232,0.2)', letterSpacing: '2px', textTransform: 'uppercase' }}>Lichtkern · Human Resonanz · {today}</div>
+                </div>
+              </div>
+
+              {/* PAGE 2 */}
+              <div className="rk-page" style={{
+                width: '100%',
+                padding: '40px 48px 32px',
+                background: '#0D0D0A',
+                color: '#F5F0E8',
+                boxSizing: 'border-box'
+              }}>
+
+                {sections.slice(3).map((sec, i) => (
+                  <div key={i} style={{ marginBottom: '18px' }}>
+                    <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '13px', fontWeight: 700, color: '#C9A84C', letterSpacing: '2px', textTransform: 'uppercase', marginBottom: '6px' }}>{sec.title}</div>
+                    <Prose>{sec.body}</Prose>
+                  </div>
+                ))}
+
+                <Ornament />
+
+                {/* Compact reference block */}
+                <div style={{ display: 'flex', gap: '14px', marginBottom: '16px' }}>
+                  {hasHD && (
+                    <div style={{ flex: 1, padding: '12px', border: '1px solid rgba(201,168,76,0.1)', borderRadius: '10px' }}>
+                      <div style={{ fontFamily: 'Raleway', fontSize: '7px', fontWeight: 800, color: '#C9A84C', letterSpacing: '2px', textTransform: 'uppercase', marginBottom: '6px' }}>Human Design</div>
+                      <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '15px', fontWeight: 700, color: '#F5F0E8' }}>{client.hdType}</div>
+                      <div style={{ fontFamily: 'Raleway', fontSize: '9px', color: 'rgba(245,240,232,0.4)', marginTop: '2px' }}>{client.hdProfile && `Profil ${client.hdProfile}`}{client.hdAuthority && ` · ${client.hdAuthority}`}</div>
+                      <div style={{ fontFamily: 'Raleway', fontSize: '9px', color: 'rgba(245,240,232,0.35)', marginTop: '4px' }}>Strategie: {hdInfo?.strategy} · Signatur: {hdInfo?.signature}</div>
                     </div>
-                  </div>
-                )}
-              </div>
-
-              {hasNums && (
-                <div style={{ display: 'flex', gap: '8px', marginBottom: '16px' }}>
-                  {[{ n: nums.personalYear, l: 'Pers. Jahr', d: PERSONAL_YEAR_DESC[nums.personalYear] }, { n: nums.personalMonth, l: 'Pers. Monat' }, { n: nums.personalDay, l: 'Pers. Tag' }].map(({ n, l, d }) => (
-                    <div key={l} style={{ flex: d ? 2 : 1, padding: '8px', border: '1px solid rgba(201,168,76,0.08)', borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                      <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '20px', fontWeight: 700, color: '#C9A84C' }}>{n}</div>
-                      <div>
-                        <div style={{ fontFamily: 'Raleway', fontSize: '6px', fontWeight: 700, color: 'rgba(245,240,232,0.35)', letterSpacing: '1px', textTransform: 'uppercase' }}>{l}</div>
-                        {d && <div style={{ fontFamily: 'Raleway', fontSize: '8px', color: 'rgba(245,240,232,0.4)', lineHeight: '1.3', marginTop: '1px' }}>{d}</div>}
+                  )}
+                  {hasNums && (
+                    <div style={{ flex: 1, padding: '12px', border: '1px solid rgba(201,168,76,0.1)', borderRadius: '10px' }}>
+                      <div style={{ fontFamily: 'Raleway', fontSize: '7px', fontWeight: 800, color: '#C9A84C', letterSpacing: '2px', textTransform: 'uppercase', marginBottom: '6px' }}>Numerologie</div>
+                      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
+                        {[
+                          { n: nums.lifePath, l: 'Leben' }, { n: nums.expression, l: 'Ausdruck' }, { n: nums.heartDesire, l: 'Herz' },
+                          { n: nums.personality, l: 'Person.' }, { n: nums.birthDay, l: 'Geburt' }, { n: nums.attitude, l: 'Einstell.' },
+                          { n: nums.maturity, l: 'Reife' }, { n: nums.generation, l: 'Gener.' },
+                        ].filter(x => x.n !== null && x.n !== undefined).map(({ n, l }) => (
+                          <div key={l} style={{ textAlign: 'center', width: '38px' }}>
+                            <div style={{ width: '28px', height: '28px', borderRadius: '50%', margin: '0 auto 1px', border: `1.5px solid ${[11,22,33].includes(n)?'#C9A84C':'rgba(201,168,76,0.2)'}`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: "'Cormorant Garamond', serif", fontSize: '12px', fontWeight: 700, color: [11,22,33].includes(n)?'#C9A84C':'#F5F0E8' }}>{n}</div>
+                            <div style={{ fontFamily: 'Raleway', fontSize: '5.5px', fontWeight: 700, color: 'rgba(245,240,232,0.3)', textTransform: 'uppercase' }}>{l}</div>
+                          </div>
+                        ))}
                       </div>
                     </div>
-                  ))}
+                  )}
                 </div>
-              )}
 
-              <div style={{ padding: '14px', background: 'rgba(201,168,76,0.03)', borderRadius: '10px', border: '1px solid rgba(201,168,76,0.06)' }}>
-                <Prose>Diese Karte ist eine Momentaufnahme deiner Seelenlandschaft. Die Zahlen und Energien die hier beschrieben werden, sind Einladungen — keine Festlegungen. Nimm mit, was resoniert. Lass los, was noch nicht passt. Dein Weg ist einzigartig.</Prose>
-              </div>
+                {hasNums && (
+                  <div style={{ display: 'flex', gap: '8px', marginBottom: '16px' }}>
+                    {[{ n: nums.personalYear, l: 'Pers. Jahr', d: PERSONAL_YEAR_DESC[nums.personalYear] }, { n: nums.personalMonth, l: 'Pers. Monat' }, { n: nums.personalDay, l: 'Pers. Tag' }].map(({ n, l, d }) => (
+                      <div key={l} style={{ flex: d ? 2 : 1, padding: '8px', border: '1px solid rgba(201,168,76,0.08)', borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                        <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '20px', fontWeight: 700, color: '#C9A84C' }}>{n}</div>
+                        <div>
+                          <div style={{ fontFamily: 'Raleway', fontSize: '6px', fontWeight: 700, color: 'rgba(245,240,232,0.35)', letterSpacing: '1px', textTransform: 'uppercase' }}>{l}</div>
+                          {d && <div style={{ fontFamily: 'Raleway', fontSize: '8px', color: 'rgba(245,240,232,0.4)', lineHeight: '1.3', marginTop: '1px' }}>{d}</div>}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
 
-              <div style={{ marginTop: '24px', padding: '16px 0', textAlign: 'center' }}>
-                <Ornament />
-                <div style={{ fontFamily: 'Raleway', fontSize: '6.5px', color: 'rgba(245,240,232,0.2)', letterSpacing: '2px', textTransform: 'uppercase' }}>Lichtkern · Human Resonanz · www.human-resonanz.de</div>
-                <div style={{ fontFamily: 'Raleway', fontSize: '6px', color: 'rgba(245,240,232,0.12)', marginTop: '2px' }}>Dient der Selbsterkenntnis · Kein Ersatz für medizinische oder therapeutische Behandlung</div>
+                <div style={{ padding: '14px', background: 'rgba(201,168,76,0.03)', borderRadius: '10px', border: '1px solid rgba(201,168,76,0.06)' }}>
+                  <Prose>Diese Karte ist eine Momentaufnahme deiner Seelenlandschaft. Die Zahlen und Energien die hier beschrieben werden, sind Einladungen — keine Festlegungen. Nimm mit, was resoniert. Lass los, was noch nicht passt. Dein Weg ist einzigartig.</Prose>
+                </div>
+
+                <div style={{ marginTop: '24px', padding: '16px 0', textAlign: 'center' }}>
+                  <Ornament />
+                  <div style={{ fontFamily: 'Raleway', fontSize: '6.5px', color: 'rgba(245,240,232,0.2)', letterSpacing: '2px', textTransform: 'uppercase' }}>Lichtkern · Human Resonanz · www.human-resonanz.de</div>
+                  <div style={{ fontFamily: 'Raleway', fontSize: '6px', color: 'rgba(245,240,232,0.12)', marginTop: '2px' }}>Dient der Selbsterkenntnis · Kein Ersatz für medizinische oder therapeutische Behandlung</div>
+                </div>
               </div>
             </div>
-          </div>
-        )}
+          )}
+        </div>
       </div>
     </div>
   );
