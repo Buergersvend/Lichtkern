@@ -100,7 +100,7 @@ if(!s) { setDetail(null); return null; }
 
     return (
       <div style={{padding:"0 16px 96px"}}>
-        <button onClick={()=>setDetail(null)} style={{fontFamily:"Raleway",fontSize:"13px",color:T.teal,fontWeight:700,background:"none",border:"none",cursor:"pointer",paddingTop:"8px",display:"block",marginBottom:"12px"}}>← Zurück</button>
+        <button onClick={()=>setDetail(null)} style={{fontFamily:"Raleway",fontSize:"13px",color:T.goldD,fontWeight:700,background:"none",border:"none",cursor:"pointer",paddingTop:"8px",display:"block",marginBottom:"12px"}}>← Zurück</button>
 
         <div style={{background:ps.bg,borderRadius:"20px",padding:"20px",marginBottom:"14px",border:`1.5px solid ${ps.border}`}}>
           <div style={{fontFamily:"Cinzel",fontSize:"18px",color:T.text,fontWeight:700}}>{s.clientName||"—"}</div>
@@ -149,7 +149,7 @@ if(!s) { setDetail(null); return null; }
             {[
               {label:"Einnahmen",  value:`${totalRevenue.toFixed(0)} ${currency}`, bg:"#0a2a1a", border:"#4ADE80", color:"#4ADE80"},
               {label:"Offen",      value:`${totalOpen.toFixed(0)} ${currency}`,    bg:"#3a1a1a", border:"#cc4444", color:"#ff6b6b"},
-              {label:"Sitzungen",  value:totalSessions,                             bg:T.bgCard,  border:T.borderMid, color:T.teal},
+              {label:"Sitzungen",  value:totalSessions,                             bg:T.bgCard,  border:T.borderMid, color:T.gold},
             ].map((s,i)=>(
               <div key={i} style={{background:s.bg,borderRadius:"14px",border:`1.5px solid ${s.border}`,padding:"10px 8px",textAlign:"center"}}>
                 <div style={{fontFamily:"Cinzel",fontSize:"16px",color:s.color,fontWeight:700}}>{s.value}</div>
@@ -171,17 +171,17 @@ if(!s) { setDetail(null); return null; }
         <div style={{display:"flex",alignItems:"flex-end",gap:"6px",height:"80px",marginBottom:"6px"}}>
           {chartData.map((m,i)=>(
             <div key={i} style={{flex:1,display:"flex",flexDirection:"column",alignItems:"center",gap:"2px",height:"100%",justifyContent:"flex-end"}}>
-              <div style={{fontFamily:"Raleway",fontSize:"9px",color:T.teal,fontWeight:700}}>{m.paid>0?m.paid.toFixed(0):""}</div>
+              <div style={{fontFamily:"Raleway",fontSize:"9px",color:T.gold,fontWeight:700}}>{m.paid>0?m.paid.toFixed(0):""}</div>
               <div style={{width:"100%",display:"flex",flexDirection:"column",justifyContent:"flex-end",height:`${Math.max(((m.paid+m.open)/maxBar)*100,4)}%`}}>
                 {m.open>0&&<div style={{width:"100%",background:"#3a1a1a",flex:m.open/(m.paid+m.open||1)}}/>}
-                {m.paid>0&&<div style={{width:"100%",background:T.teal,borderRadius:"4px 4px 0 0",flex:m.paid/(m.paid+m.open||1)}}/>}
+                {m.paid>0&&<div style={{width:"100%",background:T.gold,borderRadius:"4px 4px 0 0",flex:m.paid/(m.paid+m.open||1)}}/>}
               </div>
               <div style={{fontFamily:"Raleway",fontSize:"8px",color:T.textSoft,fontWeight:700}}>{m.label}</div>
             </div>
           ))}
         </div>
         <div style={{display:"flex",gap:"12px",justifyContent:"center"}}>
-          {[{c:T.teal,l:"Bezahlt"},{c:"#cc4444",l:"Offen"}].map((x,i)=>(
+          {[{c:T.gold,l:"Bezahlt"},{c:"#cc4444",l:"Offen"}].map((x,i)=>(
             <div key={i} style={{display:"flex",alignItems:"center",gap:"5px"}}>
               <div style={{width:"10px",height:"10px",borderRadius:"2px",background:x.c}}/>
               <span style={{fontFamily:"Raleway",fontSize:"10px",color:T.textSoft,fontWeight:600}}>{x.l}</span>
@@ -235,7 +235,7 @@ if(!s) { setDetail(null); return null; }
         return yearTotal>0 ? (
           <div style={{marginTop:"16px",background:T.bgSoft,borderRadius:"16px",padding:"14px 16px",border:`1.5px solid ${T.border}`,textAlign:"center"}}>
             <div style={{fontFamily:"Raleway",fontSize:"11px",color:T.textSoft,fontWeight:700,letterSpacing:"1px",textTransform:"uppercase",marginBottom:"4px"}}>Jahreseinnahmen {year}</div>
-            <div style={{fontFamily:"Cinzel",fontSize:"26px",color:T.tealD,fontWeight:700}}>{yearTotal.toFixed(2)} {currency}</div>
+            <div style={{fontFamily:"Cinzel",fontSize:"26px",color:T.goldD,fontWeight:700}}>{yearTotal.toFixed(2)} {currency}</div>
           </div>
         ) : null;
       })()}
