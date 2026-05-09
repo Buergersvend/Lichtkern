@@ -95,7 +95,9 @@ ${nums.maturity !== null ? `Reifezahl: ${nums.maturity}` : ''}
 Persönliches Jahr: ${nums.personalYear}, Monat: ${nums.personalMonth}
 ${nums.karmicDebts.length > 0 ? `Karmische Schuldzahlen: ${nums.karmicDebts.join(', ')}` : ''}` : ''}
 
-Schreibe folgende Abschnitte (jeweils 3-4 Sätze, warmherzig und tiefgründig):
+Schreibe folgende Abschnitte (jeweils 3-4 Sätze, warmherzig und tiefgründig).
+
+WICHTIG: Verwende EXAKT diese Abschnittstitel in Großbuchstaben, jeder Titel auf einer eigenen Zeile, gefolgt vom Fließtext. Keine anderen Titel verwenden!
 
 DEIN WESEN
 Beschreibe wer dieser Mensch im Kern ist — basierend auf der Kombination von HD-Typ und Lebenszahl.
@@ -115,10 +117,16 @@ Drei konkrete, warmherzige Impulse als drei kurze Absätze, jeder beginnt mit ei
 ${nums?.karmicDebts?.length > 0 ? `DEINE KARMISCHE EINLADUNG
 Was die Schuldzahl(en) ${nums.karmicDebts.join(', ')} als Einladung zur Heilung bedeuten.` : ''}
 
-Schreibe OHNE Markdown-Formatierung (keine **, keine #, keine Aufzählungszeichen). Nutze nur Fließtext und Absätze. Trenne die Abschnitte durch deren Titel in Großbuchstaben auf einer eigenen Zeile. Ohne Heilversprechen.`;
+STRIKTE REGELN:
+- Verwende NUR die oben genannten Abschnittstitel, EXAKT so geschrieben.
+- KEINE Markdown-Formatierung (keine **, keine #, keine Aufzählungszeichen, keine nummerierte Listen).
+- Nur Fließtext und Absätze. Ohne Heilversprechen.
+- Schreibe in der Du-Form, sprich den Klienten direkt an.`;
 
       const text = await groqFetch(prompt);
-      setKarteText(text);
+      // Strip any remaining markdown artifacts
+      const cleaned = text.replace(/\*\*/g, '').replace(/^#+\s*/gm, '').replace(/^\d+\.\s+/gm, '');
+      setKarteText(cleaned);
     } catch { setKarteText('Der Text konnte nicht generiert werden.'); }
     setLoading(false);
   };
@@ -130,9 +138,11 @@ Schreibe OHNE Markdown-Formatierung (keine **, keine #, keine Aufzählungszeiche
     const sections = [];
     let current = { title: '', body: '' };
     for (const line of lines) {
-      const cleaned = line.replace(/^\*+\s*/, '').replace(/\s*\*+$/, '').trim();
-      const isTitle = sectionTitles.some(t => cleaned.toUpperCase().includes(t));
-      if (isTitle) {
+      const cleaned = line.replace(/^\*+\s*/, '').replace(/\s*\*+$/, '').replace(/^#+\s*/, '').trim();
+      // Check for known section titles OR detect all-caps lines as section headers
+      const isKnownTitle = sectionTitles.some(t => cleaned.toUpperCase().includes(t));
+      const isAllCapsLine = cleaned.length > 3 && cleaned.length < 60 && cleaned === cleaned.toUpperCase() && /^[A-ZÄÖÜ\s\-—·×↔]+$/.test(cleaned);
+      if (isKnownTitle || isAllCapsLine) {
         if (current.body.trim()) sections.push({ ...current });
         current = { title: cleaned.replace(/\*/g, ''), body: '' };
       } else {
@@ -317,8 +327,8 @@ Schreibe OHNE Markdown-Formatierung (keine **, keine #, keine Aufzählungszeiche
 </style></head><body>
 
 ${pageShell(page1Content, watermark(WATERMARK_FLOWER, 0.30, '55%'))}
-${pageShell(page2Content, watermark(WATERMARK_LOTUS, 0.25, '50%'))}
-${pageShell(page3Content, watermark(WATERMARK_FLOWER, 0.18, '50%'))}
+${pageShell(page2Content, watermark(WATERMARK_LOTUS, 0.25, '55%'))}
+${pageShell(page3Content, watermark(WATERMARK_FLOWER, 0.18, '55%'))}
 
 </body></html>`;
 
