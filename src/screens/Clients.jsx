@@ -5,6 +5,7 @@ import { Card, Btn, TI, Select, Pill, SL } from "../components/UI.jsx";
 
 import { BodygraphSVG, HDTab, HD_CHANNELS, HD_CENTER_CFG, HD_GATE_CENTER } from "../components/HumanDesign.jsx";
 import { NumerologyTab, calcNumerology, LIFE_PATH_DESC } from "../components/Numerology.jsx";
+import { BeziehungsTab } from "../components/BeziehungsResonanz.jsx";
 import { uid } from "../config/helpers.js";
 async function groqFetch(prompt) {
  const res = await fetch("/api/ki", {
@@ -44,10 +45,10 @@ const scrollbarCSS = `
 }
 `;
 
-function ClientDetailModal({client,sessions,onClose,onSave,onStart,onAnalyse,onDelete}){
+function ClientDetailModal({client,clients,sessions,onClose,onSave,onStart,onAnalyse,onDelete}){
   const [tab,setTab]=useState('profil');
   const sc=sessions.filter(s=>s.clientId===client.id);
-  const tabs=[['profil','👤 Profil'],['hd','⚙ Human Design'],['numerologie','🔢 Numerologie'],['sessions','📋 Sitzungen']];
+  const tabs=[['profil','👤 Profil'],['hd','⚙ Human Design'],['numerologie','🔢 Numerologie'],['beziehung','💞 Beziehung'],['sessions','📋 Sitzungen']];
   return(
   <div style={{position:'fixed',inset:0,background:'rgba(0,0,0,0.5)',zIndex:200,display:'flex',alignItems:'center',justifyContent:'center'}}>
    <style>{scrollbarCSS}</style>
@@ -88,6 +89,7 @@ function ClientDetailModal({client,sessions,onClose,onSave,onStart,onAnalyse,onD
           )}
           {tab==='hd'&&<HDTab client={client} onSave={updated=>{onSave(updated);}}/>}
           {tab==='numerologie'&&<NumerologyTab client={client} onSave={updated=>{onSave(updated);}}/>}
+          {tab==='beziehung'&&<BeziehungsTab client={client} clients={clients} onSave={updated=>{onSave(updated);}}/>}
           {tab==='sessions'&&(
             <div>
               {sc.length===0&&<div style={{textAlign:'center',padding:'32px 0',color:T.textSoft,fontFamily:'Raleway',fontSize:'13px'}}>Noch keine Sitzungen</div>}
@@ -106,7 +108,7 @@ function ClientDetailModal({client,sessions,onClose,onSave,onStart,onAnalyse,onD
   );
 }
 
-// ─── SYNERGY ENGINE ───────────────────────────
+// ─── SYNERGY ENGINE ───────────────────────────────────────────────────
 function SynergyEngine({clients,onBack}){
   const [clientA,setClientA]=useState(null);
   const [clientB,setClientB]=useState(null);
@@ -384,6 +386,7 @@ function Clients({clients,sessions,onSave,onStart,onDelete,onOnboarding,reminder
       </div>
       {selClient&&<ClientDetailModal
         client={selClient}
+        clients={clients}
         sessions={sessions}
         onClose={()=>setSelClient(null)}
         onSave={updated=>{onSave(clients.map(c=>c.id===updated.id?updated:c));setSelClient(updated);}}
