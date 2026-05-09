@@ -843,8 +843,7 @@ Warmherzig, tiefgründig, poetisch aber präzise. Ohne Heilversprechen.`;
             <div style={{ fontFamily: 'Raleway', fontWeight: 800, fontSize: '13px', color: T.goldD }}>🖨 Resonanzkarte erstellen</div>
             <div style={{ fontFamily: 'Raleway', fontSize: '10px', color: T.textMid, marginTop: '3px' }}>Druckbare Seelenlandkarte für deinen Klienten</div>
           </button>
-          {showKarte && <ResonanzKarte client={{...client, birthDate, birthName}} aiText={aiText} onClose={() => setShowKarte(false)} />}
-
+          {showKarte && <ResonanzKarte client={{...client, birthDate, birthName}} onClose={() => setShowKarte(false)} onSave={onSave} />}
           {/* ═══ RESONANZ-SYNTHESE: HD × Numerologie ═══ */}
           {client.hdType && nums && (
             <ResonanzSynthese client={client} nums={nums} lifePath={nums.lifePath} />
