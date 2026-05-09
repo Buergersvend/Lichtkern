@@ -4,6 +4,8 @@ import { Flower } from "../components/Decorations";
 import { Card, Btn, TI, SL } from "../components/UI.jsx";
 import { BodygraphSVG, HD_CHANNELS, HD_CENTER_CFG, HD_GATE_CENTER } from "../components/HumanDesign.jsx";
 import { calcNumerology, LIFE_PATH_DESC } from "../components/Numerology.jsx";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "../config/firebase.js";
 
 /* ─── Helpers ─────────────────────────────────────────────────────────── */
 
@@ -13,6 +15,15 @@ const getGates = (person) => {
   const p = (person?.hdPGates || "").split(",").map(s => s.trim()).filter(Boolean).map(Number).filter(n => n >= 1 && n <= 64);
   const d = (person?.hdDGates || "").split(",").map(s => s.trim()).filter(Boolean).map(Number).filter(n => n >= 1 && n <= 64);
   return { p, d, all: [...p, ...d] };
+};
+
+const calcDefinedCenters = (allGates) => {
+  const s = new Set(allGates.map(Number));
+  const def = new Set();
+  HD_CHANNELS.forEach(([a, b]) => {
+    if (s.has(a) && s.has(b)) { def.add(HD_GATE_CENTER[a]); def.add(HD_GATE_CENTER[b]); }
+  });
+  return def;
 };
 
 const calcElectromagnetic = (personA, personB) => {
@@ -59,15 +70,16 @@ function RefPersonForm({ initial, onSave, onCancel, clients, clientId }) {
   const [mode, setMode] = useState("manual"); // "manual" | "klient"
   const [form, setForm] = useState(initial || { ...EMPTY_REF });
   const [selectedClientId, setSelectedClientId] = useState("");
+  const [hdLoading, setHdLoading] = useState(false);
 
   // Klienten ohne den aktuellen
   const availableClients = (clients || []).filter(c => c.id !== clientId);
 
-  const handleClientSelect = (cId) => {
+  const handleClientSelect = async (cId) => {
     setSelectedClientId(cId);
     const c = availableClients.find(cl => cl.id === cId);
     if (c) {
-      setForm({
+      const base = {
         name: c.name || "",
         birthDate: c.birthDate || "",
         birthName: c.birthName || "",
@@ -79,7 +91,24 @@ function RefPersonForm({ initial, onSave, onCancel, clients, clientId }) {
         hdPGates: c.hdPGates || "",
         hdDGates: c.hdDGates || "",
         sourceClientId: c.id,
-      });
+      };
+
+      // HD-Daten aus Firebase laden (gleiche Logik wie HDTab)
+      try {
+        setHdLoading(true);
+        const snap = await getDoc(doc(db, "clients", c.id, "humanDesign", "latest"));
+        if (snap.exists()) {
+          const d = snap.data();
+          base.hdType = d.typ || base.hdType;
+          base.hdProfile = d.profil || base.hdProfile;
+          base.hdAuthority = d.autoritaet || base.hdAuthority;
+          base.hdPGates = (d.tore_bewusst || []).join(",") || base.hdPGates;
+          base.hdDGates = (d.tore_unbewusst || []).join(",") || base.hdDGates;
+        }
+      } catch (e) { console.log("HD Firebase read for ref:", e); }
+      setHdLoading(false);
+
+      setForm(base);
     }
   };
 
@@ -136,6 +165,11 @@ function RefPersonForm({ initial, onSave, onCancel, clients, clientId }) {
               </option>
             ))}
           </select>
+          {hdLoading && (
+            <div style={{ fontFamily: "Raleway", fontSize: "11px", color: T.goldD, marginTop: "6px" }}>
+              ⏳ HD-Daten werden geladen…
+            </div>
+          )}
           {availableClients.length === 0 && (
             <div style={{ fontFamily: "Raleway", fontSize: "11px", color: T.textSoft, marginTop: "6px", fontStyle: "italic" }}>
               Keine anderen Klienten vorhanden.
@@ -190,6 +224,27 @@ function RefPersonForm({ initial, onSave, onCancel, clients, clientId }) {
           fontFamily: "Raleway", fontSize: "10px", color: T.goldD,
           letterSpacing: "2px", fontWeight: 700, textTransform: "uppercase", marginBottom: "8px",
         }}>⚙ Human Design</div>
+
+        {/* HD-Daten Vorschau wenn vorhanden */}
+        {form.hdType && (
+          <div style={{
+            background: T.bgCard, borderRadius: "10px", padding: "10px 12px",
+            border: `1px solid ${T.borderMid}`, marginBottom: "10px",
+          }}>
+            <div style={{ fontFamily: "Raleway", fontWeight: 800, fontSize: "13px", color: T.gold }}>
+              ✅ {form.hdType}
+            </div>
+            <div style={{ fontFamily: "Raleway", fontSize: "11px", color: T.textMid, marginTop: "2px" }}>
+              {form.hdProfile ? `Profil ${form.hdProfile}` : ""}{form.hdAuthority ? ` · ${form.hdAuthority}` : ""}
+            </div>
+            {(form.hdPGates || form.hdDGates) && (
+              <div style={{ fontFamily: "Raleway", fontSize: "10px", color: T.textSoft, marginTop: "4px" }}>
+                P: {form.hdPGates || "—"} · D: {form.hdDGates || "—"}
+              </div>
+            )}
+          </div>
+        )}
+
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "8px" }}>
           <div>
             <div style={labelStyle}>Typ</div>
@@ -241,6 +296,22 @@ function RefPersonForm({ initial, onSave, onCancel, clients, clientId }) {
               style={inputStyle} />
           </div>
         </div>
+
+        {/* HD Kalkulator Button — gleicher Stil wie HDTab */}
+        {mode === "manual" && (
+          <a
+            href={`https://hd-kalkulator.vercel.app?clientId=${clientId}_ref_${initial?.id || 'new'}&name=${encodeURIComponent(form.name || 'Referenzperson')}&returnUrl=${encodeURIComponent(window.location.href)}`}
+            target="_blank" rel="noreferrer"
+            style={{
+              display: "block", background: "rgba(201,168,76,0.1)", borderRadius: "12px",
+              padding: "12px", marginTop: "10px", border: "1.5px solid rgba(201,168,76,0.3)",
+              textDecoration: "none", textAlign: "center",
+            }}
+          >
+            <div style={{ fontFamily: "Raleway", fontWeight: 800, fontSize: "13px", color: T.goldD }}>🔮 HD berechnen →</div>
+            <div style={{ fontFamily: "Raleway", fontSize: "10px", color: T.textMid, marginTop: "3px" }}>Öffnet den HD Kalkulator</div>
+          </a>
+        )}
       </div>
 
       {/* Actions */}
@@ -255,11 +326,7 @@ function RefPersonForm({ initial, onSave, onCancel, clients, clientId }) {
 /* ─── Gespeicherte Referenzperson Karte ───────────────────────────────── */
 
 function RefPersonCard({ ref_person, client, onSelect, onDelete }) {
-  // Numerologie der Referenzperson
   const refNum = ref_person.birthDate ? calcNumerology(ref_person.birthDate, ref_person.birthName) : null;
-  // Numerologie des Klienten
-  const clientNum = client.birthDate ? calcNumerology(client.birthDate, client.birthName) : null;
-  // Elektromagnetische Verbindungen
   const syn = calcElectromagnetic(client, ref_person);
 
   return (
@@ -274,7 +341,6 @@ function RefPersonCard({ ref_person, client, onSelect, onDelete }) {
       onMouseEnter={e => e.currentTarget.style.borderColor = T.gold}
       onMouseLeave={e => e.currentTarget.style.borderColor = T.border}
     >
-      {/* Subtle background decoration */}
       <div style={{ position: "absolute", top: "-20px", right: "-20px", opacity: 0.04, fontSize: "100px", pointerEvents: "none" }}>💞</div>
 
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
@@ -286,7 +352,6 @@ function RefPersonCard({ ref_person, client, onSelect, onDelete }) {
             {client.name} ⇄ {ref_person.name}
           </div>
 
-          {/* Badges */}
           <div style={{ display: "flex", flexWrap: "wrap", gap: "5px", marginTop: "8px" }}>
             {ref_person.hdType && (
               <span style={{
@@ -319,7 +384,6 @@ function RefPersonCard({ ref_person, client, onSelect, onDelete }) {
           </div>
         </div>
 
-        {/* Delete button */}
         <button
           onClick={e => { e.stopPropagation(); if (window.confirm(`${ref_person.name} wirklich entfernen?`)) onDelete(ref_person.id); }}
           style={{
@@ -332,7 +396,6 @@ function RefPersonCard({ ref_person, client, onSelect, onDelete }) {
         >✕</button>
       </div>
 
-      {/* Erstellt am */}
       <div style={{
         fontFamily: "Raleway", fontSize: "10px", color: T.textSoft, marginTop: "8px",
       }}>
@@ -345,12 +408,43 @@ function RefPersonCard({ ref_person, client, onSelect, onDelete }) {
 
 /* ─── Vergleichs-Übersicht (nach Auswahl einer Referenzperson) ────────── */
 
-function ComparisonView({ client, refPerson, onBack }) {
+function ComparisonView({ client, refPerson, onBack, clients, onSave }) {
+  const [refData, setRefData] = useState(refPerson);
+
+  // Wenn Referenzperson aus Klient kommt: HD-Daten aus Firebase aktualisieren
+  useEffect(() => {
+    if (!refPerson.sourceClientId) return;
+    (async () => {
+      try {
+        const snap = await getDoc(doc(db, "clients", refPerson.sourceClientId, "humanDesign", "latest"));
+        if (!snap.exists()) return;
+        const d = snap.data();
+        const updated = {
+          ...refPerson,
+          hdType: d.typ || refPerson.hdType,
+          hdProfile: d.profil || refPerson.hdProfile,
+          hdAuthority: d.autoritaet || refPerson.hdAuthority,
+          hdPGates: (d.tore_bewusst || []).join(",") || refPerson.hdPGates,
+          hdDGates: (d.tore_unbewusst || []).join(",") || refPerson.hdDGates,
+        };
+        setRefData(updated);
+        // Auch im Client-Objekt aktualisieren wenn sich Daten geändert haben
+        if (updated.hdType !== refPerson.hdType || updated.hdPGates !== refPerson.hdPGates || updated.hdDGates !== refPerson.hdDGates) {
+          const updatedClient = {
+            ...client,
+            beziehungen: (client.beziehungen || []).map(b => b.id === refPerson.id ? updated : b),
+          };
+          onSave(updatedClient);
+        }
+      } catch (e) { console.log("HD sync for ref:", e); }
+    })();
+  }, [refPerson.sourceClientId]);
+
   const clientNum = client.birthDate ? calcNumerology(client.birthDate, client.birthName) : null;
-  const refNum = refPerson.birthDate ? calcNumerology(refPerson.birthDate, refPerson.birthName) : null;
-  const syn = calcElectromagnetic(client, refPerson);
+  const refNum = refData.birthDate ? calcNumerology(refData.birthDate, refData.birthName) : null;
+  const syn = calcElectromagnetic(client, refData);
   const gClient = getGates(client);
-  const gRef = getGates(refPerson);
+  const gRef = getGates(refData);
 
   // Numerologie Vergleichs-Zeilen
   const numRows = [];
@@ -381,7 +475,7 @@ function ComparisonView({ client, refPerson, onBack }) {
         }}>←</button>
         <div>
           <div style={{ fontFamily: "Cinzel", fontSize: "14px", color: T.text, fontWeight: 700 }}>
-            {client.name} ⇄ {refPerson.name}
+            {client.name} ⇄ {refData.name}
           </div>
           <div style={{ fontFamily: "Raleway", fontSize: "10px", color: T.textSoft }}>
             Beziehungs-Resonanz Vergleich
@@ -390,11 +484,11 @@ function ComparisonView({ client, refPerson, onBack }) {
       </div>
 
       {/* HD Typ-Dynamik */}
-      {(client.hdType || refPerson.hdType) && (
+      {(client.hdType || refData.hdType) && (
         <Card style={{ marginBottom: "12px" }}>
           <SL>⚙ Typ-Dynamik</SL>
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "10px" }}>
-            {[client, refPerson].map((p, i) => (
+            {[client, refData].map((p, i) => (
               <div key={i} style={{
                 background: T.bgSoft, borderRadius: "12px", padding: "12px",
                 border: `1px solid ${T.border}`,
@@ -418,7 +512,7 @@ function ComparisonView({ client, refPerson, onBack }) {
         <Card style={{ marginBottom: "12px" }}>
           <SL>Bodygraphs</SL>
           <div style={{ display: "flex", gap: "8px", justifyContent: "space-around" }}>
-            {[[client, gClient], [refPerson, gRef]].map(([p, g], i) => (
+            {[[client, gClient], [refData, gRef]].map(([p, g], i) => (
               <div key={i} style={{ textAlign: "center" }}>
                 <div style={{
                   fontFamily: "Raleway", fontSize: "11px", fontWeight: 700,
@@ -486,7 +580,7 @@ function ComparisonView({ client, refPerson, onBack }) {
               {client.name.split(" ")[0]}
             </div>
             <div style={{ fontFamily: "Raleway", fontSize: "10px", color: T.text, fontWeight: 700, padding: "6px 8px", borderBottom: `1px solid ${T.border}`, textAlign: "center", minWidth: "50px" }}>
-              {refPerson.name.split(" ")[0]}
+              {refData.name.split(" ")[0]}
             </div>
             <div style={{ fontFamily: "Raleway", fontSize: "10px", color: T.textSoft, fontWeight: 700, padding: "6px 4px", borderBottom: `1px solid ${T.border}`, textAlign: "center" }}></div>
 
@@ -521,7 +615,7 @@ function ComparisonView({ client, refPerson, onBack }) {
             ))}
           </div>
           {/* Meisterzahlen & Karmische */}
-          {(clientNum.masterNumbers?.length > 0 || refNum.masterNumbers?.length > 0 ||
+          {clientNum && refNum && (clientNum.masterNumbers?.length > 0 || refNum.masterNumbers?.length > 0 ||
             clientNum.karmicDebts?.length > 0 || refNum.karmicDebts?.length > 0) && (
             <div style={{ marginTop: "12px", paddingTop: "10px", borderTop: `1px dashed ${T.border}` }}>
               {[
@@ -541,7 +635,7 @@ function ComparisonView({ client, refPerson, onBack }) {
                         {client.name.split(" ")[0]}: {cVals.length > 0 ? cVals.join(", ") : "—"}
                       </div>
                       <div style={{ fontFamily: "Raleway", fontSize: "11px", color: T.text }}>
-                        {refPerson.name.split(" ")[0]}: {rVals.length > 0 ? rVals.join(", ") : "—"}
+                        {refData.name.split(" ")[0]}: {rVals.length > 0 ? rVals.join(", ") : "—"}
                       </div>
                     </div>
                   </div>
@@ -581,10 +675,8 @@ function BeziehungsTab({ client, clients, onSave }) {
   const handleSaveRef = (refPerson) => {
     let updated;
     if (beziehungen.find(b => b.id === refPerson.id)) {
-      // Update existing
       updated = { ...client, beziehungen: beziehungen.map(b => b.id === refPerson.id ? refPerson : b) };
     } else {
-      // Add new
       updated = { ...client, beziehungen: [...beziehungen, refPerson] };
     }
     onSave(updated);
@@ -606,6 +698,8 @@ function BeziehungsTab({ client, clients, onSave }) {
         client={client}
         refPerson={currentRef}
         onBack={() => setSelectedRef(null)}
+        clients={clients}
+        onSave={onSave}
       />
     );
   }
