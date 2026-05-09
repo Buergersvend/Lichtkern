@@ -11,6 +11,36 @@ const DIVIDER_SVG = `<svg width="200" height="20" viewBox="0 0 200 20" fill="non
 
 const STAR_ORNAMENT = `<svg width="120" height="24" viewBox="0 0 120 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="60" cy="12" r="3" stroke="#8B7332" stroke-width="0.8" fill="none" opacity="0.5"/><circle cx="60" cy="12" r="1" fill="#8B7332" opacity="0.6"/><line x1="10" y1="12" x2="52" y2="12" stroke="#8B7332" stroke-width="0.4" opacity="0.25"/><line x1="68" y1="12" x2="110" y2="12" stroke="#8B7332" stroke-width="0.4" opacity="0.25"/><circle cx="10" cy="12" r="1.5" fill="#8B7332" opacity="0.2"/><circle cx="110" cy="12" r="1.5" fill="#8B7332" opacity="0.2"/></svg>`;
 
+/* ── Watermark SVGs — subtle sacred geometry backgrounds ── */
+// Flower of Life (Page 1) — 7 overlapping circles, classic sacred geometry
+const WATERMARK_FLOWER = `<svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#8B7332" stroke-width="0.4">
+  <circle cx="200" cy="200" r="60"/>
+  <circle cx="200" cy="140" r="60"/>
+  <circle cx="200" cy="260" r="60"/>
+  <circle cx="252" cy="170" r="60"/>
+  <circle cx="252" cy="230" r="60"/>
+  <circle cx="148" cy="170" r="60"/>
+  <circle cx="148" cy="230" r="60"/>
+  <circle cx="200" cy="200" r="95" stroke-width="0.3"/>
+  <circle cx="200" cy="200" r="120" stroke-width="0.2"/>
+</svg>`;
+
+// Lotus blossom (Page 2) — stylized petals radiating outward
+const WATERMARK_LOTUS = `<svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#8B7332" stroke-width="0.4">
+  <ellipse cx="200" cy="180" rx="18" ry="70" transform="rotate(0,200,200)"/>
+  <ellipse cx="200" cy="180" rx="18" ry="70" transform="rotate(30,200,200)"/>
+  <ellipse cx="200" cy="180" rx="18" ry="70" transform="rotate(60,200,200)"/>
+  <ellipse cx="200" cy="180" rx="18" ry="70" transform="rotate(90,200,200)"/>
+  <ellipse cx="200" cy="180" rx="18" ry="70" transform="rotate(120,200,200)"/>
+  <ellipse cx="200" cy="180" rx="18" ry="70" transform="rotate(150,200,200)"/>
+  <ellipse cx="200" cy="165" rx="30" ry="100" transform="rotate(0,200,200)" stroke-width="0.25"/>
+  <ellipse cx="200" cy="165" rx="30" ry="100" transform="rotate(45,200,200)" stroke-width="0.25"/>
+  <ellipse cx="200" cy="165" rx="30" ry="100" transform="rotate(90,200,200)" stroke-width="0.25"/>
+  <ellipse cx="200" cy="165" rx="30" ry="100" transform="rotate(135,200,200)" stroke-width="0.25"/>
+  <circle cx="200" cy="200" r="12" stroke-width="0.5"/>
+  <circle cx="200" cy="200" r="4" fill="#8B7332" stroke="none" opacity="0.3"/>
+</svg>`;
+
 const printCSS = `
 @media print {
   body { margin: 0; padding: 0; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
@@ -214,6 +244,8 @@ Schreibe OHNE Markdown-Formatierung (keine **, keine #, keine Aufzählungszeiche
 <!-- PAGE 1 -->
 <div class="rk-page">
   <div class="rk-frame"></div>
+  <!-- Watermark: Flower of Life -->
+  <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:420px;height:420px;opacity:0.04;pointer-events:none;">${WATERMARK_FLOWER}</div>
   ${inlineCorner('tl')}
   ${inlineCorner('br')}
 
@@ -246,6 +278,8 @@ Schreibe OHNE Markdown-Formatierung (keine **, keine #, keine Aufzählungszeiche
 <!-- PAGE 2 -->
 <div class="rk-page">
   <div class="rk-frame"></div>
+  <!-- Watermark: Lotus -->
+  <div style="position:absolute;top:35%;left:50%;transform:translate(-50%,-50%);width:380px;height:380px;opacity:0.035;pointer-events:none;">${WATERMARK_LOTUS}</div>
   ${inlineCorner('tl')}
   ${inlineCorner('br')}
 
