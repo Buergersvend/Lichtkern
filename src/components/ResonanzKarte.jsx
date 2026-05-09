@@ -5,11 +5,11 @@ import { HD_TYPE_DESC, HD_AUTHORITY_DESC } from "./HumanDesign.jsx";
 import { groqFetch } from "../config/groq.js";
 
 /* ── SVG ornaments for print ── */
-const CORNER_SVG = `<svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 58V20C2 10 10 2 20 2H58" stroke="#8B7332" stroke-width="1.2" fill="none"/><path d="M2 58V30C2 15 15 2 30 2H58" stroke="#8B7332" stroke-width="0.5" opacity="0.4" fill="none"/><circle cx="2" cy="58" r="2" fill="#8B7332"/><circle cx="58" cy="2" r="2" fill="#8B7332"/></svg>`;
+const CORNER_SVG = `<svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 58V20C2 10 10 2 20 2H58" stroke="#8B7332" stroke-width="1.8" fill="none"/><path d="M2 58V30C2 15 15 2 30 2H58" stroke="#8B7332" stroke-width="0.8" opacity="0.5" fill="none"/><circle cx="2" cy="58" r="2.5" fill="#8B7332"/><circle cx="58" cy="2" r="2.5" fill="#8B7332"/></svg>`;
 
-const DIVIDER_SVG = `<svg width="200" height="20" viewBox="0 0 200 20" fill="none" xmlns="http://www.w3.org/2000/svg"><line x1="0" y1="10" x2="80" y2="10" stroke="#8B7332" stroke-width="0.5" opacity="0.3"/><line x1="120" y1="10" x2="200" y2="10" stroke="#8B7332" stroke-width="0.5" opacity="0.3"/><path d="M92 10L100 3L108 10L100 17Z" stroke="#8B7332" stroke-width="0.8" fill="none" opacity="0.5"/><circle cx="100" cy="10" r="2" fill="#8B7332" opacity="0.4"/></svg>`;
+const DIVIDER_SVG = `<svg width="200" height="20" viewBox="0 0 200 20" fill="none" xmlns="http://www.w3.org/2000/svg"><line x1="0" y1="10" x2="80" y2="10" stroke="#8B7332" stroke-width="0.8" opacity="0.5"/><line x1="120" y1="10" x2="200" y2="10" stroke="#8B7332" stroke-width="0.8" opacity="0.5"/><path d="M92 10L100 3L108 10L100 17Z" stroke="#8B7332" stroke-width="1" fill="none" opacity="0.6"/><circle cx="100" cy="10" r="2" fill="#8B7332" opacity="0.5"/></svg>`;
 
-const STAR_ORNAMENT = `<svg width="120" height="24" viewBox="0 0 120 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="60" cy="12" r="3" stroke="#8B7332" stroke-width="0.8" fill="none" opacity="0.5"/><circle cx="60" cy="12" r="1" fill="#8B7332" opacity="0.6"/><line x1="10" y1="12" x2="52" y2="12" stroke="#8B7332" stroke-width="0.4" opacity="0.25"/><line x1="68" y1="12" x2="110" y2="12" stroke="#8B7332" stroke-width="0.4" opacity="0.25"/><circle cx="10" cy="12" r="1.5" fill="#8B7332" opacity="0.2"/><circle cx="110" cy="12" r="1.5" fill="#8B7332" opacity="0.2"/></svg>`;
+const STAR_ORNAMENT = `<svg width="120" height="24" viewBox="0 0 120 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="60" cy="12" r="3" stroke="#8B7332" stroke-width="1" fill="none" opacity="0.6"/><circle cx="60" cy="12" r="1" fill="#8B7332" opacity="0.7"/><line x1="10" y1="12" x2="52" y2="12" stroke="#8B7332" stroke-width="0.6" opacity="0.4"/><line x1="68" y1="12" x2="110" y2="12" stroke="#8B7332" stroke-width="0.6" opacity="0.4"/><circle cx="10" cy="12" r="1.5" fill="#8B7332" opacity="0.3"/><circle cx="110" cy="12" r="1.5" fill="#8B7332" opacity="0.3"/></svg>`;
 
 /* ── Watermark SVGs — visible at ~10% opacity ── */
 const WATERMARK_FLOWER = `<svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#B8A060" stroke-width="0.8">
@@ -158,9 +158,9 @@ Schreibe OHNE Markdown-Formatierung (keine **, keine #, keine Aufzählungszeiche
     }
     return `<div style="margin-bottom:26px;">
       <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px;">
-        <div style="flex:1;height:1px;background:linear-gradient(to right,transparent,rgba(139,115,50,0.25));"></div>
+        <div style="flex:1;height:1px;background:linear-gradient(to right,transparent,rgba(139,115,50,0.45));"></div>
         <div style="font-family:'Cormorant Garamond',serif;font-size:14.5px;font-weight:700;color:#8B7332;letter-spacing:3.5px;text-transform:uppercase;white-space:nowrap;">${sec.title}</div>
-        <div style="flex:1;height:1px;background:linear-gradient(to left,transparent,rgba(139,115,50,0.25));"></div>
+        <div style="flex:1;height:1px;background:linear-gradient(to left,transparent,rgba(139,115,50,0.45));"></div>
       </div>
       ${html}
     </div>`;
@@ -169,8 +169,8 @@ Schreibe OHNE Markdown-Formatierung (keine **, keine #, keine Aufzählungszeiche
   const buildNumCircle = (n, label) => {
     const isMaster = [11, 22, 33].includes(n);
     return `<div style="text-align:center;width:52px;">
-      <div style="width:36px;height:36px;border-radius:50%;margin:0 auto 3px;border:${isMaster ? '2px solid #8B7332' : '1.5px solid rgba(139,115,50,0.25)'};${isMaster ? 'background:rgba(139,115,50,0.06);box-shadow:0 0 8px rgba(139,115,50,0.15);' : ''}display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:15px;font-weight:700;color:${isMaster ? '#8B7332' : '#2A2418'};">${n}</div>
-      <div style="font-family:'Raleway',sans-serif;font-size:7px;font-weight:700;color:rgba(42,36,24,0.4);text-transform:uppercase;letter-spacing:0.5px;">${label}</div>
+      <div style="width:38px;height:38px;border-radius:50%;margin:0 auto 3px;border:${isMaster ? '2.5px solid #8B7332' : '1.5px solid rgba(139,115,50,0.4)'};${isMaster ? 'background:rgba(139,115,50,0.08);box-shadow:0 0 10px rgba(139,115,50,0.2);' : ''}display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:700;color:${isMaster ? '#8B7332' : '#2A2418'};">${n}</div>
+      <div style="font-family:'Raleway',sans-serif;font-size:7.5px;font-weight:700;color:rgba(42,36,24,0.5);text-transform:uppercase;letter-spacing:0.5px;">${label}</div>
     </div>`;
   };
 
@@ -230,7 +230,7 @@ Schreibe OHNE Markdown-Formatierung (keine **, keine #, keine Aufzählungszeiche
   <div style="margin-bottom:16px;">${inlineStar(100, 0.35)}</div>
   ${secs.slice(0, 2).map((s, i) => buildPrintSection(s, i === 0)).join('')}
   <div style="position:absolute;bottom:14mm;left:0;right:0;text-align:center;">
-    <div style="font-family:'Raleway',sans-serif;font-size:7px;color:rgba(42,36,24,0.18);letter-spacing:2.5px;text-transform:uppercase;">Lichtkern · Human Resonanz · ${today}</div>
+    <div style="font-family:'Raleway',sans-serif;font-size:7.5px;color:rgba(42,36,24,0.28);letter-spacing:2.5px;text-transform:uppercase;">Lichtkern · Human Resonanz · ${today}</div>
   </div>`;
 
     /* ── PAGE 2: Remaining text sections ── */
@@ -240,7 +240,7 @@ Schreibe OHNE Markdown-Formatierung (keine **, keine #, keine Aufzählungszeiche
     ${secs.slice(2).map(s => buildPrintSection(s, false)).join('')}
   </div>
   <div style="position:absolute;bottom:14mm;left:0;right:0;text-align:center;">
-    <div style="font-family:'Raleway',sans-serif;font-size:7px;color:rgba(42,36,24,0.18);letter-spacing:2.5px;text-transform:uppercase;">Lichtkern · Human Resonanz · Seite 2</div>
+    <div style="font-family:'Raleway',sans-serif;font-size:7.5px;color:rgba(42,36,24,0.28);letter-spacing:2.5px;text-transform:uppercase;">Lichtkern · Human Resonanz · Seite 2</div>
   </div>`;
 
     /* ── PAGE 3: Data overview + closing ── */
@@ -249,19 +249,19 @@ Schreibe OHNE Markdown-Formatierung (keine **, keine #, keine Aufzählungszeiche
   <div style="text-align:center;margin:8px 0 18px;">
     <div style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;color:#8B7332;letter-spacing:2px;font-style:italic;">Deine Resonanz auf einen Blick</div>
   </div>
-  <div style="margin-bottom:14px;">${inlineDivider(160, 0.4)}</div>
+  <div style="margin-bottom:14px;">${inlineDivider(160, 0.6)}</div>
 
   <div style="display:flex;gap:16px;margin-bottom:18px;">
-    ${hasHD ? `<div style="flex:1;padding:18px;border:1px solid rgba(139,115,50,0.15);border-radius:8px;background:rgba(139,115,50,0.02);">
-      <div style="font-family:'Raleway',sans-serif;font-size:8px;font-weight:700;color:#8B7332;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:10px;">✦ Human Design</div>
-      <div style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;color:#2A2418;">${client.hdType}</div>
-      <div style="font-family:'Raleway',sans-serif;font-size:10px;color:rgba(42,36,24,0.5);margin-top:3px;">${client.hdProfile ? `Profil ${client.hdProfile}` : ''}${client.hdAuthority ? ` · ${client.hdAuthority}` : ''}</div>
-      <div style="width:30px;height:1px;background:rgba(139,115,50,0.2);margin:10px 0;"></div>
-      <div style="font-family:'Cormorant Garamond',serif;font-size:11px;color:rgba(42,36,24,0.5);font-style:italic;">Strategie: ${hdInfo?.strategy || '—'}</div>
-      <div style="font-family:'Cormorant Garamond',serif;font-size:11px;color:rgba(42,36,24,0.5);font-style:italic;margin-top:2px;">Signatur: ${hdInfo?.signature || '—'}</div>
+    ${hasHD ? `<div style="flex:1;padding:18px;border:1.5px solid rgba(139,115,50,0.3);border-radius:8px;background:rgba(139,115,50,0.03);">
+      <div style="font-family:'Raleway',sans-serif;font-size:9px;font-weight:700;color:#8B7332;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:10px;">✦ Human Design</div>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:600;color:#2A2418;">${client.hdType}</div>
+      <div style="font-family:'Raleway',sans-serif;font-size:11px;color:rgba(42,36,24,0.6);margin-top:3px;">${client.hdProfile ? `Profil ${client.hdProfile}` : ''}${client.hdAuthority ? ` · ${client.hdAuthority}` : ''}</div>
+      <div style="width:30px;height:1px;background:rgba(139,115,50,0.35);margin:10px 0;"></div>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:12px;color:rgba(42,36,24,0.6);font-style:italic;">Strategie: ${hdInfo?.strategy || '—'}</div>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:12px;color:rgba(42,36,24,0.6);font-style:italic;margin-top:2px;">Signatur: ${hdInfo?.signature || '—'}</div>
     </div>` : ''}
-    ${hasNums ? `<div style="flex:1;padding:18px;border:1px solid rgba(139,115,50,0.15);border-radius:8px;background:rgba(139,115,50,0.02);">
-      <div style="font-family:'Raleway',sans-serif;font-size:8px;font-weight:700;color:#8B7332;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:12px;">✦ Numerologie</div>
+    ${hasNums ? `<div style="flex:1;padding:18px;border:1.5px solid rgba(139,115,50,0.3);border-radius:8px;background:rgba(139,115,50,0.03);">
+      <div style="font-family:'Raleway',sans-serif;font-size:9px;font-weight:700;color:#8B7332;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:12px;">✦ Numerologie</div>
       <div style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center;">
         ${numCircles.map(x => buildNumCircle(x.n, x.l)).join('')}
       </div>
@@ -269,23 +269,23 @@ Schreibe OHNE Markdown-Formatierung (keine **, keine #, keine Aufzählungszeiche
   </div>
 
   ${hasNums ? `<div style="display:flex;gap:10px;margin-bottom:20px;">
-    ${timeBlocks.map(({ n, l, d }) => `<div style="flex:${d ? 2 : 1};padding:12px 14px;border:1px solid rgba(139,115,50,0.1);border-radius:8px;display:flex;align-items:center;gap:12px;background:rgba(139,115,50,0.015);">
-      <div style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:600;color:#8B7332;line-height:1;">${n}</div>
+    ${timeBlocks.map(({ n, l, d }) => `<div style="flex:${d ? 2 : 1};padding:12px 14px;border:1.5px solid rgba(139,115,50,0.2);border-radius:8px;display:flex;align-items:center;gap:12px;background:rgba(139,115,50,0.02);">
+      <div style="font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:600;color:#8B7332;line-height:1;">${n}</div>
       <div>
-        <div style="font-family:'Raleway',sans-serif;font-size:7px;font-weight:700;color:rgba(42,36,24,0.4);letter-spacing:1.5px;text-transform:uppercase;">${l}</div>
-        ${d ? `<div style="font-family:'Cormorant Garamond',serif;font-size:10px;color:rgba(42,36,24,0.45);line-height:1.3;margin-top:2px;font-style:italic;">${d}</div>` : ''}
+        <div style="font-family:'Raleway',sans-serif;font-size:8px;font-weight:700;color:rgba(42,36,24,0.5);letter-spacing:1.5px;text-transform:uppercase;">${l}</div>
+        ${d ? `<div style="font-family:'Cormorant Garamond',serif;font-size:11px;color:rgba(42,36,24,0.55);line-height:1.3;margin-top:2px;font-style:italic;">${d}</div>` : ''}
       </div>
     </div>`).join('')}
   </div>` : ''}
 
-  <div style="padding:20px 26px;background:rgba(139,115,50,0.025);border-radius:10px;border:1px solid rgba(139,115,50,0.08);text-align:center;">
-    <div style="font-family:'Cormorant Garamond',serif;font-size:16px;color:rgba(42,36,24,0.55);line-height:2;font-style:italic;">Diese Karte ist eine Momentaufnahme deiner Seelenlandschaft.<br>Die Zahlen und Energien die hier beschrieben werden, sind Einladungen — keine Festlegungen.<br>Nimm mit, was resoniert. Lass los, was noch nicht passt.<br>Dein Weg ist einzigartig.</div>
+  <div style="padding:20px 26px;background:rgba(139,115,50,0.04);border-radius:10px;border:1.5px solid rgba(139,115,50,0.15);text-align:center;">
+    <div style="font-family:'Cormorant Garamond',serif;font-size:16px;color:rgba(42,36,24,0.65);line-height:2;font-style:italic;">Diese Karte ist eine Momentaufnahme deiner Seelenlandschaft.<br>Die Zahlen und Energien die hier beschrieben werden, sind Einladungen — keine Festlegungen.<br>Nimm mit, was resoniert. Lass los, was noch nicht passt.<br>Dein Weg ist einzigartig.</div>
   </div>
 
   <div style="position:absolute;bottom:16mm;left:0;right:0;text-align:center;">
-    ${inlineStar(80, 0.25)}
-    <div style="font-family:'Raleway',sans-serif;font-size:7.5px;color:rgba(42,36,24,0.18);letter-spacing:2.5px;text-transform:uppercase;margin-top:5px;">Lichtkern · Human Resonanz · www.human-resonanz.de</div>
-    <div style="font-family:'Raleway',sans-serif;font-size:6.5px;color:rgba(42,36,24,0.12);margin-top:3px;letter-spacing:1px;">Dient der Selbsterkenntnis · Kein Ersatz für medizinische oder therapeutische Behandlung</div>
+    ${inlineStar(80, 0.4)}
+    <div style="font-family:'Raleway',sans-serif;font-size:7.5px;color:rgba(42,36,24,0.28);letter-spacing:2.5px;text-transform:uppercase;margin-top:5px;">Lichtkern · Human Resonanz · www.human-resonanz.de</div>
+    <div style="font-family:'Raleway',sans-serif;font-size:6.5px;color:rgba(42,36,24,0.2);margin-top:3px;letter-spacing:1px;">Dient der Selbsterkenntnis · Kein Ersatz für medizinische oder therapeutische Behandlung</div>
   </div>`;
 
     const printHTML = `<!DOCTYPE html>
@@ -305,20 +305,20 @@ Schreibe OHNE Markdown-Formatierung (keine **, keine #, keine Aufzählungszeiche
   .rk-frame {
     position: absolute;
     top: 10mm; right: 10mm; bottom: 10mm; left: 10mm;
-    border: 0.6px solid rgba(139,115,50,0.18);
+    border: 1px solid rgba(139,115,50,0.35);
     pointer-events: none;
   }
   .rk-frame::after {
     content: '';
     position: absolute;
     top: 3px; right: 3px; bottom: 3px; left: 3px;
-    border: 0.3px solid rgba(139,115,50,0.09);
+    border: 0.5px solid rgba(139,115,50,0.18);
   }
 </style></head><body>
 
-${pageShell(page1Content, watermark(WATERMARK_FLOWER, 0.20, '55%'))}
-${pageShell(page2Content, watermark(WATERMARK_LOTUS, 0.17, '50%'))}
-${pageShell(page3Content, watermark(WATERMARK_FLOWER, 0.13, '50%'))}
+${pageShell(page1Content, watermark(WATERMARK_FLOWER, 0.30, '55%'))}
+${pageShell(page2Content, watermark(WATERMARK_LOTUS, 0.25, '50%'))}
+${pageShell(page3Content, watermark(WATERMARK_FLOWER, 0.18, '50%'))}
 
 </body></html>`;
 
