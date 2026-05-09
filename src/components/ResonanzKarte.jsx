@@ -4,16 +4,15 @@ import { calcNumerology, LIFE_PATH_DESC, PERSONAL_YEAR_DESC } from "./Numerology
 import { HD_TYPE_DESC, HD_AUTHORITY_DESC } from "./HumanDesign.jsx";
 import { groqFetch } from "../config/groq.js";
 
-/* ── SVG ornaments for print (inline, not as img src) ── */
+/* ── SVG ornaments for print ── */
 const CORNER_SVG = `<svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 58V20C2 10 10 2 20 2H58" stroke="#8B7332" stroke-width="1.2" fill="none"/><path d="M2 58V30C2 15 15 2 30 2H58" stroke="#8B7332" stroke-width="0.5" opacity="0.4" fill="none"/><circle cx="2" cy="58" r="2" fill="#8B7332"/><circle cx="58" cy="2" r="2" fill="#8B7332"/></svg>`;
 
 const DIVIDER_SVG = `<svg width="200" height="20" viewBox="0 0 200 20" fill="none" xmlns="http://www.w3.org/2000/svg"><line x1="0" y1="10" x2="80" y2="10" stroke="#8B7332" stroke-width="0.5" opacity="0.3"/><line x1="120" y1="10" x2="200" y2="10" stroke="#8B7332" stroke-width="0.5" opacity="0.3"/><path d="M92 10L100 3L108 10L100 17Z" stroke="#8B7332" stroke-width="0.8" fill="none" opacity="0.5"/><circle cx="100" cy="10" r="2" fill="#8B7332" opacity="0.4"/></svg>`;
 
 const STAR_ORNAMENT = `<svg width="120" height="24" viewBox="0 0 120 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="60" cy="12" r="3" stroke="#8B7332" stroke-width="0.8" fill="none" opacity="0.5"/><circle cx="60" cy="12" r="1" fill="#8B7332" opacity="0.6"/><line x1="10" y1="12" x2="52" y2="12" stroke="#8B7332" stroke-width="0.4" opacity="0.25"/><line x1="68" y1="12" x2="110" y2="12" stroke="#8B7332" stroke-width="0.4" opacity="0.25"/><circle cx="10" cy="12" r="1.5" fill="#8B7332" opacity="0.2"/><circle cx="110" cy="12" r="1.5" fill="#8B7332" opacity="0.2"/></svg>`;
 
-/* ── Watermark SVGs — subtle sacred geometry backgrounds ── */
-// Flower of Life (Page 1) — 7 overlapping circles, classic sacred geometry
-const WATERMARK_FLOWER = `<svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#8B7332" stroke-width="0.4">
+/* ── Watermark SVGs — visible at ~10% opacity ── */
+const WATERMARK_FLOWER = `<svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#B8A060" stroke-width="0.6">
   <circle cx="200" cy="200" r="60"/>
   <circle cx="200" cy="140" r="60"/>
   <circle cx="200" cy="260" r="60"/>
@@ -21,24 +20,34 @@ const WATERMARK_FLOWER = `<svg viewBox="0 0 400 400" xmlns="http://www.w3.org/20
   <circle cx="252" cy="230" r="60"/>
   <circle cx="148" cy="170" r="60"/>
   <circle cx="148" cy="230" r="60"/>
-  <circle cx="200" cy="200" r="95" stroke-width="0.3"/>
-  <circle cx="200" cy="200" r="120" stroke-width="0.2"/>
+  <circle cx="200" cy="80" r="60" stroke-width="0.35"/>
+  <circle cx="200" cy="320" r="60" stroke-width="0.35"/>
+  <circle cx="304" cy="140" r="60" stroke-width="0.35"/>
+  <circle cx="304" cy="260" r="60" stroke-width="0.35"/>
+  <circle cx="96" cy="140" r="60" stroke-width="0.35"/>
+  <circle cx="96" cy="260" r="60" stroke-width="0.35"/>
+  <circle cx="200" cy="200" r="100" stroke-width="0.3"/>
+  <circle cx="200" cy="200" r="140" stroke-width="0.2"/>
+  <circle cx="200" cy="200" r="180" stroke-width="0.15"/>
 </svg>`;
 
-// Lotus blossom (Page 2) — stylized petals radiating outward
-const WATERMARK_LOTUS = `<svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#8B7332" stroke-width="0.4">
-  <ellipse cx="200" cy="180" rx="18" ry="70" transform="rotate(0,200,200)"/>
-  <ellipse cx="200" cy="180" rx="18" ry="70" transform="rotate(30,200,200)"/>
-  <ellipse cx="200" cy="180" rx="18" ry="70" transform="rotate(60,200,200)"/>
-  <ellipse cx="200" cy="180" rx="18" ry="70" transform="rotate(90,200,200)"/>
-  <ellipse cx="200" cy="180" rx="18" ry="70" transform="rotate(120,200,200)"/>
-  <ellipse cx="200" cy="180" rx="18" ry="70" transform="rotate(150,200,200)"/>
-  <ellipse cx="200" cy="165" rx="30" ry="100" transform="rotate(0,200,200)" stroke-width="0.25"/>
-  <ellipse cx="200" cy="165" rx="30" ry="100" transform="rotate(45,200,200)" stroke-width="0.25"/>
-  <ellipse cx="200" cy="165" rx="30" ry="100" transform="rotate(90,200,200)" stroke-width="0.25"/>
-  <ellipse cx="200" cy="165" rx="30" ry="100" transform="rotate(135,200,200)" stroke-width="0.25"/>
-  <circle cx="200" cy="200" r="12" stroke-width="0.5"/>
-  <circle cx="200" cy="200" r="4" fill="#8B7332" stroke="none" opacity="0.3"/>
+const WATERMARK_LOTUS = `<svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#B8A060" stroke-width="0.5">
+  <ellipse cx="200" cy="175" rx="16" ry="65" transform="rotate(0,200,200)"/>
+  <ellipse cx="200" cy="175" rx="16" ry="65" transform="rotate(30,200,200)"/>
+  <ellipse cx="200" cy="175" rx="16" ry="65" transform="rotate(60,200,200)"/>
+  <ellipse cx="200" cy="175" rx="16" ry="65" transform="rotate(90,200,200)"/>
+  <ellipse cx="200" cy="175" rx="16" ry="65" transform="rotate(120,200,200)"/>
+  <ellipse cx="200" cy="175" rx="16" ry="65" transform="rotate(150,200,200)"/>
+  <ellipse cx="200" cy="160" rx="28" ry="95" transform="rotate(0,200,200)" stroke-width="0.35"/>
+  <ellipse cx="200" cy="160" rx="28" ry="95" transform="rotate(45,200,200)" stroke-width="0.35"/>
+  <ellipse cx="200" cy="160" rx="28" ry="95" transform="rotate(90,200,200)" stroke-width="0.35"/>
+  <ellipse cx="200" cy="160" rx="28" ry="95" transform="rotate(135,200,200)" stroke-width="0.35"/>
+  <ellipse cx="200" cy="145" rx="40" ry="120" transform="rotate(22.5,200,200)" stroke-width="0.2"/>
+  <ellipse cx="200" cy="145" rx="40" ry="120" transform="rotate(67.5,200,200)" stroke-width="0.2"/>
+  <ellipse cx="200" cy="145" rx="40" ry="120" transform="rotate(112.5,200,200)" stroke-width="0.2"/>
+  <ellipse cx="200" cy="145" rx="40" ry="120" transform="rotate(157.5,200,200)" stroke-width="0.2"/>
+  <circle cx="200" cy="200" r="14" stroke-width="0.6"/>
+  <circle cx="200" cy="200" r="5" fill="#B8A060" stroke="none" opacity="0.2"/>
 </svg>`;
 
 const printCSS = `
@@ -86,22 +95,22 @@ ${nums.maturity !== null ? `Reifezahl: ${nums.maturity}` : ''}
 Persönliches Jahr: ${nums.personalYear}, Monat: ${nums.personalMonth}
 ${nums.karmicDebts.length > 0 ? `Karmische Schuldzahlen: ${nums.karmicDebts.join(', ')}` : ''}` : ''}
 
-Schreibe folgende Abschnitte (jeweils 3-5 Sätze, warmherzig und tiefgründig):
+Schreibe folgende Abschnitte (jeweils 3-4 Sätze, warmherzig und tiefgründig):
 
 DEIN WESEN
-Beschreibe wer dieser Mensch im Kern ist — basierend auf der Kombination von HD-Typ und Lebenszahl. Was macht diese Kombination einzigartig?
+Beschreibe wer dieser Mensch im Kern ist — basierend auf der Kombination von HD-Typ und Lebenszahl.
 
 DEINE INNERE LANDSCHAFT
-Was bewegt diesen Menschen innerlich? Herzzahl, Autorität und Persönlichkeitszahl erzählen eine Geschichte über innere Sehnsucht und äußere Wirkung.
+Was bewegt diesen Menschen innerlich? Herzzahl, Autorität und Persönlichkeitszahl.
 
 DEIN WEG
-Basierend auf Strategie, Lebenszahl und Profil: Wie navigiert dieser Mensch am besten durchs Leben? Konkrete, praktische Weisheit.
+Basierend auf Strategie, Lebenszahl und Profil: Wie navigiert dieser Mensch am besten durchs Leben?
 
 DEINE AKTUELLE PHASE
-Persönliches Jahr ${hasNums ? nums.personalYear : '?'} und was das für die nächsten Monate bedeutet. Verbinde es mit der HD-Strategie.
+Persönliches Jahr ${hasNums ? nums.personalYear : '?'} und was das für die nächsten Monate bedeutet.
 
 DREI GESCHENKE FÜR DEINEN WEG
-Drei konkrete, warmherzige Impulse die dieser Mensch mitnehmen kann. Als drei kurze Absätze, jeder beginnt mit einem kraftvollen Satz.
+Drei konkrete, warmherzige Impulse als drei kurze Absätze, jeder beginnt mit einem kraftvollen Satz.
 
 ${nums?.karmicDebts?.length > 0 ? `DEINE KARMISCHE EINLADUNG
 Was die Schuldzahl(en) ${nums.karmicDebts.join(', ')} als Einladung zur Heilung bedeuten.` : ''}
@@ -120,7 +129,6 @@ Schreibe OHNE Markdown-Formatierung (keine **, keine #, keine Aufzählungszeiche
     const lines = text.split('\n').filter(l => l.trim());
     const sections = [];
     let current = { title: '', body: '' };
-
     for (const line of lines) {
       const cleaned = line.replace(/^\*+\s*/, '').replace(/\s*\*+$/, '').trim();
       const isTitle = sectionTitles.some(t => cleaned.toUpperCase().includes(t));
@@ -135,43 +143,55 @@ Schreibe OHNE Markdown-Formatierung (keine **, keine #, keine Aufzählungszeiche
     return sections;
   };
 
-  /* ── Build premium print HTML ── */
+  /* ── Print helpers ── */
   const buildPrintSection = (sec, isFirst) => {
     const bodyParagraphs = sec.body.split('\n\n').filter(p => p.trim());
     let html = '';
-
     if (isFirst && bodyParagraphs.length > 0) {
-      const firstPara = bodyParagraphs[0];
-      const firstChar = firstPara.charAt(0);
-      const rest = firstPara.substring(1);
-      html += `<p style="font-family:'Cormorant Garamond',serif;font-size:13px;color:#2A2418;line-height:1.9;margin:0 0 10px;"><span style="float:left;font-family:'Cormorant Garamond',serif;font-size:52px;line-height:0.78;padding:2px 8px 0 0;color:#8B7332;font-weight:600;">${firstChar}</span>${rest}</p>`;
-      for (let i = 1; i < bodyParagraphs.length; i++) {
-        html += `<p style="font-family:'Cormorant Garamond',serif;font-size:13px;color:#2A2418;line-height:1.9;margin:0 0 10px;text-indent:1.5em;">${bodyParagraphs[i]}</p>`;
-      }
+      const first = bodyParagraphs[0];
+      html += `<p style="font-family:'Cormorant Garamond',serif;font-size:12.5px;color:#2A2418;line-height:1.9;margin:0 0 8px;"><span style="float:left;font-family:'Cormorant Garamond',serif;font-size:48px;line-height:0.78;padding:2px 8px 0 0;color:#8B7332;font-weight:600;">${first.charAt(0)}</span>${first.substring(1)}</p>`;
+      for (let i = 1; i < bodyParagraphs.length; i++)
+        html += `<p style="font-family:'Cormorant Garamond',serif;font-size:12.5px;color:#2A2418;line-height:1.9;margin:0 0 8px;text-indent:1.5em;">${bodyParagraphs[i]}</p>`;
     } else {
-      for (const p of bodyParagraphs) {
-        html += `<p style="font-family:'Cormorant Garamond',serif;font-size:13px;color:#2A2418;line-height:1.9;margin:0 0 10px;">${p}</p>`;
-      }
+      for (const p of bodyParagraphs)
+        html += `<p style="font-family:'Cormorant Garamond',serif;font-size:12.5px;color:#2A2418;line-height:1.9;margin:0 0 8px;">${p}</p>`;
     }
-
-    return `
-      <div style="margin-bottom:26px;">
-        <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
-          <div style="flex:1;height:1px;background:linear-gradient(to right,transparent,rgba(139,115,50,0.25));"></div>
-          <div style="font-family:'Cormorant Garamond',serif;font-size:12px;font-weight:700;color:#8B7332;letter-spacing:3.5px;text-transform:uppercase;white-space:nowrap;">${sec.title}</div>
-          <div style="flex:1;height:1px;background:linear-gradient(to left,transparent,rgba(139,115,50,0.25));"></div>
-        </div>
-        ${html}
-      </div>`;
+    return `<div style="margin-bottom:20px;">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px;">
+        <div style="flex:1;height:1px;background:linear-gradient(to right,transparent,rgba(139,115,50,0.25));"></div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:11px;font-weight:700;color:#8B7332;letter-spacing:3.5px;text-transform:uppercase;white-space:nowrap;">${sec.title}</div>
+        <div style="flex:1;height:1px;background:linear-gradient(to left,transparent,rgba(139,115,50,0.25));"></div>
+      </div>
+      ${html}
+    </div>`;
   };
 
   const buildNumCircle = (n, label) => {
     const isMaster = [11, 22, 33].includes(n);
     return `<div style="text-align:center;width:52px;">
-      <div style="width:38px;height:38px;border-radius:50%;margin:0 auto 3px;border:${isMaster ? '2px solid #8B7332' : '1.5px solid rgba(139,115,50,0.25)'};${isMaster ? 'background:rgba(139,115,50,0.06);box-shadow:0 0 10px rgba(139,115,50,0.15);' : ''}display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:700;color:${isMaster ? '#8B7332' : '#2A2418'};">${n}</div>
+      <div style="width:36px;height:36px;border-radius:50%;margin:0 auto 3px;border:${isMaster ? '2px solid #8B7332' : '1.5px solid rgba(139,115,50,0.25)'};${isMaster ? 'background:rgba(139,115,50,0.06);box-shadow:0 0 8px rgba(139,115,50,0.15);' : ''}display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:15px;font-weight:700;color:${isMaster ? '#8B7332' : '#2A2418'};">${n}</div>
       <div style="font-family:'Raleway',sans-serif;font-size:7px;font-weight:700;color:rgba(42,36,24,0.4);text-transform:uppercase;letter-spacing:0.5px;">${label}</div>
     </div>`;
   };
+
+  const inlineStar = (w, op) => `<div style="text-align:center;opacity:${op};">${STAR_ORNAMENT.replace('width="120"', `width="${w}"`)}</div>`;
+  const inlineDivider = (w, op) => `<div style="text-align:center;opacity:${op};">${DIVIDER_SVG.replace('width="200"', `width="${w}"`)}</div>`;
+  const inlineCorner = (pos) => {
+    const tr = { tl: '', br: 'transform:rotate(180deg);' };
+    const ps = { tl: 'top:14mm;left:14mm;', br: 'bottom:14mm;right:14mm;' };
+    return `<div style="position:absolute;${ps[pos]}width:60px;height:60px;${tr[pos]||''}">${CORNER_SVG}</div>`;
+  };
+
+  const watermark = (svg, op, top) => `<div style="position:absolute;top:${top};left:50%;transform:translate(-50%,-50%);width:480px;height:480px;opacity:${op};pointer-events:none;">${svg}</div>`;
+
+  const pageShell = (content, wm) => `
+<div class="rk-page">
+  <div class="rk-frame"></div>
+  ${wm || ''}
+  ${inlineCorner('tl')}
+  ${inlineCorner('br')}
+  ${content}
+</div>`;
 
   const handlePrint = () => {
     const secs = parseSections(karteText);
@@ -193,24 +213,80 @@ Schreibe OHNE Markdown-Formatierung (keine **, keine #, keine Aufzählungszeiche
       { n: nums.personalDay, l: 'Persönlicher Tag' },
     ] : [];
 
-    /* Inline SVG wrappers — rendered directly in the HTML, no img/data-uri */
-    const inlineStar = (w, op) => `<div style="text-align:center;opacity:${op};">${STAR_ORNAMENT.replace('width="120"', `width="${w}"`).replace('height="24"', 'height="24"')}</div>`;
-    const inlineDivider = (w, op) => `<div style="text-align:center;opacity:${op};">${DIVIDER_SVG.replace('width="200"', `width="${w}"`)}</div>`;
-    const inlineCorner = (pos) => {
-      const transforms = {
-        tl: '',
-        tr: 'transform:scaleX(-1);',
-        bl: 'transform:scaleY(-1);',
-        br: 'transform:rotate(180deg);',
-      };
-      const positions = {
-        tl: 'top:16mm;left:16mm;',
-        tr: 'top:16mm;right:16mm;',
-        bl: 'bottom:16mm;left:16mm;',
-        br: 'bottom:16mm;right:16mm;',
-      };
-      return `<div style="position:absolute;${positions[pos]}width:60px;height:60px;${transforms[pos]}">${CORNER_SVG}</div>`;
-    };
+    /* ── PAGE 1: Header + first 2 sections ── */
+    const page1Content = `
+  <div style="text-align:center;margin-bottom:4px;">
+    <div style="font-family:'Raleway',sans-serif;font-size:9px;font-weight:600;letter-spacing:5px;color:rgba(139,115,50,0.45);text-transform:uppercase;">Human Resonanz</div>
+  </div>
+  ${inlineStar(120, 0.5)}
+  <div style="text-align:center;margin:2px 0 4px;">
+    <div style="font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:300;color:#8B7332;letter-spacing:3px;font-style:italic;">Resonanzkarte</div>
+  </div>
+  <div style="margin-bottom:12px;">${inlineDivider(200, 1)}</div>
+  <div style="text-align:center;margin-bottom:2px;">
+    <div style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:600;color:#2A2418;letter-spacing:1px;">${client.name}</div>
+    <div style="font-family:'Raleway',sans-serif;font-size:9.5px;color:rgba(42,36,24,0.4);letter-spacing:1.5px;margin-top:4px;">${meta}</div>
+  </div>
+  <div style="margin-bottom:16px;">${inlineStar(100, 0.35)}</div>
+  ${secs.slice(0, 2).map((s, i) => buildPrintSection(s, i === 0)).join('')}
+  <div style="position:absolute;bottom:14mm;left:0;right:0;text-align:center;">
+    <div style="font-family:'Raleway',sans-serif;font-size:7px;color:rgba(42,36,24,0.18);letter-spacing:2.5px;text-transform:uppercase;">Lichtkern · Human Resonanz · ${today}</div>
+  </div>`;
+
+    /* ── PAGE 2: Remaining text sections ── */
+    const page2Content = `
+  ${inlineStar(100, 0.35)}
+  <div style="margin-top:12px;">
+    ${secs.slice(2).map(s => buildPrintSection(s, false)).join('')}
+  </div>
+  <div style="position:absolute;bottom:14mm;left:0;right:0;text-align:center;">
+    <div style="font-family:'Raleway',sans-serif;font-size:7px;color:rgba(42,36,24,0.18);letter-spacing:2.5px;text-transform:uppercase;">Lichtkern · Human Resonanz · Seite 2</div>
+  </div>`;
+
+    /* ── PAGE 3: Data overview + closing ── */
+    const page3Content = `
+  ${inlineStar(100, 0.35)}
+  <div style="text-align:center;margin:8px 0 18px;">
+    <div style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;color:#8B7332;letter-spacing:2px;font-style:italic;">Deine Resonanz auf einen Blick</div>
+  </div>
+  <div style="margin-bottom:14px;">${inlineDivider(160, 0.4)}</div>
+
+  <div style="display:flex;gap:16px;margin-bottom:18px;">
+    ${hasHD ? `<div style="flex:1;padding:18px;border:1px solid rgba(139,115,50,0.15);border-radius:8px;background:rgba(139,115,50,0.02);">
+      <div style="font-family:'Raleway',sans-serif;font-size:8px;font-weight:700;color:#8B7332;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:10px;">✦ Human Design</div>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;color:#2A2418;">${client.hdType}</div>
+      <div style="font-family:'Raleway',sans-serif;font-size:10px;color:rgba(42,36,24,0.5);margin-top:3px;">${client.hdProfile ? `Profil ${client.hdProfile}` : ''}${client.hdAuthority ? ` · ${client.hdAuthority}` : ''}</div>
+      <div style="width:30px;height:1px;background:rgba(139,115,50,0.2);margin:10px 0;"></div>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:11px;color:rgba(42,36,24,0.5);font-style:italic;">Strategie: ${hdInfo?.strategy || '—'}</div>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:11px;color:rgba(42,36,24,0.5);font-style:italic;margin-top:2px;">Signatur: ${hdInfo?.signature || '—'}</div>
+    </div>` : ''}
+    ${hasNums ? `<div style="flex:1;padding:18px;border:1px solid rgba(139,115,50,0.15);border-radius:8px;background:rgba(139,115,50,0.02);">
+      <div style="font-family:'Raleway',sans-serif;font-size:8px;font-weight:700;color:#8B7332;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:12px;">✦ Numerologie</div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center;">
+        ${numCircles.map(x => buildNumCircle(x.n, x.l)).join('')}
+      </div>
+    </div>` : ''}
+  </div>
+
+  ${hasNums ? `<div style="display:flex;gap:10px;margin-bottom:20px;">
+    ${timeBlocks.map(({ n, l, d }) => `<div style="flex:${d ? 2 : 1};padding:12px 14px;border:1px solid rgba(139,115,50,0.1);border-radius:8px;display:flex;align-items:center;gap:12px;background:rgba(139,115,50,0.015);">
+      <div style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:600;color:#8B7332;line-height:1;">${n}</div>
+      <div>
+        <div style="font-family:'Raleway',sans-serif;font-size:7px;font-weight:700;color:rgba(42,36,24,0.4);letter-spacing:1.5px;text-transform:uppercase;">${l}</div>
+        ${d ? `<div style="font-family:'Cormorant Garamond',serif;font-size:10px;color:rgba(42,36,24,0.45);line-height:1.3;margin-top:2px;font-style:italic;">${d}</div>` : ''}
+      </div>
+    </div>`).join('')}
+  </div>` : ''}
+
+  <div style="padding:20px 26px;background:rgba(139,115,50,0.025);border-radius:10px;border:1px solid rgba(139,115,50,0.08);text-align:center;">
+    <div style="font-family:'Cormorant Garamond',serif;font-size:13px;color:rgba(42,36,24,0.55);line-height:2;font-style:italic;">Diese Karte ist eine Momentaufnahme deiner Seelenlandschaft.<br>Die Zahlen und Energien die hier beschrieben werden, sind Einladungen — keine Festlegungen.<br>Nimm mit, was resoniert. Lass los, was noch nicht passt.<br>Dein Weg ist einzigartig.</div>
+  </div>
+
+  <div style="position:absolute;bottom:16mm;left:0;right:0;text-align:center;">
+    ${inlineStar(80, 0.25)}
+    <div style="font-family:'Raleway',sans-serif;font-size:7.5px;color:rgba(42,36,24,0.18);letter-spacing:2.5px;text-transform:uppercase;margin-top:5px;">Lichtkern · Human Resonanz · www.human-resonanz.de</div>
+    <div style="font-family:'Raleway',sans-serif;font-size:6.5px;color:rgba(42,36,24,0.12);margin-top:3px;letter-spacing:1px;">Dient der Selbsterkenntnis · Kein Ersatz für medizinische oder therapeutische Behandlung</div>
+  </div>`;
 
     const printHTML = `<!DOCTYPE html>
 <html><head><meta charset="utf-8"><title>Resonanzkarte — ${client.name}</title>
@@ -222,14 +298,13 @@ Schreibe OHNE Markdown-Formatierung (keine **, keine #, keine Aufzählungszeiche
   .rk-page {
     position: relative;
     width: 210mm; min-height: 297mm;
-    padding: 30mm 28mm 22mm;
+    padding: 28mm 26mm 20mm;
     background: #FFFDF8;
     overflow: hidden;
   }
-  /* Double border frame */
   .rk-frame {
     position: absolute;
-    top: 12mm; right: 12mm; bottom: 12mm; left: 12mm;
+    top: 10mm; right: 10mm; bottom: 10mm; left: 10mm;
     border: 0.6px solid rgba(139,115,50,0.18);
     pointer-events: none;
   }
@@ -241,94 +316,9 @@ Schreibe OHNE Markdown-Formatierung (keine **, keine #, keine Aufzählungszeiche
   }
 </style></head><body>
 
-<!-- PAGE 1 -->
-<div class="rk-page">
-  <div class="rk-frame"></div>
-  <!-- Watermark: Flower of Life -->
-  <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:420px;height:420px;opacity:0.04;pointer-events:none;">${WATERMARK_FLOWER}</div>
-  ${inlineCorner('tl')}
-  ${inlineCorner('br')}
-
-  <div style="text-align:center;margin-bottom:6px;">
-    <div style="font-family:'Raleway',sans-serif;font-size:9px;font-weight:600;letter-spacing:5px;color:rgba(139,115,50,0.45);text-transform:uppercase;">Human Resonanz</div>
-  </div>
-
-  ${inlineStar(120, 0.5)}
-
-  <div style="text-align:center;margin:2px 0 4px;">
-    <div style="font-family:'Cormorant Garamond',serif;font-size:38px;font-weight:300;color:#8B7332;letter-spacing:3px;font-style:italic;">Resonanzkarte</div>
-  </div>
-
-  <div style="margin-bottom:14px;">${inlineDivider(200, 1)}</div>
-
-  <div style="text-align:center;margin-bottom:4px;">
-    <div style="font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:600;color:#2A2418;letter-spacing:1px;">${client.name}</div>
-    <div style="font-family:'Raleway',sans-serif;font-size:10px;color:rgba(42,36,24,0.4);letter-spacing:1.5px;margin-top:5px;">${meta}</div>
-  </div>
-
-  <div style="margin-bottom:18px;">${inlineStar(100, 0.35)}</div>
-
-  ${secs.slice(0, 3).map((s, i) => buildPrintSection(s, i === 0)).join('')}
-
-  <div style="position:absolute;bottom:16mm;left:0;right:0;text-align:center;">
-    <div style="font-family:'Raleway',sans-serif;font-size:7px;color:rgba(42,36,24,0.18);letter-spacing:2.5px;text-transform:uppercase;">Lichtkern · Human Resonanz · ${today}</div>
-  </div>
-</div>
-
-<!-- PAGE 2 -->
-<div class="rk-page">
-  <div class="rk-frame"></div>
-  <!-- Watermark: Lotus -->
-  <div style="position:absolute;top:35%;left:50%;transform:translate(-50%,-50%);width:380px;height:380px;opacity:0.035;pointer-events:none;">${WATERMARK_LOTUS}</div>
-  ${inlineCorner('tl')}
-  ${inlineCorner('br')}
-
-  <div style="margin-bottom:18px;">${inlineStar(100, 0.35)}</div>
-
-  ${secs.slice(3).map(s => buildPrintSection(s, false)).join('')}
-
-  <div style="margin:22px 0 18px;">${inlineDivider(180, 0.5)}</div>
-
-  <!-- Reference blocks -->
-  <div style="display:flex;gap:16px;margin-bottom:16px;">
-    ${hasHD ? `<div style="flex:1;padding:16px;border:1px solid rgba(139,115,50,0.15);border-radius:8px;background:rgba(139,115,50,0.02);">
-      <div style="font-family:'Raleway',sans-serif;font-size:8px;font-weight:700;color:#8B7332;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:8px;">✦ Human Design</div>
-      <div style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;color:#2A2418;">${client.hdType}</div>
-      <div style="font-family:'Raleway',sans-serif;font-size:10px;color:rgba(42,36,24,0.5);margin-top:3px;">${client.hdProfile ? `Profil ${client.hdProfile}` : ''}${client.hdAuthority ? ` · ${client.hdAuthority}` : ''}</div>
-      <div style="width:30px;height:1px;background:rgba(139,115,50,0.2);margin:8px 0;"></div>
-      <div style="font-family:'Cormorant Garamond',serif;font-size:11px;color:rgba(42,36,24,0.5);font-style:italic;">Strategie: ${hdInfo?.strategy || '—'}</div>
-      <div style="font-family:'Cormorant Garamond',serif;font-size:11px;color:rgba(42,36,24,0.5);font-style:italic;">Signatur: ${hdInfo?.signature || '—'}</div>
-    </div>` : ''}
-
-    ${hasNums ? `<div style="flex:1;padding:16px;border:1px solid rgba(139,115,50,0.15);border-radius:8px;background:rgba(139,115,50,0.02);">
-      <div style="font-family:'Raleway',sans-serif;font-size:8px;font-weight:700;color:#8B7332;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:10px;">✦ Numerologie</div>
-      <div style="display:flex;flex-wrap:wrap;gap:6px;justify-content:center;">
-        ${numCircles.map(x => buildNumCircle(x.n, x.l)).join('')}
-      </div>
-    </div>` : ''}
-  </div>
-
-  ${hasNums ? `<div style="display:flex;gap:10px;margin-bottom:16px;">
-    ${timeBlocks.map(({ n, l, d }) => `<div style="flex:${d ? 2 : 1};padding:10px 14px;border:1px solid rgba(139,115,50,0.1);border-radius:8px;display:flex;align-items:center;gap:12px;background:rgba(139,115,50,0.015);">
-      <div style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:600;color:#8B7332;line-height:1;">${n}</div>
-      <div>
-        <div style="font-family:'Raleway',sans-serif;font-size:7px;font-weight:700;color:rgba(42,36,24,0.4);letter-spacing:1.5px;text-transform:uppercase;">${l}</div>
-        ${d ? `<div style="font-family:'Cormorant Garamond',serif;font-size:10px;color:rgba(42,36,24,0.45);line-height:1.3;margin-top:2px;font-style:italic;">${d}</div>` : ''}
-      </div>
-    </div>`).join('')}
-  </div>` : ''}
-
-  <!-- Closing message -->
-  <div style="padding:18px 24px;background:rgba(139,115,50,0.025);border-radius:10px;border:1px solid rgba(139,115,50,0.08);text-align:center;">
-    <div style="font-family:'Cormorant Garamond',serif;font-size:13px;color:rgba(42,36,24,0.55);line-height:1.9;font-style:italic;">Diese Karte ist eine Momentaufnahme deiner Seelenlandschaft.<br>Die Zahlen und Energien die hier beschrieben werden, sind Einladungen — keine Festlegungen.<br>Nimm mit, was resoniert. Lass los, was noch nicht passt.<br>Dein Weg ist einzigartig.</div>
-  </div>
-
-  <div style="position:absolute;bottom:18mm;left:0;right:0;text-align:center;">
-    ${inlineStar(80, 0.25)}
-    <div style="font-family:'Raleway',sans-serif;font-size:7.5px;color:rgba(42,36,24,0.18);letter-spacing:2.5px;text-transform:uppercase;margin-top:5px;">Lichtkern · Human Resonanz · www.human-resonanz.de</div>
-    <div style="font-family:'Raleway',sans-serif;font-size:6.5px;color:rgba(42,36,24,0.12);margin-top:3px;letter-spacing:1px;">Dient der Selbsterkenntnis · Kein Ersatz für medizinische oder therapeutische Behandlung</div>
-  </div>
-</div>
+${pageShell(page1Content, watermark(WATERMARK_FLOWER, 0.08, '55%'))}
+${pageShell(page2Content, watermark(WATERMARK_LOTUS, 0.07, '50%'))}
+${pageShell(page3Content, watermark(WATERMARK_FLOWER, 0.05, '50%'))}
 
 </body></html>`;
 
@@ -340,40 +330,22 @@ Schreibe OHNE Markdown-Formatierung (keine **, keine #, keine Aufzählungszeiche
 
   const sections = parseSections(karteText);
 
+  /* ═══ SCREEN UI (unchanged) ═══ */
   return (
     <div style={{
-      position: 'fixed',
-      top: 0, right: 0, bottom: 0, left: 0,
-      background: 'rgba(0,0,0,0.75)',
-      backdropFilter: 'blur(4px)',
-      zIndex: 9999,
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      padding: '16px'
+      position: 'fixed', top: 0, right: 0, bottom: 0, left: 0,
+      background: 'rgba(0,0,0,0.75)', backdropFilter: 'blur(4px)',
+      zIndex: 9999, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '16px'
     }}>
       <div style={{
-        position: 'relative',
-        background: T.bgCard,
-        borderRadius: '20px',
-        border: `1px solid ${T.border}`,
-        width: '100%',
-        maxWidth: '780px',
-        maxHeight: '90vh',
-        display: 'flex',
-        flexDirection: 'column',
-        overflow: 'hidden'
+        position: 'relative', background: T.bgCard, borderRadius: '20px',
+        border: `1px solid ${T.border}`, width: '100%', maxWidth: '780px',
+        maxHeight: '90vh', display: 'flex', flexDirection: 'column', overflow: 'hidden'
       }}>
-
         {/* Toolbar */}
         <div className="rk-no-print" style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          padding: '14px 24px',
-          borderBottom: `1px solid ${T.border}`,
-          flexShrink: 0,
-          background: T.bgCard
+          display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+          padding: '14px 24px', borderBottom: `1px solid ${T.border}`, flexShrink: 0, background: T.bgCard
         }}>
           <div style={{ fontFamily: 'Cinzel', fontSize: '16px', color: T.text, fontWeight: 700 }}>✦ Resonanzkarte</div>
           <div style={{ display: 'flex', gap: '8px' }}>
@@ -394,10 +366,8 @@ Schreibe OHNE Markdown-Formatierung (keine **, keine #, keine Aufzählungszeiche
           </div>
         </div>
 
-        {/* Scrollable content area */}
+        {/* Scrollable content */}
         <div style={{ flex: 1, overflowY: 'auto', overflowX: 'hidden' }}>
-
-          {/* Empty State */}
           {!karteText && !loading && (
             <div style={{ padding: '60px 32px', textAlign: 'center' }}>
               <div style={{ fontSize: '48px', marginBottom: '16px', opacity: 0.3 }}>✦</div>
@@ -410,8 +380,6 @@ Schreibe OHNE Markdown-Formatierung (keine **, keine #, keine Aufzählungszeiche
               </button>
             </div>
           )}
-
-          {/* Loading */}
           {loading && (
             <div style={{ padding: '80px 32px', textAlign: 'center' }}>
               <div style={{ fontSize: '36px', marginBottom: '16px', animation: 'pulse 2s ease-in-out infinite' }}>✦</div>
@@ -420,16 +388,9 @@ Schreibe OHNE Markdown-Formatierung (keine **, keine #, keine Aufzählungszeiche
               <style>{`@keyframes pulse { 0%,100% { opacity: 0.4; } 50% { opacity: 1; } }`}</style>
             </div>
           )}
-
-          {/* ═══ SCREEN PREVIEW (Dark) ═══ */}
           {karteText && !loading && (
             <div ref={printRef}>
-
-              {/* PAGE 1 */}
-              <div className="rk-page" style={{
-                width: '100%', padding: '40px 48px 32px',
-                background: '#0D0D0A', color: '#F5F0E8', boxSizing: 'border-box'
-              }}>
+              <div className="rk-page" style={{ width: '100%', padding: '40px 48px 32px', background: '#0D0D0A', color: '#F5F0E8', boxSizing: 'border-box' }}>
                 <div style={{ textAlign: 'center', marginBottom: '14px' }}>
                   <div style={{ fontFamily: 'Raleway', fontSize: '10px', fontWeight: 700, letterSpacing: '4px', color: 'rgba(201,168,76,0.5)', textTransform: 'uppercase', marginBottom: '6px' }}>Human Resonanz</div>
                   <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '32px', fontWeight: 600, color: '#C9A84C', letterSpacing: '2px' }}>Resonanzkarte</div>
@@ -438,41 +399,17 @@ Schreibe OHNE Markdown-Formatierung (keine **, keine #, keine Aufzählungszeiche
                 <div style={{ textAlign: 'center', marginBottom: '20px' }}>
                   <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '28px', fontWeight: 700, color: '#F5F0E8', marginBottom: '4px' }}>{client.name}</div>
                   <div style={{ fontFamily: 'Raleway', fontSize: '11px', color: 'rgba(245,240,232,0.4)', letterSpacing: '1px' }}>
-                    {[
-                      client.birthDate && new Date(client.birthDate).toLocaleDateString('de-DE', { day: 'numeric', month: 'long', year: 'numeric' }),
-                      hasHD && `${client.hdType} · ${client.hdProfile || ''}`,
-                      hasNums && `Lebenszahl ${nums.lifePath}`,
-                    ].filter(Boolean).join('  ·  ')}
+                    {[client.birthDate && new Date(client.birthDate).toLocaleDateString('de-DE', { day: 'numeric', month: 'long', year: 'numeric' }), hasHD && `${client.hdType} · ${client.hdProfile || ''}`, hasNums && `Lebenszahl ${nums.lifePath}`].filter(Boolean).join('  ·  ')}
                   </div>
                 </div>
                 <Ornament />
-
-                {sections.slice(0, 3).map((sec, i) => (
+                {sections.map((sec, i) => (
                   <div key={i} style={{ marginBottom: '22px' }}>
                     <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '15px', fontWeight: 700, color: '#C9A84C', letterSpacing: '2.5px', textTransform: 'uppercase', marginBottom: '8px' }}>{sec.title}</div>
                     <Prose>{sec.body}</Prose>
                   </div>
                 ))}
-
-                <div style={{ marginTop: '24px', padding: '16px 0', textAlign: 'center' }}>
-                  <div style={{ fontFamily: 'Raleway', fontSize: '8px', color: 'rgba(245,240,232,0.2)', letterSpacing: '2px', textTransform: 'uppercase' }}>Lichtkern · Human Resonanz · {today}</div>
-                </div>
-              </div>
-
-              {/* PAGE 2 */}
-              <div className="rk-page" style={{
-                width: '100%', padding: '40px 48px 32px',
-                background: '#0D0D0A', color: '#F5F0E8', boxSizing: 'border-box'
-              }}>
-                {sections.slice(3).map((sec, i) => (
-                  <div key={i} style={{ marginBottom: '22px' }}>
-                    <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '15px', fontWeight: 700, color: '#C9A84C', letterSpacing: '2.5px', textTransform: 'uppercase', marginBottom: '8px' }}>{sec.title}</div>
-                    <Prose>{sec.body}</Prose>
-                  </div>
-                ))}
-
                 <Ornament />
-
                 <div style={{ display: 'flex', gap: '14px', marginBottom: '16px' }}>
                   {hasHD && (
                     <div style={{ flex: 1, padding: '14px', border: '1px solid rgba(201,168,76,0.1)', borderRadius: '10px' }}>
@@ -486,43 +423,36 @@ Schreibe OHNE Markdown-Formatierung (keine **, keine #, keine Aufzählungszeiche
                     <div style={{ flex: 1, padding: '14px', border: '1px solid rgba(201,168,76,0.1)', borderRadius: '10px' }}>
                       <div style={{ fontFamily: 'Raleway', fontSize: '9px', fontWeight: 800, color: '#C9A84C', letterSpacing: '2px', textTransform: 'uppercase', marginBottom: '6px' }}>Numerologie</div>
                       <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
-                        {[
-                          { n: nums.lifePath, l: 'Leben' }, { n: nums.expression, l: 'Ausdruck' }, { n: nums.heartDesire, l: 'Herz' },
-                          { n: nums.personality, l: 'Person.' }, { n: nums.birthDay, l: 'Geburt' }, { n: nums.attitude, l: 'Einstell.' },
-                          { n: nums.maturity, l: 'Reife' }, { n: nums.generation, l: 'Gener.' },
-                        ].filter(x => x.n !== null && x.n !== undefined).map(({ n, l }) => (
-                          <div key={l} style={{ textAlign: 'center', width: '44px' }}>
-                            <div style={{ width: '32px', height: '32px', borderRadius: '50%', margin: '0 auto 2px', border: `1.5px solid ${[11,22,33].includes(n)?'#C9A84C':'rgba(201,168,76,0.2)'}`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: "'Cormorant Garamond', serif", fontSize: '14px', fontWeight: 700, color: [11,22,33].includes(n)?'#C9A84C':'#F5F0E8' }}>{n}</div>
-                            <div style={{ fontFamily: 'Raleway', fontSize: '7px', fontWeight: 700, color: 'rgba(245,240,232,0.3)', textTransform: 'uppercase' }}>{l}</div>
+                        {[{n:nums.lifePath,l:'Leben'},{n:nums.expression,l:'Ausdruck'},{n:nums.heartDesire,l:'Herz'},{n:nums.personality,l:'Person.'},{n:nums.birthDay,l:'Geburt'},{n:nums.attitude,l:'Einstell.'},{n:nums.maturity,l:'Reife'},{n:nums.generation,l:'Gener.'}].filter(x=>x.n!==null&&x.n!==undefined).map(({n,l})=>(
+                          <div key={l} style={{textAlign:'center',width:'44px'}}>
+                            <div style={{width:'32px',height:'32px',borderRadius:'50%',margin:'0 auto 2px',border:`1.5px solid ${[11,22,33].includes(n)?'#C9A84C':'rgba(201,168,76,0.2)'}`,display:'flex',alignItems:'center',justifyContent:'center',fontFamily:"'Cormorant Garamond', serif",fontSize:'14px',fontWeight:700,color:[11,22,33].includes(n)?'#C9A84C':'#F5F0E8'}}>{n}</div>
+                            <div style={{fontFamily:'Raleway',fontSize:'7px',fontWeight:700,color:'rgba(245,240,232,0.3)',textTransform:'uppercase'}}>{l}</div>
                           </div>
                         ))}
                       </div>
                     </div>
                   )}
                 </div>
-
                 {hasNums && (
-                  <div style={{ display: 'flex', gap: '10px', marginBottom: '16px' }}>
-                    {[{ n: nums.personalYear, l: 'Pers. Jahr', d: PERSONAL_YEAR_DESC[nums.personalYear] }, { n: nums.personalMonth, l: 'Pers. Monat' }, { n: nums.personalDay, l: 'Pers. Tag' }].map(({ n, l, d }) => (
-                      <div key={l} style={{ flex: d ? 2 : 1, padding: '10px', border: '1px solid rgba(201,168,76,0.08)', borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '10px' }}>
-                        <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '24px', fontWeight: 700, color: '#C9A84C' }}>{n}</div>
+                  <div style={{display:'flex',gap:'10px',marginBottom:'16px'}}>
+                    {[{n:nums.personalYear,l:'Pers. Jahr',d:PERSONAL_YEAR_DESC[nums.personalYear]},{n:nums.personalMonth,l:'Pers. Monat'},{n:nums.personalDay,l:'Pers. Tag'}].map(({n,l,d})=>(
+                      <div key={l} style={{flex:d?2:1,padding:'10px',border:'1px solid rgba(201,168,76,0.08)',borderRadius:'8px',display:'flex',alignItems:'center',gap:'10px'}}>
+                        <div style={{fontFamily:"'Cormorant Garamond', serif",fontSize:'24px',fontWeight:700,color:'#C9A84C'}}>{n}</div>
                         <div>
-                          <div style={{ fontFamily: 'Raleway', fontSize: '8px', fontWeight: 700, color: 'rgba(245,240,232,0.35)', letterSpacing: '1px', textTransform: 'uppercase' }}>{l}</div>
-                          {d && <div style={{ fontFamily: 'Raleway', fontSize: '10px', color: 'rgba(245,240,232,0.4)', lineHeight: '1.3', marginTop: '1px' }}>{d}</div>}
+                          <div style={{fontFamily:'Raleway',fontSize:'8px',fontWeight:700,color:'rgba(245,240,232,0.35)',letterSpacing:'1px',textTransform:'uppercase'}}>{l}</div>
+                          {d&&<div style={{fontFamily:'Raleway',fontSize:'10px',color:'rgba(245,240,232,0.4)',lineHeight:'1.3',marginTop:'1px'}}>{d}</div>}
                         </div>
                       </div>
                     ))}
                   </div>
                 )}
-
-                <div style={{ padding: '14px', background: 'rgba(201,168,76,0.03)', borderRadius: '10px', border: '1px solid rgba(201,168,76,0.06)' }}>
+                <div style={{padding:'14px',background:'rgba(201,168,76,0.03)',borderRadius:'10px',border:'1px solid rgba(201,168,76,0.06)'}}>
                   <Prose>Diese Karte ist eine Momentaufnahme deiner Seelenlandschaft. Die Zahlen und Energien die hier beschrieben werden, sind Einladungen — keine Festlegungen. Nimm mit, was resoniert. Lass los, was noch nicht passt. Dein Weg ist einzigartig.</Prose>
                 </div>
-
-                <div style={{ marginTop: '24px', padding: '16px 0', textAlign: 'center' }}>
+                <div style={{marginTop:'24px',padding:'16px 0',textAlign:'center'}}>
                   <Ornament />
-                  <div style={{ fontFamily: 'Raleway', fontSize: '8px', color: 'rgba(245,240,232,0.2)', letterSpacing: '2px', textTransform: 'uppercase' }}>Lichtkern · Human Resonanz · www.human-resonanz.de</div>
-                  <div style={{ fontFamily: 'Raleway', fontSize: '7px', color: 'rgba(245,240,232,0.12)', marginTop: '2px' }}>Dient der Selbsterkenntnis · Kein Ersatz für medizinische oder therapeutische Behandlung</div>
+                  <div style={{fontFamily:'Raleway',fontSize:'8px',color:'rgba(245,240,232,0.2)',letterSpacing:'2px',textTransform:'uppercase'}}>Lichtkern · Human Resonanz · www.human-resonanz.de</div>
+                  <div style={{fontFamily:'Raleway',fontSize:'7px',color:'rgba(245,240,232,0.12)',marginTop:'2px'}}>Dient der Selbsterkenntnis · Kein Ersatz für medizinische oder therapeutische Behandlung</div>
                 </div>
               </div>
             </div>
