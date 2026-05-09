@@ -4,14 +4,19 @@ import { calcNumerology, LIFE_PATH_DESC, PERSONAL_YEAR_DESC } from "./Numerology
 import { HD_TYPE_DESC, HD_AUTHORITY_DESC } from "./HumanDesign.jsx";
 import { groqFetch } from "../config/groq.js";
 
+/* ── SVG ornaments for print ── */
+const CORNER_SVG = `<svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 58V20C2 10 10 2 20 2H58" stroke="%238B7332" stroke-width="1.2" fill="none"/><path d="M2 58V30C2 15 15 2 30 2H58" stroke="%238B7332" stroke-width="0.5" opacity="0.4" fill="none"/><circle cx="2" cy="58" r="2" fill="%238B7332"/><circle cx="58" cy="2" r="2" fill="%238B7332"/></svg>`;
+
+const DIVIDER_SVG = `<svg width="200" height="20" viewBox="0 0 200 20" fill="none" xmlns="http://www.w3.org/2000/svg"><line x1="0" y1="10" x2="80" y2="10" stroke="%238B7332" stroke-width="0.5" opacity="0.3"/><line x1="120" y1="10" x2="200" y2="10" stroke="%238B7332" stroke-width="0.5" opacity="0.3"/><path d="M92 10L100 3L108 10L100 17Z" stroke="%238B7332" stroke-width="0.8" fill="none" opacity="0.5"/><circle cx="100" cy="10" r="2" fill="%238B7332" opacity="0.4"/></svg>`;
+
+const STAR_ORNAMENT = `<svg width="120" height="24" viewBox="0 0 120 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="60" cy="12" r="3" stroke="%238B7332" stroke-width="0.8" fill="none" opacity="0.5"/><circle cx="60" cy="12" r="1" fill="%238B7332" opacity="0.6"/><line x1="10" y1="12" x2="52" y2="12" stroke="%238B7332" stroke-width="0.4" opacity="0.25"/><line x1="68" y1="12" x2="110" y2="12" stroke="%238B7332" stroke-width="0.4" opacity="0.25"/><circle cx="10" cy="12" r="1.5" fill="%238B7332" opacity="0.2"/><circle cx="110" cy="12" r="1.5" fill="%238B7332" opacity="0.2"/></svg>`;
+
 const printCSS = `
 @media print {
-  body { margin: 0; padding: 0; -webkit-print-color-adjust: exact; print-color-adjust: exact; background: #FFFDF8 !important; color: #1A1200 !important; }
+  body { margin: 0; padding: 0; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   .rk-no-print { display: none !important; }
-  .rk-page { page-break-after: always; break-after: page; width: 210mm !important; min-height: 297mm !important; padding: 20mm 24mm 16mm !important; background: #FFFDF8 !important; color: #1A1200 !important; }
+  .rk-page { page-break-after: always; break-after: page; }
   .rk-page:last-child { page-break-after: avoid; break-after: avoid; }
-  .rk-page * { color: #1A1200 !important; }
-  .rk-page [data-gold] { color: #8B7332 !important; }
 }
 @page { size: A4; margin: 0; }
 `;
@@ -79,28 +84,6 @@ Schreibe OHNE Markdown-Formatierung (keine **, keine #, keine Aufzählungszeiche
     setLoading(false);
   };
 
-  const handlePrint = () => {
-    const content = printRef.current;
-    const win = window.open('', '_blank');
-    win.document.write(`<!DOCTYPE html><html><head><meta charset="utf-8"><title>Resonanzkarte — ${client.name}</title>
-      <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700&family=Raleway:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-      <style>${printCSS}
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Cormorant Garamond', serif; background: #FFFDF8; color: #1A1200; }
-        .rk-page { background: #FFFDF8 !important; color: #1A1200 !important; }
-        .rk-page * { color: #1A1200 !important; }
-        .rk-gold { color: #8B7332 !important; }
-        .rk-soft { color: #6B6355 !important; }
-        .rk-border { border-color: rgba(139,115,50,0.2) !important; }
-        .rk-bg-soft { background: rgba(139,115,50,0.04) !important; }
-        .rk-circle { border-color: rgba(139,115,50,0.3) !important; }
-        .rk-circle-master { border-color: #8B7332 !important; background: rgba(139,115,50,0.08) !important; }
-        .rk-ornament { color: #8B7332 !important; }
-      </style></head><body>${content.innerHTML}</body></html>`);
-    win.document.close();
-    setTimeout(() => { win.print(); }, 600);
-  };
-
   const parseSections = (text) => {
     if (!text) return [];
     const sectionTitles = ['DEIN WESEN', 'DEINE INNERE LANDSCHAFT', 'DEIN WEG', 'DEINE AKTUELLE PHASE', 'DREI GESCHENKE', 'DEINE KARMISCHE EINLADUNG'];
@@ -122,15 +105,211 @@ Schreibe OHNE Markdown-Formatierung (keine **, keine #, keine Aufzählungszeiche
     return sections;
   };
 
+  /* ── Build premium print HTML ── */
+  const buildPrintSection = (sec, isFirst) => {
+    const bodyParagraphs = sec.body.split('\n\n').filter(p => p.trim());
+    let html = '';
+
+    if (isFirst && bodyParagraphs.length > 0) {
+      const firstPara = bodyParagraphs[0];
+      const firstChar = firstPara.charAt(0);
+      const rest = firstPara.substring(1);
+      html += `<p style="font-family:'Cormorant Garamond',serif;font-size:13px;color:#2A2418;line-height:1.9;margin:0 0 10px;"><span style="float:left;font-family:'Cormorant Garamond',serif;font-size:52px;line-height:0.78;padding:2px 8px 0 0;color:#8B7332;font-weight:600;">${firstChar}</span>${rest}</p>`;
+      for (let i = 1; i < bodyParagraphs.length; i++) {
+        html += `<p style="font-family:'Cormorant Garamond',serif;font-size:13px;color:#2A2418;line-height:1.9;margin:0 0 10px;text-indent:1.5em;">${bodyParagraphs[i]}</p>`;
+      }
+    } else {
+      for (const p of bodyParagraphs) {
+        html += `<p style="font-family:'Cormorant Garamond',serif;font-size:13px;color:#2A2418;line-height:1.9;margin:0 0 10px;">${p}</p>`;
+      }
+    }
+
+    return `
+      <div style="margin-bottom:26px;">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
+          <div style="flex:1;height:1px;background:linear-gradient(to right,transparent,rgba(139,115,50,0.25));"></div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:12px;font-weight:700;color:#8B7332;letter-spacing:3.5px;text-transform:uppercase;white-space:nowrap;">${sec.title}</div>
+          <div style="flex:1;height:1px;background:linear-gradient(to left,transparent,rgba(139,115,50,0.25));"></div>
+        </div>
+        ${html}
+      </div>`;
+  };
+
+  const buildNumCircle = (n, label) => {
+    const isMaster = [11, 22, 33].includes(n);
+    return `<div style="text-align:center;width:52px;">
+      <div style="width:38px;height:38px;border-radius:50%;margin:0 auto 3px;border:${isMaster ? '2px solid #8B7332' : '1.5px solid rgba(139,115,50,0.25)'};${isMaster ? 'background:rgba(139,115,50,0.06);box-shadow:0 0 10px rgba(139,115,50,0.15);' : ''}display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:700;color:${isMaster ? '#8B7332' : '#2A2418'};">${n}</div>
+      <div style="font-family:'Raleway',sans-serif;font-size:7px;font-weight:700;color:rgba(42,36,24,0.4);text-transform:uppercase;letter-spacing:0.5px;">${label}</div>
+    </div>`;
+  };
+
+  const handlePrint = () => {
+    const secs = parseSections(karteText);
+    const meta = [
+      client.birthDate && new Date(client.birthDate).toLocaleDateString('de-DE', { day: 'numeric', month: 'long', year: 'numeric' }),
+      hasHD && `${client.hdType} · ${client.hdProfile || ''}`,
+      hasNums && `Lebenszahl ${nums.lifePath}`,
+    ].filter(Boolean).join('  ·  ');
+
+    const numCircles = hasNums ? [
+      { n: nums.lifePath, l: 'Leben' }, { n: nums.expression, l: 'Ausdruck' }, { n: nums.heartDesire, l: 'Herz' },
+      { n: nums.personality, l: 'Person.' }, { n: nums.birthDay, l: 'Geburt' }, { n: nums.attitude, l: 'Einstell.' },
+      { n: nums.maturity, l: 'Reife' }, { n: nums.generation, l: 'Gener.' },
+    ].filter(x => x.n !== null && x.n !== undefined) : [];
+
+    const timeBlocks = hasNums ? [
+      { n: nums.personalYear, l: 'Persönliches Jahr', d: PERSONAL_YEAR_DESC[nums.personalYear] },
+      { n: nums.personalMonth, l: 'Persönlicher Monat' },
+      { n: nums.personalDay, l: 'Persönlicher Tag' },
+    ] : [];
+
+    const cornerUrl = `url("data:image/svg+xml,${CORNER_SVG}")`;
+
+    const printHTML = `<!DOCTYPE html>
+<html><head><meta charset="utf-8"><title>Resonanzkarte — ${client.name}</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Raleway:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  ${printCSS}
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Cormorant Garamond', serif; background: #FFFDF8; color: #2A2418; }
+  .rk-page {
+    position: relative;
+    width: 210mm; min-height: 297mm;
+    padding: 30mm 28mm 22mm;
+    background: #FFFDF8;
+    overflow: hidden;
+  }
+  /* Corner ornaments */
+  .rk-page::before, .rk-page::after {
+    content: '';
+    position: absolute;
+    width: 60px; height: 60px;
+    background-image: ${cornerUrl};
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+  .rk-page::before { top: 16mm; left: 16mm; }
+  .rk-page::after { bottom: 16mm; right: 16mm; transform: rotate(180deg); }
+  /* Double border frame */
+  .rk-frame {
+    position: absolute;
+    top: 12mm; right: 12mm; bottom: 12mm; left: 12mm;
+    border: 0.6px solid rgba(139,115,50,0.18);
+    pointer-events: none;
+  }
+  .rk-frame::after {
+    content: '';
+    position: absolute;
+    top: 3px; right: 3px; bottom: 3px; left: 3px;
+    border: 0.3px solid rgba(139,115,50,0.09);
+  }
+</style></head><body>
+
+<!-- PAGE 1 -->
+<div class="rk-page">
+  <div class="rk-frame"></div>
+
+  <div style="text-align:center;margin-bottom:6px;">
+    <div style="font-family:'Raleway',sans-serif;font-size:9px;font-weight:600;letter-spacing:5px;color:rgba(139,115,50,0.45);text-transform:uppercase;">Human Resonanz</div>
+  </div>
+
+  <div style="text-align:center;margin-bottom:2px;">
+    <img src="data:image/svg+xml,${STAR_ORNAMENT}" style="width:120px;height:24px;opacity:0.5;" />
+  </div>
+
+  <div style="text-align:center;margin-bottom:4px;">
+    <div style="font-family:'Cormorant Garamond',serif;font-size:38px;font-weight:300;color:#8B7332;letter-spacing:3px;font-style:italic;">Resonanzkarte</div>
+  </div>
+
+  <div style="text-align:center;margin-bottom:14px;">
+    <img src="data:image/svg+xml,${DIVIDER_SVG}" style="width:200px;height:20px;" />
+  </div>
+
+  <div style="text-align:center;margin-bottom:4px;">
+    <div style="font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:600;color:#2A2418;letter-spacing:1px;">${client.name}</div>
+    <div style="font-family:'Raleway',sans-serif;font-size:10px;color:rgba(42,36,24,0.4);letter-spacing:1.5px;margin-top:5px;">${meta}</div>
+  </div>
+
+  <div style="text-align:center;margin-bottom:18px;">
+    <img src="data:image/svg+xml,${STAR_ORNAMENT}" style="width:100px;height:24px;opacity:0.35;" />
+  </div>
+
+  ${secs.slice(0, 3).map((s, i) => buildPrintSection(s, i === 0)).join('')}
+
+  <div style="position:absolute;bottom:16mm;left:0;right:0;text-align:center;">
+    <div style="font-family:'Raleway',sans-serif;font-size:7px;color:rgba(42,36,24,0.18);letter-spacing:2.5px;text-transform:uppercase;">Lichtkern · Human Resonanz · ${today}</div>
+  </div>
+</div>
+
+<!-- PAGE 2 -->
+<div class="rk-page">
+  <div class="rk-frame"></div>
+
+  <div style="text-align:center;margin-bottom:18px;">
+    <img src="data:image/svg+xml,${STAR_ORNAMENT}" style="width:100px;height:24px;opacity:0.35;" />
+  </div>
+
+  ${secs.slice(3).map(s => buildPrintSection(s, false)).join('')}
+
+  <div style="text-align:center;margin:22px 0 18px;">
+    <img src="data:image/svg+xml,${DIVIDER_SVG}" style="width:180px;height:20px;opacity:0.5;" />
+  </div>
+
+  <!-- Reference blocks -->
+  <div style="display:flex;gap:16px;margin-bottom:16px;">
+    ${hasHD ? `<div style="flex:1;padding:16px;border:1px solid rgba(139,115,50,0.15);border-radius:8px;background:rgba(139,115,50,0.02);">
+      <div style="font-family:'Raleway',sans-serif;font-size:8px;font-weight:700;color:#8B7332;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:8px;">✦ Human Design</div>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;color:#2A2418;">${client.hdType}</div>
+      <div style="font-family:'Raleway',sans-serif;font-size:10px;color:rgba(42,36,24,0.5);margin-top:3px;">${client.hdProfile ? `Profil ${client.hdProfile}` : ''}${client.hdAuthority ? ` · ${client.hdAuthority}` : ''}</div>
+      <div style="width:30px;height:1px;background:rgba(139,115,50,0.2);margin:8px 0;"></div>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:11px;color:rgba(42,36,24,0.5);font-style:italic;">Strategie: ${hdInfo?.strategy || '—'}</div>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:11px;color:rgba(42,36,24,0.5);font-style:italic;">Signatur: ${hdInfo?.signature || '—'}</div>
+    </div>` : ''}
+
+    ${hasNums ? `<div style="flex:1;padding:16px;border:1px solid rgba(139,115,50,0.15);border-radius:8px;background:rgba(139,115,50,0.02);">
+      <div style="font-family:'Raleway',sans-serif;font-size:8px;font-weight:700;color:#8B7332;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:10px;">✦ Numerologie</div>
+      <div style="display:flex;flex-wrap:wrap;gap:6px;justify-content:center;">
+        ${numCircles.map(x => buildNumCircle(x.n, x.l)).join('')}
+      </div>
+    </div>` : ''}
+  </div>
+
+  ${hasNums ? `<div style="display:flex;gap:10px;margin-bottom:16px;">
+    ${timeBlocks.map(({ n, l, d }) => `<div style="flex:${d ? 2 : 1};padding:10px 14px;border:1px solid rgba(139,115,50,0.1);border-radius:8px;display:flex;align-items:center;gap:12px;background:rgba(139,115,50,0.015);">
+      <div style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:600;color:#8B7332;line-height:1;">${n}</div>
+      <div>
+        <div style="font-family:'Raleway',sans-serif;font-size:7px;font-weight:700;color:rgba(42,36,24,0.4);letter-spacing:1.5px;text-transform:uppercase;">${l}</div>
+        ${d ? `<div style="font-family:'Cormorant Garamond',serif;font-size:10px;color:rgba(42,36,24,0.45);line-height:1.3;margin-top:2px;font-style:italic;">${d}</div>` : ''}
+      </div>
+    </div>`).join('')}
+  </div>` : ''}
+
+  <!-- Closing message -->
+  <div style="padding:18px 24px;background:rgba(139,115,50,0.025);border-radius:10px;border:1px solid rgba(139,115,50,0.08);text-align:center;">
+    <div style="font-family:'Cormorant Garamond',serif;font-size:13px;color:rgba(42,36,24,0.55);line-height:1.9;font-style:italic;">Diese Karte ist eine Momentaufnahme deiner Seelenlandschaft.<br>Die Zahlen und Energien die hier beschrieben werden, sind Einladungen — keine Festlegungen.<br>Nimm mit, was resoniert. Lass los, was noch nicht passt.<br>Dein Weg ist einzigartig.</div>
+  </div>
+
+  <div style="position:absolute;bottom:18mm;left:0;right:0;text-align:center;">
+    <img src="data:image/svg+xml,${STAR_ORNAMENT}" style="width:80px;height:24px;opacity:0.25;margin-bottom:5px;" />
+    <div style="font-family:'Raleway',sans-serif;font-size:7.5px;color:rgba(42,36,24,0.18);letter-spacing:2.5px;text-transform:uppercase;">Lichtkern · Human Resonanz · www.human-resonanz.de</div>
+    <div style="font-family:'Raleway',sans-serif;font-size:6.5px;color:rgba(42,36,24,0.12);margin-top:3px;letter-spacing:1px;">Dient der Selbsterkenntnis · Kein Ersatz für medizinische oder therapeutische Behandlung</div>
+  </div>
+</div>
+
+</body></html>`;
+
+    const win = window.open('', '_blank');
+    win.document.write(printHTML);
+    win.document.close();
+    setTimeout(() => { win.print(); }, 700);
+  };
+
   const sections = parseSections(karteText);
 
   return (
     <div style={{
       position: 'fixed',
-      top: 0,
-      right: 0,
-      bottom: 0,
-      left: 0,
+      top: 0, right: 0, bottom: 0, left: 0,
       background: 'rgba(0,0,0,0.75)',
       backdropFilter: 'blur(4px)',
       zIndex: 9999,
@@ -152,7 +331,7 @@ Schreibe OHNE Markdown-Formatierung (keine **, keine #, keine Aufzählungszeiche
         overflow: 'hidden'
       }}>
 
-        {/* Toolbar — fixed at top */}
+        {/* Toolbar */}
         <div className="rk-no-print" style={{
           display: 'flex',
           justifyContent: 'space-between',
@@ -182,11 +361,7 @@ Schreibe OHNE Markdown-Formatierung (keine **, keine #, keine Aufzählungszeiche
         </div>
 
         {/* Scrollable content area */}
-        <div style={{
-          flex: 1,
-          overflowY: 'auto',
-          overflowX: 'hidden'
-        }}>
+        <div style={{ flex: 1, overflowY: 'auto', overflowX: 'hidden' }}>
 
           {/* Empty State */}
           {!karteText && !loading && (
@@ -212,19 +387,15 @@ Schreibe OHNE Markdown-Formatierung (keine **, keine #, keine Aufzählungszeiche
             </div>
           )}
 
-          {/* ═══ PRINTABLE CONTENT ═══ */}
+          {/* ═══ SCREEN PREVIEW (Dark) ═══ */}
           {karteText && !loading && (
             <div ref={printRef}>
 
               {/* PAGE 1 */}
               <div className="rk-page" style={{
-                width: '100%',
-                padding: '40px 48px 32px',
-                background: '#0D0D0A',
-                color: '#F5F0E8',
-                boxSizing: 'border-box'
+                width: '100%', padding: '40px 48px 32px',
+                background: '#0D0D0A', color: '#F5F0E8', boxSizing: 'border-box'
               }}>
-
                 <div style={{ textAlign: 'center', marginBottom: '14px' }}>
                   <div style={{ fontFamily: 'Raleway', fontSize: '10px', fontWeight: 700, letterSpacing: '4px', color: 'rgba(201,168,76,0.5)', textTransform: 'uppercase', marginBottom: '6px' }}>Human Resonanz</div>
                   <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '32px', fontWeight: 600, color: '#C9A84C', letterSpacing: '2px' }}>Resonanzkarte</div>
@@ -256,13 +427,9 @@ Schreibe OHNE Markdown-Formatierung (keine **, keine #, keine Aufzählungszeiche
 
               {/* PAGE 2 */}
               <div className="rk-page" style={{
-                width: '100%',
-                padding: '40px 48px 32px',
-                background: '#0D0D0A',
-                color: '#F5F0E8',
-                boxSizing: 'border-box'
+                width: '100%', padding: '40px 48px 32px',
+                background: '#0D0D0A', color: '#F5F0E8', boxSizing: 'border-box'
               }}>
-
                 {sections.slice(3).map((sec, i) => (
                   <div key={i} style={{ marginBottom: '22px' }}>
                     <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '15px', fontWeight: 700, color: '#C9A84C', letterSpacing: '2.5px', textTransform: 'uppercase', marginBottom: '8px' }}>{sec.title}</div>
@@ -272,7 +439,6 @@ Schreibe OHNE Markdown-Formatierung (keine **, keine #, keine Aufzählungszeiche
 
                 <Ornament />
 
-                {/* Compact reference block */}
                 <div style={{ display: 'flex', gap: '14px', marginBottom: '16px' }}>
                   {hasHD && (
                     <div style={{ flex: 1, padding: '14px', border: '1px solid rgba(201,168,76,0.1)', borderRadius: '10px' }}>
