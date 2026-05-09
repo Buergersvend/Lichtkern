@@ -12,7 +12,7 @@ const DIVIDER_SVG = `<svg width="200" height="20" viewBox="0 0 200 20" fill="non
 const STAR_ORNAMENT = `<svg width="120" height="24" viewBox="0 0 120 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="60" cy="12" r="3" stroke="#8B7332" stroke-width="0.8" fill="none" opacity="0.5"/><circle cx="60" cy="12" r="1" fill="#8B7332" opacity="0.6"/><line x1="10" y1="12" x2="52" y2="12" stroke="#8B7332" stroke-width="0.4" opacity="0.25"/><line x1="68" y1="12" x2="110" y2="12" stroke="#8B7332" stroke-width="0.4" opacity="0.25"/><circle cx="10" cy="12" r="1.5" fill="#8B7332" opacity="0.2"/><circle cx="110" cy="12" r="1.5" fill="#8B7332" opacity="0.2"/></svg>`;
 
 /* ── Watermark SVGs — visible at ~10% opacity ── */
-const WATERMARK_FLOWER = `<svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#B8A060" stroke-width="0.6">
+const WATERMARK_FLOWER = `<svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#B8A060" stroke-width="0.8">
   <circle cx="200" cy="200" r="60"/>
   <circle cx="200" cy="140" r="60"/>
   <circle cx="200" cy="260" r="60"/>
@@ -20,34 +20,34 @@ const WATERMARK_FLOWER = `<svg viewBox="0 0 400 400" xmlns="http://www.w3.org/20
   <circle cx="252" cy="230" r="60"/>
   <circle cx="148" cy="170" r="60"/>
   <circle cx="148" cy="230" r="60"/>
-  <circle cx="200" cy="80" r="60" stroke-width="0.35"/>
-  <circle cx="200" cy="320" r="60" stroke-width="0.35"/>
-  <circle cx="304" cy="140" r="60" stroke-width="0.35"/>
-  <circle cx="304" cy="260" r="60" stroke-width="0.35"/>
-  <circle cx="96" cy="140" r="60" stroke-width="0.35"/>
-  <circle cx="96" cy="260" r="60" stroke-width="0.35"/>
-  <circle cx="200" cy="200" r="100" stroke-width="0.3"/>
-  <circle cx="200" cy="200" r="140" stroke-width="0.2"/>
-  <circle cx="200" cy="200" r="180" stroke-width="0.15"/>
+  <circle cx="200" cy="80" r="60" stroke-width="0.5"/>
+  <circle cx="200" cy="320" r="60" stroke-width="0.5"/>
+  <circle cx="304" cy="140" r="60" stroke-width="0.5"/>
+  <circle cx="304" cy="260" r="60" stroke-width="0.5"/>
+  <circle cx="96" cy="140" r="60" stroke-width="0.5"/>
+  <circle cx="96" cy="260" r="60" stroke-width="0.5"/>
+  <circle cx="200" cy="200" r="100" stroke-width="0.4"/>
+  <circle cx="200" cy="200" r="140" stroke-width="0.3"/>
+  <circle cx="200" cy="200" r="180" stroke-width="0.2"/>
 </svg>`;
 
-const WATERMARK_LOTUS = `<svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#B8A060" stroke-width="0.5">
+const WATERMARK_LOTUS = `<svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#B8A060" stroke-width="0.7">
   <ellipse cx="200" cy="175" rx="16" ry="65" transform="rotate(0,200,200)"/>
   <ellipse cx="200" cy="175" rx="16" ry="65" transform="rotate(30,200,200)"/>
   <ellipse cx="200" cy="175" rx="16" ry="65" transform="rotate(60,200,200)"/>
   <ellipse cx="200" cy="175" rx="16" ry="65" transform="rotate(90,200,200)"/>
   <ellipse cx="200" cy="175" rx="16" ry="65" transform="rotate(120,200,200)"/>
   <ellipse cx="200" cy="175" rx="16" ry="65" transform="rotate(150,200,200)"/>
-  <ellipse cx="200" cy="160" rx="28" ry="95" transform="rotate(0,200,200)" stroke-width="0.35"/>
-  <ellipse cx="200" cy="160" rx="28" ry="95" transform="rotate(45,200,200)" stroke-width="0.35"/>
-  <ellipse cx="200" cy="160" rx="28" ry="95" transform="rotate(90,200,200)" stroke-width="0.35"/>
-  <ellipse cx="200" cy="160" rx="28" ry="95" transform="rotate(135,200,200)" stroke-width="0.35"/>
-  <ellipse cx="200" cy="145" rx="40" ry="120" transform="rotate(22.5,200,200)" stroke-width="0.2"/>
-  <ellipse cx="200" cy="145" rx="40" ry="120" transform="rotate(67.5,200,200)" stroke-width="0.2"/>
-  <ellipse cx="200" cy="145" rx="40" ry="120" transform="rotate(112.5,200,200)" stroke-width="0.2"/>
-  <ellipse cx="200" cy="145" rx="40" ry="120" transform="rotate(157.5,200,200)" stroke-width="0.2"/>
-  <circle cx="200" cy="200" r="14" stroke-width="0.6"/>
-  <circle cx="200" cy="200" r="5" fill="#B8A060" stroke="none" opacity="0.2"/>
+  <ellipse cx="200" cy="160" rx="28" ry="95" transform="rotate(0,200,200)" stroke-width="0.5"/>
+  <ellipse cx="200" cy="160" rx="28" ry="95" transform="rotate(45,200,200)" stroke-width="0.5"/>
+  <ellipse cx="200" cy="160" rx="28" ry="95" transform="rotate(90,200,200)" stroke-width="0.5"/>
+  <ellipse cx="200" cy="160" rx="28" ry="95" transform="rotate(135,200,200)" stroke-width="0.5"/>
+  <ellipse cx="200" cy="145" rx="40" ry="120" transform="rotate(22.5,200,200)" stroke-width="0.3"/>
+  <ellipse cx="200" cy="145" rx="40" ry="120" transform="rotate(67.5,200,200)" stroke-width="0.3"/>
+  <ellipse cx="200" cy="145" rx="40" ry="120" transform="rotate(112.5,200,200)" stroke-width="0.3"/>
+  <ellipse cx="200" cy="145" rx="40" ry="120" transform="rotate(157.5,200,200)" stroke-width="0.3"/>
+  <circle cx="200" cy="200" r="14" stroke-width="0.8"/>
+  <circle cx="200" cy="200" r="5" fill="#B8A060" stroke="none" opacity="0.3"/>
 </svg>`;
 
 const printCSS = `
@@ -149,17 +149,17 @@ Schreibe OHNE Markdown-Formatierung (keine **, keine #, keine Aufzählungszeiche
     let html = '';
     if (isFirst && bodyParagraphs.length > 0) {
       const first = bodyParagraphs[0];
-      html += `<p style="font-family:'Cormorant Garamond',serif;font-size:14.5px;color:#2A2418;line-height:1.9;margin:0 0 10px;"><span style="float:left;font-family:'Cormorant Garamond',serif;font-size:54px;line-height:0.78;padding:2px 10px 0 0;color:#8B7332;font-weight:600;">${first.charAt(0)}</span>${first.substring(1)}</p>`;
+      html += `<p style="font-family:'Cormorant Garamond',serif;font-size:16px;color:#2A2418;line-height:1.85;margin:0 0 12px;"><span style="float:left;font-family:'Cormorant Garamond',serif;font-size:58px;line-height:0.78;padding:2px 10px 0 0;color:#8B7332;font-weight:600;">${first.charAt(0)}</span>${first.substring(1)}</p>`;
       for (let i = 1; i < bodyParagraphs.length; i++)
-        html += `<p style="font-family:'Cormorant Garamond',serif;font-size:14.5px;color:#2A2418;line-height:1.9;margin:0 0 10px;text-indent:1.5em;">${bodyParagraphs[i]}</p>`;
+        html += `<p style="font-family:'Cormorant Garamond',serif;font-size:16px;color:#2A2418;line-height:1.85;margin:0 0 12px;text-indent:1.5em;">${bodyParagraphs[i]}</p>`;
     } else {
       for (const p of bodyParagraphs)
-        html += `<p style="font-family:'Cormorant Garamond',serif;font-size:14.5px;color:#2A2418;line-height:1.9;margin:0 0 10px;">${p}</p>`;
+        html += `<p style="font-family:'Cormorant Garamond',serif;font-size:16px;color:#2A2418;line-height:1.85;margin:0 0 12px;">${p}</p>`;
     }
-    return `<div style="margin-bottom:24px;">
-      <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
+    return `<div style="margin-bottom:26px;">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px;">
         <div style="flex:1;height:1px;background:linear-gradient(to right,transparent,rgba(139,115,50,0.25));"></div>
-        <div style="font-family:'Cormorant Garamond',serif;font-size:13px;font-weight:700;color:#8B7332;letter-spacing:3.5px;text-transform:uppercase;white-space:nowrap;">${sec.title}</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:14.5px;font-weight:700;color:#8B7332;letter-spacing:3.5px;text-transform:uppercase;white-space:nowrap;">${sec.title}</div>
         <div style="flex:1;height:1px;background:linear-gradient(to left,transparent,rgba(139,115,50,0.25));"></div>
       </div>
       ${html}
@@ -216,16 +216,16 @@ Schreibe OHNE Markdown-Formatierung (keine **, keine #, keine Aufzählungszeiche
     /* ── PAGE 1: Header + first 2 sections ── */
     const page1Content = `
   <div style="text-align:center;margin-bottom:4px;">
-    <div style="font-family:'Raleway',sans-serif;font-size:9px;font-weight:600;letter-spacing:5px;color:rgba(139,115,50,0.45);text-transform:uppercase;">Human Resonanz</div>
+    <div style="font-family:'Raleway',sans-serif;font-size:10px;font-weight:600;letter-spacing:5px;color:rgba(139,115,50,0.45);text-transform:uppercase;">Human Resonanz</div>
   </div>
   ${inlineStar(120, 0.5)}
   <div style="text-align:center;margin:2px 0 4px;">
-    <div style="font-family:'Cormorant Garamond',serif;font-size:40px;font-weight:300;color:#8B7332;letter-spacing:3px;font-style:italic;">Resonanzkarte</div>
+    <div style="font-family:'Cormorant Garamond',serif;font-size:44px;font-weight:300;color:#8B7332;letter-spacing:3px;font-style:italic;">Resonanzkarte</div>
   </div>
   <div style="margin-bottom:12px;">${inlineDivider(200, 1)}</div>
   <div style="text-align:center;margin-bottom:2px;">
-    <div style="font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:600;color:#2A2418;letter-spacing:1px;">${client.name}</div>
-    <div style="font-family:'Raleway',sans-serif;font-size:11px;color:rgba(42,36,24,0.4);letter-spacing:1.5px;margin-top:5px;">${meta}</div>
+    <div style="font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:600;color:#2A2418;letter-spacing:1px;">${client.name}</div>
+    <div style="font-family:'Raleway',sans-serif;font-size:12px;color:rgba(42,36,24,0.4);letter-spacing:1.5px;margin-top:5px;">${meta}</div>
   </div>
   <div style="margin-bottom:16px;">${inlineStar(100, 0.35)}</div>
   ${secs.slice(0, 2).map((s, i) => buildPrintSection(s, i === 0)).join('')}
@@ -279,7 +279,7 @@ Schreibe OHNE Markdown-Formatierung (keine **, keine #, keine Aufzählungszeiche
   </div>` : ''}
 
   <div style="padding:20px 26px;background:rgba(139,115,50,0.025);border-radius:10px;border:1px solid rgba(139,115,50,0.08);text-align:center;">
-    <div style="font-family:'Cormorant Garamond',serif;font-size:14.5px;color:rgba(42,36,24,0.55);line-height:2;font-style:italic;">Diese Karte ist eine Momentaufnahme deiner Seelenlandschaft.<br>Die Zahlen und Energien die hier beschrieben werden, sind Einladungen — keine Festlegungen.<br>Nimm mit, was resoniert. Lass los, was noch nicht passt.<br>Dein Weg ist einzigartig.</div>
+    <div style="font-family:'Cormorant Garamond',serif;font-size:16px;color:rgba(42,36,24,0.55);line-height:2;font-style:italic;">Diese Karte ist eine Momentaufnahme deiner Seelenlandschaft.<br>Die Zahlen und Energien die hier beschrieben werden, sind Einladungen — keine Festlegungen.<br>Nimm mit, was resoniert. Lass los, was noch nicht passt.<br>Dein Weg ist einzigartig.</div>
   </div>
 
   <div style="position:absolute;bottom:16mm;left:0;right:0;text-align:center;">
@@ -316,9 +316,9 @@ Schreibe OHNE Markdown-Formatierung (keine **, keine #, keine Aufzählungszeiche
   }
 </style></head><body>
 
-${pageShell(page1Content, watermark(WATERMARK_FLOWER, 0.14, '55%'))}
-${pageShell(page2Content, watermark(WATERMARK_LOTUS, 0.12, '50%'))}
-${pageShell(page3Content, watermark(WATERMARK_FLOWER, 0.09, '50%'))}
+${pageShell(page1Content, watermark(WATERMARK_FLOWER, 0.20, '55%'))}
+${pageShell(page2Content, watermark(WATERMARK_LOTUS, 0.17, '50%'))}
+${pageShell(page3Content, watermark(WATERMARK_FLOWER, 0.13, '50%'))}
 
 </body></html>`;
 
