@@ -4,12 +4,12 @@ import { calcNumerology, LIFE_PATH_DESC, PERSONAL_YEAR_DESC } from "./Numerology
 import { HD_TYPE_DESC, HD_AUTHORITY_DESC } from "./HumanDesign.jsx";
 import { groqFetch } from "../config/groq.js";
 
-/* ── SVG ornaments for print ── */
-const CORNER_SVG = `<svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 58V20C2 10 10 2 20 2H58" stroke="%238B7332" stroke-width="1.2" fill="none"/><path d="M2 58V30C2 15 15 2 30 2H58" stroke="%238B7332" stroke-width="0.5" opacity="0.4" fill="none"/><circle cx="2" cy="58" r="2" fill="%238B7332"/><circle cx="58" cy="2" r="2" fill="%238B7332"/></svg>`;
+/* ── SVG ornaments for print (inline, not as img src) ── */
+const CORNER_SVG = `<svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 58V20C2 10 10 2 20 2H58" stroke="#8B7332" stroke-width="1.2" fill="none"/><path d="M2 58V30C2 15 15 2 30 2H58" stroke="#8B7332" stroke-width="0.5" opacity="0.4" fill="none"/><circle cx="2" cy="58" r="2" fill="#8B7332"/><circle cx="58" cy="2" r="2" fill="#8B7332"/></svg>`;
 
-const DIVIDER_SVG = `<svg width="200" height="20" viewBox="0 0 200 20" fill="none" xmlns="http://www.w3.org/2000/svg"><line x1="0" y1="10" x2="80" y2="10" stroke="%238B7332" stroke-width="0.5" opacity="0.3"/><line x1="120" y1="10" x2="200" y2="10" stroke="%238B7332" stroke-width="0.5" opacity="0.3"/><path d="M92 10L100 3L108 10L100 17Z" stroke="%238B7332" stroke-width="0.8" fill="none" opacity="0.5"/><circle cx="100" cy="10" r="2" fill="%238B7332" opacity="0.4"/></svg>`;
+const DIVIDER_SVG = `<svg width="200" height="20" viewBox="0 0 200 20" fill="none" xmlns="http://www.w3.org/2000/svg"><line x1="0" y1="10" x2="80" y2="10" stroke="#8B7332" stroke-width="0.5" opacity="0.3"/><line x1="120" y1="10" x2="200" y2="10" stroke="#8B7332" stroke-width="0.5" opacity="0.3"/><path d="M92 10L100 3L108 10L100 17Z" stroke="#8B7332" stroke-width="0.8" fill="none" opacity="0.5"/><circle cx="100" cy="10" r="2" fill="#8B7332" opacity="0.4"/></svg>`;
 
-const STAR_ORNAMENT = `<svg width="120" height="24" viewBox="0 0 120 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="60" cy="12" r="3" stroke="%238B7332" stroke-width="0.8" fill="none" opacity="0.5"/><circle cx="60" cy="12" r="1" fill="%238B7332" opacity="0.6"/><line x1="10" y1="12" x2="52" y2="12" stroke="%238B7332" stroke-width="0.4" opacity="0.25"/><line x1="68" y1="12" x2="110" y2="12" stroke="%238B7332" stroke-width="0.4" opacity="0.25"/><circle cx="10" cy="12" r="1.5" fill="%238B7332" opacity="0.2"/><circle cx="110" cy="12" r="1.5" fill="%238B7332" opacity="0.2"/></svg>`;
+const STAR_ORNAMENT = `<svg width="120" height="24" viewBox="0 0 120 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="60" cy="12" r="3" stroke="#8B7332" stroke-width="0.8" fill="none" opacity="0.5"/><circle cx="60" cy="12" r="1" fill="#8B7332" opacity="0.6"/><line x1="10" y1="12" x2="52" y2="12" stroke="#8B7332" stroke-width="0.4" opacity="0.25"/><line x1="68" y1="12" x2="110" y2="12" stroke="#8B7332" stroke-width="0.4" opacity="0.25"/><circle cx="10" cy="12" r="1.5" fill="#8B7332" opacity="0.2"/><circle cx="110" cy="12" r="1.5" fill="#8B7332" opacity="0.2"/></svg>`;
 
 const printCSS = `
 @media print {
@@ -163,7 +163,24 @@ Schreibe OHNE Markdown-Formatierung (keine **, keine #, keine Aufzählungszeiche
       { n: nums.personalDay, l: 'Persönlicher Tag' },
     ] : [];
 
-    const cornerUrl = `url("data:image/svg+xml,${CORNER_SVG}")`;
+    /* Inline SVG wrappers — rendered directly in the HTML, no img/data-uri */
+    const inlineStar = (w, op) => `<div style="text-align:center;opacity:${op};">${STAR_ORNAMENT.replace('width="120"', `width="${w}"`).replace('height="24"', 'height="24"')}</div>`;
+    const inlineDivider = (w, op) => `<div style="text-align:center;opacity:${op};">${DIVIDER_SVG.replace('width="200"', `width="${w}"`)}</div>`;
+    const inlineCorner = (pos) => {
+      const transforms = {
+        tl: '',
+        tr: 'transform:scaleX(-1);',
+        bl: 'transform:scaleY(-1);',
+        br: 'transform:rotate(180deg);',
+      };
+      const positions = {
+        tl: 'top:16mm;left:16mm;',
+        tr: 'top:16mm;right:16mm;',
+        bl: 'bottom:16mm;left:16mm;',
+        br: 'bottom:16mm;right:16mm;',
+      };
+      return `<div style="position:absolute;${positions[pos]}width:60px;height:60px;${transforms[pos]}">${CORNER_SVG}</div>`;
+    };
 
     const printHTML = `<!DOCTYPE html>
 <html><head><meta charset="utf-8"><title>Resonanzkarte — ${client.name}</title>
@@ -179,17 +196,6 @@ Schreibe OHNE Markdown-Formatierung (keine **, keine #, keine Aufzählungszeiche
     background: #FFFDF8;
     overflow: hidden;
   }
-  /* Corner ornaments */
-  .rk-page::before, .rk-page::after {
-    content: '';
-    position: absolute;
-    width: 60px; height: 60px;
-    background-image: ${cornerUrl};
-    background-size: contain;
-    background-repeat: no-repeat;
-  }
-  .rk-page::before { top: 16mm; left: 16mm; }
-  .rk-page::after { bottom: 16mm; right: 16mm; transform: rotate(180deg); }
   /* Double border frame */
   .rk-frame {
     position: absolute;
@@ -208,31 +214,27 @@ Schreibe OHNE Markdown-Formatierung (keine **, keine #, keine Aufzählungszeiche
 <!-- PAGE 1 -->
 <div class="rk-page">
   <div class="rk-frame"></div>
+  ${inlineCorner('tl')}
+  ${inlineCorner('br')}
 
   <div style="text-align:center;margin-bottom:6px;">
     <div style="font-family:'Raleway',sans-serif;font-size:9px;font-weight:600;letter-spacing:5px;color:rgba(139,115,50,0.45);text-transform:uppercase;">Human Resonanz</div>
   </div>
 
-  <div style="text-align:center;margin-bottom:2px;">
-    <img src="data:image/svg+xml,${STAR_ORNAMENT}" style="width:120px;height:24px;opacity:0.5;" />
-  </div>
+  ${inlineStar(120, 0.5)}
 
-  <div style="text-align:center;margin-bottom:4px;">
+  <div style="text-align:center;margin:2px 0 4px;">
     <div style="font-family:'Cormorant Garamond',serif;font-size:38px;font-weight:300;color:#8B7332;letter-spacing:3px;font-style:italic;">Resonanzkarte</div>
   </div>
 
-  <div style="text-align:center;margin-bottom:14px;">
-    <img src="data:image/svg+xml,${DIVIDER_SVG}" style="width:200px;height:20px;" />
-  </div>
+  <div style="margin-bottom:14px;">${inlineDivider(200, 1)}</div>
 
   <div style="text-align:center;margin-bottom:4px;">
     <div style="font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:600;color:#2A2418;letter-spacing:1px;">${client.name}</div>
     <div style="font-family:'Raleway',sans-serif;font-size:10px;color:rgba(42,36,24,0.4);letter-spacing:1.5px;margin-top:5px;">${meta}</div>
   </div>
 
-  <div style="text-align:center;margin-bottom:18px;">
-    <img src="data:image/svg+xml,${STAR_ORNAMENT}" style="width:100px;height:24px;opacity:0.35;" />
-  </div>
+  <div style="margin-bottom:18px;">${inlineStar(100, 0.35)}</div>
 
   ${secs.slice(0, 3).map((s, i) => buildPrintSection(s, i === 0)).join('')}
 
@@ -244,16 +246,14 @@ Schreibe OHNE Markdown-Formatierung (keine **, keine #, keine Aufzählungszeiche
 <!-- PAGE 2 -->
 <div class="rk-page">
   <div class="rk-frame"></div>
+  ${inlineCorner('tl')}
+  ${inlineCorner('br')}
 
-  <div style="text-align:center;margin-bottom:18px;">
-    <img src="data:image/svg+xml,${STAR_ORNAMENT}" style="width:100px;height:24px;opacity:0.35;" />
-  </div>
+  <div style="margin-bottom:18px;">${inlineStar(100, 0.35)}</div>
 
   ${secs.slice(3).map(s => buildPrintSection(s, false)).join('')}
 
-  <div style="text-align:center;margin:22px 0 18px;">
-    <img src="data:image/svg+xml,${DIVIDER_SVG}" style="width:180px;height:20px;opacity:0.5;" />
-  </div>
+  <div style="margin:22px 0 18px;">${inlineDivider(180, 0.5)}</div>
 
   <!-- Reference blocks -->
   <div style="display:flex;gap:16px;margin-bottom:16px;">
@@ -290,8 +290,8 @@ Schreibe OHNE Markdown-Formatierung (keine **, keine #, keine Aufzählungszeiche
   </div>
 
   <div style="position:absolute;bottom:18mm;left:0;right:0;text-align:center;">
-    <img src="data:image/svg+xml,${STAR_ORNAMENT}" style="width:80px;height:24px;opacity:0.25;margin-bottom:5px;" />
-    <div style="font-family:'Raleway',sans-serif;font-size:7.5px;color:rgba(42,36,24,0.18);letter-spacing:2.5px;text-transform:uppercase;">Lichtkern · Human Resonanz · www.human-resonanz.de</div>
+    ${inlineStar(80, 0.25)}
+    <div style="font-family:'Raleway',sans-serif;font-size:7.5px;color:rgba(42,36,24,0.18);letter-spacing:2.5px;text-transform:uppercase;margin-top:5px;">Lichtkern · Human Resonanz · www.human-resonanz.de</div>
     <div style="font-family:'Raleway',sans-serif;font-size:6.5px;color:rgba(42,36,24,0.12);margin-top:3px;letter-spacing:1px;">Dient der Selbsterkenntnis · Kein Ersatz für medizinische oder therapeutische Behandlung</div>
   </div>
 </div>
