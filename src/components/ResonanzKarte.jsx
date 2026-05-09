@@ -32,22 +32,26 @@ const WATERMARK_FLOWER = `<svg viewBox="0 0 400 400" xmlns="http://www.w3.org/20
 </svg>`;
 
 const WATERMARK_LOTUS = `<svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#B8A060" stroke-width="0.7">
-  <ellipse cx="200" cy="175" rx="16" ry="65" transform="rotate(0,200,200)"/>
-  <ellipse cx="200" cy="175" rx="16" ry="65" transform="rotate(30,200,200)"/>
-  <ellipse cx="200" cy="175" rx="16" ry="65" transform="rotate(60,200,200)"/>
-  <ellipse cx="200" cy="175" rx="16" ry="65" transform="rotate(90,200,200)"/>
-  <ellipse cx="200" cy="175" rx="16" ry="65" transform="rotate(120,200,200)"/>
-  <ellipse cx="200" cy="175" rx="16" ry="65" transform="rotate(150,200,200)"/>
-  <ellipse cx="200" cy="160" rx="28" ry="95" transform="rotate(0,200,200)" stroke-width="0.5"/>
-  <ellipse cx="200" cy="160" rx="28" ry="95" transform="rotate(45,200,200)" stroke-width="0.5"/>
-  <ellipse cx="200" cy="160" rx="28" ry="95" transform="rotate(90,200,200)" stroke-width="0.5"/>
-  <ellipse cx="200" cy="160" rx="28" ry="95" transform="rotate(135,200,200)" stroke-width="0.5"/>
-  <ellipse cx="200" cy="145" rx="40" ry="120" transform="rotate(22.5,200,200)" stroke-width="0.3"/>
-  <ellipse cx="200" cy="145" rx="40" ry="120" transform="rotate(67.5,200,200)" stroke-width="0.3"/>
-  <ellipse cx="200" cy="145" rx="40" ry="120" transform="rotate(112.5,200,200)" stroke-width="0.3"/>
-  <ellipse cx="200" cy="145" rx="40" ry="120" transform="rotate(157.5,200,200)" stroke-width="0.3"/>
-  <circle cx="200" cy="200" r="14" stroke-width="0.8"/>
-  <circle cx="200" cy="200" r="5" fill="#B8A060" stroke="none" opacity="0.3"/>
+  <ellipse cx="200" cy="155" rx="14" ry="55" transform="rotate(0,200,200)"/>
+  <ellipse cx="200" cy="155" rx="14" ry="55" transform="rotate(30,200,200)"/>
+  <ellipse cx="200" cy="155" rx="14" ry="55" transform="rotate(60,200,200)"/>
+  <ellipse cx="200" cy="155" rx="14" ry="55" transform="rotate(90,200,200)"/>
+  <ellipse cx="200" cy="155" rx="14" ry="55" transform="rotate(120,200,200)"/>
+  <ellipse cx="200" cy="155" rx="14" ry="55" transform="rotate(150,200,200)"/>
+  <ellipse cx="200" cy="140" rx="22" ry="80" transform="rotate(0,200,200)" stroke-width="0.5"/>
+  <ellipse cx="200" cy="140" rx="22" ry="80" transform="rotate(30,200,200)" stroke-width="0.5"/>
+  <ellipse cx="200" cy="140" rx="22" ry="80" transform="rotate(60,200,200)" stroke-width="0.5"/>
+  <ellipse cx="200" cy="140" rx="22" ry="80" transform="rotate(90,200,200)" stroke-width="0.5"/>
+  <ellipse cx="200" cy="140" rx="22" ry="80" transform="rotate(120,200,200)" stroke-width="0.5"/>
+  <ellipse cx="200" cy="140" rx="22" ry="80" transform="rotate(150,200,200)" stroke-width="0.5"/>
+  <ellipse cx="200" cy="125" rx="32" ry="110" transform="rotate(15,200,200)" stroke-width="0.3"/>
+  <ellipse cx="200" cy="125" rx="32" ry="110" transform="rotate(45,200,200)" stroke-width="0.3"/>
+  <ellipse cx="200" cy="125" rx="32" ry="110" transform="rotate(75,200,200)" stroke-width="0.3"/>
+  <ellipse cx="200" cy="125" rx="32" ry="110" transform="rotate(105,200,200)" stroke-width="0.3"/>
+  <ellipse cx="200" cy="125" rx="32" ry="110" transform="rotate(135,200,200)" stroke-width="0.3"/>
+  <ellipse cx="200" cy="125" rx="32" ry="110" transform="rotate(165,200,200)" stroke-width="0.3"/>
+  <circle cx="200" cy="200" r="16" stroke-width="0.8"/>
+  <circle cx="200" cy="200" r="6" fill="#B8A060" stroke="none" opacity="0.2"/>
 </svg>`;
 
 const printCSS = `
