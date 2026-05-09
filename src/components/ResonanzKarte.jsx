@@ -149,17 +149,17 @@ Schreibe OHNE Markdown-Formatierung (keine **, keine #, keine Aufzählungszeiche
     let html = '';
     if (isFirst && bodyParagraphs.length > 0) {
       const first = bodyParagraphs[0];
-      html += `<p style="font-family:'Cormorant Garamond',serif;font-size:12.5px;color:#2A2418;line-height:1.9;margin:0 0 8px;"><span style="float:left;font-family:'Cormorant Garamond',serif;font-size:48px;line-height:0.78;padding:2px 8px 0 0;color:#8B7332;font-weight:600;">${first.charAt(0)}</span>${first.substring(1)}</p>`;
+      html += `<p style="font-family:'Cormorant Garamond',serif;font-size:14.5px;color:#2A2418;line-height:1.9;margin:0 0 10px;"><span style="float:left;font-family:'Cormorant Garamond',serif;font-size:54px;line-height:0.78;padding:2px 10px 0 0;color:#8B7332;font-weight:600;">${first.charAt(0)}</span>${first.substring(1)}</p>`;
       for (let i = 1; i < bodyParagraphs.length; i++)
-        html += `<p style="font-family:'Cormorant Garamond',serif;font-size:12.5px;color:#2A2418;line-height:1.9;margin:0 0 8px;text-indent:1.5em;">${bodyParagraphs[i]}</p>`;
+        html += `<p style="font-family:'Cormorant Garamond',serif;font-size:14.5px;color:#2A2418;line-height:1.9;margin:0 0 10px;text-indent:1.5em;">${bodyParagraphs[i]}</p>`;
     } else {
       for (const p of bodyParagraphs)
-        html += `<p style="font-family:'Cormorant Garamond',serif;font-size:12.5px;color:#2A2418;line-height:1.9;margin:0 0 8px;">${p}</p>`;
+        html += `<p style="font-family:'Cormorant Garamond',serif;font-size:14.5px;color:#2A2418;line-height:1.9;margin:0 0 10px;">${p}</p>`;
     }
-    return `<div style="margin-bottom:20px;">
-      <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px;">
+    return `<div style="margin-bottom:24px;">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
         <div style="flex:1;height:1px;background:linear-gradient(to right,transparent,rgba(139,115,50,0.25));"></div>
-        <div style="font-family:'Cormorant Garamond',serif;font-size:11px;font-weight:700;color:#8B7332;letter-spacing:3.5px;text-transform:uppercase;white-space:nowrap;">${sec.title}</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:13px;font-weight:700;color:#8B7332;letter-spacing:3.5px;text-transform:uppercase;white-space:nowrap;">${sec.title}</div>
         <div style="flex:1;height:1px;background:linear-gradient(to left,transparent,rgba(139,115,50,0.25));"></div>
       </div>
       ${html}
@@ -220,12 +220,12 @@ Schreibe OHNE Markdown-Formatierung (keine **, keine #, keine Aufzählungszeiche
   </div>
   ${inlineStar(120, 0.5)}
   <div style="text-align:center;margin:2px 0 4px;">
-    <div style="font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:300;color:#8B7332;letter-spacing:3px;font-style:italic;">Resonanzkarte</div>
+    <div style="font-family:'Cormorant Garamond',serif;font-size:40px;font-weight:300;color:#8B7332;letter-spacing:3px;font-style:italic;">Resonanzkarte</div>
   </div>
   <div style="margin-bottom:12px;">${inlineDivider(200, 1)}</div>
   <div style="text-align:center;margin-bottom:2px;">
-    <div style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:600;color:#2A2418;letter-spacing:1px;">${client.name}</div>
-    <div style="font-family:'Raleway',sans-serif;font-size:9.5px;color:rgba(42,36,24,0.4);letter-spacing:1.5px;margin-top:4px;">${meta}</div>
+    <div style="font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:600;color:#2A2418;letter-spacing:1px;">${client.name}</div>
+    <div style="font-family:'Raleway',sans-serif;font-size:11px;color:rgba(42,36,24,0.4);letter-spacing:1.5px;margin-top:5px;">${meta}</div>
   </div>
   <div style="margin-bottom:16px;">${inlineStar(100, 0.35)}</div>
   ${secs.slice(0, 2).map((s, i) => buildPrintSection(s, i === 0)).join('')}
@@ -279,7 +279,7 @@ Schreibe OHNE Markdown-Formatierung (keine **, keine #, keine Aufzählungszeiche
   </div>` : ''}
 
   <div style="padding:20px 26px;background:rgba(139,115,50,0.025);border-radius:10px;border:1px solid rgba(139,115,50,0.08);text-align:center;">
-    <div style="font-family:'Cormorant Garamond',serif;font-size:13px;color:rgba(42,36,24,0.55);line-height:2;font-style:italic;">Diese Karte ist eine Momentaufnahme deiner Seelenlandschaft.<br>Die Zahlen und Energien die hier beschrieben werden, sind Einladungen — keine Festlegungen.<br>Nimm mit, was resoniert. Lass los, was noch nicht passt.<br>Dein Weg ist einzigartig.</div>
+    <div style="font-family:'Cormorant Garamond',serif;font-size:14.5px;color:rgba(42,36,24,0.55);line-height:2;font-style:italic;">Diese Karte ist eine Momentaufnahme deiner Seelenlandschaft.<br>Die Zahlen und Energien die hier beschrieben werden, sind Einladungen — keine Festlegungen.<br>Nimm mit, was resoniert. Lass los, was noch nicht passt.<br>Dein Weg ist einzigartig.</div>
   </div>
 
   <div style="position:absolute;bottom:16mm;left:0;right:0;text-align:center;">
@@ -316,9 +316,9 @@ Schreibe OHNE Markdown-Formatierung (keine **, keine #, keine Aufzählungszeiche
   }
 </style></head><body>
 
-${pageShell(page1Content, watermark(WATERMARK_FLOWER, 0.08, '55%'))}
-${pageShell(page2Content, watermark(WATERMARK_LOTUS, 0.07, '50%'))}
-${pageShell(page3Content, watermark(WATERMARK_FLOWER, 0.05, '50%'))}
+${pageShell(page1Content, watermark(WATERMARK_FLOWER, 0.14, '55%'))}
+${pageShell(page2Content, watermark(WATERMARK_LOTUS, 0.12, '50%'))}
+${pageShell(page3Content, watermark(WATERMARK_FLOWER, 0.09, '50%'))}
 
 </body></html>`;
 
