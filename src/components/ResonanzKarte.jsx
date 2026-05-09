@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { T } from "../config/theme.js";
 import { calcNumerology, LIFE_PATH_DESC, PERSONAL_YEAR_DESC } from "./Numerology.jsx";
 import { HD_TYPE_DESC, HD_AUTHORITY_DESC } from "./HumanDesign.jsx";
@@ -80,10 +80,22 @@ const Prose = ({ children }) => (
   <div style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '15.5px', color: 'rgba(245,240,232,0.8)', lineHeight: '1.85', fontWeight: 400, wordWrap: 'break-word', overflowWrap: 'break-word' }}>{children}</div>
 );
 
-function ResonanzKarte({ client, aiText: existingAiText, onClose }) {
+function ResonanzKarte({ client, onClose, onSave }) {
   const printRef = useRef();
-  const [karteText, setKarteText] = useState(existingAiText || '');
+  // Load saved text if it's from the current month
+  const currentMonth = new Date().toISOString().slice(0, 7); // "2026-05"
+  const savedIsCurrentMonth = client.resonanzKarteMonth === currentMonth;
+  const [karteText, setKarteText] = useState(savedIsCurrentMonth ? (client.resonanzKarteText || '') : '');
   const [loading, setLoading] = useState(false);
+  const [autoGenTriggered, setAutoGenTriggered] = useState(false);
+
+  // Auto-generate if we have data but no current-month text
+  useEffect(() => {
+    if (!karteText && !loading && !autoGenTriggered && (client.hdType || client.birthDate)) {
+      setAutoGenTriggered(true);
+      generateKarteText();
+    }
+  }, []); // eslint-disable-line
 
   const nums = client.birthDate ? calcNumerology(client.birthDate, client.birthName) : null;
   const hasHD = !!client.hdType;
@@ -139,6 +151,10 @@ STRIKTE REGELN:
       // Strip any remaining markdown artifacts
       const cleaned = text.replace(/\*\*/g, '').replace(/^#+\s*/gm, '').replace(/^\d+\.\s+/gm, '');
       setKarteText(cleaned);
+      // Persist to Firestore via parent
+      if (onSave && cleaned && !cleaned.includes('nicht generiert')) {
+        onSave({ ...client, resonanzKarteText: cleaned, resonanzKarteMonth: currentMonth });
+      }
     } catch { setKarteText('Der Text konnte nicht generiert werden.'); }
     setLoading(false);
   };
