@@ -46,8 +46,8 @@ const calcElectromagnetic = (personA, personB) => {
 
 /* ─── SVG Watermarks (inline, matching ResonanzKarte V3) ──────────────── */
 
-const FlowerOfLifeSVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="300" height="300">
-  <g stroke="#B8A060" stroke-width="0.5" fill="none" opacity="0.08">
+const FlowerOfLifeSVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <g stroke="#B8A060" stroke-width="0.8" fill="none" opacity="0.25">
     <circle cx="200" cy="200" r="60"/>
     <circle cx="260" cy="200" r="60"/><circle cx="140" cy="200" r="60"/>
     <circle cx="230" cy="148" r="60"/><circle cx="170" cy="148" r="60"/>
@@ -61,8 +61,8 @@ const FlowerOfLifeSVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40
   </g>
 </svg>`;
 
-const LotusSVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="300" height="300">
-  <g fill="none" stroke="#B8A060" stroke-width="0.4" opacity="0.06">
+const LotusSVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <g fill="none" stroke="#B8A060" stroke-width="0.7" opacity="0.2">
     <g transform="translate(200,200)">
       ${[0,60,120,180,240,300].map(r=>`<ellipse cx="0" cy="-40" rx="25" ry="50" transform="rotate(${r})"/>`).join('')}
       ${[0,60,120,180,240,300].map(r=>`<ellipse cx="0" cy="-55" rx="20" ry="65" transform="rotate(${r+30})"/>`).join('')}
