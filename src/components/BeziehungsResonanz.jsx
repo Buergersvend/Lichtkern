@@ -257,7 +257,7 @@ function openPrintView(client, refPerson, sections, syn, clientNum, refNum) {
   </div>
 </div>
 
-<!-- PAGE 2: Analyse-Sektionen 1-3 -->
+<!-- PAGE 2: Resonanzfeld + Wachstumsimpulse -->
 <div class="page">
   <div class="outer-border"></div>
   <div class="inner-border"></div>
@@ -274,20 +274,9 @@ function openPrintView(client, refPerson, sections, syn, clientNum, refNum) {
   </div>
 
   <div style="position:relative;z-index:1;">
-    ${sections.slice(0, 3).map((sec) => {
-      const firstChar = sec.content.charAt(0);
-      const rest = sec.content.slice(1);
-      return `
-        <div style="margin-bottom:28px;">
-          <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;">
-            <span style="font-size:18px;">${sec.icon}</span>
-            <span style="font-family:'Cinzel',serif;font-size:13px;color:#B8A060;letter-spacing:2.5px;font-weight:700;">${sec.title}</span>
-            <div style="flex:1;height:1px;background:linear-gradient(90deg,rgba(184,160,96,0.35),transparent);margin-left:6px;"></div>
-          </div>
-          <div style="font-family:'Raleway',sans-serif;font-size:13.5px;color:#2A2215;line-height:1.85;text-align:justify;">
-            <span style="font-family:'Cinzel',serif;font-size:42px;color:#B8A060;float:left;line-height:0.85;margin-right:8px;margin-top:4px;">${firstChar}</span>${rest}
-          </div>
-        </div>`;
+    ${sections.slice(0, 2).map((sec) => {
+      const fc = sec.content.charAt(0); const r = sec.content.slice(1);
+      return `<div style="margin-bottom:28px;"><div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;"><span style="font-size:18px;">${sec.icon}</span><span style="font-family:'Cinzel',serif;font-size:13px;color:#B8A060;letter-spacing:2.5px;font-weight:700;">${sec.title}</span><div style="flex:1;height:1px;background:linear-gradient(90deg,rgba(184,160,96,0.35),transparent);margin-left:6px;"></div></div><div style="font-family:'Raleway',sans-serif;font-size:13.5px;color:#2A2215;line-height:1.85;text-align:justify;"><span style="font-family:'Cinzel',serif;font-size:42px;color:#B8A060;float:left;line-height:0.85;margin-right:8px;margin-top:4px;">${fc}</span>${r}</div></div>`;
     }).join('')}
   </div>
 
@@ -296,7 +285,7 @@ function openPrintView(client, refPerson, sections, syn, clientNum, refNum) {
   </div>
 </div>
 
-<!-- PAGE 3: Analyse-Sektionen 4-5 + Footer -->
+<!-- PAGE 3: Spannungsfelder + Seelenvertrag -->
 <div class="page">
   <div class="outer-border"></div>
   <div class="inner-border"></div>
@@ -307,20 +296,31 @@ function openPrintView(client, refPerson, sections, syn, clientNum, refNum) {
   <div class="watermark" style="top:50%;left:50%;transform:translate(-50%,-50%);">${FlowerOfLifeSVG}</div>
 
   <div style="position:relative;z-index:1;">
-    ${sections.slice(3).map((sec) => {
-      const firstChar = sec.content.charAt(0);
-      const rest = sec.content.slice(1);
-      return `
-        <div style="margin-bottom:28px;">
-          <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;">
-            <span style="font-size:18px;">${sec.icon}</span>
-            <span style="font-family:'Cinzel',serif;font-size:13px;color:#B8A060;letter-spacing:2.5px;font-weight:700;">${sec.title}</span>
-            <div style="flex:1;height:1px;background:linear-gradient(90deg,rgba(184,160,96,0.35),transparent);margin-left:6px;"></div>
-          </div>
-          <div style="font-family:'Raleway',sans-serif;font-size:13.5px;color:#2A2215;line-height:1.85;text-align:justify;">
-            <span style="font-family:'Cinzel',serif;font-size:42px;color:#B8A060;float:left;line-height:0.85;margin-right:8px;margin-top:4px;">${firstChar}</span>${rest}
-          </div>
-        </div>`;
+    ${sections.slice(2, 4).map((sec) => {
+      const fc = sec.content.charAt(0); const r = sec.content.slice(1);
+      return `<div style="margin-bottom:28px;"><div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;"><span style="font-size:18px;">${sec.icon}</span><span style="font-family:'Cinzel',serif;font-size:13px;color:#B8A060;letter-spacing:2.5px;font-weight:700;">${sec.title}</span><div style="flex:1;height:1px;background:linear-gradient(90deg,rgba(184,160,96,0.35),transparent);margin-left:6px;"></div></div><div style="font-family:'Raleway',sans-serif;font-size:13.5px;color:#2A2215;line-height:1.85;text-align:justify;"><span style="font-family:'Cinzel',serif;font-size:42px;color:#B8A060;float:left;line-height:0.85;margin-right:8px;margin-top:4px;">${fc}</span>${r}</div></div>`;
+    }).join('')}
+  </div>
+
+  <div style="position:absolute;bottom:13mm;left:0;right:0;text-align:center;">
+    <div style="font-family:'Raleway',sans-serif;font-size:8px;color:rgba(138,125,107,0.4);letter-spacing:1.5px;">HUMAN RESONANZ · BEZIEHUNGS-RESONANZKARTE · SEITE 3</div>
+  </div>
+</div>
+
+<!-- PAGE 4: Praxisimpuls + Signatur -->
+<div class="page">
+  <div class="outer-border"></div>
+  <div class="inner-border"></div>
+  <div class="corner corner-tl">${cornerSVG}</div>
+  <div class="corner corner-tr">${cornerSVG}</div>
+  <div class="corner corner-bl">${cornerSVG}</div>
+  <div class="corner corner-br">${cornerSVG}</div>
+  <div class="watermark" style="top:50%;left:50%;transform:translate(-50%,-50%);">${LotusSVG}</div>
+
+  <div style="position:relative;z-index:1;">
+    ${sections.slice(4).map((sec) => {
+      const fc = sec.content.charAt(0); const r = sec.content.slice(1);
+      return `<div style="margin-bottom:28px;"><div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;"><span style="font-size:18px;">${sec.icon}</span><span style="font-family:'Cinzel',serif;font-size:13px;color:#B8A060;letter-spacing:2.5px;font-weight:700;">${sec.title}</span><div style="flex:1;height:1px;background:linear-gradient(90deg,rgba(184,160,96,0.35),transparent);margin-left:6px;"></div></div><div style="font-family:'Raleway',sans-serif;font-size:13.5px;color:#2A2215;line-height:1.85;text-align:justify;"><span style="font-family:'Cinzel',serif;font-size:42px;color:#B8A060;float:left;line-height:0.85;margin-right:8px;margin-top:4px;">${fc}</span>${r}</div></div>`;
     }).join('')}
   </div>
 
@@ -336,7 +336,7 @@ function openPrintView(client, refPerson, sections, syn, clientNum, refNum) {
   </div>
 
   <div style="position:absolute;bottom:13mm;left:0;right:0;text-align:center;">
-    <div style="font-family:'Raleway',sans-serif;font-size:8px;color:rgba(138,125,107,0.4);letter-spacing:1.5px;">HUMAN RESONANZ · BEZIEHUNGS-RESONANZKARTE · SEITE 3</div>
+    <div style="font-family:'Raleway',sans-serif;font-size:8px;color:rgba(138,125,107,0.4);letter-spacing:1.5px;">HUMAN RESONANZ · BEZIEHUNGS-RESONANZKARTE · SEITE 4</div>
   </div>
 </div>
 
