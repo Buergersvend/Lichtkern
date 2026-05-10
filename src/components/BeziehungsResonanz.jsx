@@ -163,24 +163,18 @@ function openPrintView(client, refPerson, sections, syn, clientNum, refNum) {
 <title>Beziehungs-Resonanzkarte · ${client.name} ⇄ ${refPerson.name}</title>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Raleway:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
 <style>
-  @page { size: A4 portrait; margin: 18mm 0 15mm 0; }
-  @page:first { margin: 0; }
+  @page { size: A4 portrait; margin: 0; }
   @media print {
     body { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
     .no-print { display: none !important; }
   }
   body { margin:0; padding:0; background:#FFF; font-family:'Raleway',sans-serif; }
   .page {
-    width:210mm; min-height:297mm; margin:0 auto; padding:22mm 22mm 20mm;
+    width:210mm; height:297mm; margin:0 auto; padding:22mm 22mm 20mm;
     position:relative; box-sizing:border-box; page-break-after:always;
-    background:#FFFDF7;
+    background:#FFFDF7; overflow:hidden;
   }
   .page:last-child { page-break-after: auto; }
-  .page-flow {
-    width:210mm; margin:0 auto; padding:22mm 22mm 24mm;
-    position:relative; box-sizing:border-box;
-    background:#FFFDF7;
-  }
   .outer-border {
     position:absolute; inset:10mm;
     border:1.2px solid rgba(184,160,96,0.3);
