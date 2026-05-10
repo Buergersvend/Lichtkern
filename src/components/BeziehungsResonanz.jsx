@@ -46,8 +46,8 @@ const calcElectromagnetic = (personA, personB) => {
 
 /* ─── SVG Watermarks (inline, matching ResonanzKarte V3) ──────────────── */
 
-const FlowerOfLifeSVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
-  <g stroke="#B8A060" stroke-width="0.8" fill="none" opacity="0.25">
+const FlowerOfLifeSVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="300" height="300">
+  <g stroke="#B8A060" stroke-width="0.5" fill="none" opacity="0.08">
     <circle cx="200" cy="200" r="60"/>
     <circle cx="260" cy="200" r="60"/><circle cx="140" cy="200" r="60"/>
     <circle cx="230" cy="148" r="60"/><circle cx="170" cy="148" r="60"/>
@@ -61,8 +61,8 @@ const FlowerOfLifeSVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40
   </g>
 </svg>`;
 
-const LotusSVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
-  <g fill="none" stroke="#B8A060" stroke-width="0.7" opacity="0.2">
+const LotusSVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="300" height="300">
+  <g fill="none" stroke="#B8A060" stroke-width="0.4" opacity="0.06">
     <g transform="translate(200,200)">
       ${[0,60,120,180,240,300].map(r=>`<ellipse cx="0" cy="-40" rx="25" ry="50" transform="rotate(${r})"/>`).join('')}
       ${[0,60,120,180,240,300].map(r=>`<ellipse cx="0" cy="-55" rx="20" ry="65" transform="rotate(${r+30})"/>`).join('')}
@@ -95,63 +95,65 @@ function openPrintView(client, refPerson, sections, syn, clientNum, refNum) {
     <line x1="115" y1="6" x2="200" y2="6" stroke="#B8A060" stroke-width="0.8" opacity="0.35"/>
   </svg>`;
 
-  // Build sections HTML
+  // Build sections HTML — larger fonts, more spacing
   const sectionsHTML = sections.map((sec, i) => {
     const firstChar = sec.content.charAt(0);
     const rest = sec.content.slice(1);
     return `
-      <div style="margin-bottom:18px;">
-        <div style="display:flex;align-items:center;gap:6px;margin-bottom:8px;">
-          <span style="font-size:14px;">${sectionIcons[sec.title] || '✦'}</span>
-          <span style="font-family:'Cinzel',serif;font-size:10px;color:#B8A060;letter-spacing:2px;font-weight:700;">${sec.title}</span>
-          <div style="flex:1;height:1px;background:linear-gradient(90deg,rgba(184,160,96,0.35),transparent);margin-left:4px;"></div>
+      <div style="margin-bottom:28px;">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;">
+          <span style="font-size:18px;">${sectionIcons[sec.title] || '✦'}</span>
+          <span style="font-family:'Cinzel',serif;font-size:13px;color:#B8A060;letter-spacing:2.5px;font-weight:700;">${sec.title}</span>
+          <div style="flex:1;height:1px;background:linear-gradient(90deg,rgba(184,160,96,0.35),transparent);margin-left:6px;"></div>
         </div>
-        <div style="font-family:'Raleway',sans-serif;font-size:11px;color:#2A2215;line-height:1.75;text-align:justify;">
-          <span style="font-family:'Cinzel',serif;font-size:38px;color:#B8A060;float:left;line-height:1;margin-right:6px;margin-top:2px;">${firstChar}</span>${rest}
+        <div style="font-family:'Raleway',sans-serif;font-size:13.5px;color:#2A2215;line-height:1.85;text-align:justify;">
+          <span style="font-family:'Cinzel',serif;font-size:42px;color:#B8A060;float:left;line-height:0.85;margin-right:8px;margin-top:4px;">${firstChar}</span>${rest}
         </div>
       </div>`;
   }).join('');
 
-  // Numerology comparison
+  // Numerology comparison — bigger fonts
   let numHTML = '';
   if (clientNum && refNum) {
     const rows = [["Lebenszahl","lifePath"],["Ausdruckszahl","expression"],["Herzenszahl","soulUrge"],["Persönlichkeitszahl","personality"],["Reifezahl","maturity"]];
     const rowsHTML = rows.filter(([,k]) => clientNum[k] != null && refNum[k] != null).map(([label, k]) => {
       const match = clientNum[k] === refNum[k];
       return `<tr>
-        <td style="font-family:'Raleway',sans-serif;font-size:9px;color:#5A4D3A;padding:4px 8px;border-bottom:1px solid rgba(184,160,96,0.15);">${label}</td>
-        <td style="font-family:'Cinzel',serif;font-size:12px;color:#B8A060;font-weight:700;text-align:center;padding:4px;border-bottom:1px solid rgba(184,160,96,0.15);">${clientNum[k]}</td>
-        <td style="font-family:'Cinzel',serif;font-size:12px;color:#2A2215;font-weight:700;text-align:center;padding:4px;border-bottom:1px solid rgba(184,160,96,0.15);">${refNum[k]}</td>
-        <td style="text-align:center;padding:4px;border-bottom:1px solid rgba(184,160,96,0.15);">${match ? '<span style="font-size:10px;color:#B8A060;">✦</span>' : ''}</td>
+        <td style="font-family:'Raleway',sans-serif;font-size:13px;color:#5A4D3A;padding:8px 12px;border-bottom:1px solid rgba(184,160,96,0.15);">${label}</td>
+        <td style="font-family:'Cinzel',serif;font-size:18px;color:#B8A060;font-weight:700;text-align:center;padding:8px 12px;border-bottom:1px solid rgba(184,160,96,0.15);">${clientNum[k]}</td>
+        <td style="font-family:'Cinzel',serif;font-size:18px;color:#2A2215;font-weight:700;text-align:center;padding:8px 12px;border-bottom:1px solid rgba(184,160,96,0.15);">${refNum[k]}</td>
+        <td style="text-align:center;padding:8px;border-bottom:1px solid rgba(184,160,96,0.15);">${match ? '<span style="font-size:14px;color:#B8A060;">✦</span>' : ''}</td>
       </tr>`;
     }).join('');
 
     numHTML = `
-      <div style="margin-top:16px;">
-        <div style="font-family:'Cinzel',serif;font-size:10px;color:#B8A060;letter-spacing:2px;margin-bottom:8px;">🔢 NUMEROLOGIE</div>
+      <div style="margin-top:28px;">
+        <div style="font-family:'Cinzel',serif;font-size:13px;color:#B8A060;letter-spacing:2.5px;margin-bottom:12px;">🔢 NUMEROLOGIE-VERGLEICH</div>
         <table style="width:100%;border-collapse:collapse;">
           <tr>
-            <th style="font-family:'Raleway',sans-serif;font-size:8px;color:#8A7D6B;text-align:left;padding:4px 8px;border-bottom:1px solid rgba(184,160,96,0.3);"></th>
-            <th style="font-family:'Raleway',sans-serif;font-size:8px;color:#B8A060;text-align:center;padding:4px;border-bottom:1px solid rgba(184,160,96,0.3);">${client.name.split(' ')[0]}</th>
-            <th style="font-family:'Raleway',sans-serif;font-size:8px;color:#2A2215;text-align:center;padding:4px;border-bottom:1px solid rgba(184,160,96,0.3);">${refPerson.name.split(' ')[0]}</th>
-            <th style="padding:4px;border-bottom:1px solid rgba(184,160,96,0.3);"></th>
+            <th style="font-family:'Raleway',sans-serif;font-size:11px;color:#8A7D6B;font-weight:700;text-align:left;padding:8px 12px;border-bottom:1.5px solid rgba(184,160,96,0.3);"></th>
+            <th style="font-family:'Raleway',sans-serif;font-size:11px;color:#B8A060;font-weight:700;text-align:center;padding:8px 12px;border-bottom:1.5px solid rgba(184,160,96,0.3);">${client.name.split(' ')[0]}</th>
+            <th style="font-family:'Raleway',sans-serif;font-size:11px;color:#2A2215;font-weight:700;text-align:center;padding:8px 12px;border-bottom:1.5px solid rgba(184,160,96,0.3);">${refPerson.name.split(' ')[0]}</th>
+            <th style="padding:8px;border-bottom:1.5px solid rgba(184,160,96,0.3);"></th>
           </tr>
           ${rowsHTML}
         </table>
       </div>`;
   }
 
-  // Electromagnetic connections
+  // Electromagnetic connections — bigger fonts
   let emHTML = '';
   if (syn.electromagnetic.length > 0) {
     emHTML = `
-      <div style="margin-top:16px;">
-        <div style="font-family:'Cinzel',serif;font-size:10px;color:#B8A060;letter-spacing:2px;margin-bottom:8px;">⚡ ELEKTROMAGNETISCHE VERBINDUNGEN</div>
+      <div style="margin-top:28px;">
+        <div style="font-family:'Cinzel',serif;font-size:13px;color:#B8A060;letter-spacing:2.5px;margin-bottom:12px;">⚡ ELEKTROMAGNETISCHE VERBINDUNGEN</div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;">
         ${syn.electromagnetic.map(e => `
-          <div style="display:inline-block;margin:2px 4px 2px 0;padding:3px 10px;border-radius:8px;border:1px solid rgba(184,160,96,0.3);font-family:'Cinzel',serif;font-size:9px;color:#B8A060;">
+          <div style="padding:6px 14px;border-radius:10px;border:1px solid rgba(184,160,96,0.3);font-family:'Cinzel',serif;font-size:12px;color:#B8A060;background:rgba(184,160,96,0.04);">
             Tor ${e.gate1}–${e.gate2} · ${HD_CENTER_CFG[e.center1]?.label || ''} ↔ ${HD_CENTER_CFG[e.center2]?.label || ''}
           </div>
         `).join('')}
+        </div>
       </div>`;
   }
 
@@ -168,40 +170,39 @@ function openPrintView(client, refPerson, sections, syn, clientNum, refNum) {
   }
   body { margin:0; padding:0; background:#FFF; font-family:'Raleway',sans-serif; }
   .page {
-    width:210mm; min-height:297mm; margin:0 auto; padding:20mm 18mm;
+    width:210mm; min-height:297mm; margin:0 auto; padding:22mm 22mm 20mm;
     position:relative; box-sizing:border-box; page-break-after:always;
     background:#FFFDF7;
   }
   .page:last-child { page-break-after: auto; }
   .outer-border {
-    position:absolute; inset:8mm;
-    border:1px solid rgba(184,160,96,0.35);
+    position:absolute; inset:10mm;
+    border:1.2px solid rgba(184,160,96,0.3);
     pointer-events:none;
   }
   .inner-border {
-    position:absolute; inset:10mm;
-    border:0.5px solid rgba(184,160,96,0.18);
+    position:absolute; inset:12mm;
+    border:0.5px solid rgba(184,160,96,0.15);
     pointer-events:none;
   }
   .watermark {
     position:absolute; pointer-events:none;
-    opacity:1;
   }
   .corner { position:absolute; pointer-events:none; }
-  .corner-tl { top:6mm; left:6mm; }
-  .corner-tr { top:6mm; right:6mm; transform:scaleX(-1); }
-  .corner-bl { bottom:6mm; left:6mm; transform:scaleY(-1); }
-  .corner-br { bottom:6mm; right:6mm; transform:scale(-1,-1); }
+  .corner-tl { top:7mm; left:7mm; }
+  .corner-tr { top:7mm; right:7mm; transform:scaleX(-1); }
+  .corner-bl { bottom:7mm; left:7mm; transform:scaleY(-1); }
+  .corner-br { bottom:7mm; right:7mm; transform:scale(-1,-1); }
 </style>
 </head><body>
 
 <!-- Print Button -->
-<div class="no-print" style="position:fixed;top:16px;right:16px;z-index:100;display:flex;gap:8px;">
-  <button onclick="window.print()" style="padding:12px 24px;border-radius:12px;background:#B8A060;color:#1A1200;border:none;font-family:'Raleway',sans-serif;font-weight:700;font-size:14px;cursor:pointer;">🖨 Drucken / PDF</button>
-  <button onclick="window.close()" style="padding:12px 18px;border-radius:12px;background:#f5f0e8;color:#5A4D3A;border:1px solid #d4c9a8;font-family:'Raleway',sans-serif;font-weight:600;font-size:13px;cursor:pointer;">✕ Schließen</button>
+<div class="no-print" style="position:fixed;top:20px;right:20px;z-index:100;display:flex;gap:10px;">
+  <button onclick="window.print()" style="padding:14px 28px;border-radius:12px;background:#B8A060;color:#1A1200;border:none;font-family:'Raleway',sans-serif;font-weight:700;font-size:15px;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,0.1);">🖨 Drucken / PDF</button>
+  <button onclick="window.close()" style="padding:14px 20px;border-radius:12px;background:#f5f0e8;color:#5A4D3A;border:1px solid #d4c9a8;font-family:'Raleway',sans-serif;font-weight:600;font-size:14px;cursor:pointer;">✕ Schließen</button>
 </div>
 
-<!-- PAGE 1: Header + Datenblatt + erste Sektionen -->
+<!-- PAGE 1: Header + Datenblatt -->
 <div class="page">
   <div class="outer-border"></div>
   <div class="inner-border"></div>
@@ -209,31 +210,31 @@ function openPrintView(client, refPerson, sections, syn, clientNum, refNum) {
   <div class="corner corner-tr">${cornerSVG}</div>
   <div class="corner corner-bl">${cornerSVG}</div>
   <div class="corner corner-br">${cornerSVG}</div>
-  <div class="watermark" style="top:50%;left:50%;transform:translate(-50%,-50%);">${FlowerOfLifeSVG}</div>
+  <div class="watermark" style="bottom:15%;left:50%;transform:translateX(-50%);">${FlowerOfLifeSVG}</div>
 
   <!-- Title -->
-  <div style="text-align:center;margin-bottom:6px;position:relative;z-index:1;">
-    <div style="font-family:'Cinzel',serif;font-size:10px;color:#B8A060;letter-spacing:4px;margin-bottom:4px;">HUMAN RESONANZ</div>
-    <div style="font-family:'Cinzel',serif;font-size:28px;color:#2A2215;font-weight:700;letter-spacing:1px;">Beziehungs-Resonanzkarte</div>
-    <div style="text-align:center;margin:8px 0;">${dividerSVG}</div>
+  <div style="text-align:center;margin-bottom:10px;position:relative;z-index:1;">
+    <div style="font-family:'Cinzel',serif;font-size:12px;color:#B8A060;letter-spacing:5px;margin-bottom:6px;">HUMAN RESONANZ</div>
+    <div style="font-family:'Cinzel',serif;font-size:32px;color:#2A2215;font-weight:700;letter-spacing:1.5px;">Beziehungs-Resonanzkarte</div>
+    <div style="text-align:center;margin:12px 0;">${dividerSVG}</div>
   </div>
 
   <!-- Names -->
-  <div style="text-align:center;margin-bottom:20px;position:relative;z-index:1;">
-    <div style="font-family:'Cinzel',serif;font-size:20px;color:#B8A060;font-weight:700;">${client.name}</div>
-    <div style="font-family:'Raleway',sans-serif;font-size:12px;color:#8A7D6B;margin:4px 0;">⇄</div>
-    <div style="font-family:'Cinzel',serif;font-size:20px;color:#2A2215;font-weight:700;">${refPerson.name}</div>
+  <div style="text-align:center;margin-bottom:28px;position:relative;z-index:1;">
+    <div style="font-family:'Cinzel',serif;font-size:24px;color:#B8A060;font-weight:700;">${client.name}</div>
+    <div style="font-family:'Raleway',sans-serif;font-size:16px;color:#8A7D6B;margin:6px 0;">⇄</div>
+    <div style="font-family:'Cinzel',serif;font-size:24px;color:#2A2215;font-weight:700;">${refPerson.name}</div>
   </div>
 
   <!-- Typ-Dynamik -->
-  <div style="display:flex;gap:16px;margin-bottom:16px;position:relative;z-index:1;">
+  <div style="display:flex;gap:20px;margin-bottom:24px;position:relative;z-index:1;">
     ${[client, refPerson].map((p, i) => `
-      <div style="flex:1;background:rgba(184,160,96,0.06);border-radius:10px;padding:12px;border:1px solid rgba(184,160,96,0.2);">
-        <div style="font-family:'Cinzel',serif;font-size:10px;color:${i === 0 ? '#B8A060' : '#2A2215'};font-weight:700;margin-bottom:4px;">${p.name}</div>
-        <div style="font-family:'Raleway',sans-serif;font-size:13px;color:#2A2215;font-weight:700;">${p.hdType || '—'}</div>
-        ${p.hdProfile ? `<div style="font-family:'Raleway',sans-serif;font-size:10px;color:#5A4D3A;">Profil ${p.hdProfile} · ${p.hdAuthority || ''}</div>` : ''}
-        ${i === 0 && defClient.size > 0 ? `<div style="font-family:'Raleway',sans-serif;font-size:9px;color:#8A7D6B;margin-top:4px;">Zentren: ${[...defClient].map(c => HD_CENTER_CFG[c]?.label).join(', ')}</div>` : ''}
-        ${i === 1 && defRef.size > 0 ? `<div style="font-family:'Raleway',sans-serif;font-size:9px;color:#8A7D6B;margin-top:4px;">Zentren: ${[...defRef].map(c => HD_CENTER_CFG[c]?.label).join(', ')}</div>` : ''}
+      <div style="flex:1;background:rgba(184,160,96,0.05);border-radius:12px;padding:18px 20px;border:1px solid rgba(184,160,96,0.2);">
+        <div style="font-family:'Cinzel',serif;font-size:13px;color:${i === 0 ? '#B8A060' : '#2A2215'};font-weight:700;margin-bottom:6px;">${p.name}</div>
+        <div style="font-family:'Raleway',sans-serif;font-size:18px;color:#2A2215;font-weight:800;">${p.hdType || '—'}</div>
+        ${p.hdProfile ? `<div style="font-family:'Raleway',sans-serif;font-size:13px;color:#5A4D3A;margin-top:4px;">Profil ${p.hdProfile} · ${p.hdAuthority || ''}</div>` : ''}
+        ${i === 0 && defClient.size > 0 ? `<div style="font-family:'Raleway',sans-serif;font-size:11px;color:#8A7D6B;margin-top:6px;">Zentren: ${[...defClient].map(c => HD_CENTER_CFG[c]?.label).join(', ')}</div>` : ''}
+        ${i === 1 && defRef.size > 0 ? `<div style="font-family:'Raleway',sans-serif;font-size:11px;color:#8A7D6B;margin-top:6px;">Zentren: ${[...defRef].map(c => HD_CENTER_CFG[c]?.label).join(', ')}</div>` : ''}
       </div>
     `).join('')}
   </div>
@@ -245,8 +246,8 @@ function openPrintView(client, refPerson, sections, syn, clientNum, refNum) {
   </div>
 
   <!-- Footer Page 1 -->
-  <div style="position:absolute;bottom:12mm;left:0;right:0;text-align:center;">
-    <div style="font-family:'Raleway',sans-serif;font-size:7px;color:rgba(138,125,107,0.5);letter-spacing:1px;">HUMAN RESONANZ · BEZIEHUNGS-RESONANZKARTE · SEITE 1</div>
+  <div style="position:absolute;bottom:13mm;left:0;right:0;text-align:center;">
+    <div style="font-family:'Raleway',sans-serif;font-size:8px;color:rgba(138,125,107,0.4);letter-spacing:1.5px;">HUMAN RESONANZ · BEZIEHUNGS-RESONANZKARTE · SEITE 1</div>
   </div>
 </div>
 
@@ -260,29 +261,29 @@ function openPrintView(client, refPerson, sections, syn, clientNum, refNum) {
   <div class="corner corner-br">${cornerSVG}</div>
   <div class="watermark" style="top:50%;left:50%;transform:translate(-50%,-50%);">${LotusSVG}</div>
 
-  <div style="text-align:center;margin-bottom:16px;position:relative;z-index:1;">
-    <div style="font-family:'Cinzel',serif;font-size:12px;color:#B8A060;letter-spacing:3px;font-weight:700;">✦ BEZIEHUNGS-RESONANZANALYSE</div>
-    <div style="font-family:'Raleway',sans-serif;font-size:9px;color:#8A7D6B;margin-top:4px;">${client.name} ⇄ ${refPerson.name}</div>
-    <div style="text-align:center;margin:10px 0;">${dividerSVG}</div>
+  <div style="text-align:center;margin-bottom:24px;position:relative;z-index:1;">
+    <div style="font-family:'Cinzel',serif;font-size:15px;color:#B8A060;letter-spacing:3.5px;font-weight:700;">✦ BEZIEHUNGS-RESONANZANALYSE</div>
+    <div style="font-family:'Raleway',sans-serif;font-size:12px;color:#8A7D6B;margin-top:6px;">${client.name} ⇄ ${refPerson.name}</div>
+    <div style="text-align:center;margin:14px 0;">${dividerSVG}</div>
   </div>
 
   <div style="position:relative;z-index:1;">
     ${sectionsHTML}
   </div>
 
-  <!-- Datum + Signatur -->
-  <div style="position:absolute;bottom:16mm;left:18mm;right:18mm;position:relative;z-index:1;margin-top:24px;">
-    <div style="text-align:center;margin:12px 0;">${dividerSVG}</div>
+  <!-- Datum + Signatur — mit klarem Abstand -->
+  <div style="position:relative;z-index:1;margin-top:36px;">
+    <div style="text-align:center;margin-bottom:16px;">${dividerSVG}</div>
     <div style="text-align:center;">
-      <div style="font-family:'Raleway',sans-serif;font-size:8px;color:#8A7D6B;letter-spacing:1px;">
+      <div style="font-family:'Raleway',sans-serif;font-size:11px;color:#8A7D6B;letter-spacing:1px;">
         Erstellt am ${new Date().toLocaleDateString('de-DE', { day: '2-digit', month: 'long', year: 'numeric' })}
       </div>
-      <div style="font-family:'Cinzel',serif;font-size:9px;color:#B8A060;letter-spacing:2px;margin-top:4px;">HUMAN RESONANZ</div>
+      <div style="font-family:'Cinzel',serif;font-size:12px;color:#B8A060;letter-spacing:3px;margin-top:6px;">HUMAN RESONANZ</div>
     </div>
   </div>
 
-  <div style="position:absolute;bottom:12mm;left:0;right:0;text-align:center;">
-    <div style="font-family:'Raleway',sans-serif;font-size:7px;color:rgba(138,125,107,0.5);letter-spacing:1px;">HUMAN RESONANZ · BEZIEHUNGS-RESONANZKARTE · SEITE 2</div>
+  <div style="position:absolute;bottom:13mm;left:0;right:0;text-align:center;">
+    <div style="font-family:'Raleway',sans-serif;font-size:8px;color:rgba(138,125,107,0.4);letter-spacing:1.5px;">HUMAN RESONANZ · BEZIEHUNGS-RESONANZKARTE · SEITE 2</div>
   </div>
 </div>
 
