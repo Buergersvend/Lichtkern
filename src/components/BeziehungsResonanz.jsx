@@ -450,15 +450,27 @@ function parseSections(text) {
   const sectionNames = ["RESONANZFELD", "WACHSTUMSIMPULSE", "SPANNUNGSFELDER", "SEELENVERTRAG", "PRAXISIMPULS"];
   const sectionIcons = { "RESONANZFELD": "💫", "WACHSTUMSIMPULSE": "🌱", "SPANNUNGSFELDER": "⚡", "SEELENVERTRAG": "🔮", "PRAXISIMPULS": "✦" };
   const sections = []; const lines = text.split("\n"); let current = null;
+  const seenTitles = new Set();
   for (const line of lines) {
     const trimmed = line.trim();
     const matchedSection = sectionNames.find(s => trimmed.toUpperCase().includes(s));
-    if (matchedSection) { if (current) sections.push(current); current = { title: matchedSection, icon: sectionIcons[matchedSection] || "✦", content: "" }; }
+    if (matchedSection) {
+      // Wenn derselbe Titel direkt nochmal kommt (ohne Content dazwischen), ignorieren
+      if (current && current.title === matchedSection && !current.content.trim()) continue;
+      if (current && current.content.trim()) sections.push(current);
+      current = { title: matchedSection, icon: sectionIcons[matchedSection] || "✦", content: "" };
+    }
     else if (current && trimmed) { current.content += (current.content ? "\n" : "") + trimmed; }
   }
-  if (current) sections.push(current);
+  if (current && current.content.trim()) sections.push(current);
   if (sections.length === 0 && text.trim()) { sections.push({ title: "BEZIEHUNGSANALYSE", icon: "✦", content: text.trim() }); }
-  return sections;
+  // Deduplizieren: wenn zwei Sektionen denselben Titel haben, nur die mit Content behalten
+  const deduped = [];
+  const usedTitles = new Set();
+  for (const sec of sections) {
+    if (!usedTitles.has(sec.title)) { deduped.push(sec); usedTitles.add(sec.title); }
+  }
+  return deduped;
 }
 
 /* ─── ComparisonView ──────────────────────────────────────────────────── */
