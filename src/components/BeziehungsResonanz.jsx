@@ -491,7 +491,7 @@ function ComparisonView({ client, refPerson, onBack, clients, onSave }) {
     if (!hasData) return; setAiLoading(true);
     try {
       const prompt = buildBeziehungsPrompt(client, refData, syn, clientNum, refNum);
-     let raw = await groqFetch(prompt, 2500);
+      let raw = await groqFetch(prompt, 2500);
       raw = raw.replace(/\*\*/g, "").replace(/^#+\s*/gm, "").replace(/^\d+\.\s+/gm, "").replace(/^[-•]\s+/gm, "");
       setAiText(raw);
       const updatedRef = { ...refData, aiText: raw, aiGeneratedAt: new Date().toISOString() };
