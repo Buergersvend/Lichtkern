@@ -95,12 +95,12 @@ function openPrintView(client, refPerson, sections, syn, clientNum, refNum) {
     <line x1="115" y1="6" x2="200" y2="6" stroke="#B8A060" stroke-width="0.8" opacity="0.35"/>
   </svg>`;
 
-  // Build sections HTML — larger fonts, more spacing
+  // Build sections HTML — larger fonts, more spacing, no mid-section page breaks
   const sectionsHTML = sections.map((sec, i) => {
     const firstChar = sec.content.charAt(0);
     const rest = sec.content.slice(1);
     return `
-      <div style="margin-bottom:28px;">
+      <div style="margin-bottom:28px;page-break-inside:avoid;">
         <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;">
           <span style="font-size:18px;">${sectionIcons[sec.title] || '✦'}</span>
           <span style="font-family:'Cinzel',serif;font-size:13px;color:#B8A060;letter-spacing:2.5px;font-weight:700;">${sec.title}</span>
@@ -251,15 +251,16 @@ function openPrintView(client, refPerson, sections, syn, clientNum, refNum) {
   </div>
 </div>
 
-<!-- PAGE 2: Analyse-Sektionen -->
-<div class="page">
+<!-- PAGE 2+: Analyse-Sektionen (fließend, automatischer Seitenumbruch) -->
+<div class="page" style="height:auto;min-height:297mm;">
   <div class="outer-border"></div>
   <div class="inner-border"></div>
   <div class="corner corner-tl">${cornerSVG}</div>
   <div class="corner corner-tr">${cornerSVG}</div>
   <div class="corner corner-bl">${cornerSVG}</div>
   <div class="corner corner-br">${cornerSVG}</div>
-  <div class="watermark" style="top:50%;left:50%;transform:translate(-50%,-50%);">${LotusSVG}</div>
+  <div class="watermark" style="top:40%;left:50%;transform:translate(-50%,-50%);">${LotusSVG}</div>
+  <div class="watermark" style="top:85%;left:50%;transform:translate(-50%,-50%);">${FlowerOfLifeSVG}</div>
 
   <div style="text-align:center;margin-bottom:24px;position:relative;z-index:1;">
     <div style="font-family:'Cinzel',serif;font-size:15px;color:#B8A060;letter-spacing:3.5px;font-weight:700;">✦ BEZIEHUNGS-RESONANZANALYSE</div>
@@ -271,8 +272,8 @@ function openPrintView(client, refPerson, sections, syn, clientNum, refNum) {
     ${sectionsHTML}
   </div>
 
-  <!-- Datum + Signatur — mit klarem Abstand -->
-  <div style="position:relative;z-index:1;margin-top:36px;">
+  <!-- Datum + Signatur -->
+  <div style="position:relative;z-index:1;margin-top:40px;page-break-inside:avoid;">
     <div style="text-align:center;margin-bottom:16px;">${dividerSVG}</div>
     <div style="text-align:center;">
       <div style="font-family:'Raleway',sans-serif;font-size:11px;color:#8A7D6B;letter-spacing:1px;">
@@ -280,10 +281,6 @@ function openPrintView(client, refPerson, sections, syn, clientNum, refNum) {
       </div>
       <div style="font-family:'Cinzel',serif;font-size:12px;color:#B8A060;letter-spacing:3px;margin-top:6px;">HUMAN RESONANZ</div>
     </div>
-  </div>
-
-  <div style="position:absolute;bottom:13mm;left:0;right:0;text-align:center;">
-    <div style="font-family:'Raleway',sans-serif;font-size:8px;color:rgba(138,125,107,0.4);letter-spacing:1.5px;">HUMAN RESONANZ · BEZIEHUNGS-RESONANZKARTE · SEITE 2</div>
   </div>
 </div>
 
@@ -442,7 +439,7 @@ function buildBeziehungsPrompt(client, refPerson, syn, clientNum, refNum) {
   if (syn.electromagnetic.length > 0) { prompt += `\n${syn.electromagnetic.map(e => `Kanal ${e.gate1}-${e.gate2} (${HD_CENTER_CFG[e.center1]?.label || e.center1} ↔ ${HD_CENTER_CFG[e.center2]?.label || e.center2})`).join('\n')}`; }
   if (syn.shared.length > 0) { prompt += `\nGemeinsame Tore: ${syn.shared.join(', ')}`; }
   if (clientNum && refNum) { const m = []; if (clientNum.lifePath === refNum.lifePath) m.push(`Lebenszahl ${clientNum.lifePath}`); if (clientNum.expression === refNum.expression) m.push(`Ausdruckszahl ${clientNum.expression}`); if (clientNum.soulUrge === refNum.soulUrge) m.push(`Herzenszahl ${clientNum.soulUrge}`); if (m.length > 0) prompt += `\nIdentische Numerologie-Werte: ${m.join(', ')}`; }
-  prompt += `\n\nWICHTIG: Verwende EXAKT diese fünf Abschnittstitel in GROSSBUCHSTABEN. Schreibe 3-4 Sätze pro Abschnitt. Kein Markdown, keine Nummerierungen, keine Aufzählungszeichen.\n\nRESONANZFELD\nWas diese zwei Menschen energetisch verbindet — die tiefste gemeinsame Schwingung. Verbinde HD-Kanäle mit numerologischen Übereinstimmungen zu einem ganzheitlichen Bild.\n\nWACHSTUMSIMPULSE\nWas aktiviert A bei B und umgekehrt? Welche offenen Zentren werden konditioniert? Wie spiegeln sich die Numerologie-Zahlen gegenseitig?\n\nSPANNUNGSFELDER\nWo entstehen Reibung und Herausforderung? Welche HD-Typen-Dynamiken und numerologischen Gegensätze wirken? Ehrlich und konstruktiv.\n\nSEELENVERTRAG\nWas ist der tiefere Sinn dieser Begegnung? Was wollen diese zwei Seelen miteinander lernen? Poetisch, aber geerdet.\n\nPRAXISIMPULS\nEin konkreter Ansatz für die therapeutische Begleitung dieser Beziehung. Was kann der Praktiker in der Sitzungsarbeit nutzen?\n\nWarmherzig, präzise, ganzheitlich. Ohne Heilversprechen. Duze die Personen.`;
+  prompt += `\n\nWICHTIG: Verwende EXAKT diese fünf Abschnittstitel in GROSSBUCHSTABEN. Schreibe 5-7 Sätze pro Abschnitt — gehe in die Tiefe, sei spezifisch, benenne konkrete Tore, Kanäle und Zahlen. Kein Markdown, keine Nummerierungen, keine Aufzählungszeichen, keine Sternchen.\n\nRESONANZFELD\nWas diese zwei Menschen energetisch verbindet — die tiefste gemeinsame Schwingung. Verbinde HD-Kanäle mit numerologischen Übereinstimmungen zu einem ganzheitlichen Bild. Beschreibe, wie sich die elektromagnetischen Verbindungen im Alltag anfühlen könnten. Gehe auf die Qualität der Verbindung ein — ist sie aktivierend, beruhigend, herausfordernd?\n\nWACHSTUMSIMPULSE\nWas aktiviert A bei B und umgekehrt? Welche offenen Zentren werden konditioniert und was bedeutet das emotional und energetisch? Wie spiegeln sich die Numerologie-Zahlen gegenseitig — welche Lernaufgaben ergeben sich daraus? Beschreibe die Wachstumsdynamik konkret und lebensnah.\n\nSPANNUNGSFELDER\nWo entstehen Reibung und Herausforderung? Welche HD-Typen-Dynamiken (Strategie, Autorität, Profil) können kollidieren? Welche numerologischen Gegensätze wirken? Beschreibe, wie sich Spannungen im Alltag zeigen könnten und welche Missverständnisse typisch wären. Ehrlich, konstruktiv, ohne zu beschönigen.\n\nSEELENVERTRAG\nWas ist der tiefere Sinn dieser Begegnung? Was wollen diese zwei Seelen miteinander lernen und erfahren? Welche karmischen Themen (Schuldzahlen, Meisterzahlen) spielen hier hinein? Beschreibe die spirituelle Dimension dieser Verbindung — poetisch, aber geerdet und konkret.\n\nPRAXISIMPULS\nKonkrete Ansätze für die therapeutische Begleitung dieser Beziehung. Was kann der Praktiker in Einzel- und Paarsitzungen nutzen? Welche Übungen, Reflexionsfragen oder Rituale passen zu dieser spezifischen Konstellation? Gib mindestens zwei bis drei umsetzbare Impulse.\n\nWarmherzig, tiefgründig, ganzheitlich. Ohne Heilversprechen. Duze die Personen.`;
   return prompt;
 }
 
