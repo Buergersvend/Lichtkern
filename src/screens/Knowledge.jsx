@@ -34,12 +34,12 @@ function Knowledge(){
 
 // ─── PDF GENERATOR ────────────────────────────
 const LEVEL_COLORS = {
-  struktur:"#B07D2A",stoffwechsel:"#C05A3E",energetisch:"#0D9488",
+  struktur:"#B07D2A",stoffwechsel:"#C05A3E",energetisch:"#C9A84C",
   emotional:"#17956A",mental:"#9A820A",spirituell:"#6D3FCC",
   universell:"#8B4ED4",dna:"#2C7FD4",
 };
 
-function flowerSVG(size=500,color="#0D9488",opacity=0.07){
+function flowerSVG(size=500,color="#C9A84C",opacity=0.07){
   const r=55,cx=size/2,cy=size/2;
   const pts=[[0,0],[r,0],[-r,0],[r/2,r*0.866],[-r/2,r*0.866],[r/2,-r*0.866],[-r/2,-r*0.866]];
   const circles=pts.map(([dx,dy])=>`<circle cx="${cx+dx}" cy="${cy+dy}" r="${r}" fill="none" stroke="${color}" stroke-width="1.2"/>`).join("");
@@ -49,7 +49,7 @@ function flowerSVG(size=500,color="#0D9488",opacity=0.07){
 function buildPDF(session, opts){
   const {version,praxisname,showGoal,showLevels,showTechniques,showOutcome,showHomework,showAI,showReflection} = opts;
   const t2 = top2(session.levels||{});
-  const c1 = t2[0] ? (LEVEL_COLORS[t2[0][0]]||"#0D9488") : "#0D9488";
+  const c1 = t2[0] ? (LEVEL_COLORS[t2[0][0]]||"#C9A84C") : "#C9A84C";
   const c2 = t2[1] ? (LEVEL_COLORS[t2[1][0]]||"#6D3FCC") : "#6D3FCC";
   const gradBg = `linear-gradient(140deg,${c1}18 0%,#FFFFFF 45%,${c2}18 100%)`;
   const dateStr = new Date(session.createdAt).toLocaleDateString("de-DE",{weekday:"long",year:"numeric",month:"long",day:"numeric"});
@@ -57,16 +57,16 @@ function buildPDF(session, opts){
 
   const levelRows = LEVELS.filter(l=>(session.levels?.[l.key]||0)>0).map(l=>{
     const val=session.levels[l.key]||0;
-    const bar=`<div style="height:8px;border-radius:4px;background:#E5E0F5;margin-top:4px;"><div style="height:100%;width:${val}%;border-radius:4px;background:${l.bar};"></div></div>`;
+    const bar=`<div style="height:8px;border-radius:4px;background:rgba(201,168,76,0.2);margin-top:4px;"><div style="height:100%;width:${val}%;border-radius:4px;background:${l.bar};"></div></div>`;
     return `<div style="margin-bottom:10px;"><div style="display:flex;justify-content:space-between;"><span style="font-family:Raleway,sans-serif;font-size:13px;font-weight:700;color:${l.text};">${l.icon} ${l.name}</span><span style="font-family:Raleway,sans-serif;font-size:12px;font-weight:800;color:${l.text};background:${l.bg};padding:2px 10px;border-radius:8px;">${val}%</span></div>${bar}</div>`;
   }).join("");
 
-  const techPills = (session.techniques||[]).map(t=>`<span style="display:inline-block;background:#CCFBF1;color:#0F6B63;font-family:Raleway,sans-serif;font-size:11px;font-weight:700;padding:4px 12px;border-radius:14px;margin:3px 3px 3px 0;border:1px solid #7EC8C2;">${t}</span>`).join("");
+  const techPills = (session.techniques||[]).map(t=>`<span style="display:inline-block;background:#F0DFA0;color:#A87D3A;font-family:Raleway,sans-serif;font-size:11px;font-weight:700;padding:4px 12px;border-radius:14px;margin:3px 3px 3px 0;border:1px solid rgba(201,168,76,0.4);">${t}</span>`).join("");
 
   const reflectionQuestions = version==="detail" && showReflection ? `
-    <div style="page-break-before:auto;background:#F5FDFD;border-radius:16px;padding:20px 24px;margin-bottom:24px;border:1.5px solid #B2E0DC;">
-      <h3 style="font-family:Cinzel,serif;font-size:14px;color:#0F3030;margin:0 0 14px;font-weight:700;">🌿 Reflexionsraum</h3>
-      ${["Was hat mich in dieser Sitzung am meisten berührt?","Welche Veränderung spüre ich bereits jetzt in mir?","Was möchte ich in den nächsten Tagen besonders beobachten?","Welcher Moment der Sitzung bleibt mir im Herzen?"].map(q=>`<div style="margin-bottom:16px;"><p style="font-family:Raleway,sans-serif;font-size:12px;color:#2D6B68;font-weight:700;margin:0 0 6px;">${q}</p><div style="border-bottom:1.5px solid #B2E0DC;height:28px;margin-bottom:4px;"></div><div style="border-bottom:1.5px solid #B2E0DC;height:28px;margin-bottom:4px;"></div></div>`).join("")}
+    <div style="page-break-before:auto;background:#F5FDFD;border-radius:16px;padding:20px 24px;margin-bottom:24px;border:1.5px solid rgba(201,168,76,0.3);">
+      <h3 style="font-family:Cinzel,serif;font-size:14px;color:#1A1200;margin:0 0 14px;font-weight:700;">🌿 Reflexionsraum</h3>
+      ${["Was hat mich in dieser Sitzung am meisten berührt?","Welche Veränderung spüre ich bereits jetzt in mir?","Was möchte ich in den nächsten Tagen besonders beobachten?","Welcher Moment der Sitzung bleibt mir im Herzen?"].map(q=>`<div style="margin-bottom:16px;"><p style="font-family:Raleway,sans-serif;font-size:12px;color:#6B5B3A;font-weight:700;margin:0 0 6px;">${q}</p><div style="border-bottom:1.5px solid rgba(201,168,76,0.3);height:28px;margin-bottom:4px;"></div><div style="border-bottom:1.5px solid rgba(201,168,76,0.3);height:28px;margin-bottom:4px;"></div></div>`).join("")}
     </div>` : "";
 
   const html = `<!DOCTYPE html><html lang="de"><head>
@@ -75,7 +75,7 @@ function buildPDF(session, opts){
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Raleway:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
 <style>
   *{box-sizing:border-box;margin:0;padding:0;}
-  body{background:#F0FAFA;font-family:Raleway,sans-serif;color:#0F3030;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  body{background:#FAF7F0;font-family:Raleway,sans-serif;color:#1A1200;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
   @page{margin:0;size:A4;}
   @media print{body{background:white;}.no-print{display:none!important;}}
   .page{max-width:720px;margin:0 auto;padding:40px 40px 60px;}
@@ -85,79 +85,79 @@ function buildPDF(session, opts){
 
   <!-- Print button -->
   <div class="no-print" style="text-align:right;margin-bottom:20px;">
-    <button onclick="window.print()" style="font-family:Raleway,sans-serif;font-weight:700;font-size:13px;padding:10px 24px;background:linear-gradient(135deg,#0D9488,#0F6B63);color:white;border:none;border-radius:12px;cursor:pointer;box-shadow:0 4px 14px rgba(13,148,136,0.3);">🖨 PDF speichern / Drucken</button>
+    <button onclick="window.print()" style="font-family:Raleway,sans-serif;font-weight:700;font-size:13px;padding:10px 24px;background:linear-gradient(135deg,#C9A84C,#A87D3A);color:white;border:none;border-radius:12px;cursor:pointer;box-shadow:0 4px 14px rgba(13,148,136,0.3);">🖨 PDF speichern / Drucken</button>
   </div>
 
   <!-- Header -->
-  <div style="position:relative;overflow:hidden;border-radius:20px;padding:36px 36px 28px;background:${gradBg};margin-bottom:28px;border:1.5px solid #B2E0DC;">
+  <div style="position:relative;overflow:hidden;border-radius:20px;padding:36px 36px 28px;background:${gradBg};margin-bottom:28px;border:1.5px solid rgba(201,168,76,0.3);">
     ${flowerSVG(420,c1,0.09)}
     <div style="position:relative;z-index:1;">
       <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:12px;">
         <div>
-          <p style="font-family:Raleway,sans-serif;font-size:9px;letter-spacing:3px;color:#6AABA7;text-transform:uppercase;margin-bottom:6px;font-weight:700;">SITZUNGSDOKUMENTATION</p>
-          <h1 style="font-family:Cinzel,serif;font-size:28px;color:#0F3030;font-weight:700;margin-bottom:4px;">${session.clientName||"Klient"}</h1>
-          <p style="font-family:Raleway,sans-serif;font-size:12px;color:#2D6B68;font-weight:500;">${dateStr}</p>
+          <p style="font-family:Raleway,sans-serif;font-size:9px;letter-spacing:3px;color:#A89668;text-transform:uppercase;margin-bottom:6px;font-weight:700;">SITZUNGSDOKUMENTATION</p>
+          <h1 style="font-family:Cinzel,serif;font-size:28px;color:#1A1200;font-weight:700;margin-bottom:4px;">${session.clientName||"Klient"}</h1>
+          <p style="font-family:Raleway,sans-serif;font-size:12px;color:#6B5B3A;font-weight:500;">${dateStr}</p>
           <div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap;">
-            <span style="font-size:10px;padding:4px 13px;border-radius:14px;background:rgba(255,255,255,0.8);color:#0F6B63;font-family:Raleway,sans-serif;font-weight:700;border:1px solid #7EC8C2;">${typeLabel}</span>
+            <span style="font-size:10px;padding:4px 13px;border-radius:14px;background:rgba(255,255,255,0.8);color:#A87D3A;font-family:Raleway,sans-serif;font-weight:700;border:1px solid rgba(201,168,76,0.4);">${typeLabel}</span>
             ${t2.map(([k,v])=>{const i=lvl(k);return`<span style="font-size:10px;padding:4px 13px;border-radius:14px;background:rgba(255,255,255,0.8);color:${i?.text};font-family:Raleway,sans-serif;font-weight:700;border:1px solid ${i?.border};">${i?.icon} ${i?.name} ${v}%</span>`;}).join("")}
           </div>
         </div>
         <div style="text-align:right;">
-          ${praxisname?`<p style="font-family:Cinzel,serif;font-size:14px;color:#0F3030;font-weight:700;">${praxisname}</p>`:""}
-          <p style="font-family:Raleway,sans-serif;font-size:10px;color:#6AABA7;font-weight:700;margin-top:4px;">✦ Lichtkern</p>
+          ${praxisname?`<p style="font-family:Cinzel,serif;font-size:14px;color:#1A1200;font-weight:700;">${praxisname}</p>`:""}
+          <p style="font-family:Raleway,sans-serif;font-size:10px;color:#A89668;font-weight:700;margin-top:4px;">✦ Lichtkern</p>
         </div>
       </div>
     </div>
   </div>
 
   ${showGoal && session.goal ? `
-  <div style="background:white;border-radius:16px;padding:20px 24px;margin-bottom:20px;border:1.5px solid #B2E0DC;box-shadow:0 3px 14px rgba(13,148,136,0.08);">
-    <h3 style="font-family:Cinzel,serif;font-size:13px;color:#0F3030;margin:0 0 10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;">Thema & Anliegen</h3>
-    <p style="font-family:Raleway,sans-serif;font-size:14px;color:#0F3030;line-height:1.8;font-weight:500;">${session.goal}</p>
+  <div style="background:white;border-radius:16px;padding:20px 24px;margin-bottom:20px;border:1.5px solid rgba(201,168,76,0.3);box-shadow:0 3px 14px rgba(13,148,136,0.08);">
+    <h3 style="font-family:Cinzel,serif;font-size:13px;color:#1A1200;margin:0 0 10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;">Thema & Anliegen</h3>
+    <p style="font-family:Raleway,sans-serif;font-size:14px;color:#1A1200;line-height:1.8;font-weight:500;">${session.goal}</p>
   </div>` : ""}
 
   ${showLevels && Object.values(session.levels||{}).some(v=>v>0) ? `
-  <div style="background:white;border-radius:16px;padding:20px 24px;margin-bottom:20px;border:1.5px solid #B2E0DC;box-shadow:0 3px 14px rgba(13,148,136,0.08);">
-    <h3 style="font-family:Cinzel,serif;font-size:13px;color:#0F3030;margin:0 0 16px;font-weight:700;letter-spacing:1px;text-transform:uppercase;">Ebenen-Analyse</h3>
+  <div style="background:white;border-radius:16px;padding:20px 24px;margin-bottom:20px;border:1.5px solid rgba(201,168,76,0.3);box-shadow:0 3px 14px rgba(13,148,136,0.08);">
+    <h3 style="font-family:Cinzel,serif;font-size:13px;color:#1A1200;margin:0 0 16px;font-weight:700;letter-spacing:1px;text-transform:uppercase;">Ebenen-Analyse</h3>
     ${levelRows}
   </div>` : ""}
 
   ${showTechniques && (session.techniques||[]).length>0 ? `
-  <div style="background:white;border-radius:16px;padding:20px 24px;margin-bottom:20px;border:1.5px solid #B2E0DC;box-shadow:0 3px 14px rgba(13,148,136,0.08);">
-    <h3 style="font-family:Cinzel,serif;font-size:13px;color:#0F3030;margin:0 0 12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;">Angewandte Methoden</h3>
+  <div style="background:white;border-radius:16px;padding:20px 24px;margin-bottom:20px;border:1.5px solid rgba(201,168,76,0.3);box-shadow:0 3px 14px rgba(13,148,136,0.08);">
+    <h3 style="font-family:Cinzel,serif;font-size:13px;color:#1A1200;margin:0 0 12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;">Angewandte Methoden</h3>
     <div>${techPills}</div>
   </div>` : ""}
 
   ${showOutcome && session.outcome ? `
-  <div style="background:white;border-radius:16px;padding:20px 24px;margin-bottom:20px;border:1.5px solid #B2E0DC;box-shadow:0 3px 14px rgba(13,148,136,0.08);">
-    <h3 style="font-family:Cinzel,serif;font-size:13px;color:#0F3030;margin:0 0 10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;">Ergebnis & Beobachtungen</h3>
-    <p style="font-family:Raleway,sans-serif;font-size:14px;color:#0F3030;line-height:1.8;font-weight:500;">${session.outcome}</p>
+  <div style="background:white;border-radius:16px;padding:20px 24px;margin-bottom:20px;border:1.5px solid rgba(201,168,76,0.3);box-shadow:0 3px 14px rgba(13,148,136,0.08);">
+    <h3 style="font-family:Cinzel,serif;font-size:13px;color:#1A1200;margin:0 0 10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;">Ergebnis & Beobachtungen</h3>
+    <p style="font-family:Raleway,sans-serif;font-size:14px;color:#1A1200;line-height:1.8;font-weight:500;">${session.outcome}</p>
   </div>` : ""}
 
   ${showHomework && session.homework ? `
-  <div style="background:#EDFAF2;border-radius:16px;padding:20px 24px;margin-bottom:20px;border:1.5px solid #4DC98A;">
-    <h3 style="font-family:Cinzel,serif;font-size:13px;color:#0A3B20;margin:0 0 10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;">🌱 Integrationsauftrag</h3>
-    <p style="font-family:Raleway,sans-serif;font-size:14px;color:#0A3B20;line-height:1.8;font-weight:500;">${session.homework}</p>
+  <div style="background:rgba(201,168,76,0.1);border-radius:16px;padding:20px 24px;margin-bottom:20px;border:1.5px solid #C9A84C;">
+    <h3 style="font-family:Cinzel,serif;font-size:13px;color:#3A2E1A;margin:0 0 10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;">🌱 Integrationsauftrag</h3>
+    <p style="font-family:Raleway,sans-serif;font-size:14px;color:#3A2E1A;line-height:1.8;font-weight:500;">${session.homework}</p>
   </div>` : ""}
 
   ${showAI && session.aiSummary ? `
-  <div style="background:${gradBg};border-radius:16px;padding:20px 24px;margin-bottom:20px;border:1.5px solid #B2E0DC;position:relative;overflow:hidden;">
+  <div style="background:${gradBg};border-radius:16px;padding:20px 24px;margin-bottom:20px;border:1.5px solid rgba(201,168,76,0.3);position:relative;overflow:hidden;">
     ${flowerSVG(300,c1,0.07)}
     <div style="position:relative;z-index:1;">
-      <h3 style="font-family:Cinzel,serif;font-size:13px;color:#0F3030;margin:0 0 12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;">✦ Sitzungsresonanz</h3>
-      <p style="font-family:Raleway,sans-serif;font-size:13px;color:#0F3030;line-height:1.9;font-weight:500;white-space:pre-wrap;">${session.aiSummary}</p>
+      <h3 style="font-family:Cinzel,serif;font-size:13px;color:#1A1200;margin:0 0 12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;">✦ Sitzungsresonanz</h3>
+      <p style="font-family:Raleway,sans-serif;font-size:13px;color:#1A1200;line-height:1.9;font-weight:500;white-space:pre-wrap;">${session.aiSummary}</p>
     </div>
   </div>` : ""}
 
   ${reflectionQuestions}
 
   <!-- Footer -->
-  <div style="border-top:1.5px solid #B2E0DC;margin-top:32px;padding-top:16px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;">
+  <div style="border-top:1.5px solid rgba(201,168,76,0.3);margin-top:32px;padding-top:16px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;">
     <div>
-      <p style="font-family:Cinzel,serif;font-size:11px;color:#0D9488;font-weight:700;">✦ Lichtkern · powered by Human Resonanz</p>
-      ${praxisname?`<p style="font-family:Raleway,sans-serif;font-size:10px;color:#6AABA7;margin-top:2px;">${praxisname}</p>`:""}
+      <p style="font-family:Cinzel,serif;font-size:11px;color:#C9A84C;font-weight:700;">✦ Lichtkern · powered by Human Resonanz</p>
+      ${praxisname?`<p style="font-family:Raleway,sans-serif;font-size:10px;color:#A89668;margin-top:2px;">${praxisname}</p>`:""}
     </div>
-    <p style="font-family:Raleway,sans-serif;font-size:9px;color:#6AABA7;text-align:right;line-height:1.6;">Keine medizinische Diagnose.<br/>Kein Ersatz für ärztliche oder therapeutische Behandlung.</p>
+    <p style="font-family:Raleway,sans-serif;font-size:9px;color:#A89668;text-align:right;line-height:1.6;">Keine medizinische Diagnose.<br/>Kein Ersatz für ärztliche oder therapeutische Behandlung.</p>
   </div>
 
 </div>

@@ -133,13 +133,13 @@ Deine Angaben werden vertraulich behandelt.`);
       const html = `<!DOCTYPE html><html lang="de"><head><meta charset="UTF-8"/>
 <title>Erstanamnese · Lichtkern</title>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Raleway:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
-<style>*{box-sizing:border-box;margin:0;padding:0;}body{font-family:Raleway,sans-serif;color:#0F3030;background:#F0FAFA;-webkit-print-color-adjust:exact;print-color-adjust:exact;}.page{max-width:700px;margin:0 auto;padding:40px;}.no-print{text-align:right;margin-bottom:20px;}.section{background:white;border-radius:14px;padding:18px 20px;margin-bottom:14px;border:1.5px solid #B2E0DC;}.line{border-bottom:1px solid #B2E0DC;height:28px;margin:8px 0;}.check{display:inline-block;width:16px;height:16px;border:1.5px solid #B2E0DC;border-radius:3px;margin-right:6px;vertical-align:middle;}h3{font-family:Cinzel,serif;font-size:12px;color:#0F3030;margin:0 0 12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;}p{font-size:12px;color:#2D6B68;font-weight:600;margin-bottom:6px;}@media print{.no-print{display:none;}}</style>
+<style>*{box-sizing:border-box;margin:0;padding:0;}body{font-family:Raleway,sans-serif;color:#1A1200;background:#FAF7F0;-webkit-print-color-adjust:exact;print-color-adjust:exact;}.page{max-width:700px;margin:0 auto;padding:40px;}.no-print{text-align:right;margin-bottom:20px;}.section{background:white;border-radius:14px;padding:18px 20px;margin-bottom:14px;border:1.5px solid rgba(201,168,76,0.3);}.line{border-bottom:1px solid rgba(201,168,76,0.3);height:28px;margin:8px 0;}.check{display:inline-block;width:16px;height:16px;border:1.5px solid rgba(201,168,76,0.3);border-radius:3px;margin-right:6px;vertical-align:middle;}h3{font-family:Cinzel,serif;font-size:12px;color:#1A1200;margin:0 0 12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;}p{font-size:12px;color:#6B5B3A;font-weight:600;margin-bottom:6px;}@media print{.no-print{display:none;}}</style>
 </head><body><div class="page">
-<div class="no-print"><button onclick="window.print()" style="font-family:Raleway;font-weight:700;font-size:13px;padding:10px 24px;background:linear-gradient(135deg,#0D9488,#0F6B63);color:white;border:none;border-radius:12px;cursor:pointer;">🖨 PDF drucken / speichern</button></div>
-<div style="background:linear-gradient(140deg,#CCFBF1,#FFFFFF,#EDE9FE);border-radius:20px;padding:28px;margin-bottom:20px;border:1.5px solid #B2E0DC;">
-  <p style="font-size:9px;letter-spacing:3px;color:#6AABA7;text-transform:uppercase;margin-bottom:6px;font-weight:700;">ERSTANAMNESE</p>
-  <h1 style="font-family:Cinzel,serif;font-size:24px;color:#0F3030;font-weight:700;margin-bottom:4px;">Lichtkern</h1>
-  <p style="font-size:11px;color:#2D6B68;">powered by Human Resonanz · Vertraulicher Fragebogen</p>
+<div class="no-print"><button onclick="window.print()" style="font-family:Raleway;font-weight:700;font-size:13px;padding:10px 24px;background:linear-gradient(135deg,#C9A84C,#A87D3A);color:white;border:none;border-radius:12px;cursor:pointer;">🖨 PDF drucken / speichern</button></div>
+<div style="background:linear-gradient(140deg,#F0DFA0,#FFFFFF,rgba(201,168,76,0.15));border-radius:20px;padding:28px;margin-bottom:20px;border:1.5px solid rgba(201,168,76,0.3);">
+  <p style="font-size:9px;letter-spacing:3px;color:#A89668;text-transform:uppercase;margin-bottom:6px;font-weight:700;">ERSTANAMNESE</p>
+  <h1 style="font-family:Cinzel,serif;font-size:24px;color:#1A1200;font-weight:700;margin-bottom:4px;">Lichtkern</h1>
+  <p style="font-size:11px;color:#6B5B3A;">powered by Human Resonanz · Vertraulicher Fragebogen</p>
 </div>
 <div class="section"><h3>Persönliche Daten</h3>
   <p>Name:</p><div class="line"></div>
@@ -163,7 +163,7 @@ Deine Angaben werden vertraulich behandelt.`);
   <p style="margin-top:8px;">Weitere:</p><div class="line"></div>
 </div>
 <div class="section"><h3>Lebensbereiche (Belastung 0–10)</h3>
-  ${["Körper & Gesundheit","Beziehung & Familie","Beruf & Finanzen","Spiritualität","Persönlichkeit","Sinnfrage & Lebensweg"].map(s=>`<p>${s}: <span style="display:inline-block;width:120px;border-bottom:1px solid #B2E0DC;margin-left:8px;">&nbsp;</span>/10</p>`).join("")}
+  ${["Körper & Gesundheit","Beziehung & Familie","Beruf & Finanzen","Spiritualität","Persönlichkeit","Sinnfrage & Lebensweg"].map(s=>`<p>${s}: <span style="display:inline-block;width:120px;border-bottom:1px solid rgba(201,168,76,0.3);margin-left:8px;">&nbsp;</span>/10</p>`).join("")}
 </div>
 <div class="section"><h3>Ziele & Erwartungen</h3>
   <p>Was möchtest du in der Arbeit mit mir erreichen?</p>
@@ -178,9 +178,9 @@ Deine Angaben werden vertraulich behandelt.`);
 <div class="section"><h3>Eigene Fragen</h3>
   <div class="line"></div><div class="line"></div><div class="line"></div>
 </div>
-<div style="border-top:1.5px solid #B2E0DC;margin-top:20px;padding-top:14px;text-align:center;">
-  <p style="font-family:Cinzel,serif;font-size:11px;color:#0D9488;font-weight:700;">✦ Lichtkern · powered by Human Resonanz</p>
-  <p style="font-size:9px;color:#6AABA7;margin-top:4px;">Vertraulich · Nicht für Dritte bestimmt</p>
+<div style="border-top:1.5px solid rgba(201,168,76,0.3);margin-top:20px;padding-top:14px;text-align:center;">
+  <p style="font-family:Cinzel,serif;font-size:11px;color:#C9A84C;font-weight:700;">✦ Lichtkern · powered by Human Resonanz</p>
+  <p style="font-size:9px;color:#A89668;margin-top:4px;">Vertraulich · Nicht für Dritte bestimmt</p>
 </div>
 </div></body></html>`;
       const w=window.open("","_blank");
@@ -201,8 +201,8 @@ Deine Angaben werden vertraulich behandelt.`);
         {clientMode==="mail_text"&&(<>
           <SL>E-Mail Adresse des Klienten</SL>
           <div style={{marginBottom:"16px"}}><TI type="email" value={mailEmail} onChange={setMailEmail} placeholder="klient@beispiel.de"/></div>
-          <div style={{background:"#EDFAF2",borderRadius:"14px",padding:"14px",marginBottom:"18px",border:"1.5px solid #4DC98A"}}>
-            <div style={{fontFamily:"Raleway",fontSize:"12px",color:"#0A3B20",lineHeight:"1.7",fontWeight:500}}>
+          <div style={{background:"rgba(201,168,76,0.1)",borderRadius:"14px",padding:"14px",marginBottom:"18px",border:"1.5px solid #C9A84C"}}>
+            <div style={{fontFamily:"Raleway",fontSize:"12px",color:"#3A2E1A",lineHeight:"1.7",fontWeight:500}}>
               Dein Mailprogramm öffnet sich mit dem vollständigen Fragebogen als Text. Klient füllt aus und antwortet per Mail — du überträgst die Angaben dann in Lichtkern.
             </div>
           </div>
@@ -212,8 +212,8 @@ Deine Angaben werden vertraulich behandelt.`);
         </>)}
 
         {clientMode==="mail_pdf"&&(<>
-          <div style={{background:"#EDFAF2",borderRadius:"14px",padding:"14px",marginBottom:"18px",border:"1.5px solid #4DC98A"}}>
-            <div style={{fontFamily:"Raleway",fontSize:"12px",color:"#0A3B20",lineHeight:"1.7",fontWeight:500}}>
+          <div style={{background:"rgba(201,168,76,0.1)",borderRadius:"14px",padding:"14px",marginBottom:"18px",border:"1.5px solid #C9A84C"}}>
+            <div style={{fontFamily:"Raleway",fontSize:"12px",color:"#3A2E1A",lineHeight:"1.7",fontWeight:500}}>
               Ein leerer, druckbarer Fragebogen öffnet sich als PDF. Speichere ihn und sende ihn per Mail an deinen Klienten. Klient füllt ihn aus, schickt ihn zurück — du überträgst die Angaben in Lichtkern.
             </div>
           </div>
@@ -246,13 +246,13 @@ Deine Angaben werden vertraulich behandelt.`);
       const html = `<!DOCTYPE html><html lang="de"><head><meta charset="UTF-8"/>
 <title>Anamnese · ${form.name}</title>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Raleway:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
-<style>*{box-sizing:border-box;margin:0;padding:0;}body{font-family:Raleway,sans-serif;color:#0F3030;background:#F0FAFA;-webkit-print-color-adjust:exact;print-color-adjust:exact;}.page{max-width:700px;margin:0 auto;padding:40px;}.no-print{text-align:right;margin-bottom:20px;}@media print{.no-print{display:none;}}</style>
+<style>*{box-sizing:border-box;margin:0;padding:0;}body{font-family:Raleway,sans-serif;color:#1A1200;background:#FAF7F0;-webkit-print-color-adjust:exact;print-color-adjust:exact;}.page{max-width:700px;margin:0 auto;padding:40px;}.no-print{text-align:right;margin-bottom:20px;}@media print{.no-print{display:none;}}</style>
 </head><body><div class="page">
-<div class="no-print"><button onclick="window.print()" style="font-family:Raleway;font-weight:700;font-size:13px;padding:10px 24px;background:linear-gradient(135deg,#0D9488,#0F6B63);color:white;border:none;border-radius:12px;cursor:pointer;">🖨 PDF drucken</button></div>
-<div style="background:linear-gradient(140deg,#CCFBF1,#FFFFFF,#EDE9FE);border-radius:20px;padding:30px;margin-bottom:24px;border:1.5px solid #B2E0DC;">
-  <p style="font-size:9px;letter-spacing:3px;color:#6AABA7;text-transform:uppercase;margin-bottom:6px;font-weight:700;">ERSTANAMNESE</p>
-  <h1 style="font-family:Cinzel,serif;font-size:26px;color:#0F3030;font-weight:700;margin-bottom:4px;">${form.name}</h1>
-  <p style="font-size:12px;color:#2D6B68;font-weight:500;">*${form.birthDate||"—"} · ${form.contact||"—"} · ${new Date().toLocaleDateString("de-DE")}</p>
+<div class="no-print"><button onclick="window.print()" style="font-family:Raleway;font-weight:700;font-size:13px;padding:10px 24px;background:linear-gradient(135deg,#C9A84C,#A87D3A);color:white;border:none;border-radius:12px;cursor:pointer;">🖨 PDF drucken</button></div>
+<div style="background:linear-gradient(140deg,#F0DFA0,#FFFFFF,rgba(201,168,76,0.15));border-radius:20px;padding:30px;margin-bottom:24px;border:1.5px solid rgba(201,168,76,0.3);">
+  <p style="font-size:9px;letter-spacing:3px;color:#A89668;text-transform:uppercase;margin-bottom:6px;font-weight:700;">ERSTANAMNESE</p>
+  <h1 style="font-family:Cinzel,serif;font-size:26px;color:#1A1200;font-weight:700;margin-bottom:4px;">${form.name}</h1>
+  <p style="font-size:12px;color:#6B5B3A;font-weight:500;">*${form.birthDate||"—"} · ${form.contact||"—"} · ${new Date().toLocaleDateString("de-DE")}</p>
 </div>
 ${[
   ["Beschwerden & Symptome", form.complaints||"—"],
@@ -262,13 +262,13 @@ ${[
   ["Ziele & Erwartungen", [form.goals,form.expectations].filter(Boolean).join("\n")||"—"],
   ["Ahnen & Familienmuster", [form.ancestorThemes,form.familyPatterns,form.ancestorNotes].filter(Boolean).join("\n")||"—"],
   ["Eigene Fragen", form.ownQuestions||"—"],
-].map(([title,content])=>`<div style="background:white;border-radius:14px;padding:18px 20px;margin-bottom:14px;border:1.5px solid #B2E0DC;">
-  <h3 style="font-family:Cinzel,serif;font-size:12px;color:#0F3030;margin:0 0 8px;font-weight:700;letter-spacing:1px;text-transform:uppercase;">${title}</h3>
-  <p style="font-size:13px;color:#0F3030;line-height:1.8;white-space:pre-wrap;font-weight:500;">${content}</p>
+].map(([title,content])=>`<div style="background:white;border-radius:14px;padding:18px 20px;margin-bottom:14px;border:1.5px solid rgba(201,168,76,0.3);">
+  <h3 style="font-family:Cinzel,serif;font-size:12px;color:#1A1200;margin:0 0 8px;font-weight:700;letter-spacing:1px;text-transform:uppercase;">${title}</h3>
+  <p style="font-size:13px;color:#1A1200;line-height:1.8;white-space:pre-wrap;font-weight:500;">${content}</p>
 </div>`).join("")}
-<div style="border-top:1.5px solid #B2E0DC;margin-top:24px;padding-top:14px;text-align:center;">
-  <p style="font-family:Cinzel,serif;font-size:11px;color:#0D9488;font-weight:700;">✦ Lichtkern · powered by Human Resonanz</p>
-  <p style="font-size:9px;color:#6AABA7;margin-top:4px;">Vertrauliche Erstanamnese · Nicht für Dritte bestimmt</p>
+<div style="border-top:1.5px solid rgba(201,168,76,0.3);margin-top:24px;padding-top:14px;text-align:center;">
+  <p style="font-family:Cinzel,serif;font-size:11px;color:#C9A84C;font-weight:700;">✦ Lichtkern · powered by Human Resonanz</p>
+  <p style="font-size:9px;color:#A89668;margin-top:4px;">Vertrauliche Erstanamnese · Nicht für Dritte bestimmt</p>
 </div>
 </div></body></html>`;
       const w=window.open("","_blank");
@@ -301,11 +301,11 @@ ${[
         ))}
 
         {/* Consent */}
-        <div style={{background:"#EDFAF2",borderRadius:"14px",padding:"14px",marginBottom:"18px",border:"1.5px solid #4DC98A",display:"flex",gap:"12px",alignItems:"flex-start"}}>
+        <div style={{background:"rgba(201,168,76,0.1)",borderRadius:"14px",padding:"14px",marginBottom:"18px",border:"1.5px solid #C9A84C",display:"flex",gap:"12px",alignItems:"flex-start"}}>
           <button onClick={()=>up({consent:!form.consent})} style={{width:"44px",height:"24px",borderRadius:"12px",border:"none",cursor:"pointer",flexShrink:0,marginTop:"2px",background:form.consent?T.teal:"#CBD5E1",position:"relative",transition:"background 0.2s"}}>
             <div style={{position:"absolute",top:"3px",left:form.consent?"23px":"3px",width:"18px",height:"18px",borderRadius:"50%",background:"white",transition:"left 0.2s",boxShadow:"0 1px 4px rgba(0,0,0,0.2)"}}/>
           </button>
-          <div style={{fontFamily:"Raleway",fontSize:"12px",color:"#0A3B20",fontWeight:600,lineHeight:"1.6"}}>
+          <div style={{fontFamily:"Raleway",fontSize:"12px",color:"#3A2E1A",fontWeight:600,lineHeight:"1.6"}}>
             Ich stimme der Speicherung meiner Daten im Lichtkern-System zu. Meine Daten werden vertraulich behandelt und nicht an Dritte weitergegeben.
           </div>
         </div>

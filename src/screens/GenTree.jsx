@@ -95,11 +95,11 @@ function LinkModal_v2({onSave,onClose,clients,selectedClientId}){
           {others.length===0?<div style={{fontFamily:"Raleway",fontSize:"13px",color:T.textSoft}}>Keine weiteren Klienten</div>
           :<Select value={targetId} onChange={setTargetId} options={[{value:"",label:"— Klient wählen —"},...others.map(c=>({value:c.id,label:c.name}))]}/>}
         </div>
-        <div style={{background:"#EDFAF2",borderRadius:"14px",padding:"13px",marginBottom:"16px",border:"1.5px solid #4DC98A",display:"flex",gap:"12px",alignItems:"flex-start"}}>
+        <div style={{background:"rgba(201,168,76,0.1)",borderRadius:"14px",padding:"13px",marginBottom:"16px",border:"1.5px solid #C9A84C",display:"flex",gap:"12px",alignItems:"flex-start"}}>
           <button onClick={()=>setConsent(!consent)} style={{width:"44px",height:"24px",borderRadius:"12px",border:"none",cursor:"pointer",flexShrink:0,marginTop:"2px",background:consent?T.teal:"#CBD5E1",position:"relative",transition:"background 0.2s"}}>
             <div style={{position:"absolute",top:"3px",left:consent?"23px":"3px",width:"18px",height:"18px",borderRadius:"50%",background:"white",transition:"left 0.2s"}}/>
           </button>
-          <span style={{fontFamily:"Raleway",fontSize:"11px",color:"#0A3B20",fontWeight:600,lineHeight:"1.6"}}>Einwilligung beider Klienten liegt vor.</span>
+          <span style={{fontFamily:"Raleway",fontSize:"11px",color:"#3A2E1A",fontWeight:600,lineHeight:"1.6"}}>Einwilligung beider Klienten liegt vor.</span>
         </div>
         <Btn onClick={()=>onSave({relType,targetId,targetName:(clients||[]).find(c=>c.id===targetId)?.name||""})} disabled={!consent||!targetId} style={{width:"100%"}}>Verbindung speichern</Btn>
       </div>
@@ -136,13 +136,13 @@ function GenTree({ clients, genTrees, onSaveTree }) {
     const html = `<!DOCTYPE html><html lang="de"><head><meta charset="UTF-8"/>
 <title>Generationsbaum · ${cl?.name}</title>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Raleway:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
-<style>*{box-sizing:border-box;margin:0;padding:0;}body{font-family:Raleway,sans-serif;color:#0F3030;background:#F0FAFA;-webkit-print-color-adjust:exact;}.page{max-width:700px;margin:0 auto;padding:36px;}.no-print{text-align:right;margin-bottom:16px;}.card{background:white;border-radius:14px;padding:16px 18px;margin-bottom:12px;border:1.5px solid #B2E0DC;page-break-inside:avoid;}h3{font-family:Cinzel,serif;font-size:12px;color:#0F3030;margin:0 0 10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;}p{font-size:12px;color:#2D6B68;font-weight:500;line-height:1.8;}.pill{display:inline-block;padding:2px 10px;border-radius:10px;font-size:11px;font-weight:700;background:#EDE9FE;color:#4C1D95;margin:2px;}@media print{.no-print{display:none;}}</style>
+<style>*{box-sizing:border-box;margin:0;padding:0;}body{font-family:Raleway,sans-serif;color:#1A1200;background:#FAF7F0;-webkit-print-color-adjust:exact;}.page{max-width:700px;margin:0 auto;padding:36px;}.no-print{text-align:right;margin-bottom:16px;}.card{background:white;border-radius:14px;padding:16px 18px;margin-bottom:12px;border:1.5px solid rgba(201,168,76,0.3);page-break-inside:avoid;}h3{font-family:Cinzel,serif;font-size:12px;color:#1A1200;margin:0 0 10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;}p{font-size:12px;color:#6B5B3A;font-weight:500;line-height:1.8;}.pill{display:inline-block;padding:2px 10px;border-radius:10px;font-size:11px;font-weight:700;background:rgba(201,168,76,0.15);color:#A87D3A;margin:2px;}@media print{.no-print{display:none;}}</style>
 </head><body><div class="page">
-<div class="no-print"><button onclick="window.print()" style="font-family:Raleway;font-weight:700;font-size:13px;padding:10px 24px;background:linear-gradient(135deg,#0D9488,#0F6B63);color:white;border:none;border-radius:12px;cursor:pointer;">🖨 PDF drucken</button></div>
-<div style="background:linear-gradient(140deg,#CCFBF1,#FFF,#EDE9FE);border-radius:20px;padding:26px;margin-bottom:18px;border:1.5px solid #B2E0DC;">
-  <p style="font-size:9px;letter-spacing:3px;color:#6AABA7;text-transform:uppercase;margin-bottom:6px;font-weight:700;">GENERATIONSBAUM</p>
-  <h1 style="font-family:Cinzel,serif;font-size:24px;color:#0F3030;font-weight:700;margin-bottom:4px;">${cl?.name}</h1>
-  <p style="font-size:11px;color:#2D6B68;">Exportiert: ${new Date().toLocaleDateString("de-DE")}</p>
+<div class="no-print"><button onclick="window.print()" style="font-family:Raleway;font-weight:700;font-size:13px;padding:10px 24px;background:linear-gradient(135deg,#C9A84C,#A87D3A);color:white;border:none;border-radius:12px;cursor:pointer;">🖨 PDF drucken</button></div>
+<div style="background:linear-gradient(140deg,#F0DFA0,#FFF,rgba(201,168,76,0.15));border-radius:20px;padding:26px;margin-bottom:18px;border:1.5px solid rgba(201,168,76,0.3);">
+  <p style="font-size:9px;letter-spacing:3px;color:#A89668;text-transform:uppercase;margin-bottom:6px;font-weight:700;">GENERATIONSBAUM</p>
+  <h1 style="font-family:Cinzel,serif;font-size:24px;color:#1A1200;font-weight:700;margin-bottom:4px;">${cl?.name}</h1>
+  <p style="font-size:11px;color:#6B5B3A;">Exportiert: ${new Date().toLocaleDateString("de-DE")}</p>
 </div>
 ${GEN_ROLES.filter(r=>tree?.[r]?.name).map(r=>{const p=tree[r];return`<div class="card"><h3>${r}</h3>
 <p><strong>${p.name}</strong>${p.birthYear?" · *"+p.birthYear:""}${!p.alive&&p.deathYear?" – †"+p.deathYear:""}</p>
@@ -152,9 +152,9 @@ ${p.notes?"<p>Notizen: "+p.notes+"</p>":""}
 </div>`;}).join("")}
 ${inheritedThemes.length?"<div class=\"card\"><h3>Vererbte Muster (2+ Generationen)</h3>"+inheritedThemes.map(([t,c])=>"<span class=\"pill\">"+t+" ("+c+"×)</span>").join(" ")+"</div>":""}
 ${(tree?.relations||[]).length?"<div class=\"card\"><h3>Verknüpfte Klienten</h3>"+(tree.relations||[]).map(r=>"<p>"+r.relType+": "+r.targetName+" · Einwilligung: "+new Date(r.date).toLocaleDateString("de-DE")+"</p>").join("")+"</div>":""}
-<div style="border-top:1.5px solid #B2E0DC;margin-top:18px;padding-top:12px;text-align:center;">
-  <p style="font-family:Cinzel,serif;font-size:11px;color:#0D9488;font-weight:700;">✦ Lichtkern · powered by Human Resonanz</p>
-  <p style="font-size:9px;color:#6AABA7;margin-top:4px;">Vertraulich · Generationsarbeit</p>
+<div style="border-top:1.5px solid rgba(201,168,76,0.3);margin-top:18px;padding-top:12px;text-align:center;">
+  <p style="font-family:Cinzel,serif;font-size:11px;color:#C9A84C;font-weight:700;">✦ Lichtkern · powered by Human Resonanz</p>
+  <p style="font-size:9px;color:#A89668;margin-top:4px;">Vertraulich · Generationsarbeit</p>
 </div></div></body></html>`;
     const w=window.open("","_blank");if(w){w.document.write(html);w.document.close();}
   };
