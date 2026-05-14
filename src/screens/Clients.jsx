@@ -7,16 +7,6 @@ import { BodygraphSVG, HDTab, HD_CHANNELS, HD_CENTER_CFG, HD_GATE_CENTER } from 
 import { NumerologyTab, calcNumerology, LIFE_PATH_DESC } from "../components/Numerology.jsx";
 import { BeziehungsTab } from "../components/BeziehungsResonanz.jsx";
 import { uid } from "../config/helpers.js";
-async function groqFetch(prompt) {
- const res = await fetch("/api/ki", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ prompt }),
-  });
-  if (!res.ok) throw new Error("KI Netzwerkfehler");
-  const data = await res.json();
-  return data.text || data.result || "";
-}
 
 function hdCalcDefinedCenters(gates) {
   return new Set(gates);
