@@ -100,7 +100,7 @@ if(!s) { setDetail(null); return null; }
 
     return (
       <div style={{padding:"0 16px 96px"}}>
-        <button onClick={()=>setDetail(null)} style={{fontFamily:"Raleway",fontSize:"13px",color:T.goldD,fontWeight:700,background:"none",border:"none",cursor:"pointer",paddingTop:"8px",display:"block",marginBottom:"12px"}}>← Zurück</button>
+        <button onClick={()=>setDetail(null)} style={{fontFamily:"Raleway",fontSize:"13px",color:T.gold,fontWeight:700,background:"none",border:"none",cursor:"pointer",paddingTop:"8px",display:"block",marginBottom:"12px"}}>← Zurück</button>
 
         <div style={{background:ps.bg,borderRadius:"20px",padding:"20px",marginBottom:"14px",border:`1.5px solid ${ps.border}`}}>
           <div style={{fontFamily:"Cinzel",fontSize:"18px",color:T.text,fontWeight:700}}>{s.clientName||"—"}</div>
@@ -142,14 +142,15 @@ if(!s) { setDetail(null); return null; }
   return (
     <div style={{padding:"0 16px 96px"}}>
       {/* Hero */}
-      <div style={{position:"relative",borderRadius:"22px",overflow:"hidden",padding:"22px 24px",marginBottom:"16px",background:T.bgSoft,boxShadow:`0 6px 28px ${T.shadowDeep}`,border:`1.5px solid ${T.border}`}}>  <Flower size={200} opacity={0.09}/>
+      <div style={{position:"relative",borderRadius:"22px",overflow:"hidden",padding:"22px 24px",marginBottom:"16px",background:`linear-gradient(140deg,${T.goldL} 0%,#FFFFFF 50%,${T.goldL} 100%)`,boxShadow:`0 6px 28px ${T.shadowDeep}`,border:`1.5px solid ${T.border}`}}>
+        <Flower size={200} opacity={0.09}/>
         <div style={{position:"relative",zIndex:1}}>
           <h2 style={{fontFamily:"Cinzel",fontSize:"20px",color:T.text,margin:"0 0 12px",fontWeight:700}}>Abrechnung</h2>
           <div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:"8px"}}>
             {[
               {label:"Einnahmen",  value:`${totalRevenue.toFixed(0)} ${currency}`, bg:"#0a2a1a", border:"#4ADE80", color:"#4ADE80"},
               {label:"Offen",      value:`${totalOpen.toFixed(0)} ${currency}`,    bg:"#3a1a1a", border:"#cc4444", color:"#ff6b6b"},
-              {label:"Sitzungen",  value:totalSessions,                             bg:T.bgCard,  border:T.borderMid, color:T.gold},
+              {label:"Sitzungen",  value:totalSessions,                             bg:T.goldL,   border:T.gold,      color:T.gold},
             ].map((s,i)=>(
               <div key={i} style={{background:s.bg,borderRadius:"14px",border:`1.5px solid ${s.border}`,padding:"10px 8px",textAlign:"center"}}>
                 <div style={{fontFamily:"Cinzel",fontSize:"16px",color:s.color,fontWeight:700}}>{s.value}</div>
@@ -235,7 +236,7 @@ if(!s) { setDetail(null); return null; }
         return yearTotal>0 ? (
           <div style={{marginTop:"16px",background:T.bgSoft,borderRadius:"16px",padding:"14px 16px",border:`1.5px solid ${T.border}`,textAlign:"center"}}>
             <div style={{fontFamily:"Raleway",fontSize:"11px",color:T.textSoft,fontWeight:700,letterSpacing:"1px",textTransform:"uppercase",marginBottom:"4px"}}>Jahreseinnahmen {year}</div>
-            <div style={{fontFamily:"Cinzel",fontSize:"26px",color:T.goldD,fontWeight:700}}>{yearTotal.toFixed(2)} {currency}</div>
+            <div style={{fontFamily:"Cinzel",fontSize:"26px",color:T.gold,fontWeight:700}}>{yearTotal.toFixed(2)} {currency}</div>
           </div>
         ) : null;
       })()}
