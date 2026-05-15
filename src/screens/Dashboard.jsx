@@ -15,6 +15,7 @@ function Dashboard({clients,sessions,appointments,onNav,settings}){
   const [showMore,setShowMore]=useState(false);
   const [impuls,setImpuls]=useState("");
   const [impulsLoading,setImpulsLoading]=useState(true);
+  const [impulsDate,setImpulsDate]=useState(todayStr);
   const today=todayStr();
   const todayAppts=(appointments||[]).filter(a=>a.date===today).sort((a,b)=>a.startTime.localeCompare(b.startTime));
   const hour=new Date().getHours();
@@ -39,7 +40,14 @@ function Dashboard({clients,sessions,appointments,onNav,settings}){
   ];
 
   useEffect(()=>{
+    const onVisible=()=>{ if(document.visibilityState==="visible") setImpulsDate(todayStr()); };
+    document.addEventListener("visibilitychange",onVisible);
+    return()=>document.removeEventListener("visibilitychange",onVisible);
+  },[]);
+
+  useEffect(()=>{
     async function ladeImpuls(){
+      const currentDay=todayStr();
       try {
         const uid = auth.currentUser?.uid;
         if(!uid){ setImpuls(FALLBACK); setImpulsLoading(false); return; }
@@ -47,7 +55,7 @@ function Dashboard({clients,sessions,appointments,onNav,settings}){
         const snap = await getDoc(ref);
         if(snap.exists()){
           const data = snap.data();
-          if(data.datum === today){
+          if(data.datum === currentDay){
             setImpuls(data.text||FALLBACK);
             setImpulsLoading(false);
             return;
@@ -63,7 +71,7 @@ function Dashboard({clients,sessions,appointments,onNav,settings}){
           setImpulsLoading(false);
           return;
         }
-        await setDoc(ref,{datum:today,text});
+        await setDoc(ref,{datum:currentDay,text});
         setImpuls(text);
       } catch(e){
         setImpuls(FALLBACK);
@@ -71,8 +79,9 @@ function Dashboard({clients,sessions,appointments,onNav,settings}){
         setImpulsLoading(false);
       }
     }
+    setImpulsLoading(true);
     ladeImpuls();
-  },[today]);
+  },[impulsDate]);
 
   return(
     <div style={{minHeight:"100vh",background:DARK,padding:"0 20px 120px"}}>
