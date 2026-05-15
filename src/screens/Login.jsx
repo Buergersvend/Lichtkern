@@ -77,7 +77,8 @@ function LoginScreen({ onLogin }){
     setLoading(false);
   };
 
- const inp = { width:"100%", padding:"14px 16px", borderRadius:"14px", border:`1.5px solid ${T.border}`, fontFamily:"Raleway", fontSize:"16px", color:"#1A1A1A", background:T.bgCard, outline:"none", boxSizing:"border-box", WebkitAppearance:"none" };
+ const inp = { width:"100%", padding:"14px 16px", borderRadius:"14px", border:`1.5px solid ${T.gold}`, fontFamily:"Raleway", fontSize:"16px", color:"#F5F0E8", background:"#23233a", outline:"none", boxSizing:"border-box", WebkitAppearance:"none" };
+ const inpCls = "lk-inp";
 
   return (
     <div style={{background:"#0F0F0F", minHeight:"100vh", display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", padding:"24px", position:"relative", overflow:"hidden"}}>
@@ -105,12 +106,12 @@ function LoginScreen({ onLogin }){
 
           <div style={{display:"flex", flexDirection:"column", gap:"14px"}}>
             {mode === "register" && <>
-              <input ref={refName} style={inp} placeholder="Dein Name *" autoComplete="name" />
-              <input ref={refPraxis} style={inp} placeholder="Praxisname (optional)" autoComplete="organization" />
+              <input ref={refName} className={inpCls} style={inp} placeholder="Dein Name *" autoComplete="name" />
+              <input ref={refPraxis} className={inpCls} style={inp} placeholder="Praxisname (optional)" autoComplete="organization" />
             </>}
-            <input ref={refEmail} style={inp} type="email" placeholder="E-Mail *" autoComplete="email" onKeyDown={e=>e.key==="Enter"&&refPassword.current?.focus()} />
+            <input ref={refEmail} className={inpCls} style={inp} type="email" placeholder="E-Mail *" autoComplete="email" onKeyDown={e=>e.key==="Enter"&&refPassword.current?.focus()} />
             <div style={{position:"relative"}}>
-              <input ref={refPassword} style={{...inp, paddingRight:"52px"}} type={pwVisible?"text":"password"} placeholder="Passwort *" autoComplete={mode==="register"?"new-password":"current-password"} onKeyDown={e=>e.key==="Enter"&&submit()} />
+              <input ref={refPassword} className={inpCls} style={{...inp, paddingRight:"52px"}} type={pwVisible?"text":"password"} placeholder="Passwort *" autoComplete={mode==="register"?"new-password":"current-password"} onKeyDown={e=>e.key==="Enter"&&submit()} />
               <button onClick={()=>setPwVisible(!pwVisible)} style={{position:"absolute",right:"14px",top:"50%",transform:"translateY(-50%)",background:"none",border:"none",cursor:"pointer",fontSize:"18px",opacity:0.45,padding:"4px"}}>{pwVisible?"🙈":"👁️"}</button>
             </div>
 
