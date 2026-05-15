@@ -83,7 +83,7 @@ Keine langen Einleitungen. Sofort in die Praxis.`;
         </OCard>
 
         <OCard>
-          <OLabel color={OT.violetD}>✦ KI-Praxisanalyse</OLabel>
+          <OLabel color={OT.goldD}>✦ KI-Praxisanalyse</OLabel>
           {kiLaed ? (
             <div style={{textAlign:"center",padding:"24px",fontFamily:"Raleway",fontSize:"13px",color:OT.textMid}}>⏳ Analysiere...</div>
           ) : kiDetail ? (
@@ -380,7 +380,7 @@ function Quiz({ onAbschluss }) {
                 <div style={{fontFamily:"Raleway",fontSize:"13px",color:OT.textMid,fontWeight:600,lineHeight:"1.7"}}>Du brauchst mindestens 12/15 Punkte (80%). Versuche es erneut.</div>
               </div>
             )}
-            <button onClick={()=>{setAktFrage(0);setAntworten({});setGezeigt(false);setAbgeschlossen(false);}} style={{fontFamily:"Raleway",fontWeight:700,fontSize:"13px",padding:"12px 24px",borderRadius:"12px",border:"none",cursor:"pointer",background:bestanden?`linear-gradient(135deg,#C9A84C,#A87D3A)`:`linear-gradient(135deg,${OT.violet},${OT.violetD})`,color:"white"}}>
+            <button onClick={()=>{setAktFrage(0);setAntworten({});setGezeigt(false);setAbgeschlossen(false);}} style={{fontFamily:"Raleway",fontWeight:700,fontSize:"13px",padding:"12px 24px",borderRadius:"12px",border:"none",cursor:"pointer",background:bestanden?`linear-gradient(135deg,#C9A84C,#A87D3A)`:`linear-gradient(135deg,${OT.gold},${OT.goldD})`,color:"white"}}>
               {bestanden?"✦ Nochmal absolvieren":"📚 Nochmal versuchen"}
             </button>
           </div>
@@ -406,7 +406,7 @@ function Quiz({ onAbschluss }) {
     <div style={{display:"flex",flexDirection:"column",gap:"12px",opacity:animiert?0:1,transition:"opacity 0.2s"}}>
       <div style={{display:"flex",gap:"4px"}}>
         {QUIZ_FRAGEN.map((_, i) => (
-          <div key={i} style={{flex:1,height:"5px",borderRadius:"3px",background:i<aktFrage?(antworten[i]===QUIZ_FRAGEN[i].richtig?OT_GREEN:"#FCA5A5"):i===aktFrage?OT.violet:OT.border,transition:"background 0.3s"}}/>
+          <div key={i} style={{flex:1,height:"5px",borderRadius:"3px",background:i<aktFrage?(antworten[i]===QUIZ_FRAGEN[i].richtig?OT_GREEN:"#FCA5A5"):i===aktFrage?OT.gold:OT.border,transition:"background 0.3s"}}/>
         ))}
       </div>
       <div style={{display:"flex",justifyContent:"space-between"}}>
@@ -474,7 +474,7 @@ function OrganspracheLernmodul({ stufe = 1, onBack, onZertifikat }) {
   return (
     <div style={{display:"flex",flexDirection:"column",gap:"0"}}>
       <button onClick={onBack} style={{fontFamily:"Raleway",fontSize:"13px",color:"#C9A84C",fontWeight:700,background:"none",border:"none",cursor:"pointer",textAlign:"left",marginBottom:"12px"}}>← Zum Lernpfad</button>
-      <div style={{position:"relative",borderRadius:"20px",overflow:"hidden",padding:"22px 20px",marginBottom:"16px",background:`linear-gradient(140deg,${stufeCfg.bg} 0%,#FFFFFF 45%,${OT.violetL} 100%)`,border:`1.5px solid ${stufeCfg.farbe}44`,boxShadow:`0 4px 20px ${OT.shadow}`}}>
+      <div style={{position:"relative",borderRadius:"20px",overflow:"hidden",padding:"22px 20px",marginBottom:"16px",background:`linear-gradient(140deg,${stufeCfg.bg} 0%,#FFFFFF 45%,${OT.goldL} 100%)`,border:`1.5px solid ${stufeCfg.farbe}44`,boxShadow:`0 4px 20px ${OT.shadow}`}}>
         <div style={{display:"flex",alignItems:"flex-start",gap:"14px",marginBottom:"14px"}}>
           <div style={{width:"52px",height:"52px",borderRadius:"50%",background:stufeCfg.farbe,display:"flex",alignItems:"center",justifyContent:"center",fontSize:"24px",flexShrink:0}}>{stufeCfg.icon}</div>
           <div>

@@ -166,7 +166,7 @@ Sei präzise, praxisnah und einfühlsam. Keine Heilversprechen, keine Diagnosen.
                   <div style={{display:"flex",alignItems:"center",gap:"8px",marginBottom:"6px"}}>
                     <span style={{fontSize:"20px",color:chakra.hex}}>●</span>
                     <span style={{fontFamily:"Cinzel",fontSize:"13px",color:OT.text,fontWeight:700}}>{chakra.name}</span>
-                    <span style={{marginLeft:"auto",fontFamily:"Raleway",fontSize:"10px",fontWeight:700,padding:"3px 8px",borderRadius:"8px",background:"#EDE9FE",color:OT.violet}}>Chakra</span>
+                    <span style={{marginLeft:"auto",fontFamily:"Raleway",fontSize:"10px",fontWeight:700,padding:"3px 8px",borderRadius:"8px",background:"rgba(201,168,76,0.10)",color:OT.gold}}>Chakra</span>
                   </div>
                   <div style={{fontFamily:"Raleway",fontSize:"11px",color:OT.textMid,fontWeight:500,marginBottom:"6px"}}>
                     Mögliche Blockaden: {chakra.emotion_block.slice(0,3).join(" · ")}
@@ -180,7 +180,7 @@ Sei präzise, praxisnah und einfühlsam. Keine Heilversprechen, keine Diagnosen.
             if (info.typ === "aura_hinweis") {
               return (
                 <div key={idx} style={{padding:"12px",background:OT.bgCard,borderRadius:"12px",border:`1px solid ${OT.border}`}}>
-                  <div style={{fontFamily:"Raleway",fontSize:"12px",color:OT.violet,fontWeight:700}}>🔮 Aura-Feld-Arbeit indiziert</div>
+                  <div style={{fontFamily:"Raleway",fontSize:"12px",color:OT.gold,fontWeight:700}}>🔮 Aura-Feld-Arbeit indiziert</div>
                   <div style={{fontFamily:"Raleway",fontSize:"11px",color:OT.textMid,fontWeight:500,marginTop:"4px"}}>
                     Wechsle zur "Aura & Chirurgie" Karte für detaillierte Feinstoffarbeit
                   </div>
@@ -195,7 +195,7 @@ Sei präzise, praxisnah und einfühlsam. Keine Heilversprechen, keine Diagnosen.
       {/* KI-Antwort */}
       {kiGestellt && (
         <OCard style={{background:OT.bgSoft,border:`1.5px solid ${OT.borderMid}`}}>
-          <OLabel color={OT.violetD}>✦ KI-Analyse · Stiller Berater</OLabel>
+          <OLabel color={OT.goldD}>✦ KI-Analyse · Stiller Berater</OLabel>
           {kiLaed ? (
             <div style={{textAlign:"center",padding:"30px 0"}}>
               <div style={{fontSize:"30px",marginBottom:"12px"}}>✦</div>

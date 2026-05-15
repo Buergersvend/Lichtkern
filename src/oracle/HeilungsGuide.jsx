@@ -40,7 +40,7 @@ Gib eine PRAXISANLEITUNG:
   if (gewaehlt) {
     return (
       <div style={{display:"flex",flexDirection:"column",gap:"12px"}}>
-        <button onClick={()=>{setGewaehlt(null);setKiDetail("");}} style={{fontFamily:"Raleway",fontSize:"13px",color:OT.teal,fontWeight:700,background:"none",border:"none",cursor:"pointer",textAlign:"left"}}>← Alle Methoden</button>
+        <button onClick={()=>{setGewaehlt(null);setKiDetail("");}} style={{fontFamily:"Raleway",fontSize:"13px",color:OT.gold,fontWeight:700,background:"none",border:"none",cursor:"pointer",textAlign:"left"}}>← Alle Methoden</button>
         <OCard style={{background:OT.bgSoft,border:`1.5px solid ${OT.borderMid}`}}>
           <div style={{display:"flex",alignItems:"center",gap:"12px",marginBottom:"14px"}}>
             <span style={{fontSize:"36px"}}>{gewaehlt.icon}</span>
@@ -52,18 +52,18 @@ Gib eine PRAXISANLEITUNG:
           <div style={{fontFamily:"Raleway",fontSize:"13px",color:OT.text,lineHeight:"1.75",fontWeight:500,marginBottom:"12px"}}>{gewaehlt.beschreibung}</div>
           <OLabel>Anwendungsgebiet</OLabel>
           <div style={{fontFamily:"Raleway",fontSize:"12px",color:OT.textMid,fontWeight:500,marginBottom:"12px"}}>{gewaehlt.anwendung}</div>
-          <OLabel color={OT.tealD}>Basis-Ablauf</OLabel>
+          <OLabel color={OT.goldD}>Basis-Ablauf</OLabel>
           <div style={{display:"flex",flexDirection:"column",gap:"6px"}}>
             {gewaehlt.ablauf.map((s,i)=>(
               <div key={i} style={{display:"flex",gap:"10px",padding:"8px 12px",background:"rgba(255,255,255,0.8)",borderRadius:"10px"}}>
-                <span style={{fontFamily:"Cinzel",fontSize:"12px",color:OT.teal,fontWeight:700,flexShrink:0}}>{i+1}.</span>
+                <span style={{fontFamily:"Cinzel",fontSize:"12px",color:OT.gold,fontWeight:700,flexShrink:0}}>{i+1}.</span>
                 <span style={{fontFamily:"Raleway",fontSize:"12px",color:OT.text,fontWeight:500}}>{s}</span>
               </div>
             ))}
           </div>
         </OCard>
         <OCard>
-          <OLabel color={OT.violetD}>✦ KI-Praxisanleitung (detailliert)</OLabel>
+          <OLabel color={OT.goldD}>✦ KI-Praxisanleitung (detailliert)</OLabel>
           {kiLaed ? <div style={{textAlign:"center",padding:"24px",fontFamily:"Raleway",fontSize:"13px",color:OT.textMid}}>⏳ Lade Praxiswissen...</div>
           : kiDetail ? <div style={{fontFamily:"Raleway",fontSize:"13px",color:OT.text,lineHeight:"1.9",whiteSpace:"pre-wrap",fontWeight:500}}>{kiDetail}</div>
           : <OBtn onClick={()=>ladeKiDetail(gewaehlt)}>✦ Detaillierte Praxisanleitung laden</OBtn>}
@@ -92,7 +92,7 @@ Gib eine PRAXISANLEITUNG:
                   <div style={{fontFamily:"Raleway",fontSize:"11px",color:OT.textMid,fontWeight:500,marginBottom:"4px"}}>{methode.anwendung.split(",")[0]}...</div>
                   <div style={{display:"flex",gap:"4px"}}>
                     {Array.from({length:5},(_,i)=>(
-                      <div key={i} style={{width:"12px",height:"4px",borderRadius:"2px",background:i<methode.stufe?OT.violet:OT.border}}/>
+                      <div key={i} style={{width:"12px",height:"4px",borderRadius:"2px",background:i<methode.stufe?OT.gold:OT.border}}/>
                     ))}
                     <span style={{fontFamily:"Raleway",fontSize:"9px",color:OT.textSoft,fontWeight:600,marginLeft:"4px"}}>Stufe {methode.stufe}</span>
                   </div>

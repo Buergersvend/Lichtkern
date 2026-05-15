@@ -30,7 +30,7 @@ export function Btn({children,variant="primary",onClick,disabled,style={}}){
     ghost:{background:T.goldL,color:T.goldD,border:`1.5px solid ${T.borderMid}`},
     soft:{background:T.bgSoft,color:T.textMid,border:`1.5px solid ${T.border}`},
     success:{background:`linear-gradient(135deg,${T.gold},${T.goldD})`,color:"#FFF",boxShadow:`0 4px 14px ${T.shadowDeep}`},
-    violet:{background:`linear-gradient(135deg,${T.violet},${T.violetD})`,color:"#FFF"},
+    violet:{background:`linear-gradient(135deg,${T.gold},${T.goldD})`,color:"#FFF"},
     danger:{background:"#FEE2E2",color:"#9B1C1C",border:"1.5px solid #FCA5A5"},
   };
   return <button onClick={disabled?undefined:onClick} style={{...base,...v[variant]}}>{children}</button>;
@@ -88,7 +88,7 @@ export function BottomNav({active,onChange}){
     {NAV.map(n=>(
       <button key={n.id} onClick={()=>onChange(n.id)} style={{flex:1,padding:"10px 4px 8px",border:"none",background:"none",cursor:"pointer",display:"flex",flexDirection:"column",alignItems:"center",gap:"3px"}}>
         <span style={{fontSize:"18px",opacity:active===n.id?1:0.4}}>{n.icon}</span>
-        <span style={{fontSize:"9px",fontFamily:"Raleway",fontWeight:700,letterSpacing:"1px",color:active===n.id?T.teal:T.textSoft,textTransform:"uppercase"}}>{n.label}</span>
+        <span style={{fontSize:"9px",fontFamily:"Raleway",fontWeight:700,letterSpacing:"1px",color:active===n.id?T.gold:T.textSoft,textTransform:"uppercase"}}>{n.label}</span>
       </button>
     ))}
   </nav>);

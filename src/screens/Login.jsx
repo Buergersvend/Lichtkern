@@ -82,7 +82,7 @@ function LoginScreen({ onLogin }){
   return (
     <div style={{background:"#0F0F0F", minHeight:"100vh", display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", padding:"24px", position:"relative", overflow:"hidden"}}>
       <div style={{position:"fixed",top:"-100px",right:"-100px",width:"350px",height:"350px",borderRadius:"50%",background:`radial-gradient(circle,${T.goldL||"rgba(201,168,76,0.12)"} 0%,transparent 70%)`,opacity:0.8,pointerEvents:"none"}}/>
-      <div style={{position:"fixed",bottom:"5%",left:"-80px",width:"280px",height:"280px",borderRadius:"50%",background:`radial-gradient(circle,${T.violetL} 0%,transparent 70%)`,opacity:0.6,pointerEvents:"none"}}/>
+      <div style={{position:"fixed",bottom:"5%",left:"-80px",width:"280px",height:"280px",borderRadius:"50%",background:`radial-gradient(circle,${T.goldL} 0%,transparent 70%)`,opacity:0.6,pointerEvents:"none"}}/>
       <div style={{width:"100%", maxWidth:"400px", position:"relative", zIndex:1}}>
 
         {/* Logo */}

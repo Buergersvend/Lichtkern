@@ -14,7 +14,7 @@ function Session({wizard,setWizard,clients,onComplete,onCancel}){
   const [aiText,setAiText]=useState("");
   if(!wizard)return(
     <div style={{display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",height:"65vh",gap:"20px",padding:"0 32px",textAlign:"center"}}>
-      <div style={{width:"88px",height:"88px",borderRadius:"50%",background:`linear-gradient(135deg,${T.goldL},${T.violetL})`,display:"flex",alignItems:"center",justifyContent:"center",fontSize:"36px",boxShadow:`0 6px 28px ${T.shadowDeep}`,border:`1.5px solid ${T.border}`}}>✦</div>
+      <div style={{width:"88px",height:"88px",borderRadius:"50%",background:`linear-gradient(135deg,${T.goldL},${T.goldL})`,display:"flex",alignItems:"center",justifyContent:"center",fontSize:"36px",boxShadow:`0 6px 28px ${T.shadowDeep}`,border:`1.5px solid ${T.border}`}}>✦</div>
       <div style={{fontFamily:"Cinzel",fontSize:"20px",color:T.text,fontWeight:700}}>Neue Sitzung</div>
       <div style={{fontFamily:"Raleway",fontSize:"13px",color:T.textMid,lineHeight:"1.7",fontWeight:500}}>Begleite deine Klienten strukturiert<br/>und mit voller Präsenz</div>
       <Btn onClick={()=>setWizard({step:0,type:"first",levels:{},techniques:[],goal:"",outcome:"",homework:"",notes:"",resonanceSource:"Intuition",clientName:"",clientId:null,category:""})}>✦ Sitzung starten</Btn>
@@ -31,7 +31,7 @@ function Session({wizard,setWizard,clients,onComplete,onCancel}){
   return(
     <div style={{display:"flex",flexDirection:"column",minHeight:"100%"}}>
       <div style={{padding:"12px 16px 0"}}>
-        <div style={{display:"flex",gap:"5px",marginBottom:"10px"}}>{STEPS.map((s,i)=><div key={s} style={{flex:1,height:"5px",borderRadius:"3px",transition:"all 0.3s",background:i<wizard.step?T.gold:i===wizard.step?`linear-gradient(to right,${T.gold},${T.violet})`:T.border}}/>)}</div>
+        <div style={{display:"flex",gap:"5px",marginBottom:"10px"}}>{STEPS.map((s,i)=><div key={s} style={{flex:1,height:"5px",borderRadius:"3px",transition:"all 0.3s",background:i<wizard.step?T.gold:i===wizard.step?`linear-gradient(to right,${T.gold},${T.gold})`:T.border}}/>)}</div>
         <div style={{display:"flex",justifyContent:"space-between",alignItems:"center"}}>
           <span style={{fontFamily:"Raleway",fontSize:"10px",color:T.textMid,fontWeight:700,letterSpacing:"1px"}}>{STEPS[wizard.step].toUpperCase()} · {wizard.step+1}/{STEPS.length}</span>
           {wizard.clientName&&<span style={{fontFamily:"Raleway",fontSize:"11px",color:T.gold,fontWeight:700}}>{wizard.clientName}</span>}

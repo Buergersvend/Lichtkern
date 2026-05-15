@@ -5,7 +5,7 @@ import { T } from "../config/theme";
 
 // ─── FLOWER ───────────────────────────────────
 export function Flower({ size = 280, opacity = 0.09, color }) {
-  const c = color || T.teal;
+  const c = color || T.gold;
   const r = 44;
   const cx = size / 2;
   const cy = size / 2;
@@ -56,7 +56,7 @@ export function Flower({ size = 280, opacity = 0.09, color }) {
 
 // ─── TREE OF LIFE ─────────────────────────────
 export function TreeOfLife({ width = 220, height = 300, opacity = 0.22, color, style = {} }) {
-  const c = color || T.teal;
+  const c = color || T.gold;
   const vw = 220, vh = 300;
   return (
     <svg

@@ -51,8 +51,8 @@ const lvl  = k  => LEVELS.find(l => l.key === k);
 const top2 = (lv={}) => Object.entries(lv).filter(([,v])=>v>0).sort(([,a],[,b])=>b-a).slice(0,2);
 const dynGrad = (lv={}) => {
   const t=top2(lv);
-  if(!t.length)return`linear-gradient(140deg,${T.tealL} 0%,#FFFFFF 45%,${T.violetL} 100%)`;
-  const c1=lvl(t[0][0])?.bg||T.tealL, c2=t[1]?(lvl(t[1][0])?.bg||"#FFF"):"#FFF";
+  if(!t.length)return`linear-gradient(140deg,${T.goldL} 0%,#FFFFFF 45%,${T.goldL} 100%)`;
+  const c1=lvl(t[0][0])?.bg||T.goldL, c2=t[1]?(lvl(t[1][0])?.bg||"#FFF"):"#FFF";
   return`linear-gradient(140deg,${c1} 0%,#FFFFFF 45%,${c2} 100%)`;
 };
 

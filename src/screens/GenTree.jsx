@@ -45,7 +45,7 @@ function PersonEditModal_v2({ person, onSave, onClose }) {
           <div><SL>Todesjahr</SL><TI value={form.deathYear||""} onChange={v=>up({deathYear:v})} placeholder="—"/></div>
         </div>
         <div style={{display:"flex",alignItems:"center",gap:"10px",marginBottom:"14px"}}>
-          <button onClick={()=>up({alive:!form.alive})} style={{width:"44px",height:"24px",borderRadius:"12px",border:"none",cursor:"pointer",background:form.alive?T.teal:"#CBD5E1",position:"relative",transition:"background 0.2s"}}>
+          <button onClick={()=>up({alive:!form.alive})} style={{width:"44px",height:"24px",borderRadius:"12px",border:"none",cursor:"pointer",background:form.alive?T.gold:"#CBD5E1",position:"relative",transition:"background 0.2s"}}>
             <div style={{position:"absolute",top:"3px",left:form.alive?"23px":"3px",width:"18px",height:"18px",borderRadius:"50%",background:"white",transition:"left 0.2s"}}/>
           </button>
           <span style={{fontFamily:"Raleway",fontSize:"13px",color:T.text,fontWeight:500}}>{form.alive?"Lebend":"Verstorben"}</span>
@@ -53,7 +53,7 @@ function PersonEditModal_v2({ person, onSave, onClose }) {
         <SL>Themen & Muster</SL>
         <div style={{display:"flex",flexWrap:"wrap",gap:"6px",marginBottom:"14px"}}>
           {GEN_THEMES.map(t=>(
-            <button key={t} onClick={()=>toggleTheme(t)} style={{fontFamily:"Raleway",fontSize:"11px",fontWeight:600,padding:"5px 11px",borderRadius:"16px",border:`1.5px solid ${form.themes?.includes(t)?T.violet:T.border}`,background:form.themes?.includes(t)?T.violetL:"white",color:form.themes?.includes(t)?T.violetD:T.textMid,cursor:"pointer"}}>{t}</button>
+            <button key={t} onClick={()=>toggleTheme(t)} style={{fontFamily:"Raleway",fontSize:"11px",fontWeight:600,padding:"5px 11px",borderRadius:"16px",border:`1.5px solid ${form.themes?.includes(t)?T.gold:T.border}`,background:form.themes?.includes(t)?T.goldL:"white",color:form.themes?.includes(t)?T.goldD:T.textMid,cursor:"pointer"}}>{t}</button>
           ))}
         </div>
         <SL>Verstrickungen</SL><div style={{marginBottom:"12px"}}><TI value={form.loyalties||""} onChange={v=>up({loyalties:v})} placeholder="z.B. Loyalität zur Mutter…" multiline rows={2}/></div>
@@ -96,7 +96,7 @@ function LinkModal_v2({onSave,onClose,clients,selectedClientId}){
           :<Select value={targetId} onChange={setTargetId} options={[{value:"",label:"— Klient wählen —"},...others.map(c=>({value:c.id,label:c.name}))]}/>}
         </div>
         <div style={{background:"rgba(201,168,76,0.1)",borderRadius:"14px",padding:"13px",marginBottom:"16px",border:"1.5px solid #C9A84C",display:"flex",gap:"12px",alignItems:"flex-start"}}>
-          <button onClick={()=>setConsent(!consent)} style={{width:"44px",height:"24px",borderRadius:"12px",border:"none",cursor:"pointer",flexShrink:0,marginTop:"2px",background:consent?T.teal:"#CBD5E1",position:"relative",transition:"background 0.2s"}}>
+          <button onClick={()=>setConsent(!consent)} style={{width:"44px",height:"24px",borderRadius:"12px",border:"none",cursor:"pointer",flexShrink:0,marginTop:"2px",background:consent?T.gold:"#CBD5E1",position:"relative",transition:"background 0.2s"}}>
             <div style={{position:"absolute",top:"3px",left:consent?"23px":"3px",width:"18px",height:"18px",borderRadius:"50%",background:"white",transition:"left 0.2s"}}/>
           </button>
           <span style={{fontFamily:"Raleway",fontSize:"11px",color:"#3A2E1A",fontWeight:600,lineHeight:"1.6"}}>Einwilligung beider Klienten liegt vor.</span>
@@ -175,10 +175,10 @@ ${(tree?.relations||[]).length?"<div class=\"card\"><h3>Verknüpfte Klienten</h3
         {role==="Vater-Mutter" &&<line x1={x} y1={y+26} x2={320} y2={108} stroke={T.border} strokeWidth="1.2" strokeDasharray="4,4"/>}
         {role==="Vater-Vater"  &&<line x1={x} y1={y+26} x2={320} y2={108} stroke={T.border} strokeWidth="1.2" strokeDasharray="4,4"/>}
         {/* Inherited pattern glow */}
-        {hasInherited&&<circle cx={x} cy={y} r={isMe?32:26} fill="none" stroke={T.violet} strokeWidth="2" strokeDasharray="4,3" opacity={0.5}/>}
+        {hasInherited&&<circle cx={x} cy={y} r={isMe?32:26} fill="none" stroke={T.gold} strokeWidth="2" strokeDasharray="4,3" opacity={0.5}/>}
         <circle cx={x} cy={y} r={isMe?26:20}
-         fill={hasData?(isDead?"#1a2a1a":isMe?T.tealL:T.bgCard):"#1a1a1a"}
-          stroke={hasData?(isDead?T.violet:isMe?T.teal:T.borderMid):T.border}
+         fill={hasData?(isDead?"#1a2a1a":isMe?T.goldL:T.bgCard):"#1a1a1a"}
+          stroke={hasData?(isDead?T.gold:isMe?T.gold:T.borderMid):T.border}
           strokeWidth={isMe?2:1.5}
           strokeDasharray={isDead?"4,3":"none"}/>
         <text x={x} y={y-(hasData&&p.name?5:2)} textAnchor="middle" style={{fontSize:isMe?"13px":"11px",fill:hasData?T.text:T.textSoft}}>
@@ -188,7 +188,7 @@ ${(tree?.relations||[]).length?"<div class=\"card\"><h3>Verknüpfte Klienten</h3
           {p.name.length>7?p.name.slice(0,7)+"…":p.name}
         </text>}
         {p.themes?.slice(0,3).map((t,i)=>(
-          <circle key={i} cx={x-8+(i*8)} cy={y+(isMe?22:17)} r={3} fill={T.violet} opacity={0.5}/>
+          <circle key={i} cx={x-8+(i*8)} cy={y+(isMe?22:17)} r={3} fill={T.gold} opacity={0.5}/>
         ))}
         <text x={x} y={y+(isMe?36:30)} textAnchor="middle" style={{fontSize:"7px",fontFamily:"Raleway",fill:T.textSoft,fontWeight:"600"}}>
           {role==="Ich"?"Klient":role.replace("-"," ")}
@@ -203,19 +203,19 @@ ${(tree?.relations||[]).length?"<div class=\"card\"><h3>Verknüpfte Klienten</h3
     const isMe = role==="Ich";
     const isDead = !p.alive&&p.name;
     const hasInherited = inheritedThemes.some(([t])=>(p.themes||[]).includes(t));
-    const brd = isDead?T.violet:isMe?T.teal:T.borderMid;
+    const brd = isDead?T.gold:isMe?T.gold:T.borderMid;
     return (
       <g onClick={()=>setEditPerson({...p,role})} style={{cursor:"pointer"}}>
-        {hasInherited&&<rect x={x-2} y={y-2} width={w+4} height={h+4} rx="14" fill="none" stroke={T.violet} strokeWidth="2" strokeDasharray="5,3" opacity={0.5}/>}
+        {hasInherited&&<rect x={x-2} y={y-2} width={w+4} height={h+4} rx="14" fill="none" stroke={T.gold} strokeWidth="2" strokeDasharray="5,3" opacity={0.5}/>}
         <rect x={x} y={y} width={w} height={h} rx="12"
-       fill={p.name?(isDead?"#1a2a1a":isMe?T.tealL:T.bgCard):"#1a1a1a"}
+       fill={p.name?(isDead?"#1a2a1a":isMe?T.goldL:T.bgCard):"#1a1a1a"}
           stroke={brd} strokeWidth={isMe?2:1.5} strokeDasharray={isDead?"5,3":"none"}/>
         <text x={x+w/2} y={y+18} textAnchor="middle" style={{fontSize:"11px",fill:p.name?T.text:T.textSoft,fontWeight:"700",fontFamily:"Raleway"}}>
           {p.name||(role==="Ich"?"Klient":role.replace("-"," "))}
         </text>
         {p.birthYear&&<text x={x+w/2} y={y+31} textAnchor="middle" style={{fontSize:"9px",fill:T.textSoft,fontFamily:"Raleway"}}>*{p.birthYear}{p.deathYear?" †"+p.deathYear:""}</text>}
         {p.themes?.slice(0,2).map((t,i)=>(
-          <text key={i} x={x+8+(i*(w/2-8))} y={y+h-10} style={{fontSize:"8px",fill:T.violetD,fontWeight:"700",fontFamily:"Raleway"}}>{t.slice(0,8)}</text>
+          <text key={i} x={x+8+(i*(w/2-8))} y={y+h-10} style={{fontSize:"8px",fill:T.goldD,fontWeight:"700",fontFamily:"Raleway"}}>{t.slice(0,8)}</text>
         ))}
         {!p.name&&<text x={x+w/2} y={y+h/2+4} textAnchor="middle" style={{fontSize:"18px"}}>+</text>}
       </g>
@@ -260,7 +260,7 @@ ${(tree?.relations||[]).length?"<div class=\"card\"><h3>Verknüpfte Klienten</h3
               const rels=(genTrees[c.id]?.relations||[]).length;
               return(
                 <Card key={c.id} onClick={()=>setSelectedClientId(c.id)} style={{cursor:"pointer",display:"flex",alignItems:"center",gap:"12px"}}>
-                  <div style={{width:"44px",height:"44px",borderRadius:"50%",background:hasTree?T.tealL:T.bgSoft,border:`1.5px solid ${hasTree?T.teal:T.border}`,display:"flex",alignItems:"center",justifyContent:"center",fontSize:"20px",flexShrink:0}}>🧬</div>
+                  <div style={{width:"44px",height:"44px",borderRadius:"50%",background:hasTree?T.goldL:T.bgSoft,border:`1.5px solid ${hasTree?T.gold:T.border}`,display:"flex",alignItems:"center",justifyContent:"center",fontSize:"20px",flexShrink:0}}>🧬</div>
                   <div style={{flex:1}}>
                     <div style={{fontFamily:"Raleway",fontWeight:700,fontSize:"14px",color:T.text}}>{c.name}</div>
                     <div style={{fontFamily:"Raleway",fontSize:"11px",color:T.textSoft,fontWeight:500,marginTop:"2px"}}>
@@ -281,7 +281,7 @@ ${(tree?.relations||[]).length?"<div class=\"card\"><h3>Verknüpfte Klienten</h3
 
   return(
     <div style={{padding:"0 16px 96px"}}>
-      <button onClick={()=>setSelectedClientId(null)} style={{fontFamily:"Raleway",fontSize:"13px",color:T.teal,fontWeight:700,background:"none",border:"none",cursor:"pointer",paddingTop:"8px",display:"block",marginBottom:"10px"}}>← Klienten</button>
+      <button onClick={()=>setSelectedClientId(null)} style={{fontFamily:"Raleway",fontSize:"13px",color:T.gold,fontWeight:700,background:"none",border:"none",cursor:"pointer",paddingTop:"8px",display:"block",marginBottom:"10px"}}>← Klienten</button>
 
       {/* Header */}
       <div style={{position:"relative",borderRadius:"18px",overflow:"hidden",padding:"16px 18px",marginBottom:"12px",background:T.bgSoft,border:`1.5px solid ${T.border}`}}>
@@ -295,7 +295,7 @@ ${(tree?.relations||[]).length?"<div class=\"card\"><h3>Verknüpfte Klienten</h3
             {/* View toggle */}
             <div style={{display:"flex",borderRadius:"10px",overflow:"hidden",border:`1.5px solid ${T.border}`}}>
               {[["compact","⊞"],["large","⊟"]].map(([v,icon])=>(
-                <button key={v} onClick={()=>setTreeView(v)} style={{fontFamily:"Raleway",fontWeight:700,fontSize:"12px",padding:"6px 12px",border:"none",cursor:"pointer",background:treeView===v?T.teal:"white",color:treeView===v?"white":T.textMid}}>{icon}</button>
+                <button key={v} onClick={()=>setTreeView(v)} style={{fontFamily:"Raleway",fontWeight:700,fontSize:"12px",padding:"6px 12px",border:"none",cursor:"pointer",background:treeView===v?T.gold:"white",color:treeView===v?"white":T.textMid}}>{icon}</button>
               ))}
             </div>
             <button onClick={()=>setLinkModal(true)} style={{fontFamily:"Raleway",fontSize:"11px",fontWeight:700,padding:"7px 12px",borderRadius:"10px",border:`1.5px solid ${T.border}`,background:"white",color:T.textMid,cursor:"pointer"}}>🔗</button>
@@ -356,16 +356,16 @@ ${(tree?.relations||[]).length?"<div class=\"card\"><h3>Verknüpfte Klienten</h3
 
       {/* Inherited themes */}
       {inheritedThemes.length>0&&(
-        <Card style={{marginBottom:"12px",background:`${T.violetL}88`,border:`1.5px solid ${T.violet}44`}}>
+        <Card style={{marginBottom:"12px",background:`${T.goldL}88`,border:`1.5px solid ${T.gold}44`}}>
           <div style={{display:"flex",alignItems:"center",gap:"8px",marginBottom:"10px"}}>
             <span style={{fontSize:"16px"}}>🔮</span>
-            <span style={{fontFamily:"Cinzel",fontSize:"12px",color:T.violetD,fontWeight:700}}>Vererbte Muster</span>
+            <span style={{fontFamily:"Cinzel",fontSize:"12px",color:T.goldD,fontWeight:700}}>Vererbte Muster</span>
           </div>
           <div style={{display:"flex",flexWrap:"wrap",gap:"6px"}}>
             {inheritedThemes.map(([theme,count])=>(
-              <div key={theme} style={{background:T.bgCard,borderRadius:"20px",padding:"5px 12px",border:`1.5px solid ${T.violet}66`,display:"flex",alignItems:"center",gap:"6px"}}>
-                <span style={{fontFamily:"Raleway",fontSize:"12px",color:T.violetD,fontWeight:700}}>{theme}</span>
-                <span style={{fontFamily:"Raleway",fontSize:"10px",color:T.violet,fontWeight:800,background:T.violetL,padding:"1px 7px",borderRadius:"10px"}}>{count}×</span>
+              <div key={theme} style={{background:T.bgCard,borderRadius:"20px",padding:"5px 12px",border:`1.5px solid ${T.gold}66`,display:"flex",alignItems:"center",gap:"6px"}}>
+                <span style={{fontFamily:"Raleway",fontSize:"12px",color:T.goldD,fontWeight:700}}>{theme}</span>
+                <span style={{fontFamily:"Raleway",fontSize:"10px",color:T.gold,fontWeight:800,background:T.goldL,padding:"1px 7px",borderRadius:"10px"}}>{count}×</span>
               </div>
             ))}
           </div>
@@ -401,17 +401,17 @@ ${(tree?.relations||[]).length?"<div class=\"card\"><h3>Verknüpfte Klienten</h3
           const p=tree[r];
           const hasI=inheritedThemes.some(([t])=>(p.themes||[]).includes(t));
           return(
-            <Card key={r} onClick={()=>setEditPerson({...p,role:r})} style={{cursor:"pointer",padding:"12px 14px",border:hasI?`1.5px solid ${T.violet}66`:undefined}}>
+            <Card key={r} onClick={()=>setEditPerson({...p,role:r})} style={{cursor:"pointer",padding:"12px 14px",border:hasI?`1.5px solid ${T.gold}66`:undefined}}>
               <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start"}}>
                 <div style={{flex:1}}>
                   <div style={{display:"flex",alignItems:"center",gap:"8px",marginBottom:"2px"}}>
                     <span style={{fontFamily:"Raleway",fontSize:"10px",fontWeight:700,color:T.textSoft,letterSpacing:"1px",textTransform:"uppercase"}}>{r}</span>
-                    {!p.alive&&<span style={{fontSize:"9px",background:"#F0EDFC",color:T.violetD,padding:"1px 7px",borderRadius:"8px",fontFamily:"Raleway",fontWeight:700}}>✝</span>}
-                    {hasI&&<span style={{fontSize:"9px",background:T.violetL,color:T.violetD,padding:"1px 7px",borderRadius:"8px",fontFamily:"Raleway",fontWeight:700}}>🔮 Vererbt</span>}
+                    {!p.alive&&<span style={{fontSize:"9px",background:"#F0EDFC",color:T.goldD,padding:"1px 7px",borderRadius:"8px",fontFamily:"Raleway",fontWeight:700}}>✝</span>}
+                    {hasI&&<span style={{fontSize:"9px",background:T.goldL,color:T.goldD,padding:"1px 7px",borderRadius:"8px",fontFamily:"Raleway",fontWeight:700}}>🔮 Vererbt</span>}
                   </div>
                   <div style={{fontFamily:"Raleway",fontSize:"14px",fontWeight:700,color:T.text}}>{p.name}</div>
                   {p.birthYear&&<div style={{fontFamily:"Raleway",fontSize:"10px",color:T.textSoft}}>*{p.birthYear}{p.deathYear?" – †"+p.deathYear:""}</div>}
-                  {p.themes?.length>0&&<div style={{display:"flex",flexWrap:"wrap",gap:"4px",marginTop:"5px"}}>{p.themes.map(t=><span key={t} style={{fontSize:"10px",padding:"2px 9px",borderRadius:"10px",background:T.violetL,color:T.violetD,fontFamily:"Raleway",fontWeight:700}}>{t}</span>)}</div>}
+                  {p.themes?.length>0&&<div style={{display:"flex",flexWrap:"wrap",gap:"4px",marginTop:"5px"}}>{p.themes.map(t=><span key={t} style={{fontSize:"10px",padding:"2px 9px",borderRadius:"10px",background:T.goldL,color:T.goldD,fontFamily:"Raleway",fontWeight:700}}>{t}</span>)}</div>}
                 </div>
               </div>
             </Card>

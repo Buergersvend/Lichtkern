@@ -52,7 +52,7 @@ function PinLock({ mode, onSuccess, onSetup, onLogout, userId }) {
 
   return (
     <div style={{position:"fixed",top:0,left:0,right:0,bottom:0,zIndex:9999,background:T.bg,display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",padding:"32px 24px"}}>
-      <div style={{width:"72px",height:"72px",borderRadius:"50%",background:`linear-gradient(135deg,${T.gold},${T.violetL})`,display:"flex",alignItems:"center",justifyContent:"center",fontSize:"30px",boxShadow:`0 6px 28px ${T.shadowDeep}`,border:`1.5px solid ${T.border}`,marginBottom:"20px"}}>
+      <div style={{width:"72px",height:"72px",borderRadius:"50%",background:`linear-gradient(135deg,${T.gold},${T.goldL})`,display:"flex",alignItems:"center",justifyContent:"center",fontSize:"30px",boxShadow:`0 6px 28px ${T.shadowDeep}`,border:`1.5px solid ${T.border}`,marginBottom:"20px"}}>
         🔒
       </div>
       <div style={{fontFamily:"Cinzel",fontSize:"20px",color:T.text,fontWeight:700,marginBottom:"6px"}}>Lichtkern</div>

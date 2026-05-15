@@ -80,13 +80,13 @@ Antworte in diesen Abschnitten (kurz & präzise):
         <OCard>
           <OLabel color="#A87D3A">Lernpfad</OLabel>
           <div style={{fontFamily:"Raleway",fontSize:"13px",color:OT.text,lineHeight:"1.8",fontWeight:500,marginBottom:"10px"}}>{gewaehltes.lernpfad_soft}</div>
-          <div style={{background:OT.bgCard,padding:"12px",borderRadius:"12px",border:`1px solid ${OT.violet}33`}}>
-            <div style={{fontFamily:"Raleway",fontSize:"10px",fontWeight:800,color:OT.violetD,letterSpacing:"1.5px",textTransform:"uppercase",marginBottom:"6px"}}>🎓 Vertiefung</div>
+          <div style={{background:OT.bgCard,padding:"12px",borderRadius:"12px",border:`1px solid ${OT.gold}33`}}>
+            <div style={{fontFamily:"Raleway",fontSize:"10px",fontWeight:800,color:OT.goldD,letterSpacing:"1.5px",textTransform:"uppercase",marginBottom:"6px"}}>🎓 Vertiefung</div>
             <div style={{fontFamily:"Raleway",fontSize:"12px",color:OT.text,lineHeight:"1.8",fontWeight:500}}>{gewaehltes.lernpfad_deep}</div>
           </div>
         </OCard>
         <OCard>
-          <OLabel color={OT.violetD}>✦ KI-Sitzungsanalyse</OLabel>
+          <OLabel color={OT.goldD}>✦ KI-Sitzungsanalyse</OLabel>
           {kiLaed ? <div style={{textAlign:"center",padding:"20px",fontFamily:"Raleway",fontSize:"13px",color:OT.textMid}}>⏳ Analysiere...</div>
           : kiDetail ? <div style={{fontFamily:"Raleway",fontSize:"13px",color:OT.text,lineHeight:"1.9",whiteSpace:"pre-wrap",fontWeight:500}}>{kiDetail}</div>
           : <OBtn onClick={()=>ladeKiDetail(gewaehltes)}>✦ KI-Analyse für diese Sitzung</OBtn>}

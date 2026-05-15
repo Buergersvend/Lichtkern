@@ -68,7 +68,7 @@ function PDFModal({ session, onClose }){
   const Toggle = ({label,val,set})=>(
     <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",padding:"10px 0",borderBottom:`1px solid ${T.border}`}}>
       <span style={{fontFamily:"Raleway",fontSize:"13px",color:T.text,fontWeight:500}}>{label}</span>
-      <button onClick={()=>set(!val)} style={{width:"44px",height:"24px",borderRadius:"12px",border:"none",cursor:"pointer",background:val?T.teal:"#CBD5E1",position:"relative",transition:"background 0.2s"}}>
+      <button onClick={()=>set(!val)} style={{width:"44px",height:"24px",borderRadius:"12px",border:"none",cursor:"pointer",background:val?T.gold:"#CBD5E1",position:"relative",transition:"background 0.2s"}}>
         <div style={{position:"absolute",top:"3px",left:val?"23px":"3px",width:"18px",height:"18px",borderRadius:"50%",background:"white",transition:"left 0.2s",boxShadow:"0 1px 4px rgba(0,0,0,0.2)"}}/>
       </button>
     </div>
@@ -136,8 +136,8 @@ Hinweis: Diese Dokumentation ersetzt keine medizinische oder therapeutische Beha
         <SL>Version</SL>
         <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:"8px",marginBottom:"18px"}}>
           {[["kurz","📋 Kurzversion","Ziel, Ebenen, Methoden, Auftrag"],["detail","📖 Detailversion","+ KI-Resonanz, Reflexionsraum"]].map(([v,l,sub])=>(
-            <button key={v} onClick={()=>setVersion(v)} style={{padding:"12px",borderRadius:"14px",border:`1.5px solid ${version===v?T.teal:T.border}`,background:version==v?T.teal:T.bgCard,cursor:"pointer",textAlign:"left"}}>
-              <div style={{fontFamily:"Raleway",fontSize:"12px",fontWeight:700,color:version===v?T.tealD:T.text}}>{l}</div>
+            <button key={v} onClick={()=>setVersion(v)} style={{padding:"12px",borderRadius:"14px",border:`1.5px solid ${version===v?T.gold:T.border}`,background:version==v?T.gold:T.bgCard,cursor:"pointer",textAlign:"left"}}>
+              <div style={{fontFamily:"Raleway",fontSize:"12px",fontWeight:700,color:version===v?T.goldD:T.text}}>{l}</div>
               <div style={{fontFamily:"Raleway",fontSize:"10px",color:T.textSoft,marginTop:"3px",fontWeight:500}}>{sub}</div>
             </button>
           ))}
@@ -172,9 +172,9 @@ Hinweis: Diese Dokumentation ersetzt keine medizinische oder therapeutische Beha
           <Btn onClick={openPDF} style={{width:"100%",fontSize:"14px",padding:"13px"}}>
             📄 PDF öffnen & speichern
           </Btn>
-          <Btn onClick={openInvoice} style={{width:"100%",fontSize:"14px",padding:"13px",background:"transparent",border:`1.5px solid ${T.teal}`,color:T.teal}}>🧾 Privatrechnung erstellen</Btn>
+          <Btn onClick={openInvoice} style={{width:"100%",fontSize:"14px",padding:"13px",background:"transparent",border:`1.5px solid ${T.gold}`,color:T.gold}}>🧾 Privatrechnung erstellen</Btn>
           {email.trim() && (
-            <button onClick={sendEmail} style={{width:"100%",fontFamily:"Raleway",fontWeight:700,fontSize:"13px",padding:"13px",borderRadius:"12px",border:`1.5px solid ${T.teal}`,background:T.tealL,color:T.tealD,cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center",gap:"8px"}}>
+            <button onClick={sendEmail} style={{width:"100%",fontFamily:"Raleway",fontWeight:700,fontSize:"13px",padding:"13px",borderRadius:"12px",border:`1.5px solid ${T.gold}`,background:T.goldL,color:T.goldD,cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center",gap:"8px"}}>
               ✉️ E-Mail öffnen · {email}
             </button>
           )}

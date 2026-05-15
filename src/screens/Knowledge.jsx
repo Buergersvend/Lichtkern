@@ -7,14 +7,14 @@ import { Card, Btn, Pill } from "../components/UI.jsx";
 function Knowledge(){
   const [sel,setSel]=useState(null);const [tab,setTab]=useState("soft");
   if(sel)return(<div style={{padding:"0 16px 96px"}}>
-    <button onClick={()=>setSel(null)} style={{fontFamily:"Raleway",fontSize:"13px",color:T.teal,fontWeight:700,background:"none",border:"none",cursor:"pointer",paddingTop:"8px",display:"block",marginBottom:"14px"}}>← Zurück</button>
+    <button onClick={()=>setSel(null)} style={{fontFamily:"Raleway",fontSize:"13px",color:T.gold,fontWeight:700,background:"none",border:"none",cursor:"pointer",paddingTop:"8px",display:"block",marginBottom:"14px"}}>← Zurück</button>
     <div style={{position:"relative",borderRadius:"22px",overflow:"hidden",padding:"28px 24px",marginBottom:"16px",background:T.bgSoft,border:`1.5px solid ${T.border}`}}>
       <Flower size={200} opacity={0.11}/>
       <div style={{position:"relative",zIndex:1}}><div style={{fontSize:"50px",marginBottom:"12px"}}>{sel.icon}</div><h2 style={{fontFamily:"Cinzel",fontSize:"24px",color:T.text,margin:0,fontWeight:700}}>{sel.title}</h2></div>
     </div>
-    <div style={{display:"flex",gap:"8px",marginBottom:"14px"}}>{[["soft","🌱 Erklärung"],["deep","🎓 Schulung"]].map(([v,l])=><button key={v} onClick={()=>setTab(v)} style={{flex:1,padding:"12px",borderRadius:"12px",border:`1.5px solid ${tab===v?T.teal:T.border}`,background:tab===v?T.teal:"white",cursor:"pointer",fontFamily:"Raleway",fontSize:"12px",fontWeight:700,color:tab===v?"white":T.textMid,transition:"all 0.15s"}}>{l}</button>)}</div>
+    <div style={{display:"flex",gap:"8px",marginBottom:"14px"}}>{[["soft","🌱 Erklärung"],["deep","🎓 Schulung"]].map(([v,l])=><button key={v} onClick={()=>setTab(v)} style={{flex:1,padding:"12px",borderRadius:"12px",border:`1.5px solid ${tab===v?T.gold:T.border}`,background:tab===v?T.gold:"white",cursor:"pointer",fontFamily:"Raleway",fontSize:"12px",fontWeight:700,color:tab===v?"white":T.textMid,transition:"all 0.15s"}}>{l}</button>)}</div>
     <Card>{tab==="soft"?<div style={{fontFamily:"Raleway",fontSize:"14px",color:T.text,lineHeight:"1.9",fontWeight:500}}>{sel.soft}</div>:<div style={{textAlign:"center",padding:"38px 0"}}><div style={{fontSize:"44px",marginBottom:"14px"}}>🎓</div><div style={{fontFamily:"Cinzel",fontSize:"15px",color:T.text,fontWeight:700}}>Schulung folgt</div><div style={{fontFamily:"Raleway",fontSize:"12px",color:T.textMid,marginTop:"6px",fontWeight:500}}>Human Resonanz Akademie · In Vorbereitung</div></div>}</Card>
-    {sel.tags?.length>0&&<div style={{display:"flex",flexWrap:"wrap",gap:"6px",marginTop:"12px"}}>{sel.tags.map(t=><span key={t} style={{fontSize:"10px",padding:"4px 13px",borderRadius:"12px",background:T.tealL,color:T.tealD,fontFamily:"Raleway",fontWeight:700,border:`1px solid ${T.borderMid}`}}>{t}</span>)}</div>}
+    {sel.tags?.length>0&&<div style={{display:"flex",flexWrap:"wrap",gap:"6px",marginTop:"12px"}}>{sel.tags.map(t=><span key={t} style={{fontSize:"10px",padding:"4px 13px",borderRadius:"12px",background:T.goldL,color:T.goldD,fontFamily:"Raleway",fontWeight:700,border:`1px solid ${T.borderMid}`}}>{t}</span>)}</div>}
   </div>);
   return(<div style={{padding:"0 16px 96px"}}>
     <div style={{position:"relative",borderRadius:"22px",overflow:"hidden",padding:"26px 24px",marginBottom:"20px",background:T.bgSoft,border:`1.5px solid ${T.border}`}}>
@@ -26,7 +26,7 @@ function Knowledge(){
         <span style={{fontSize:"32px",display:"block",marginBottom:"10px"}}>{item.icon}</span>
         <div style={{fontFamily:"Raleway",fontWeight:800,fontSize:"13px",color:T.text,marginBottom:"7px"}}>{item.title}</div>
         <div style={{fontFamily:"Raleway",fontSize:"11px",color:T.textMid,lineHeight:"1.65",fontWeight:500,overflow:"hidden",display:"-webkit-box",WebkitLineClamp:2,WebkitBoxOrient:"vertical"}}>{item.soft}</div>
-        {item.tags?.length>0&&<div style={{display:"flex",flexWrap:"wrap",gap:"4px",marginTop:"10px"}}>{item.tags.map(t=><span key={t} style={{fontSize:"9px",padding:"2px 9px",borderRadius:"10px",background:T.tealL,color:T.tealD,fontFamily:"Raleway",fontWeight:700}}>{t}</span>)}</div>}
+        {item.tags?.length>0&&<div style={{display:"flex",flexWrap:"wrap",gap:"4px",marginTop:"10px"}}>{item.tags.map(t=><span key={t} style={{fontSize:"9px",padding:"2px 9px",borderRadius:"10px",background:T.goldL,color:T.goldD,fontFamily:"Raleway",fontWeight:700}}>{t}</span>)}</div>}
       </div>)}
     </div>
   </div>);

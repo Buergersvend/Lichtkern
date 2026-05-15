@@ -9,7 +9,7 @@ function ClientAnalysis({ clientId, clients, sessions, onBack }){
 
   if(!client||cs.length===0) return (
     <div style={{padding:"0 16px 96px"}}>
-      <button onClick={onBack} style={{fontFamily:"Raleway",fontSize:"13px",color:T.teal,fontWeight:700,background:"none",border:"none",cursor:"pointer",paddingTop:"8px",display:"block",marginBottom:"16px"}}>← Zurück</button>
+      <button onClick={onBack} style={{fontFamily:"Raleway",fontSize:"13px",color:T.gold,fontWeight:700,background:"none",border:"none",cursor:"pointer",paddingTop:"8px",display:"block",marginBottom:"16px"}}>← Zurück</button>
       <div style={{textAlign:"center",padding:"60px 0"}}>
         <div style={{fontSize:"40px",opacity:0.3,marginBottom:"12px"}}>📊</div>
         <div style={{fontFamily:"Raleway",fontSize:"14px",color:T.textMid,fontWeight:600}}>Keine Sitzungsdaten vorhanden</div>
@@ -36,8 +36,8 @@ function ClientAnalysis({ clientId, clients, sessions, onBack }){
   const firstTotal = lineData[0]?.total||0;
   const lastTotal  = lineData[lineData.length-1]?.total||0;
   const trend = lastTotal < firstTotal ? "abnehmend 📉" : lastTotal > firstTotal ? "zunehmend 📈" : "stabil ➡️";
-  const trendColor = lastTotal < firstTotal ? "#0A3B20" : lastTotal > firstTotal ? "#9B1C1C" : T.tealD;
-  const trendBg    = lastTotal < firstTotal ? "#DCFCE7" : lastTotal > firstTotal ? "#FEE2E2" : T.tealL;
+  const trendColor = lastTotal < firstTotal ? "#0A3B20" : lastTotal > firstTotal ? "#9B1C1C" : T.goldD;
+  const trendBg    = lastTotal < firstTotal ? "#DCFCE7" : lastTotal > firstTotal ? "#FEE2E2" : T.goldL;
 
   // Technik-Entwicklung
   const techBySession = cs.map(s=>({date:s.createdAt?.slice(0,10),techniques:s.techniques||[]}));
@@ -81,7 +81,7 @@ function ClientAnalysis({ clientId, clients, sessions, onBack }){
 
   return (
     <div style={{padding:"0 16px 96px"}}>
-      <button onClick={onBack} style={{fontFamily:"Raleway",fontSize:"13px",color:T.teal,fontWeight:700,background:"none",border:"none",cursor:"pointer",paddingTop:"8px",display:"block",marginBottom:"12px"}}>← Zurück</button>
+      <button onClick={onBack} style={{fontFamily:"Raleway",fontSize:"13px",color:T.gold,fontWeight:700,background:"none",border:"none",cursor:"pointer",paddingTop:"8px",display:"block",marginBottom:"12px"}}>← Zurück</button>
 
       {/* Hero */}
       <div style={{position:"relative",borderRadius:"22px",overflow:"hidden",padding:"22px 24px",marginBottom:"16px",background:T.bgSoft,boxShadow:`0 6px 28px ${T.shadowDeep}`,border:`1.5px solid ${T.border}`}}>
@@ -91,7 +91,7 @@ function ClientAnalysis({ clientId, clients, sessions, onBack }){
           <p style={{fontFamily:"Raleway",fontSize:"11px",color:T.textMid,margin:"0 0 10px",fontWeight:600}}>{cs.length} Sitzungen · {first.createdAt?.slice(0,10)} – {last.createdAt?.slice(0,10)}</p>
           <div style={{display:"flex",gap:"8px",flexWrap:"wrap"}}>
             <span style={{fontFamily:"Raleway",fontSize:"11px",fontWeight:700,padding:"4px 12px",borderRadius:"12px",background:trendBg,color:trendColor}}>Gesamtbelastung {trend}</span>
-            {client.tags?.slice(0,2).map(t=><span key={t} style={{fontFamily:"Raleway",fontSize:"11px",fontWeight:700,padding:"4px 12px",borderRadius:"12px",background:T.tealL,color:T.tealD}}>{t}</span>)}
+            {client.tags?.slice(0,2).map(t=><span key={t} style={{fontFamily:"Raleway",fontSize:"11px",fontWeight:700,padding:"4px 12px",borderRadius:"12px",background:T.goldL,color:T.goldD}}>{t}</span>)}
           </div>
         </div>
       </div>
@@ -101,7 +101,7 @@ function ClientAnalysis({ clientId, clients, sessions, onBack }){
         <div style={{display:"flex",alignItems:"flex-end",gap:"4px",height:"72px",marginBottom:"8px"}}>
           {lineData.map((d,i)=>{
             const h=Math.max((d.total/maxTotal)*100,4);
-            const col = i===0?T.border:d.total<lineData[i-1].total?T.teal:d.total>lineData[i-1].total?"#F87171":T.gold;
+            const col = i===0?T.border:d.total<lineData[i-1].total?T.gold:d.total>lineData[i-1].total?"#F87171":T.gold;
             return(
               <div key={i} style={{flex:1,display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"flex-end",height:"100%",gap:"2px"}}>
                 <div style={{width:"100%",borderRadius:"4px 4px 0 0",background:col,height:`${h}%`,transition:"height 0.4s"}}/>
@@ -111,7 +111,7 @@ function ClientAnalysis({ clientId, clients, sessions, onBack }){
           })}
         </div>
         <div style={{display:"flex",gap:"10px",justifyContent:"center"}}>
-          {[{c:T.teal,l:"Besser"},{c:"#F87171",l:"Mehr Aktivität"},{c:T.gold,l:"Gleich"}].map((x,i)=>(
+          {[{c:T.gold,l:"Besser"},{c:"#F87171",l:"Mehr Aktivität"},{c:T.gold,l:"Gleich"}].map((x,i)=>(
             <div key={i} style={{display:"flex",alignItems:"center",gap:"4px"}}>
               <div style={{width:"8px",height:"8px",borderRadius:"2px",background:x.c}}/>
               <span style={{fontFamily:"Raleway",fontSize:"9px",color:T.textSoft,fontWeight:600}}>{x.l}</span>
@@ -127,7 +127,7 @@ function ClientAnalysis({ clientId, clients, sessions, onBack }){
             <div key={l.key} style={{marginBottom:"10px"}}>
               <div style={{display:"flex",justifyContent:"space-between",marginBottom:"3px"}}>
                 <span style={{fontFamily:"Raleway",fontSize:"11px",color:T.text,fontWeight:700}}>{l.icon} {l.name}</span>
-                <span style={{fontFamily:"Raleway",fontSize:"10px",fontWeight:800,color:l.diff<0?T.tealD:l.diff>0?"#C0392B":T.textSoft}}>
+                <span style={{fontFamily:"Raleway",fontSize:"10px",fontWeight:800,color:l.diff<0?T.goldD:l.diff>0?"#C0392B":T.textSoft}}>
                   {l.diff<0?`▼ ${Math.abs(l.diff)}%`:l.diff>0?`▲ ${l.diff}%`:"="}
                 </span>
               </div>
@@ -135,9 +135,9 @@ function ClientAnalysis({ clientId, clients, sessions, onBack }){
                 <span style={{fontFamily:"Raleway",fontSize:"9px",color:T.textSoft,fontWeight:600,width:"24px",textAlign:"right"}}>{l.first}%</span>
                 <div style={{flex:1,height:"7px",borderRadius:"4px",background:T.bgSoft,position:"relative",overflow:"hidden"}}>
                   <div style={{position:"absolute",top:0,left:0,height:"100%",width:`${l.first}%`,background:T.border,borderRadius:"4px"}}/>
-                  <div style={{position:"absolute",top:0,left:0,height:"100%",width:`${l.last}%`,background:l.diff<0?T.teal:l.diff>0?"#F87171":T.gold,borderRadius:"4px",opacity:0.85}}/>
+                  <div style={{position:"absolute",top:0,left:0,height:"100%",width:`${l.last}%`,background:l.diff<0?T.gold:l.diff>0?"#F87171":T.gold,borderRadius:"4px",opacity:0.85}}/>
                 </div>
-                <span style={{fontFamily:"Raleway",fontSize:"9px",color:l.diff<0?T.tealD:l.diff>0?"#C0392B":T.textSoft,fontWeight:700,width:"24px"}}>{l.last}%</span>
+                <span style={{fontFamily:"Raleway",fontSize:"9px",color:l.diff<0?T.goldD:l.diff>0?"#C0392B":T.textSoft,fontWeight:700,width:"24px"}}>{l.last}%</span>
               </div>
             </div>
           ))}
@@ -182,8 +182,8 @@ function ClientAnalysis({ clientId, clients, sessions, onBack }){
         <div style={{display:"flex",alignItems:"flex-end",gap:"8px",height:"60px",marginBottom:"6px"}}>
           {freqData.map(([month,count],i)=>(
             <div key={i} style={{flex:1,display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"flex-end",height:"100%",gap:"3px"}}>
-              <span style={{fontFamily:"Raleway",fontSize:"9px",color:T.teal,fontWeight:700}}>{count}</span>
-              <div style={{width:"100%",borderRadius:"4px 4px 0 0",background:T.teal,height:`${(count/maxFreq)*100}%`}}/>
+              <span style={{fontFamily:"Raleway",fontSize:"9px",color:T.gold,fontWeight:700}}>{count}</span>
+              <div style={{width:"100%",borderRadius:"4px 4px 0 0",background:T.gold,height:`${(count/maxFreq)*100}%`}}/>
               <span style={{fontFamily:"Raleway",fontSize:"8px",color:T.textSoft,fontWeight:600}}>{month.slice(5)}</span>
             </div>
           ))}
@@ -209,10 +209,10 @@ function ClientAnalysis({ clientId, clients, sessions, onBack }){
                   </div>
                   <div style={{display:"flex",gap:"3px",flexShrink:0}}>
                     {cs.map((s,i)=>(
-                      <div key={i} style={{width:"10px",height:"10px",borderRadius:"2px",background:(s.techniques||[]).includes(tech)?T.teal:T.bgSoft,border:`1px solid ${T.border}`}}/>
+                      <div key={i} style={{width:"10px",height:"10px",borderRadius:"2px",background:(s.techniques||[]).includes(tech)?T.gold:T.bgSoft,border:`1px solid ${T.border}`}}/>
                     ))}
                   </div>
-                  <span style={{fontFamily:"Raleway",fontSize:"10px",color:T.teal,fontWeight:800,flexShrink:0,background:T.tealL,padding:"2px 7px",borderRadius:"8px"}}>{count}×</span>
+                  <span style={{fontFamily:"Raleway",fontSize:"10px",color:T.gold,fontWeight:800,flexShrink:0,background:T.goldL,padding:"2px 7px",borderRadius:"8px"}}>{count}×</span>
                 </div>
               );
             })}
@@ -227,7 +227,7 @@ function ClientAnalysis({ clientId, clients, sessions, onBack }){
             {topWords.map(([word,count],i)=>{
               const size=11+Math.round((count/(topWords[0][1]||1))*7);
               return(
-                <span key={word} style={{fontFamily:"Raleway",fontSize:`${size}px`,fontWeight:700,color:i<3?T.tealD:T.textMid,background:i<3?T.tealL:T.bgSoft,padding:"5px 12px",borderRadius:"16px",border:`1px solid ${i<3?T.borderMid:T.border}`}}>
+                <span key={word} style={{fontFamily:"Raleway",fontSize:`${size}px`,fontWeight:700,color:i<3?T.goldD:T.textMid,background:i<3?T.goldL:T.bgSoft,padding:"5px 12px",borderRadius:"16px",border:`1px solid ${i<3?T.borderMid:T.border}`}}>
                   {word}<span style={{fontSize:"9px",opacity:0.6}}> ×{count}</span>
                 </span>
               );

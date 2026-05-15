@@ -85,7 +85,7 @@ function TemplatePickerModal({ templates, onSelect, onSkip, onClose }) {
                 </div>
                 <div style={{display:"flex",gap:"5px",marginTop:"6px",flexWrap:"wrap"}}>
                   {(tpl.techniques||[]).slice(0,3).map(t=>(
-                    <span key={t} style={{fontSize:"9px",padding:"2px 8px",borderRadius:"10px",background:T.tealL,color:T.tealD,fontFamily:"Raleway",fontWeight:700}}>{t}</span>
+                    <span key={t} style={{fontSize:"9px",padding:"2px 8px",borderRadius:"10px",background:T.goldL,color:T.goldD,fontFamily:"Raleway",fontWeight:700}}>{t}</span>
                   ))}
                   {(tpl.techniques||[]).length>3&&<span style={{fontSize:"9px",color:T.textSoft,fontFamily:"Raleway",fontWeight:600}}>+{(tpl.techniques||[]).length-3}</span>}
                 </div>
@@ -122,7 +122,7 @@ function TemplatesScreen({ templates, onSave, onStartSession }) {
   // ── Template Editor ──
   if(editing) return (
     <div style={{padding:"0 16px 96px"}}>
-      <button onClick={()=>setEditing(null)} style={{fontFamily:"Raleway",fontSize:"13px",color:T.teal,fontWeight:700,background:"none",border:"none",cursor:"pointer",paddingTop:"8px",display:"block",marginBottom:"12px"}}>← Zurück</button>
+      <button onClick={()=>setEditing(null)} style={{fontFamily:"Raleway",fontSize:"13px",color:T.gold,fontWeight:700,background:"none",border:"none",cursor:"pointer",paddingTop:"8px",display:"block",marginBottom:"12px"}}>← Zurück</button>
       <h2 style={{fontFamily:"Cinzel",fontSize:"20px",color:T.text,fontWeight:700,marginBottom:"16px"}}>{editing.id&&templates.find(t=>t.id===editing.id)?"Vorlage bearbeiten":"Neue Vorlage"}</h2>
 
       <Card style={{marginBottom:"12px"}}>
@@ -134,7 +134,7 @@ function TemplatesScreen({ templates, onSave, onStartSession }) {
         <SL>Sitzungstyp</SL>
         <div style={{display:"flex",gap:"8px",marginBottom:"12px",flexWrap:"wrap"}}>
           {[["first","🌱 Erst"],["followup","🔄 Folge"],["closing","✨ Abschluss"]].map(([v,l])=>(
-            <button key={v} onClick={()=>setEditing({...editing,type:v})} style={{padding:"8px 14px",borderRadius:"12px",border:`1.5px solid ${editing.type===v?T.teal:T.border}`,background:editing.type===v?T.tealL:"white",cursor:"pointer",fontFamily:"Raleway",fontSize:"11px",fontWeight:700,color:editing.type===v?T.tealD:T.textMid}}>
+            <button key={v} onClick={()=>setEditing({...editing,type:v})} style={{padding:"8px 14px",borderRadius:"12px",border:`1.5px solid ${editing.type===v?T.gold:T.border}`,background:editing.type===v?T.goldL:"white",cursor:"pointer",fontFamily:"Raleway",fontSize:"11px",fontWeight:700,color:editing.type===v?T.goldD:T.textMid}}>
               {l}
             </button>
           ))}
@@ -169,7 +169,7 @@ function TemplatesScreen({ templates, onSave, onStartSession }) {
             <div style={{display:"flex",flexWrap:"wrap",gap:"6px"}}>
               {items.map(t=>{
                 const sel=(editing.techniques||[]).includes(t);
-                return <button key={t} onClick={()=>setEditing({...editing,techniques:sel?(editing.techniques||[]).filter(x=>x!==t):[...(editing.techniques||[]),t]})} style={{fontFamily:"Raleway",fontSize:"11px",fontWeight:600,padding:"6px 12px",borderRadius:"16px",border:`1.5px solid ${sel?T.teal:T.border}`,background:sel?T.teal:"white",color:sel?"white":T.textMid,cursor:"pointer"}}>{t}</button>;
+                return <button key={t} onClick={()=>setEditing({...editing,techniques:sel?(editing.techniques||[]).filter(x=>x!==t):[...(editing.techniques||[]),t]})} style={{fontFamily:"Raleway",fontSize:"11px",fontWeight:600,padding:"6px 12px",borderRadius:"16px",border:`1.5px solid ${sel?T.gold:T.border}`,background:sel?T.gold:"white",color:sel?"white":T.textMid,cursor:"pointer"}}>{t}</button>;
               })}
             </div>
           </div>
@@ -217,10 +217,10 @@ function TemplatesScreen({ templates, onSave, onStartSession }) {
                 <div style={{fontFamily:"Raleway",fontSize:"13px",fontWeight:700,color:T.text}}>{tpl.name}</div>
                 <div style={{fontFamily:"Raleway",fontSize:"11px",color:T.textSoft,fontWeight:500,marginTop:"2px",overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{tpl.goal}</div>
                 <div style={{display:"flex",gap:"4px",marginTop:"6px",flexWrap:"wrap"}}>
-                  {(tpl.techniques||[]).slice(0,3).map(t=><span key={t} style={{fontSize:"9px",padding:"2px 8px",borderRadius:"10px",background:T.tealL,color:T.tealD,fontFamily:"Raleway",fontWeight:700}}>{t}</span>)}
+                  {(tpl.techniques||[]).slice(0,3).map(t=><span key={t} style={{fontSize:"9px",padding:"2px 8px",borderRadius:"10px",background:T.goldL,color:T.goldD,fontFamily:"Raleway",fontWeight:700}}>{t}</span>)}
                 </div>
               </div>
-              <button onClick={()=>onStartSession(tpl)} style={{fontFamily:"Raleway",fontSize:"11px",fontWeight:700,padding:"7px 12px",borderRadius:"10px",border:"none",cursor:"pointer",background:`linear-gradient(135deg,${T.teal},${T.tealD})`,color:"white",flexShrink:0}}>
+              <button onClick={()=>onStartSession(tpl)} style={{fontFamily:"Raleway",fontSize:"11px",fontWeight:700,padding:"7px 12px",borderRadius:"10px",border:"none",cursor:"pointer",background:`linear-gradient(135deg,${T.gold},${T.goldD})`,color:"white",flexShrink:0}}>
                 ✦ Start
               </button>
             </div>
@@ -242,7 +242,7 @@ function TemplatesScreen({ templates, onSave, onStartSession }) {
                 </div>
                 <div style={{display:"flex",gap:"6px",flexShrink:0}}>
                   <button onClick={()=>setEditing({...tpl})} style={{fontFamily:"Raleway",fontSize:"11px",fontWeight:700,padding:"7px 10px",borderRadius:"10px",border:`1.5px solid ${T.border}`,cursor:"pointer",background:T.bgSoft,color:T.textMid}}>✏️</button>
-                  <button onClick={()=>onStartSession(tpl)} style={{fontFamily:"Raleway",fontSize:"11px",fontWeight:700,padding:"7px 12px",borderRadius:"10px",border:"none",cursor:"pointer",background:`linear-gradient(135deg,${T.teal},${T.tealD})`,color:"white"}}>✦</button>
+                  <button onClick={()=>onStartSession(tpl)} style={{fontFamily:"Raleway",fontSize:"11px",fontWeight:700,padding:"7px 12px",borderRadius:"10px",border:"none",cursor:"pointer",background:`linear-gradient(135deg,${T.gold},${T.goldD})`,color:"white"}}>✦</button>
                   <button onClick={()=>{if(window.confirm("Vorlage löschen?"))deleteCustom(tpl.id);}} style={{fontFamily:"Raleway",fontSize:"11px",fontWeight:700,padding:"7px 10px",borderRadius:"10px",border:"1.5px solid #FCA5A5",cursor:"pointer",background:"#FEE2E2",color:"#9B1C1C"}}>🗑</button>
                 </div>
               </div>

@@ -35,7 +35,7 @@ function OnboardingScreen({ onSave, onCancel }) {
   // Mode selection
   if(!clientMode) return (
     <div style={{padding:"0 16px 96px"}}>
-      <button onClick={onCancel} style={{fontFamily:"Raleway",fontSize:"13px",color:T.teal,fontWeight:700,background:"none",border:"none",cursor:"pointer",paddingTop:"8px",display:"block",marginBottom:"16px"}}>← Zurück</button>
+      <button onClick={onCancel} style={{fontFamily:"Raleway",fontSize:"13px",color:T.gold,fontWeight:700,background:"none",border:"none",cursor:"pointer",paddingTop:"8px",display:"block",marginBottom:"16px"}}>← Zurück</button>
       <div style={{position:"relative",borderRadius:"22px",overflow:"hidden",padding:"26px 24px",marginBottom:"24px",background:T.bgSoft,boxShadow:`0 6px 28px ${T.shadowDeep}`,border:`1.5px solid ${T.border}`}}>
         <Flower size={200} opacity={0.09}/>
         <div style={{position:"relative",zIndex:1}}>
@@ -189,7 +189,7 @@ Deine Angaben werden vertraulich behandelt.`);
 
     return (
       <div style={{padding:"0 16px 96px"}}>
-        <button onClick={()=>setClientMode(null)} style={{fontFamily:"Raleway",fontSize:"13px",color:T.teal,fontWeight:700,background:"none",border:"none",cursor:"pointer",paddingTop:"8px",display:"block",marginBottom:"16px"}}>← Zurück</button>
+        <button onClick={()=>setClientMode(null)} style={{fontFamily:"Raleway",fontSize:"13px",color:T.gold,fontWeight:700,background:"none",border:"none",cursor:"pointer",paddingTop:"8px",display:"block",marginBottom:"16px"}}>← Zurück</button>
         <div style={{position:"relative",borderRadius:"22px",overflow:"hidden",padding:"22px 24px",marginBottom:"20px",background:T.bgSoft,boxShadow:`0 6px 28px ${T.shadowDeep}`,border:`1.5px solid ${T.border}`}}>
           <Flower size={180} opacity={0.09}/>
           <div style={{position:"relative",zIndex:1}}>
@@ -277,7 +277,7 @@ ${[
 
     return (
       <div style={{padding:"0 16px 96px"}}>
-        <button onClick={()=>setShowPreview(false)} style={{fontFamily:"Raleway",fontSize:"13px",color:T.teal,fontWeight:700,background:"none",border:"none",cursor:"pointer",paddingTop:"8px",display:"block",marginBottom:"14px"}}>← Bearbeiten</button>
+        <button onClick={()=>setShowPreview(false)} style={{fontFamily:"Raleway",fontSize:"13px",color:T.gold,fontWeight:700,background:"none",border:"none",cursor:"pointer",paddingTop:"8px",display:"block",marginBottom:"14px"}}>← Bearbeiten</button>
         <div style={{background:T.bgSoft,borderRadius:"20px",padding:"20px",marginBottom:"14px",border:`1.5px solid ${T.border}`}}>
           <div style={{fontFamily:"Cinzel",fontSize:"20px",color:T.text,fontWeight:700}}>{form.name||"—"}</div>
           <div style={{fontFamily:"Raleway",fontSize:"12px",color:T.textMid,marginTop:"4px",fontWeight:500}}>
@@ -302,7 +302,7 @@ ${[
 
         {/* Consent */}
         <div style={{background:"rgba(201,168,76,0.1)",borderRadius:"14px",padding:"14px",marginBottom:"18px",border:"1.5px solid #C9A84C",display:"flex",gap:"12px",alignItems:"flex-start"}}>
-          <button onClick={()=>up({consent:!form.consent})} style={{width:"44px",height:"24px",borderRadius:"12px",border:"none",cursor:"pointer",flexShrink:0,marginTop:"2px",background:form.consent?T.teal:"#CBD5E1",position:"relative",transition:"background 0.2s"}}>
+          <button onClick={()=>up({consent:!form.consent})} style={{width:"44px",height:"24px",borderRadius:"12px",border:"none",cursor:"pointer",flexShrink:0,marginTop:"2px",background:form.consent?T.gold:"#CBD5E1",position:"relative",transition:"background 0.2s"}}>
             <div style={{position:"absolute",top:"3px",left:form.consent?"23px":"3px",width:"18px",height:"18px",borderRadius:"50%",background:"white",transition:"left 0.2s",boxShadow:"0 1px 4px rgba(0,0,0,0.2)"}}/>
           </button>
           <div style={{fontFamily:"Raleway",fontSize:"12px",color:"#3A2E1A",fontWeight:600,lineHeight:"1.6"}}>
@@ -330,7 +330,7 @@ ${[
       <div style={{padding:"12px 0 0"}}>
         <div style={{display:"flex",gap:"4px",marginBottom:"8px"}}>
           {ONBOARDING_STEPS.map((s,i)=>(
-            <div key={s} style={{flex:1,height:"4px",borderRadius:"2px",background:i<step?T.teal:i===step?`linear-gradient(to right,${T.teal},${T.violet})`:T.border,transition:"all 0.3s"}}/>
+            <div key={s} style={{flex:1,height:"4px",borderRadius:"2px",background:i<step?T.gold:i===step?`linear-gradient(to right,${T.gold},${T.gold})`:T.border,transition:"all 0.3s"}}/>
           ))}
         </div>
         <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:"16px"}}>
@@ -360,7 +360,7 @@ ${[
       <div style={{display:"flex",flexWrap:"wrap",gap:"7px",marginBottom:"10px"}}>
         {options.map(o=>{
           const sel=(form[field]||[]).includes(o);
-          return <button key={o} onClick={()=>up({[field]:sel?(form[field]||[]).filter(x=>x!==o):[...(form[field]||[]),o]})} style={{fontFamily:"Raleway",fontSize:"11px",fontWeight:600,padding:"7px 14px",borderRadius:"16px",border:`1.5px solid ${sel?T.teal:T.border}`,background:sel?T.tealL:"white",color:sel?T.tealD:T.textMid,cursor:"pointer"}}>{o}</button>;
+          return <button key={o} onClick={()=>up({[field]:sel?(form[field]||[]).filter(x=>x!==o):[...(form[field]||[]),o]})} style={{fontFamily:"Raleway",fontSize:"11px",fontWeight:600,padding:"7px 14px",borderRadius:"16px",border:`1.5px solid ${sel?T.gold:T.border}`,background:sel?T.goldL:"white",color:sel?T.goldD:T.textMid,cursor:"pointer"}}>{o}</button>;
         })}
       </div>
       {freeField&&<TI value={form[freeField]||""} onChange={v=>up({[freeField]:v})} placeholder={freePlaceholder||"Weitere…"} multiline rows={2}/>}
@@ -403,11 +403,11 @@ ${[
           <div key={area} style={{marginBottom:"12px"}}>
             <div style={{display:"flex",justifyContent:"space-between",marginBottom:"4px"}}>
               <span style={{fontFamily:"Raleway",fontSize:"12px",color:T.text,fontWeight:600}}>{area}</span>
-              <span style={{fontFamily:"Raleway",fontSize:"11px",color:T.teal,fontWeight:800,background:T.tealL,padding:"1px 8px",borderRadius:"8px"}}>{val}/10</span>
+              <span style={{fontFamily:"Raleway",fontSize:"11px",color:T.gold,fontWeight:800,background:T.goldL,padding:"1px 8px",borderRadius:"8px"}}>{val}/10</span>
             </div>
             <div style={{position:"relative",height:"9px"}}>
               <div style={{position:"absolute",inset:0,borderRadius:"5px",background:T.bgSoft,border:`1px solid ${T.border}`}}/>
-              <div style={{position:"absolute",top:0,left:0,height:"100%",width:`${val*10}%`,borderRadius:"5px",background:T.teal,transition:"width 0.1s"}}/>
+              <div style={{position:"absolute",top:0,left:0,height:"100%",width:`${val*10}%`,borderRadius:"5px",background:T.gold,transition:"width 0.1s"}}/>
               <input type="range" min="0" max="10" value={val} onChange={e=>up({lifeareas:{...form.lifeareas,[area]:+e.target.value}})} style={{position:"absolute",inset:0,width:"100%",opacity:0,cursor:"pointer",height:"9px"}}/>
             </div>
           </div>
