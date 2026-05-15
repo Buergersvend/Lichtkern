@@ -77,7 +77,7 @@ function LoginScreen({ onLogin }){
     setLoading(false);
   };
 
- const inp = { width:"100%", padding:"14px 16px", borderRadius:"14px", border:`1.5px solid ${T.gold}`, fontFamily:"Raleway", fontSize:"16px", color:"#F5F0E8", background:"#23233a", outline:"none", boxSizing:"border-box", WebkitAppearance:"none" };
+ const inp = { width:"100%", padding:"14px 16px", borderRadius:"14px", border:`1.5px solid ${T.gold}`, fontFamily:"Raleway", fontSize:"16px", color:"#F5F0E8", background:"#1A1A1A", outline:"none", boxSizing:"border-box", WebkitAppearance:"none" };
  const inpCls = "lk-inp";
 
   return (
