@@ -33,6 +33,7 @@ const SIDEBAR_SECTIONS = [
     { id: "billing", label: "Abrechnung", icon: "◈" },
   ]},
   { label: "Resonanz", items: [
+    { id: "humandesign", label: "Human Design", icon: "⬡" },
     { id: "oracle", label: "Resonanz-Analyse", icon: "✦" },
     { id: "synergy", label: "Numerologie", icon: "✧" },
     { id: "gentree", label: "Resonanzkarte", icon: "⊛" },
@@ -190,6 +191,7 @@ function App({ user, onLogout }){
       {screen==="clientanalysis"&&<ClientAnalysis clientId={analyticsClient} clients={clients} sessions={sessions} onBack={()=>setScreen("analytics")}/>}
       {screen==="knowledge"&&<Knowledge/>}
      {screen==="oracle"&&<OracleAgent onClose={()=>setScreen("dashboard")}/>}
+      {screen==="humandesign"&&<HDTab clients={clients}/>}
       {screen==="billing"   &&<Billing sessions={sessions} clients={clients} settings={settings} onUpdateSession={async(updated)=>{const next=sessions.map(s=>s.id===updated.id?updated:s);await saveSessions(next);}}/>}
       {screen==="templates" &&<TemplatesScreen templates={templates} onSave={saveTemplates} onStartSession={(tpl)=>startSession(null,tpl)}/>}
       {screen==="onboarding" &&<OnboardingScreen onSave={async(client)=>{await saveClients([...clients,client]);nav("clients");}} onCancel={()=>nav("clients")}/>}

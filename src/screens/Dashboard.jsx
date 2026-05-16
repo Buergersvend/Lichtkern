@@ -254,36 +254,90 @@ function useSupernova(canvasRef, logoRef) {
 
 /* ─── CATEGORY TILES ───────────────────────────── */
 const CATEGORIES = [
-  { id: "praxis", label: "Praxis", sub: "Klienten · Termine · Abrechnung", icon: "◈", nav: "clients" },
-  { id: "resonanz", label: "Resonanz", sub: "HD · Numerologie · Analyse", icon: "✦", nav: "oracle" },
-  { id: "analyse", label: "Analyse", sub: "Analytics · Verlauf", icon: "⊕", nav: "analytics" },
+  { id: "praxis", label: "Praxis", sub: "Klienten · Termine · Abrechnung", icon: "◈", items: [
+    { id: "clients", label: "Klienten", icon: "◈" },
+    { id: "calendar", label: "Kalender", icon: "◷" },
+    { id: "billing", label: "Abrechnung", icon: "◈" },
+  ]},
+  { id: "resonanz", label: "Resonanz", sub: "HD · Numerologie · Analyse", icon: "✦", items: [
+    { id: "oracle", label: "Resonanz-Analyse", icon: "✦" },
+    { id: "synergy", label: "Numerologie", icon: "✧" },
+    { id: "gentree", label: "Resonanzkarte", icon: "⊛" },
+  ]},
+  { id: "analyse", label: "Analyse", sub: "Analytics · Verlauf", icon: "⊕", items: [
+    { id: "analytics", label: "Analytics", icon: "⊕" },
+    { id: "history", label: "Verlauf", icon: "◎" },
+  ]},
 ];
 
-function CategoryTile({ cat, onNav }) {
+function CategoryTile({ cat, onNav, open, onToggle }) {
   const [hover, setHover] = useState(false);
+  const [itemHover, setItemHover] = useState(null);
   return (
-    <button
-      onClick={() => onNav(cat.nav)}
-      onMouseEnter={() => setHover(true)}
-      onMouseLeave={() => setHover(false)}
-      style={{
-        background: hover ? "rgba(201,168,76,0.07)" : DARK2,
-        border: `1px solid ${hover ? "rgba(201,168,76,0.35)" : "rgba(201,168,76,0.15)"}`,
-        borderRadius: "14px",
-        padding: "20px 12px",
-        textAlign: "center",
-        cursor: "pointer",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        gap: "8px",
-        transition: "all 0.25s",
-      }}
-    >
-      <span style={{ fontSize: "26px", color: hover ? GOLD : "rgba(201,168,76,0.45)", transition: "all 0.25s" }}>{cat.icon}</span>
-      <span style={{ fontFamily: "Raleway", fontSize: "13px", color: hover ? "rgba(245,240,232,0.95)" : "rgba(245,240,232,0.7)", fontWeight: 600, letterSpacing: "0.5px", transition: "all 0.25s" }}>{cat.label}</span>
-      <span style={{ fontFamily: "Raleway", fontSize: "10px", color: "rgba(245,240,232,0.25)" }}>{cat.sub}</span>
-    </button>
+    <div>
+      <button
+        onClick={onToggle}
+        onMouseEnter={() => setHover(true)}
+        onMouseLeave={() => setHover(false)}
+        style={{
+          background: open ? "rgba(201,168,76,0.1)" : hover ? "rgba(201,168,76,0.07)" : DARK2,
+          border: `1px solid ${open || hover ? "rgba(201,168,76,0.35)" : "rgba(201,168,76,0.15)"}`,
+          borderRadius: open ? "14px 14px 0 0" : "14px",
+          borderBottom: open ? "1px solid rgba(201,168,76,0.08)" : undefined,
+          padding: "20px 12px",
+          textAlign: "center",
+          cursor: "pointer",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          gap: "8px",
+          width: "100%",
+          transition: "all 0.25s",
+        }}
+      >
+        <span style={{ fontSize: "26px", color: open || hover ? GOLD : "rgba(201,168,76,0.45)", transition: "all 0.25s" }}>{cat.icon}</span>
+        <span style={{ fontFamily: "Raleway", fontSize: "13px", color: open || hover ? "rgba(245,240,232,0.95)" : "rgba(245,240,232,0.7)", fontWeight: 600, letterSpacing: "0.5px", transition: "all 0.25s" }}>{cat.label}</span>
+        <span style={{ fontFamily: "Raleway", fontSize: "10px", color: "rgba(245,240,232,0.25)" }}>{cat.sub}</span>
+      </button>
+      <div style={{
+        overflow: "hidden",
+        maxHeight: open ? "240px" : "0",
+        transition: "max-height 0.3s ease",
+        background: "#161616",
+        border: open ? "1px solid rgba(201,168,76,0.2)" : "1px solid transparent",
+        borderTop: "none",
+        borderRadius: "0 0 14px 14px",
+      }}>
+        {cat.items.map(item => (
+          <button
+            key={item.id}
+            onClick={() => onNav(item.id)}
+            onMouseEnter={() => setItemHover(item.id)}
+            onMouseLeave={() => setItemHover(null)}
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "10px",
+              width: "100%",
+              padding: "10px 16px",
+              border: "none",
+              borderBottom: "1px solid rgba(201,168,76,0.06)",
+              background: itemHover === item.id ? "rgba(201,168,76,0.1)" : "transparent",
+              color: itemHover === item.id ? GOLD : "rgba(245,240,232,0.65)",
+              cursor: "pointer",
+              fontFamily: "Raleway",
+              fontSize: "12px",
+              fontWeight: 600,
+              textAlign: "left",
+              transition: "all 0.15s",
+            }}
+          >
+            <span style={{ fontSize: "14px", opacity: 0.7 }}>{item.icon}</span>
+            <span>{item.label}</span>
+          </button>
+        ))}
+      </div>
+    </div>
   );
 }
 
@@ -292,6 +346,7 @@ function Dashboard({ clients, sessions, appointments, onNav, settings }) {
   const [impuls, setImpuls] = useState("");
   const [impulsLoading, setImpulsLoading] = useState(true);
   const [impulsDate, setImpulsDate] = useState(todayStr);
+  const [openCategory, setOpenCategory] = useState(null);
   const canvasRef = useRef(null);
   const logoRef = useRef(null);
   const fireSupernova = useSupernova(canvasRef, logoRef);
@@ -400,9 +455,15 @@ function Dashboard({ clients, sessions, appointments, onNav, settings }) {
       </div>
 
       {/* ── 3 Kategorie-Kacheln ── */}
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "10px", marginBottom: "24px" }}>
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "10px", marginBottom: "24px", alignItems: "start" }}>
         {CATEGORIES.map(cat => (
-          <CategoryTile key={cat.id} cat={cat} onNav={onNav} />
+          <CategoryTile
+            key={cat.id}
+            cat={cat}
+            onNav={onNav}
+            open={openCategory === cat.id}
+            onToggle={() => setOpenCategory(openCategory === cat.id ? null : cat.id)}
+          />
         ))}
       </div>
 
