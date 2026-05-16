@@ -260,8 +260,9 @@ const CATEGORIES = [
     { id: "billing", label: "Abrechnung", icon: "◈" },
   ]},
   { id: "resonanz", label: "Resonanz", sub: "HD · Numerologie · Analyse", icon: "✦", items: [
-    { id: "oracle", label: "Resonanz-Analyse", icon: "✦" },
+    { id: "humandesign", label: "Human Design", icon: "⬡" },
     { id: "synergy", label: "Numerologie", icon: "✧" },
+    { id: "oracle", label: "Resonanz-Analyse", icon: "✦" },
     { id: "gentree", label: "Resonanzkarte", icon: "⊛" },
   ]},
   { id: "analyse", label: "Analyse", sub: "Analytics · Verlauf", icon: "⊕", items: [

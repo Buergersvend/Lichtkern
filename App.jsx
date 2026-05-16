@@ -34,8 +34,8 @@ const SIDEBAR_SECTIONS = [
   ]},
   { label: "Resonanz", items: [
     { id: "humandesign", label: "Human Design", icon: "⬡" },
-    { id: "oracle", label: "Resonanz-Analyse", icon: "✦" },
     { id: "synergy", label: "Numerologie", icon: "✧" },
+    { id: "oracle", label: "Resonanz-Analyse", icon: "✦" },
     { id: "gentree", label: "Resonanzkarte", icon: "⊛" },
   ]},
   { label: "Analyse", items: [
