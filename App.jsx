@@ -24,6 +24,25 @@ import { GenTree } from "./src/screens/GenTree.jsx";
 import { PDFModal } from "./src/screens/PDFModal.jsx";
 import OracleAgent from "./src/oracle/OracleAgent.jsx";
 
+const SIDEBAR_SECTIONS = [
+  { label: "Praxis", items: [
+    { id: "dashboard", label: "Dashboard", icon: "◉" },
+    { id: "clients", label: "Klienten", icon: "◈" },
+    { id: "calendar", label: "Kalender", icon: "◷" },
+    { id: "session", label: "Sitzungen", icon: "✦", isSession: true },
+    { id: "billing", label: "Abrechnung", icon: "◈" },
+  ]},
+  { label: "Resonanz", items: [
+    { id: "oracle", label: "Resonanz-Analyse", icon: "✦" },
+    { id: "synergy", label: "Numerologie", icon: "✧" },
+    { id: "gentree", label: "Resonanzkarte", icon: "⊛" },
+  ]},
+  { label: "Analyse", items: [
+    { id: "analytics", label: "Analytics", icon: "⊕" },
+    { id: "history", label: "Verlauf", icon: "◎" },
+  ]},
+];
+
 function Root() {
   const [user, setUser] = useState(undefined); // undefined = loading, null = logged out
   const [showOracle, setShowOracle] = useState(false);
@@ -61,6 +80,7 @@ function App({ user, onLogout }){
   const [locked,setLocked]           = useState(false);
   const [ready,setReady]             = useState(false);
   const [isDesktop, setIsDesktop]    = useState(window.innerWidth >= 900);
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
 
   useEffect(()=>{
     const handler = ()=>setIsDesktop(window.innerWidth>=900);
@@ -116,38 +136,40 @@ function App({ user, onLogout }){
   return(<div style={{background:"#111111",minHeight:"100vh",display:"flex",flexDirection:"row"}}>
     {/* Desktop sidebar */}
     {isDesktop && (
-      <div style={{width:"260px",flexShrink:0,background:"#111111",borderRight:'1px solid rgba(201,168,76,0.15)',display:"flex",flexDirection:"column",overflowY:"hidden",position:"fixed",top:0,left:0,bottom:0,zIndex:100,backdropFilter:"blur(20px)",boxShadow:"2px 0 24px rgba(201,168,76,0.06)"}}>
-        {/* Nav items */}
-        <div style={{padding:"24px 14px 4px",flex:1,display:"flex",flexDirection:"column",gap:"3px",overflowY:"hidden"}}>
-          {NAV.filter(n=>n.id!=="session").map(item=>{
+  <div style={{width:sidebarCollapsed?68:230,flexShrink:0,background:"#0A0A0A",borderRight:"1px solid rgba(201,168,76,0.12)",display:"flex",flexDirection:"column",position:"fixed",top:0,left:0,bottom:0,zIndex:100,transition:"width 0.25s ease",overflow:"hidden"}}>
+    <div style={{display:"flex",alignItems:"center",gap:10,padding:sidebarCollapsed?"20px 16px":"20px 18px"}}>
+      <div style={{width:36,height:36,borderRadius:"50%",flexShrink:0,background:"radial-gradient(circle,rgba(201,168,76,0.35) 0%,transparent 70%)",border:"1px solid rgba(201,168,76,0.35)",display:"flex",alignItems:"center",justifyContent:"center",color:"#C9A84C",fontFamily:"Raleway",fontSize:12,fontWeight:600}}>SD</div>
+      <div style={{fontFamily:"Raleway",fontSize:14,fontWeight:700,color:"rgba(245,240,232,0.75)",letterSpacing:1,whiteSpace:"nowrap",opacity:sidebarCollapsed?0:1,transition:"opacity 0.2s",overflow:"hidden",width:sidebarCollapsed?0:"auto"}}>Lichtkern</div>
+    </div>
+    <div style={{flex:1,padding:"4px 0",overflowY:"auto"}}>
+      {SIDEBAR_SECTIONS.map((sec,si)=>(
+        <div key={si} style={{marginBottom:12}}>
+          <div style={{fontFamily:"Raleway",fontSize:9,fontWeight:700,letterSpacing:2,color:"rgba(201,168,76,0.45)",textTransform:"uppercase",padding:sidebarCollapsed?"0":"0 18px 4px",opacity:sidebarCollapsed?0:1,height:sidebarCollapsed?0:"auto",overflow:"hidden",transition:"opacity 0.2s"}}>{sec.label}</div>
+          {sec.items.map(item=>{
             const isA=screen===item.id;
-            return(
-              <React.Fragment key={item.id}>
-              <button onClick={()=>nav(item.id)} style={{display:"flex",alignItems:"center",gap:"13px",padding:"12px 14px",borderRadius:"14px",border:"none",background:isA?"rgba(201,168,76,0.15)":"transparent",color:isA?T.gold:T.textMid,cursor:"pointer",fontFamily:"Raleway",fontWeight:700,fontSize:"13px",textAlign:"left",boxShadow:isA?`0 2px 10px rgba(201,168,76,0.12)`:"none",transition:"all 0.15s"}}>
-               <span style={{fontSize:"17px",width:"22px",textAlign:"center",opacity:1,filter:isA?"none":"grayscale(1) brightness(1.8)"}}>{item.icon}</span>
-                <span style={{color:isA?"#C9A84C":"rgba(245,240,232,0.7)"}}>{item.label}</span>
-                {isA&&<div style={{marginLeft:"auto",width:"6px",height:"6px",borderRadius:"50%",background:"#C9A84C",flexShrink:0}}/>}
-              </button>
-              {item.id==="clients"&&<button onClick={()=>startSession()} style={{display:"flex",alignItems:"center",gap:"13px",padding:"12px 14px",borderRadius:"14px",border:"none",background:"transparent",color:T.textMid,cursor:"pointer",fontFamily:"Raleway",fontWeight:700,fontSize:"13px",textAlign:"left",transition:"all 0.15s"}}>
-                <span style={{fontSize:"17px",width:"22px",textAlign:"center",opacity:0.65}}>✦</span>
-               <span style={{color:"rgba(245,240,232,0.7)"}}>Sitzung</span>
-              </button>}
-              </React.Fragment>
-            );
+            return <button key={item.id} onClick={()=>item.isSession?startSession():nav(item.id)} style={{display:"flex",alignItems:"center",gap:12,padding:sidebarCollapsed?"10px 0":"10px 18px",justifyContent:sidebarCollapsed?"center":"flex-start",width:"100%",border:"none",background:isA?"rgba(201,168,76,0.12)":"transparent",color:isA?"#C9A84C":"rgba(245,240,232,0.7)",cursor:"pointer",fontFamily:"Raleway",fontWeight:700,fontSize:13,textAlign:"left",transition:"all 0.15s",borderRadius:sidebarCollapsed?0:"0 12px 12px 0",marginRight:sidebarCollapsed?0:8}}>
+              <span style={{fontSize:17,width:22,textAlign:"center",flexShrink:0,filter:isA?"none":"grayscale(1) brightness(1.5)"}}>{item.icon}</span>
+              <span style={{whiteSpace:"nowrap",overflow:"hidden",opacity:sidebarCollapsed?0:1,width:sidebarCollapsed?0:"auto",transition:"opacity 0.2s"}}>{item.label}</span>
+              {isA&&!sidebarCollapsed&&<div style={{marginLeft:"auto",width:6,height:6,borderRadius:"50%",background:"#C9A84C",flexShrink:0}}/>}
+            </button>;
           })}
         </div>
-        {/* Settings bottom */}
-        <div style={{padding:"12px 14px 24px",borderTop:`1.5px solid ${T.border}`}}>
-            <button onClick={()=>setShowSettings(true)} style={{display:"flex",alignItems:"center",gap:"13px",padding:"12px 14px",borderRadius:"14px",border:"none",background:"transparent",width:"100%",cursor:"pointer"}}>
-              <span style={{fontSize:"17px",opacity:0.65}}>⚙</span>
-              <span style={{color:"rgba(245,240,232,0.7)"}}>Einstellungen</span>
-            </button>
-          </div>
-       </div>
+      ))}
+    </div>
+    <div style={{borderTop:"1px solid rgba(201,168,76,0.1)",padding:"8px 0 12px"}}>
+      <button onClick={()=>setShowSettings(true)} style={{display:"flex",alignItems:"center",gap:12,padding:sidebarCollapsed?"10px 0":"10px 18px",justifyContent:sidebarCollapsed?"center":"flex-start",width:"100%",border:"none",background:"transparent",color:"rgba(245,240,232,0.4)",cursor:"pointer",fontFamily:"Raleway",fontWeight:700,fontSize:13,transition:"all 0.15s"}}>
+        <span style={{fontSize:17,width:22,textAlign:"center",opacity:0.65}}>⚙</span>
+        <span style={{opacity:sidebarCollapsed?0:1,width:sidebarCollapsed?0:"auto",overflow:"hidden",whiteSpace:"nowrap",transition:"opacity 0.2s"}}>Einstellungen</span>
+      </button>
+      <button onClick={()=>setSidebarCollapsed(!sidebarCollapsed)} style={{display:"flex",alignItems:"center",justifyContent:"center",width:"100%",padding:"8px 0",border:"none",background:"transparent",color:"rgba(245,240,232,0.2)",cursor:"pointer",fontSize:16,transition:"all 0.15s"}}>
+        {sidebarCollapsed?"»":"«"}
+      </button>
+    </div>
+  </div>
     )}
 
     {/* Main content */}
-    <div style={{flex:1,marginLeft:isDesktop?"260px":"0",minWidth:0}}>
+    <div style={{flex:1,marginLeft:isDesktop?(sidebarCollapsed?68:230)+"px":"0",minWidth:0}}>
       <div style={{position:"fixed",top:"-60px",right:"-60px",width:"280px",height:"280px",borderRadius:"50%",background:`radial-gradient(circle,${T.goldL} 0%,transparent 70%)`,pointerEvents:"none",zIndex:0,opacity:0.35}}/>
       <div style={{position:"fixed",bottom:"12%",left:isDesktop?"200px":"-50px",width:"220px",height:"220px",borderRadius:"50%",background:`radial-gradient(circle,${T.goldL} 0%,transparent 70%)`,pointerEvents:"none",zIndex:0,opacity:0.25}}/>
       <div style={{position:"relative",zIndex:1,paddingTop:"12px",maxWidth:isDesktop?"none":"480px",margin:"0 auto"}}>
