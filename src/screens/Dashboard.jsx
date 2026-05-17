@@ -367,7 +367,7 @@ function Dashboard({ clients, sessions, appointments, onNav, settings }) {
   const recentSessions = (sessions || [])
     .slice(0, 3)
     .map(s => {
-      const client = (clients || []).find(c => c.id === s.clientId);
+      const client = (clients || []).find(c => c.id === s.clientId || c.clientId === s.clientId);
       const daysDiff = Math.floor((Date.now() - new Date(s.createdAt).getTime()) / 86400000);
       return { ...s, clientName: client?.name || s.clientName || "Unbekannt", initials: (client?.name || "??").split(" ").map(w => w[0]).join("").toUpperCase().slice(0, 2), daysAgo: daysDiff };
     });
