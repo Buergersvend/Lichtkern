@@ -365,7 +365,7 @@ function Dashboard({ clients, sessions, appointments, onNav, settings }) {
 
   // Last activity (last 3 sessions)
   const recentSessions = (sessions || [])
-    .slice(0, 3)
+    .filter(s => s.clientId).slice(0, 3)
     .map(s => {
       const client = (clients || []).find(c => c.id === s.clientId || c.clientId === s.clientId);
       const daysDiff = Math.floor((Date.now() - new Date(s.createdAt).getTime()) / 86400000);
