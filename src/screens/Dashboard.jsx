@@ -380,13 +380,14 @@ function Dashboard({ clients, sessions, appointments, onNav, settings }) {
   }, []);
 
   // Load Resonanz-Impuls
-  useEffect(() => {
+useEffect(() => {
+  const unsubscribe = auth.onAuthStateChanged((user) => {
+    if (!user) { setImpuls(FALLBACK); setImpulsLoading(false); return; }
+    
     async function ladeImpuls() {
       const currentDay = todayStr();
       try {
-        const uid = auth.currentUser?.uid;
-        if (!uid) { setImpuls(FALLBACK); setImpulsLoading(false); return; }
-        const ref = doc(db, "users", uid, "data", "resonanz_impuls");
+        const ref = doc(db, "users", user.uid, "data", "resonanz_impuls");
         const snap = await getDoc(ref);
         if (snap.exists()) {
           const data = snap.data();
@@ -408,15 +409,19 @@ function Dashboard({ clients, sessions, appointments, onNav, settings }) {
         await setDoc(ref, { datum: currentDay, text });
         setImpuls(text);
       } catch (e) {
+        console.error("Resonanz-Impuls Fehler:", e);
         setImpuls(FALLBACK);
       } finally {
         setImpulsLoading(false);
       }
     }
+    
     setImpulsLoading(true);
     ladeImpuls();
-  }, [impulsDate]);
-
+  });
+  
+  return () => unsubscribe();
+}, [impulsDate]);
   return (
     <div style={{ minHeight: "100vh", background: DARK, padding: "0 20px 120px" }}>
 
