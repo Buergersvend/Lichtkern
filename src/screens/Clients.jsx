@@ -277,9 +277,9 @@ function Clients({clients,sessions,onSave,onStart,onDelete,onOnboarding,reminder
   const [showAdd,setShowAdd]=useState(false);
   const [search,setSearch]=useState("");
   const [selClient,setSelClient]=useState(null);
-  const [form,setForm]=useState({name:"",contact:"",notes:"",tags:"",hdType:"",hdProfile:"",hdAuthority:"",birthDate:"",birthName:""});
+  const [form,setForm]=useState({name:"",email:"",contact:"",notes:"",tags:"",hdType:"",hdProfile:"",hdAuthority:"",birthDate:"",birthName:""});
   const filtered=clients.filter(c=>c.name.toLowerCase().includes(search.toLowerCase()));
-  const add=()=>{if(!form.name.trim())return;onSave([...clients,{id:uid(),createdAt:new Date().toISOString(),...form,tags:form.tags.split(",").map(t=>t.trim()).filter(Boolean)}]);setForm({name:"",contact:"",notes:"",tags:"",birthDate:"",birthName:""});setShowAdd(false);};
+  const add=()=>{if(!form.name.trim())return;onSave([...clients,{id:uid(),createdAt:new Date().toISOString(),...form,tags:form.tags.split(",").map(t=>t.trim()).filter(Boolean)}]);setForm({name:"",email:"",contact:"",notes:"",tags:"",birthDate:"",birthName:""});setShowAdd(false);};
   return(
     <div style={{padding:"0 16px 96px"}}>
       <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",paddingTop:"8px",marginBottom:"16px"}}>
@@ -292,7 +292,7 @@ function Clients({clients,sessions,onSave,onStart,onDelete,onOnboarding,reminder
       {showAdd&&(
         <Card style={{marginBottom:"16px",background:T.bgSoft,border:`1.5px solid ${T.borderMid}`}}>
           <SL color={T.goldD}>Neuer Klient</SL>
-          {[{k:"name",p:"Name *"},{k:"contact",p:"Email / Telefon"},{k:"notes",p:"Notizen"},{k:"tags",p:"Tags: Angst, Rücken, Ahnen…"}].map(f=>(
+          {[{k:"name",p:"Name *"},{k:"email",p:"E-Mail"},{k:"contact",p:"Telefon"},{k:"notes",p:"Notizen"},{k:"tags",p:"Tags: Angst, Rücken, Ahnen…"}].map(f=>(
             <div key={f.k} style={{marginBottom:"8px"}}><TI value={form[f.k]} onChange={v=>setForm({...form,[f.k]:v})} placeholder={f.p}/></div>
           ))}
           {/* Geburtsdaten für Numerologie */}

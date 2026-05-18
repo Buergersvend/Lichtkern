@@ -256,6 +256,9 @@ function SettingsScreen({ settings, onSave, onClose, clients, sessions, appointm
           <SettingsRow label="Therapeuten-Name">
             <TI value={form.therapistName||""} onChange={v=>up({therapistName:v})} placeholder="Dein vollständiger Name"/>
           </SettingsRow>
+          <SettingsRow label="E-Mail (für Terminerinnerungen)">
+            <TI value={form.practitionerEmail||""} onChange={v=>up({practitionerEmail:v})} placeholder="z.B. deine@email.de"/>
+          </SettingsRow>
         </Section>
 
         {/* 2. Rechnungsangaben + Disclaimer */}
