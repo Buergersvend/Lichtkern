@@ -379,7 +379,7 @@ function Dashboard({ clients, sessions, appointments, onNav, settings }) {
     return () => document.removeEventListener("visibilitychange", onVisible);
   }, []);
 
-  // Load Resonanz-Impuls
+ // Load Resonanz-Impuls
 useEffect(() => {
   const unsubscribe = auth.onAuthStateChanged((user) => {
     if (!user) { setImpuls(FALLBACK); setImpulsLoading(false); return; }
@@ -391,17 +391,20 @@ useEffect(() => {
         const snap = await getDoc(ref);
         if (snap.exists()) {
           const data = snap.data();
-          if (data.datum === currentDay) {
-            setImpuls(data.text || FALLBACK);
+          if (data.datum === currentDay && data.text && data.text !== FALLBACK) {
+            setImpuls(data.text);
             setImpulsLoading(false);
             return;
           }
         }
+        console.log("[Impuls] Groq wird aufgerufen...");
         const text = await groqFetch([{
           role: "user",
           content: "Generiere einen einzigen kurzen Resonanz-Impuls für Energetiker und Heiler. Maximal 2 Sätze. Tiefgründig, poetisch, inspirierend. Keine Anführungszeichen, keine Erklärung, nur den Impuls selbst."
         }]);
+        console.log("[Impuls] Groq Antwort:", text);
         if (!text || text.startsWith("Fehler") || text.length < 10) {
+          console.warn("[Impuls] Groq ungültig, zeige Fallback");
           setImpuls(FALLBACK);
           setImpulsLoading(false);
           return;
@@ -409,7 +412,7 @@ useEffect(() => {
         await setDoc(ref, { datum: currentDay, text });
         setImpuls(text);
       } catch (e) {
-        console.error("Resonanz-Impuls Fehler:", e);
+        console.error("[Impuls] Fehler:", e);
         setImpuls(FALLBACK);
       } finally {
         setImpulsLoading(false);
@@ -421,8 +424,7 @@ useEffect(() => {
   });
   
   return () => unsubscribe();
-}, [impulsDate]);
-  return (
+}, [impulsDate]);  return (
     <div style={{ minHeight: "100vh", background: DARK, padding: "0 20px 120px" }}>
 
       {/* ── HERO (unverändert) ── */}
