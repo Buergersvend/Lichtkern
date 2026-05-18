@@ -20,7 +20,7 @@ export default async function handler(req, res) {
       body: JSON.stringify({
         model: "llama-3.3-70b-versatile",
         max_tokens: maxTokens || 1500,
-        messages: [{ role: "user", content: prompt }]
+       messages: Array.isArray(prompt) ? prompt : [{ role: "user", content: prompt }]
       })
     });
     const data = await response.json();
