@@ -8,7 +8,7 @@ const GOLD = "#C9A84C";
 const DARK = "#0F0F0F";
 const DARK2 = "#1A1A1A";
 const DARK3 = "#242424";
-const LOGO = "/Firmenlogo_ohne_Hintergrund_Herz_20260414-removebg-preview.png";
+const LOGO = "/logo-siegel.png";
 const FALLBACK = "Vertraue dem Fluss deiner Energie — sie führt dich dorthin, wo Heilung möglich ist.";
 
 /* ─── SUPERNOVA EFFECT ─────────────────────────── */
@@ -157,11 +157,11 @@ function useSupernova(canvasRef, logoRef) {
     cv.height = rect.height * dpr;
     cv.style.width = rect.width + "px";
     cv.style.height = rect.height + "px";
-    cv.getContext("2d").scale(dpr, dpr);
+    const ctx2 = cv.getContext("2d");
+    ctx2.setTransform(1, 0, 0, 1, 0, 0);
+    ctx2.scale(dpr, dpr);
     const w = rect.width, h = rect.height;
     const cx = w / 2, cy = h / 2;
-    dims.current = { w: w * dpr, h: h * dpr, cx: w / 2, cy: h / 2 };
-    // re-set after scale
     dims.current = { w, h, cx, cy };
 
     // Reset
@@ -188,8 +188,8 @@ function useSupernova(canvasRef, logoRef) {
     void container.offsetWidth;
     container.style.animation = "lk-shake 0.4s ease-out";
 
-    // Spawn particles (80 main + 25 embers)
-    for (let i = 0; i < 80; i++) {
+    // Spawn particles (100 main + 30 embers)
+    for (let i = 0; i < 100; i++) {
       const a = Math.random() * Math.PI * 2;
       const spd = 2 + Math.random() * 7;
       const sz = 1 + Math.random() * 3.5;
@@ -205,7 +205,7 @@ function useSupernova(canvasRef, logoRef) {
         trail: sz > 2.2
       });
     }
-    for (let i = 0; i < 25; i++) {
+    for (let i = 0; i < 30; i++) {
       const a = Math.random() * Math.PI * 2;
       const d = 15 + Math.random() * 35;
       particles.current.push({
@@ -218,19 +218,19 @@ function useSupernova(canvasRef, logoRef) {
       });
     }
 
-    // Shockwave rings (4)
-    for (let i = 0; i < 4; i++) {
+    // Shockwave rings (5)
+    for (let i = 0; i < 5; i++) {
       rings.current.push({ radius: 15, maxRadius: 160 + i * 60, opacity: 0.6 - i * 0.1, width: 2.5 - i * 0.4, speed: 3.5 + i * 1.2 });
     }
 
-    // Light rays (12)
-    for (let i = 0; i < 12; i++) {
-      const a = (Math.PI * 2 / 12) * i + (Math.random() - 0.5) * 0.3;
+    // Light rays (16)
+    for (let i = 0; i < 16; i++) {
+      const a = (Math.PI * 2 / 16) * i + (Math.random() - 0.5) * 0.3;
       rays.current.push({ angle: a, length: 0, maxLength: 80 + Math.random() * 100, opacity: 0.35 + Math.random() * 0.25, width: 1 + Math.random() * 1.5, speed: 5 + Math.random() * 3 });
     }
 
-    // Starfield (50)
-    for (let i = 0; i < 50; i++) {
+    // Starfield (60)
+    for (let i = 0; i < 60; i++) {
       starfield.current.push({
         x: Math.random() * w, y: Math.random() * h,
         size: 0.4 + Math.random() * 1.2,
@@ -282,9 +282,11 @@ function CategoryTile({ cat, onNav, open, onToggle }) {
         onMouseLeave={() => setHover(false)}
         style={{
           background: open ? "rgba(201,168,76,0.1)" : hover ? "rgba(201,168,76,0.07)" : DARK2,
-          border: `1px solid ${open || hover ? "rgba(201,168,76,0.35)" : "rgba(201,168,76,0.15)"}`,
+          borderTop:    `1px solid ${open || hover ? "rgba(201,168,76,0.35)" : "rgba(201,168,76,0.15)"}`,
+          borderLeft:   `1px solid ${open || hover ? "rgba(201,168,76,0.35)" : "rgba(201,168,76,0.15)"}`,
+          borderRight:  `1px solid ${open || hover ? "rgba(201,168,76,0.35)" : "rgba(201,168,76,0.15)"}`,
+          borderBottom: open ? "1px solid rgba(201,168,76,0.08)" : `1px solid ${hover ? "rgba(201,168,76,0.35)" : "rgba(201,168,76,0.15)"}`,
           borderRadius: open ? "14px 14px 0 0" : "14px",
-          borderBottom: open ? "1px solid rgba(201,168,76,0.08)" : undefined,
           padding: "20px 12px",
           textAlign: "center",
           cursor: "pointer",
@@ -321,7 +323,9 @@ function CategoryTile({ cat, onNav, open, onToggle }) {
               gap: "10px",
               width: "100%",
               padding: "10px 16px",
-              border: "none",
+              borderTop: "none",
+              borderLeft: "none",
+              borderRight: "none",
               borderBottom: "1px solid rgba(201,168,76,0.06)",
               background: itemHover === item.id ? "rgba(201,168,76,0.1)" : "transparent",
               color: itemHover === item.id ? GOLD : "rgba(245,240,232,0.65)",
@@ -427,7 +431,7 @@ useEffect(() => {
 }, [impulsDate]);  return (
     <div style={{ minHeight: "100vh", background: DARK, padding: "0 20px 120px" }}>
 
-      {/* ── HERO (unverändert) ── */}
+      {/* ── HERO ── */}
       <div style={{ textAlign: "center", padding: "32px 0 20px", borderBottom: "1px solid rgba(201,168,76,0.2)", marginBottom: "20px", position: "relative", overflow: "hidden" }}>
         {/* Supernova Canvas */}
         <canvas ref={canvasRef} style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", pointerEvents: "none", zIndex: 1 }} />

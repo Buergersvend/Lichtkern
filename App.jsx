@@ -139,7 +139,9 @@ function App({ user, onLogout }){
     {isDesktop && (
   <div style={{width:sidebarCollapsed?68:200,flexShrink:0,background:"#0F0F0F",borderRight:"0.5px solid rgba(201,168,76,0.15)",display:"flex",flexDirection:"column",position:"fixed",top:0,left:0,bottom:0,zIndex:100,transition:"width 0.25s ease",overflow:"hidden"}}>
     <div style={{display:"flex",alignItems:"center",gap:10,padding:sidebarCollapsed?"20px 16px":"20px 18px"}}>
-      <div style={{width:36,height:36,borderRadius:"50%",flexShrink:0,background:"radial-gradient(circle,rgba(201,168,76,0.35) 0%,transparent 70%)",border:"1px solid rgba(201,168,76,0.35)",display:"flex",alignItems:"center",justifyContent:"center",color:"#C9A84C",fontFamily:"Raleway",fontSize:12,fontWeight:600}}>SD</div>
+      <div style={{width:36,height:36,borderRadius:"50%",flexShrink:0,background:"radial-gradient(circle,rgba(201,168,76,0.35) 0%,transparent 70%)",border:"1px solid rgba(201,168,76,0.35)",display:"flex",alignItems:"center",justifyContent:"center",overflow:"hidden"}}>
+        <img src="/logo-siegel.png" alt="Human Resonanz" style={{width:"100%",height:"100%",objectFit:"contain"}} />
+      </div>
       <div style={{fontFamily:"Raleway",fontSize:14,fontWeight:700,color:"rgba(245,240,232,0.85)",letterSpacing:1,whiteSpace:"nowrap",opacity:sidebarCollapsed?0:1,transition:"opacity 0.2s",overflow:"hidden",width:sidebarCollapsed?0:"auto"}}>Lichtkern</div>
     </div>
     <div style={{flex:1,padding:"4px 0",overflowY:"auto"}}>

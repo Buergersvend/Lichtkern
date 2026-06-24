@@ -88,7 +88,7 @@ function LoginScreen({ onLogin }){
 
         {/* Logo */}
         <div style={{textAlign:"center", marginBottom:"36px"}}>
-          <img src="/Firmenlogo_ohne_Hintergrund_Herz_20260414-removebg-preview.png" style={{width:"80px",height:"80px",objectFit:"contain"}}/>
+          <img src="/logo-siegel.png" style={{width:"80px",height:"80px",objectFit:"contain"}}/>
           <div style={{fontFamily:"Raleway", fontSize:"11px", color:T.textSoft, letterSpacing:"3px", marginTop:"5px", fontWeight:600}}>POWERED BY HUMAN RESONANZ</div>
         </div>
 
