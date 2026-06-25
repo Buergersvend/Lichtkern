@@ -9,7 +9,7 @@ const DARK = "#0F0F0F";
 const DARK2 = "#1A1A1A";
 const DARK3 = "#242424";
 const LOGO = "/logo-siegel.png";
-const FALLBACK = "Vertraue dem Fluss deiner Energie — sie führt dich dorthin, wo Heilung möglich ist.";
+const FALLBACK = "Vertraue dem Fluss deiner Energie – sie führt dich dorthin, wo Begegnung möglich ist.";
 
 /* ─── SUPERNOVA EFFECT ─────────────────────────── */
 function useSupernova(canvasRef, logoRef) {
@@ -404,7 +404,7 @@ useEffect(() => {
         console.log("[Impuls] Groq wird aufgerufen...");
         const text = await groqFetch([{
           role: "user",
-          content: "Generiere einen einzigen kurzen Resonanz-Impuls für Energetiker und Heiler. Maximal 2 Sätze. Tiefgründig, poetisch, inspirierend. Keine Anführungszeichen, keine Erklärung, nur den Impuls selbst."
+          content: "Generiere einen einzigen kurzen Resonanz-Impuls für Begleiter und Coaches. Bleibe auf einer seelisch-symbolischen Ebene, ohne Heilversprechen oder medizinische Aussagen. Maximal 2 Sätze. Tiefgründig, poetisch, inspirierend. Keine Anführungszeichen, keine Erklärung, nur den Impuls selbst."
         }]);
         console.log("[Impuls] Groq Antwort:", text);
         if (!text || text.startsWith("Fehler") || text.length < 10) {
