@@ -22,14 +22,17 @@ export default async function handler(req, res) {
   if (mode === "dev") {
     try {
       const authHeader = req.headers["authorization"] || "";
+      console.log("[ORACLE-DEBUG] dev angefragt, authHeader vorhanden:", !!req.headers["authorization"]);
       const token = authHeader.startsWith("Bearer ") ? authHeader.slice(7) : null;
       if (token) {
         const decoded = await admin.auth().verifyIdToken(token);
+        console.log("[ORACLE-DEBUG] verifiziert, uid:", decoded.uid, "| owner-match:", decoded.uid === OWNER_UID);
         if (decoded.uid !== OWNER_UID) effectiveMode = "analyse";
       } else {
         effectiveMode = "analyse";
       }
-    } catch {
+    } catch (e) {
+      console.error("[ORACLE-DEBUG] Verifikation fehlgeschlagen:", e?.message || e);
       effectiveMode = "analyse";
     }
   }
