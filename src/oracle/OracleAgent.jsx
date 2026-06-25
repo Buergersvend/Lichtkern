@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import { T } from "../config/theme.js";
 import { Btn, TI, SL } from "../components/UI.jsx";
+import { auth } from "../config/firebase.js";
+
+const OWNER_UID = "vVixVaoH4mPPjAljm1cKlQe16un1";
 
 export default function OracleAgent({ onClose }) {
-  const [mode, setMode] = useState("dev");
+  const [mode, setMode] = useState("analyse");
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -15,9 +18,13 @@ export default function OracleAgent({ onClose }) {
     setInput("");
     setLoading(true);
     try {
+      const token = auth.currentUser ? await auth.currentUser.getIdToken() : null;
       const res = await fetch("/api/oracle", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": token ? `Bearer ${token}` : "",
+        },
         body: JSON.stringify({ message: input, mode }),
       });
       const data = await res.json();
@@ -42,7 +49,10 @@ export default function OracleAgent({ onClose }) {
 
         {/* Modus */}
         <div style={{ display: "flex", gap: "8px", padding: "12px 24px" }}>
-          {[["dev", "⚙ DEV"], ["analyse", "📊 Analyse"]].map(([v, l]) => (
+          {[
+            ...(auth.currentUser?.uid === OWNER_UID ? [["dev", "⚙ DEV"]] : []),
+            ["analyse", "📊 Analyse"],
+          ].map(([v, l]) => (
             <button key={v} onClick={() => setMode(v)} style={{ padding: "7px 16px", borderRadius: "10px", border: `1.5px solid ${mode === v ? T.gold : T.border}`, background: mode === v ? T.gold : T.bgCard, fontFamily: "Raleway", fontSize: "12px", fontWeight: 700, color: mode === v ? "#1A1200" : T.textMid, cursor: "pointer" }}>{l}</button>
           ))}
         </div>

@@ -1,3 +1,14 @@
+import admin from "firebase-admin";
+
+if (!admin.apps.length) {
+  const sa = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
+  admin.initializeApp({
+    credential: admin.credential.cert(sa),
+  });
+}
+
+const OWNER_UID = "vVixVaoH4mPPjAljm1cKlQe16un1";
+
 export default async function handler(req, res) {
   if (req.method !== "POST") {
     return res.status(405).json({ error: "Method not allowed" });
@@ -6,7 +17,24 @@ export default async function handler(req, res) {
   if (!message) return res.status(400).json({ error: "Kein Message angegeben." });
   const GROQ_API_KEY = process.env.GROQ_API_KEY;
   if (!GROQ_API_KEY) return res.status(500).json({ error: "API-Key fehlt." });
-  const systemPrompt = mode === "dev"
+
+  let effectiveMode = mode;
+  if (mode === "dev") {
+    try {
+      const authHeader = req.headers["authorization"] || "";
+      const token = authHeader.startsWith("Bearer ") ? authHeader.slice(7) : null;
+      if (token) {
+        const decoded = await admin.auth().verifyIdToken(token);
+        if (decoded.uid !== OWNER_UID) effectiveMode = "analyse";
+      } else {
+        effectiveMode = "analyse";
+      }
+    } catch {
+      effectiveMode = "analyse";
+    }
+  }
+
+  const systemPrompt = effectiveMode === "dev"
   ? `Du bist Resonanz, der intelligente Entwicklungsassistent von Lichtkern. Lichtkern ist eine React/Vite Praxisverwaltungs-App für Energiearbeiter im DACH-Markt. Stack: React, Vite, Firebase (Firestore+Auth), Vercel, Groq AI (llama-3.3-70b-versatile). Dateistruktur: screens/ (Dashboard,Clients,Calendar,Session,History,Analytics,Billing,Settings,Knowledge,GenTree,PDFModal,Templates,Onboarding,ClientAnalysis), components/ (UI.jsx,Decorations.jsx,HumanDesign.jsx), config/ (theme.js,constants.js,helpers.js,firebase.js,groq.js), oracle/ (OracleAgent.jsx und Module), api/ (ki.js,oracle.js). Dark Theme vollständig umgesetzt. Dashboard modernisiert. PDF Markierungen gefixt. Alle bekannten Bugs behoben. Roadmap: Lernwelt, B2B, Billing/Stripe, Hell/Dunkel Toggle. Geschäftsmodell: App-Abo (Free/Starter €14/Pro €29/Studio €49), Lernwelt pro Zertifikat, B2B später. Entwickler: Sven, Laie, GitHub Web Editor, max 2 Dateien pro Session, Deutsch. Antworte präzise und direkt auf Deutsch.`
   : `Du bist Resonanz, der einfühlsame Begleiter in Lichtkern. Du unterstützt Begleiter und Coaches mit Impulsen zu ihrer Begleitungsarbeit. Du analysierst anonymisierte Begleitungsnotizen, erkennst Muster in Begleitungsverläufen und gibst hilfreiche, alltagsnahe Impulse — auf einer seelisch-symbolischen Ebene, ohne Heilversprechen oder medizinische Aussagen. Du deutest keine Symptome und stellst keine Diagnosen. Kein Personenbezug. Bei gesundheitlichen Themen verweist du grundsätzlich an Ärzte, Heilpraktiker oder Therapeuten. Antworte warmherzig, klar und inspirierend auf Deutsch.`;
   try {
