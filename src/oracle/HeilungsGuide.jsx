@@ -112,7 +112,7 @@ Gib eine PRAXISANLEITUNG:
 // ════════════════════════════════════════════════════════════════
 
 // ════════════════════════════════════════════════════════════════
-//  ORGANSPRACHE LERNMODUL · Pilot-Modul · Human Resonanz Akademie
+//  ORGANSPRACHE LERNMODUL · Pilot-Modul · Human Resonanz Lernwelt
 // ════════════════════════════════════════════════════════════════
 
 //  INTEGRATION: Ersetze in Lernpfad die KI-Generierung für

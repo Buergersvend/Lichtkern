@@ -413,10 +413,10 @@ const HEILMETHODEN_KATALOG = [
 
 const LERNPFAD_STUFEN = [
   { nr:1, name:"Einführung",    farbe:"#16A34A", icon:"🌱", beschreibung:"Grundverständnis, Terminologie, erste Wahrnehmungen. Für Einsteiger." },
-  { nr:2, name:"Grundlagen",   farbe:"#C9A84C", icon:"📚", beschreibung:"Systematisches Wissen, erste Technikanwendung, Klienten-Grundarbeit." },
-  { nr:3, name:"Vertiefung",   farbe:"#0284C7", icon:"🎯", beschreibung:"Komplexe Fälle, Kombination von Methoden, eigene Wahrnehmungsschärfung." },
-  { nr:4, name:"Meisterschaft",farbe:"#A87D3A", icon:"⚡", beschreibung:"Aura-Chirurgie, Quantenarbeit, Fern-Anwendungen, Ausbildungsleitung." },
-  { nr:5, name:"Zertifizierung",farbe:"#D97706",icon:"🏆", beschreibung:"Geprüfte Kompetenz, Human Resonanz Akademie Zertifikat, Lehrerlizenz." },
+  { nr:2, name:"Grundlagen",   farbe:"#C9A84C", icon:"📚", beschreibung:"Systematisches Wissen, erste Technikanwendung, eigenständige Anwendung." },
+  { nr:3, name:"Vertiefung",   farbe:"#0284C7", icon:"🎯", beschreibung:"Komplexe Themen, Kombination von Methoden, eigene Wahrnehmungsschärfung." },
+  { nr:4, name:"Meisterschaft",farbe:"#A87D3A", icon:"⚡", beschreibung:"Souveräne Anwendung und tiefes Verständnis." },
+  { nr:5, name:"Zertifizierung",farbe:"#D97706",icon:"🏆", beschreibung:"Geprüfte Kompetenz · Höchste Abschlussstufe der Human Resonanz Lernwelt." },
 ];
 
 // ════════════════════════════════════════════════════════════════

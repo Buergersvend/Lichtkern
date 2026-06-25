@@ -37,7 +37,7 @@ function Lernpfad({ groqFetch }){
     if (!groqFetch) { setKiInhalt("⚠️ API nicht verbunden."); return; }
     setKiLaed(true); setKiInhalt("");
     const stufenNamen = {1:"Einführung",2:"Grundlagen",3:"Vertiefung",4:"Meisterschaft",5:"Zertifizierungswissen"};
-    const prompt = `Du bist Leiter der Human Resonanz Akademie und vermittelst professionelles energetisches Heiler-Wissen.
+    const prompt = `Du bist ein erfahrener Begleiter der Human Resonanz Lernwelt. Du vermittelst Wissen über energetische Selbstwahrnehmung, Bewusstseinsarbeit und persönliche Entwicklung — auf einer seelisch-symbolischen Ebene, ohne Heilversprechen oder medizinische Aussagen. Bei gesundheitlichen Themen verweist du grundsätzlich an Ärzte, Heilpraktiker oder Therapeuten.
 
 Thema: ${thema.name}
 Lernstufe: ${stufenNamen[stufe]} (${stufe}/5)
@@ -128,7 +128,7 @@ Schreibe klar, strukturiert und inspirierend. Auf Deutsch.`;
   return (
     <div style={{display:"flex",flexDirection:"column",gap:"14px"}}>
       <OCard style={{background:OT.bgSoft,padding:"16px"}}>
-        <div style={{fontFamily:"Cinzel",fontSize:"15px",color:OT.text,fontWeight:700,marginBottom:"4px"}}>🏆 Resonanz Akademie · Lernpfad</div>
+        <div style={{fontFamily:"Cinzel",fontSize:"15px",color:OT.text,fontWeight:700,marginBottom:"4px"}}>🏆 Resonanz Lernwelt · Lernpfad</div>
         <div style={{fontFamily:"Raleway",fontSize:"12px",color:OT.textMid,fontWeight:500}}>Von Einführung bis Zertifizierung. KI generiert individuellen Lerninhalt für deine Stufe.</div>
         <div style={{display:"flex",gap:"6px",marginTop:"10px",flexWrap:"wrap"}}>
           {LERNPFAD_STUFEN.map(s=>(
