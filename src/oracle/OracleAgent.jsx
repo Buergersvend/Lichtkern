@@ -19,7 +19,6 @@ export default function OracleAgent({ onClose }) {
     setLoading(true);
     try {
       const token = auth.currentUser ? await auth.currentUser.getIdToken() : null;
-      console.log("[DEV-DEBUG] mode:", mode, "| token vorhanden:", !!token, "| uid:", auth.currentUser?.uid);
       const res = await fetch("/api/oracle", {
         method: "POST",
         headers: {
