@@ -346,61 +346,66 @@ const HELLSINN_TAGS = {
 };
 
 const HEILMETHODEN_KATALOG = [
-  { id:"blutreinigung",  name:"Blutreinigung",      icon:"🩸", kategorie:"Energetische Heilung",
-    beschreibung:"Reinigung des energetischen Blutfeldes von niedrigen Frequenzen, Schockmustern und Ahnenbelastungen. Das Blut ist der Träger aller Lebensinformation.",
-    anwendung:"Chronische Erkrankungen, Erschöpfung, Ahnenthemen, Kreislaufprobleme, Bluterkrankungen",
-    ablauf:["Verbindung mit dem Herzfeld","Licht durch das Blut strömen lassen","Dunkle Partikel im Licht auflösen","Neue vitale Frequenz einprogrammieren","Versiegelung"],
+  { id:"blutreinigung",  name:"Lebensfluss-Wahrnehmung", icon:"🩸", kategorie:"Seelisch-symbolische Arbeit",
+    beschreibung:"Eine symbolische Auseinandersetzung mit dem Bild des Blutes als Sinnbild für Lebenskraft und familiäre Herkunft. Eine Einladung, den eigenen Lebensfluss bewusst wahrzunehmen.",
+    anwendung:"Für Menschen, die sich mit Themen wie Lebenskraft, familiärer Herkunft und innerer Erneuerung beschäftigen möchten",
+    ablauf:["Innehalten und zur Ruhe kommen","das Bild des eigenen Lebensflusses vor dem inneren Auge entstehen lassen","bewusst durchatmen","einen Moment der inneren Sammlung"],
     stufe:3
   },
-  { id:"herzheilung",    name:"Herzheilung",         icon:"💚", kategorie:"Energetische Heilung",
-    beschreibung:"Tiefe Heilungsarbeit am Herzfeld: Öffnen, Reinigen, Integrieren von Herzwunden, Liebeskummer, Verlust und emotionalen Panzerungen.",
-    anwendung:"Herzschmerz, Trauer, Verlust, Beziehungsprobleme, Selbstablehnung, Angststörungen",
-    ablauf:["Herzraum öffnen","Schmerzschichten ablösen","Rohes Licht einlassen","Selbstliebe ankern","Herz-Kohärenz stabilisieren"],
+  { id:"herzheilung",    name:"Herzraum-Begegnung",      icon:"💚", kategorie:"Seelisch-symbolische Arbeit",
+    beschreibung:"Eine symbolische Annäherung an das Herz als Sinnbild für Verbundenheit und emotionale Offenheit. Ein Raum, um Themen wie Abschied, Sehnsucht und Nähe achtsam anzuschauen.",
+    anwendung:"Für Menschen, die sich mit Themen wie Trauer, Verbundenheit und Selbstannahme auseinandersetzen möchten",
+    ablauf:["Die Aufmerksamkeit auf den Herzraum lenken","schwierige Gefühle benennen und anerkennen","sich selbst Mitgefühl zusprechen","ruhig atmen"],
     stufe:2
   },
-  { id:"chakraheilung",  name:"Chakraheilung",        icon:"🌈", kategorie:"Energetische Heilung",
-    beschreibung:"Systematische Reinigung, Balancierung und Aktivierung der sieben Hauptchakren und ihrer Verbindungskanäle (Sushumna, Ida, Pingala).",
-    anwendung:"Energieimbalancen, Körperbeschwerden, emotionale Blockaden, spirituelle Stagnation",
-    ablauf:["Chakren-Scan (Pendeltest/Intuition)","Blockiertes Chakra identifizieren","Reinigung","Aktivierung mit Farb-/Tonfrequenz","Nadis ausbalancieren"],
+  { id:"chakraheilung",  name:"Chakren-Wahrnehmung",     icon:"🌈", kategorie:"Seelisch-symbolische Arbeit",
+    beschreibung:"Eine symbolische Beschäftigung mit dem Chakren-Modell als Landkarte innerer Themen — von Erdung über Ausdruck bis zur inneren Klarheit.",
+    anwendung:"Für Menschen, die das Chakren-Modell als Anregung zur Selbstreflexion kennenlernen möchten",
+    ablauf:["Die sieben Themenbereiche der Reihe nach betrachten","spüren welches Thema gerade anklingt","mit Farben oder Klängen zur Ruhe finden"],
     stufe:1
   },
-  { id:"meridianheilung",name:"Meridian-Ausgleich",  icon:"🌊", kategorie:"Energetische Heilung",
-    beschreibung:"Energetische Aktivierung der 12 Hauptmeridiane und 2 Gefäße (Renmai/Dumai) zur Harmonisierung des gesamten Energiesystems.",
-    anwendung:"Organprobleme, Schmerzbilder, emotionale Muster, TCM-Diagnoseprinzipien",
-    ablauf:["Meridian-Scan","Schwache Meridiane bestimmen","Sedierung / Tonisierung","Energie nachführen","Ausleitung"],
+  { id:"meridianheilung",name:"Meridian-Betrachtung",    icon:"🌊", kategorie:"Seelisch-symbolische Arbeit",
+    beschreibung:"Eine symbolische Beschäftigung mit dem Meridian-Modell der fernöstlichen Tradition als Bild für innere Balance und Lebensrhythmus.",
+    anwendung:"Für Menschen, die sich für fernöstliche Vorstellungen von innerer Balance interessieren",
+    ablauf:["Die Vorstellung der Energiebahnen als Anregung nutzen","dem eigenen Rhythmus nachspüren","Phasen von Anspannung und Ruhe wahrnehmen"],
     stufe:2
   },
-  { id:"ahnenarbeit",    name:"Ahnenlinien-Heilung", icon:"🧬", kategorie:"Systemische Energie",
-    beschreibung:"Heilungsarbeit an transgenerationellen Mustern, Loyalitäten, Schwüren und Traumata in Mutter- und Vaterlinie bis zur 7. Generation.",
-    anwendung:"Wiederholungsmuster, Beziehungsthemen, Erkrankungsmuster die sich wiederholen",
-    ablauf:["Ahnen-Feld öffnen","Thema und Ursprung finden","Anerkennung der Ahnen","Lösung/Vergebung","DNS-Reinigung","Integration"],
+  { id:"ahnenarbeit",    name:"Ahnenlinien-Betrachtung", icon:"🧬", kategorie:"Seelisch-symbolische Arbeit",
+    beschreibung:"Eine symbolische Auseinandersetzung mit der eigenen Familiengeschichte — mit wiederkehrenden Mustern, Prägungen und der Frage, was über Generationen weitergegeben wird.",
+    anwendung:"Für Menschen, die wiederkehrende familiäre Muster und ihre eigene Herkunft besser verstehen möchten",
+    ablauf:["Die eigene Familiengeschichte anschauen","wiederkehrende Muster benennen","den Vorfahren innerlich Anerkennung geben","einen Gedanken der Versöhnung fassen"],
     stufe:3
   },
-  { id:"dnaheilung",     name:"DNA / Licht-Codes",   icon:"🔮", kategorie:"Quantenheilung",
+  { id:"zeitlinie",      name:"Zeitlinienarbeit",        icon:"⏳", kategorie:"Seelisch-symbolische Arbeit",
+    beschreibung:"Eine symbolische Arbeit mit der eigenen Lebenslinie — der Blick auf Vergangenes, Gegenwärtiges und Zukünftiges als Anregung zur Selbstreflexion.",
+    anwendung:"Für Menschen, die ihre eigene Lebensgeschichte und ihre Wünsche für die Zukunft reflektieren möchten",
+    ablauf:["Sich die eigene Lebenslinie vorstellen","prägende Momente betrachten","den Blick bewusst auf das Jetzt und mögliche nächste Schritte richten"],
+    stufe:4
+  },
+  { id:"lichtsprache",   name:"Licht-Sprache",           icon:"✨", kategorie:"Seelisch-symbolische Arbeit",
+    beschreibung:"Ein intuitiver, klanglicher Ausdruck jenseits der Alltagssprache — Laute, Töne und Gesten als kreative, nonverbale Form der Selbstwahrnehmung.",
+    anwendung:"Für Menschen, die einen kreativen, nonverbalen Ausdruck erkunden möchten",
+    ablauf:["Zur Ruhe kommen","dem spontanen Klang- und Bewegungsimpuls Raum geben","ohne Bewertung ausdrücken","danach nachspüren"],
+    stufe:3
+  },
+];
+
+// ===== DEAKTIVIERT 26.06.2026 - HeilprG/HWG, Anwaltsklaerung ausstehend =====
+// dnaheilung: kein behandlungsfreier Kern (DNA-/Epigenetik-Wirkversprechen) -> Klaerung: endgueltig raus?
+// fernheilung: §9 HWG Fernbehandlungsverbot -> sanierte Rettungs-Fassung "Verbindung ueber Distanz" siehe Anwaltsdokument, Klaerung: tragfaehig?
+// Originalinhalt beider Eintraege:
+/*
+  { id:"dnaheilung", name:"DNA / Licht-Codes", icon:"🔮", kategorie:"Quantenheilung",
     beschreibung:"Aktivierung von Licht-Codes in der DNS über Intention, Klang und höherdimensionale Verbindung. Epigenetische Umprogrammierung.",
     anwendung:"Tiefe Familienmuster, spirituelles Erwachen, Potential-Entfaltung",
     ablauf:["Verbindung höheres Selbst","DNS-Visualisierung","Lichtcodes einsenden","Altes Programm auflösen","Neues Muster verankern"],
-    stufe:5
-  },
-  { id:"zeitlinie",      name:"Zeitlinienarbeit",    icon:"⏳", kategorie:"Quantenheilung",
-    beschreibung:"Energetische Heilungsarbeit in der Zeit: Vergangenheitshealing, Inkarnationsthemen, Zukunftsprogrammierung.",
-    anwendung:"Nicht-heilende Wunden, Traumatas die 'tief' sitzen, Karma-Auflösung",
-    ablauf:["Zeitlinie öffnen","Heilungspunkt identifizieren","Intervention im Energiefeld der Zeit","Integration ins Jetzt"],
-    stufe:4
-  },
-  { id:"lichtsprache",   name:"Licht-Sprache",       icon:"✨", kategorie:"Frequenzarbeit",
-    beschreibung:"Übertragung von Heilfrequenzen durch Laut, Geste und Intention jenseits des Verstandes. Direkte Arbeit mit dem Energiefeld.",
-    anwendung:"Tiefe Blockaden, wenn Worte nicht reichen, Frequenzübertragung",
-    ablauf:["Verbindung herstellen","Kanal öffnen","Lichtsprache fließen lassen","Empfangen und integrieren"],
-    stufe:3
-  },
-  { id:"fernheilung",    name:"Fernheilung",         icon:"🌐", kategorie:"Quantenheilung",
+    stufe:5 },
+  { id:"fernheilung", name:"Fernheilung", icon:"🌐", kategorie:"Quantenheilung",
     beschreibung:"Quantenenergetische Heilungsarbeit über Raum und Zeit. Intention als primäres Werkzeug. Gleiche Wirksamkeit wie Präsenz-Sitzung.",
     anwendung:"Nicht anwesende Klienten, Nachsorge, internationale Arbeit",
     ablauf:["Heiligen Raum öffnen","Verbindung mit Klientenfeld aufnehmen","Absicht setzen","Arbeit durchführen","Schließen und loslassen"],
-    stufe:4
-  },
-];
+    stufe:4 },
+*/
 
 const LERNPFAD_STUFEN = [
   { nr:1, name:"Einführung",    farbe:"#16A34A", icon:"🌱", beschreibung:"Grundverständnis, Terminologie, erste Wahrnehmungen. Für Einsteiger." },
