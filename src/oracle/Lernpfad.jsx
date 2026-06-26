@@ -25,7 +25,7 @@ function Lernpfad({ groqFetch }){
     {id:"ahnen", name:"Ahnen & DNA", icon:"🧬"},
     {id:"hellsinne", name:"Hellsinne", icon:"👁️"},
     // {id:"aura_chirurgie", name:"Aura-Chirurgie", icon:"✂️"},  // deaktiviert
-    {id:"fernheilung", name:"Fernheilung", icon:"🌐"},
+    {id:"fernheilung", name:"Arbeit auf Distanz", icon:"🌐"},
     {id:"lichtsprache", name:"Licht-Sprache", icon:"✨"},
     {id:"humandesign", name:"Human Design", icon:"⚙️"},
     {id:"schamanismus", name:"Schamanismus", icon:"🪶"},
