@@ -57,8 +57,8 @@ const CHAKRA_SYSTEM = [
     aura_schicht:"Astralkörper",
     hd_zentren:["G-Zentrum","Milz","Ego"],
     heilung:["Rosenquarz","Malachit","Ho'oponopono","Herz-Kohärenz-Atmung","Vergebungsrituale"],
-    lernpfad_soft:"Das Herz-Chakra ist die Brücke zwischen dem Unteren (Materie) und dem Oberen (Geist). Es trägt die höchste Heilfrequenz.",
-    lernpfad_deep:"Herzheilungen sind oft mehrstufig: 1. Schutzpanzer auflösen 2. Alten Schmerz entlassen 3. Selbstliebe aktivieren 4. Verbindungsfaden zum höheren Selbst stärken. Besondere Methode: Blutreinigung durch Lichtarbeit im Herzraum."
+    lernpfad_soft:"Das Herz-Chakra ist die Brücke zwischen dem Unteren (Materie) und dem Oberen (Geist). Es steht symbolisch für Mitgefühl und Verbundenheit.",
+    lernpfad_deep:"Die Arbeit mit dem Herzraum verläuft oft in Schritten: 1. innere Schutzhaltungen wahrnehmen 2. alten Schmerz anschauen 3. Selbstmitgefühl stärken 4. die Verbindung zum eigenen inneren Kern vertiefen."
   },
   { id:"kehle",        nr:5, name:"Kehlkopf-Chakra", de:"Vishuddha",   farbe:"#0284C7", hex:"#0284C7",
     symbol:"◈", mantra:"HAM", hz:741,
