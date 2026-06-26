@@ -267,58 +267,55 @@ const ORGAN_MAP = {
 };
 
 const AURA_SCHICHTEN = [
-  { nr:1, name:"Ätherischer Körper",    farbe:"#CBD5E1", thema:"Vitalität · Körperblaupause",
-    abstand:"2–5 cm", wahrnehmung:"Kribbeln, Wärme, Pulsation direkt am Körper",
-    blockaden:["Erschöpfung","Chronische Erkrankungen","Energieverlust","Schmerz"],
-    heilung:["Pranic Healing","Quantenheilung am Ätherfeld","Lebensenergie-Infusion","Akupunktur-Meridiane"],
-    chirurgie:["Ätherische Wunden nähen","Depleted areas auffüllen","Energielecks schließen"]
+  {
+    nr:1, nameDe:"Die körpernahe Ebene", nameKlassisch:"Ätherkörper",
+    farbe:"#CBD5E1", naehe:"dem Erleben ganz nah",
+    beschreibung:"Die erste Schicht liegt deinem Körper am nächsten — dort, wo Empfinden, Vitalität und das unmittelbare Gefühl von 'Wie geht es mir gerade?' wohnen. Sie ist die Brücke zwischen dem Körperlichen und dem Inneren: ein symbolischer Raum, in dem sich Erschöpfung, Lebendigkeit oder Anspannung als erstes zeigen.",
+    themen:["Müdigkeit oder das Gefühl, ausgelaugt zu sein","Ein Bedürfnis nach Ruhe und Erdung","Spürbare Vitalität und Präsenz"],
+    impuls:"Wie fühlt sich dein Körper gerade an — getragen oder angespannt? Was bräuchtest du heute, um dich lebendiger zu fühlen?"
   },
-  { nr:2, name:"Emotionalkörper",       farbe:"#FCA5A5", thema:"Gefühle · Wünsche · Reaktionen",
-    abstand:"5–15 cm", wahrnehmung:"Temperaturveränderungen, Farben, emotionale Eindrücke",
-    blockaden:["Unterdrückte Gefühle","Altes Herzweh","Traumata","emotionale Verstrickungen"],
-    heilung:["Emotions-Entleerung","Emotionalkörper-Reinigung","Traumaarbeit","Farbheilung"],
-    chirurgie:["Emotionale Schichten ablösen","alte Gefühlsknoten lösen","Schutzpanzer auflösen"]
+  {
+    nr:2, nameDe:"Die Ebene der Gefühle", nameKlassisch:"Emotionalkörper",
+    farbe:"#FCA5A5", naehe:"nah, im Fühlen",
+    beschreibung:"Die zweite Schicht ist der Raum deiner Gefühle — der täglichen Wellen aus Freude, Trauer, Ärger, Sehnsucht. Hier zeigt sich, was dich gerade innerlich bewegt, oft schneller und ehrlicher als der Verstand es zugeben würde.",
+    themen:["Gefühle, die sich stauen oder keinen Ausdruck finden","Eine Stimmung, die schon länger anhält","Ein neues emotionales Gleichgewicht"],
+    impuls:"Welches Gefühl ist gerade am stärksten in dir? Und wann hast du ihm zuletzt wirklich Raum gegeben?"
   },
-  { nr:3, name:"Mentalkörper",          farbe:"#FEF08A", thema:"Gedanken · Überzeugungen · Muster",
-    abstand:"15–25 cm", wahrnehmung:"Impulse, Gedanken die kommen, Druckgefühl am Kopf",
-    blockaden:["Glaubenssätze","Negative Gedankenmuster","Mentale Programme","Fremdgedanken"],
-    heilung:["Glaubenssatz-Clearing","Mentalkörper-Reinigung","Lichtsprache","Affirmationsfeld"],
-    chirurgie:["Mentale Implantate entfernen","Fremdgedanken auslösen","Mentales Gitter reparieren"]
+  {
+    nr:3, nameDe:"Die Ebene des Denkens", nameKlassisch:"Mentalkörper",
+    farbe:"#FEF08A", naehe:"einen Schritt weiter, im Denken",
+    beschreibung:"Die dritte Schicht ist die Welt deiner Gedanken, Überzeugungen und inneren Erzählungen — die Geschichten, die du dir über dich selbst und die Welt erzählst. Manche tragen dich, manche begrenzen dich, oft ohne dass du es bemerkst.",
+    themen:["Wiederkehrende Gedankenmuster","Ein Glaubenssatz, der nicht mehr passt","Eine neue Klarheit in der Art, wie du über etwas denkst"],
+    impuls:"Welcher Gedanke kehrt in letzter Zeit immer wieder? Stimmt er noch — oder ist er eine alte Gewohnheit?"
   },
-  { nr:4, name:"Astralkörper",          farbe:"#86EFAC", thema:"Verbindungen · Liebe · Beziehungen",
-    abstand:"25–45 cm", wahrnehmung:"Energiefäden zu Personen, Herzöffnung, Expansionsgefühl",
-    blockaden:["Kord-Verbindungen","Symbiotische Bindungen","Liebeswunden","Beziehungsverstrickungen"],
-    heilung:["Kord-Schneiden","Astralreisen-Reinigung","Liebeswunden-Heilung","Herzverbindungen stärken"],
-    chirurgie:["Energetische Korde durchtrennen","Parasitäre Verbindungen lösen","Liebesfäden heilen"]
+  {
+    nr:4, nameDe:"Die Ebene der Verbindung", nameKlassisch:"Herzebene",
+    farbe:"#86EFAC", naehe:"in der Mitte, wo sich innen und außen begegnen",
+    beschreibung:"Die vierte Schicht ist die Mitte — der Übergang zwischen dem Persönlichen und dem Größeren. Hier wohnen Liebe, Mitgefühl und die Art, wie du dich mit anderen und mit dir selbst verbindest. Sie ist der Ort, an dem Nähe und Abgrenzung ihr Gleichgewicht suchen.",
+    themen:["Ein Gefühl von Verbundenheit oder von Einsamkeit","Die Frage nach gesunden Grenzen","Eine Sehnsucht nach mehr Offenheit"],
+    impuls:"Wo in deinem Leben fühlst du dich verbunden, wo eher allein? Und was würde dein Herz gerade brauchen?"
   },
-  { nr:5, name:"Äther-Schablone",       farbe:"#7DD3FC", thema:"Göttlicher Bauplan · Identität",
-    abstand:"45–60 cm", wahrnehmung:"Kristalline Struktur, Blaupausen-Qualität, Ordnung/Chaos",
-    blockaden:["Identitätsverlust","Nicht authentisch leben","Lebensplan blockiert"],
-    heilung:["Blaupausen-Aktivierung","Göttliche Struktur wiederherstellen","Identitätsheilung"],
-    chirurgie:["Verzerrte Blaupausen korrigieren","Göttliches Muster reinstallieren"]
+  {
+    nr:5, nameDe:"Die Ebene des Ausdrucks", nameKlassisch:"Ätherische Blaupause",
+    farbe:"#7DD3FC", naehe:"nach außen gewandt, im Ausdruck",
+    beschreibung:"Die fünfte Schicht hat mit deinem authentischen Ausdruck zu tun — damit, wie sehr das, was du nach außen zeigst, mit dem übereinstimmt, was innen wahr ist. Sie ist die Ebene der eigenen Wahrheit und der Stimme, die gehört werden möchte.",
+    themen:["Das Gefühl, sich nicht ganz zeigen zu können","Ein Wunsch, klarer für sich einzustehen","Eine wachsende Stimmigkeit zwischen innen und außen"],
+    impuls:"Wo zeigst du dich gerade so, wie du wirklich bist — und wo hältst du dich zurück?"
   },
-  { nr:6, name:"Kausalkörper",          farbe:"#C4B5FD", thema:"Karma · Seelenmuster · Lebensthemen",
-    abstand:"60–80 cm", wahrnehmung:"Leuchten, hohe Frequenz, Sphärenklang intern",
-    blockaden:["Karmische Muster","Seelenwunden","ungelöste Lebensthemen","Seelensplitter"],
-    heilung:["Karma-Auflösung","Seelenheilung","Zeitlinienarbeit","Inkarnationsthemen lösen"],
-    chirurgie:["Karmische Korde trennen","Seelensplitter zurückrufen","Lebensthemen umprogrammieren"]
+  {
+    nr:6, nameDe:"Die Ebene der Lebensthemen", nameKlassisch:"Kausalkörper",
+    farbe:"#C4B5FD", naehe:"weiter gefasst, über die Zeit",
+    beschreibung:"Die sechste Schicht ist die Ebene der größeren Muster — der Themen, die sich durch dein Leben ziehen, manchmal über Jahre. Hier geht es weniger um den einzelnen Tag als um die roten Fäden, die sich wiederholen und etwas über deinen Weg erzählen.",
+    themen:["Ein Thema, das in verschiedenen Lebensphasen wiederkehrt","Eine Lebensaufgabe, die sich langsam klärt","Das Erkennen eines Musters, das du loslassen darfst"],
+    impuls:"Welches Thema begleitet dich schon länger? Was hat es dich bisher gelehrt?"
   },
-  { nr:7, name:"Kether-Körper",         farbe:"#FFFFFF", thema:"Göttliche Verbindung · Einheit",
-    abstand:"80–100+ cm", wahrnehmung:"Stille, Licht, absolute Präsenz, Grenzenlosigkeit",
-    blockaden:["Spirituelle Trennung","Gottvertrauen verloren","Sinnkrise","Disconnect"],
-    heilung:["Lichtkanal öffnen","Göttliche Verbindung herstellen","Quellenlicht einlassen"],
-    chirurgie:["Lichtkanal reparieren","Verbindung zum Höheren reinstallieren"]
-  },
-];
-
-const AURA_CHIRURGIE_TECHNIKEN = [
-  { name:"Kord-Schneidung",            icon:"✂️", beschreibung:"Energetische Verbindungsfäden zu Personen, Orten oder Situationen durchtrennen. Nicht zu verwechseln mit Liebesbanden.", anwendung:"Symbiotische Abhängigkeiten, toxische Beziehungen, nicht ablösbare Bindungen", schritte:["Feld scannen nach Korden","Ursprung bestimmen","Intention setzen","Arkturanisches Lichtschwert oder Goldenes Licht","Wunde versiegeln","Neue Grenze setzen"] },
-  { name:"Implantat-Entfernung",       icon:"🔮", beschreibung:"Fremdenergetische Strukturen im Aurafeld finden und auflösen. Diese können aus anderen Inkarnationen, Verträgen oder Magie stammen.", anwendung:"Unerklärliche Schwere, fremde Gedanken, blockierte Manifestation", schritte:["Scan mit Hellspürsinn","Lokalisierung (oft Chakren oder Gelenke)","Lichtzange / Goldenes Licht","Entfernen und Entsorgen im Licht","Wunde füllen mit Reines Licht"] },
-  { name:"Energieleck-Versiegelung",   icon:"💧", beschreibung:"Löcher oder Risse in der Aura finden und reparieren. Entstehen durch Schock, Operationen, Drogen oder intensive emotionale Verluste.", anwendung:"Chronische Erschöpfung, das Gefühl 'immer leer zu sein'", schritte:["Aura abtasten auf Temperaturdifferenzen","Leck lokalisieren","Goldenes Licht oder Silberlicht einfüllen","Aura-Gewebe nähen (visualisiert)","Versiegeln und schützen"] },
-  { name:"Fremdenergien-Clearing",     icon:"🌊", beschreibung:"Im Alltag, in Menschenmassen oder bei intensiver Kontaktarbeit sammeln sich Fremdenergien im Feld. Regelmäßige Reinigung ist essenziell.", anwendung:"Nach intensiver Sitzungsarbeit, in Menschenmassen, nach Konflikten", schritte:["Violettes Feuer / Lichtdusche","Feld von außen nach innen bürsten","Ins Licht entlassen","Schutz reaktivieren"] },
-  { name:"Schutzmatrix-Stärkung",      icon:"🛡️", beschreibung:"Aufbau eines bewussten energetischen Schutzschildes für sensible Praktizierende und deren Klienten.", anwendung:"Vor Sitzungen, bei empathischen Überwältigungen, für Schutz im Alltag", schritte:["Erdung aktivieren","Lichtschutzblase aufbauen (Goldlicht oder Kristall)","Spiegel-Außenhülle","Intention: Nur das Höchste und Heilsamste darf ein und aus"] },
-  { name:"Seelensplitter-Rückruf",     icon:"🌟", beschreibung:"Teile der Seele, die durch Trauma abgespalten wurden, werden zurückgerufen und reintegriert. Schamanische Kerntechnik.", anwendung:"Bei Dissoziationstendenzen, Gefühl 'nicht ganz da zu sein', nach Traumata", schritte:["Heiligen Raum öffnen","Seelensplitter lokalisieren (Zeit / Ort)","Liebevoller Ruf","Empfangen und integrieren","Mit Licht versiegeln"] },
-  { name:"DNA-Aktivierung",            icon:"🧬", beschreibung:"Aktivierung von Licht-Codes in den Ahnen-DNS-Schichten. Entfernt generationelle Programme und aktiviert das volle Potenzial.", anwendung:"Bei tiefen Familienmustern, Wiederholung generationeller Themen", schritte:["Verbindung mit dem höheren Selbst","DNS-Doppelhelix visualisieren","Licht-Codes einschleusen","Altes Programm auflösen","Neues Programm verankern"] },
+  {
+    nr:7, nameDe:"Die Ebene der Weite", nameKlassisch:"Ketherkörper",
+    farbe:"#FFFFFF", naehe:"in die Weite geöffnet",
+    beschreibung:"Die siebte Schicht ist die weiteste — der Raum von Sinn, Vertrauen und der Verbindung zu etwas, das über dich hinausreicht. Wie jeder Mensch das nennt, ist verschieden: Quelle, Leben, Stille, das Ganze. Hier geht es um das Gefühl, getragen und Teil von etwas Größerem zu sein.",
+    themen:["Eine Sehnsucht nach Sinn","Momente von tiefer Ruhe und Vertrauen","Das Gefühl, den Faden zum Größeren verloren zu haben"],
+    impuls:"Wann hast du dich zuletzt mit etwas Größerem verbunden gefühlt? Was schenkt dir gerade ein Gefühl von Sinn?"
+  }
 ];
 
 const HELLSINN_TAGS = {
@@ -372,12 +369,6 @@ const HEILMETHODEN_KATALOG = [
     anwendung:"Organprobleme, Schmerzbilder, emotionale Muster, TCM-Diagnoseprinzipien",
     ablauf:["Meridian-Scan","Schwache Meridiane bestimmen","Sedierung / Tonisierung","Energie nachführen","Ausleitung"],
     stufe:2
-  },
-  { id:"auraoperation",  name:"Aura-Chirurgie",      icon:"✂️", kategorie:"Aura-Arbeit",
-    beschreibung:"Präzise energetische Eingriffe im Aurakörper: Kord-Schnitte, Implantat-Entfernung, Energieleck-Versiegelung, Schutzmatrix-Aufbau.",
-    anwendung:"Energielecks, Fremdeinflüsse, toxische Beziehungen, chronische Energielosigkeit",
-    ablauf:["Aura-Scan","Befund festhalten","Gezielte Intervention","Wunden heilen","Schutz aufbauen"],
-    stufe:4
   },
   { id:"ahnenarbeit",    name:"Ahnenlinien-Heilung", icon:"🧬", kategorie:"Systemische Energie",
     beschreibung:"Heilungsarbeit an transgenerationellen Mustern, Loyalitäten, Schwüren und Traumata in Mutter- und Vaterlinie bis zur 7. Generation.",
@@ -441,4 +432,4 @@ const OLabel = ({children, color}) => (
   <div style={{fontFamily:"Raleway",fontSize:"10px",letterSpacing:"2px",fontWeight:800,color:color||OT.textSoft,textTransform:"uppercase",marginBottom:"10px"}}>{children}</div>
 );
 
-export { OT, CHAKRA_SYSTEM, ORGAN_MAP, AURA_SCHICHTEN, AURA_CHIRURGIE_TECHNIKEN, HELLSINN_TAGS, HEILMETHODEN_KATALOG, LERNPFAD_STUFEN, OCard, OBtn, OTag, OLabel };
+export { OT, CHAKRA_SYSTEM, ORGAN_MAP, AURA_SCHICHTEN, HELLSINN_TAGS, HEILMETHODEN_KATALOG, LERNPFAD_STUFEN, OCard, OBtn, OTag, OLabel };
