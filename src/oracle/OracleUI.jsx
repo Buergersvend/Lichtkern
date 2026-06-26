@@ -25,7 +25,7 @@ const CHAKRA_SYSTEM = [
     hd_zentren:["Wurzel","Milz"],
     heilung:["Rote Erdkristalle","Barfußlaufen","Rhodonit","Hämatit","Affirmation: Ich bin sicher"],
     lernpfad_soft:"Das Wurzel-Chakra ist unser energetischer Anker. Es verbindet uns mit der Erde und dem physischen Leben.",
-    lernpfad_deep:"Im energetischen Scan zeigt sich das Wurzel-Chakra durch Temperatur (kalt = unteraktiv, heiß = überaktiv) und Pulsation. Blockaden entstehen durch frühe Kindheitstraumata, Mangelerfahrungen oder transgenerationale Armutsmuster."
+    lernpfad_deep:"Der Wurzel-Bereich zeigt sich über das Empfinden von Stabilität oder Unruhe im Körper. Themen entstehen oft durch frühe Kindheitsthemen, Mangelerfahrungen oder transgenerationale Muster."
   },
   { id:"sakral",       nr:2, name:"Sakral-Chakra",   de:"Svadhisthana", farbe:"#EA580C", hex:"#EA580C",
     symbol:"◎", mantra:"VAM", hz:417,
@@ -47,7 +47,7 @@ const CHAKRA_SYSTEM = [
     hd_zentren:["Ego","G-Zentrum","Milz"],
     heilung:["Citrin","Tigerauge","Atemarbeit","Sonnenbad","Grenzen setzen"],
     lernpfad_soft:"Der Solarplexus ist unser Kraftzentrum. Er regiert Selbstvertrauen, innere Stärke und die Fähigkeit, das Leben aktiv zu gestalten.",
-    lernpfad_deep:"Im Scan zeigt sich der Solarplexus durch einen Sog-Effekt (Energie wird gezogen = Fremdenergie) oder Enge (Kontrollmuster). Karmische Themen von Macht und Ohnmacht sind häufig."
+    lernpfad_deep:"Der Solarplexus zeigt sich oft über das Gefühl, ausgelaugt zu sein. Kontroll- und Ohnmachtsthemen sind hier häufig."
   },
   { id:"herz",         nr:4, name:"Herz-Chakra",     de:"Anahata",     farbe:"#16A34A", hex:"#16A34A",
     symbol:"✦", mantra:"YAM", hz:639,
@@ -69,7 +69,7 @@ const CHAKRA_SYSTEM = [
     hd_zentren:["Kehle","G-Zentrum"],
     heilung:["Lapislazuli","Aquamarin","Tönen","Singen","Wahrheit sprechen","Blauäther-Licht"],
     lernpfad_soft:"Das Kehlkopf-Chakra trägt unsere Stimme und Wahrheit. Hier manifestieren sich alle unausgesprochenen Worte als Energie.",
-    lernpfad_deep:"Im Human Design ist das Kehle-Zentrum das einzige Manifestationszentrum. Nicht-definierte Kehle = hohe Empfindlichkeit für Fremdenergie. Klassische Muster: 'Ich darf nicht' oder 'niemand hört mir zu'."
+    lernpfad_deep:"Im Human Design ist das Kehle-Zentrum das einzige Manifestationszentrum. Nicht-definierte Kehle = hohe Empfindlichkeit für die Stimmung anderer. Klassische Muster: 'Ich darf nicht' oder 'niemand hört mir zu'."
   },
   { id:"stirn",        nr:6, name:"Stirn-Chakra",    de:"Ajna",        farbe:"#4338CA", hex:"#4338CA",
     symbol:"◉", mantra:"OM", hz:852,
@@ -80,7 +80,7 @@ const CHAKRA_SYSTEM = [
     hd_zentren:["Ajna","Krone"],
     heilung:["Amethyst","Sodalith","Traumarbeit","Meditation","Dritte-Auge-Aktivierung"],
     lernpfad_soft:"Das Stirnchakra ist das Tor zur inneren Wahrnehmung – Hellsehen, Hellspüren, Hellfühlen und Hellwissen sind hier verwurzelt.",
-    lernpfad_deep:"Für Heiler: Das Stirnchakra benötigt regelmäßige Reinigung nach intensiver Wahrnehmungsarbeit. Schutzvisualisierung vor und Erdung nach Sitzungen ist essenziell."
+    lernpfad_deep:"Das Stirnchakra reagiert empfindlich auf intensive Wahrnehmungsphasen. Bewusste Erdung danach hilft, wieder im Körper anzukommen."
   },
   { id:"krone",        nr:7, name:"Kronen-Chakra",   de:"Sahasrara",   farbe:"#7C3AED", hex:"#7C3AED",
     symbol:"✧", mantra:"AUM", hz:963,
@@ -91,7 +91,7 @@ const CHAKRA_SYSTEM = [
     hd_zentren:["Krone","Ajna"],
     heilung:["Bergkristall","Selenit","Stilles Gebet","Lichtkanal öffnen","Kosmische Verbindung"],
     lernpfad_soft:"Das Kronenchakra verbindet uns mit dem Universum. Es ist weniger ein Energiezentrum als ein offenes Tor zum Unendlichen.",
-    lernpfad_deep:"Kronen-Aktivierung ist nicht Ziel, sondern Nebenprodukt tiefer Reinigungsarbeit. Überstimulation führt zu Dissoziation. Erdung und Wurzel-Chakra-Stärkung ist immer parallel notwendig."
+    lernpfad_deep:"Kronen-Aktivierung ist nicht Ziel, sondern Nebenprodukt tiefer Wahrnehmungsarbeit. Überstimulation führt zu dem Gefühl, nicht im Körper zu sein. Erdung und Wurzel-Chakra-Stärkung ist immer parallel notwendig."
   },
 ];
 
