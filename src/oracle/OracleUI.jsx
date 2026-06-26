@@ -102,7 +102,7 @@ const ORGAN_MAP = {
     chakra:"stirn", seiten:{links:"Vergangenheit / Weibliches",rechts:"Zukunft / Männliches"},
     ahnen:"Väter- oder Mutterlinie: Verbotenes Denken, unterdrückte Meinung",
     heilung:["Gedanken ordnen","innere Klarheit finden","den Kopf zur Ruhe bringen"],
-    keywords:["kopfschmerzen","migräne","schwindel","gedanken","mental"]
+    keywords:["kopfschmerzen","schwindel","gedanken","mental"]
   },
   "augen": { emoji:"👁️",
     symbolik:["Nicht-sehen-wollen","Angst vor Wahrheit","Hellsicht blockiert","blinder Fleck"],
@@ -118,7 +118,7 @@ const ORGAN_MAP = {
     chakra:"kehle", seiten:{links:"eigene innere Stimme",rechts:"äußere Botschaften / Autorität"},
     ahnen:"'Kinder haben zu schweigen' / Verbote zu hören oder zu sprechen",
     heilung:["nach innen hören","Stille-Meditation","die innere Stimme achten"],
-    keywords:["ohren","hören","tinnitus","stille","ohr"]
+    keywords:["ohren","hören","ohrgeräusche","stille","ohr"]
   },
   "mund / zähne / kiefer": { emoji:"🦷",
     symbolik:["Schlucken von Worten","Verbissenes Festhalten","aufgebissene Zähne","Ausdruck blockiert"],
@@ -130,11 +130,11 @@ const ORGAN_MAP = {
   },
   "hals / schilddrüse": { emoji:"🌀",
     symbolik:["Stimme unterdrückt","Lebensfluss gebremst","Nicht authentisch","Metabolismus des Lebens"],
-    emotion:["Angst vor Ablehnung","Schweigen","Isolation","Erschöpfung (Hashimoto=Selbstangriff)"],
+    emotion:["Angst vor Ablehnung","Schweigen","Isolation","Erschöpfung"],
     chakra:"kehle", seiten:{links:"Empfangen von Liebe und Wahrheit",rechts:"Geben / Aussenden"},
     ahnen:"Generationen: verbotene Sprache, Emigration, Sprachverlust",
     heilung:["die eigene Stimme finden","Ausdruck zulassen","für die eigene Wahrheit einstehen"],
-    keywords:["hals","schilddrüse","stimme","nacken","kehle","hashimoto"]
+    keywords:["hals","schilddrüse","stimme","nacken","kehle"]
   },
   "schultern": { emoji:"💪",
     symbolik:["Last tragen","Verantwortung","Bürde","Schulterlast der Familie"],
@@ -174,7 +174,7 @@ const ORGAN_MAP = {
     chakra:"herz", seiten:{links:"emotionale Trauer / Loslassen",rechts:"aktive Kraft / Lebenswille"},
     ahnen:"Verlust, Asthma-Muster, 'kein Raum für mich' / enge Verhältnisse",
     heilung:["bewusst atmen","Raum einnehmen","Trauer-Ritual"],
-    keywords:["lunge","atmen","atem","asthma","husten","trauer"]
+    keywords:["lunge","atmen","atem","atemnot","husten","trauer"]
   },
   "leber / galle": { emoji:"🫀",
     symbolik:["Verarbeitung","aufgestauter Ärger","Vergiftetes","Entgiftung","Urteile"],
@@ -222,7 +222,7 @@ const ORGAN_MAP = {
     chakra:"wurzel", seiten:{links:"weibliche Linie",rechts:"männliche Linie"},
     ahnen:"Existenzmuster, Armut, Krieg, Heimatverlust",
     heilung:["Sicherheit in sich finden","Existenzängste anschauen","Erdung spüren"],
-    keywords:["rücken unten","lendenwirbel","ischias","hüfte","kreuz","exist"]
+    keywords:["rücken unten","lendenwirbel","rückenschmerzen","hüfte","kreuz","exist"]
   },
   "hüfte / becken": { emoji:"🦵",
     symbolik:["Vorwärtsgehen","Sexualität","Kreativität","Familiensystem","Gleichgewicht"],
@@ -254,7 +254,7 @@ const ORGAN_MAP = {
     chakra:"wurzel", seiten:{ links:"Selbstbezug",rechts:"Außenwelt"},
     ahnen:"Generationelle Berührungsarmut, Übergriffe, zu viel oder zu wenig Nähe",
     heilung:["eigene Grenzen wahrnehmen","Schutz und Offenheit","Berührung zulassen"],
-    keywords:["haut","neurodermitis","ekzem","psoriasis","jucken","kontakt","berührung"]
+    keywords:["haut","hautausschlag","juckreiz","hautprobleme","jucken","kontakt","berührung"]
   },
   "blut / kreislauf": { emoji:"🩸",
     symbolik:["Lebensfluss","Kraft","Familie (Blut ist dicker)","Ahnenverbindung","Vitalität"],
@@ -262,7 +262,7 @@ const ORGAN_MAP = {
     chakra:"herz", seiten:{links:"Vergangenheit",rechts:"Zukunft"},
     ahnen:"Zentrales Ahnenthema – Blut trägt alle Generationenmuster",
     heilung:["Lebensfluss spüren","Vergebung","familiäre Muster anschauen"],
-    keywords:["blut","kreislauf","blutdruck","anämie","durchblutung","vitalität"]
+    keywords:["blut","kreislauf","blutdruck","blutarmut","durchblutung","vitalität"]
   },
 };
 
