@@ -101,7 +101,7 @@ const ORGAN_MAP = {
     emotion:["Überanalyse","mentaler Stress","Überforderung","innerer Lärm"],
     chakra:"stirn", seiten:{links:"Vergangenheit / Weibliches",rechts:"Zukunft / Männliches"},
     ahnen:"Väter- oder Mutterlinie: Verbotenes Denken, unterdrückte Meinung",
-    heilung:["Stirnchakra-Balance","Gehirn-Hemisphären-Sync","Mentalkörper-Reinigung","Ahnen: Recht auf eigene Gedanken"],
+    heilung:["Gedanken ordnen","innere Klarheit finden","den Kopf zur Ruhe bringen"],
     keywords:["kopfschmerzen","migräne","schwindel","gedanken","mental"]
   },
   "augen": { emoji:"👁️",
@@ -109,7 +109,7 @@ const ORGAN_MAP = {
     emotion:["Verleugnung","Schutz vor Schmerz","Überforderung"],
     chakra:"stirn", seiten:{links:"Innenschau / was du dir selbst nicht zeigst",rechts:"Außenwelt / was du anderen nicht zeigen willst"},
     ahnen:"Generationenmuster: 'Sieh nicht hin' / Zeugen von Gewalt oder Schmerz",
-    heilung:["Ajna-Chakra-Öffnung","Augen-Meridian-Arbeit","innere Kind-Arbeit: darf sehen"],
+    heilung:["hinschauen, was sich zeigt","den eigenen Blick weiten","inneres Kind: darf sehen"],
     keywords:["augen","sehen","blind","wahrnehmung","blick"]
   },
   "ohren": { emoji:"👂",
@@ -117,7 +117,7 @@ const ORGAN_MAP = {
     emotion:["Überwältigung durch Geräusche","Konfliktvermeidung","Gehorsam"],
     chakra:"kehle", seiten:{links:"eigene innere Stimme",rechts:"äußere Botschaften / Autorität"},
     ahnen:"'Kinder haben zu schweigen' / Verbote zu hören oder zu sprechen",
-    heilung:["Kehlchakra-Balance","Ohr-Meridian","Stille-Meditation","Selbstermächtigung der inneren Stimme"],
+    heilung:["nach innen hören","Stille-Meditation","die innere Stimme achten"],
     keywords:["ohren","hören","tinnitus","stille","ohr"]
   },
   "mund / zähne / kiefer": { emoji:"🦷",
@@ -125,7 +125,7 @@ const ORGAN_MAP = {
     emotion:["Unterdrückte Worte","Wut","Ohnmacht","Perfektionismus","Kontrolle"],
     chakra:"kehle", seiten:{links:"Weibliches / Empfangen",rechts:"Männliches / Geben"},
     ahnen:"Muster: 'Sprich nicht darüber' / verbotene Wahrheiten",
-    heilung:["Kiefer-Entspannung","Kehlchakra-Befreiung","Tönen","die eigene Wahrheit sprechen"],
+    heilung:["Kiefer-Entspannung","die eigene Wahrheit sprechen","Ausdruck zulassen"],
     keywords:["mund","zähne","kiefer","schlucken","beißen","zähneknirschen"]
   },
   "hals / schilddrüse": { emoji:"🌀",
@@ -133,7 +133,7 @@ const ORGAN_MAP = {
     emotion:["Angst vor Ablehnung","Schweigen","Isolation","Erschöpfung (Hashimoto=Selbstangriff)"],
     chakra:"kehle", seiten:{links:"Empfangen von Liebe und Wahrheit",rechts:"Geben / Aussenden"},
     ahnen:"Generationen: verbotene Sprache, Emigration, Sprachverlust",
-    heilung:["Schilddrüsen-Meridian","Kehle-Licht-Infusion","Singen","Aquamarin","Wahrheitsbotschaft"],
+    heilung:["die eigene Stimme finden","Ausdruck zulassen","für die eigene Wahrheit einstehen"],
     keywords:["hals","schilddrüse","stimme","nacken","kehle","hashimoto"]
   },
   "schultern": { emoji:"💪",
@@ -141,7 +141,7 @@ const ORGAN_MAP = {
     emotion:["Überlastung","Pflichtgefühl","Selbstaufopferung","Hilfsbereitschaft als Flucht"],
     chakra:"herz", seiten:{links:"emotionale Last / Familienthemen",rechts:"berufliche Last / männliche Linie"},
     ahnen:"Muster: 'Wir müssen funktionieren' / traumatische Familienbelastungen",
-    heilung:["Herz-Chakra-Öffnung","Schultern freisprechen","Lasten rituell abgeben","Familienaufstellung"],
+    heilung:["Lasten bewusst ablegen","Verantwortung neu sortieren","sich entlasten"],
     keywords:["schultern","schulter","last","verantwortung","verspannt","nacken"]
   },
   "ellenbogen": { emoji:"🦾",
@@ -149,7 +149,7 @@ const ORGAN_MAP = {
     emotion:["Frustration","unterdrückte Durchsetzung","Ärger auf Hindernisse","Rigidität"],
     chakra:"solar", seiten:{links:"innere Blockade / Selbstbeziehung",rechts:"äußere Reibung / Beziehungen"},
     ahnen:"'Streit nicht an' / 'Pass dich an' / Rebellion unterdrückt",
-    heilung:["Solarplexus-Kraft-Aktivierung","Grenzen-Ritual","Dickdarm-Meridian","das Recht auf Reibung"],
+    heilung:["die eigene Position halten","gesunde Grenzen wahren","Reibung zulassen"],
     keywords:["ellenbogen","anecken","reibung","grenzen","behaupten","ärger"]
   },
   "hände / finger": { emoji:"🤲",
@@ -157,7 +157,7 @@ const ORGAN_MAP = {
     emotion:["Festhalten","Kontrollzwang","Kreativitätsblockade","Berührungsarmut"],
     chakra:"herz", seiten:{links:"empfangen",rechts:"geben"},
     ahnen:"'Nicht anfassen' / körperliche Kälte in der Familie / Gewalt durch Hände",
-    heilung:["Herzchakra-Öffnung","Daumenmassage für Lungenmeridian","Handchakras aktivieren","loslassen üben"],
+    heilung:["Greifen und Loslassen spüren","loslassen üben","Geben und Nehmen"],
     keywords:["hände","finger","greifen","halten","loslassen","hände"]
   },
   "herz": { emoji:"❤️",
@@ -165,7 +165,7 @@ const ORGAN_MAP = {
     emotion:["Trauer","Liebeskummer","Einsamkeit","Selbstablehnung","Sehnsucht","Verhärtung"],
     chakra:"herz", seiten:{links:"Empfangen von Liebe / Selbstliebe",rechts:"Geben von Liebe"},
     ahnen:"Verlust, Krieg, früher Tod von Geliebten, Trennungen über Generationen",
-    heilung:["Herzheilung (Lichtinfusion)","Blutreinigung","Ho'oponopono","Rosenquarz","Herz-Kohärenz","Vergebungsarbeit"],
+    heilung:["dem Herzen Raum geben","Verbundenheit spüren","Vergebungsarbeit"],
     keywords:["herz","herzschmerz","liebe","verlust","trauer","einsamkeit","herzrythmus"]
   },
   "lunge": { emoji:"🫁",
@@ -173,7 +173,7 @@ const ORGAN_MAP = {
     emotion:["Unterdrückte Trauer","Lebensangst","Nicht atmen dürfen","Lebensraum verloren"],
     chakra:"herz", seiten:{links:"emotionale Trauer / Loslassen",rechts:"aktive Kraft / Lebenswille"},
     ahnen:"Verlust, Asthma-Muster, 'kein Raum für mich' / enge Verhältnisse",
-    heilung:["Atemtherapie","Herzchakra-Öffnung","Lungenmeridian","Trauer-Ritual","Lebensraum beanspruchen"],
+    heilung:["bewusst atmen","Raum einnehmen","Trauer-Ritual"],
     keywords:["lunge","atmen","atem","asthma","husten","trauer"]
   },
   "leber / galle": { emoji:"🫀",
@@ -181,7 +181,7 @@ const ORGAN_MAP = {
     emotion:["Wut","Bitterkeit","Neid","aufgestauter Ärger","unkontrollierbare Emotionen"],
     chakra:"solar", seiten:{links:"innere Bitterkeit",rechts:"äußerer Ärger / Konflikt"},
     ahnen:"Muster: unterdrückte Wut, Alkohol als Flucht, Bitterkeit über das Leben",
-    heilung:["Leberentgiftung energetisch","Gallenblasen-Meridian","Wut rituell entladen","Solarplexus-Reinigung"],
+    heilung:["angestauten Ärger anschauen","Groll loslassen","Bitterkeit wandeln"],
     keywords:["leber","galle","wut","ärger","bitterkeit","entgiftung"]
   },
   "magen / milz": { emoji:"🫃",
@@ -189,7 +189,7 @@ const ORGAN_MAP = {
     emotion:["Sorgen","Grübeln","Nicht-annehmen-können","Zu viel auf einmal","Überwältigung"],
     chakra:"solar", seiten:{links:"emotionale Assimilation",rechts:"äußere Themen / Beruf"},
     ahnen:"'Das Leben ist schwer' / Mangelernährung / Hungermuster",
-    heilung:["Magenmeridian-Arbeit","Sorgen rituell entladen","Solarplexus","Milz-Stärkung","Erd-Frequenz"],
+    heilung:["Sorgen verdauen","sich genährt fühlen","Erdung spüren"],
     keywords:["magen","milz","verdauung","sorgen","grübeln","bauch","übelkeit"]
   },
   "nieren / nebennieren": { emoji:"🫘",
@@ -197,7 +197,7 @@ const ORGAN_MAP = {
     emotion:["Tiefe Angst","Erschöpfung","Schock","Trauma","Lebensangst","Überlebensstress"],
     chakra:"wurzel", seiten:{links:"weibliche Linie / Mutter",rechts:"männliche Linie / Vater"},
     ahnen:"Kriegstrauma, Überlebensangst, existenzielle Not über Generationen",
-    heilung:["Nierenmeridian-Stärkung","Nebennieren-Reset","Tiefes Trauma-Release","Ahnen-Frieden","Wurzelchakra"],
+    heilung:["Ängste anschauen","zur Ruhe kommen","Überforderung wahrnehmen"],
     keywords:["nieren","nebennieren","angst","erschöpfung","trauma","schock","burnout"]
   },
   "rücken oben": { emoji:"🔼",
@@ -205,7 +205,7 @@ const ORGAN_MAP = {
     emotion:["Mangel an Liebe","Unsupportedness","emotionale Bürde","Verlassenheit"],
     chakra:"herz",  seiten:{links:"Selbstliebe / innere Unterstützung",rechts:"äußere Unterstützung durch andere"},
     ahnen:"Liebesarmut, emotionale Kälte in der Herkunftsfamilie",
-    heilung:["Herzchakra-Öffnung","Selbstliebe-Ritual","Rückenmeridian-Arbeit","Unterstützung annehmen lernen"],
+    heilung:["dem Herzen Raum geben","Selbstliebe-Ritual","sich getragen fühlen","Unterstützung annehmen lernen"],
     keywords:["rücken oben","oberer rücken","schulterblatt","verspannung"]
   },
   "rücken mitte": { emoji:"🟡",
@@ -213,7 +213,7 @@ const ORGAN_MAP = {
     emotion:["Schuld","Scham","Ohnmacht","alte Wunden","Verbitterung"],
     chakra:"solar", seiten:{links:"innere Schuld",rechts:"Schuld durch andere zugewiesen"},
     ahnen:"Muster: Strafe, Sühne, 'schuldig sein' als Familienprogramm",
-    heilung:["Solarplexus","Vergebungsarbeit","Schuld-Ritual","Gallenmeridian","Zeitlinienarbeit"],
+    heilung:["alte Wunden anschauen","Vergebungsarbeit","Lasten der Vergangenheit loslassen"],
     keywords:["rücken mitte","mittlerer rücken","solar","schuld","vergangenheit"]
   },
   "rücken unten / lendenwirbel": { emoji:"🔽",
@@ -221,7 +221,7 @@ const ORGAN_MAP = {
     emotion:["Finanzielle Angst","Überlebensangst","Verlassenheit","Erschöpfung"],
     chakra:"wurzel", seiten:{links:"weibliche Linie",rechts:"männliche Linie"},
     ahnen:"Existenzmuster, Armut, Krieg, Heimatverlust",
-    heilung:["Wurzelchakra-Erdung","Ahnenfrieden","Nierenmeridian","Blasenmeridian","Abundanzprogramm aktivieren"],
+    heilung:["Sicherheit in sich finden","Existenzängste anschauen","Erdung spüren"],
     keywords:["rücken unten","lendenwirbel","ischias","hüfte","kreuz","exist"]
   },
   "hüfte / becken": { emoji:"🦵",
@@ -229,7 +229,7 @@ const ORGAN_MAP = {
     emotion:["Stagnation","Angst vor Veränderung","sexuelle Blockaden","Familienthemen"],
     chakra:"sakral", seiten:{links:"Weibliches / Yin / Mutter",rechts:"Männliches / Yang / Vater"},
     ahnen:"Sexualität als Tabu, Bindung an Herkunftsfamilie, Bewegungsunfreiheit",
-    heilung:["Sakralchakra-Öffnung","Hüftöffner","Ahnen-Sexualitätsmuster","Becken-Entspannung"],
+    heilung:["in Bewegung kommen","Veränderung zulassen","Becken-Entspannung"],
     keywords:["hüfte","becken","hüftschmerzen","sexualität","kreativität","fortbewegung"]
   },
   "knie": { emoji:"🦿",
@@ -237,7 +237,7 @@ const ORGAN_MAP = {
     emotion:["Starrsinn","Stolz","Angst vor Niederlage","Unterwerfung","Autoritätskonflikte"],
     chakra:"wurzel", seiten:{links:"innere Flexibilität",rechts:"äußere Anpassung / Autorität"},
     ahnen:"Kniefall vor Autoritäten / Unterwerfungsmuster / Stolz als Überlebensstrategie",
-    heilung:["Magenmeridian","Flexibilitäts-Übung mental","Wurzelchakra","Ego-Auflösung","Demut als Kraft"],
+    heilung:["Demut zulassen","Flexibilität üben","nachgeben können"],
     keywords:["knie","knieschmerzen","starrheit","flexibilität","beugen","autorität"]
   },
   "sprunggelenk / füße": { emoji:"🦶",
@@ -245,7 +245,7 @@ const ORGAN_MAP = {
     emotion:["Orientierungslosigkeit","Angst vor dem nächsten Schritt","Erdungsdefizit"],
     chakra:"wurzel", seiten:{links:"Vergangenheit / Herkunft",rechts:"Zukunft / Richtung"},
     ahnen:"Entwurzelung, Flucht, Migration, heimatlose Vorfahren",
-    heilung:["Fußreflexzonen","Barfußlaufen","Erdungsritual","Wurzelchakra","Ahnen-Heimat-Heilung"],
+    heilung:["Erdung spüren","barfuß gehen","den eigenen Weg gehen","Heimat in sich finden"],
     keywords:["füße","fuß","sprunggelenk","knöchel","erdung","richtung","schritt"]
   },
   "haut": { emoji:"🧑",
@@ -253,7 +253,7 @@ const ORGAN_MAP = {
     emotion:["Grenzverlust","Hypersensitivität","Berührungsangst","Kontaktangst","Identitätsverlust"],
     chakra:"wurzel", seiten:{ links:"Selbstbezug",rechts:"Außenwelt"},
     ahnen:"Generationelle Berührungsarmut, Übergriffe, zu viel oder zu wenig Nähe",
-    heilung:["Hautmeridian","Schutz-Visualisierung","Aura-Stärkung","Körpergrenzen-Ritual","Berührungs-Therapie"],
+    heilung:["eigene Grenzen wahrnehmen","Schutz und Offenheit","Berührung zulassen"],
     keywords:["haut","neurodermitis","ekzem","psoriasis","jucken","kontakt","berührung"]
   },
   "blut / kreislauf": { emoji:"🩸",
@@ -261,7 +261,7 @@ const ORGAN_MAP = {
     emotion:["Lebensunlust","Erschöpfung","Familienthemen","Blutsbande","Kreislauf des Lebens"],
     chakra:"herz", seiten:{links:"Vergangenheit",rechts:"Zukunft"},
     ahnen:"Zentrales Ahnenthema – Blut trägt alle Generationenmuster",
-    heilung:["Blutreinigung (Lichtarbeit)","Herzchakra-Pump-Übung","DNA-Aktivierung","Ahnen-Blutlinie-Reinigung","Ferritheilung"],
+    heilung:["Lebensfluss spüren","Vergebung","familiäre Muster anschauen"],
     keywords:["blut","kreislauf","blutdruck","anämie","durchblutung","vitalität"]
   },
 };
