@@ -136,7 +136,7 @@ const LERNMODUL_STUFEN = {
   2: { name:"Grundlagen",   farbe:"#C9A84C", icon:"📚", bg:"rgba(201,168,76,0.15)" },
   3: { name:"Vertiefung",   farbe:"#0284C7", icon:"🎯", bg:"#DBEAFE" },
   4: { name:"Meisterschaft",farbe:"#7C3AED", icon:"⚡", bg:"#EDE9FE" },
-  5: { name:"Zertifizierung",farbe:"#D97706",icon:"🏆", bg:"#FEF3C7" },
+  5: { name:"Souveränität",  farbe:"#D97706",icon:"🏆", bg:"#FEF3C7" },
 };
 
 const ORGANSPRACHE_INHALT = {
@@ -251,7 +251,7 @@ const ORGANSPRACHE_INHALT = {
     schluesselwoerter: ["Gesamtsystem","Körper-Landkarte","Blinder Fleck","Supervision","Berufsethik"],
   },
   5: {
-    titel: "Zertifizierungsprüfung",
+    titel: "Abschluss-Reflexion",
     untertitel: "Nachweis deiner Kompetenz in Organsprache",
     lernziele: [
       "Alle Lerninhalte der Stufen 1–4 sicher abrufen",
@@ -568,7 +568,7 @@ function OrganspracheLernmodul({ stufe = 1, onBack, onZertifikat }) {
         ) : (
           <div style={{background:OT.bgSoft,borderRadius:"16px",padding:"22px",border:`1.5px solid #D97706`,textAlign:"center"}}>
             <div style={{fontSize:"40px",marginBottom:"12px"}}>🏆</div>
-            <div style={{fontFamily:"Cinzel",fontSize:"16px",color:OT.text,fontWeight:700,marginBottom:"6px"}}>Zertifizierungsprüfung</div>
+            <div style={{fontFamily:"Cinzel",fontSize:"16px",color:OT.text,fontWeight:700,marginBottom:"6px"}}>Abschluss-Reflexion</div>
             <div style={{fontFamily:"Raleway",fontSize:"12px",color:OT.textMid,fontWeight:500,marginBottom:"16px",lineHeight:"1.7"}}>15 Fragen · Multiple Choice · Mindestens 12/15 Punkte</div>
             <button onClick={()=>setQuizModus(true)} style={{fontFamily:"Raleway",fontWeight:700,fontSize:"14px",padding:"14px 28px",borderRadius:"13px",border:"none",cursor:"pointer",background:`linear-gradient(135deg,#D97706,#B45309)`,color:"white",boxShadow:"0 4px 20px rgba(217,119,6,0.4)"}}>✦ Prüfung starten</button>
           </div>

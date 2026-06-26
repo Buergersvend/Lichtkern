@@ -412,7 +412,7 @@ const LERNPFAD_STUFEN = [
   { nr:2, name:"Grundlagen",   farbe:"#C9A84C", icon:"📚", beschreibung:"Systematisches Wissen, erste Technikanwendung, eigenständige Anwendung." },
   { nr:3, name:"Vertiefung",   farbe:"#0284C7", icon:"🎯", beschreibung:"Komplexe Themen, Kombination von Methoden, eigene Wahrnehmungsschärfung." },
   { nr:4, name:"Meisterschaft",farbe:"#A87D3A", icon:"⚡", beschreibung:"Souveräne Anwendung und tiefes Verständnis." },
-  { nr:5, name:"Zertifizierung",farbe:"#D97706",icon:"🏆", beschreibung:"Geprüfte Kompetenz · Höchste Abschlussstufe der Human Resonanz Lernwelt." },
+  { nr:5, name:"Souveränität",  farbe:"#D97706",icon:"🏆", beschreibung:"Eigenständige, sichere Anwendung des Gelernten im eigenen Alltag." },
 ];
 
 // ════════════════════════════════════════════════════════════════
