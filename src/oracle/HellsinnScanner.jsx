@@ -49,7 +49,7 @@ function HellsinnScanner({ groqFetch }){
     const organTreffer = lokalInfo.filter(i=>i.typ==="organ").map(i=>`Organ: ${i.organ} (${i.daten.symbolik.join(", ")})`).join("\n");
     const chakraTreffer = lokalInfo.filter(i=>i.typ==="chakra").map(i=>`Chakra: ${i.chakra.name} - Themen: ${i.chakra.themen.slice(0,3).join(", ")}`).join("\n");
 
-    const prompt = `Du bist ein erfahrener energetischer Heiler und feinstofflicher Berater im Lichtkern-System. Du erhältst die Wahrnehmungen eines Praktizierers an einem Klienten und gibst sofort strukturierte Handlungsempfehlungen. Antworte auf Deutsch, klar und professionell.
+    const prompt = `Du bist ein erfahrener Begleiter und Berater im Lichtkern-System. Du erhältst die Wahrnehmungen eines Begleiters und gibst seelisch-symbolische Impulse und Anregungen zur Selbstwahrnehmung — auf einer seelisch-symbolischen Ebene, ohne Heilversprechen oder medizinische Aussagen. Bei gesundheitlichen Themen verweist du grundsätzlich an Ärzte, Heilpraktiker oder Therapeuten. Antworte auf Deutsch, klar und professionell.
 
 WAHRNEHMUNGEN:
 ${kontext}
@@ -61,7 +61,7 @@ ${chakraTreffer}
 Gib eine strukturierte Analyse in GENAU diesem Format (nutze diese Überschriften):
 
 🫀 ORGANSPRACHE & KÖRPERSYMBOLIK
-[Was sagen diese Körperregionen/Symptome auf der energetischen Ebene? Welche Themen, Gefühle, Lebensbereiche sind gemeint?]
+[Was sagen diese Körperregionen auf der seelisch-symbolischen Ebene? Welche Themen, Gefühle, Lebensbereiche sind gemeint?]
 
 ⚡ CHAKRA & ENERGIEFELD
 [Welche Chakren sind betroffen? Was zeigt das Energiefeld? Offen/geschlossen/überaktiv?]
@@ -69,16 +69,16 @@ Gib eine strukturierte Analyse in GENAU diesem Format (nutze diese Überschrifte
 🧬 MÖGLICHE AHNENMUSTER / GENERATIONENTHEMEN
 [Welche generationellen Themen könnten dahinterstecken?]
 
-💚 HEILUNGSEMPFEHLUNGEN (Priorität: Energetisch)
-1. [Erste Maßnahme, z.B. Chakraheilung / Blutreinigung / Herzheilung]
-2. [Zweite Maßnahme]
-3. [Dritte Maßnahme]
+💚 IMPULSE & ANREGUNGEN (seelisch-symbolisch)
+1. [Erster Impuls, z.B. Arbeit mit einem Chakra-Thema / innere Klärung / Herzöffnung]
+2. [Zweiter Impuls]
+3. [Dritter Impuls]
 [Weitere wenn relevant]
 
 🎯 FRAGEN AN DEN KLIENTEN
 [2-3 gezielte Fragen die mehr Klarheit bringen]
 
-Sei präzise, praxisnah und einfühlsam. Keine Heilversprechen, keine Diagnosen.`;
+Sei präzise, alltagsnah und einfühlsam. Keine Heilversprechen, keine Diagnosen, keine medizinischen Aussagen. Bei gesundheitlichen Themen verweise an Ärzte, Heilpraktiker oder Therapeuten.`;
 
     try {
       const antwort = await groqFetch(prompt);
@@ -97,7 +97,7 @@ Sei präzise, praxisnah und einfühlsam. Keine Heilversprechen, keine Diagnosen.
     <div style={{display:"flex",flexDirection:"column",gap:"14px"}}>
       {/* Eingabe */}
       <OCard>
-        <OLabel>✦ Hellsinn-Eingabe · Was nimmst du wahr?</OLabel>
+        <OLabel>✦ Wahrnehmungs-Eingabe · Was nimmst du wahr?</OLabel>
         <textarea
           value={eingabe}
           onChange={e=>setEingabe(e.target.value)}
@@ -106,7 +106,7 @@ Sei präzise, praxisnah und einfühlsam. Keine Heilversprechen, keine Diagnosen.
         />
         <div style={{display:"flex",gap:"8px",marginTop:"10px",flexWrap:"wrap"}}>
           <OBtn onClick={kiAnalyse} disabled={kiLaed||(!eingabe.trim()&&tags.length===0)}>
-            {kiLaed?"⏳ KI analysiert...":"✦ KI-Analyse starten"}
+            {kiLaed?"⏳ Impulse werden erstellt...":"✦ Impulse erhalten"}
           </OBtn>
           {(eingabe||tags.length>0)&&<OBtn variant="ghost" onClick={reset}>← Neu</OBtn>}
         </div>
@@ -203,6 +203,9 @@ Sei präzise, praxisnah und einfühlsam. Keine Heilversprechen, keine Diagnosen.
             </div>
           ) : (
             <div style={{fontFamily:"Raleway",fontSize:"13px",color:OT.text,lineHeight:"1.9",whiteSpace:"pre-wrap",fontWeight:500}}>{kiAntwort}</div>
+            <div style={{marginTop:"12px",padding:"10px 14px",borderRadius:"10px",background:"rgba(201,168,76,0.08)",border:`1px solid ${OT.borderMid}`}}>
+              <span style={{fontFamily:"Raleway",fontSize:"11px",color:OT.textSoft,fontWeight:500,lineHeight:"1.7"}}>Diese Impulse bewegen sich auf einer seelisch-symbolischen Ebene und sind kein Ersatz für medizinische oder therapeutische Beratung. Bei gesundheitlichen Themen wende dich an Ärzte, Heilpraktiker oder Therapeuten.</span>
+            </div>
           )}
         </OCard>
       )}

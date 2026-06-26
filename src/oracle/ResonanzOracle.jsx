@@ -11,7 +11,7 @@ function ResonanzOracle({ groqFetch }){
   const [aktiv, setAktiv] = useState("scanner");
 
   const TABS = [
-    { id:"scanner",    icon:"💫", label:"Hellsinn-Scanner" },
+    { id:"scanner",    icon:"💫", label:"Hellsinn-Wahrnehmung" },
     { id:"organmap",   icon:"🫀", label:"Organsprache"    },
     { id:"chakra",     icon:"🌈", label:"Chakren"         },
     { id:"aura",       icon:"🌐", label:"Aura & Chirurgie"},
