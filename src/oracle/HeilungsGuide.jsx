@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback, useRef } from "react";
-import { OT } from "./OracleUI.jsx";
+import { OT, OCard, OLabel, OBtn, HEILMETHODEN_KATALOG } from "./OracleUI.jsx";
 
 function HeilungsGuide({ groqFetch }){
   const [gewaehlt, setGewaehlt] = useState(null);
@@ -9,7 +9,7 @@ function HeilungsGuide({ groqFetch }){
   const ladeKiDetail = async (methode) => {
     if (!groqFetch) return;
     setKiLaed(true); setKiDetail("");
-    const prompt = `Du bist ein erfahrener energetischer Heiler und erklärst diese Heilmethode für den praktischen Einsatz.
+    const prompt = `Du bist ein einfühlsamer Begleiter und erklärst diese Methode auf einer seelisch-symbolischen Ebene, ohne Heilversprechen oder medizinische Aussagen. Bei gesundheitlichen Themen verweist du grundsätzlich an Ärzte, Heilpraktiker oder Therapeuten.
 
 Methode: ${methode.name} (${methode.kategorie})
 Beschreibung: ${methode.beschreibung}
@@ -23,14 +23,14 @@ Gib eine PRAXISANLEITUNG:
 ⚡ SCHRITT-FÜR-SCHRITT ANLEITUNG 
 [Detaillierte Anleitung in Schritten]
 
-💬 KOMMUNIKATION MIT DEM KLIENTEN
-[Was sagst du dem Klienten vorher / während / nachher? Wie erklärst du es?]
+💬 WIE DU DIESE METHODE FÜR DICH NUTZT
+[Wie lässt sich diese Methode in der eigenen Selbstwahrnehmung anwenden?]
 
-🌟 INTEGRATION NACH DER SITZUNG
-[Was empfiehlst du dem Klienten mitzunehmen / zu üben?]
+🌟 IMPULSE ZUR VERTIEFUNG
+[Welche sanften Reflexionsimpulse passen dazu?]
 
 ⚠️ WICHTIGE HINWEISE
-[Sicherheit, Grenzen, wann zur Begleitung durch andere Fachleute verweisen]`;
+[Weise ausdrücklich darauf hin, dass dies eine seelisch-symbolische Betrachtung ist und keine medizinische oder therapeutische Beratung ersetzt. Bei gesundheitlichen Beschwerden ist an Ärzte, Heilpraktiker oder Therapeuten zu verweisen.]`;
 
     try { setKiDetail(await groqFetch(prompt)); }
     catch { setKiDetail("Fehler."); }
@@ -63,10 +63,13 @@ Gib eine PRAXISANLEITUNG:
           </div>
         </OCard>
         <OCard>
-          <OLabel color={OT.goldD}>✦ KI-Praxisanleitung (detailliert)</OLabel>
+          <OLabel color={OT.goldD}>✦ Symbolische Vertiefung</OLabel>
           {kiLaed ? <div style={{textAlign:"center",padding:"24px",fontFamily:"Raleway",fontSize:"13px",color:OT.textMid}}>⏳ Lade Praxiswissen...</div>
-          : kiDetail ? <div style={{fontFamily:"Raleway",fontSize:"13px",color:OT.text,lineHeight:"1.9",whiteSpace:"pre-wrap",fontWeight:500}}>{kiDetail}</div>
-          : <OBtn onClick={()=>ladeKiDetail(gewaehlt)}>✦ Detaillierte Praxisanleitung laden</OBtn>}
+          : kiDetail ? <><div style={{fontFamily:"Raleway",fontSize:"13px",color:OT.text,lineHeight:"1.9",whiteSpace:"pre-wrap",fontWeight:500}}>{kiDetail}</div>
+            <div style={{marginTop:"12px",padding:"10px 14px",borderRadius:"10px",background:"rgba(201,168,76,0.08)",border:`1px solid ${OT.borderMid}`}}>
+              <span style={{fontFamily:"Raleway",fontSize:"11px",color:OT.textSoft,fontWeight:500,lineHeight:"1.7"}}>Diese Betrachtung bewegt sich auf einer seelisch-symbolischen Ebene und ersetzt keine medizinische oder therapeutische Beratung. Bei körperlichen, seelischen oder gesundheitlichen Beschwerden wende dich an Ärzte, Heilpraktiker oder Therapeuten.</span>
+            </div></>
+          : <OBtn onClick={()=>ladeKiDetail(gewaehlt)}>✦ Vertiefung laden</OBtn>}
         </OCard>
       </div>
     );
@@ -77,8 +80,8 @@ Gib eine PRAXISANLEITUNG:
   return (
     <div style={{display:"flex",flexDirection:"column",gap:"14px"}}>
       <OCard style={{background:OT.bgSoft,padding:"16px"}}>
-        <div style={{fontFamily:"Cinzel",fontSize:"15px",color:OT.text,fontWeight:700,marginBottom:"4px"}}>Heilungs-Guide</div>
-        <div style={{fontFamily:"Raleway",fontSize:"12px",color:OT.textMid,fontWeight:500}}>Priorisiert: Energetische Heilung zuerst. KI gibt detaillierte Praxisanleitungen.</div>
+        <div style={{fontFamily:"Cinzel",fontSize:"15px",color:OT.text,fontWeight:700,marginBottom:"4px"}}>Resonanz-Guide</div>
+        <div style={{fontFamily:"Raleway",fontSize:"12px",color:OT.textMid,fontWeight:500}}>Seelisch-symbolische Impulse zur Vertiefung.</div>
       </OCard>
       {kategorien.map(kat => (
         <div key={kat}>

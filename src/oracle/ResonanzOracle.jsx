@@ -15,7 +15,7 @@ function ResonanzOracle({ groqFetch }){
     { id:"organmap",   icon:"🫀", label:"Organsprache"    },
     { id:"chakra",     icon:"🌈", label:"Chakren"         },
     { id:"aura",       icon:"🌐", label:"Aura-Schichten"  },
-    { id:"heilung",    icon:"💚", label:"Heilungs-Guide"  },
+    { id:"heilung",    icon:"💚", label:"Resonanz-Guide"   },
     { id:"lernpfad",   icon:"🏆", label:"Lernpfad"        },
   ];
 
@@ -37,7 +37,7 @@ function ResonanzOracle({ groqFetch }){
         <div style={{position:"relative",zIndex:1}}>
           <div style={{fontFamily:"Cinzel",fontSize:"22px",color:OT.text,fontWeight:700,letterSpacing:"2px",marginBottom:"4px"}}>✦ Resonanz Oracle</div>
           <div style={{fontFamily:"Raleway",fontSize:"10px",color:OT.textSoft,letterSpacing:"3px",fontWeight:700,textTransform:"uppercase"}}>KI als stiller Berater im Hintergrund</div>
-          <div style={{fontFamily:"Raleway",fontSize:"12px",color:OT.textMid,fontWeight:500,marginTop:"8px",lineHeight:"1.6"}}>Organsprache · Chakren · Aura-Schichten · Heilungs-Guide · Lernpfad</div>
+          <div style={{fontFamily:"Raleway",fontSize:"12px",color:OT.textMid,fontWeight:500,marginTop:"8px",lineHeight:"1.6"}}>Organsprache · Chakren · Aura-Schichten · Resonanz-Guide · Lernpfad</div>
         </div>
       </div>
 
