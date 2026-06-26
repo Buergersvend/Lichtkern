@@ -413,6 +413,15 @@ useEffect(() => {
           setImpulsLoading(false);
           return;
         }
+        const REIZWOERTER = ["heil","therapie","diagnos","behandl","kurier","lindert","wirkt gegen","krankheit","symptom"];
+        const textL = text.toLowerCase();
+        const treffer = REIZWOERTER.find(w => textL.includes(w));
+        if (treffer) {
+          console.warn("[Impuls] Reizwort gefunden:", treffer, "– zeige Fallback, kein Cache");
+          setImpuls(FALLBACK);
+          setImpulsLoading(false);
+          return;
+        }
         await setDoc(ref, { datum: currentDay, text });
         setImpuls(text);
       } catch (e) {
