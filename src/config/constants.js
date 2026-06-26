@@ -21,15 +21,15 @@ const LEVELS = [
 ];
 
 const TECHNIQUES = {
-  "Analyse & Anamnese":["Energetische Anamnese","Belastungstest","Muster-Check","Resonanz-Check"],
-  "Meridian & Chakren":["Chakren-Balance","Meridian-Ausgleich","Reinigung Energiekörper","Schutz & Stärkung"],
+  "Analyse & Anamnese":["Energetische Anamnese","Themen-Check","Muster-Check","Resonanz-Check"],
+  "Meridian & Chakren":["Chakren-Balance","Meridian-Ausgleich","innere Klärung","Schutz & Stärkung"],
   "Emotionale Transformation":["EFT (Klopftechnik)","Atemtechnik 5-5-5-5","Emotions-Entkopplung"],
   "Mentale Muster":["Glaubenssatz-Shift","Anker setzen","Macht-/Schaltwort-Arbeit"],
-  "Zeitlinie & Karma":["Zeitlinienarbeit","Inkarnations-Thema","Karma/Verstrickung lösen"],
-  "DNA & Ahnen":["Ahnenlinie Mutter","Ahnenlinie Vater","DNS-Programm","Loyalitäten & Schwüre"],
+  "Zeitlinie & Karma":["Zeitlinienarbeit","Inkarnations-Thema","wiederkehrende Muster anschauen"],
+  "DNA & Ahnen":["Ahnenlinie Mutter","Ahnenlinie Vater","familiäre Prägungen","Loyalitäten & Schwüre"],
   "Geometrie & Radionik":["Blume des Lebens","Heilige Geometrie","Radionik"],
   "Schamanismus":["Heiliger Raum öffnen","Krafttier / Archetyp","Ritual & Abschluss"],
-  "Fernheilung":["Fernanwendung","Räume energetisieren","Licht-Sprache"],
+  "Arbeit auf Distanz":["Verbindung über Distanz","Raum halten","seelisch-symbolische Begleitung"],
 };
 
 const KNOWLEDGE = [
