@@ -24,7 +24,7 @@ function Lernpfad({ groqFetch }){
     {id:"aura", name:"Aura & Feinstoff", icon:"🌐"},
     {id:"ahnen", name:"Ahnen & DNA", icon:"🧬"},
     {id:"hellsinne", name:"Hellsinne", icon:"👁️"},
-    {id:"aura_chirurgie", name:"Aura-Chirurgie", icon:"✂️"},
+    // {id:"aura_chirurgie", name:"Aura-Chirurgie", icon:"✂️"},  // deaktiviert
     {id:"fernheilung", name:"Fernheilung", icon:"🌐"},
     {id:"lichtsprache", name:"Licht-Sprache", icon:"✨"},
     {id:"humandesign", name:"Human Design", icon:"⚙️"},

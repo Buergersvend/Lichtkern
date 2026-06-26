@@ -182,7 +182,7 @@ Sei präzise, alltagsnah und einfühlsam. Keine Heilversprechen, keine Diagnosen
                 <div key={idx} style={{padding:"12px",background:OT.bgCard,borderRadius:"12px",border:`1px solid ${OT.border}`}}>
                   <div style={{fontFamily:"Raleway",fontSize:"12px",color:OT.gold,fontWeight:700}}>🔮 Aura-Feld-Arbeit indiziert</div>
                   <div style={{fontFamily:"Raleway",fontSize:"11px",color:OT.textMid,fontWeight:500,marginTop:"4px"}}>
-                    Wechsle zur "Aura & Chirurgie" Karte für detaillierte Feinstoffarbeit
+                    Feinstoffliche Wahrnehmungen können in der Begleitungsarbeit als seelisch-symbolische Hinweise genutzt werden.
                   </div>
                 </div>
               );
