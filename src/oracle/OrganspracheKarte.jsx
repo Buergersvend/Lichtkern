@@ -14,7 +14,7 @@ function OrganspracheKarte({ groqFetch }){
     if (!groqFetch) return;
     setKiLaed(true); setKiDetail("");
     const chkr = CHAKRA_SYSTEM.find(c=>c.id===daten.chakra);
-    const prompt = `Du bist ein energetischer Heiler und erklärst Organsprache präzise und praxisnah.
+    const prompt = `Du bist ein einfühlsamer Begleiter und erklärst Organsprache auf einer seelisch-symbolischen Ebene, ohne Heilversprechen oder medizinische Aussagen. Bei gesundheitlichen Themen verweist du grundsätzlich an Ärzte, Heilpraktiker oder Therapeuten.
 
 Organ: ${organ} (Emoji: ${daten.emoji})
 Seite: ${seite} = ${daten.seiten?.[seite]||"universal"}
@@ -25,11 +25,11 @@ Ahnen-Thema: ${daten.ahnen}
 
 Gib eine PRAXISNAHE Erklärung in 3 kurzen Abschnitten:
 
-1. 🎯 WAS DIESES ORGAN JETZT SAGEN WILL (3-4 Sätze, direkt zum Punkt)
-2. 💬 TYPISCHE SÄTZE DES KLIENTEN (3 konkrete Sätze die der Klient oft sagt wenn dieses Muster aktiv ist)  
-3. 🌟 NÄCHSTE SCHRITTE IN DER SITZUNG (2-3 konkrete Handlungsimpulse)
+1. 🪷 WELCHES SEELISCH-SYMBOLISCHE THEMA sich hier zeigen kann (3-4 Sätze, einfühlsam)
+2. 💬 WELCHE INNEREN THEMEN oft damit verbunden sind (3 ruhige Sätze)
+3. 🌿 IMPULSE ZUR SELBSTWAHRNEHMUNG (2-3 sanfte Reflexionsfragen)
 
-Keine langen Einleitungen. Sofort in die Praxis.`;
+Keine langen Einleitungen. Bleibe einfühlsam und symbolisch.`;
 
     try {
       const antwort = await groqFetch(prompt);
@@ -83,13 +83,16 @@ Keine langen Einleitungen. Sofort in die Praxis.`;
         </OCard>
 
         <OCard>
-          <OLabel color={OT.goldD}>✦ KI-Praxisanalyse</OLabel>
+          <OLabel color={OT.goldD}>✦ Symbolische Deutung</OLabel>
           {kiLaed ? (
             <div style={{textAlign:"center",padding:"24px",fontFamily:"Raleway",fontSize:"13px",color:OT.textMid}}>⏳ Analysiere...</div>
           ) : kiDetail ? (
             <div style={{fontFamily:"Raleway",fontSize:"13px",color:OT.text,lineHeight:"1.9",whiteSpace:"pre-wrap",fontWeight:500}}>{kiDetail}</div>
+            <div style={{marginTop:"12px",padding:"10px 14px",borderRadius:"10px",background:"rgba(201,168,76,0.08)",border:`1px solid ${OT.borderMid}`}}>
+              <span style={{fontFamily:"Raleway",fontSize:"11px",color:OT.textSoft,fontWeight:500,lineHeight:"1.7"}}>Diese Betrachtung bewegt sich auf einer seelisch-symbolischen Ebene und ersetzt keine medizinische oder therapeutische Beratung. Bei körperlichen, seelischen oder gesundheitlichen Beschwerden wende dich an Ärzte, Heilpraktiker oder Therapeuten.</span>
+            </div>
           ) : (
-            <OBtn onClick={()=>ladeKiDetail(gewaehltes,daten)}>✦ KI-Praxisanalyse laden</OBtn>
+            <OBtn onClick={()=>ladeKiDetail(gewaehltes,daten)}>✦ Deutung laden</OBtn>
           )}
         </OCard>
       </div>
@@ -109,7 +112,7 @@ Keine langen Einleitungen. Sofort in die Praxis.`;
     <div style={{display:"flex",flexDirection:"column",gap:"14px"}}>
       <OCard style={{background:OT.bgSoft,padding:"16px"}}>
         <div style={{fontFamily:"Cinzel",fontSize:"15px",color:OT.text,fontWeight:700,marginBottom:"4px"}}>Organsprache-Navigator</div>
-        <div style={{fontFamily:"Raleway",fontSize:"12px",color:OT.textMid,fontWeight:500}}>Wähle ein Organ → sofortige energetische Deutung + KI-Praxisanalyse</div>
+        <div style={{fontFamily:"Raleway",fontSize:"12px",color:OT.textMid,fontWeight:500}}>Wähle ein Organ → seelisch-symbolische Betrachtung</div>
       </OCard>
       {Object.entries(kategorien).map(([kat, organe]) => (
         <OCard key={kat}>
@@ -149,8 +152,8 @@ const ORGANSPRACHE_INHALT = {
     sektionen: [
       {
         titel: "Das Grundprinzip", icon: "🌿",
-        inhalt: `Der Körper ist kein Zufallsprodukt. Er ist der ehrlichste Spiegel, den wir haben – und er spricht eine Sprache, die jeder lernen kann.\n\nOrgansprache beschäftigt sich mit der Frage: Warum erkrankt gerade dieses Organ? Was will mir mein Körper damit sagen?\n\nDer Schlüsselsatz lautet: Jede körperliche Störung ist ein Lösungsversuch der Seele – ein Signal, das gehört werden möchte.`,
-        highlight: "Der Körper lügt nie. Er zeigt immer, was die Seele noch nicht in Worte gefasst hat.",
+        inhalt: `Der Körper ist kein Zufallsprodukt. Er ist der ehrlichste Spiegel, den wir haben – und er spricht eine Sprache, die jeder lernen kann.\n\nOrgansprache beschäftigt sich mit der Frage: Warum erkrankt gerade dieses Organ? Was will mir mein Körper damit sagen?\n\nKörperliche Empfindungen können uns einladen, achtsam nach innen zu schauen — als seelisch-symbolische Betrachtung, nicht als medizinische Deutung.`,
+        highlight: "Der Körper spricht eine eigene, leise Sprache. Wer ihm achtsam zuhört, lernt sich selbst besser kennen.",
       },
       {
         titel: "Drei Grundgesetze der Organsprache", icon: "⚖️",
@@ -227,7 +230,7 @@ const ORGANSPRACHE_INHALT = {
     lernziele: [
       "Mehrfachsymptome als Gesamtsystem lesen",
       "Organsprache mit anderen Methoden verbinden",
-      "Energetische Heilarbeit auf Basis von Organsprache ableiten",
+      "Vertieftes Verständnis der seelisch-symbolischen Organsprache",
       "Eigene blinde Flecken als Praktizierender erkennen",
     ],
     sektionen: [
@@ -239,7 +242,7 @@ const ORGANSPRACHE_INHALT = {
       {
         titel: "Blinde Flecken des Praktizierers", icon: "🪞",
         inhalt: `Als Praktizierender bringst du dein eigenes System mit in jede Sitzung. Deine eigenen ungelösten Körperthemen beeinflussen, was du beim Klienten siehst.\n\n**Die Praxis der Selbstreflexion:**\nFühre ein Praktizierenden-Tagebuch: Nach jeder Sitzung – Was hat mich bewegt?`,
-        highlight: "Der beste Heiler ist der, der sich selbst am besten kennt – einschließlich seiner Grenzen.",
+        highlight: "Der beste Begleiter ist der, der sich selbst am besten kennt – einschließlich seiner Grenzen.",
       },
     ],
     praxisuebungen: [
