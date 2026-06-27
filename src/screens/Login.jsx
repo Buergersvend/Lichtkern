@@ -3,7 +3,7 @@ import { T } from "../config/theme.js";
 import { TI, Btn } from "../components/UI.jsx";
 import { Flower } from "../components/Decorations";
 import { auth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "../config/firebase.js";
-import { getFirestore, doc, setDoc } from "firebase/firestore";
+import { getFirestore, doc, setDoc, getDoc, updateDoc } from "firebase/firestore";
 import { sendPasswordResetEmail } from "firebase/auth";
 const db = getFirestore();
 
@@ -19,6 +19,7 @@ function LoginScreen({ onLogin }){
   const refPassword = useRef();
   const refName     = useRef();
   const refPraxis   = useRef();
+  const refCode     = useRef();
 
   useEffect(()=>{
     const saved=localStorage.getItem("rememberedEmail");
@@ -43,11 +44,19 @@ function LoginScreen({ onLogin }){
     setError(""); setSuccess(""); setLoading(true);
     try {
       if (mode === "register") {
+        const code = refCode.current?.value?.trim() || "";
         if (!dsgvo)    { setError("Bitte Datenschutzerklärung akzeptieren."); setLoading(false); return; }
         if (!name)     { setError("Bitte deinen Namen eingeben."); setLoading(false); return; }
+        if (!code)     { setError("Bitte Einladungscode eingeben."); setLoading(false); return; }
         if (!email)    { setError("Bitte E-Mail eingeben."); setLoading(false); return; }
         if (!password) { setError("Bitte Passwort eingeben."); setLoading(false); return; }
+        const codeSnap = await getDoc(doc(db, "einladungscodes", code.toLowerCase()));
+        if (!codeSnap.exists() || codeSnap.data().used) {
+          setError("Dieser Einladungscode ist ungültig oder wurde bereits verwendet.");
+          setLoading(false); return;
+        }
         const cred = await createUserWithEmailAndPassword(auth, email, password);
+        await updateDoc(doc(db, "einladungscodes", code.toLowerCase()), { used: true, usedBy: cred.user.uid, usedAt: new Date().toISOString() });
         await setDoc(doc(db, "users", cred.user.uid, "data", "lk_settings"), {
           value: JSON.stringify({ theme:"kristallwasser", currency:"CHF", defaultDuration:"60", autoLock:"5", pinEnabled:false, praxisname:praxis, subtitle:"", therapistName:name, defaultFee:"", disclaimer:"", modules:[], setupDone:false })
         });
@@ -108,6 +117,7 @@ function LoginScreen({ onLogin }){
             {mode === "register" && <>
               <input ref={refName} className={inpCls} style={inp} placeholder="Dein Name *" autoComplete="name" />
               <input ref={refPraxis} className={inpCls} style={inp} placeholder="Praxisname (optional)" autoComplete="organization" />
+              <input ref={refCode} className={inpCls} style={{...inp, letterSpacing:"2px"}} placeholder="Einladungscode *" autoComplete="off" autoCapitalize="off" />
             </>}
             <input ref={refEmail} className={inpCls} style={inp} type="email" placeholder="E-Mail *" autoComplete="email" onKeyDown={e=>e.key==="Enter"&&refPassword.current?.focus()} />
             <div style={{position:"relative"}}>
