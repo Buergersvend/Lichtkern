@@ -80,16 +80,51 @@ export const NAV=[
   {id:"session",  label:"Sitzung",   icon:"✦"},
   {id:"calendar", label:"Kalender",  icon:"◷"},
   {id:"history",  label:"Verlauf",   icon:"◎"},
- {id:"oracle", label:"Resonanz", icon:"✦"},
+  {id:"oracle",   label:"Resonanz",  icon:"✦"},
 ];
 
-export function BottomNav({active,onChange}){
-  return(<nav style={{position:"fixed",bottom:0,left:0,right:0,background:"#0F0F0F",borderTop:`1.5px solid ${T.border}`,display:"flex",zIndex:100,paddingBottom:"env(safe-area-inset-bottom)"}}>
-    {NAV.map(n=>(
-      <button key={n.id} onClick={()=>onChange(n.id)} style={{flex:1,padding:"10px 4px 8px",border:"none",background:"none",cursor:"pointer",display:"flex",flexDirection:"column",alignItems:"center",gap:"3px"}}>
-        <span style={{fontSize:"18px",opacity:active===n.id?1:0.4}}>{n.icon}</span>
-        <span style={{fontSize:"9px",fontFamily:"Raleway",fontWeight:700,letterSpacing:"1px",color:active===n.id?T.gold:T.textSoft,textTransform:"uppercase"}}>{n.label}</span>
-      </button>
-    ))}
-  </nav>);
+const MEHR_ITEMS = [
+  { id:"humandesign",     label:"Human Design",  icon:"⬡" },
+  { id:"synergy",         label:"Numerologie",   icon:"✧" },
+  { id:"gentree",         label:"Resonanzkarte", icon:"⊛" },
+  { id:"resonanz-raeume", label:"Resonanz-Räume",icon:"✧", gated:true },
+];
+
+export function BottomNav({active, onChange, erlaubtRaeume}){
+  const [sheet, setSheet] = React.useState(false);
+  const items = MEHR_ITEMS.filter(i => !i.gated || erlaubtRaeume);
+  const mehrAktiv = items.some(i => i.id === active);
+  return (
+    <>
+      {sheet && <>
+        <div onClick={()=>setSheet(false)} style={{position:"fixed",inset:0,background:"rgba(0,0,0,0.65)",zIndex:150}}/>
+        <div style={{position:"fixed",bottom:"calc(60px + env(safe-area-inset-bottom))",left:0,right:0,background:T.bgSoft,borderTop:`1.5px solid ${T.border}`,borderRadius:"18px 18px 0 0",zIndex:160,padding:"16px 12px 8px"}}>
+          <div style={{width:36,height:4,borderRadius:2,background:T.border,margin:"0 auto 14px"}}/>
+          <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:"8px"}}>
+            {items.map(item=>{
+              const isA = active===item.id;
+              return(
+                <button key={item.id} onClick={()=>{onChange(item.id);setSheet(false);}} style={{display:"flex",alignItems:"center",gap:10,padding:"12px 14px",borderRadius:"14px",border:`1.5px solid ${isA?T.gold:T.border}`,background:isA?"rgba(201,168,76,0.08)":T.bgCard,cursor:"pointer",textAlign:"left"}}>
+                  <span style={{fontSize:20,flexShrink:0}}>{item.icon}</span>
+                  <span style={{fontFamily:"Raleway",fontSize:13,fontWeight:700,color:isA?T.gold:T.text}}>{item.label}</span>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      </>}
+      <nav style={{position:"fixed",bottom:0,left:0,right:0,background:"#0F0F0F",borderTop:`1.5px solid ${T.border}`,display:"flex",zIndex:100,paddingBottom:"env(safe-area-inset-bottom)"}}>
+        {NAV.map(n=>(
+          <button key={n.id} onClick={()=>onChange(n.id)} style={{flex:1,padding:"10px 4px 8px",border:"none",background:"none",cursor:"pointer",display:"flex",flexDirection:"column",alignItems:"center",gap:"3px"}}>
+            <span style={{fontSize:"18px",opacity:active===n.id?1:0.4}}>{n.icon}</span>
+            <span style={{fontSize:"9px",fontFamily:"Raleway",fontWeight:700,letterSpacing:"1px",color:active===n.id?T.gold:T.textSoft,textTransform:"uppercase"}}>{n.label}</span>
+          </button>
+        ))}
+        <button onClick={()=>setSheet(s=>!s)} style={{flex:1,padding:"10px 4px 8px",border:"none",background:"none",cursor:"pointer",display:"flex",flexDirection:"column",alignItems:"center",gap:"3px"}}>
+          <span style={{fontSize:"18px",opacity:mehrAktiv||sheet?1:0.4}}>☰</span>
+          <span style={{fontSize:"9px",fontFamily:"Raleway",fontWeight:700,letterSpacing:"1px",color:mehrAktiv||sheet?T.gold:T.textSoft,textTransform:"uppercase"}}>Mehr</span>
+        </button>
+      </nav>
+    </>
+  );
 }
