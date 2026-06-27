@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useCallback, useRef } from "react";
 
 const OT = {
-  bg:"#FFFDF5", bgCard:"#FFFFFF", bgSoft:"#FFF8E7", bgSofter:"#FFFCF0",
+  bg:"#0F0F0F", bgCard:"#1A1A1A", bgSoft:"#242424", bgSofter:"#2A2A2A",
   border:"rgba(201,168,76,0.3)", borderMid:"rgba(201,168,76,0.5)",
-  text:"#1A1200", textMid:"#6B5B3A", textSoft:"#A89668",
+  text:"#F5F0E8", textMid:"rgba(245,240,232,0.85)", textSoft:"rgba(245,240,232,0.7)",
   teal:"#C9A84C", tealL:"rgba(201,168,76,0.15)", tealD:"#A87D3A",
   violet:"#C9A84C", violetL:"rgba(201,168,76,0.15)", violetD:"#A87D3A",
   gold:"#C9A84C", goldL:"rgba(201,168,76,0.15)",
