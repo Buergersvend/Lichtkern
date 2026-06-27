@@ -479,7 +479,7 @@ function OrganspracheLernmodul({ stufe = 1, onBack, onZertifikat }) {
   return (
     <div style={{display:"flex",flexDirection:"column",gap:"0"}}>
       <button onClick={onBack} style={{fontFamily:"Raleway",fontSize:"13px",color:"#C9A84C",fontWeight:700,background:"none",border:"none",cursor:"pointer",textAlign:"left",marginBottom:"12px"}}>← Zum Lernpfad</button>
-      <div style={{position:"relative",borderRadius:"20px",overflow:"hidden",padding:"22px 20px",marginBottom:"16px",background:`linear-gradient(140deg,${stufeCfg.bg} 0%,#FFFFFF 45%,${OT.goldL} 100%)`,border:`1.5px solid ${stufeCfg.farbe}44`,boxShadow:`0 4px 20px ${OT.shadow}`}}>
+      <div style={{position:"relative",borderRadius:"20px",overflow:"hidden",padding:"22px 20px",marginBottom:"16px",background:`linear-gradient(140deg,rgba(255,255,255,0.05) 0%,${OT.bgCard} 45%,${OT.goldL} 100%)`,border:`1.5px solid ${stufeCfg.farbe}44`,boxShadow:`0 4px 20px ${OT.shadow}`}}>
         <div style={{display:"flex",alignItems:"flex-start",gap:"14px",marginBottom:"14px"}}>
           <div style={{width:"52px",height:"52px",borderRadius:"50%",background:stufeCfg.farbe,display:"flex",alignItems:"center",justifyContent:"center",fontSize:"24px",flexShrink:0}}>{stufeCfg.icon}</div>
           <div>

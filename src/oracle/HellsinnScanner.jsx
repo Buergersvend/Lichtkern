@@ -137,7 +137,7 @@ Sei präzise, alltagsnah und einfühlsam. Keine Heilversprechen, keine Diagnosen
 
       {/* Lokale Sofort-Bezüge */}
       {lokalInfo.length > 0 && (
-        <OCard style={{background:`linear-gradient(135deg,${OT.bgSoft},#FAFFFE)`,border:`1.5px solid ${OT.borderMid}`}}>
+        <OCard style={{background:`linear-gradient(135deg,${OT.bgSoft},${OT.bgCard})`,border:`1.5px solid ${OT.borderMid}`}}>
           <OLabel color="#A87D3A">⚡ Sofortige Resonanz-Bezüge</OLabel>
           {lokalInfo.map((info, idx) => {
             if (info.typ === "organ") {
@@ -150,7 +150,7 @@ Sei präzise, alltagsnah und einfühlsam. Keine Heilversprechen, keine Diagnosen
                     <span style={{marginLeft:"auto",fontFamily:"Raleway",fontSize:"10px",fontWeight:700,padding:"3px 8px",borderRadius:"8px",background:"rgba(201,168,76,0.15)",color:"#A87D3A"}}>Organsprache</span>
                   </div>
                   <div style={{display:"flex",flexWrap:"wrap",gap:"5px",marginBottom:"6px"}}>
-                    {daten.symbolik.map(s=><span key={s} style={{fontFamily:"Raleway",fontSize:"10px",fontWeight:700,padding:"3px 9px",borderRadius:"10px",background:"#FEF3C7",color:OT.gold}}>{s}</span>)}
+                    {daten.symbolik.map(s=><span key={s} style={{fontFamily:"Raleway",fontSize:"10px",fontWeight:700,padding:"3px 9px",borderRadius:"10px",background:OT.goldL,color:OT.gold}}>{s}</span>)}
                   </div>
                   <div style={{fontFamily:"Raleway",fontSize:"11px",color:OT.textMid,fontWeight:500}}>
                     Chakra-Bezug: <b>{CHAKRA_SYSTEM.find(c=>c.id===daten.chakra)?.name||daten.chakra}</b>

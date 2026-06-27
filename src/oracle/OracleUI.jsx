@@ -324,7 +324,7 @@ const HELLSINN_TAGS = {
     items:["Wärme","Kälte","Schwere","Leichtigkeit","Kribbeln","Pulsation","Enge","Druck","Zug","Leere","Fülle","Prickeln","Schmerz gespürt","Starre","Vibration","Weichheit","Härte"]
   },
   farben: {
-    label:"🎨 Farben / Licht", farbe:"#EA580C", bgfarbe:"#FFF7ED",
+    label:"🎨 Farben / Licht", farbe:"#EA580C", bgfarbe:"rgba(234,88,12,0.15)",
     items:["Rot","Orange","Gelb","Grün","Hellblau","Dunkelblau","Violett","Weiß","Schwarz","Grau","Braun","Rosa","Gold","Silber","Türkis","Dunkel","Hell","Trüb","Leuchtend"]
   },
   koerper: {
@@ -340,7 +340,7 @@ const HELLSINN_TAGS = {
     items:["Mauer","Käfig","Netz","Panzer","Schleier","Schnur","Knoten","Stein","Schwert","Licht","Fluss","Baum","Wurzel","Wasser","Feuer","Erde","Wind","Höhle","Brücke","Spiegel"]
   },
   ahnen: {
-    label:"🧬 Ahnen / Karma", farbe:"#B45309", bgfarbe:"#FEF3C7",
+    label:"🧬 Ahnen / Karma", farbe:"#B45309", bgfarbe:"rgba(180,83,9,0.15)",
     items:["Mutter-Linie","Vater-Linie","Großeltern","Krieg","Verlust","Emigration","Trauma","Schwur","Loyalität","Karma","Wiederholung","Verstrickung","Schicksal","Ahnen anwesend"]
   },
 };
