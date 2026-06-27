@@ -207,7 +207,7 @@ function App({ user, onLogout }){
       </div>
     </div>
   
-    {!isDesktop&&<BottomNav active={screen} onChange={nav}/>}
+    {!isDesktop&&<BottomNav active={screen} onChange={nav} erlaubtRaeume={ZUGANG_RAEUME.includes(auth.currentUser?.uid)}/>}
     
   </div>);
 }
