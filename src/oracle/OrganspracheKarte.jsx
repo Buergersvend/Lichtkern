@@ -87,10 +87,12 @@ Keine langen Einleitungen. Bleibe einfühlsam und symbolisch.`;
           {kiLaed ? (
             <div style={{textAlign:"center",padding:"24px",fontFamily:"Raleway",fontSize:"13px",color:OT.textMid}}>⏳ Analysiere...</div>
           ) : kiDetail ? (
-            <div style={{fontFamily:"Raleway",fontSize:"13px",color:OT.text,lineHeight:"1.9",whiteSpace:"pre-wrap",fontWeight:500}}>{kiDetail}</div>
-            <div style={{marginTop:"12px",padding:"10px 14px",borderRadius:"10px",background:"rgba(201,168,76,0.08)",border:`1px solid ${OT.borderMid}`}}>
-              <span style={{fontFamily:"Raleway",fontSize:"11px",color:OT.textSoft,fontWeight:500,lineHeight:"1.7"}}>Diese Betrachtung bewegt sich auf einer seelisch-symbolischen Ebene und ersetzt keine medizinische oder therapeutische Beratung. Bei körperlichen, seelischen oder gesundheitlichen Beschwerden wende dich an Ärzte, Heilpraktiker oder Therapeuten.</span>
-            </div>
+            <>
+              <div style={{fontFamily:"Raleway",fontSize:"13px",color:OT.text,lineHeight:"1.9",whiteSpace:"pre-wrap",fontWeight:500}}>{kiDetail}</div>
+              <div style={{marginTop:"12px",padding:"10px 14px",borderRadius:"10px",background:"rgba(201,168,76,0.08)",border:`1px solid ${OT.borderMid}`}}>
+                <span style={{fontFamily:"Raleway",fontSize:"11px",color:OT.textSoft,fontWeight:500,lineHeight:"1.7"}}>Diese Betrachtung bewegt sich auf einer seelisch-symbolischen Ebene und ersetzt keine medizinische oder therapeutische Beratung. Bei körperlichen, seelischen oder gesundheitlichen Beschwerden wende dich an Ärzte, Heilpraktiker oder Therapeuten.</span>
+              </div>
+            </>
           ) : (
             <OBtn onClick={()=>ladeKiDetail(gewaehltes,daten)}>✦ Deutung laden</OBtn>
           )}
