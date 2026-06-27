@@ -253,14 +253,14 @@ ${(tree?.relations||[]).length?"<div class=\"card\"><h3>Verknüpfte Klienten</h3
         </div>
       </div>
       {clients.length===0
-        ? <div style={{textAlign:"center",padding:"48px 0"}}><div style={{fontSize:"40px",marginBottom:"12px",opacity:0.3}}>🧬</div><div style={{fontFamily:"Raleway",fontSize:"14px",color:T.textMid,fontWeight:600}}>Noch keine Klienten</div></div>
+        ? <div style={{textAlign:"center",padding:"48px 0"}}><div style={{fontSize:"40px",marginBottom:"12px",opacity:0.3}}>🌳</div><div style={{fontFamily:"Raleway",fontSize:"14px",color:T.textMid,fontWeight:600}}>Noch keine Klienten</div></div>
         : <div style={{display:"flex",flexDirection:"column",gap:"10px"}}>
             {clients.map(c=>{
               const hasTree=genTrees[c.id]&&Object.values(genTrees[c.id]).some(v=>typeof v==="object"&&v.name);
               const rels=(genTrees[c.id]?.relations||[]).length;
               return(
                 <Card key={c.id} onClick={()=>setSelectedClientId(c.id)} style={{cursor:"pointer",display:"flex",alignItems:"center",gap:"12px"}}>
-                  <div style={{width:"44px",height:"44px",borderRadius:"50%",background:hasTree?T.goldL:T.bgSoft,border:`1.5px solid ${hasTree?T.gold:T.border}`,display:"flex",alignItems:"center",justifyContent:"center",fontSize:"20px",flexShrink:0}}>🧬</div>
+                  <div style={{width:"44px",height:"44px",borderRadius:"50%",background:hasTree?T.goldL:T.bgSoft,border:`1.5px solid ${hasTree?T.gold:T.border}`,display:"flex",alignItems:"center",justifyContent:"center",fontSize:"20px",flexShrink:0}}>🌳</div>
                   <div style={{flex:1}}>
                     <div style={{fontFamily:"Raleway",fontWeight:700,fontSize:"14px",color:T.text}}>{c.name}</div>
                     <div style={{fontFamily:"Raleway",fontSize:"11px",color:T.textSoft,fontWeight:500,marginTop:"2px"}}>
