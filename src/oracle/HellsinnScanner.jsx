@@ -202,10 +202,12 @@ Sei präzise, alltagsnah und einfühlsam. Keine Heilversprechen, keine Diagnosen
               <div style={{fontFamily:"Raleway",fontSize:"13px",color:OT.textMid,fontWeight:600}}>Energetische Analyse läuft...</div>
             </div>
           ) : (
-            <div style={{fontFamily:"Raleway",fontSize:"13px",color:OT.text,lineHeight:"1.9",whiteSpace:"pre-wrap",fontWeight:500}}>{kiAntwort}</div>
-            <div style={{marginTop:"12px",padding:"10px 14px",borderRadius:"10px",background:"rgba(201,168,76,0.08)",border:`1px solid ${OT.borderMid}`}}>
-              <span style={{fontFamily:"Raleway",fontSize:"11px",color:OT.textSoft,fontWeight:500,lineHeight:"1.7"}}>Diese Impulse bewegen sich auf einer seelisch-symbolischen Ebene und sind kein Ersatz für medizinische oder therapeutische Beratung. Bei gesundheitlichen Themen wende dich an Ärzte, Heilpraktiker oder Therapeuten.</span>
-            </div>
+            <>
+              <div style={{fontFamily:"Raleway",fontSize:"13px",color:OT.text,lineHeight:"1.9",whiteSpace:"pre-wrap",fontWeight:500}}>{kiAntwort}</div>
+              <div style={{marginTop:"12px",padding:"10px 14px",borderRadius:"10px",background:"rgba(201,168,76,0.08)",border:`1px solid ${OT.borderMid}`}}>
+                <span style={{fontFamily:"Raleway",fontSize:"11px",color:OT.textSoft,fontWeight:500,lineHeight:"1.7"}}>Diese Impulse bewegen sich auf einer seelisch-symbolischen Ebene und sind kein Ersatz für medizinische oder therapeutische Beratung. Bei gesundheitlichen Themen wende dich an Ärzte, Heilpraktiker oder Therapeuten.</span>
+              </div>
+            </>
           )}
         </OCard>
       )}
