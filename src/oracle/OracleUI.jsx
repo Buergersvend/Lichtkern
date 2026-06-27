@@ -78,7 +78,7 @@ const CHAKRA_SYSTEM = [
     organe:["Augen","Stirn","Hypophyse","Pinealdrüse","Kleinhirn","Nase","Stirnhöhlen"],
     aura_schicht:"Kausalkörper",
     hd_zentren:["Ajna","Krone"],
-    heilung:["Amethyst","Sodalith","Traumarbeit","Meditation","Dritte-Auge-Aktivierung"],
+    heilung:["Amethyst","Sodalith","Traumarbeit","Meditation","Drittes-Auge-Wahrnehmung"],
     lernpfad_soft:"Das Stirnchakra ist das Tor zur inneren Wahrnehmung – Hellsehen, Hellspüren, Hellfühlen und Hellwissen sind hier verwurzelt.",
     lernpfad_deep:"Das Stirnchakra reagiert empfindlich auf intensive Wahrnehmungsphasen. Bewusste Erdung danach hilft, wieder im Körper anzukommen."
   },
