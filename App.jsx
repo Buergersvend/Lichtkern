@@ -23,6 +23,7 @@ import { PinLock, SettingsScreen } from "./src/screens/Settings.jsx";
 import { GenTree } from "./src/screens/GenTree.jsx";
 import { PDFModal } from "./src/screens/PDFModal.jsx";
 import OracleAgent from "./src/oracle/OracleAgent.jsx";
+import { ResonanzOracle } from "./src/oracle/ResonanzOracle.jsx";
 
 const SIDEBAR_SECTIONS = [
   { label: "Praxis", items: [
@@ -36,6 +37,7 @@ const SIDEBAR_SECTIONS = [
     { id: "humandesign", label: "Human Design", icon: "⬡" },
     { id: "synergy", label: "Numerologie", icon: "✧" },
     { id: "oracle", label: "Resonanz-Analyse", icon: "✦" },
+    { id: "resonanz-raeume", label: "Resonanz-Räume", icon: "✧" },
     { id: "gentree", label: "Resonanzkarte", icon: "⊛" },
   ]},
   { label: "Analyse", items: [
@@ -193,6 +195,7 @@ function App({ user, onLogout }){
       {screen==="clientanalysis"&&<ClientAnalysis clientId={analyticsClient} clients={clients} sessions={sessions} onBack={()=>setScreen("analytics")}/>}
       {screen==="knowledge"&&<Knowledge/>}
      {screen==="oracle"&&<OracleAgent onClose={()=>setScreen("dashboard")}/>}
+      {screen==="resonanz-raeume"&&<ResonanzOracle groqFetch={groqFetch}/>}
       {screen==="humandesign"&&<div style={{padding:"40px 20px",textAlign:"center"}}><div style={{fontFamily:"Cinzel",fontSize:"20px",color:"#C9A84C",marginBottom:"12px"}}>Human Design</div><div style={{fontFamily:"Raleway",fontSize:"13px",color:"rgba(245,240,232,0.5)"}}>Wähle einen Klienten um dessen Bodygraph zu sehen</div><button onClick={()=>nav("clients")} style={{marginTop:"20px",fontFamily:"Raleway",fontSize:"13px",fontWeight:700,padding:"10px 24px",borderRadius:"12px",border:"1px solid rgba(201,168,76,0.3)",background:"rgba(201,168,76,0.1)",color:"#C9A84C",cursor:"pointer"}}>Zu den Klienten</button></div>}
       {screen==="billing"   &&<Billing sessions={sessions} clients={clients} settings={settings} onUpdateSession={async(updated)=>{const next=sessions.map(s=>s.id===updated.id?updated:s);await saveSessions(next);}}/>}
       {screen==="templates" &&<TemplatesScreen templates={templates} onSave={saveTemplates} onStartSession={(tpl)=>startSession(null,tpl)}/>}

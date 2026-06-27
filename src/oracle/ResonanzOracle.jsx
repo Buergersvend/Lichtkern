@@ -31,13 +31,14 @@ function ResonanzOracle({ groqFetch }){
 
   return (
     <div style={{background:OT.bg,minHeight:"100%",paddingBottom:"40px"}}>
-      {/* Hero */}
+      {/* Header */}
       <div style={{position:"relative",margin:"0 0 20px",padding:"26px 20px 22px",background:OT.bgSoft,borderBottom:`1.5px solid ${OT.border}`,overflow:"hidden"}}>
-        <div style={{position:"absolute",top:-60,right:-60,width:"200px",height:"200px",borderRadius:"50%",background:OT.bgSoft,opacity:0,pointerEvents:"none"}}/>
         <div style={{position:"relative",zIndex:1}}>
-          <div style={{fontFamily:"Cinzel",fontSize:"22px",color:OT.text,fontWeight:700,letterSpacing:"2px",marginBottom:"4px"}}>✦ Resonanz Oracle</div>
-          <div style={{fontFamily:"Raleway",fontSize:"10px",color:OT.textSoft,letterSpacing:"3px",fontWeight:700,textTransform:"uppercase"}}>KI als stiller Berater im Hintergrund</div>
-          <div style={{fontFamily:"Raleway",fontSize:"12px",color:OT.textMid,fontWeight:500,marginTop:"8px",lineHeight:"1.6"}}>Organsprache · Chakren · Aura-Schichten · Resonanz-Guide · Lernpfad</div>
+          <div style={{fontFamily:"Cinzel",fontSize:"22px",color:OT.text,fontWeight:700,letterSpacing:"2px",marginBottom:"6px"}}>✦ Resonanz-Räume</div>
+          <div style={{fontFamily:"Raleway",fontSize:"12px",color:OT.textMid,fontWeight:500,lineHeight:"1.6",marginBottom:"14px"}}>Werkzeuge zur Selbstwahrnehmung und Reflexion — Organsprache, Chakren, Aura-Schichten und der Resonanz-Guide laden dazu ein, die eigene innere Landschaft zu erkunden.</div>
+          <div style={{padding:"12px 14px",borderRadius:"10px",background:"rgba(201,168,76,0.07)",border:`1px solid ${OT.borderMid}`}}>
+            <span style={{fontFamily:"Raleway",fontSize:"11px",color:OT.textSoft,fontWeight:500,lineHeight:"1.75"}}>Die Resonanz-Räume sind ein Angebot zur persönlichen Reflexion und Selbstwahrnehmung. Sie ersetzen keine ärztliche, psychotherapeutische oder heilkundliche Behandlung, Diagnose oder Beratung. Bei gesundheitlichen Beschwerden wende dich bitte an eine Ärztin, einen Arzt, eine Heilpraktikerin oder einen Heilpraktiker. Die hier angebotenen Inhalte stellen keine Heilaussagen dar und versprechen keine bestimmte Wirkung.</span>
+          </div>
         </div>
       </div>
 
