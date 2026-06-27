@@ -3,6 +3,7 @@ import { todayStr } from '../config/helpers';
 import { db, auth } from "../config/firebase.js";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { groqFetch } from "../config/groq.js";
+import { enthältReizwort } from "../oracle/reizwortFilter.js";
 
 const GOLD = "#C9A84C";
 const DARK = "#0F0F0F";
@@ -413,11 +414,8 @@ useEffect(() => {
           setImpulsLoading(false);
           return;
         }
-        const REIZWOERTER = ["heil","therapie","diagnos","behandl","kurier","lindert","wirkt gegen","krankheit","symptom"];
-        const textL = text.toLowerCase();
-        const treffer = REIZWOERTER.find(w => textL.includes(w));
-        if (treffer) {
-          console.warn("[Impuls] Reizwort gefunden:", treffer, "– zeige Fallback, kein Cache");
+        if (enthältReizwort(text)) {
+          console.warn("[Impuls] Reizwort gefunden – zeige Fallback, kein Cache");
           setImpuls(FALLBACK);
           setImpulsLoading(false);
           return;

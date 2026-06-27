@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { OT, LERNPFAD_STUFEN, OCard, OBtn, OLabel } from "./OracleUI.jsx";
 import { OrganspracheLernmodul } from "./OrganspracheKarte.jsx";
+import { enthältReizwort, REIZWORT_HINWEIS } from "./reizwortFilter.js";
 
 function Lernpfad({ groqFetch }){
   const [gewStufe, setGewStufe] = useState(null);
@@ -61,8 +62,10 @@ ${stufe >= 4 ? `🔮 MEISTERSCHAFTSWISSEN\n[Was unterscheidet einen Meister von 
 
 Schreibe klar, strukturiert und inspirierend. Auf Deutsch.`;
 
-    try { setKiInhalt(await groqFetch(prompt)); }
-    catch { setKiInhalt("Fehler beim Laden."); }
+    try {
+      const antwort = await groqFetch(prompt);
+      setKiInhalt(enthältReizwort(antwort) ? REIZWORT_HINWEIS : antwort);
+    } catch { setKiInhalt("Fehler beim Laden."); }
     setKiLaed(false);
   };
 

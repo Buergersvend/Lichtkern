@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { OT, CHAKRA_SYSTEM, OCard, OBtn, OLabel } from "./OracleUI.jsx";
+import { enthältReizwort, REIZWORT_HINWEIS } from "./reizwortFilter.js";
 
 function ChakraMatrix({ groqFetch }){
   const [gewaehltes, setGewaehltes] = useState(null);
@@ -37,8 +38,10 @@ Antworte in diesen Abschnitten (kurz & präzise):
 ⚡ VERBINDUNG ZU ANDEREN CHAKREN
 [Mit welchen anderen Chakren interagiert dieses?]`;
 
-    try { setKiDetail(await groqFetch(prompt)); }
-    catch { setKiDetail("Fehler."); }
+    try {
+      const antwort = await groqFetch(prompt);
+      setKiDetail(enthältReizwort(antwort) ? REIZWORT_HINWEIS : antwort);
+    } catch { setKiDetail("Fehler."); }
     setKiLaed(false);
   };
 

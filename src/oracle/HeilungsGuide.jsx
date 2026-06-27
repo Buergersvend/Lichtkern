@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback, useRef } from "react";
 import { OT, OCard, OLabel, OBtn, HEILMETHODEN_KATALOG } from "./OracleUI.jsx";
+import { enthältReizwort, REIZWORT_HINWEIS } from "./reizwortFilter.js";
 
 function HeilungsGuide({ groqFetch }){
   const [gewaehlt, setGewaehlt] = useState(null);
@@ -32,8 +33,10 @@ Gib eine PRAXISANLEITUNG:
 ⚠️ WICHTIGE HINWEISE
 [Weise ausdrücklich darauf hin, dass dies eine seelisch-symbolische Betrachtung ist und keine medizinische oder therapeutische Beratung ersetzt. Bei gesundheitlichen Beschwerden ist an Ärzte, Heilpraktiker oder Therapeuten zu verweisen.]`;
 
-    try { setKiDetail(await groqFetch(prompt)); }
-    catch { setKiDetail("Fehler."); }
+    try {
+      const antwort = await groqFetch(prompt);
+      setKiDetail(enthältReizwort(antwort) ? REIZWORT_HINWEIS : antwort);
+    } catch { setKiDetail("Fehler."); }
     setKiLaed(false);
   };
 

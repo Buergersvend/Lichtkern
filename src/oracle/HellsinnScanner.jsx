@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback, useRef } from "react";
 import { OT, ORGAN_MAP, CHAKRA_SYSTEM, HELLSINN_TAGS, OCard, OBtn, OTag, OLabel } from "./OracleUI.jsx";
+import { enthältReizwort, REIZWORT_HINWEIS } from "./reizwortFilter.js";
 
 function HellsinnScanner({ groqFetch }){
   const [eingabe, setEingabe]       = useState("");
@@ -82,7 +83,7 @@ Sei präzise, alltagsnah und einfühlsam. Keine Heilversprechen, keine Diagnosen
 
     try {
       const antwort = await groqFetch(prompt);
-      setKiAntwort(antwort);
+      setKiAntwort(enthältReizwort(antwort) ? REIZWORT_HINWEIS : antwort);
     } catch (e) {
       setKiAntwort("❌ Fehler bei der Analyse. Bitte Verbindung prüfen.");
     }

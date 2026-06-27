@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback, useRef } from "react";
 import { OT, ORGAN_MAP, CHAKRA_SYSTEM, OCard, OBtn, OLabel } from "./OracleUI.jsx";
+import { enthältReizwort, REIZWORT_HINWEIS } from "./reizwortFilter.js";
 
 const OT_GREEN = "#16A34A";
 const OT_GREENL = "#DCFCE7";
@@ -33,7 +34,7 @@ Keine langen Einleitungen. Bleibe einfühlsam und symbolisch.`;
 
     try {
       const antwort = await groqFetch(prompt);
-      setKiDetail(antwort);
+      setKiDetail(enthältReizwort(antwort) ? REIZWORT_HINWEIS : antwort);
     } catch { setKiDetail("Fehler bei der Analyse."); }
     setKiLaed(false);
   };
