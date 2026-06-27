@@ -72,7 +72,7 @@ Keine langen Einleitungen. Bleibe einfühlsam und symbolisch.`;
           )}
 
           <div style={{display:"flex",flexWrap:"wrap",gap:"6px",marginBottom:"12px"}}>
-            {daten.symbolik.map(s=><span key={s} style={{fontFamily:"Raleway",fontSize:"11px",fontWeight:700,padding:"4px 11px",borderRadius:"12px",background:"rgba(255,255,255,0.9)",color:OT.gold,border:"1px solid #D97706"}}>{s}</span>)}
+            {daten.symbolik.map(s=><span key={s} style={{fontFamily:"Raleway",fontSize:"11px",fontWeight:700,padding:"4px 11px",borderRadius:"12px",background:"rgba(255,255,255,0.05)",color:OT.gold,border:"1px solid #D97706"}}>{s}</span>)}
           </div>
           <div style={{fontFamily:"Raleway",fontSize:"12px",color:OT.textMid,fontWeight:500,lineHeight:"1.6",marginBottom:"10px"}}>
             <b>Ahnen-Thema:</b> {daten.ahnen}
@@ -375,13 +375,13 @@ function Quiz({ onAbschluss }) {
               })}
             </div>
             {bestanden ? (
-              <div style={{background:"rgba(255,255,255,0.85)",borderRadius:"14px",padding:"16px",marginBottom:"10px"}}>
+              <div style={{background:"rgba(255,255,255,0.05)",borderRadius:"14px",padding:"16px",marginBottom:"10px"}}>
                 <div style={{fontFamily:"Raleway",fontSize:"13px",color:"#15803D",fontWeight:600,lineHeight:"1.7"}}>
                   Herzlichen Glückwunsch! Du hast die Prüfung bestanden und das Human Resonanz Lernwelt Zertifikat für <strong>Organsprache</strong> verdient.
                 </div>
               </div>
             ) : (
-              <div style={{background:"rgba(255,255,255,0.85)",borderRadius:"14px",padding:"16px",marginBottom:"10px"}}>
+              <div style={{background:"rgba(255,255,255,0.05)",borderRadius:"14px",padding:"16px",marginBottom:"10px"}}>
                 <div style={{fontFamily:"Raleway",fontSize:"13px",color:OT.textMid,fontWeight:600,lineHeight:"1.7"}}>Du brauchst mindestens 12/15 Punkte (80%). Versuche es erneut.</div>
               </div>
             )}
@@ -488,7 +488,7 @@ function OrganspracheLernmodul({ stufe = 1, onBack, onZertifikat }) {
             <div style={{fontFamily:"Raleway",fontSize:"12px",color:OT.textMid,fontWeight:500,marginTop:"4px"}}>{inhalt.untertitel}</div>
           </div>
         </div>
-        <div style={{background:"rgba(255,255,255,0.75)",borderRadius:"12px",padding:"14px"}}>
+        <div style={{background:"rgba(255,255,255,0.05)",borderRadius:"12px",padding:"14px"}}>
           <Label color="#A87D3A" size="9">Lernziele dieser Stufe</Label>
           {inhalt.lernziele.map((z, i) => <Lernziel key={i} text={z} nr={i+1}/>)}
         </div>

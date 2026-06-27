@@ -64,7 +64,7 @@ Antworte in diesen Abschnitten (kurz & präzise):
             </div>
           </div>
           <div style={{display:"flex",flexWrap:"wrap",gap:"6px",marginBottom:"12px"}}>
-            {gewaehltes.themen.map(t=><span key={t} style={{fontFamily:"Raleway",fontSize:"10px",fontWeight:700,padding:"4px 10px",borderRadius:"10px",background:"rgba(255,255,255,0.85)",color:gewaehltes.hex,border:`1px solid ${gewaehltes.hex}44`}}>{t}</span>)}
+            {gewaehltes.themen.map(t=><span key={t} style={{fontFamily:"Raleway",fontSize:"10px",fontWeight:700,padding:"4px 10px",borderRadius:"10px",background:"rgba(255,255,255,0.05)",color:gewaehltes.hex,border:`1px solid ${gewaehltes.hex}44`}}>{t}</span>)}
           </div>
           <div style={{marginBottom:"12px"}}>
             <OLabel color="#C0392B">Blockaden-Muster</OLabel>

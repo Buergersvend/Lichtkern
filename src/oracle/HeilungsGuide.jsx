@@ -55,7 +55,7 @@ Gib eine PRAXISANLEITUNG:
           <OLabel color={OT.goldD}>Basis-Ablauf</OLabel>
           <div style={{display:"flex",flexDirection:"column",gap:"6px"}}>
             {gewaehlt.ablauf.map((s,i)=>(
-              <div key={i} style={{display:"flex",gap:"10px",padding:"8px 12px",background:"rgba(255,255,255,0.8)",borderRadius:"10px"}}>
+              <div key={i} style={{display:"flex",gap:"10px",padding:"8px 12px",background:"rgba(255,255,255,0.05)",borderRadius:"10px"}}>
                 <span style={{fontFamily:"Cinzel",fontSize:"12px",color:OT.gold,fontWeight:700,flexShrink:0}}>{i+1}.</span>
                 <span style={{fontFamily:"Raleway",fontSize:"12px",color:OT.text,fontWeight:500}}>{s}</span>
               </div>
