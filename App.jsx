@@ -25,6 +25,8 @@ import { PDFModal } from "./src/screens/PDFModal.jsx";
 import OracleAgent from "./src/oracle/OracleAgent.jsx";
 import { ResonanzOracle } from "./src/oracle/ResonanzOracle.jsx";
 
+const ZUGANG_RAEUME = ["vVixVaoH4mPPjAljm1cKlQe16un1"]; // Sven (Owner). Weitere Test-UIDs hier eintragen.
+
 const SIDEBAR_SECTIONS = [
   { label: "Praxis", items: [
     { id: "dashboard", label: "Dashboard", icon: "◉" },
@@ -150,7 +152,7 @@ function App({ user, onLogout }){
       {SIDEBAR_SECTIONS.map((sec,si)=>(
         <div key={si} style={{marginBottom:4,marginTop:si>0?18:0}}>
           <div style={{fontFamily:"Raleway",fontSize:9,fontWeight:700,letterSpacing:2,color:"rgba(201,168,76,0.6)",textTransform:"uppercase",padding:sidebarCollapsed?"0":"0 18px 6px",opacity:sidebarCollapsed?0:1,height:sidebarCollapsed?0:"auto",overflow:"hidden",transition:"opacity 0.2s"}}>{sec.label}</div>
-          {sec.items.map(item=>{
+          {sec.items.filter(item=>item.id!=="resonanz-raeume"||ZUGANG_RAEUME.includes(auth.currentUser?.uid)).map(item=>{
             const isA=screen===item.id;
             return <button key={item.id} onClick={()=>item.isSession?startSession():nav(item.id)} style={{display:"flex",alignItems:"center",gap:12,padding:sidebarCollapsed?"10px 0":"9px 18px",justifyContent:sidebarCollapsed?"center":"flex-start",width:"100%",border:"none",background:isA?"rgba(201,168,76,0.08)":"transparent",color:isA?"#C9A84C":"rgba(245,240,232,0.75)",cursor:"pointer",fontFamily:"Raleway",fontWeight:700,fontSize:13,textAlign:"left",transition:"all 0.15s",borderRadius:sidebarCollapsed?0:"0 12px 12px 0",marginRight:sidebarCollapsed?0:8,marginBottom:1}}>
               <span style={{fontSize:17,width:22,textAlign:"center",flexShrink:0,filter:isA?"none":"grayscale(1) brightness(1.5)"}}>{item.icon}</span>
@@ -195,7 +197,7 @@ function App({ user, onLogout }){
       {screen==="clientanalysis"&&<ClientAnalysis clientId={analyticsClient} clients={clients} sessions={sessions} onBack={()=>setScreen("analytics")}/>}
       {screen==="knowledge"&&<Knowledge/>}
      {screen==="oracle"&&<OracleAgent onClose={()=>setScreen("dashboard")}/>}
-      {screen==="resonanz-raeume"&&<ResonanzOracle groqFetch={groqFetch}/>}
+      {screen==="resonanz-raeume"&&ZUGANG_RAEUME.includes(auth.currentUser?.uid)&&<ResonanzOracle groqFetch={groqFetch}/>}
       {screen==="humandesign"&&<div style={{padding:"40px 20px",textAlign:"center"}}><div style={{fontFamily:"Cinzel",fontSize:"20px",color:"#C9A84C",marginBottom:"12px"}}>Human Design</div><div style={{fontFamily:"Raleway",fontSize:"13px",color:"rgba(245,240,232,0.5)"}}>Wähle einen Klienten um dessen Bodygraph zu sehen</div><button onClick={()=>nav("clients")} style={{marginTop:"20px",fontFamily:"Raleway",fontSize:"13px",fontWeight:700,padding:"10px 24px",borderRadius:"12px",border:"1px solid rgba(201,168,76,0.3)",background:"rgba(201,168,76,0.1)",color:"#C9A84C",cursor:"pointer"}}>Zu den Klienten</button></div>}
       {screen==="billing"   &&<Billing sessions={sessions} clients={clients} settings={settings} onUpdateSession={async(updated)=>{const next=sessions.map(s=>s.id===updated.id?updated:s);await saveSessions(next);}}/>}
       {screen==="templates" &&<TemplatesScreen templates={templates} onSave={saveTemplates} onStartSession={(tpl)=>startSession(null,tpl)}/>}
