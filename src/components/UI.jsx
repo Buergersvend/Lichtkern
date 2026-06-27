@@ -78,12 +78,12 @@ export const NAV=[
   {id:"dashboard",label:"Übersicht", icon:"◉"},
   {id:"clients",  label:"Klienten",  icon:"◈"},
   {id:"session",  label:"Sitzung",   icon:"✦"},
-  {id:"calendar", label:"Kalender",  icon:"◷"},
-  {id:"history",  label:"Verlauf",   icon:"◎"},
   {id:"oracle",   label:"Berater",   icon:"✦"},
 ];
 
 const MEHR_ITEMS = [
+  { id:"calendar",        label:"Kalender",      icon:"◷" },
+  { id:"history",         label:"Verlauf",       icon:"◎" },
   { id:"humandesign",     label:"Human Design",  icon:"⬡" },
   { id:"synergy",         label:"Numerologie",   icon:"✧" },
   { id:"gentree",         label:"Resonanzkarte", icon:"⊛" },
