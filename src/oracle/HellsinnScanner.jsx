@@ -84,7 +84,7 @@ Sei präzise, alltagsnah und einfühlsam. Keine Heilversprechen, keine Diagnosen
       const antwort = await groqFetch(prompt);
       setKiAntwort(antwort);
     } catch (e) {
-      setKiAntwort("❌ Fehler bei der KI-Analyse. Bitte Verbindung prüfen.");
+      setKiAntwort("❌ Fehler bei der Analyse. Bitte Verbindung prüfen.");
     }
     setKiLaed(false);
   };
@@ -195,7 +195,7 @@ Sei präzise, alltagsnah und einfühlsam. Keine Heilversprechen, keine Diagnosen
       {/* KI-Antwort */}
       {kiGestellt && (
         <OCard style={{background:OT.bgSoft,border:`1.5px solid ${OT.borderMid}`}}>
-          <OLabel color={OT.goldD}>✦ KI-Analyse · Stiller Berater</OLabel>
+          <OLabel color={OT.goldD}>✦ Stiller Berater</OLabel>
           {kiLaed ? (
             <div style={{textAlign:"center",padding:"30px 0"}}>
               <div style={{fontSize:"30px",marginBottom:"12px"}}>✦</div>

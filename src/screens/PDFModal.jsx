@@ -19,7 +19,7 @@ function buildPDF(s, opts) {
   ${showGoal&&s.goal?`<h2>Thema & Anliegen</h2><p>${s.goal}</p>`:""}
   ${showOutcome&&s.outcome?`<h2>Ergebnis</h2><p>${s.outcome}</p>`:""}
   ${showHW&&s.homework?`<h2>Integrationsauftrag</h2><p>${s.homework}</p>`:""}
-  ${showAI&&s.aiSummary?`<h2>KI-Resonanz</h2><p>${s.aiSummary}</p>`:""}
+  ${showAI&&s.aiSummary?`<h2>Resonanz-Deutung</h2><p>${s.aiSummary}</p>`:""}
   </body></html>`;
 }
 function buildInvoice(s, inv) {
@@ -135,7 +135,7 @@ Hinweis: Diese Dokumentation ersetzt keine medizinische oder therapeutische Beha
         {/* Version */}
         <SL>Version</SL>
         <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:"8px",marginBottom:"18px"}}>
-          {[["kurz","📋 Kurzversion","Ziel, Ebenen, Methoden, Auftrag"],["detail","📖 Detailversion","+ KI-Resonanz, Reflexionsraum"]].map(([v,l,sub])=>(
+          {[["kurz","📋 Kurzversion","Ziel, Ebenen, Methoden, Auftrag"],["detail","📖 Detailversion","+ Resonanz-Deutung, Reflexionsraum"]].map(([v,l,sub])=>(
             <button key={v} onClick={()=>setVersion(v)} style={{padding:"12px",borderRadius:"14px",border:`1.5px solid ${version===v?T.gold:T.border}`,background:version==v?T.gold:T.bgCard,cursor:"pointer",textAlign:"left"}}>
               <div style={{fontFamily:"Raleway",fontSize:"12px",fontWeight:700,color:version===v?T.goldD:T.text}}>{l}</div>
               <div style={{fontFamily:"Raleway",fontSize:"10px",color:T.textSoft,marginTop:"3px",fontWeight:500}}>{sub}</div>
@@ -163,7 +163,7 @@ Hinweis: Diese Dokumentation ersetzt keine medizinische oder therapeutische Beha
           <Toggle label="Angewandte Methoden"   val={showTechniques} set={setShowTech}/>
           <Toggle label="Ergebnis"              val={showOutcome}    set={setShowOutcome}/>
           <Toggle label="Integrationsauftrag"   val={showHomework}   set={setShowHW}/>
-          <Toggle label="KI-Zusammenfassung"    val={showAI}         set={setShowAI}/>
+          <Toggle label="Resonanz-Zusammenfassung" val={showAI}         set={setShowAI}/>
           {version==="detail"&&<Toggle label="Reflexionsraum (leer)" val={showReflection} set={setShowRef}/>}
         </Card>
 

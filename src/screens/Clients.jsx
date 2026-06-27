@@ -253,7 +253,7 @@ Warmherzig, präzise.`;
           {/* AI Analysis */}
           <div>
             <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:'10px'}}>
-              <SL>✦ KI-Beziehungsanalyse</SL>
+              <SL>✦ Symbolische Beziehungsanalyse</SL>
               <Btn onClick={genAI} disabled={aiLoading} style={{padding:'8px 16px',fontSize:'11px',opacity:aiLoading?0.5:1}}>{aiLoading?'…':'⚙ Analysieren'}</Btn>
             </div>
             {aiText&&<div style={{background:T.bgSoft,borderRadius:'14px',padding:'16px',border:`1.5px solid ${T.borderMid}`,fontFamily:'Raleway',fontSize:'13px',color:T.text,lineHeight:'1.7',whiteSpace:'pre-wrap'}}>{aiText}</div>}

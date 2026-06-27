@@ -129,7 +129,7 @@ Schreibe klar, strukturiert und inspirierend. Auf Deutsch.`;
     <div style={{display:"flex",flexDirection:"column",gap:"14px"}}>
       <OCard style={{background:OT.bgSoft,padding:"16px"}}>
         <div style={{fontFamily:"Cinzel",fontSize:"15px",color:OT.text,fontWeight:700,marginBottom:"4px"}}>🏆 Resonanz Lernwelt · Lernpfad</div>
-        <div style={{fontFamily:"Raleway",fontSize:"12px",color:OT.textMid,fontWeight:500}}>Von der Einführung bis zur sicheren Anwendung. KI generiert individuellen Lerninhalt für deine Stufe.</div>
+        <div style={{fontFamily:"Raleway",fontSize:"12px",color:OT.textMid,fontWeight:500}}>Von der Einführung bis zur sicheren Anwendung. Individueller Lerninhalt wird für deine Stufe generiert.</div>
         <div style={{display:"flex",gap:"6px",marginTop:"10px",flexWrap:"wrap"}}>
           {LERNPFAD_STUFEN.map(s=>(
             <div key={s.nr} style={{display:"flex",alignItems:"center",gap:"4px",padding:"4px 10px",borderRadius:"10px",background:OT.bgCard,border:`1px solid ${s.farbe}44`}}>

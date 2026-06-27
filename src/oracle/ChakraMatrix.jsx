@@ -86,10 +86,10 @@ Antworte in diesen Abschnitten (kurz & präzise):
           </div>
         </OCard>
         <OCard>
-          <OLabel color={OT.goldD}>✦ KI-Sitzungsanalyse</OLabel>
+          <OLabel color={OT.goldD}>✦ Stiller Berater</OLabel>
           {kiLaed ? <div style={{textAlign:"center",padding:"20px",fontFamily:"Raleway",fontSize:"13px",color:OT.textMid}}>⏳ Analysiere...</div>
           : kiDetail ? <div style={{fontFamily:"Raleway",fontSize:"13px",color:OT.text,lineHeight:"1.9",whiteSpace:"pre-wrap",fontWeight:500}}>{kiDetail}</div>
-          : <OBtn onClick={()=>ladeKiDetail(gewaehltes)}>✦ KI-Analyse für diese Sitzung</OBtn>}
+          : <OBtn onClick={()=>ladeKiDetail(gewaehltes)}>✦ Symbolische Deutung laden</OBtn>}
         </OCard>
       </div>
     );
@@ -99,7 +99,7 @@ Antworte in diesen Abschnitten (kurz & präzise):
     <div style={{display:"flex",flexDirection:"column",gap:"12px"}}>
       <OCard style={{background:OT.bgSoft,padding:"16px"}}>
         <div style={{fontFamily:"Cinzel",fontSize:"15px",color:OT.text,fontWeight:700,marginBottom:"4px"}}>Chakren-Matrix</div>
-        <div style={{fontFamily:"Raleway",fontSize:"12px",color:OT.textMid,fontWeight:500}}>Tippe auf Status um Scan-Ergebnis zu vermerken · Dann KI-Analyse per Klick</div>
+        <div style={{fontFamily:"Raleway",fontSize:"12px",color:OT.textMid,fontWeight:500}}>Tippe auf Status um Scan-Ergebnis zu vermerken · Dann Deutung per Klick</div>
       </OCard>
       {CHAKRA_SYSTEM.map(chakra => {
         const st = status[chakra.id];
