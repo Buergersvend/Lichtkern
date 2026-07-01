@@ -306,7 +306,7 @@ Warmherzig, präzise, ohne Heilversprechen.`;
       {/* HD Kalkulator Button */}
       <a href={hdUrl()} target="_blank" rel="noreferrer" style={{display:'block',background:'rgba(201,168,76,0.1)',borderRadius:'12px',padding:'14px',marginBottom:'16px',border:`1.5px solid rgba(201,168,76,0.3)`,textDecoration:'none',textAlign:'center'}}>
         <div style={{fontFamily:'Raleway',fontWeight:800,fontSize:'14px',color:T.goldD}}>🔮 Human Design berechnen →</div>
-        <div style={{fontFamily:'Raleway',fontSize:'11px',color:T.textMid,marginTop:'4px'}}>Ergebnisse werden automatisch gespeichert</div>
+        <div style={{fontFamily:'Raleway',fontSize:'11px',color:T.textMid,marginTop:'4px'}}>Öffnet den externen HD-Kalkulator</div>
       </a>
 
       {/* Resonanz-Analyse */}
