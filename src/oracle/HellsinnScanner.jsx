@@ -64,8 +64,8 @@ Gib eine strukturierte Analyse in GENAU diesem Format (nutze diese Überschrifte
 🫀 ORGANSPRACHE & KÖRPERSYMBOLIK
 [Was sagen diese Körperregionen auf der seelisch-symbolischen Ebene? Welche Themen, Gefühle, Lebensbereiche sind gemeint?]
 
-⚡ CHAKRA & ENERGIEFELD
-[Welche Chakren sind betroffen? Was zeigt das Energiefeld? Offen/geschlossen/überaktiv?]
+⚡ CHAKRA-THEMEN
+[Welche Chakra-Themen können hier symbolisch anklingen? Als Betrachtungsangebot, nicht als Befund.]
 
 🧬 MÖGLICHE AHNENMUSTER / GENERATIONENTHEMEN
 [Welche generationellen Themen könnten dahinterstecken?]
@@ -170,10 +170,7 @@ Sei präzise, alltagsnah und einfühlsam. Keine Heilversprechen, keine Diagnosen
                     <span style={{marginLeft:"auto",fontFamily:"Raleway",fontSize:"10px",fontWeight:700,padding:"3px 8px",borderRadius:"8px",background:"rgba(201,168,76,0.10)",color:OT.gold}}>Chakra</span>
                   </div>
                   <div style={{fontFamily:"Raleway",fontSize:"11px",color:OT.textMid,fontWeight:500,marginBottom:"6px"}}>
-                    Mögliche Blockaden: {chakra.emotion_block.slice(0,3).join(" · ")}
-                  </div>
-                  <div style={{display:"flex",flexWrap:"wrap",gap:"4px"}}>
-                    {chakra.heilung.slice(0,3).map(h=><span key={h} style={{fontFamily:"Raleway",fontSize:"10px",padding:"3px 9px",borderRadius:"10px",background:"rgba(201,168,76,0.15)",color:"#A87D3A",fontWeight:700}}>{h}</span>)}
+                    Mögliche Themen: {chakra.emotion_block.slice(0,3).join(" · ")}
                   </div>
                 </div>
               );
@@ -181,7 +178,7 @@ Sei präzise, alltagsnah und einfühlsam. Keine Heilversprechen, keine Diagnosen
             if (info.typ === "aura_hinweis") {
               return (
                 <div key={idx} style={{padding:"12px",background:OT.bgCard,borderRadius:"12px",border:`1px solid ${OT.border}`}}>
-                  <div style={{fontFamily:"Raleway",fontSize:"12px",color:OT.gold,fontWeight:700}}>🔮 Aura-Feld-Arbeit indiziert</div>
+                  <div style={{fontFamily:"Raleway",fontSize:"12px",color:OT.gold,fontWeight:700}}>🔮 Impuls: Aura-Schichten als Betrachtungsmodell</div>
                   <div style={{fontFamily:"Raleway",fontSize:"11px",color:OT.textMid,fontWeight:500,marginTop:"4px"}}>
                     Feinstoffliche Wahrnehmungen können in der Begleitungsarbeit als seelisch-symbolische Hinweise genutzt werden.
                   </div>
