@@ -46,7 +46,7 @@ Gib eine seelisch-symbolische BETRACHTUNG:
             <span style={{fontSize:"36px"}}>{gewaehlt.icon}</span>
             <div>
               <div style={{fontFamily:"Cinzel",fontSize:"18px",color:OT.text,fontWeight:700}}>{gewaehlt.name}</div>
-              <div style={{fontFamily:"Raleway",fontSize:"11px",color:OT.textMid,fontWeight:600}}>{gewaehlt.kategorie} · Stufe {gewaehlt.stufe}/5</div>
+              <div style={{fontFamily:"Raleway",fontSize:"11px",color:OT.textMid,fontWeight:600}}>{gewaehlt.kategorie}</div>
             </div>
           </div>
           <div style={{fontFamily:"Raleway",fontSize:"13px",color:OT.text,lineHeight:"1.75",fontWeight:500,marginBottom:"12px"}}>{gewaehlt.beschreibung}</div>
@@ -93,12 +93,6 @@ Gib eine seelisch-symbolische BETRACHTUNG:
                 <div style={{flex:1}}>
                   <div style={{fontFamily:"Raleway",fontSize:"13px",color:OT.text,fontWeight:700,marginBottom:"2px"}}>{methode.name}</div>
                   <div style={{fontFamily:"Raleway",fontSize:"11px",color:OT.textMid,fontWeight:500,marginBottom:"4px"}}>{methode.anwendung.split(",")[0]}...</div>
-                  <div style={{display:"flex",gap:"4px"}}>
-                    {Array.from({length:5},(_,i)=>(
-                      <div key={i} style={{width:"12px",height:"4px",borderRadius:"2px",background:i<methode.stufe?OT.gold:OT.border}}/>
-                    ))}
-                    <span style={{fontFamily:"Raleway",fontSize:"9px",color:OT.textSoft,fontWeight:600,marginLeft:"4px"}}>Stufe {methode.stufe}</span>
-                  </div>
                 </div>
                 <span style={{color:OT.textSoft,fontSize:"18px"}}>›</span>
               </button>
