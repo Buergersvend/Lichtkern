@@ -388,11 +388,17 @@ const HEILMETHODEN_KATALOG = [
     ablauf:["Zur Ruhe kommen","dem spontanen Klang- und Bewegungsimpuls Raum geben","ohne Bewertung ausdrücken","danach nachspüren"],
     stufe:3
   },
+  { id:"fernheilung", name:"Verbindung über Distanz", icon:"🕊", kategorie:"Seelisch-symbolische Arbeit",
+    beschreibung:"Eine symbolische Betrachtung von Verbundenheit über räumliche Entfernung — das Gefühl, einem Menschen innerlich nahe zu sein, auch wenn er nicht anwesend ist.",
+    anwendung:"Für Menschen, die Verbundenheit über Entfernung reflektieren möchten — etwa bei Abschied, Trennung oder räumlicher Distanz.",
+    ablauf:["Zur Ruhe kommen","sich die Verbundenheit mit einem Menschen innerlich vorstellen","gute Wünsche formulieren","bewusst abschließen und loslassen"],
+    stufe:4
+  },
 ];
 
 // ===== DEAKTIVIERT 26.06.2026 - HeilprG/HWG, Anwaltsklaerung ausstehend =====
 // dnaheilung: kein behandlungsfreier Kern (DNA-/Epigenetik-Wirkversprechen) -> Klaerung: endgueltig raus?
-// fernheilung: §9 HWG Fernbehandlungsverbot -> sanierte Rettungs-Fassung "Verbindung ueber Distanz" siehe Anwaltsdokument, Klaerung: tragfaehig?
+// fernheilung: §9 HWG Fernbehandlungsverbot -> sanierte Rettungs-Fassung "Verbindung ueber Distanz" siehe Anwaltsdokument, Klaerung: tragfaehig? -> 02.07.2026 in sanierter Fassung reaktiviert (Raster 4/4), Anwaltspaket: nicht blockierend, zur Kenntnis
 // Originalinhalt beider Eintraege:
 /*
   { id:"dnaheilung", name:"DNA / Licht-Codes", icon:"🔮", kategorie:"Quantenheilung",
