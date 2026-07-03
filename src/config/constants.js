@@ -21,7 +21,7 @@ const LEVELS = [
 ];
 
 const TECHNIQUES = {
-  "Analyse & Anamnese":["Energetische Anamnese","Themen-Check","Muster-Check","Resonanz-Check"],
+  "Analyse & Bestandsaufnahme":["Energetische Bestandsaufnahme","Themen-Check","Muster-Check","Resonanz-Check"],
   "Meridian & Chakren":["Chakren-Balance","Meridian-Ausgleich","innere Klärung","Schutz & Stärkung"],
   "Emotionale Transformation":["EFT (Klopftechnik)","Atemtechnik 5-5-5-5","Emotions-Entkopplung"],
   "Mentale Muster":["Glaubenssatz-Shift","Anker setzen","Macht-/Schaltwort-Arbeit"],
