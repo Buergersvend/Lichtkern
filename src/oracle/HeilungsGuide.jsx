@@ -16,16 +16,13 @@ Methode: ${methode.name} (${methode.kategorie})
 Beschreibung: ${methode.beschreibung}
 Anwendungsgebiet: ${methode.anwendung}
 
-Gib eine PRAXISANLEITUNG:
+Gib eine seelisch-symbolische BETRACHTUNG:
 
-🎯 WANN GENAU ANWENDEN
-[Konkrete Indikatoren, wann diese Methode die richtige ist - inkl. Kontraindikationen]
+## WORUM ES GEHT
+[Die symbolische Bedeutung dieser Betrachtungsweise — welches innere Thema sie anspricht]
 
-⚡ SCHRITT-FÜR-SCHRITT ANLEITUNG 
-[Detaillierte Anleitung in Schritten]
-
-💬 WIE DU DIESE METHODE FÜR DICH NUTZT
-[Wie lässt sich diese Methode in der eigenen Selbstwahrnehmung anwenden?]
+## SELBSTWAHRNEHMUNG
+[Wie lässt sich diese Betrachtungsweise in der eigenen Selbstwahrnehmung und Reflexion nutzen?]
 
 🌟 IMPULSE ZUR VERTIEFUNG
 [Welche sanften Reflexionsimpulse passen dazu?]
