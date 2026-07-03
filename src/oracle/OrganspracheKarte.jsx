@@ -78,9 +78,6 @@ Keine langen Einleitungen. Bleibe einfühlsam und symbolisch.`;
           <div style={{fontFamily:"Raleway",fontSize:"12px",color:OT.textMid,fontWeight:500,lineHeight:"1.6",marginBottom:"10px"}}>
             <b>Ahnen-Thema:</b> {daten.ahnen}
           </div>
-          <div style={{display:"flex",flexWrap:"wrap",gap:"6px"}}>
-            {daten.heilung.map(h=><span key={h} style={{fontFamily:"Raleway",fontSize:"10px",fontWeight:700,padding:"3px 10px",borderRadius:"10px",background:"rgba(201,168,76,0.15)",color:"#A87D3A",border:`1px solid ${OT.borderMid}`}}>💚 {h}</span>)}
-          </div>
         </OCard>
 
         <OCard>
@@ -147,7 +144,7 @@ const ORGANSPRACHE_INHALT = {
     titel: "Was ist Organsprache?",
     untertitel: "Das Grundprinzip: Körper als Spiegel der Seele",
     lernziele: [
-      "Verstehen, dass Körpersymptome immer eine Botschaft tragen",
+      "Verstehen, wie sich Körperempfindungen symbolisch betrachten lassen",
       "Den Zusammenhang zwischen Emotion und Organ erfassen",
       "Erste Schlüsselbegriffe der Organsprache kennen",
       "Den respektvollen Umgang mit Körperbotschaften üben",
@@ -155,12 +152,12 @@ const ORGANSPRACHE_INHALT = {
     sektionen: [
       {
         titel: "Das Grundprinzip", icon: "🌿",
-        inhalt: `Der Körper ist kein Zufallsprodukt. Er ist der ehrlichste Spiegel, den wir haben – und er spricht eine Sprache, die jeder lernen kann.\n\nOrgansprache beschäftigt sich mit der Frage: Warum erkrankt gerade dieses Organ? Was will mir mein Körper damit sagen?\n\nKörperliche Empfindungen können uns einladen, achtsam nach innen zu schauen — als seelisch-symbolische Betrachtung, nicht als medizinische Deutung.`,
+        inhalt: `Der Körper ist kein Zufallsprodukt. Er ist der ehrlichste Spiegel, den wir haben – und er spricht eine Sprache, die jeder lernen kann.\n\nOrgansprache beschäftigt sich mit der Frage: Welches Lebensthema kann sich symbolisch mit diesem Organ verbinden? Was möchte ich mir achtsam anschauen?\n\nKörperliche Empfindungen können uns einladen, achtsam nach innen zu schauen — als seelisch-symbolische Betrachtung, nicht als medizinische Deutung.`,
         highlight: "Der Körper spricht eine eigene, leise Sprache. Wer ihm achtsam zuhört, lernt sich selbst besser kennen.",
       },
       {
-        titel: "Drei Grundgesetze der Organsprache", icon: "⚖️",
-        inhalt: `**1. Gesetz der Entsprechung**\nJedes Organ entspricht einem Lebensthema, einem emotionalen Zustand oder einem Beziehungsmuster.\n\n**2. Gesetz der Polarität (Links/Rechts)**\nLinke Seite → Weibliches Prinzip, Empfangen, Mutter, Innen, Vergangenheit\nRechte Seite → Männliches Prinzip, Geben, Vater, Außen, Zukunft\n\n**3. Gesetz der Schichten**\nKörpersymptome sprechen immer auf mehreren Ebenen gleichzeitig: körperlich, emotional, mental, spirituell.`,
+        titel: "Drei Betrachtungsweisen der Organsprache", icon: "⚖️",
+        inhalt: `**1. Bild der Entsprechung**\nJedes Organ kann symbolisch für ein Lebensthema, einen emotionalen Zustand oder ein Beziehungsmuster stehen.\n\n**2. Bild der Polarität (Links/Rechts)**\nLinke Seite → Weibliches Prinzip, Empfangen, Mutter, Innen, Vergangenheit\nRechte Seite → Männliches Prinzip, Geben, Vater, Außen, Zukunft\n\n**3. Bild der Ebenen**\nKörperliche Empfindungen lassen sich auf mehreren Ebenen betrachten: körperlich, emotional, mental, spirituell.`,
         highlight: null,
       },
       {
