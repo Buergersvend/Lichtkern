@@ -51,7 +51,7 @@ const CHAKRA_SYSTEM = [
   },
   { id:"herz",         nr:4, name:"Herz-Chakra",     de:"Anahata",     farbe:"#16A34A", hex:"#16A34A",
     symbol:"✦", mantra:"YAM", hz:639,
-    themen:["Liebe","Mitgefühl","Verbindung","Selbstliebe","Vergebung","Heilung","Brücke"],
+    themen:["Liebe","Mitgefühl","Verbindung","Selbstliebe","Vergebung","Ganzwerdung","Brücke"],
     emotion_block:["Trauer","Einsamkeit","Verlust","Verhärtung","Selbstablehnung","Grenzverlust"],
     organe:["Herz","Lunge","Thymus","Arme","Hände","Brustkorb","Schultern"],
     aura_schicht:"Astralkörper",
