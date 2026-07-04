@@ -5,6 +5,7 @@ import { T } from "../config/theme.js";
 import { APPT_TYPES, LEVELS, TECHNIQUES, KNOWLEDGE, DE_DAYS, DE_DAYS_F, DE_MONTHS, HOURS } from "../config/constants.js";
 import { lvl, top2, dynGrad, uid } from "../config/helpers";
 import { groqFetch } from "../config/groq.js";
+import { enthältReizwort, REIZWORT_HINWEIS } from "../oracle/reizwortFilter.js";
 import { Card, Btn, TI, Select, LBar, Pill, SL } from "../components/UI.jsx";
 import { PDFModal } from "./PDFModal.jsx";
 const STEPS = ["Klient","Ziel","Ebenen","Techniken","Abschluss"];
@@ -24,8 +25,8 @@ function Session({wizard,setWizard,clients,onComplete,onCancel}){
   const upd=u=>setWizard({...wizard,...u});
   const genAI=async()=>{
     setAiLoading(true);
-    try{const _aiPrompt3=`Du bist ein einfühlsamer Begleiter im Lichtkern-System. Schreibe eine warmherzige Sitzungsdokumentation (kein KI-Ton):\nKlient: ${wizard.clientName||"Anonym"} | Typ: ${wizard.type==="first"?"Erstsitzung":wizard.type==="followup"?"Folgesitzung":"Abschluss"}\nThema: ${wizard.goal||"—"} | Ebenen: ${t2.map(([k,v])=>`${lvl(k)?.name} (${v}%)`).join(", ")||"—"}\nTechniken: ${wizard.techniques?.join(", ")||"—"} | Ergebnis: ${wizard.outcome||"—"} | Integration: ${wizard.homework||"—"}\n1. Warmherzige Zusammenfassung (3-4 Sätze) 2. 2-3 Integrationsimpulse mit Reflexionsfragen. Keine Heilversprechen.`;
-      setAiText(await groqFetch(_aiPrompt3));}catch{setAiText("Netzwerkfehler.");}
+    try{const _aiPrompt3=`Du bist ein einfühlsamer Begleiter im Lichtkern-System. Schreibe eine warmherzige Sitzungsdokumentation (kein KI-Ton) auf seelisch-symbolischer Ebene.\nKlient: Anonym | Typ: ${wizard.type==="first"?"Erstsitzung":wizard.type==="followup"?"Folgesitzung":"Abschluss"}\nThema: ${wizard.goal||"—"} | Ebenen: ${t2.map(([k,v])=>`${lvl(k)?.name} (${v}%)`).join(", ")||"—"}\nTechniken: ${wizard.techniques?.join(", ")||"—"} | Ergebnis: ${wizard.outcome||"—"} | Integration: ${wizard.homework||"—"}\nRegeln:\n- Beschreibe nur, womit sich die Sitzung beschäftigt hat und was der Klient selbst wahrgenommen hat. Wahrnehmungen sind subjektive Beobachtungen des Klienten, nie Wirkungen einer Technik.\n- Keine Heilversprechen, keine Wirksamkeits- oder Erfolgsaussagen, keine Ursache-Wirkungs-Aussagen zwischen Techniken und körperlichen Zuständen. Verbotene Formulierungen: wirkte, reduzierte, einwirkten, spürbar verändert.\n- Enthalten Thema oder Ergebnis körperliche Beschwerden oder Symptome, schließe mit exakt diesem Satz: Bei körperlichen oder gesundheitlichen Beschwerden gehört die Abklärung zu Arzt, Heilpraktiker oder Therapeut.\n- Keine Markdown-Zeichen wie ** verwenden.\nFormat: 1. Warmherzige Zusammenfassung (3-4 Sätze) 2. 2-3 Integrationsimpulse mit Reflexionsfragen.`;
+      const antwort=await groqFetch(_aiPrompt3);const bereinigt=antwort.replace(/\*\*/g,"");setAiText(enthältReizwort(bereinigt)?REIZWORT_HINWEIS:bereinigt);}catch{setAiText("Netzwerkfehler.");}
     setAiLoading(false);
   };
   return(

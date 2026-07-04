@@ -46,7 +46,7 @@ function OnboardingScreen({ onSave, onCancel }) {
       <SL>Wer füllt den Fragebogen aus?</SL>
       <div style={{display:"flex",flexDirection:"column",gap:"12px"}}>
         {[
-          {mode:"together",icon:"🤝",title:"Gemeinsam ausfüllen",sub:"Therapeut und Klient sitzen zusammen — du führst durch den Fragebogen"},
+          {mode:"together",icon:"🤝",title:"Gemeinsam ausfüllen",sub:"Du und dein Klient sitzt zusammen — du führst durch den Fragebogen"},
           {mode:"mail_text",icon:"✉️",title:"Per Mail versenden — Textformat",sub:"Öffnet dein Mailprogramm mit allen Fragen als lesbaren Text — Klient antwortet per Mail"},
           {mode:"mail_pdf",icon:"📄",title:"Per Mail versenden — PDF",sub:"Generiert einen druckbaren Leer-Fragebogen als PDF zum Herunterladen & Versenden"},
         ].map(opt=>(

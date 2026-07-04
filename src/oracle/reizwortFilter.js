@@ -4,8 +4,11 @@ export const REIZWOERTER = [
   "gesünderes Leben","gesünder","für die Gesundheit","deine Gesundheit","Heilung"
 ];
 
+export const REIZWORT_AUSNAHMEN = ["heilpraktiker","heilungsversprechen"];
+
 export function enthältReizwort(text) {
-  const lower = text.toLowerCase();
+  let lower = text.toLowerCase();
+  REIZWORT_AUSNAHMEN.forEach(a => { lower = lower.split(a).join(""); });
   return REIZWOERTER.some(w => lower.includes(w.toLowerCase()));
 }
 
