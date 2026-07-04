@@ -157,7 +157,7 @@ Bitte analysiere:
 4. Herausforderungen: Wo können Reibungspunkte entstehen?
 5. Impuls für die Begleitung: Ein konkreter Ansatz für gemeinsame oder individuelle Selbstreflexion.
 
-Schließe mit exakt diesem Satz: Bei körperlichen oder gesundheitlichen Beschwerden gehört die Abklärung zu Arzt, Heilpraktiker oder Therapeut. Warmherzig, präzise.`;
+Schreibe warmherzig und präzise. Schließe mit exakt diesem Satz und füge danach nichts mehr an: Bei körperlichen oder gesundheitlichen Beschwerden gehört die Abklärung zu Arzt, Heilpraktiker oder Therapeut.`;
       const _t=await groqFetch(_aiPrompt2);
       setAiText(enthältReizwort(_t)?'Die Betrachtung konnte nicht erstellt werden. Bitte erneut versuchen.':_t);
     }catch{setAiText('Netzwerkfehler.');}
