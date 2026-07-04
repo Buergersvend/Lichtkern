@@ -199,13 +199,13 @@ const ORGANSPRACHE_INHALT = {
     schluesselwoerter: ["5-Elemente-TCM","Links-Rechts-Polarität","Psychosomatik","Deutung","Organkorrespondenz"],
   },
   3: {
-    titel: "Organsprache in der Praxis",
-    untertitel: "Fallarbeit, Tiefendeutung & Ahnenlinie",
+    titel: "Organsprache im Alltag",
+    untertitel: "Selbstwahrnehmung, Betrachtung & Ahnenlinie",
     lernziele: [
-      "Komplexe Symptombilder mehrdimensional deuten",
+      "Körperempfindungen mehrdimensional betrachten",
       "Ahnenlinien-Bezüge in der Organsprache erkennen",
-      "Ein strukturiertes Anamnese-Gespräch führen",
-      "Deutungsangebote klientenzentriert formulieren",
+      "Die vier Betrachtungsphasen in der eigenen Selbstwahrnehmung anwenden",
+      "Eigene Wahrnehmungen achtsam in Worte fassen",
     ],
     sektionen: [
       {
@@ -220,9 +220,9 @@ const ORGANSPRACHE_INHALT = {
       },
     ],
     praxisuebungen: [
-      { titel: "Strukturiertes Anamnese-Gespräch üben", beschreibung: "Führe mit einer Person ein vollständiges Deutungsgespräch (alle 4 Phasen) zu einem Körpersymptom.", dauer: "60–90 Min" },
+      { titel: "Selbstreflexion in vier Betrachtungsphasen", beschreibung: "Wähle ein eigenes Körperempfinden und gehe die vier Betrachtungsphasen für dich selbst durch. Notiere, was du dabei wahrnimmst — als persönliche Beobachtung, nicht als Befund oder Deutung. Anhaltende oder belastende Beschwerden gehören in die Abklärung bei Arzt, Heilpraktiker oder Therapeut.", dauer: "60–90 Min" },
     ],
-    schluesselwoerter: ["Deutungsgespräch","Anamnese","Transgenerational","Resonanz","Ahnenmuster"],
+    schluesselwoerter: ["Selbstwahrnehmung","Betrachtung","Reflexion","Ahnenmuster"],
   },
   4: {
     titel: "Meisterschaft der Organsprache",
