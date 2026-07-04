@@ -3,6 +3,7 @@ import { T } from "../config/theme.js";
 import { Flower } from "../components/Decorations";
 import { Card, Btn, TI, Select, Pill, SL } from "../components/UI.jsx";
 import { groqFetch } from "../config/groq.js";
+import { enthältReizwort } from "../oracle/reizwortFilter.js";
 import { BodygraphSVG, HDTab, HD_CHANNELS, HD_CENTER_CFG, HD_GATE_CENTER } from "../components/HumanDesign.jsx";
 import { NumerologyTab, calcNumerology, LIFE_PATH_DESC } from "../components/Numerology.jsx";
 import { BeziehungsTab } from "../components/BeziehungsResonanz.jsx";
@@ -136,13 +137,13 @@ function SynergyEngine({clients,onBack}){
     const defA=hdCalcDefinedCenters(gA.all);
     const defB=hdCalcDefinedCenters(gB.all);
     try{
-      const _aiPrompt2=`Du bist ein Human Design Beziehungsanalytiker in einer ganzheitlichen Heilpraxis. Analysiere diese zwei Menschen:
+      const _aiPrompt2=`Du bist ein erfahrener Begleiter, der zwei Human-Design-Profile auf seelisch-symbolischer Ebene betrachtet. Beschreibe Wahrnehmungen und Impulse zur Selbstreflexion, nie Wirkungen einer Methode. Verwende nie die Wörter wirkte, reduzierte, einwirkten, spürbar verändert. Kein Markdown, keine Sternchen.
 
-PERSON A: ${clientA.name}
+PERSON A: Anonym
 Typ: ${clientA.hdType||'unbekannt'} · Profil: ${clientA.hdProfile||'—'} · Autorität: ${clientA.hdAuthority||'—'}
 Definierte Zentren: ${[...defA].map(c=>HD_CENTER_CFG[c]?.label).join(', ')||'—'}
 
-PERSON B: ${clientB.name}
+PERSON B: Anonym B
 Typ: ${clientB.hdType||'unbekannt'} · Profil: ${clientB.hdProfile||'—'} · Autorität: ${clientB.hdAuthority||'—'}
 Definierte Zentren: ${[...defB].map(c=>HD_CENTER_CFG[c]?.label).join(', ')||'—'}
 
@@ -150,14 +151,15 @@ Elektromagnetische Verbindungen: ${syn.electromagnetic.length} Kanäle
 ${syn.electromagnetic.slice(0,5).map(e=>`Kanal ${e.gate1}-${e.gate2} (${HD_CENTER_CFG[e.center1]?.label||e.center1}↔${HD_CENTER_CFG[e.center2]?.label||e.center2})`).join(', ')||'keine'}
 
 Bitte analysiere:
-1. **Energiedynamik**: Wie interagieren diese zwei Menschen energetisch?
-2. **Wachstumsfelder**: Was aktiviert/konditioniert A bei B und umgekehert?
-3. **Stärken der Verbindung**: Was macht diese Begegnung wertvoll?
-4. **Herausforderungen**: Wo können Reibungspunkte entstehen?
-5. **Empfehlung für die Praxisarbeit**: Ein konkreter Ansatz für gemeinsame oder individuelle Begleitung.
+1. Energiedynamik: Wie begegnen sich diese zwei Menschen auf symbolischer Ebene?
+2. Wachstumsfelder: Was aktiviert/konditioniert A bei B und umgekehert?
+3. Stärken der Verbindung: Was macht diese Begegnung wertvoll?
+4. Herausforderungen: Wo können Reibungspunkte entstehen?
+5. Impuls für die Begleitung: Ein konkreter Ansatz für gemeinsame oder individuelle Selbstreflexion.
 
-Warmherzig, präzise.`;
-      setAiText(await groqFetch(_aiPrompt2));
+Schließe mit exakt diesem Satz: Bei körperlichen oder gesundheitlichen Beschwerden gehört die Abklärung zu Arzt, Heilpraktiker oder Therapeut. Warmherzig, präzise.`;
+      const _t=await groqFetch(_aiPrompt2);
+      setAiText(enthältReizwort(_t)?'Die Betrachtung konnte nicht erstellt werden. Bitte erneut versuchen.':_t);
     }catch{setAiText('Netzwerkfehler.');}
     setAiLoading(false);
   };
