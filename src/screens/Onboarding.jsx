@@ -39,7 +39,7 @@ function OnboardingScreen({ onSave, onCancel }) {
       <div style={{position:"relative",borderRadius:"22px",overflow:"hidden",padding:"26px 24px",marginBottom:"24px",background:T.bgSoft,boxShadow:`0 6px 28px ${T.shadowDeep}`,border:`1.5px solid ${T.border}`}}>
         <Flower size={200} opacity={0.09}/>
         <div style={{position:"relative",zIndex:1}}>
-          <h2 style={{fontFamily:"Cinzel",fontSize:"22px",color:T.text,margin:"0 0 6px",fontWeight:700}}>Erstanamnese</h2>
+          <h2 style={{fontFamily:"Cinzel",fontSize:"22px",color:T.text,margin:"0 0 6px",fontWeight:700}}>Aufnahmebogen</h2>
           <p style={{fontFamily:"Raleway",fontSize:"12px",color:T.textMid,margin:0,fontWeight:600}}>Vollständige Erstbefragung · 7 Bereiche</p>
         </div>
       </div>
@@ -66,7 +66,7 @@ function OnboardingScreen({ onSave, onCancel }) {
   
   if(clientMode==="mail_text"||clientMode==="mail_pdf"){
     const sendMailText = () => {
-      const subject = encodeURIComponent("Erstanamnese · Lichtkern");
+      const subject = encodeURIComponent("Aufnahmebogen · Lichtkern");
       const body = encodeURIComponent(`Liebe/r Klient/in,
 
 bitte fülle diesen Fragebogen vor unserer ersten Sitzung aus und sende ihn ausgefüllt zurück.
@@ -131,13 +131,13 @@ Deine Angaben werden vertraulich behandelt.`);
 
     const sendMailPDF = () => {
       const html = `<!DOCTYPE html><html lang="de"><head><meta charset="UTF-8"/>
-<title>Erstanamnese · Lichtkern</title>
+<title>Aufnahmebogen · Lichtkern</title>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Raleway:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
 <style>*{box-sizing:border-box;margin:0;padding:0;}body{font-family:Raleway,sans-serif;color:#1A1200;background:#FAF7F0;-webkit-print-color-adjust:exact;print-color-adjust:exact;}.page{max-width:700px;margin:0 auto;padding:40px;}.no-print{text-align:right;margin-bottom:20px;}.section{background:white;border-radius:14px;padding:18px 20px;margin-bottom:14px;border:1.5px solid rgba(201,168,76,0.3);}.line{border-bottom:1px solid rgba(201,168,76,0.3);height:28px;margin:8px 0;}.check{display:inline-block;width:16px;height:16px;border:1.5px solid rgba(201,168,76,0.3);border-radius:3px;margin-right:6px;vertical-align:middle;}h3{font-family:Cinzel,serif;font-size:12px;color:#1A1200;margin:0 0 12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;}p{font-size:12px;color:#6B5B3A;font-weight:600;margin-bottom:6px;}@media print{.no-print{display:none;}}</style>
 </head><body><div class="page">
 <div class="no-print"><button onclick="window.print()" style="font-family:Raleway;font-weight:700;font-size:13px;padding:10px 24px;background:linear-gradient(135deg,#C9A84C,#A87D3A);color:white;border:none;border-radius:12px;cursor:pointer;">🖨 PDF drucken / speichern</button></div>
 <div style="background:linear-gradient(140deg,#F0DFA0,#FFFFFF,rgba(201,168,76,0.15));border-radius:20px;padding:28px;margin-bottom:20px;border:1.5px solid rgba(201,168,76,0.3);">
-  <p style="font-size:9px;letter-spacing:3px;color:#A89668;text-transform:uppercase;margin-bottom:6px;font-weight:700;">ERSTANAMNESE</p>
+  <p style="font-size:9px;letter-spacing:3px;color:#A89668;text-transform:uppercase;margin-bottom:6px;font-weight:700;">AUFNAHMEBOGEN</p>
   <h1 style="font-family:Cinzel,serif;font-size:24px;color:#1A1200;font-weight:700;margin-bottom:4px;">Lichtkern</h1>
   <p style="font-size:11px;color:#6B5B3A;">powered by Human Resonanz · Vertraulicher Fragebogen</p>
 </div>
@@ -244,13 +244,13 @@ Deine Angaben werden vertraulich behandelt.`);
 
     const exportPDF = () => {
       const html = `<!DOCTYPE html><html lang="de"><head><meta charset="UTF-8"/>
-<title>Anamnese · ${form.name}</title>
+<title>Aufnahmebogen · ${form.name}</title>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Raleway:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
 <style>*{box-sizing:border-box;margin:0;padding:0;}body{font-family:Raleway,sans-serif;color:#1A1200;background:#FAF7F0;-webkit-print-color-adjust:exact;print-color-adjust:exact;}.page{max-width:700px;margin:0 auto;padding:40px;}.no-print{text-align:right;margin-bottom:20px;}@media print{.no-print{display:none;}}</style>
 </head><body><div class="page">
 <div class="no-print"><button onclick="window.print()" style="font-family:Raleway;font-weight:700;font-size:13px;padding:10px 24px;background:linear-gradient(135deg,#C9A84C,#A87D3A);color:white;border:none;border-radius:12px;cursor:pointer;">🖨 PDF drucken</button></div>
 <div style="background:linear-gradient(140deg,#F0DFA0,#FFFFFF,rgba(201,168,76,0.15));border-radius:20px;padding:30px;margin-bottom:24px;border:1.5px solid rgba(201,168,76,0.3);">
-  <p style="font-size:9px;letter-spacing:3px;color:#A89668;text-transform:uppercase;margin-bottom:6px;font-weight:700;">ERSTANAMNESE</p>
+  <p style="font-size:9px;letter-spacing:3px;color:#A89668;text-transform:uppercase;margin-bottom:6px;font-weight:700;">AUFNAHMEBOGEN</p>
   <h1 style="font-family:Cinzel,serif;font-size:26px;color:#1A1200;font-weight:700;margin-bottom:4px;">${form.name}</h1>
   <p style="font-size:12px;color:#6B5B3A;font-weight:500;">*${form.birthDate||"—"} · ${form.contact||"—"} · ${new Date().toLocaleDateString("de-DE")}</p>
 </div>
@@ -268,7 +268,7 @@ ${[
 </div>`).join("")}
 <div style="border-top:1.5px solid rgba(201,168,76,0.3);margin-top:24px;padding-top:14px;text-align:center;">
   <p style="font-family:Cinzel,serif;font-size:11px;color:#C9A84C;font-weight:700;">✦ Lichtkern · powered by Human Resonanz</p>
-  <p style="font-size:9px;color:#A89668;margin-top:4px;">Vertrauliche Erstanamnese · Nicht für Dritte bestimmt</p>
+  <p style="font-size:9px;color:#A89668;margin-top:4px;">Vertraulicher Aufnahmebogen · Nicht für Dritte bestimmt</p>
 </div>
 </div></body></html>`;
       const w=window.open("","_blank");
@@ -315,7 +315,7 @@ ${[
             ✅ Als Klient speichern
           </Btn>
           <button onClick={exportPDF} style={{width:"100%",fontFamily:"Raleway",fontWeight:700,fontSize:"13px",padding:"13px",borderRadius:"12px",border:`1.5px solid ${T.border}`,background:T.bgSoft,color:T.textMid,cursor:"pointer"}}>
-            📄 Anamnese als PDF
+            📄 Aufnahmebogen als PDF
           </button>
           <Btn variant="soft" onClick={onCancel} style={{width:"100%"}}>Abbrechen</Btn>
         </div>

@@ -285,7 +285,7 @@ function Clients({clients,sessions,onSave,onStart,onDelete,onOnboarding,reminder
       <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",paddingTop:"8px",marginBottom:"16px"}}>
         <h2 style={{fontFamily:"Cinzel",fontSize:"22px",color:T.text,margin:0,fontWeight:700}}>Klienten</h2>
         <div style={{display:"flex",gap:"8px"}}>
-          <button onClick={onOnboarding} style={{fontFamily:"Raleway",fontWeight:700,fontSize:"11px",padding:"9px 14px",borderRadius:"12px",border:`1.5px solid ${T.border}`,background:T.bgSoft,color:T.textMid,cursor:"pointer"}}>📋 Anamnese</button>
+          <button onClick={onOnboarding} style={{fontFamily:"Raleway",fontWeight:700,fontSize:"11px",padding:"9px 14px",borderRadius:"12px",border:`1.5px solid ${T.border}`,background:T.bgSoft,color:T.textMid,cursor:"pointer"}}>📋 Aufnahmebogen</button>
           <Btn onClick={()=>setShowAdd(!showAdd)} style={{padding:"9px 18px",fontSize:"12px"}}>+ Neu</Btn>
         </div>
       </div>
