@@ -3,6 +3,7 @@ import { T } from "../config/theme.js";
 import { calcNumerology, LIFE_PATH_DESC, PERSONAL_YEAR_DESC } from "./Numerology.jsx";
 import { HD_TYPE_DESC, HD_AUTHORITY_DESC } from "./HumanDesign.jsx";
 import { groqFetch } from "../config/groq.js";
+import { enthältReizwort, REIZWORT_HINWEIS } from "../oracle/reizwortFilter.js";
 
 /* ── SVG ornaments for print ── */
 const CORNER_SVG = `<svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 58V20C2 10 10 2 20 2H58" stroke="#8B7332" stroke-width="1.8" fill="none"/><path d="M2 58V30C2 15 15 2 30 2H58" stroke="#8B7332" stroke-width="0.8" opacity="0.5" fill="none"/><circle cx="2" cy="58" r="2.5" fill="#8B7332"/><circle cx="58" cy="2" r="2.5" fill="#8B7332"/></svg>`;
@@ -109,7 +110,7 @@ function ResonanzKarte({ client, onClose, onSave }) {
     try {
       const prompt = `Du bist ein warmherziger, weiser Berater der eine persönliche "Seelenlandkarte" für einen Klienten schreibt. Schreibe in der Du-Form, poetisch aber klar, wie ein Brief von einem weisen Mentor.
 
-KLIENT: ${client.name}
+KLIENT: Anonym
 ${hasHD ? `HUMAN DESIGN: ${client.hdType}, Profil ${client.hdProfile || '—'}, Autorität: ${client.hdAuthority || '—'}
 Strategie: ${hdInfo?.strategy || '—'}, Signatur: ${hdInfo?.signature || '—'}` : ''}
 ${hasNums ? `NUMEROLOGIE: Lebenszahl ${nums.lifePath}${nums.isMaster ? ' (Meisterzahl!)' : ''} — ${lp?.title || ''}
@@ -139,20 +140,22 @@ DREI GESCHENKE FÜR DEINEN WEG
 Drei konkrete, warmherzige Impulse als drei kurze Absätze, jeder beginnt mit einem kraftvollen Satz.
 
 ${nums?.karmicDebts?.length > 0 ? `DEINE KARMISCHE EINLADUNG
-Was die Schuldzahl(en) ${nums.karmicDebts.join(', ')} als Einladung zur Heilung bedeuten.` : ''}
+Was die Schuldzahl(en) ${nums.karmicDebts.join(', ')} als Einladung zur Selbstbetrachtung bedeuten.` : ''}
 
 STRIKTE REGELN:
 - Verwende NUR die oben genannten Abschnittstitel, EXAKT so geschrieben.
 - KEINE Markdown-Formatierung (keine **, keine #, keine Aufzählungszeichen, keine nummerierte Listen).
-- Nur Fließtext und Absätze. Ohne Heilversprechen.
+- Nur Fließtext und Absätze. Ohne Heilversprechen. Keine Wirksamkeits- oder Ursache-Wirkungs-Aussagen zu körperlichen Zuständen.
 - Schreibe in der Du-Form, sprich den Klienten direkt an.`;
 
       const text = await groqFetch(prompt);
       // Strip any remaining markdown artifacts
       const cleaned = text.replace(/\*\*/g, '').replace(/^#+\s*/gm, '').replace(/^\d+\.\s+/gm, '');
-      setKarteText(cleaned);
+      const istReizwort = enthältReizwort(cleaned);
+      const final = istReizwort ? REIZWORT_HINWEIS : cleaned;
+      setKarteText(final);
       // Persist to Firestore via parent
-      if (onSave && cleaned && !cleaned.includes('nicht generiert')) {
+      if (onSave && !istReizwort && cleaned && !cleaned.includes('nicht generiert')) {
         onSave({ ...client, resonanzKarteText: cleaned, resonanzKarteMonth: currentMonth });
       }
     } catch { setKarteText('Der Text konnte nicht generiert werden.'); }

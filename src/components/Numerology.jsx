@@ -3,6 +3,7 @@ import { T } from "../config/theme.js";
 import { Card, Btn, SL } from "./UI.jsx";
 import { Flower } from "./Decorations";
 import { groqFetch } from "../config/groq.js";
+import { enthältReizwort, REIZWORT_HINWEIS } from "../oracle/reizwortFilter.js";
 import { ResonanzKarte } from "./ResonanzKarte.jsx";
 
 // ─── PYTHAGOREAN LETTER MAP ────────────────────────────────────────────────
@@ -687,11 +688,11 @@ function NumerologyTab({ client, onSave }) {
     setAiLoading(true);
     const lp = LIFE_PATH_DESC[nums.lifePath];
     try {
-      const prompt = `Du bist ein erfahrener Numerologe und ganzheitlicher Therapeut in einer Heilpraxis. Analysiere diesen Klienten für die therapeutische Begleitung:
+      const prompt = `Du bist ein einfühlsamer Begleiter im Lichtkern-System mit numerologischem Wissen. Betrachte diese Zahlen auf seelisch-symbolischer Ebene:
 
-Klient: ${client.name}
+Klient: Anonym
 Geburtsdatum: ${birthDate}
-Geburtsname: ${birthName || 'nicht angegeben'}
+Geburtsname: nicht übermittelt
 
 NUMEROLOGIE-PROFIL:
 - Lebenszahl: ${nums.lifePath} (${lp?.title || ''})
@@ -714,13 +715,15 @@ Bitte gib:
 1. **Seelenporträt** (3-4 Sätze): Was erzählen die Zahlen über die tiefere Natur dieses Menschen?
 2. **Lebensaufgabe** (2 Sätze): Was ist die zentrale Lektion dieses Lebens?
 3. **Aktuelle Zeitqualität** (2-3 Sätze): Was sagen Persönliches Jahr ${nums.personalYear} und Monat ${nums.personalMonth} über die aktuelle Phase?
-4. **Heilungsimpulse** (3 konkrete Ansätze für die Praxisarbeit basierend auf den Zahlen)
-${nums.karmicDebts.length > 0 ? `5. **Karmische Themen** (2 Sätze): Was bedeuten die Schuldzahlen ${nums.karmicDebts.join(', ')} für die therapeutische Arbeit?` : ''}
+4. Impulse zur Selbstwahrnehmung (3 Anregungen zur Reflexion, basierend auf den Zahlen)
+${nums.karmicDebts.length > 0 ? `5. **Karmische Themen** (2 Sätze): Was bedeuten die Schuldzahlen ${nums.karmicDebts.join(', ')} für die persönliche Betrachtung?` : ''}
 ${client.hdType ? `6. **Brücke HD ↔ Numerologie** (2 Sätze): Wie ergänzen sich ${client.hdType} und Lebenszahl ${nums.lifePath}?` : ''}
 
-Warmherzig, tiefgründig, poetisch aber präzise. Ohne Heilversprechen.`;
+Warmherzig, tiefgründig, poetisch aber präzise. Ohne Heilversprechen. Keine Wirksamkeits- oder Erfolgsaussagen, keine Ursache-Wirkungs-Aussagen zu körperlichen Zuständen. Schließe mit exakt diesem Satz: Bei körperlichen oder gesundheitlichen Beschwerden gehört die Abklärung zu Arzt, Heilpraktiker oder Therapeut.`;
 
-      setAiText(await groqFetch(prompt));
+      const antwort = await groqFetch(prompt);
+      const bereinigt = antwort.replace(/\*\*/g,"");
+      setAiText(enthältReizwort(bereinigt) ? REIZWORT_HINWEIS : bereinigt);
     } catch { setAiText('Netzwerkfehler.'); }
     setAiLoading(false);
   };

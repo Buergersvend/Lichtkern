@@ -5,6 +5,7 @@ import { Card, Btn, TI, SL } from "../components/UI.jsx";
 import { BodygraphSVG, HD_CHANNELS, HD_CENTER_CFG, HD_GATE_CENTER } from "../components/HumanDesign.jsx";
 import { calcNumerology, LIFE_PATH_DESC } from "../components/Numerology.jsx";
 import { groqFetch } from "../config/groq.js";
+import { enthältReizwort, REIZWORT_HINWEIS } from "../oracle/reizwortFilter.js";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../config/firebase.js";
 
@@ -479,17 +480,17 @@ function RefPersonCard({ ref_person, client, onSelect, onDelete }) {
 function buildBeziehungsPrompt(client, refPerson, syn, clientNum, refNum) {
   const gClient = getGates(client); const gRef = getGates(refPerson);
   const defClient = calcDefinedCenters(gClient.all); const defRef = calcDefinedCenters(gRef.all);
-  let prompt = `Du bist ein erfahrener Human Design & Numerologie Beziehungsanalytiker in einer ganzheitlichen Heilpraxis.\n\nAnalysiere die Beziehungsdynamik zwischen diesen zwei Menschen. Verbinde Human Design UND Numerologie zu einer ganzheitlichen Synthese.\n\nPERSON A: ${client.name}`;
+  let prompt = `Du bist ein einfühlsamer Begleiter im Lichtkern-System mit Wissen in Human Design und Numerologie.\n\nAnalysiere die Beziehungsdynamik zwischen diesen zwei Menschen. Verbinde Human Design UND Numerologie zu einer ganzheitlichen Synthese.\n\nPERSON A: Anonym`;
   if (client.hdType) { prompt += `\nHD-Typ: ${client.hdType}\nProfil: ${client.hdProfile || '—'}\nAutorität: ${client.hdAuthority || '—'}\nDefinierte Zentren: ${[...defClient].map(c => HD_CENTER_CFG[c]?.label || c).join(', ') || '—'}\nBewusste Tore: ${gClient.p.join(', ') || 'keine'}\nUnbewusste Tore: ${gClient.d.join(', ') || 'keine'}`; }
   if (clientNum) { prompt += `\nLebenszahl: ${clientNum.lifePath}${clientNum.isMaster ? ' (Meisterzahl)' : ''}\nAusdruckszahl: ${clientNum.expression || '—'}\nHerzenszahl: ${clientNum.soulUrge || '—'}\nPersönlichkeitszahl: ${clientNum.personality || '—'}\nReifezahl: ${clientNum.maturity || '—'}`; if (clientNum.masterNumbers?.length > 0) prompt += `\nMeisterzahlen: ${clientNum.masterNumbers.join(', ')}`; if (clientNum.karmicDebts?.length > 0) prompt += `\nKarmische Schuldzahlen: ${clientNum.karmicDebts.join(', ')}`; }
-  prompt += `\n\nPERSON B: ${refPerson.name}`;
+  prompt += `\n\nPERSON B: Anonym B`;
   if (refPerson.hdType) { prompt += `\nHD-Typ: ${refPerson.hdType}\nProfil: ${refPerson.hdProfile || '—'}\nAutorität: ${refPerson.hdAuthority || '—'}\nDefinierte Zentren: ${[...defRef].map(c => HD_CENTER_CFG[c]?.label || c).join(', ') || '—'}\nBewusste Tore: ${gRef.p.join(', ') || 'keine'}\nUnbewusste Tore: ${gRef.d.join(', ') || 'keine'}`; }
   if (refNum) { prompt += `\nLebenszahl: ${refNum.lifePath}${refNum.isMaster ? ' (Meisterzahl)' : ''}\nAusdruckszahl: ${refNum.expression || '—'}\nHerzenszahl: ${refNum.soulUrge || '—'}\nPersönlichkeitszahl: ${refNum.personality || '—'}\nReifezahl: ${refNum.maturity || '—'}`; if (refNum.masterNumbers?.length > 0) prompt += `\nMeisterzahlen: ${refNum.masterNumbers.join(', ')}`; if (refNum.karmicDebts?.length > 0) prompt += `\nKarmische Schuldzahlen: ${refNum.karmicDebts.join(', ')}`; }
   prompt += `\n\nBEZIEHUNGSDATEN\nElektromagnetische Kanäle: ${syn.electromagnetic.length}`;
   if (syn.electromagnetic.length > 0) { prompt += `\n${syn.electromagnetic.map(e => `Kanal ${e.gate1}-${e.gate2} (${HD_CENTER_CFG[e.center1]?.label || e.center1} ↔ ${HD_CENTER_CFG[e.center2]?.label || e.center2})`).join('\n')}`; }
   if (syn.shared.length > 0) { prompt += `\nGemeinsame Tore: ${syn.shared.join(', ')}`; }
   if (clientNum && refNum) { const m = []; if (clientNum.lifePath === refNum.lifePath) m.push(`Lebenszahl ${clientNum.lifePath}`); if (clientNum.expression === refNum.expression) m.push(`Ausdruckszahl ${clientNum.expression}`); if (clientNum.soulUrge === refNum.soulUrge) m.push(`Herzenszahl ${clientNum.soulUrge}`); if (m.length > 0) prompt += `\nIdentische Numerologie-Werte: ${m.join(', ')}`; }
-  prompt += `\n\nWICHTIG: Verwende EXAKT diese fünf Abschnittstitel in GROSSBUCHSTABEN. Schreibe 5-7 Sätze pro Abschnitt — gehe in die Tiefe, sei spezifisch, benenne konkrete Tore, Kanäle und Zahlen. Kein Markdown, keine Nummerierungen, keine Aufzählungszeichen, keine Sternchen.\n\nRESONANZFELD\nWas diese zwei Menschen energetisch verbindet — die tiefste gemeinsame Schwingung. Verbinde HD-Kanäle mit numerologischen Übereinstimmungen zu einem ganzheitlichen Bild. Beschreibe, wie sich die elektromagnetischen Verbindungen im Alltag anfühlen könnten. Gehe auf die Qualität der Verbindung ein — ist sie aktivierend, beruhigend, herausfordernd?\n\nWACHSTUMSIMPULSE\nWas aktiviert A bei B und umgekehrt? Welche offenen Zentren werden konditioniert und was bedeutet das emotional und energetisch? Wie spiegeln sich die Numerologie-Zahlen gegenseitig — welche Lernaufgaben ergeben sich daraus? Beschreibe die Wachstumsdynamik konkret und lebensnah.\n\nSPANNUNGSFELDER\nWo entstehen Reibung und Herausforderung? Welche HD-Typen-Dynamiken (Strategie, Autorität, Profil) können kollidieren? Welche numerologischen Gegensätze wirken? Beschreibe, wie sich Spannungen im Alltag zeigen könnten und welche Missverständnisse typisch wären. Ehrlich, konstruktiv, ohne zu beschönigen.\n\nSEELENVERTRAG\nWas ist der tiefere Sinn dieser Begegnung? Was wollen diese zwei Seelen miteinander lernen und erfahren? Welche karmischen Themen (Schuldzahlen, Meisterzahlen) spielen hier hinein? Beschreibe die spirituelle Dimension dieser Verbindung — poetisch, aber geerdet und konkret.\n\nPRAXISIMPULS\nKonkrete Ansätze für die therapeutische Begleitung dieser Beziehung. Was kann der Praktiker in Einzel- und Paarsitzungen nutzen? Welche Übungen, Reflexionsfragen oder Rituale passen zu dieser spezifischen Konstellation? Gib mindestens zwei bis drei umsetzbare Impulse.\n\nWarmherzig, tiefgründig, ganzheitlich. Ohne Heilversprechen. Duze die Personen.`;
+  prompt += `\n\nWICHTIG: Verwende EXAKT diese fünf Abschnittstitel in GROSSBUCHSTABEN. Schreibe 5-7 Sätze pro Abschnitt — gehe in die Tiefe, sei spezifisch, benenne konkrete Tore, Kanäle und Zahlen. Kein Markdown, keine Nummerierungen, keine Aufzählungszeichen, keine Sternchen.\n\nRESONANZFELD\nWas diese zwei Menschen energetisch verbindet — die tiefste gemeinsame Schwingung. Verbinde HD-Kanäle mit numerologischen Übereinstimmungen zu einem ganzheitlichen Bild. Beschreibe, wie sich die elektromagnetischen Verbindungen im Alltag anfühlen könnten. Gehe auf die Qualität der Verbindung ein — ist sie aktivierend, beruhigend, herausfordernd?\n\nWACHSTUMSIMPULSE\nWas aktiviert A bei B und umgekehrt? Welche offenen Zentren werden konditioniert und was bedeutet das emotional und energetisch? Wie spiegeln sich die Numerologie-Zahlen gegenseitig — welche Lernaufgaben ergeben sich daraus? Beschreibe die Wachstumsdynamik konkret und lebensnah.\n\nSPANNUNGSFELDER\nWo entstehen Reibung und Herausforderung? Welche HD-Typen-Dynamiken (Strategie, Autorität, Profil) können kollidieren? Welche numerologischen Gegensätze wirken? Beschreibe, wie sich Spannungen im Alltag zeigen könnten und welche Missverständnisse typisch wären. Ehrlich, konstruktiv, ohne zu beschönigen.\n\nSEELENVERTRAG\nWas ist der tiefere Sinn dieser Begegnung? Was wollen diese zwei Seelen miteinander lernen und erfahren? Welche karmischen Themen (Schuldzahlen, Meisterzahlen) spielen hier hinein? Beschreibe die spirituelle Dimension dieser Verbindung — poetisch, aber geerdet und konkret.\n\nPRAXISIMPULS\nAnregungen zur gemeinsamen Reflexion über diese Verbindung. Welche Impulse können die beiden gemeinsam betrachten? Welche Übungen, Reflexionsfragen oder Rituale passen zu dieser spezifischen Konstellation? Gib mindestens zwei bis drei umsetzbare Impulse.\n\nWarmherzig, tiefgründig, ganzheitlich. Ohne Heilversprechen. Keine Wirksamkeits- oder Ursache-Wirkungs-Aussagen zu körperlichen Zuständen. Duze die Personen.`;
   return prompt;
 }
 
@@ -555,10 +556,14 @@ function ComparisonView({ client, refPerson, onBack, clients, onSave }) {
       const prompt = buildBeziehungsPrompt(client, refData, syn, clientNum, refNum);
       let raw = await groqFetch(prompt, 2500);
       raw = raw.replace(/\*\*/g, "").replace(/^#+\s*/gm, "").replace(/^\d+\.\s+/gm, "").replace(/^[-•]\s+/gm, "");
-      setAiText(raw);
-      const updatedRef = { ...refData, aiText: raw, aiGeneratedAt: new Date().toISOString() };
-      setRefData(updatedRef);
-      onSave({ ...client, beziehungen: (client.beziehungen || []).map(b => b.id === refPerson.id ? updatedRef : b) });
+      const istReizwort = enthältReizwort(raw);
+      const final = istReizwort ? REIZWORT_HINWEIS : raw;
+      setAiText(final);
+      if (!istReizwort) {
+        const updatedRef = { ...refData, aiText: raw, aiGeneratedAt: new Date().toISOString() };
+        setRefData(updatedRef);
+        onSave({ ...client, beziehungen: (client.beziehungen || []).map(b => b.id === refPerson.id ? updatedRef : b) });
+      }
     } catch { setAiText("Netzwerkfehler bei der Analyse."); }
     setAiLoading(false);
   };
