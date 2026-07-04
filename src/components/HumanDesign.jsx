@@ -3,6 +3,7 @@ import { Flower } from "./Decorations";
 import { T } from "../config/theme.js";
 import { Card, Btn, SL } from "./UI.jsx";
 import { groqFetch } from "../config/groq.js";
+import { enthältReizwort, REIZWORT_HINWEIS } from "../oracle/reizwortFilter.js";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../config/firebase.js";
 
@@ -217,9 +218,9 @@ function HDTab({client,onSave}){
     if(!hasData)return;
     setAiLoading(true);
     try{
-      const prompt=`Du bist ein erfahrener Human Design Analytiker in einer ganzheitlichen Heilpraxis. Analysiere diesen Klienten für die therapeutische Begleitung:
+      const prompt=`Du bist ein einfühlsamer Begleiter im Lichtkern-System mit Human-Design-Wissen. Betrachte dieses Profil auf seelisch-symbolischer Ebene:
 
-Klient: ${client.name}
+Klient: Anonym
 HD-Typ: ${displayType}
 Profil: ${hdData.profile||'—'}
 Autorität: ${hdData.authority||'—'}
@@ -229,12 +230,15 @@ Definierte Zentren: ${[...defined].map(c=>HD_CENTER_CFG[c]?.label||c).join(', ')
 
 Bitte gib:
 1. **Kernthema** (2 Sätze): Was prägt diesen Menschen fundamental?
-2. **Heilungsansätze** (3 konkrete Impulse für die Praxisarbeit)
+2. Impulse zur Selbstwahrnehmung (3 Anregungen zur Reflexion)
 3. **Konditionierungsfelder** (offene Zentren): Was nimmt dieser Mensch von anderen auf?
 4. **Integrationsauftrag**: Ein kraftvoller Satz für die Arbeit mit diesem Klienten.
 
-Warmherzig, präzise, ohne Heilversprechen.`;
-      setAiText(await groqFetch(prompt));
+Warmherzig, präzise, ohne Heilversprechen. Keine Wirksamkeits- oder Ursache-Wirkungs-Aussagen zu körperlichen Zuständen. Schließe mit exakt diesem Satz: Bei körperlichen oder gesundheitlichen Beschwerden gehört die Abklärung zu Arzt, Heilpraktiker oder Therapeut.`;
+      const raw=await groqFetch(prompt);
+      const istReizwort=enthältReizwort(raw);
+      const final=istReizwort?REIZWORT_HINWEIS:raw;
+      setAiText(final);
     }catch{setAiText('Netzwerkfehler.');}
     setAiLoading(false);
   };
