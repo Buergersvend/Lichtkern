@@ -137,7 +137,7 @@ const LIFE_PATH_DESC = {
   9:  { title:'Der Weise', essence:'Vollendung, Mitgefühl, Transformation', desc:'Du trägst die Weisheit aller Zahlen in dir. Dein Weg ist das Loslassen, das Dienen und die Transformation — du bist hier um einen Zyklus zu vollenden.' },
   11: { title:'Der Inspirierte — Meisterzahl', essence:'Intuition, Inspiration, spirituelle Führung', desc:'Du trägst eine besondere Frequenz. Als 11 bist du ein Kanal für höhere Wahrheiten. Deine Intuition ist überdurchschnittlich — lerne ihr zu vertrauen, auch wenn der Verstand zweifelt.' },
   22: { title:'Der Meisterbaumeister — Meisterzahl', essence:'Vision, Manifestation, globaler Einfluss', desc:'Die kraftvollste aller Zahlen. Du hast die Fähigkeit, spirituelle Visionen in materielle Realität umzusetzen. Du baust nicht für dich — du baust für die Menschheit.' },
-  33: { title:'Der Meisterlehrer — Meisterzahl', essence:'Bedingungslose Liebe, heilende Präsenz', desc:'Die seltenste Meisterzahl. Du bist hier um durch dein Sein zu lehren. Deine bloße Anwesenheit kann heilen. Bedingungslose Liebe ist dein höchster Ausdruck.' },
+  33: { title:'Der Meisterlehrer — Meisterzahl', essence:'Bedingungslose Liebe, nährende Präsenz', desc:'Die seltenste Meisterzahl. Du bist hier um durch dein Sein zu lehren. Deine bloße Anwesenheit kann Menschen aufrichten. Bedingungslose Liebe ist dein höchster Ausdruck.' },
 };
 
 const PERSONAL_YEAR_DESC = {
@@ -146,7 +146,7 @@ const PERSONAL_YEAR_DESC = {
   3: 'Kreativität & Ausdruck — Deine Ideen wollen raus. Sichtbar werden.',
   4: 'Fundament bauen — Harte Arbeit, die sich langfristig auszahlt.',
   5: 'Wandel & Freiheit — Altes loslassen, Neues willkommen heißen.',
-  6: 'Verantwortung & Liebe — Familie, Heim, Heilung stehen im Fokus.',
+  6: 'Verantwortung & Liebe — Familie, Heim, Fürsorge stehen im Fokus.',
   7: 'Innenschau & Weisheit — Rückzug, Lernen, spirituelle Vertiefung.',
   8: 'Ernte & Fülle — Die Früchte vergangener Jahre einfahren.',
   9: 'Vollendung & Loslassen — Ein Zyklus endet. Raum für Neues schaffen.',
@@ -173,7 +173,7 @@ const EXPRESSION_DESC = {
   3: 'Dein natürliches Talent: Kommunizieren, inspirieren, erschaffen.',
   4: 'Dein natürliches Talent: Organisieren, strukturieren, manifestieren.',
   5: 'Dein natürliches Talent: Anpassen, erneuern, andere befreien.',
-  6: 'Dein natürliches Talent: Heilen, nähren, Schönheit schaffen.',
+  6: 'Dein natürliches Talent: Umsorgen, nähren, Schönheit schaffen.',
   7: 'Dein natürliches Talent: Analysieren, forschen, Wahrheit finden.',
   8: 'Dein natürliches Talent: Managen, Wohlstand aufbauen, führen.',
   9: 'Dein natürliches Talent: Dienen, transformieren, loslassen.',
@@ -194,14 +194,14 @@ const PERSONALITY_DESC = {
   9: 'Du wirkst nach außen: Mitfühlend, weltoffen, weise.',
   11:'Du wirkst nach außen: Inspirierend, feinfühlig, leuchtend.',
   22:'Du wirkst nach außen: Beeindruckend, visionär, verlässlich.',
-  33:'Du wirkst nach außen: Liebevoll, heilend, strahlend.',
+  33:'Du wirkst nach außen: Liebevoll, nährend, strahlend.',
 };
 
 const KARMIC_DESC = {
-  13: { title:'Karmische Schuld 13', desc:'Lektion der Disziplin — Faulheit und Abkürzungen aus früheren Leben. Heilung durch konsequente Arbeit und Ausdauer.' },
-  14: { title:'Karmische Schuld 14', desc:'Lektion der Mäßigung — Missbrauch von Freiheit in früheren Leben. Heilung durch Verantwortung und Balance.' },
-  16: { title:'Karmische Schuld 16', desc:'Lektion der Demut — Ego und Stolz aus früheren Leben. Heilung durch spirituelles Erwachen und Loslassen des falschen Selbst.' },
-  19: { title:'Karmische Schuld 19', desc:'Lektion der Eigenständigkeit — Machtmissbrauch in früheren Leben. Heilung durch dienende Führung und Mitgefühl.' },
+  13: { title:'Karmische Schuld 13', desc:'Lektion der Disziplin — Faulheit und Abkürzungen aus früheren Leben. Wandlung durch konsequente Arbeit und Ausdauer.' },
+  14: { title:'Karmische Schuld 14', desc:'Lektion der Mäßigung — Missbrauch von Freiheit in früheren Leben. Wandlung durch Verantwortung und Balance.' },
+  16: { title:'Karmische Schuld 16', desc:'Lektion der Demut — Ego und Stolz aus früheren Leben. Wandlung durch spirituelles Erwachen und Loslassen des falschen Selbst.' },
+  19: { title:'Karmische Schuld 19', desc:'Lektion der Eigenständigkeit — Machtmissbrauch in früheren Leben. Wandlung durch dienende Führung und Mitgefühl.' },
 };
 
 // ─── INFO TEXTS: Was ist diese Zahl? ───────────────────────────────────────
@@ -432,13 +432,13 @@ const HD_TYPE_NUMEROLOGY = {
     3: { resonanz: 'Der kreative Katalysator', insight: 'Manifestor + Lebenszahl 3: Deine Worte und Ideen haben Durchschlagskraft. Was du kreierst, bewegt andere sofort.' },
     4: { resonanz: 'Der Meisterbaumeister', insight: 'Manifestor + Lebenszahl 4: Du initiierst nicht nur — du baust Fundamente die Generationen überdauern. Struktur ist dein Werkzeug der Manifestation.' },
     5: { resonanz: 'Der freiheitliche Initiator', insight: 'Manifestor + Lebenszahl 5: Unruhe trifft Durchsetzungskraft. Du brichst Strukturen auf und schaffst Raum für Neues — aber achte auf Beständigkeit.' },
-    6: { resonanz: 'Der heilende Initiator', insight: 'Manifestor + Lebenszahl 6: Deine Initiationskraft dient dem Heilen. Du startest Prozesse die andere in ihre Ganzheit führen.' },
+    6: { resonanz: 'Der fürsorgliche Initiator', insight: 'Manifestor + Lebenszahl 6: Deine Initiationskraft dient dem Verbinden. Du startest Prozesse die andere in ihre Ganzheit führen.' },
     7: { resonanz: 'Der mystische Initiator', insight: 'Manifestor + Lebenszahl 7: Du bringst tiefe Wahrheiten in Bewegung. Deine Impulse kommen aus der Stille und treffen ins Mark.' },
     8: { resonanz: 'Die manifestierte Fülle', insight: 'Manifestor + Lebenszahl 8: Maximale Manifestationskraft. Du bist hier um Überfluss zu erschaffen — materiell und spirituell.' },
     9: { resonanz: 'Der transformative Initiator', insight: 'Manifestor + Lebenszahl 9: Du startest Zyklen des Loslassens. Deine Impulse beenden das Alte und öffnen Raum für Evolution.' },
     11: { resonanz: 'Der erleuchtete Initiator', insight: 'Manifestor + Meisterzahl 11: Deine Impulse kommen aus höheren Ebenen. Du initiierst spirituelle Durchbrüche — bei dir und bei anderen.' },
     22: { resonanz: 'Der Meister-Manifestor', insight: 'Manifestor + Meisterzahl 22: Die mächtigste Kombination. Du manifestierst Visionen die die Welt verändern. Dein Informieren ist nicht höflich — es ist prophetisch.' },
-    33: { resonanz: 'Der erleuchtete Heiler-Initiator', insight: 'Manifestor + Meisterzahl 33: Deine bloße Präsenz initiiert Heilung. Du musst nicht handeln — dein Sein bewegt.' },
+    33: { resonanz: 'Der erleuchtete Herz-Initiator', insight: 'Manifestor + Meisterzahl 33: Deine bloße Präsenz initiiert Wandlung. Du musst nicht handeln — dein Sein bewegt.' },
   },
   'Generator': {
     1: { resonanz: 'Der antwortende Pionier', insight: 'Generator + Lebenszahl 1: Deine Sakralkraft will Neues erschaffen — aber nur wenn echte Resonanz da ist. Warte auf den Impuls, dann gib alles.' },
@@ -446,13 +446,13 @@ const HD_TYPE_NUMEROLOGY = {
     3: { resonanz: 'Der kreative Motor', insight: 'Generator + Lebenszahl 3: Unerschöpfliche kreative Energie — wenn du auf Resonanz reagierst, wird dein Ausdruck magnetisch.' },
     4: { resonanz: 'Der ausdauernde Erbauer', insight: 'Generator + Lebenszahl 4: Die beständigste Kombination. Deine Sakralkraft plus Baumeister-Energie erschafft Werke für die Ewigkeit.' },
     5: { resonanz: 'Der vielseitige Generator', insight: 'Generator + Lebenszahl 5: Deine Energie will Vielfalt — aber deine Strategie verlangt Resonanz. Der Schlüssel: Reagiere auf das, was dich wirklich begeistert.' },
-    6: { resonanz: 'Der heilende Generator', insight: 'Generator + Lebenszahl 6: Deine Lebenskraft heilt. Wenn du auf Resonanz antwortest, wird deine Fürsorge zur Transformation.' },
+    6: { resonanz: 'Der nährende Generator', insight: 'Generator + Lebenszahl 6: Deine Lebenskraft nährt. Wenn du auf Resonanz antwortest, wird deine Fürsorge zur Transformation.' },
     7: { resonanz: 'Der forschende Generator', insight: 'Generator + Lebenszahl 7: Tiefe Sakralenergie für innere Forschung. Deine Befriedigung kommt durch Erkenntnis.' },
     8: { resonanz: 'Der produktive Fülle-Generator', insight: 'Generator + Lebenszahl 8: Maximale Arbeitskraft trifft Manifestation. Du bist gebaut um Wohlstand durch Hingabe zu erschaffen.' },
     9: { resonanz: 'Der dienende Generator', insight: 'Generator + Lebenszahl 9: Deine Energie dient dem Größeren. Befriedigung kommt durch Loslassen und Transformation.' },
     11: { resonanz: 'Der inspirierte Generator', insight: 'Generator + Meisterzahl 11: Deine Sakralkraft ist ein Kanal für höhere Inspiration. Wenn du reagierst, fließt Weisheit durch dich.' },
     22: { resonanz: 'Der Meisterbauer-Generator', insight: 'Generator + Meisterzahl 22: Du hast die Ausdauer UND die Vision für Großprojekte. Deine Sakralkraft baut Tempel.' },
-    33: { resonanz: 'Der liebende Generator', insight: 'Generator + Meisterzahl 33: Deine Arbeit ist Liebe. Deine Energie heilt durch pure Hingabe an das, was Resonanz erzeugt.' },
+    33: { resonanz: 'Der liebende Generator', insight: 'Generator + Meisterzahl 33: Deine Arbeit ist Liebe. Deine Energie nährt durch pure Hingabe an das, was Resonanz erzeugt.' },
   },
   'Manifesting Generator': {
     1: { resonanz: 'Der schnelle Pionier', insight: 'MG + Lebenszahl 1: Blitzschnelle Initiation mit Sakralkraft. Du reagierst, informierst und handelst in einem Atemzug.' },
@@ -465,7 +465,7 @@ const HD_TYPE_NUMEROLOGY = {
     1: { resonanz: 'Der einladende Pionier', insight: 'Projektor + Lebenszahl 1: Du siehst neue Wege bevor andere sie ahnen — aber warte auf die Einladung, bevor du vorangehst.' },
     2: { resonanz: 'Der natürliche Berater', insight: 'Projektor + Lebenszahl 2: Doppelte Führungsqualität durch Einfühlung. Deine Einladungen kommen durch deine diplomatische Weisheit.' },
     4: { resonanz: 'Der systemische Führer', insight: 'Projektor + Lebenszahl 4: Du siehst die Strukturen die andere brauchen. Dein Erfolg kommt durch geduldiges Warten und meisterhaftes Organisieren.' },
-    6: { resonanz: 'Der heilende Führer', insight: 'Projektor + Lebenszahl 6: Du führst durch Fürsorge. Deine Einladungen kommen weil andere spüren, dass du sie wirklich siehst.' },
+    6: { resonanz: 'Der fürsorgliche Führer', insight: 'Projektor + Lebenszahl 6: Du führst durch Fürsorge. Deine Einladungen kommen weil andere spüren, dass du sie wirklich siehst.' },
     7: { resonanz: 'Der weise Beobachter', insight: 'Projektor + Lebenszahl 7: Die tiefgründigste Kombination. Du durchschaust Systeme und Menschen — deine Weisheit ist dein Schlüssel zur Einladung.' },
     9: { resonanz: 'Der universelle Führer', insight: 'Projektor + Lebenszahl 9: Du führst durch Loslassen. Je weniger du festhältst, desto mehr Einladungen kommen.' },
     11: { resonanz: 'Der intuitive Führer', insight: 'Projektor + Meisterzahl 11: Deine Führung kommt aus purer Intuition. Du siehst was andere brauchen bevor sie es selbst wissen.' },
@@ -649,7 +649,7 @@ function getTimeStrategyInsight(hdType, personalYear) {
     'Generator': {
       1: 'Persönliches Jahr 1 + Generator: Neue Resonanzen tauchen auf — reagiere auf das was dein Sakral zum Leuchten bringt.',
       3: 'Persönliches Jahr 3 + Generator: Kreative Hochphase — deine Sakralenergie will sich ausdrücken.',
-      6: 'Persönliches Jahr 6 + Generator: Deine Energie fließt in Fürsorge und Heilung — höre auf dein Sakral bei Beziehungsfragen.',
+      6: 'Persönliches Jahr 6 + Generator: Deine Energie fließt in Fürsorge und Verbundenheit — höre auf dein Sakral bei Beziehungsfragen.',
       8: 'Persönliches Jahr 8 + Generator: Erntejahr — deine bisherige Arbeit zahlt sich aus. Sakral sagt Ja zu Fülle.',
     },
     'Projektor': {
