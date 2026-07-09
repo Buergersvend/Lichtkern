@@ -274,6 +274,7 @@ function NumCard({ number, label, sublabel, description, infoKey }) {
   if (number === null || number === undefined) return null;
   const isMaster = [11, 22, 33].includes(number);
   const info = infoKey ? NUM_INFO[infoKey] : null;
+  const arch = infoKey === 'lifePath' ? LIFE_PATH_DESC[number] : null;
 
   return (
     <div style={{
@@ -322,6 +323,13 @@ function NumCard({ number, label, sublabel, description, infoKey }) {
               marginTop: '8px', background: T.bgCard, borderRadius: '10px',
               padding: '12px', border: `1px solid ${T.border}`,
             }}>
+              {arch && (
+                <div style={{ marginBottom: '12px', paddingBottom: '12px', borderBottom: `1px solid ${T.border}` }}>
+                  <div style={{ fontFamily: 'Cinzel', fontSize: '15px', fontWeight: 700, color: T.gold, marginBottom: '3px' }}>{arch.title}</div>
+                  <div style={{ fontFamily: 'Raleway', fontSize: '9px', fontWeight: 700, color: T.textSoft, letterSpacing: '1px', textTransform: 'uppercase', marginBottom: '6px' }}>{arch.essence}</div>
+                  <div style={{ fontFamily: 'Raleway', fontSize: '11px', color: T.textMid, lineHeight: '1.6', fontWeight: 500 }}>{arch.desc}</div>
+                </div>
+              )}
               {[
                 { icon: '◈', title: 'Was ist das?', text: info.what },
                 { icon: '⚙', title: 'Wie wird sie berechnet?', text: info.how },
