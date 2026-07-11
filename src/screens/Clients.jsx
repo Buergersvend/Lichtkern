@@ -295,7 +295,7 @@ function Clients({clients,sessions,onSave,onStart,onDelete,onOnboarding,reminder
         <Card style={{marginBottom:"16px",background:T.bgSoft,border:`1.5px solid ${T.borderMid}`}}>
           <SL color={T.goldD}>Neuer Klient</SL>
           {[{k:"name",p:"Name *"},{k:"email",p:"E-Mail"},{k:"contact",p:"Telefon"},{k:"notes",p:"Notizen"},{k:"tags",p:"Tags: Angst, Rücken, Ahnen…"}].map(f=>(
-            <div key={f.k} style={{marginBottom:"8px"}}><TI value={form[f.k]} onChange={v=>setForm({...form,[f.k]:v})} placeholder={f.p}/></div>
+            <div key={f.k} style={{marginBottom:"8px"}}><TI value={form[f.k]} onChange={v=>setForm({...form,[f.k]:v})} placeholder={f.p}/>{f.k==="notes"&&<div style={{fontFamily:"Raleway",fontSize:"10px",color:T.textMid,marginTop:"4px"}}>Nur für dich sichtbar — erscheint in keinem Export und wird nicht an die KI übermittelt.</div>}</div>
           ))}
           {/* Geburtsdaten für Numerologie */}
           <div style={{marginTop:"12px",paddingTop:"12px",borderTop:`1px dashed ${T.border}`}}>

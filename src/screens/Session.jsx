@@ -92,7 +92,7 @@ function SA({wizard,upd,aiText,aiLoading,onGen}){
   return(<div style={{display:"flex",flexDirection:"column",gap:"14px"}}>
   <div><SL>Ergebnis</SL><TI value={wizard.outcome||""} onChange={v=>upd({outcome:v})} placeholder="Was hat sich gezeigt?" multiline rows={3}/></div>
   <div><SL>Integrationsauftrag</SL><TI value={wizard.homework||""} onChange={v=>upd({homework:v})} placeholder="Was soll der Klient beobachten?" multiline rows={2}/></div>
-  <div><SL>Private Notizen</SL><TI value={wizard.notes||""} onChange={v=>upd({notes:v})} placeholder="Nur für dich…" multiline rows={2}/></div>
+  <div><SL>Private Notizen</SL><TI value={wizard.notes||""} onChange={v=>upd({notes:v})} placeholder="Nur für dich…" multiline rows={2}/><div style={{fontFamily:"Raleway",fontSize:"10px",color:T.textMid,marginTop:"4px"}}>Nur für dich sichtbar — erscheint in keinem Export und wird nicht an die KI übermittelt.</div></div>
   <div>
     <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:"8px"}}>
      <SL>✦ Resonanz-Zusammenfassung</SL>
