@@ -53,7 +53,7 @@ function useSupernova(canvasRef, logoRef) {
       ctx.beginPath();
       ctx.arc(cx, cy, glow.current.radius, 0, Math.PI * 2);
       ctx.fill();
-      glow.current.radius += 1.5;
+      glow.current.radius += Math.max(dims.current.w, dims.current.h) / 250;
       glow.current.opacity *= 0.975;
       if (glow.current.opacity < 0.01) glow.current.opacity = 0;
     }
@@ -244,7 +244,7 @@ function useSupernova(canvasRef, logoRef) {
       });
     }
 
-    glow.current = { opacity: 0.6, radius: 40 };
+    glow.current = { opacity: 0.6, radius: Math.max(dims.current.w, dims.current.h) * 0.1 };
     coreGlow.current = { opacity: 1 };
 
     if (!running.current) {
