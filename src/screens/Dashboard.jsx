@@ -222,8 +222,9 @@ function useSupernova(canvasRef, logoRef) {
     }
 
     // Shockwave rings (5)
+    const ringSkal = Math.max(w, h) / 400;
     for (let i = 0; i < 5; i++) {
-      rings.current.push({ radius: 15, maxRadius: 160 + i * 60, opacity: 0.6 - i * 0.1, width: 2.5 - i * 0.4, speed: 3.5 + i * 1.2 });
+      rings.current.push({ radius: 15, maxRadius: (160 + i * 60) * ringSkal, opacity: 0.6 - i * 0.1, width: 2.5 - i * 0.4, speed: 3.5 + i * 1.2 });
     }
 
     // Light rays (16)
