@@ -16,20 +16,6 @@ const firebaseApp = initializeApp(firebaseConfig);
 const auth = getAuth(firebaseApp);
 const db   = getFirestore(firebaseApp);
 
-// ─── GROQ KI-API (sicher via Serverless Proxy) ────
-// Der API-Key liegt nur auf dem Vercel-Server – nie im Browser sichtbar!
-const _GROQ_PLACEHOLDER = null; // Key nur serverseitig in /api/ki.js
-const groqFetch = async (prompt) => {
-  const r = await fetch("/api/ki", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ prompt })
-  });
-  const d = await r.json();
-  if (d.error) throw new Error(d.error);
-  return d.text || "Fehler.";
-};
-
 // ─── FIRESTORE STORAGE (ersetzt window.storage) ──
 const fsGet = async (userId, key) => {
   try {
@@ -45,4 +31,4 @@ const fsDelete = async (userId, key) => {
   try { await deleteDoc(doc(db, "users", userId, "data", key)); } catch {}
 };
 
-export { auth, db, groqFetch, fsGet, fsSet, fsDelete, onAuthStateChanged, signOut, createUserWithEmailAndPassword, signInWithEmailAndPassword };
+export { auth, db, fsGet, fsSet, fsDelete, onAuthStateChanged, signOut, createUserWithEmailAndPassword, signInWithEmailAndPassword };
