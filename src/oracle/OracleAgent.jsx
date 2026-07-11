@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { T } from "../config/theme.js";
 import { Btn, TI, SL } from "../components/UI.jsx";
 import { auth } from "../config/firebase.js";
+import { renderMarkdownLite } from "./markdownLite.jsx";
 
 const OWNER_UID = "vVixVaoH4mPPjAljm1cKlQe16un1";
 
@@ -66,7 +67,7 @@ export default function OracleAgent({ onClose }) {
           )}
           {messages.map((m, i) => (
             <div key={i} style={{ alignSelf: m.role === "user" ? "flex-end" : "flex-start", maxWidth: "80%", background: m.role === "user" ? T.gold : T.bgSoft, color: m.role === "user" ? "#1A1200" : T.text, borderRadius: m.role === "user" ? "16px 16px 4px 16px" : "16px 16px 16px 4px", padding: "10px 14px", fontFamily: "Raleway", fontSize: "13px", lineHeight: "1.6" }}>
-              {m.text}
+              {m.role === "oracle" ? renderMarkdownLite(m.text) : m.text}
             </div>
           ))}
           {loading && <div style={{ alignSelf: "flex-start", fontFamily: "Raleway", fontSize: "13px", color: T.textSoft }}>Resonanz denkt…</div>}
