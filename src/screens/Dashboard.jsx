@@ -152,7 +152,7 @@ function useSupernova(canvasRef, logoRef) {
     const logo = logoRef.current;
     if (!cv || !logo) return;
 
-    const rect = cv.parentElement.getBoundingClientRect();
+    const rect = { width: window.innerWidth, height: window.innerHeight };
     const dpr = window.devicePixelRatio || 1;
     cv.width = rect.width * dpr;
     cv.height = rect.height * dpr;
@@ -162,7 +162,9 @@ function useSupernova(canvasRef, logoRef) {
     ctx2.setTransform(1, 0, 0, 1, 0, 0);
     ctx2.scale(dpr, dpr);
     const w = rect.width, h = rect.height;
-    const cx = w / 2, cy = h / 2;
+    const logoRect = logo.getBoundingClientRect();
+    const cx = logoRect.left + logoRect.width / 2;
+    const cy = logoRect.top + logoRect.height / 2;
     dims.current = { w, h, cx, cy };
 
     // Reset
@@ -441,7 +443,7 @@ useEffect(() => {
       {/* ── HERO ── */}
       <div style={{ textAlign: "center", padding: "32px 0 20px", borderBottom: "1px solid rgba(201,168,76,0.2)", marginBottom: "20px", position: "relative", overflow: "hidden" }}>
         {/* Supernova Canvas */}
-        <canvas ref={canvasRef} style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", pointerEvents: "none", zIndex: 1 }} />
+        <canvas ref={canvasRef} style={{ position: "fixed", top: 0, left: 0, width: "100%", height: "100%", pointerEvents: "none", zIndex: 50 }} />
         {/* Whiteout flash */}
         <div id="lk-flash" style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", background: "radial-gradient(circle at 50% 40%, rgba(255,240,200,0.9) 0%, rgba(201,168,76,0.3) 40%, transparent 70%)", opacity: 0, pointerEvents: "none", zIndex: 2, transition: "opacity 0.08s" }} />
 
