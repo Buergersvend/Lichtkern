@@ -457,6 +457,10 @@ useEffect(() => {
               // Flash
               const flash = document.getElementById("lk-flash");
               if (flash) {
+                const lr = logoRef.current.getBoundingClientRect();
+                const fx = ((lr.left + lr.width / 2) / window.innerWidth * 100).toFixed(1);
+                const fy = ((lr.top + lr.height / 2) / window.innerHeight * 100).toFixed(1);
+                flash.style.background = `radial-gradient(circle at ${fx}% ${fy}%, rgba(255,240,200,0.9) 0%, rgba(201,168,76,0.3) 40%, transparent 70%)`;
                 flash.style.transition = "opacity 0.06s";
                 flash.style.opacity = "1";
                 setTimeout(() => { flash.style.transition = "opacity 0.7s ease-out"; flash.style.opacity = "0"; }, 60);
