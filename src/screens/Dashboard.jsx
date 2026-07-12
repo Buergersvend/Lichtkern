@@ -446,7 +446,7 @@ useEffect(() => {
         {/* Supernova Canvas */}
         <canvas ref={canvasRef} style={{ position: "fixed", top: 0, left: 0, width: "100%", height: "100%", pointerEvents: "none", zIndex: 50 }} />
         {/* Whiteout flash */}
-        <div id="lk-flash" style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", background: "radial-gradient(circle at 50% 40%, rgba(255,240,200,0.9) 0%, rgba(201,168,76,0.3) 40%, transparent 70%)", opacity: 0, pointerEvents: "none", zIndex: 2, transition: "opacity 0.08s" }} />
+        <div id="lk-flash" style={{ position: "fixed", top: 0, left: 0, width: "100%", height: "100%", background: "radial-gradient(circle at 50% 40%, rgba(255,240,200,0.9) 0%, rgba(201,168,76,0.3) 40%, transparent 70%)", opacity: 0, pointerEvents: "none", zIndex: 49, transition: "opacity 0.08s" }} />
 
         <div style={{ position: "relative", zIndex: 3 }}>
           <img
