@@ -111,6 +111,11 @@ function practitionerEmailHTML(therapistName, tomorrowAppts) {
 
 /* ─── Main Handler ─────────────────────────────────────────────────── */
 export default async function handler(req, res) {
+  const authHeader = req.headers.authorization;
+  const cronSecret = process.env.CRON_SECRET;
+  if (!cronSecret || authHeader !== `Bearer ${cronSecret}`) {
+    return res.status(401).json({ error: "Unauthorized" });
+  }
   // Verify cron secret (optional but recommended)
   // Vercel Cron sends Authorization header automatically
 
@@ -207,14 +212,16 @@ export default async function handler(req, res) {
       }
     }
 
+    if (errors.length) console.error("[reminder] Fehler:", errors);
     return res.status(200).json({
       ok: true,
       tomorrow,
       sent: totalSent,
-      errors: errors.length > 0 ? errors : undefined,
+      errorCount: errors.length,
     });
 
   } catch (e) {
-    return res.status(500).json({ error: e.message });
+    console.error("[reminder] Fatal:", e);
+    return res.status(500).json({ error: "Internal error" });
   }
 }
