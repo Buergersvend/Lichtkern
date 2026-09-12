@@ -1,6 +1,11 @@
 import React, { useState, useEffect, useCallback, useRef } from "react";
 import { OT, ORGAN_MAP, CHAKRA_SYSTEM, HELLSINN_TAGS, OCard, OBtn, OTag, OLabel } from "./OracleUI.jsx";
-import { enthältReizwort, REIZWORT_HINWEIS } from "./reizwortFilter.js";
+import {
+  enthältReizwort,
+  REIZWORT_HINWEIS,
+  enthältKrankheitsbegriff,
+  KRANKHEITS_HINWEIS,
+} from "./reizwortFilter.js";
 
 function HellsinnScanner({ groqFetch }){
   const [eingabe, setEingabe]       = useState("");
@@ -45,6 +50,14 @@ function HellsinnScanner({ groqFetch }){
 
   const kiAnalyse = async () => {
     if (!groqFetch) { setKiAntwort("⚠️ Kein API-Zugang. Verbinde die App mit /api/ki."); return; }
+    // Raster 1c — Eingangssperre. Greift vor dem Prompt-Aufbau:
+    // bei einem benannten Krankheitsbild entsteht keine Antwort.
+    if (enthältKrankheitsbegriff(eingabe) || enthältKrankheitsbegriff(tags.join(" "))) {
+      setKiGestellt(true);
+      setKiAntwort(KRANKHEITS_HINWEIS);
+      setKiLaed(false);
+      return;
+    }
     setKiLaed(true); setKiGestellt(true); setKiAntwort("");
     const kontext = `Stichworte: ${eingabe}\nWahrnehmungs-Tags: ${tags.join(", ")}`;
     const organTreffer = lokalInfo.filter(i=>i.typ==="organ").map(i=>`Organ: ${i.organ} (${i.daten.symbolik.join(", ")})`).join("\n");
