@@ -67,8 +67,13 @@ export const REIZWORT_HINWEIS =
   "Dazu gebe ich keine Auskunft. Bei körperlichen oder gesundheitlichen " +
   "Beschwerden gehört die Abklärung zu Arzt, Heilpraktiker oder Therapeut.";
 
+// Umleitung statt Abweisung. Der Nutzer wird auf die Ebene gefuehrt,
+// die offen ist, statt vor einer Wand zu stehen. Der Pflichtsatz steht am Ende.
 export const KRANKHEITS_HINWEIS =
-  "Zu Krankheiten, Diagnosen und Beschwerdebildern äußere ich mich nicht. " +
+  "Zu Krankheiten, Diagnosen und Beschwerdebildern äußere ich mich nicht.\n\n" +
+  "Beschreibe stattdessen, was du wahrnimmst — etwa Enge, Druck, Wärme, " +
+  "ein Nicht-hören-wollen, das Gefühl zu überhören. Die Wahrnehmungs-Tags oben " +
+  "helfen beim Einstieg. Damit arbeite ich gern weiter.\n\n" +
   "Bei körperlichen oder gesundheitlichen Beschwerden gehört die Abklärung " +
   "zu Arzt, Heilpraktiker oder Therapeut.";
 
