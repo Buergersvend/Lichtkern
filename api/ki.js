@@ -50,6 +50,9 @@ export default async function handler(req, res) {
       })
     });
     const data = await response.json();
+    if (!response.ok || !data.choices) {
+      return res.status(502).json({ error: "KI-Dienst: " + (data.error?.message || response.status) });
+    }
     const text = data.choices?.[0]?.message?.content || "Fehler.";
     return res.status(200).json({ text });
   } catch (err) {
