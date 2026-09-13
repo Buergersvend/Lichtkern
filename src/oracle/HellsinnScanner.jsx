@@ -23,6 +23,13 @@ function HellsinnScanner({ groqFetch }){
   }, [eingabe, tags]);
 
   const analysiereLokal = () => {
+    // RASTER-1C-LOKAL — auch der lokale Pfad. Die Zuordnung Organ -> Bedeutung
+    // ist ohne KI genauso eine Deutung, nur statisch und damit belegbarer.
+    if (enthältKrankheitsbegriff(eingabe) || enthältKrankheitsbegriff(tags.join(" "))) {
+      setLokalInfo([]);
+      return;
+    }
+
     const alleWorte = [...tags, ...eingabe.toLowerCase().split(/[\s,;]+/)].filter(Boolean);
     const treffer = [];
 
