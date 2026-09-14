@@ -53,6 +53,11 @@ export default async function handler(req, res) {
         ]
       })
     });
+    if (!response.ok) {
+      const detail = await response.text();
+      console.error("Groq-Fehler", response.status, detail.slice(0, 500));
+      return res.status(502).json({ error: "KI-Dienst nicht erreichbar.", status: response.status });
+    }
     const data = await response.json();
     const text = data.choices?.[0]?.message?.content || "Keine Antwort.";
     return res.status(200).json({ text });
