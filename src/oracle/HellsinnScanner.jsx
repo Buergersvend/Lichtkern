@@ -70,7 +70,7 @@ function HellsinnScanner({ groqFetch }){
     const organTreffer = lokalInfo.filter(i=>i.typ==="organ").map(i=>`Organ: ${i.organ} (${i.daten.symbolik.join(", ")})`).join("\n");
     const chakraTreffer = lokalInfo.filter(i=>i.typ==="chakra").map(i=>`Chakra: ${i.chakra.name} - Themen: ${i.chakra.themen.slice(0,3).join(", ")}`).join("\n");
 
-    const prompt = `Du bist ein erfahrener Begleiter und Berater im Lichtkern-System. Du erhältst die Wahrnehmungen eines Begleiters und gibst seelisch-symbolische Impulse und Anregungen zur Selbstwahrnehmung — auf einer seelisch-symbolischen Ebene, ohne Heilversprechen oder medizinische Aussagen. Bei gesundheitlichen Themen verweist du grundsätzlich an Ärzte, Heilpraktiker oder Therapeuten. Antworte auf Deutsch, klar und professionell.
+    const prompt = `Du bist ein erfahrener Begleiter und Berater im Lichtkern-System. Du erhältst die Wahrnehmungen eines Begleiters und gibst seelisch-symbolische Impulse und Anregungen zur Selbstwahrnehmung — auf einer seelisch-symbolischen Ebene, ohne Heilversprechen oder medizinische Aussagen. Bei gesundheitlichen Themen verweist du ausnahmslos an Ärzte, Heilpraktiker oder Therapeuten. Antworte auf Deutsch, klar und professionell.
 
 WAHRNEHMUNGEN:
 ${kontext}
