@@ -82,7 +82,7 @@ ${chakraTreffer}
 Gib eine strukturierte Analyse in GENAU diesem Format (nutze diese Überschriften):
 
 🫀 ORGANSPRACHE & KÖRPERSYMBOLIK
-[Was sagen diese Körperregionen auf der seelisch-symbolischen Ebene? Welche Themen, Gefühle, Lebensbereiche sind gemeint?]
+[Welche seelisch-symbolischen Themen werden diesen Körperregionen in verschiedenen Traditionen zugeordnet? Als Betrachtungsangebot formuliert, nicht als Befund. Keine Deutung, keine Aussage über Ursachen.]
 
 ⚡ CHAKRA-THEMEN
 [Welche Chakra-Themen können hier symbolisch anklingen? Als Betrachtungsangebot, nicht als Befund.]
